@@ -1,0 +1,14 @@
+# Local dependencies and caches
+node_modules/
+.venv/
+__pycache__/
+.DS_Store
+
+# Generated outputs
+build/
+dist/
+
+# Local credentials
+.env
+.env.*
+!.env.example

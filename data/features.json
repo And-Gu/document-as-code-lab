@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "features": [
+    {
+      "id": "tutorial-foundation",
+      "name": "Tutorial foundation",
+      "status": "planned",
+      "completion_criterion": "Chapter 1 and the first chapter 2 exercise are written and verified."
+    },
+    {
+      "id": "growth-metrics",
+      "name": "Historical growth metrics",
+      "status": "planned",
+      "completion_criterion": "Documented metrics are reproducible across Git revisions."
+    },
+    {
+      "id": "website",
+      "name": "Tutorial website",
+      "status": "planned",
+      "completion_criterion": "The website builds from source and is published."
+    },
+    {
+      "id": "github-dashboard",
+      "name": "GitHub dashboard",
+      "status": "planned",
+      "completion_criterion": "Repository charts update from measured data and link to work tracking."
+    },
+    {
+      "id": "pdf-book",
+      "name": "PDF book",
+      "status": "planned",
+      "completion_criterion": "The book is generated from source and visually verified."
+    },
+    {
+      "id": "presentations",
+      "name": "Presentation decks",
+      "status": "planned",
+      "completion_criterion": "Introduction and workshop decks are generated and visually verified."
+    },
+    {
+      "id": "portable-workflow",
+      "name": "Workflow beyond GitHub",
+      "status": "planned",
+      "completion_criterion": "The OneDrive and Copilot exercise is documented and verified in a stated environment."
+    }
+  ]
+}
