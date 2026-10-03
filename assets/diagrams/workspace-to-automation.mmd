@@ -1,0 +1,8 @@
+flowchart LR
+    edit["Edit a source file"]
+    commit["Commit the proposal on a branch"]
+    review["Review the diff in a pull request"]
+    merge["Merge into main"]
+    workflow["Runner executes tests and growth measurement"]
+    outputs["Save report artifacts"]
+    edit --> commit --> review --> merge --> workflow --> outputs

@@ -1,0 +1,11 @@
+flowchart LR
+    sources["Maintained sources and versions"]
+    task["Task, audience, and boundaries"]
+    context["Select relevant context"]
+    draft["AI-assisted draft"]
+    checks["Check claims against sources"]
+    review["Human review"]
+    sources --> context
+    task --> context
+    context --> draft --> checks --> review
+    review -->|Request correction| draft

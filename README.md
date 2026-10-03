@@ -2,15 +2,22 @@
 
 A living tutorial and visualization lab: write in Markdown, track changes, and turn shared source material into a website, a PDF book, and presentations.
 
-The project teaches document-as-code by applying it to itself. Its content, publishing capabilities, and work history become material for practical visualization exercises.
+The project teaches document-as-code by applying it to itself. It also serves as a visualization showcase for experienced readers: repository content, metadata, relationships, and work history become inputs to charts, diagrams, and dashboards.
 
 ## Status
 
-Planning and chapter outlines. Publishing pipelines and dashboards are not implemented yet.
+Chapters 1 through 7 in the reading order are in draft; the remaining chapters are outlined. A runnable onboarding showcase, local growth reporting, structured-record processing, and record-to-Mermaid generation are available, with a GitHub Actions workflow for growth reports. Complete website, PDF book, and presentation pipelines, along with interactive dashboards, remain future work. The hosted workflow needs verification after push.
+
+## Explore the Showcase
+
+Chapter 1 follows three [procedure source files](examples/onboarding-showcase/README.md) into an assembled [handbook review copy](assets/onboarding-showcase/handbook.md), a [training excerpt](assets/onboarding-showcase/training-excerpt.md), and a [review-status chart](assets/onboarding-showcase/review-status.png). The [generation script](scripts/build_onboarding_showcase.py) builds these views from the same sources.
+
+These are fixed, fictional teaching examples, not operationally approved instructions or a finished publishing system. The handbook includes draft material, the training excerpt is not a slide deck, and the chart is not an interactive dashboard. Chapter 4 uses a separate draft copy for its editing exercise.
 
 ## Learning Goals
 
 - Structure and maintain reusable documentation.
+- Process content and metadata into documents, dashboards, and selected AI context.
 - Give language models relevant, traceable context.
 - Measure project growth using Git history and GitHub data.
 - Create diagrams, images, and dashboards.
@@ -19,16 +26,22 @@ Planning and chapter outlines. Publishing pipelines and dashboards are not imple
 
 ## Tutorial
 
+Start with the [shared vocabulary](GLOSSARY.md) whenever a term is unfamiliar. Local exercises link to official Git setup and cloning guides; the tutorial focuses on using the resulting workspace.
+
+Filename prefixes and `chapter_number` metadata give the current reading order. Stable `id` values may contain older numbers; they identify the same content across reorganizations, not its current position.
+
 1. [Document-as-Code: The Living Tutorial](docs/01-introduction.md)
-2. [Project Growth: History as Data](docs/02-project-growth.md)
-3. [Markdown and Content Structure](docs/03-markdown.md)
-4. [AI-Native Documentation and Context](docs/04-ai-native.md)
-5. [Images, Diagrams, and Visual Sources](docs/05-images.md)
-6. [Git, Review, and Collaboration](docs/06-git-review.md)
-7. [Dashboards and Work Tracking in GitHub](docs/07-dashboards.md)
-8. [Publishing to Websites, Books, and Presentations](docs/08-publishing.md)
-9. [Beyond GitHub: OneDrive, Copilot, and Other Applications](docs/09-beyond-github.md)
-10. [Automation, Quality, and Further Experiments](docs/10-automation.md)
+2. [GitHub as a Workspace for Knowledge and Automation](docs/02-github-workspace.md)
+3. [Project Growth: History as Data](docs/03-project-growth.md)
+4. [Markdown and Content Structure](docs/04-markdown.md)
+5. [Structured Content: Metadata, Rules, and Views](docs/05-structured-content.md)
+6. [AI-Native Documentation and Context](docs/06-ai-native.md)
+7. [Images, Diagrams, and Visual Sources](docs/07-images.md)
+8. [Git, Review, and Collaboration](docs/08-git-review.md)
+9. [Dashboards and Work Tracking in GitHub](docs/09-dashboards.md)
+10. [Publishing to Websites, Books, and Presentations](docs/10-publishing.md)
+11. [Beyond GitHub: OneDrive, Copilot, and Other Applications](docs/11-beyond-github.md)
+12. [Automation, Quality, and Further Experiments](docs/12-automation.md)
 
 ## Planned Outputs
 
@@ -44,26 +57,34 @@ Outputs share source material, but each needs appropriate structure and editoria
 
 ## Growth Tracking
 
-Chapter 2 will introduce an automated report updated on changes to the main branch:
+Chapter 3 will introduce an automated report updated on changes to the main branch:
 
 - Chapter count and word count, including per-chapter comparisons.
 - Historical values reconstructed from Git revisions.
 - Capability milestones from the versioned [feature register](data/features.json).
-- Work progress from GitHub issues and Projects.
+- Work progress from GitHub issues and Projects (planned for a later dashboard exercise).
 
 Word counts measure content volume, not quality. The measurement rules will distinguish substantive chapters from outlines and exclude generated files. Every snapshot will identify its source commit.
 
 ## Repository Layout
 
 - `docs/`: tutorial chapters.
+- `examples/`: exercise sources and fixed showcase datasets, excluded from chapter metrics.
 - `data/`: capability metadata and future measurement data.
+- `assets/diagrams/`: editable diagram sources referenced by chapter visual metadata.
+- `assets/figures/`: historical teaching charts and their measurement data.
+- `assets/onboarding-showcase/`: generated handbook, training excerpt, chart, and source data.
+- `scripts/`: historical measurement, content assembly, structured-record processing, and chart generation.
+- `tests/`: focused growth measurement, structured-record processing, and diagram generation checks.
+- `.github/workflows/`: automated growth reporting on pushes to main.
 - `ROADMAP.md`: stages and completion criteria.
 - `CONTRIBUTING.md`: writing and review conventions.
+- `GLOSSARY.md`: shared definitions used across chapters.
 
-Build scripts, visual assets, and output-specific configuration will be added as the corresponding exercises are implemented.
+Further publishing scripts and output-specific configuration will be added as the corresponding exercises are implemented.
 
 ## Next Milestone
 
-Write chapter 1 and a runnable first exercise for chapter 2. Use that exercise to choose and validate the initial publishing tools.
+Review the first seven chapter drafts and verify the growth workflow on GitHub. Then choose and validate the initial website publishing tools.
 
 No content license has been selected yet.

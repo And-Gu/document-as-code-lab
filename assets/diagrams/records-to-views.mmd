@@ -1,0 +1,11 @@
+flowchart LR
+    records["Records: prose and metadata"]
+    rules["Field and relationship checks"]
+    valid["Validated records"]
+    doc["Requirements document"]
+    dashboard["Work dashboard"]
+    context["Selected AI context"]
+    records --> rules --> valid
+    valid --> doc
+    valid --> dashboard
+    valid --> context

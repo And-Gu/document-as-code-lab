@@ -1,0 +1,8 @@
+flowchart LR
+    procedure["PROC-001: draft procedure"]
+    task["TASK-003: implementation work"]
+    requirement["REQ-014: reference-number requirement"]
+    test["TEST-008: planned test"]
+    task -->|implements: intended work| requirement
+    requirement -->|verified_by: intended check| test
+    procedure -. conceptual connection only .-> requirement

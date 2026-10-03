@@ -1,0 +1,13 @@
+version: 1
+required: [id, type, status, owner, title]
+statuses:
+  requirement: [proposed, approved, retired]
+  task: [planned, in-progress, complete]
+  test: [planned, complete]
+relationships:
+  verified_by:
+    from: requirement
+    to: test
+  implements:
+    from: task
+    to: requirement

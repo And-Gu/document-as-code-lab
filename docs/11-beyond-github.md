@@ -1,7 +1,11 @@
+---
+id: 09-beyond-github
+chapter_number: 11
+status: outline
+---
+
 # Beyond GitHub: OneDrive, Copilot, and Other Applications
 
-- Chapter ID: `09-beyond-github`
-- Status: outline
 
 ## Learning Goal
 

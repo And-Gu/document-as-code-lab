@@ -1,0 +1,130 @@
+{
+  "measurement_version": 2,
+  "history": [
+    {
+      "source_commit": "8908932f8d0ed2d35ebcd9e59c5b58f2d4ae8cc5",
+      "committed_at": "2026-10-03T13:37:22+02:00",
+      "kind": "commit",
+      "chapter_count": 10,
+      "draft_or_complete_chapters": 0,
+      "word_count": 829,
+      "complete_features": 0,
+      "features": [
+        {
+          "id": "tutorial-foundation",
+          "name": "Tutorial foundation",
+          "status": "planned",
+          "completion_criterion": "Chapter 1 and the first chapter 2 exercise are written and verified."
+        },
+        {
+          "id": "growth-metrics",
+          "name": "Historical growth metrics",
+          "status": "planned",
+          "completion_criterion": "Documented metrics are reproducible across Git revisions."
+        },
+        {
+          "id": "website",
+          "name": "Tutorial website",
+          "status": "planned",
+          "completion_criterion": "The website builds from source and is published."
+        },
+        {
+          "id": "github-dashboard",
+          "name": "GitHub dashboard",
+          "status": "planned",
+          "completion_criterion": "Repository charts update from measured data and link to work tracking."
+        },
+        {
+          "id": "pdf-book",
+          "name": "PDF book",
+          "status": "planned",
+          "completion_criterion": "The book is generated from source and visually verified."
+        },
+        {
+          "id": "presentations",
+          "name": "Presentation decks",
+          "status": "planned",
+          "completion_criterion": "Introduction and workshop decks are generated and visually verified."
+        },
+        {
+          "id": "portable-workflow",
+          "name": "Workflow beyond GitHub",
+          "status": "planned",
+          "completion_criterion": "The OneDrive and Copilot exercise is documented and verified in a stated environment."
+        }
+      ],
+      "chapters": [
+        {
+          "id": "01-introduction",
+          "path": "docs/01-introduction.md",
+          "title": "Document-as-Code: The Living Tutorial",
+          "status": "outline",
+          "words": 66
+        },
+        {
+          "id": "02-project-growth",
+          "path": "docs/02-project-growth.md",
+          "title": "Project Growth: History as Data",
+          "status": "outline",
+          "words": 89
+        },
+        {
+          "id": "03-markdown",
+          "path": "docs/03-markdown.md",
+          "title": "Markdown and Content Structure",
+          "status": "outline",
+          "words": 65
+        },
+        {
+          "id": "04-ai-native",
+          "path": "docs/04-ai-native.md",
+          "title": "AI-Native Documentation and Context",
+          "status": "outline",
+          "words": 80
+        },
+        {
+          "id": "05-images",
+          "path": "docs/05-images.md",
+          "title": "Images, Diagrams, and Visual Sources",
+          "status": "outline",
+          "words": 91
+        },
+        {
+          "id": "06-git-review",
+          "path": "docs/06-git-review.md",
+          "title": "Git, Review, and Collaboration",
+          "status": "outline",
+          "words": 65
+        },
+        {
+          "id": "07-dashboards",
+          "path": "docs/07-dashboards.md",
+          "title": "Dashboards and Work Tracking in GitHub",
+          "status": "outline",
+          "words": 85
+        },
+        {
+          "id": "08-publishing",
+          "path": "docs/08-publishing.md",
+          "title": "Publishing to Websites, Books, and Presentations",
+          "status": "outline",
+          "words": 97
+        },
+        {
+          "id": "09-beyond-github",
+          "path": "docs/09-beyond-github.md",
+          "title": "Beyond GitHub: OneDrive, Copilot, and Other Applications",
+          "status": "outline",
+          "words": 107
+        },
+        {
+          "id": "10-automation",
+          "path": "docs/10-automation.md",
+          "title": "Automation, Quality, and Further Experiments",
+          "status": "outline",
+          "words": 84
+        }
+      ]
+    }
+  ]
+}

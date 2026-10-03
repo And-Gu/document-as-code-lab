@@ -1,0 +1,14 @@
+flowchart TD
+    source["Versioned information items: text, models, images, and data"]
+    review["Review changed items and their impact"]
+    approved["Select item versions with recorded approval"]
+    checks["Automated checks and output generation"]
+    context["Selected context, audience, and task"]
+    ai["AI-assisted draft"]
+    editorial["Review assembled outputs for release"]
+    outputs["Website, handbook, slides, and dashboard"]
+    source --> review --> approved
+    approved --> checks --> editorial
+    approved --> context --> ai --> editorial
+    editorial --> outputs
+    editorial -->|Corrections to shared material| source

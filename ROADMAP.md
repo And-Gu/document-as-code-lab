@@ -3,7 +3,8 @@
 ## 1. Establish the Tutorial
 
 - Agree on audience and expected prior knowledge.
-- Draft chapter 1 and define the recurring example.
+- Draft chapters 1 and 2 to introduce the approach and the GitHub workspace.
+- Develop chapter 3's growth exercise using the recurring example.
 - Define chapter status, chapter counting, word counting, and capability milestones.
 - Keep this README aligned with implemented behavior.
 

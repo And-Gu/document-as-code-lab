@@ -1,7 +1,11 @@
+---
+id: 07-dashboards
+chapter_number: 9
+status: outline
+---
+
 # Dashboards and Work Tracking in GitHub
 
-- Chapter ID: `07-dashboards`
-- Status: outline
 
 ## Learning Goal
 
