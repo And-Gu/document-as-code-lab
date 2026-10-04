@@ -1,0 +1,16 @@
+.tutorial-example {
+  --example-accent: #337487;
+  --example-background: #f3f8fa;
+  margin: 2rem 0;
+  padding: 1rem 1.25rem;
+  border-inline-start: 3px solid var(--example-accent);
+  background: var(--example-background);
+  min-width: 0;
+}
+
+.tutorial-example > :first-child { margin-top: 0; }
+.tutorial-example > :last-child { margin-bottom: 0; }
+
+@media (max-width: 760px) {
+  .tutorial-example { padding: 0.8rem; }
+}

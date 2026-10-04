@@ -6,6 +6,8 @@ This project is being developed in English.
 
 Each chapter starts with a stable identifier, a reading-order number, and an explicit status. An outline is not a completed chapter.
 
+Chapter statuses are `outline`, `draft`, `in-review`, `approved`, and the earlier `complete` convention. Use `approved` after the responsible reviewer explicitly accepts the chapter revision; retain that decision with its review or commit record. Chapter approval does not approve the tutorial as a whole or the fictional instructions used in an example. Return substantive revisions to review.
+
 `chapter_number` and the filename prefix must match the current reading order. The `id` is a permanent content key, not a chapter number: older IDs retain prefixes from earlier outlines. For example, `04-markdown.md` has `chapter_number: 4` and `id: 03-markdown`. Do not renumber that ID to fix its apparent mismatch; historical reports use it to recognize the same content. For new chapters, prefer descriptive IDs without a reading-order prefix.
 
 Chapters can store their identifier, `chapter_number`, status, audience, and learning goal in YAML front matter. Filename prefixes and chapter numbers follow the reading order. Preserve existing IDs when renumbering; IDs identify content independently of its position. Keep planning notes out of the reader-facing prose as a chapter develops.

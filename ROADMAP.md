@@ -22,6 +22,8 @@ Done when an update produces verifiable current and historical metrics.
 
 ## 3. Publish the First Website
 
+Current status: Astro publishes all twelve chapters to GitHub Pages, with metadata and Git-history panels. Production deployment, navigation, images, and Mermaid rendering have been verified. Chapter 3 also has an interactive growth widget using committed history at build time; its saved charts remain historical snapshots. Extending this view into a combined work-tracking dashboard remains a next step. Chapter 1 has its first approved edition.
+
 - Compare a small set of publishing tools against the tutorial's needs.
 - Publish chapters and a basic growth dashboard.
 - Check links, navigation, accessibility, and diagram rendering.
@@ -57,6 +59,5 @@ Done when readers can adapt the practices without relying on GitHub.
 ## Open Decisions
 
 - Primary audience and assumed technical knowledge.
-- Content and code licenses.
-- Website, book, slide, and chart tooling.
+- Book and presentation tooling; Astro is selected for the website, and existing charts use Matplotlib.
 - Microsoft account environment used for the portability exercise.

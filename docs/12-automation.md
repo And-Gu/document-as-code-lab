@@ -48,7 +48,7 @@ Other useful scripts are available, but they are not all steps in that hosted wo
 
 The last script deliberately writes tracked teaching assets. Run it only when you intend to inspect and update those examples, or use a disposable project copy. The other outputs are local build results ignored by Git.
 
-This is not yet a complete publishing pipeline. The hosted workflow does not deploy a website, render a book, approve procedures, or check every chapter caption. Knowing the boundary helps us decide what to add next.
+The growth workflow produces report artifacts. A separate Astro pull-request workflow checks the website build, and the Pages deployment workflow builds and publishes the website after changes reach `main`. That build also regenerates the data for chapter 3's interactive growth widget. Book generation, procedure approval, and checks of every chapter caption are outside these workflows. Knowing these boundaries helps us decide what to add next.
 
 ## Check More Than the Build Result
 

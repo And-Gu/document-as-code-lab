@@ -15,6 +15,7 @@
 .chapter-information[data-status='draft'] { --status-color: #946200; }
 .chapter-information[data-status='in-review'] { --status-color: #1968ac; }
 .chapter-information[data-status='complete'] { --status-color: #237746; }
+.chapter-information[data-status='approved'] { --status-color: #237746; }
 .chapter-information__summary { padding: 0.8rem 1rem; cursor: pointer; }
 .chapter-information__summary:focus-visible { outline: 2px solid var(--status-color); outline-offset: 3px; }
 .chapter-information__status { color: var(--status-color); font-weight: 700; white-space: nowrap; }

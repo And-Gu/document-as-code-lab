@@ -5,10 +5,22 @@ import subprocess
 import tempfile
 from unittest.mock import patch
 
-from scripts.measure_growth import chapter_metrics, historical_snapshot, snapshot
+from scripts.measure_growth import chapter_metrics, historical_snapshot, snapshot, main
 
 
 class GrowthTests(unittest.TestCase):
+    def test_json_only_preserves_report_without_rendering(self):
+        with tempfile.TemporaryDirectory() as directory:
+            with patch('sys.argv', ['measure_growth', '--json-only', '--output', directory]), \
+                    patch('scripts.measure_growth.render') as render:
+                main()
+            render.assert_not_called()
+            report = json.loads((Path(directory) / 'history.json').read_text())
+            self.assertEqual(report['measurement_version'], 3)
+            self.assertTrue(report['history'])
+            self.assertEqual(report['history'][-1]['kind'], 'commit')
+            self.assertFalse((Path(directory) / 'growth.png').exists())
+
     def test_drafted_chapters_are_separate_from_file_count(self):
         files = {f"docs/{name}.md": f"---\nid: {name}\nstatus: {status}\n---\n# {name}"
                  for name, status in [("one", "outline"), ("two", "draft"), ("three", "complete")]}
@@ -21,6 +33,14 @@ class GrowthTests(unittest.TestCase):
         record = chapter_metrics("docs/sample.md", text)
         self.assertEqual(record["words"], 4)
         self.assertEqual(record["status"], "draft")
+
+    def test_review_and_approval_preserve_developed_chapter_count(self):
+        for status in ["draft", "in-review", "approved", "complete"]:
+            with self.subTest(status=status):
+                text = f"---\nid: introduction\nstatus: {status}\n---\n# Introduction"
+                result = snapshot(["docs/introduction.md"], lambda _: text, {})
+                self.assertEqual(result["draft_or_complete_chapters"], 1)
+                self.assertEqual(result["chapters"][0]["status"], status)
 
     def test_legacy_chapter_status_is_preserved(self):
         record = chapter_metrics("docs/x.md", "# Example\n- Chapter ID: `old-id`\n- Status: outline\nBody")

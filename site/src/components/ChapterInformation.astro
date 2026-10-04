@@ -9,7 +9,7 @@ const metadata = chapter.data;
 const source = `docs/${chapter.id}.md`;
 const history = chapterHistory(source);
 const repository = 'https://github.com/And-Gu/document-as-code-lab';
-const knownStatuses = ['outline', 'draft', 'in-review', 'complete'];
+const knownStatuses = ['outline', 'draft', 'in-review', 'approved', 'complete'];
 const status = knownStatuses.includes(metadata.status) ? metadata.status : 'unknown';
 const label = status === 'unknown' ? 'Unknown' : status === 'in-review' ? 'In review'
   : status.charAt(0).toUpperCase() + status.slice(1);
