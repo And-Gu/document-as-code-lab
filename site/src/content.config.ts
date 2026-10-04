@@ -10,7 +10,10 @@ const chapters = defineCollection({
   }),
   schema: z.object({
     chapter_number: z.number().int().positive(),
-    status: z.string(),
+    status: z.string().default('unknown'),
+    id: z.string().optional(),
+    audience: z.string().optional(),
+    learning_goal: z.string().optional(),
   }),
 });
 

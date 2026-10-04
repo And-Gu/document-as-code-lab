@@ -1,0 +1,54 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { chapterHistory } from '../lib/chapter-history';
+import '../styles/chapter-information.css';
+
+interface Props { chapter: CollectionEntry<'chapters'> }
+const { chapter } = Astro.props;
+const metadata = chapter.data;
+const source = `docs/${chapter.id}.md`;
+const history = chapterHistory(source);
+const repository = 'https://github.com/And-Gu/document-as-code-lab';
+const knownStatuses = ['outline', 'draft', 'in-review', 'complete'];
+const status = knownStatuses.includes(metadata.status) ? metadata.status : 'unknown';
+const label = status === 'unknown' ? 'Unknown' : status === 'in-review' ? 'In review'
+  : status.charAt(0).toUpperCase() + status.slice(1);
+const latest = history.commits[0];
+const formatDate = (date: string) => new Intl.DateTimeFormat('en-GB', {
+  day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC',
+}).format(new Date(date));
+---
+
+<details class="chapter-information" data-status={status}>
+  <summary class="chapter-information__summary">
+    <span class="chapter-information__status"><span class="chapter-information__dot" aria-hidden="true"></span>{label}</span>
+    <span class="chapter-information__title">Chapter information</span>
+    <span class="chapter-information__updated">
+      {history.changedLocally ? 'Local edits' : latest ? <>Updated <time datetime={latest.date}>{formatDate(latest.date)}</time></> : 'History unavailable'}
+    </span>
+  </summary>
+  <div class="chapter-information__body">
+    <dl class="chapter-information__metadata">
+      <dt>Learning goal</dt><dd>{metadata.learning_goal ?? 'Not specified'}</dd>
+      <dt>Audience</dt><dd>{metadata.audience?.replaceAll('-', ' ') ?? 'Not specified'}</dd>
+      <dt>Chapter</dt><dd>{metadata.chapter_number}</dd>
+      <dt>Stable ID</dt><dd><code>{metadata.id ?? chapter.id}</code></dd>
+      <dt>Source status</dt><dd><code>{metadata.status}</code></dd>
+    </dl>
+    <h2 class="chapter-information__heading">Recent changes</h2>
+    {history.commits.length ? <ol class="chapter-information__commits">
+      {history.commits.map((commit) => <li>
+        <a href={`${repository}/commit/${commit.sha}`}>{commit.message}</a>
+        <span class="chapter-information__commit-meta">{commit.author} · <time datetime={commit.date}>{formatDate(commit.date)}</time> · <code>{commit.sha.slice(0, 7)}</code></span>
+      </li>)}
+    </ol> : <p>No commit history is available for this source file.</p>}
+    <div class="chapter-information__links">
+      <a href={`${repository}/blob/${history.revision ?? 'main'}/${source}`}>View source</a>
+      <a href={`${repository}/commits/${history.revision ?? 'main'}/${source}`}>Change history</a>
+      {latest && <a href={`${repository}/commit/${latest.sha}`}>View latest change</a>}
+    </div>
+    <p class="chapter-information__note">
+      {history.changedLocally ? 'This local preview includes uncommitted chapter edits. History describes committed versions.' : 'Status comes from chapter metadata; history reflects the source revision used for this build.'}
+    </p>
+  </div>
+</details>

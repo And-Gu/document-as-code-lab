@@ -3,6 +3,7 @@ import { render } from 'astro:content';
 import Documentation from '../../layouts/Documentation.astro';
 import { getChapters, chapterTitle } from '../../lib/chapters';
 import { siteUrl } from '../../lib/urls';
+import ChapterInformation from '../../components/ChapterInformation.astro';
 
 export async function getStaticPaths() {
   const chapters = await getChapters();
@@ -12,12 +13,16 @@ export async function getStaticPaths() {
   }));
 }
 const { chapter, previous, next } = Astro.props;
-const { Content } = await render(chapter);
+const { Content, headings } = await render(chapter);
 ---
 
 <Documentation title={chapterTitle(chapter)} activeChapter={chapter.id}>
   <p class="chapter-meta">Chapter {chapter.data.chapter_number} · {chapter.data.status}</p>
-  <article><Content /></article>
+  <article>
+    <h1 id={headings.find((heading) => heading.depth === 1)?.slug ?? chapter.id}>{chapterTitle(chapter)}</h1>
+    <ChapterInformation chapter={chapter} />
+    <Content />
+  </article>
   <div class="chapter-navigation" aria-label="Chapter navigation">
     {previous && <a href={siteUrl(`chapters/${previous.id}/`)}>Previous: {chapterTitle(previous)}</a>}
     {next && <a href={siteUrl(`chapters/${next.id}/`)}>Next: {chapterTitle(next)}</a>}

@@ -1,0 +1,38 @@
+.chapter-information {
+  --status-color: #59636d;
+  --widget-background: #f8faf9;
+  --widget-border: #d6dedb;
+  --widget-text: #222;
+  --widget-muted: #52605a;
+  margin: 1.25rem 0 1.75rem;
+  border: 1px solid var(--widget-border);
+  border-left: 4px solid var(--status-color);
+  border-radius: 4px;
+  background: var(--widget-background);
+  color: var(--widget-text);
+  font-size: 0.875rem;
+}
+.chapter-information[data-status='draft'] { --status-color: #946200; }
+.chapter-information[data-status='in-review'] { --status-color: #1968ac; }
+.chapter-information[data-status='complete'] { --status-color: #237746; }
+.chapter-information__summary { padding: 0.8rem 1rem; cursor: pointer; }
+.chapter-information__summary:focus-visible { outline: 2px solid var(--status-color); outline-offset: 3px; }
+.chapter-information__status { color: var(--status-color); font-weight: 700; white-space: nowrap; }
+.chapter-information__dot { display: inline-block; width: 0.55rem; height: 0.55rem; border-radius: 50%; background: currentColor; margin-right: 0.45rem; }
+.chapter-information__title { margin-left: 0.75rem; font-weight: 600; }
+.chapter-information__updated { display: inline-block; margin-left: 0.75rem; color: var(--widget-muted); }
+.chapter-information__body { padding: 0 1rem 1rem; border-top: 1px solid var(--widget-border); }
+.chapter-information__metadata { display: grid; grid-template-columns: 7rem minmax(0, 1fr); gap: 0.5rem 1rem; margin: 1rem 0; }
+.chapter-information__metadata dt { font-weight: 600; }
+.chapter-information__metadata dd { margin: 0; overflow-wrap: anywhere; }
+.chapter-information .chapter-information__heading { margin: 1.25rem 0 0.5rem; font-size: 1rem; line-height: 1.4; }
+.chapter-information__commits { padding-left: 1.25rem; margin: 0; }
+.chapter-information__commits li { margin: 0.65rem 0; }
+.chapter-information__commit-meta { display: block; color: var(--widget-muted); }
+.chapter-information__links { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; margin-top: 1rem; }
+.chapter-information__note { margin: 0.8rem 0 0; color: var(--widget-muted); font-size: 0.8rem; }
+@media (max-width: 480px) {
+  .chapter-information__updated { display: block; margin: 0.35rem 0 0 1rem; }
+  .chapter-information__metadata { grid-template-columns: minmax(0, 1fr); gap: 0.2rem; }
+  .chapter-information__metadata dd { margin-bottom: 0.65rem; }
+}
