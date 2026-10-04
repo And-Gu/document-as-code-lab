@@ -27,20 +27,20 @@ visuals:
     outputs: [web, pdf, slides]
     caption: Prose word counts by chapter, including outline material.
     alt: Horizontal bars compare chapter word counts, identified by stable chapter IDs.
-  - id: growth-baseline
+  - id: growth-first-update
     status: source-ready
     kind: chart
-    purpose: Provide an inspectable historical result before the reader runs the tools.
-    placement: after-start-with-a-real-observation
+    purpose: Compare the initial outline with the first committed set of chapter drafts.
+    placement: after-our-first-committed-comparison
     preferred_source: matplotlib
     source: ../scripts/measure_growth.py
-    generated_asset: ../assets/figures/growth-baseline.png
-    data: ../assets/figures/growth-baseline.json
-    source_commit: 8908932f8d0ed2d35ebcd9e59c5b58f2d4ae8cc5
+    generated_asset: ../assets/figures/growth-first-update/growth.png
+    data: ../assets/figures/growth-first-update/history.json
+    source_commit: 9c91191bcf0bf77a337870a17f43523d16f7407b
     measurement_version: 2
     outputs: [web, pdf, slides]
-    caption: The project's first committed revision, before any chapters were drafted.
-    alt: A single revision has 829 prose words, 10 chapter files, and zero completed capabilities. There is no trend yet.
+    caption: Two committed observations show accumulated change, not a sustained growth rate.
+    alt: Prose words rise from 829 to 16416, chapter files from 10 to 12, and recorded completed capabilities remain zero.
 ---
 
 # Project Growth: History as Data
@@ -66,26 +66,36 @@ A shorter explanation may be an improvement. A chapter can become more useful wi
 
 Chapter 1's dashboard summarizes fictional procedure review states. This report measures the tutorial repository. A chapter marked `draft`, a procedure marked `approved`, and a capability marked `complete` describe different things; they should not be combined into one completion percentage.
 
-## Start with a Real Observation
+## Our First Committed Comparison
 
-The project's first committed revision gives us a baseline we can inspect before running any tools:
+The first commit, `8908932`, contains ten chapter outlines. The next, `9c91191`, records the first seven drafts, supporting examples, and processing scripts. Compare these actual revisions using the same measurement rules:
 
-![A single revision has 829 prose words, 10 chapter files, and zero completed capabilities. There is no trend yet.](../assets/figures/growth-baseline.png)
+![Prose words increase from 829 to 16416 and chapter files from 10 to 12. Recorded completed capabilities remain zero across the two revisions.](../assets/figures/growth-first-update/growth.png)
 
-*Baseline: the first committed revision, `8908932`, measured with rules version 2. This is a historical example, not the current project status.*
+*Two committed observations, ending at `9c91191`, measured with rules version 2. This is a fixed historical comparison, not a live report.*
 
-| Measure | Baseline value | Interpretation |
-| --- | --- | --- |
-| Chapter files | 10 | The initial planned scope |
-| Draft or complete chapters | 0 | Every chapter was still an outline |
-| Prose words | 829 | The volume of those outlines |
-| Completed capabilities | 0 | None had been marked complete |
+| Measure | Initial outline: 8908932 | First drafts: 9c91191 | Change |
+| --- | --- | --- | --- |
+| Chapter files | 10 | 12 | +2 |
+| Draft or complete chapters | 0 | 7 | +7 |
+| Prose words | 829 | 16,416 | +15,587 |
+| Recorded completed capabilities | 0 | 0 | No change |
 
-Ten chapter files might sound like a substantial tutorial. The status count shows that they were only outlines. For a team deciding what to do next, the useful conclusion is to develop and verify the material, not simply add more chapter files.
+The additional chapters cover the GitHub workspace and structured content. Existing chapters were expanded and reordered; their stable IDs preserve their identity across that reorganization. Seven chapters are drafts, not seven approved or completed publications.
 
-With one revision, there is no growth trend yet. The chart establishes a starting point; later committed revisions provide the comparisons. We do not invent earlier data to make the chart look complete.
+The flat capability line needs explanation. The commit includes working scripts and tests, but the feature register still records every capability as planned. This metric reports explicit milestone decisions, not an automatic assessment of available functionality. The appropriate next action is to review the completion criteria and evidence, then update the register where justified, rather than interpret zero as "nothing works."
 
-The [saved baseline data](../assets/figures/growth-baseline.json) contains the full revision, totals, and per-chapter values. Its chapter count reflects the reading plan at that time, before later additions and renumbering.
+The large word-count increase represents work accumulated before one commit. Git does not record each uncommitted editing step. These two points establish a before-and-after comparison, not a reliable trend, productivity rate, or forecast.
+
+The [chapter-size chart](../assets/figures/growth-first-update/chapter-sizes.png) shows another useful detail: structured content is the largest chapter at this revision, with 3,063 measured words. That suggests a readability review, not an automatic decision to shorten it. Its examples may justify the space.
+
+The [saved report](../assets/figures/growth-first-update/history.json) contains both observations and their chapter-level values. This chapter update is not included in the totals above: the report is pinned to the earlier committed source. Recreate the snapshot from the repository root with:
+
+```bash
+python scripts/measure_growth.py --ref 9c91191bcf0bf77a337870a17f43523d16f7407b --output build/first-update-check
+```
+
+With the same script and measurement rules, the JSON values should match the saved report. Keep future live reports separate from this teaching snapshot. The original one-observation [baseline chart](../assets/figures/growth-baseline.png) and [data](../assets/figures/growth-baseline.json) remain available as historical assets.
 
 ## Choose a View for the Question
 
@@ -114,17 +124,9 @@ Git and GitHub contribute different information. This exercise reads Git history
 
 ## Define the Rules Before Counting
 
-The initial script applies these rules consistently to every revision:
+The script counts chapter files directly inside `docs/`, including outlines. It measures their prose while excluding metadata and fenced examples, and leaves supporting files and generated outputs outside the totals. This is a measure of content volume, not a precise estimate of reading effort.
 
-- Count Markdown files directly inside `docs/` as chapters, including outlines.
-- Use chapter IDs and statuses from YAML front matter, with support for the earlier inline chapter fields.
-- Count words in the chapter body, including headings, tables, captions, and outline notes.
-- Exclude YAML front matter, inline chapter identity and status fields, fenced code or diagram blocks, and HTML comments.
-- Count link labels rather than their destination URLs. Inline code remains part of the prose count.
-- Count a word as a sequence of letters, digits, or underscores, optionally joined by apostrophes or hyphens. This is an approximate English-oriented measure, not a full Markdown language parser.
-- Exclude the README, scripts, assets, and generated reports from chapter totals.
-
-The report records `measurement_version: 2`. This version corrects historical counting to exclude nested Markdown files, matching working-tree previews. If the rules change, update that version and regenerate the history before comparing values. Otherwise, a change in measurement could look like a change in content.
+The report records `measurement_version: 2`. Use the same rules across revisions; otherwise a change in measurement can look like a change in content. The optional [measurement reference](../reference/growth-measurement.md) lists exact inclusions, exclusions, and regeneration commands.
 
 ## Track Capabilities Explicitly
 
@@ -171,9 +173,7 @@ This adds a separately labelled working-tree snapshot. Its `source_commit` ident
 
 Open both generated charts and compare them with `history.json`. Chapter statuses are available in the data but are not a separate panel in the history chart. The chapter-size chart shows the latest measured snapshot, including the working-tree preview when requested. Its stable chapter IDs may retain older number prefixes after chapters are reordered; use the report's titles and paths to identify them.
 
-To recreate the earlier baseline, run `python scripts/measure_growth.py --ref 8908932f8d0ed2d35ebcd9e59c5b58f2d4ae8cc5 --output build/baseline`. The fixed teaching asset is versioned under `assets/figures/`; regularly regenerated reports remain under `build/`.
-
-## Use AI with the Measurement Context
+### Optional: Ask AI to Interpret the Report
 
 The structured report is also useful context for an LLM. An agent can help explain a change, suggest a visualization, or adapt the measurement script. Give it the rules and source revisions as well as the numbers, so it can distinguish observations from interpretations.
 
@@ -196,7 +196,7 @@ Check its figures against the JSON report. A plausible explanation is not eviden
 
 Use your own working copy so you can make an experimental commit.
 
-Before editing, predict the result: adding a paragraph to an existing chapter should change its word count, but not the number of chapters or completed capabilities. If you completed chapter 2's exercise, you can skip steps 2 and 3 and compare the observations before and after its accepted chapter edit instead of making another change.
+Before editing, predict the result: adding a paragraph to an existing chapter should change its word count, but not the number of chapters or completed capabilities. If you completed chapter 2's optional editing extension and its change was accepted, you can skip steps 2 and 3 and investigate that edit instead.
 
 1. Run the script and note the latest totals in `build/growth/history.json`.
 2. Add a useful paragraph to a chapter. Generate a working-tree preview and inspect the change in its word count.
@@ -204,13 +204,7 @@ Before editing, predict the result: adding a paragraph to an existing chapter sh
 4. Run the default script again. Compare the final two entries in `history.json` and inspect both charts.
 5. Explain whether the change affected words, chapter count, or capabilities, and whether it improved the tutorial.
 
-For a reproducibility check, save the full commit ID from the report and regenerate that revision in a separate directory:
-
-```bash
-python scripts/measure_growth.py --ref YOUR_COMMIT_ID --output build/growth-check
-```
-
-Replace `YOUR_COMMIT_ID` with the actual ID. With the same measurement script and rules, the JSON values should match the corresponding committed history. A shallow clone does not contain enough history; the script stops and asks you to fetch it rather than silently report incomplete totals.
+For an optional reproducibility check, regenerate the same revision using the commands in the [measurement reference](../reference/growth-measurement.md). A shallow clone lacks the history this exercise needs; the script stops rather than silently reporting incomplete totals.
 
 **Expected result:** the new committed observation reflects your paragraph, with chapter and capability counts unchanged. Its exact word change depends on the text you wrote.
 
@@ -228,6 +222,8 @@ Full history is requested with `fetch-depth: 0`. [The checkout documentation exp
 
 The workflow does not commit generated reports back into the repository, so its output cannot trigger a cycle of new commits and builds. It does not yet publish a website or refresh README images. Those integrations belong to the later dashboard and publishing chapters.
 
-Local measurement and a successful GitHub workflow run are separate checks. The workflow becomes available when these files are pushed; its hosted execution still needs verification.
+Local measurement and a successful GitHub workflow run are separate checks. The [first hosted run for 9c91191](https://github.com/And-Gu/document-as-code-lab/actions/runs/37135502115) completed successfully after the push to `main`, running the tests and uploading the `project-growth` artifact. Repository access is required to inspect this private run, and artifact availability is subject to retention limits. The fixed comparison above remains available with the tutorial's source files.
+
+The downloaded artifact's JSON report matches the locally regenerated report for that revision. This verifies agreement for these inputs, not the correctness of every future measurement or an automatic completion decision for the feature register.
 
 Next, [Markdown and Content Structure](04-markdown.md) explores the source conventions that make these chapters easier to maintain and process.

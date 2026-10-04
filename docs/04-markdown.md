@@ -157,8 +157,6 @@ A fenced code block preserves an example without interpreting it as ordinary doc
 python scripts/measure_growth.py --include-working-tree
 ```
 
-When you need to show a three-backtick code block inside another code block, use a longer outer fence. This prevents the inner example from closing the outer block.
-
 The [CommonMark specification](https://spec.commonmark.org/spec) defines core Markdown elements. GitHub Flavored Markdown extends it with features such as tables and task lists. [Its specification describes those extensions](https://github.github.com/gfm/).
 
 ## Images Need Text Too
@@ -202,7 +200,7 @@ Chapters use related fields, including `chapter_number`. This chapter retains th
 
 Front matter is a convention used by many tools, rather than a core Markdown requirement. Our field names have project-specific meanings. A publishing tool must be configured to interpret them, and another application may display or ignore them.
 
-We also record visual intent in a `visuals` list. That separates a diagram's purpose and accessibility description from the syntax used to draw it. The conventions are documented in [CONTRIBUTING.md](../CONTRIBUTING.md).
+Optional visual specifications use a `visuals` list, described in [CONTRIBUTING.md](../CONTRIBUTING.md). You do not need to add one for this chapter's text-editing exercise.
 
 Keep metadata small and useful. The next chapter, [Structured Content: Metadata, Rules, and Views](05-structured-content.md), introduces templates as starting points, then schemas as rules for checking the resulting records, followed by relationships and validation.
 
@@ -210,7 +208,7 @@ Keep metadata small and useful. The next chapter, [Structured Content: Metadata,
 
 Review in three passes. First inspect the source and diff for meaning, metadata, and unintended edits. Then inspect the preview for readable headings, ordered steps, working links, and understandable diagrams. Finally, check each published format when its pipeline exists: a successful GitHub preview does not prove that a PDF or slide is usable.
 
-### GitHub's Rendering Boundaries
+### Essential Preview Checks
 
 GitHub's repository preview provides a particular rendering environment. It does not run our publishing scripts, resolve custom include instructions, or turn our `visuals` metadata into images. A separately built website can have different capabilities.
 
@@ -222,7 +220,11 @@ Use formatting that the renderer recognizes:
 - Keep opening and closing code fences balanced. A `markdown` fence displays an example as code; it does not render the example's headings.
 - Use a fenced block labelled `mermaid` for a diagram that GitHub should render.
 
-Here is the source for a small embedded diagram. The four-backtick outer fence lets us display the three-backtick inner fence as an example:
+The checks above are enough for the core exercise. The following diagram example is optional background for readers inspecting Mermaid sources.
+
+### Optional: Diagram Fences and Rendering
+
+A four-backtick outer fence lets us display the three-backtick inner fence as an example:
 
 ````markdown
 ```mermaid
@@ -233,21 +235,15 @@ flowchart LR
 
 We keep editable Mermaid sources in `.mmd` files, but use embedded `mermaid` blocks for diagrams in the chapter preview. A Markdown link to a source file provides access to its text; it is not an instruction to include or render that file as a diagram.
 
-Mermaid has its own diagram syntax; the Markdown fence tells the renderer which language it contains. In this example, `flowchart LR` requests a left-to-right flowchart. `request` is a node identifier, the quoted text inside brackets is its displayed label, and `-->` draws an arrow to the `review` node. You describe the connection rather than positioning each shape manually. [Mermaid's flowchart guide](https://mermaid.js.org/syntax/flowchart.html) covers these elements.
+The `mermaid` fence identifies the diagram language. `flowchart LR` requests a left-to-right flowchart; `request` identifies a node, brackets contain its label, and `-->` draws an arrow. See [Mermaid's flowchart guide](https://mermaid.js.org/syntax/flowchart.html) for more syntax.
 
 Rendering turns the diagram text into a visual. It does not check that the diagram agrees with a procedure or dataset. [Chapter 5](05-structured-content.md) shows why that distinction matters when diagrams describe record relationships.
 
-Mermaid features also depend on the version GitHub supports. Syntax that works in another editor may fail in GitHub. Start with simple diagram types, quote descriptive node labels, and check the actual preview. GitHub's diagram guide explains how to check its current Mermaid version with an `info` diagram. [See GitHub's diagram documentation](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-diagrams).
+Mermaid support varies between renderers. Check the actual preview; [GitHub's diagram documentation](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-diagrams) explains supported use and how to inspect its Mermaid version.
 
 GitHub also sanitizes rendered HTML. You cannot assume that custom scripts, embedded content, or layout styling will work in a repository preview. [The GitHub Flavored Markdown specification describes this additional processing](https://github.github.com/gfm/).
 
-### Other Output Formats
-
-A readable Markdown file is a good start, but renderers support different features. Mermaid needs diagram support, and front matter needs metadata handling. A wide table may look acceptable on GitHub and overflow a printed page.
-
-Prefer basic elements where they meet the need, and document extensions when you use them. Preview the result and review each target format once a publishing workflow exists. Avoid adding raw HTML solely to make one preview look right without checking its effect elsewhere.
-
-The illustration in this chapter is an editable Mermaid source, not a verified cross-format asset. Our later visual chapter will cover rendering and export.
+A wide table or diagram may need different treatment in print. [Chapter 7](07-images.md) develops visual sources and exports, and [chapter 10](10-publishing.md) covers publication choices. This chapter's diagram source is not a verified cross-format asset.
 
 ## Try It: Improve an Onboarding Section
 

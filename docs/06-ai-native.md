@@ -23,11 +23,11 @@ visuals:
 
 AI-native documentation is information maintained so that people and AI tools can work with it as part of everyday tasks. In this tutorial, that means clear source material, explicit context, traceable changes, and reviewable results. It does not mean that every document is written by AI.
 
-A trainer preparing an onboarding session needs more than a fluent explanation. The explanation must distinguish agreed requirements from proposed features and from capabilities that actually exist. An AI tool can help draft it, but only if the task and available evidence are clear.
+We have already prepared the foundations for this in our onboarding example. In chapter 5, we organized requirements into records and selected approved requirements for an AI context package. That package had a specific purpose: help a trainer explain the agreed requirements to new colleagues. We will now follow it from maintained source material into an AI-assisted drafting task.
 
-Document-as-code provides useful foundations: readable sources, stable identifiers, metadata, version history, and repeatable processing. These support both generating new material and maintaining related information when something changes. The same principles can be used outside GitHub, as [chapter 11](11-beyond-github.md) will explore.
+For the trainer, a fluent explanation is only part of a useful result. The draft must preserve the distinctions we established in the records: an agreed requirement is not a proposed feature, and neither is evidence that a capability has been implemented. The question is how to give an AI tool enough context to preserve those distinctions, then check that its draft does so.
 
-This chapter uses the context package from chapter 5. You will inspect what it supplies, compare AI-assisted drafts, and define what an agent should check when updating related views. You can read the example without an AI account. The comparison exercise requires an AI tool permitted for the material you supply; account access and data handling depend on that tool and your organization.
+You will inspect the context package, compare an unsupported task with a source-grounded draft, and define checks for related updates. Reading requires no AI account; the comparison requires a tool permitted for the material you supply. An optional extension adds the full chapter as a third context condition.
 
 ## Start with the Task, Not the Whole Repository
 
@@ -69,7 +69,7 @@ flowchart LR
 
 This Mermaid diagram is an authored explanation, not a running agent workflow. As discussed in chapter 5, its related sources and wording should be checked together when the process changes.
 
-Context selection can begin with explicit file paths and filters. For a larger collection, retrieval means finding relevant items by identifiers, metadata, links, or search. Review the selected material for scope, version, and missing dependencies. A matching search result is not necessarily the right source for the task.
+Selection can begin with file paths and metadata filters. For larger collections, retrieval finds relevant items through search or links. Check scope, version, and missing dependencies rather than treating every matching result as suitable context.
 
 ## Adapt a General Model to Local Needs
 
@@ -77,7 +77,7 @@ A general-purpose LLM does not automatically know your team's terminology, decis
 
 This is adaptation through context, not retraining or fine-tuning. The supplied text does not change the model's underlying parameters or guarantee that it will remember the information in a later session. The application or agent must make relevant, current sources available when needed. [Microsoft's RAG guide](https://learn.microsoft.com/en-us/dotnet/ai/conceptual/rag) explains how external information can support generation without first training the model on it.
 
-### Can a Repository Replace RAG?
+### Optional Depth: Can a Repository Replace RAG?
 
 Retrieval-augmented generation (RAG) means retrieving relevant external information and supplying it to a model when generating a response. It is a pattern, not a synonym for a vector database. A repository stores maintained information; RAG describes a way to find and use that information.
 
@@ -121,6 +121,18 @@ Keep the task boundaries explicit: which files may be edited, which material may
 
 Our processor filters by record type and status. It does not enforce confidentiality rules, detect malicious instructions, or verify that the recorded approval is supported by review evidence. Those remain separate responsibilities.
 
+## Develop the Working Environment with an Agent
+
+AI-native work is not limited to generating content. It can also help the people responsible for information develop the tools around it. A documentation specialist can describe a recurring need, work with an agent to implement a small change, and inspect the result against concrete examples.
+
+Suppose the onboarding team needs to identify procedures awaiting review by owner. The specialist defines what counts as awaiting review and which records belong in the view. The agent can inspect the existing metadata, adapt a processor, add tests, and generate a sample result. The specialist checks that the view answers the actual question before accepting it into the team's workflow.
+
+As [chapter 2](02-github-workspace.md) explains, this requires practical authority to improve the team's tools. An agent can help implement changes within that scope; it does not bypass access controls or replace platform support.
+
+Treat the improvement as maintained work: state the expected behavior, test normal and missing-input cases, review the code and sample output, and record how to run it. Keep ownership with the team rather than leaving essential knowledge in one conversation. Project instructions and reusable skills can preserve the procedure for later work; people still need to understand its purpose, limits, and maintenance needs.
+
+Our processors illustrate this direction, not a complete autonomous platform. Start with a recurring problem and extend the environment where the benefit justifies the complexity.
+
 ## Make Updates a Coordinated Task
 
 An AI agent can help maintain authored explanations as well as generate new text. When the source changes, the desired task is to update and check affected material, not simply finish the first file.
@@ -149,7 +161,7 @@ The generated package identifies a base Git commit and an input digest. The dige
 
 Ask for record IDs beside factual claims, then inspect whether those records actually support the wording. A citation is a route to evidence, not proof by itself. Review the audience fit, omitted qualifications, and unsupported claims before accepting the draft. Publishing it is a separate decision.
 
-## Try It: Compare Three Contexts
+## Try It: Compare a Task with and without Sources
 
 Use the fictional dataset in your own working copy. With the Python environment from chapter 3 active, regenerate the package:
 
@@ -157,7 +169,7 @@ Use the fictional dataset in your own working copy. With the Python environment 
 python scripts/process_records.py
 ```
 
-Inspect the selected records and preserve a copy of the resulting package before the comparison. Reuse the same task in three fresh conversations or otherwise isolated sessions, keeping the tool and settings the same where possible:
+Inspect the selected records and preserve the resulting package. Reuse this task in two fresh conversations or otherwise isolated sessions, keeping the tool and settings the same where possible:
 
 ```text
 Draft a short explanation of the agreed access-request requirements
@@ -168,20 +180,23 @@ Do not invent operational instructions. Keep the result under 150 words.
 ```
 
 1. Supply the task alone, without source files. Look for whether the response acknowledges that it has no evidence of agreed requirements.
-2. Supply the task with the full text of chapter 5. Check whether the response distinguishes examples, proposals, and instructions to the reader from the underlying requirements.
-3. Supply the task with the generated `ai-context.md` package. Check each claim against the selected source records and note what remains unknown.
+2. Supply the task with the generated `ai-context.md` package. Check each claim against the selected records and note what remains unknown.
 
 Use a tool configuration without automatic repository retrieval for this comparison where possible. If other context remains available, record that limitation: the first condition is no longer an instruction-only comparison. Do not reset or overwrite your exercise records just to match the chapter's starting dataset.
 
 For each response, note supported claims, unsupported claims, missing qualifications, and useful acknowledgements of uncertainty. Compare source support rather than fluency alone. The task-only response may correctly decline to supply specifics; that is preferable to invented requirements.
 
-**Expected result:** three drafts or responses and a short evidence-based comparison. The selected package makes its boundaries easier to inspect, but is not guaranteed to produce the best response in every run. This is a learning exercise, not a benchmark of model quality.
+**Expected result:** two responses and a short evidence-based comparison. The package makes source support easier to inspect, but does not guarantee a correct answer. This is a learning exercise, not a benchmark of model quality.
 
 **If results are misleading:** check for context carried over from another conversation, changed record statuses, missing source text, or a package generated before your latest edits. Correct the input or narrow the task before trying again.
 
 **Keep:** the prompt, exact package used, source references, responses, and review notes. Store practice results under an ignored directory such as `build/ai-context-review/`; keep any reusable, reviewed source improvements separately. No AI-generated response is automatically an approved publication.
 
-You can also complete a no-model version: inspect the three input conditions and write what each establishes and leaves unknown. Label this as a context review, not an AI-output experiment.
+### Optional: Compare the Whole Chapter
+
+In a third fresh session, supply the same task with chapter 5's full text. Check whether the response distinguishes examples, proposals, and authoring instructions from requirements. Compare its source support with the curated-package response. This tests selection, not the assumption that shorter input is always better.
+
+You can also complete a no-model version: inspect the input conditions and write what each establishes and leaves unknown. Label this as a context review, not an AI-output experiment.
 
 Finally, return to the information item you chose in chapter 1. Define one AI-assisted task, its permitted sources, and a claim the available material cannot support. Identify one related view an agent should check if that source changes.
 

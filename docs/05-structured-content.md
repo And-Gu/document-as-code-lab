@@ -196,7 +196,7 @@ Our example uses two relationships:
 
 The processor checks that each referenced ID exists and has the expected type. A requirement cannot use `verified_by` to point to a task.
 
-This diagram uses Mermaid, a text-based notation for diagrams. Instead of positioning shapes manually, we describe the items and their connections, and a renderer draws them. Its source can be versioned and reviewed alongside the records. [Chapter 4](04-markdown.md) introduces the basic syntax.
+This Mermaid diagram makes the relationships visible. [Chapter 4](04-markdown.md) introduces its text-based notation.
 
 ```mermaid
 flowchart LR
@@ -213,32 +213,9 @@ flowchart LR
 
 The labelled solid arrows correspond to fields the processor checks. The dashed arrow explains the shared scenario; it is not stored or validated as a record relationship. These meanings are choices we made for this diagram, not rules imposed by Mermaid. Neither arrow style is evidence that the service works.
 
-### Text-Based Is Not Automatically Data-Driven
+The diagram is authored, not generated from the records: text-based does not automatically mean data-driven. If a relationship changes, checking this explanation belongs to the same task. Generated views need regeneration; authored views need an appropriate edit or an explicit decision to retain a labelled teaching snapshot.
 
-This diagram is authored rather than generated from the records. Its Mermaid source repeats record IDs and relationships that also exist in the metadata. If REQ-014 changes to reference another test, updating the diagram should be part of the same maintenance task. Otherwise, it can render correctly while describing outdated information.
-
-Text-based describes how a diagram is stored and edited. Data-driven describes how its content is derived from maintained information. Rendering and data generation are separate steps:
-
-| Approach | Where the connections come from | What happens after a record changes |
-| --- | --- | --- |
-| Authored Mermaid diagram, as above | A person or AI agent writes the nodes and arrows | Review and update affected connections as part of the source change |
-| Data-driven Mermaid diagram, introduced in chapter 7 | A generator reads record IDs and relationship fields | Rerunning the generator updates the diagram source |
-
-A data-driven pipeline reads and validates the records, generates Mermaid text from their relationships, then renders that text as a diagram. Chapter 7 implements the generation step and explains separate rendering options. Its generator uses explicit selection rules and omits our conceptual procedure connection, which is not stored in those fields.
-
-Data-driven does not mean continuously updated: someone or an automated workflow must run the generator again. Chapter 2's automation provides the mechanism for that later step. Tests would check that the generated connections match the selected records, while people would still review meaning and readability.
-
-### Make Related Updates Part of the Task
-
-AI-assisted maintenance should treat a source change and its affected views as one task. When an agent updates a requirement, it should identify related diagrams, explanations, and excerpts, update them where needed, and check that they remain consistent. An authored diagram may communicate an interpretation that cannot be derived from metadata alone; agent-assisted editing is useful for maintaining that explanation.
-
-This coordination needs explicit support: project instructions, reusable skills, recorded dependencies, or an execution harness. A skill supplies reusable task guidance; a harness is the surrounding system that supplies context, runs tools, and checks results. The agent should report which related outputs it updated, which it checked and left unchanged, and which it could not verify. An unverified dependency should remain visible as unfinished work.
-
-Where relationships can be generated reliably from structured records, prefer a repeatable generator. Where a diagram requires editorial judgment, use agent-assisted updates with review. In both cases, completing the task means checking the affected views, not merely changing the original file. These checks support human review; they do not automatically approve the content.
-
-In this chapter, the three output views below are generated from records; the relationship diagram is an authored explanation. We have not yet implemented a harness that discovers and checks all affected views. [Chapter 7](07-images.md) will develop coordinated diagram maintenance, and [chapter 12](12-automation.md) will cover automation and checks.
-
-A valid relationship does not prove implementation or successful verification. Evidence would need additional records, such as a test result tied to a product version. Keep that distinction visible in dashboards and AI context.
+AI agents should help coordinate those updates, not leave the task at the first changed file. [Chapter 6](06-ai-native.md) explains the supporting instructions, skills, and harnesses; [chapter 7](07-images.md) develops diagram generation and rendering. Here, focus on the record fields and what their links mean. A valid link still does not prove implementation or a successful test.
 
 Preserve IDs when records change. If an item is retired, retaining it with an explicit status can preserve the explanation behind older references. Deleting it requires a decision about its links and history.
 
@@ -291,11 +268,11 @@ Task: draft a brief explanation of the approved requirements for new colleagues.
 
 It then states its selection and limitations and includes REQ-014's requirement and rationale. REQ-015 is excluded because it is proposed. A context package is therefore an intentional selection, not just the entire document pasted into a prompt.
 
-The AI package includes an audience, a task, selection rules, and limits. It excludes the proposed requirement and the bodies of related tasks and tests. The processor prepares a file; it does not send data to an AI service or generate a model response.
+The package excludes the bodies of related tasks and tests. The processor prepares a file; it does not contact an AI service. Chapter 6 explores how to use and review that context.
 
 Every output records the base Git commit and a digest of the input files. The manifest also lists hashes for the schema, records, and processor. The commit identifies the working tree's base; the digest distinguishes the exact local inputs. Reproducing a result still requires preserving those inputs.
 
-## Draft a Record with AI Support
+### Optional Authoring Method: Use an AI Agent
 
 A template gives an agent a starting structure, the schema supplies checkable rules, and the source provides meaning. None replaces the others. Try this bounded authoring request in your exercise copy:
 
@@ -332,19 +309,25 @@ The processor writes its three Markdown views and `manifest.json` to `build/reco
 
 Before opening them, predict where REQ-015 should appear from its type and status. Confirm that it is in the requirements document and dashboard but absent from the AI package. If you already changed the exercise records, use their actual starting values rather than expecting the fixed table above.
 
-### 2. Author a Proposed Record
+### 2. Change a Status and Predict the Result
+
+In your exercise copy, change REQ-015 from `proposed` to `approved`. This simulates a review decision, not real approval. Predict the effect, then rebuild: the total requirement count stays the same, one count moves from proposed to approved, and REQ-015 enters the AI package. Confirm that the input digest changes too.
+
+If REQ-015 was already approved in your copy, select another proposed requirement and record the ID. If none exists, use the optional authoring step below first.
+
+**Expected result:** one source-field change updates the requirements document, dashboard counts, and selected AI context.
+
+**If processing fails:** check spelling, allowed statuses, and referenced IDs. Old generated files can survive a failed run; inspect the new manifest after a successful rerun.
+
+**Keep:** the intended exercise change and its explanatory commit. Return to your information item from chapter 1 and name one metadata field that would support a useful selection or view.
+
+### Optional: Author a Proposed Record
 
 Copy the requirement template into a new file in `records/`, or use the bounded AI prompt above. Use a unique ID, replace every placeholder, and leave the record proposed. Predict which outputs will change, then run the processor.
 
 The requirement should appear in the requirements document and dashboard, but not the approved-only AI package. Confirm that the input digest changed too. If you already created REQ-016 with the prompt, inspect that record rather than creating it twice.
 
-### 3. Simulate a Review Decision
-
-In your exercise copy, change REQ-015 from `proposed` to `approved`. This simulates a decision; it does not approve a real requirement. Predict the effect, then rebuild: the total requirement count should stay the same, one count should move from proposed to approved, and REQ-015 should enter the AI package. The new requirement from stage 2 remains proposed and excluded.
-
-If REQ-015 was already approved from an earlier exercise, choose a proposed requirement instead and record which ID you changed.
-
-### 4. Break and Repair a Relationship
+### Optional: Test a Validation Failure
 
 Temporarily change REQ-014's test reference to a nonexistent ID, such as `TEST-999`. Predict whether processing will succeed. Run the processor, inspect the missing-reference error, then restore `TEST-008` and run it successfully.
 
@@ -352,13 +335,7 @@ When validation fails, the processor stops before writing outputs. Files from an
 
 Review the final source diff and commit only the intended exercise changes. Record your predictions and what the outputs actually showed.
 
-**Expected result:** changing a requirement's status changes the document, summary counts, and AI selection. A broken relationship stops processing with an error.
-
-**If processing fails:** check field spelling, allowed statuses, and referenced IDs against the schema. After correcting the source, run the processor again and inspect the new manifest rather than relying on an older output.
-
-**Keep:** the intended changes to exercise records and their commit. Restore deliberate errors before committing. Tests use independent record fixtures so that completing this exercise does not invalidate their starting assumptions. Generated views remain in `build/records/`.
-
-Return to your information item from chapter 1. Sketch a small authoring template, identify one field that answers a real question, and name one useful output. Explain what a structural check could verify and what still needs human judgment. Add a relationship only if it supports a question you need to answer.
+Restore deliberate errors before committing. Tests use independent fixtures, so exercise edits do not invalidate their starting assumptions. Generated views remain under `build/records/`.
 
 ## Connect Existing Applications
 

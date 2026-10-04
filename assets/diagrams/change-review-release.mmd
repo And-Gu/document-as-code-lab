@@ -1,0 +1,10 @@
+flowchart LR
+    proposal["Recorded proposal and affected views"]
+    review["Review source change"]
+    merge["Merge accepted change"]
+    build["Build selected outputs"]
+    releaseReview["Review publication"]
+    release["Release identified output"]
+    proposal --> review --> merge --> build --> releaseReview --> release
+    review -->|Request correction| proposal
+    releaseReview -->|Request correction| proposal

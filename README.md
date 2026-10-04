@@ -6,7 +6,7 @@ The project teaches document-as-code by applying it to itself. It also serves as
 
 ## Status
 
-Chapters 1 through 7 in the reading order are in draft; the remaining chapters are outlined. A runnable onboarding showcase, local growth reporting, structured-record processing, and record-to-Mermaid generation are available, with a GitHub Actions workflow for growth reports. Complete website, PDF book, and presentation pipelines, along with interactive dashboards, remain future work. The hosted workflow needs verification after push.
+All 12 chapters now have a first draft. A runnable onboarding showcase, local growth reporting, structured-record processing, and record-to-Mermaid generation are available, with a GitHub Actions workflow for growth reports. Chapters 9 through 12 add work tracking, publication planning, a portable workflow, and an exercise for detecting stale outputs. Complete website, PDF book, and presentation pipelines, along with interactive dashboards, remain future work. Hosted work-board, export, and Microsoft-environment exercises still need validation in their target environments. The first hosted growth run succeeded for commit `9c91191`; chapter 3 includes its two-revision comparison.
 
 ## Explore the Showcase
 
@@ -57,18 +57,19 @@ Outputs share source material, but each needs appropriate structure and editoria
 
 ## Growth Tracking
 
-Chapter 3 will introduce an automated report updated on changes to the main branch:
+Chapter 3 introduces an automated report updated on changes to the main branch:
 
 - Chapter count and word count, including per-chapter comparisons.
 - Historical values reconstructed from Git revisions.
 - Capability milestones from the versioned [feature register](data/features.json).
-- Work progress from GitHub issues and Projects (planned for a later dashboard exercise).
+- Work progress from GitHub issues and Projects (chapter 9 introduces work tracking; integration into this report remains planned).
 
-Word counts measure content volume, not quality. The measurement rules will distinguish substantive chapters from outlines and exclude generated files. Every snapshot will identify its source commit.
+Word counts measure content volume, not quality. The measurement rules distinguish substantive chapters from outlines and exclude generated files. Committed snapshots identify their source revision; optional working-copy measurements are labelled separately.
 
 ## Repository Layout
 
 - `docs/`: tutorial chapters.
+- `reference/`: optional technical detail linked from chapters, excluded from chapter metrics.
 - `examples/`: exercise sources and fixed showcase datasets, excluded from chapter metrics.
 - `data/`: capability metadata and future measurement data.
 - `assets/diagrams/`: editable diagram sources referenced by chapter visual metadata.
@@ -85,6 +86,6 @@ Further publishing scripts and output-specific configuration will be added as th
 
 ## Next Milestone
 
-Review the first seven chapter drafts and verify the growth workflow on GitHub. Then choose and validate the initial website publishing tools.
+Review the complete first draft with readers and verify the remaining environment-dependent exercises. Reconcile the capability register with verification evidence, then choose and validate the initial website publishing tools.
 
 No content license has been selected yet.
