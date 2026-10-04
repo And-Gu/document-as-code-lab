@@ -16,7 +16,7 @@ const chapters = defineCollection({
 
 const materials = defineCollection({
   loader: glob({
-    pattern: ['*.md', 'examples/**/*.md', 'reference/**/*.md', 'assets/**/*.md'],
+    pattern: ['*.md', 'site/README.md', 'examples/**/*.md', 'reference/**/*.md', 'assets/**/*.md'],
     base: '..',
     generateId: ({ entry }) => entry.replace(/\.md$/, ''),
   }),

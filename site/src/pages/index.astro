@@ -1,6 +1,7 @@
 ---
 import Documentation from '../layouts/Documentation.astro';
 import { getChapters, chapterTitle } from '../lib/chapters';
+import { siteUrl } from '../lib/urls';
 const chapters = await getChapters();
 ---
 
@@ -10,7 +11,7 @@ const chapters = await getChapters();
   <h2>Contents</h2>
   <ol>
     {chapters.map((chapter) => (
-      <li><a href={`/chapters/${chapter.id}/`}>{chapterTitle(chapter)}</a></li>
+      <li><a href={siteUrl(`chapters/${chapter.id}/`)}>{chapterTitle(chapter)}</a></li>
     ))}
   </ol>
 </Documentation>

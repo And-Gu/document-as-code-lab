@@ -1,5 +1,6 @@
 ---
 import { getChapters, chapterTitle } from '../lib/chapters';
+import { siteUrl } from '../lib/urls';
 
 interface Props {
   title: string;
@@ -18,7 +19,7 @@ const chapters = await getChapters();
   </head>
   <body>
     <a class="skip-link" href="#content">Skip to content</a>
-    <header><a href="/">Document-as-Code Lab</a></header>
+    <header><a href={siteUrl()}>Document-as-Code Lab</a></header>
     <div class="documentation">
       <nav aria-label="Chapters">
         <details id="chapter-menu" open>
@@ -26,13 +27,13 @@ const chapters = await getChapters();
           <ol>
             {chapters.map((chapter) => (
               <li>
-                <a href={`/chapters/${chapter.id}/`} aria-current={activeChapter === chapter.id ? 'page' : undefined}>
+                <a href={siteUrl(`chapters/${chapter.id}/`)} aria-current={activeChapter === chapter.id ? 'page' : undefined}>
                   {chapterTitle(chapter)}
                 </a>
               </li>
             ))}
           </ol>
-          <a href="/materials/GLOSSARY/">Shared vocabulary</a>
+          <a href={siteUrl('materials/GLOSSARY/')}>Shared vocabulary</a>
         </details>
       </nav>
       <main id="content" tabindex="-1"><slot /></main>

@@ -4,7 +4,8 @@ import { visit } from 'unist-util-visit';
 
 const root = fileURLToPath(new URL('../../', import.meta.url));
 
-export default function repositoryLinks() {
+export default function repositoryLinks({ base = '' } = {}) {
+  const prefix = base.replace(/\/$/, '');
   return (tree, file) => {
     if (!file.path) return;
     visit(tree, 'element', (node) => {
@@ -21,11 +22,11 @@ export default function repositoryLinks() {
 
       const encoded = relative.split('/').map(encodeURIComponent).join('/');
       if (/^docs\/[^/]+\.md$/.test(relative)) {
-        node.properties[property] = `/chapters/${encoded.slice(5, -3)}/${suffix}`;
+        node.properties[property] = `${prefix}/chapters/${encoded.slice(5, -3)}/${suffix}`;
       } else if (relative.endsWith('.md')) {
-        node.properties[property] = `/materials/${encoded.slice(0, -3)}/${suffix}`;
+        node.properties[property] = `${prefix}/materials/${encoded.slice(0, -3)}/${suffix}`;
       } else {
-        node.properties[property] = `/files/${encoded}${suffix}`;
+        node.properties[property] = `${prefix}/files/${encoded}${suffix}`;
       }
     });
   };
