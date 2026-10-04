@@ -144,6 +144,29 @@ python scripts/measure_growth.py --ref e7cd98089498c392db3f914fd74eb4f2bc97545f 
 
 This report deliberately stops at the completed-draft commit. The explanation you are reading and later script changes are recorded afterwards, so they are not included in its totals. The charts now use four panels and reader-facing chapter titles; the underlying counting rules remain version 2. Older saved charts retain their original presentation.
 
+## From Drafts to Working Capabilities
+
+Commit `62eacec` adds a local Astro reading site. It reads the original chapter files rather than maintaining another copy of the text. Readers can browse all twelve chapters, follow links to supporting examples, and see images and Mermaid diagrams. The site builds successfully, passes its TypeScript checks, and has been checked for broken local links.
+
+This is a working capability, not just more tutorial content. You can try it by following the [site instructions](../site/README.md). Editing a chapter updates the local reading site from the same source.
+
+We have now reviewed the [feature register](../data/features.json) against the available evidence:
+
+| Capability | Current status | Evidence or remaining work |
+| --- | --- | --- |
+| Historical growth metrics | Complete | Historical reports are reproducible; counting tests pass, and local and hosted results have been compared |
+| Local Astro reading site | Complete | All twelve chapters render; build, type checks, local links, and Mermaid rendering have been verified |
+| Tutorial website | In progress | The local site works, but hosted publication is still needed to meet the original criterion |
+| PDF book and presentation decks | Planned | Finished outputs still need generation and visual verification |
+| GitHub dashboard | Planned | The combined chart and work-tracking view still needs implementation |
+| Workflow beyond GitHub | Planned | The exercise still needs verification in its stated environment |
+
+Why separate the local site from the broader website milestone? The original website criterion requires both a successful build and publication. A locally usable site is valuable progress, but it does not mean readers can reach a hosted website. Recording these separately makes both the achievement and the remaining work visible. These milestones are not independent units of effort, so their count should not be interpreted as a percentage of the project finished.
+
+The updated register records two completed capabilities. The historical charts above still correctly show zero: the register had not recorded completion at those revisions. Even `62eacec`, which contains the working site, still records zero. The new count enters committed history when this register update is committed. Until then, use `--include-working-tree` to see it as a labelled preview.
+
+The growth-metrics entry is a retrospective assessment of existing functionality; the local-site entry recognizes the implementation in `62eacec`. This distinction matters: the capability chart shows when completion was recorded, not necessarily when the first working code appeared. Each completed entry now includes evidence explaining the decision.
+
 ## Choose a View for the Question
 
 The report separates measures with different units rather than combining them into a single score. Each view should help a reader ask a specific question:

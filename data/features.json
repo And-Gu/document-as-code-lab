@@ -10,13 +10,29 @@
     {
       "id": "growth-metrics",
       "name": "Historical growth metrics",
-      "status": "planned",
-      "completion_criterion": "Documented metrics are reproducible across Git revisions."
+      "status": "complete",
+      "completion_criterion": "Documented metrics are reproducible across Git revisions.",
+      "evidence": [
+        "scripts/measure_growth.py reconstructs committed snapshots using measurement rules version 2.",
+        "tests/test_growth.py verifies the counting rules and historical snapshots.",
+        "Chapter 3 documents matching local and hosted reports for 9c91191."
+      ]
+    },
+    {
+      "id": "local-website",
+      "name": "Local Astro reading site",
+      "status": "complete",
+      "completion_criterion": "All twelve chapters render from the original Markdown sources in a locally runnable site, with navigation, linked material, images, and Mermaid diagrams; build and type checks pass.",
+      "evidence": [
+        "Commit 62eacec introduces the Astro site under site/.",
+        "npm run build succeeds and npm run check reports no errors or warnings.",
+        "All twelve chapter pages and their local links were verified; the chapter 1 Mermaid diagram renders in the browser."
+      ]
     },
     {
       "id": "website",
       "name": "Tutorial website",
-      "status": "planned",
+      "status": "in-progress",
       "completion_criterion": "The website builds from source and is published."
     },
     {
