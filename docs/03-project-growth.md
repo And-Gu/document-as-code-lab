@@ -148,7 +148,13 @@ This report deliberately stops at the completed-draft commit. The explanation yo
 
 Commit `62eacec` adds a local Astro reading site. It reads the original chapter files rather than maintaining another copy of the text. Readers can browse all twelve chapters, follow links to supporting examples, and see images and Mermaid diagrams. The site builds successfully, passes its TypeScript checks, and has been checked for broken local links.
 
-This is a working capability, not just more tutorial content. You can try it by following the [site instructions](../site/README.md). Editing a chapter updates the local reading site from the same source.
+This is a working capability, not just more tutorial content. You can try it by following the [site instructions](../site/README.md). Editing a chapter updates the local reading site from the same source. [Chapter 10](10-publishing.md#our-website-uses-astro) explains Astro's role in publishing.
+
+Commit `815d650` adds the GitHub Pages deployment. The [tutorial website](https://and-gu.github.io/document-as-code-lab/) is now public, and its build and deployment have succeeded. We checked navigation, an image, and a Mermaid diagram on the hosted site. This completes the original website milestone: it builds from the maintained sources and is available to readers.
+
+Commit `d1b4f17` adds an expandable **Chapter information** panel to all twelve chapter pages. It shows the chapter's status, audience, learning goal, stable ID, and recent commit messages. CSS colors the panel according to the source's `status` field. Git history is collected during the build, so the displayed changes refer to the source revision used for publication rather than a live GitHub feed.
+
+This small widget demonstrates another use of the information we already maintain. Readers can inspect the state and history of the chapter without opening its source file. Its status label is not an approval decision, and its commit list is not a measure of writing effort. The widget is a chapter-level view, not the complete work-tracking dashboard planned in chapter 9.
 
 We have now reviewed the [feature register](../data/features.json) against the available evidence:
 
@@ -156,16 +162,17 @@ We have now reviewed the [feature register](../data/features.json) against the a
 | --- | --- | --- |
 | Historical growth metrics | Complete | Historical reports are reproducible; counting tests pass, and local and hosted results have been compared |
 | Local Astro reading site | Complete | All twelve chapters render; build, type checks, local links, and Mermaid rendering have been verified |
-| Tutorial website | In progress | The local site works, but hosted publication is still needed to meet the original criterion |
+| Tutorial website | Complete | Production build and GitHub Pages deployment succeeded; the hosted reading experience was checked |
+| Chapter metadata and history widget | Complete | All twelve hosted chapters contain the panel; expansion and chapter-specific commit history were checked |
 | PDF book and presentation decks | Planned | Finished outputs still need generation and visual verification |
 | GitHub dashboard | Planned | The combined chart and work-tracking view still needs implementation |
 | Workflow beyond GitHub | Planned | The exercise still needs verification in its stated environment |
 
-Why separate the local site from the broader website milestone? The original website criterion requires both a successful build and publication. A locally usable site is valuable progress, but it does not mean readers can reach a hosted website. Recording these separately makes both the achievement and the remaining work visible. These milestones are not independent units of effort, so their count should not be interpreted as a percentage of the project finished.
+Why separate the local site from the broader website milestone? They record different outcomes: a site we can run ourselves, and a publication readers can reach online. The widget adds another outcome: making each chapter's metadata and history visible. These milestones overlap and are not independent units of effort, so their count should not be interpreted as a percentage of the project finished.
 
-The updated register records two completed capabilities. The historical charts above still correctly show zero: the register had not recorded completion at those revisions. Even `62eacec`, which contains the working site, still records zero. The new count enters committed history when this register update is committed. Until then, use `--include-working-tree` to see it as a labelled preview.
+The updated register records four completed capabilities. The historical charts above still correctly show zero: the register had not recorded completion at those revisions. Commit `3522333` records the first two completed capabilities. The website and widget are recognized in this later register update; their count enters committed history when the update is committed. Until then, use `--include-working-tree` to see four as a labelled preview.
 
-The growth-metrics entry is a retrospective assessment of existing functionality; the local-site entry recognizes the implementation in `62eacec`. This distinction matters: the capability chart shows when completion was recorded, not necessarily when the first working code appeared. Each completed entry now includes evidence explaining the decision.
+The entries are assessments supported by implementation and verification evidence. Their recording dates may be later than their implementation dates. This distinction matters: the capability chart shows when completion was recorded, not necessarily when the first working code appeared. Each completed entry includes evidence explaining the decision. Regenerating the report does not rewrite the earlier teaching snapshots.
 
 ## Choose a View for the Question
 

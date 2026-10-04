@@ -32,8 +32,22 @@
     {
       "id": "website",
       "name": "Tutorial website",
-      "status": "in-progress",
-      "completion_criterion": "The website builds from source and is published."
+      "status": "complete",
+      "completion_criterion": "The website builds from source and is published.",
+      "evidence": [
+        "Commit 815d650 adds GitHub Pages deployment; run 37221801141 built and deployed successfully.",
+        "https://and-gu.github.io/document-as-code-lab/ is accessible; chapter navigation, a Mermaid diagram, and an image were verified in the hosted site."
+      ]
+    },
+    {
+      "id": "chapter-information",
+      "name": "Chapter metadata and history widget",
+      "status": "complete",
+      "completion_criterion": "All twelve published chapter pages expose metadata, status-based styling, and chapter-specific Git history in an expandable panel.",
+      "evidence": [
+        "Commit d1b4f17 adds the widget to all chapter pages; deployment run 37226980591 succeeded.",
+        "All twelve hosted chapter pages were checked for the widget, and expansion and commit history were verified in chapter 3."
+      ]
     },
     {
       "id": "github-dashboard",
