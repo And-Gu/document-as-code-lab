@@ -1,0 +1,16 @@
+---
+import Documentation from '../layouts/Documentation.astro';
+import { getChapters, chapterTitle } from '../lib/chapters';
+const chapters = await getChapters();
+---
+
+<Documentation title="Project Documentation">
+  <h1>Document-as-Code: The Living Tutorial</h1>
+  <p>A tutorial and visualization lab for maintaining, reviewing, and reusing information.</p>
+  <h2>Contents</h2>
+  <ol>
+    {chapters.map((chapter) => (
+      <li><a href={`/chapters/${chapter.id}/`}>{chapterTitle(chapter)}</a></li>
+    ))}
+  </ol>
+</Documentation>

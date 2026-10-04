@@ -6,7 +6,19 @@ The project teaches document-as-code by applying it to itself. It also serves as
 
 ## Status
 
-All 12 chapters now have a first draft. A runnable onboarding showcase, local growth reporting, structured-record processing, and record-to-Mermaid generation are available, with a GitHub Actions workflow for growth reports. Chapters 9 through 12 add work tracking, publication planning, a portable workflow, and an exercise for detecting stale outputs. Complete website, PDF book, and presentation pipelines, along with interactive dashboards, remain future work. Hosted work-board, export, and Microsoft-environment exercises still need validation in their target environments. Chapter 3 now compares three committed checkpoints, reaching 12 drafts and 25,656 measured prose words at `e7cd980`; its hosted growth run also succeeded.
+All 12 chapters now have a first draft. A runnable onboarding showcase, local growth reporting, structured-record processing, and record-to-Mermaid generation are available, with a GitHub Actions workflow for growth reports. An Astro reading site mirrors the chapters directly from their Markdown sources, including diagrams and linked examples. Chapters 9 through 12 add work tracking, publication planning, a portable workflow, and an exercise for detecting stale outputs. Hosted website publishing, PDF book and presentation pipelines, along with interactive dashboards, remain future work. Hosted work-board, export, and Microsoft-environment exercises still need validation in their target environments. Chapter 3 now compares three committed checkpoints, reaching 12 drafts and 25,656 measured prose words at `e7cd980`; its hosted growth run also succeeded.
+
+## Read Locally
+
+Run the Astro site from the repository root:
+
+```bash
+cd site
+npm install
+npm run dev
+```
+
+Open the local URL printed by Astro. Changes to the original chapter files update the site; no duplicate chapter copies are maintained. See the [site README](site/README.md) for checks and build commands. No hosted deployment is configured yet.
 
 ## Explore the Showcase
 
@@ -69,6 +81,7 @@ Word counts measure content volume, not quality. The measurement rules distingui
 ## Repository Layout
 
 - `docs/`: tutorial chapters.
+- `site/`: Astro reading site using the original chapters and supporting material.
 - `reference/`: optional technical detail linked from chapters, excluded from chapter metrics.
 - `examples/`: exercise sources and fixed showcase datasets, excluded from chapter metrics.
 - `data/`: capability metadata and future measurement data.
@@ -86,6 +99,6 @@ Further publishing scripts and output-specific configuration will be added as th
 
 ## Next Milestone
 
-Review the complete first draft with readers and verify the remaining environment-dependent exercises. Reconcile the capability register with verification evidence, then choose and validate the initial website publishing tools.
+Review the complete first draft and local reading site with readers, and verify the remaining environment-dependent exercises. Reconcile the capability register with verification evidence, then choose and validate hosted website publishing.
 
 No content license has been selected yet.

@@ -1,0 +1,99 @@
+---
+import { getChapters, chapterTitle } from '../lib/chapters';
+
+interface Props {
+  title: string;
+  activeChapter?: string;
+}
+const { title, activeChapter } = Astro.props;
+const chapters = await getChapters();
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title} | Document-as-Code Lab</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#content">Skip to content</a>
+    <header><a href="/">Document-as-Code Lab</a></header>
+    <div class="documentation">
+      <nav aria-label="Chapters">
+        <details id="chapter-menu" open>
+          <summary>Chapters</summary>
+          <ol>
+            {chapters.map((chapter) => (
+              <li>
+                <a href={`/chapters/${chapter.id}/`} aria-current={activeChapter === chapter.id ? 'page' : undefined}>
+                  {chapterTitle(chapter)}
+                </a>
+              </li>
+            ))}
+          </ol>
+          <a href="/materials/GLOSSARY/">Shared vocabulary</a>
+        </details>
+      </nav>
+      <main id="content" tabindex="-1"><slot /></main>
+    </div>
+    <script>
+      const menu = document.querySelector<HTMLDetailsElement>('#chapter-menu');
+      if (menu && window.matchMedia('(max-width: 760px)').matches) menu.open = false;
+      const blocks = document.querySelectorAll<HTMLElement>('pre[data-language="mermaid"] code, pre code.language-mermaid');
+      if (blocks.length) {
+        const { default: mermaid } = await import('mermaid');
+        mermaid.initialize({ startOnLoad: false, securityLevel: 'strict', theme: 'neutral' });
+        for (const code of blocks) {
+          const pre = code.parentElement;
+          if (!pre) continue;
+          const diagram = document.createElement('div');
+          diagram.className = 'mermaid';
+          diagram.textContent = code.textContent;
+          pre.replaceWith(diagram);
+        }
+        await mermaid.run({ querySelector: '.mermaid' });
+      }
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  :root { font-family: system-ui, sans-serif; color: #222; background: #fff; line-height: 1.65; }
+  body { margin: 0; }
+  a { color: #17684c; text-underline-offset: 0.15em; }
+  a:hover { color: #111; }
+  a:focus-visible, summary:focus-visible { outline: 2px solid #17684c; outline-offset: 4px; }
+  header { padding: 1rem 1.5rem; border-bottom: 1px solid #ddd; }
+  header a { font-weight: 650; text-decoration: none; }
+  .documentation { display: grid; grid-template-columns: 17rem minmax(0, 1fr); max-width: 86rem; margin: auto; }
+  nav { padding: 1.5rem; border-right: 1px solid #ddd; font-size: 0.875rem; }
+  nav summary { font-weight: 650; cursor: pointer; }
+  nav ol { padding-left: 1.4rem; }
+  nav li { padding: 0.3rem 0; }
+  nav a[aria-current="page"] { font-weight: 700; color: #111; }
+  main { min-width: 0; max-width: 52rem; padding: 1.5rem 2.5rem 4rem; }
+  h1 { font-size: 2rem; line-height: 1.25; }
+  h2 { font-size: 1.5rem; line-height: 1.3; margin-top: 2rem; }
+  h3 { font-size: 1.15rem; margin-top: 1.5rem; }
+  img, svg { max-width: 100%; height: auto; }
+  table { display: block; width: 100%; overflow-x: auto; border-collapse: collapse; font-size: 0.9rem; }
+  th, td { padding: 0.55rem 0.7rem; border: 1px solid #ddd; text-align: left; vertical-align: top; }
+  th { background: #f3f5f4; }
+  pre { overflow-x: auto; padding: 1rem; border: 1px solid #ddd; font-size: 0.85rem; }
+  code { overflow-wrap: anywhere; }
+  p, li, h1, h2, h3, a { overflow-wrap: anywhere; }
+  blockquote { border-left: 3px solid #ccc; margin-left: 0; padding-left: 1rem; }
+  .mermaid { overflow-x: auto; margin: 1.5rem 0; }
+  .chapter-meta { color: #555; font-size: 0.875rem; }
+  .chapter-navigation { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; border-top: 1px solid #ddd; padding-top: 1rem; margin-top: 2.5rem; }
+  .chapter-navigation a { flex: 1 1 14rem; }
+  .skip-link { position: absolute; top: -5rem; left: 1rem; background: white; padding: 0.5rem; }
+  .skip-link:focus { top: 0.5rem; }
+  @media (max-width: 760px) {
+    .documentation { grid-template-columns: minmax(0, 1fr); }
+    nav { border-right: 0; border-bottom: 1px solid #ddd; padding: 1rem; }
+    main { padding: 1rem 1rem 3rem; }
+    h1 { font-size: 1.7rem; }
+  }
+</style>

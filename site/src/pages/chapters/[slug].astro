@@ -1,0 +1,24 @@
+---
+import { render } from 'astro:content';
+import Documentation from '../../layouts/Documentation.astro';
+import { getChapters, chapterTitle } from '../../lib/chapters';
+
+export async function getStaticPaths() {
+  const chapters = await getChapters();
+  return chapters.map((chapter, index) => ({
+    params: { slug: chapter.id },
+    props: { chapter, previous: chapters[index - 1], next: chapters[index + 1] },
+  }));
+}
+const { chapter, previous, next } = Astro.props;
+const { Content } = await render(chapter);
+---
+
+<Documentation title={chapterTitle(chapter)} activeChapter={chapter.id}>
+  <p class="chapter-meta">Chapter {chapter.data.chapter_number} · {chapter.data.status}</p>
+  <article><Content /></article>
+  <div class="chapter-navigation" aria-label="Chapter navigation">
+    {previous && <a href={`/chapters/${previous.id}/`}>Previous: {chapterTitle(previous)}</a>}
+    {next && <a href={`/chapters/${next.id}/`}>Next: {chapterTitle(next)}</a>}
+  </div>
+</Documentation>

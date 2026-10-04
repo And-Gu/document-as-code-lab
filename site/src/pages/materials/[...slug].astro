@@ -1,0 +1,19 @@
+---
+import { getCollection, render } from 'astro:content';
+import Documentation from '../../layouts/Documentation.astro';
+
+export async function getStaticPaths() {
+  return (await getCollection('materials')).map((material) => ({
+    params: { slug: material.id },
+    props: { material },
+  }));
+}
+const { material } = Astro.props;
+const { Content, headings } = await render(material);
+const title = headings.find((heading) => heading.depth === 1)?.text ?? material.id;
+---
+
+<Documentation title={title}>
+  <p class="chapter-meta"><a href={`/files/${material.id}.md`}>Source file</a></p>
+  <article><Content /></article>
+</Documentation>
