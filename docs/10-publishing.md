@@ -75,6 +75,31 @@ Check a real reader journey: can a new colleague reach the access instructions, 
 
 Chapter 1's linked handbook already gives us a basic reading experience in GitHub. A separate website offers more control over navigation and presentation, but also introduces a build and hosting process to maintain. Generating a website and making it available to readers are separate steps. Decide where it will be hosted and who should have access before publishing project information.
 
+### Our Website Uses Astro
+
+We use [Astro](https://astro.build/), a framework for building content-driven websites, to give this tutorial a separate reading experience. The Astro project lives in `site/`, while the chapter sources remain in `docs/`. This is a publishing choice, not a requirement of document-as-code; another tool could present the same maintained information.
+
+Our site uses an Astro content collection to read the original Markdown files and their chapter metadata. Layouts and page templates provide the contents view, chapter navigation, and visual styling. The build turns these inputs into web pages and supporting assets. Our site also renders Mermaid diagrams and links to supporting examples. See the [Astro documentation](https://docs.astro.build/) and its [content collections guide](https://docs.astro.build/en/guides/content-collections/) for the underlying concepts.
+
+The responsibilities are separate:
+
+| Part | Responsibility in this project |
+| --- | --- |
+| Markdown in `docs/` | Holds the maintained chapter content |
+| Astro in `site/` | Builds the website and defines its presentation |
+| GitHub Actions | Runs repeatable checks and the configured publishing process |
+| GitHub Pages | Hosts the generated website for readers |
+
+This separation lets us improve navigation or page layout without maintaining another copy of the chapters. Conversely, an accepted text change can reach the website through a new build. It does not automatically update a PDF or presentation; each output needs its own configured process.
+
+You can inspect the current reading site locally using the [site instructions](../site/README.md). From `site/`, `npm run dev` starts the local site and `npm run build` creates production files in `site/dist/`. Those generated files are not the editable master and are not committed to the repository.
+
+For hosted publication, the intended sequence is: propose a change in a branch, open a pull request, pass the Astro build check, review the change, and merge it into `main`. A deployment workflow then builds the accepted sources and sends the output to GitHub Pages. Required reviews and checks depend on repository branch rules; a workflow alone does not enforce approval.
+
+The repository is now public, and GitHub Pages is enabled with GitHub Actions as its publishing source. The configured address is [the tutorial website](https://and-gu.github.io/document-as-code-lab/). Enabling Pages is not itself a deployment: the workflow files must be committed, and a successful deployment must make the generated pages available. At the time of this chapter update, the deployment configuration is still pending and that address returns 404. Readers can use the local Astro site in the meantime.
+
+Because this is a project website, its address includes `/document-as-code-lab/`. Navigation, images, and script URLs must work under that path, not just at the root of localhost. Check the published site as well as the local build, including a chapter link, an image, and a Mermaid diagram. A successful build confirms that files were generated; it does not confirm that hosting and browser rendering work.
+
 ## Assemble a PDF for Continuous Reading
 
 A PDF provides a stable edition that can be downloaded, shared, or printed. Its structure should help readers understand the material without relying on the surrounding website.
@@ -119,7 +144,7 @@ Pandoc is one option for converting Markdown into formats such as HTML, Word, an
 
 Quarto is another candidate when the project needs coordinated websites, books, and presentations. Its [documentation](https://quarto.org/docs/guide/) describes these output types and their configuration. Choosing it would mean adding and maintaining the relevant project settings; its capabilities are not already configured in this repository.
 
-We have not yet selected and verified a complete publishing system for this tutorial. The existing onboarding builder produces Markdown and a chart. Use the trial to decide which additional tools fit our content, visual requirements, accessibility needs, and maintenance capacity.
+Astro is our selected and locally verified website tool. A complete publishing system for the website, PDF book, and presentations is still being developed; choosing Astro does not provide the other output pipelines. The existing onboarding builder produces Markdown and a chart. Use the trial to decide which additional tools fit our content, visual requirements, accessibility needs, and maintenance capacity.
 
 ## Keep Changes Connected to Their Source
 
