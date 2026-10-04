@@ -6,7 +6,7 @@ The project teaches document-as-code by applying it to itself. It also serves as
 
 ## Status
 
-All 12 chapters now have a first draft. A runnable onboarding showcase, local growth reporting, structured-record processing, and record-to-Mermaid generation are available, with a GitHub Actions workflow for growth reports. Chapters 9 through 12 add work tracking, publication planning, a portable workflow, and an exercise for detecting stale outputs. Complete website, PDF book, and presentation pipelines, along with interactive dashboards, remain future work. Hosted work-board, export, and Microsoft-environment exercises still need validation in their target environments. The first hosted growth run succeeded for commit `9c91191`; chapter 3 includes its two-revision comparison.
+All 12 chapters now have a first draft. A runnable onboarding showcase, local growth reporting, structured-record processing, and record-to-Mermaid generation are available, with a GitHub Actions workflow for growth reports. Chapters 9 through 12 add work tracking, publication planning, a portable workflow, and an exercise for detecting stale outputs. Complete website, PDF book, and presentation pipelines, along with interactive dashboards, remain future work. Hosted work-board, export, and Microsoft-environment exercises still need validation in their target environments. Chapter 3 now compares three committed checkpoints, reaching 12 drafts and 25,656 measured prose words at `e7cd980`; its hosted growth run also succeeded.
 
 ## Explore the Showcase
 

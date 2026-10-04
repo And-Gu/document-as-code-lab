@@ -14,6 +14,8 @@ Optional detail for [chapter 3](../docs/03-project-growth.md). These rules descr
 
 Version 2 corrected historical counting to exclude nested Markdown files, matching working-tree previews. If rules change, update the measurement version and regenerate comparable history.
 
+The current renderer shows four history panels, including the existing draft-or-complete count, and uses reading-order numbers and titles for chapter-size labels. These presentation changes do not change measurement version 2 or historical JSON values. Fixed older images retain their original layout. Matplotlib caches stay under ignored `build/`, not alongside saved teaching assets.
+
 ## Reproduce a Revision
 
 With the Python environment active, from the repository root:
@@ -31,3 +33,5 @@ python scripts/measure_growth.py --ref 8908932f8d0ed2d35ebcd9e59c5b58f2d4ae8cc5 
 ```
 
 Fixed teaching snapshots under `assets/figures/` retain their historical values. Regenerated working reports stay under ignored `build/`.
+
+The complete-first-draft snapshot is pinned to `e7cd98089498c392db3f914fd74eb4f2bc97545f` in `assets/figures/growth-complete-draft/`. Rebuild it with that explicit `--ref`; later chapter edits are intentionally outside its totals.

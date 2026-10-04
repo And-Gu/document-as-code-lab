@@ -6,6 +6,7 @@ import os
 from pathlib import Path, PurePosixPath
 import re
 import subprocess
+import textwrap
 
 import yaml
 
@@ -82,7 +83,7 @@ def historical_snapshot(sha):
 
 
 def render(report, output):
-    os.environ.setdefault("MPLCONFIGDIR", str(output / ".matplotlib"))
+    os.environ.setdefault("MPLCONFIGDIR", str(ROOT / "build/.matplotlib"))
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
@@ -90,11 +91,11 @@ def render(report, output):
     rows = report["history"] + ([report["working_tree"]] if report.get("working_tree") else [])
     x = list(range(len(rows)))
     labels = [r["source_commit"][:7] if r["kind"] == "commit" else "Working tree" for r in rows]
-    fig, axes = plt.subplots(3, 1, figsize=(10, 9), sharex=True, layout="constrained")
+    fig, axes = plt.subplots(4, 1, figsize=(10, 11), sharex=True, layout="constrained")
     for ax, field, title, color in zip(axes,
-            ["word_count", "chapter_count", "complete_features"],
-            ["Prose words", "Chapter files (including outlines)", "Completed capabilities"],
-            ["#187b6b", "#b54765", "#6b5b95"]):
+            ["word_count", "chapter_count", "draft_or_complete_chapters", "complete_features"],
+            ["Prose words", "Chapter files (including outlines)", "Draft or complete chapters", "Completed capabilities"],
+            ["#187b6b", "#b54765", "#3975a5", "#6b5b95"]):
         values = [r[field] if r[field] is not None else float("nan") for r in rows]
         committed_count = len(report["history"])
         ax.plot(x[:committed_count], values[:committed_count],
@@ -116,8 +117,12 @@ def render(report, output):
     plt.close(fig)
 
     latest = rows[-1]
-    fig, ax = plt.subplots(figsize=(10, max(4, len(latest["chapters"]) * 0.36)), layout="constrained")
-    ax.barh([c["id"] for c in latest["chapters"]], [c["words"] for c in latest["chapters"]], color="#187b6b")
+    fig, ax = plt.subplots(figsize=(12, max(4, len(latest["chapters"]) * 0.65)), layout="constrained")
+    labels_by_chapter = [textwrap.fill(f"{Path(c['path']).stem.split('-')[0]}. {c['title']}", 44)
+                         for c in latest["chapters"]]
+    bars = ax.barh(labels_by_chapter, [c["words"] for c in latest["chapters"]], color="#187b6b")
+    ax.bar_label(bars, padding=4)
+    ax.set_xlim(0, max(1, max((c["words"] for c in latest["chapters"]), default=0)) * 1.15)
     ax.invert_yaxis()
     ax.set_xlabel("Prose words (outlines included)")
     ax.set_title("Chapter sizes: " + labels[-1], loc="left")
@@ -150,6 +155,7 @@ def main():
     latest = report.get("working_tree", history[-1])
     print(f"Measured {len(history)} committed revisions; latest: "
           f"{latest['chapter_count']} chapters, {latest['word_count']} prose words, "
+          f"{latest['draft_or_complete_chapters']} draft or complete chapters, "
           f"{latest['complete_features']} completed capabilities.")
     print(f"Report and charts: {args.output}")
 

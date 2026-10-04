@@ -9,6 +9,13 @@ from scripts.measure_growth import chapter_metrics, historical_snapshot, snapsho
 
 
 class GrowthTests(unittest.TestCase):
+    def test_drafted_chapters_are_separate_from_file_count(self):
+        files = {f"docs/{name}.md": f"---\nid: {name}\nstatus: {status}\n---\n# {name}"
+                 for name, status in [("one", "outline"), ("two", "draft"), ("three", "complete")]}
+        result = snapshot(list(files), files.__getitem__, {})
+        self.assertEqual(result["chapter_count"], 3)
+        self.assertEqual(result["draft_or_complete_chapters"], 2)
+
     def test_metadata_examples_and_links_are_not_counted_as_prose(self):
         text = "---\nid: sample\nstatus: draft\n---\n# Hello\nRead [the guide](https://example.com).\n```yaml\nignored: words\n```\n<!-- hidden words -->"
         record = chapter_metrics("docs/sample.md", text)

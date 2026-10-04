@@ -14,8 +14,8 @@ visuals:
     source: ../scripts/measure_growth.py
     generated_asset: ../build/growth/growth.png
     outputs: [web, pdf, slides]
-    caption: Three separate measures of project growth, calculated from source revisions.
-    alt: Separate panels show prose word count, chapter file count, and completed capabilities by revision. A working-tree preview, when requested, is labelled separately.
+    caption: Four separate measures of project growth, calculated from source revisions.
+    alt: Separate panels show prose word count, chapter file count, drafted or completed chapters, and completed capabilities by revision. A working-tree preview, when requested, is labelled separately.
   - id: chapter-sizes
     status: source-ready
     kind: chart
@@ -26,7 +26,7 @@ visuals:
     generated_asset: ../build/growth/chapter-sizes.png
     outputs: [web, pdf, slides]
     caption: Prose word counts by chapter, including outline material.
-    alt: Horizontal bars compare chapter word counts, identified by stable chapter IDs.
+    alt: Horizontal bars compare chapter word counts, labelled with reading-order numbers and titles.
   - id: growth-first-update
     status: source-ready
     kind: chart
@@ -41,6 +41,20 @@ visuals:
     outputs: [web, pdf, slides]
     caption: Two committed observations show accumulated change, not a sustained growth rate.
     alt: Prose words rise from 829 to 16416, chapter files from 10 to 12, and recorded completed capabilities remain zero.
+  - id: growth-complete-draft
+    status: source-ready
+    kind: chart
+    purpose: Compare the first seven drafts with the complete twelve-chapter first draft.
+    placement: after-a-complete-first-draft
+    preferred_source: matplotlib
+    source: ../scripts/measure_growth.py
+    generated_asset: ../assets/figures/growth-complete-draft/growth.png
+    data: ../assets/figures/growth-complete-draft/history.json
+    source_commit: e7cd98089498c392db3f914fd74eb4f2bc97545f
+    measurement_version: 2
+    outputs: [web, pdf, slides]
+    caption: Three recorded checkpoints distinguish growing content from chapter development.
+    alt: At the complete-draft checkpoint, prose reaches 25656 words and all 12 chapter files are drafts. Recorded completed capabilities remain zero.
 ---
 
 # Project Growth: History as Data
@@ -97,6 +111,39 @@ python scripts/measure_growth.py --ref 9c91191bcf0bf77a337870a17f43523d16f7407b 
 
 With the same script and measurement rules, the JSON values should match the saved report. Keep future live reports separate from this teaching snapshot. The original one-observation [baseline chart](../assets/figures/growth-baseline.png) and [data](../assets/figures/growth-baseline.json) remain available as historical assets.
 
+## A Complete First Draft
+
+Commit `e7cd980` records a first draft of all twelve chapters, including the remaining material on dashboards, publishing, portable workflows, and automation. It also contains the editorial improvements made while reviewing earlier chapters.
+
+![Three checkpoints show prose growing from 829 to 16416 to 25656 words. Drafted chapters rise from zero to seven to twelve, while recorded completed capabilities remain zero.](../assets/figures/growth-complete-draft/growth.png)
+
+*Fixed historical comparison ending at `e7cd980`, using measurement rules version 2. The additional panel makes chapter development visible even when the file count stays unchanged.*
+
+| Measure | First drafts: 9c91191 | Complete first draft: e7cd980 | Change |
+| --- | --- | --- | --- |
+| Chapter files | 12 | 12 | No change |
+| Draft or complete chapters | 7 | 12 | +5 |
+| Prose words | 16,416 | 25,656 | +9,240 |
+| Recorded completed capabilities | 0 | 0 | No change |
+
+The scope stayed at twelve chapter files, but five outlines became drafts. The separate measures now reveal progress that the file count alone would hide. All chapters are still drafts; the count does not mean that every exercise has been verified in its target environment.
+
+![Word counts for the twelve drafted chapters, labelled by reading order and title. The introduction has 2725 words and the review chapter has 1576.](../assets/figures/growth-complete-draft/chapter-sizes.png)
+
+*Chapter sizes at the same checkpoint. Longer does not mean better, and equal lengths are not the goal.*
+
+The introduction is now the longest chapter at 2,725 measured words. The review chapter is the shortest at 1,576. Structured content has fallen from 3,063 to 2,569 words following editorial work. These differences help select material for reader review; they do not establish that any chapter needs a prescribed length.
+
+The capability count still reflects the unchanged feature register. Completing the tutorial draft does not automatically complete website, book, or presentation delivery. Review the register against the evidence before updating those milestones.
+
+Inspect the [saved data](../assets/figures/growth-complete-draft/history.json), or reproduce it with:
+
+```bash
+python scripts/measure_growth.py --ref e7cd98089498c392db3f914fd74eb4f2bc97545f --output build/complete-draft-check
+```
+
+This report deliberately stops at the completed-draft commit. The explanation you are reading and later script changes are recorded afterwards, so they are not included in its totals. The charts now use four panels and reader-facing chapter titles; the underlying counting rules remain version 2. Older saved charts retain their original presentation.
+
 ## Choose a View for the Question
 
 The report separates measures with different units rather than combining them into a single score. Each view should help a reader ask a specific question:
@@ -110,7 +157,7 @@ The report separates measures with different units rather than combining them in
 
 For example, splitting one chapter into two can increase the chapter count without adding much information. Editing for clarity can reduce the word count. Neither change is automatically progress or a setback. Use the chart to find a change worth inspecting, then read the source and its review context.
 
-The history chart uses separate panels for words, chapters, and capabilities. The chapter-size chart uses horizontal bars so chapter identifiers remain readable. Both are generated from the same report, which could also supply a website dashboard or a presentation later.
+The current history chart uses separate panels for words, chapter files, drafted or completed chapters, and capabilities. The chapter-size chart uses horizontal bars so chapter titles remain readable. Both are generated from the same report, which could also supply a website dashboard or a presentation later.
 
 ## Git History Is Our First Dataset
 
@@ -158,7 +205,7 @@ The script creates three files in `build/growth/`:
 | File | Contents |
 | --- | --- |
 | `history.json` | Source commit, date, chapter records, and capability data for each revision |
-| `growth.png` | Separate historical panels for words, chapter files, and completed capabilities |
+| `growth.png` | Separate historical panels for words, chapter files, drafted or completed chapters, and completed capabilities |
 | `chapter-sizes.png` | Word counts for individual chapters in the latest snapshot |
 
 These are generated outputs and are excluded from version control. You can regenerate them from the source. The JSON report is also a future input for an interactive website dashboard.
@@ -171,7 +218,7 @@ python scripts/measure_growth.py --include-working-tree
 
 This adds a separately labelled working-tree snapshot. Its `source_commit` identifies the base revision, not an exact version of the local edits. Keep the committed report for reproducible comparisons.
 
-Open both generated charts and compare them with `history.json`. Chapter statuses are available in the data but are not a separate panel in the history chart. The chapter-size chart shows the latest measured snapshot, including the working-tree preview when requested. Its stable chapter IDs may retain older number prefixes after chapters are reordered; use the report's titles and paths to identify them.
+Open both generated charts and compare them with `history.json`. The history chart includes a panel counting chapters marked draft or complete; individual statuses remain available in the data. The chapter-size chart shows the latest measured snapshot, including the working-tree preview when requested. It uses reading-order numbers from filenames and chapter titles. Stable IDs remain in the report for comparison across reorganizations.
 
 ### Optional: Ask AI to Interpret the Report
 
@@ -225,5 +272,7 @@ The workflow does not commit generated reports back into the repository, so its 
 Local measurement and a successful GitHub workflow run are separate checks. The [first hosted run for 9c91191](https://github.com/And-Gu/document-as-code-lab/actions/runs/37135502115) completed successfully after the push to `main`, running the tests and uploading the `project-growth` artifact. Repository access is required to inspect this private run, and artifact availability is subject to retention limits. The fixed comparison above remains available with the tutorial's source files.
 
 The downloaded artifact's JSON report matches the locally regenerated report for that revision. This verifies agreement for these inputs, not the correctness of every future measurement or an automatic completion decision for the feature register.
+
+The [hosted run for the complete first draft](https://github.com/And-Gu/document-as-code-lab/actions/runs/37187718618) also succeeded for `e7cd980`. Its report provides the third committed observation used in the new comparison. That run used the earlier three-panel chart renderer; the refreshed fixed charts add the fourth panel without changing the measured values.
 
 Next, [Markdown and Content Structure](04-markdown.md) explores the source conventions that make these chapters easier to maintain and process.
