@@ -6,7 +6,9 @@ The project teaches document-as-code by applying it to itself. It also serves as
 
 ## Status
 
-All 12 chapters now have a first draft. A runnable onboarding showcase, local growth reporting, structured-record processing, and record-to-Mermaid generation are available, with a GitHub Actions workflow for growth reports. An Astro reading site mirrors the chapters directly from their Markdown sources, including diagrams and linked examples. Chapters 9 through 12 add work tracking, publication planning, a portable workflow, and an exercise for detecting stale outputs. Hosted website publishing, PDF book and presentation pipelines, along with interactive dashboards, remain future work. Hosted work-board, export, and Microsoft-environment exercises still need validation in their target environments. Chapter 3 now compares three committed checkpoints, reaching 12 drafts and 25,656 measured prose words at `e7cd980`; its hosted growth run also succeeded.
+Chapter 1 has its first approved edition; the other 11 chapters remain drafts. The [Astro reading site is published on GitHub Pages](https://and-gu.github.io/document-as-code-lab/) and reads the original Markdown sources, including diagrams and linked examples. Every chapter has an expandable metadata and Git-history widget. Pull requests run Astro checks and a production build; pushes to `main` build and deploy the website.
+
+A runnable onboarding showcase, historical growth reporting, structured-record processing, and record-to-Mermaid generation are also available. Growth reports are generated as GitHub Actions artifacts. Chapter 3's saved charts remain fixed historical examples, while its Astro view adds an interactive report measured from committed history during each site build. PDF book and presentation pipelines, the combined work-tracking dashboard, and verification of Microsoft-environment exercises remain future work. Approval of chapter 1 does not extend to the remaining chapter drafts or the fictional example procedures.
 
 ## Read Locally
 
@@ -18,7 +20,7 @@ npm install
 npm run dev
 ```
 
-Open the local URL printed by Astro. Changes to the original chapter files update the site; no duplicate chapter copies are maintained. See the [site README](site/README.md) for checks and build commands. No hosted deployment is configured yet.
+Open the local URL printed by Astro, using the `/document-as-code-lab/` base path. Changes to the original chapter files update the site; no duplicate chapter copies are maintained. See the [site README](site/README.md) for checks, build commands, and the GitHub Pages deployment flow.
 
 ## Explore the Showcase
 
@@ -55,11 +57,11 @@ Filename prefixes and `chapter_number` metadata give the current reading order. 
 11. [Beyond GitHub: OneDrive, Copilot, and Other Applications](docs/11-beyond-github.md)
 12. [Automation, Quality, and Further Experiments](docs/12-automation.md)
 
-## Planned Outputs
+## Outputs
 
 | Output | Purpose |
 | --- | --- |
-| Website | Navigable tutorial and interactive dashboard |
+| Website | Published tutorial with chapter metadata and history; a combined interactive dashboard remains planned |
 | PDF book | Coherent long-form reading |
 | Presentations | Introduction, workshop, and technical deep dive |
 | GitHub dashboard | Repository status, growth charts, and work tracking |
@@ -90,7 +92,7 @@ Word counts measure content volume, not quality. The measurement rules distingui
 - `assets/onboarding-showcase/`: generated handbook, training excerpt, chart, and source data.
 - `scripts/`: historical measurement, content assembly, structured-record processing, and chart generation.
 - `tests/`: focused growth measurement, structured-record processing, and diagram generation checks.
-- `.github/workflows/`: automated growth reporting on pushes to main.
+- `.github/workflows/`: growth reporting, Astro PR validation, and GitHub Pages deployment.
 - `ROADMAP.md`: stages and completion criteria.
 - `CONTRIBUTING.md`: writing and review conventions.
 - `GLOSSARY.md`: shared definitions used across chapters.
@@ -99,6 +101,8 @@ Further publishing scripts and output-specific configuration will be added as th
 
 ## Next Milestone
 
-Review the complete first draft and local reading site with readers, and verify the remaining environment-dependent exercises. Reconcile the capability register with verification evidence, then choose and validate hosted website publishing.
+Review the complete first draft and published reading site with readers, verify the remaining environment-dependent exercises, and develop the PDF, presentation, and dashboard pipelines. Keep the capability register aligned with verification evidence.
 
-No content license has been selected yet.
+## Licensing
+
+Original software is licensed under MIT; original educational content is licensed under CC BY 4.0. See [LICENSE.md](LICENSE.md) for scope, attribution, and third-party exceptions.

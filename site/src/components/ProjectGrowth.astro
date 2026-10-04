@@ -1,0 +1,100 @@
+---
+import { readFile } from 'node:fs/promises';
+import path from 'node:path';
+import { repositoryRoot } from '../lib/repository';
+import '../styles/project-growth.css';
+
+const report = JSON.parse(await readFile(path.join(repositoryRoot, 'build/site-growth/history.json'), 'utf8'));
+const rows = report.history.map((row: Record<string, unknown>) => ({
+  source_commit: row.source_commit, committed_at: row.committed_at,
+  word_count: row.word_count, chapter_count: row.chapter_count,
+  draft_or_complete_chapters: row.draft_or_complete_chapters, complete_features: row.complete_features,
+}));
+const latest = rows.at(-1);
+const fields = [
+  ['word_count', 'Prose words'], ['chapter_count', 'Chapter files'],
+  ['draft_or_complete_chapters', 'Draft or complete chapters'], ['complete_features', 'Completed capabilities'],
+];
+const repository = 'https://github.com/And-Gu/document-as-code-lab';
+---
+
+<template id="project-growth-template">
+  <section class="project-growth" aria-labelledby="project-growth-title">
+    <h3 id="project-growth-title">Project Growth: Latest Built Revision</h3>
+    <p class="project-growth__provenance">Measured revision <a href={`${repository}/commit/${latest.source_commit}`}>{latest.source_commit.slice(0, 7)}</a> · Rules version {report.measurement_version}</p>
+    <div class="project-growth__controls">
+      <label>Measure<select data-control="metric">{fields.map(([field, label]) => <option value={field}>{label}</option>)}</select></label>
+      <label>Compare from<select data-control="from">{rows.map((row: typeof latest, index: number) => <option value={index}>{row.source_commit.slice(0, 7)}</option>)}</select></label>
+      <label>Selected revision<select data-control="to">{rows.map((row: typeof latest, index: number) => <option value={index} selected={index === rows.length - 1}>{row.source_commit.slice(0, 7)}</option>)}</select></label>
+    </div>
+    <div class="project-growth__chart"><canvas aria-label="Project growth by revision. Values are available in the comparison table." role="img"></canvas></div>
+    <p class="project-growth__selection" aria-live="polite"></p>
+    <table class="project-growth__comparison">
+      <thead><tr><th>Measure</th><th>From</th><th>Selected</th><th>Change</th></tr></thead>
+      <tbody>{fields.map(([field, label]) => <tr data-field={field}><th scope="row">{label}</th><td></td><td></td><td></td></tr>)}</tbody>
+    </table>
+    <details class="project-growth__data"><summary>Measured history</summary>
+      <table><thead><tr><th>Revision</th><th>Prose words</th><th>Chapters</th><th>Draft or complete</th><th>Capabilities</th></tr></thead>
+      <tbody>{rows.map((row: typeof latest) => <tr><td><a href={`${repository}/commit/${row.source_commit}`}>{row.source_commit.slice(0, 7)}</a></td><td>{row.word_count.toLocaleString('en-GB')}</td><td>{row.chapter_count}</td><td>{row.draft_or_complete_chapters}</td><td>{row.complete_features ?? 'Unknown'}</td></tr>)}</tbody></table>
+    </details>
+    <p class="project-growth__note">Committed snapshots only. Revision spacing does not represent elapsed time. Counts describe volume and recorded milestones, not quality or effort.</p>
+  </section>
+</template>
+<script type="application/json" id="project-growth-data" set:html={JSON.stringify({ rows, fields }).replaceAll('<', '\\u003c')} />
+<noscript>The interactive growth view requires JavaScript. The saved historical charts below remain readable.</noscript>
+
+<script>
+  import Chart from 'chart.js/auto';
+  type Snapshot = {
+    source_commit: string; committed_at: string;
+    word_count: number; chapter_count: number; draft_or_complete_chapters: number; complete_features: number | null;
+  };
+  type Metric = 'word_count' | 'chapter_count' | 'draft_or_complete_chapters' | 'complete_features';
+  const placeholder = document.querySelector('#project-growth-widget');
+  const template = document.querySelector<HTMLTemplateElement>('#project-growth-template');
+  const data = document.querySelector('#project-growth-data');
+  if (placeholder && template && data?.textContent) {
+    placeholder.append(template.content.cloneNode(true));
+    const { rows, fields } = JSON.parse(data.textContent) as { rows: Snapshot[]; fields: [Metric, string][] };
+    const metric = placeholder.querySelector<HTMLSelectElement>('[data-control="metric"]')!;
+    const from = placeholder.querySelector<HTMLSelectElement>('[data-control="from"]')!;
+    const to = placeholder.querySelector<HTMLSelectElement>('[data-control="to"]')!;
+    const canvas = placeholder.querySelector<HTMLCanvasElement>('canvas')!;
+    const selection = placeholder.querySelector<HTMLElement>('.project-growth__selection')!;
+    const chart = new Chart<'line', (number | null)[]>(canvas, {
+      type: 'line',
+      data: { labels: rows.map(row => row.source_commit.slice(0, 7)), datasets: [{
+        label: 'Prose words', data: rows.map(row => row.word_count),
+        borderColor: '#17684c', backgroundColor: '#17684c', pointRadius: 4, tension: 0,
+      }] },
+      options: {
+        responsive: true, maintainAspectRatio: false, animation: false,
+        plugins: { legend: { display: false } },
+        scales: { y: { beginAtZero: true }, x: { title: { display: true, text: 'Revision order' } } },
+        onClick: (_event, elements) => {
+          if (elements[0]) { to.value = String(elements[0].index); update(); }
+        },
+      },
+    });
+    const number = (value: number | null) => value === null ? 'Unknown' : value.toLocaleString('en-GB');
+    function update() {
+      const selectedMetric = metric.value as Metric;
+      const start = rows[Number(from.value)];
+      const end = rows[Number(to.value)];
+      chart.data.datasets[0].data = rows.map(row => row[selectedMetric]);
+      chart.data.datasets[0].label = fields.find(([field]) => field === selectedMetric)![1];
+      chart.data.datasets[0].pointRadius = rows.map((_row, index) => index === Number(to.value) ? 7 : 4);
+      chart.options.scales!.y!.ticks = { precision: 0 };
+      chart.update();
+      selection.textContent = `${end.source_commit.slice(0, 7)} · ${new Date(end.committed_at).toLocaleDateString('en-GB', { timeZone: 'UTC' })} · ${chart.data.datasets[0].label}: ${number(end[selectedMetric])}`;
+      for (const [field] of fields) {
+        const cells = placeholder!.querySelectorAll(`[data-field="${field}"] td`);
+        cells[0].textContent = number(start[field]); cells[1].textContent = number(end[field]);
+        const delta = start[field] === null || end[field] === null ? null : end[field]! - start[field]!;
+        cells[2].textContent = delta === null ? 'Unknown' : `${delta > 0 ? '+' : ''}${number(delta)}`;
+      }
+    }
+    for (const control of [metric, from, to]) control.addEventListener('change', update);
+    update();
+  }
+</script>

@@ -1,7 +1,7 @@
 ---
 id: 01-introduction
 chapter_number: 1
-status: draft
+status: approved
 audience: practitioners-familiar-with-documents-and-visual-tools
 learning_goal: Identify reusable information, its owner, and useful documents or visualizations built from it.
 visuals:
@@ -32,7 +32,21 @@ visuals:
 
 # Document-as-Code: The Living Tutorial
 
-Document-as-Code Lab is both a tutorial for learning document-as-code and a showcase for exploring how a project's information and history can be visualized. We use our own content and its changes over time to develop charts, diagrams, dashboards, presentations, and PDF documents.
+Document-as-Code Lab introduces the principles of document-as-code through practical examples. It is also a showcase for readers who want to explore how maintained information can support charts, diagrams, dashboards, and interactive views.
+
+Document-as-code brings software development practices into information work. We keep editable sources, record changes, review updates, and automate how information is checked and published. This makes information easier to maintain and reuse, and provides useful context for AI-assisted work.
+
+The tutorial itself demonstrates the approach. Its chapters are maintained as Markdown files: readable text with simple formatting. Those same files supply our published website. As the project develops, we also explore how the material can support PDF books and presentations.
+
+## Reading This Tutorial
+
+You can read the tutorial on the [website](https://and-gu.github.io/document-as-code-lab/) or browse its [Markdown files on GitHub](https://github.com/And-Gu/document-as-code-lab/tree/main/docs). Both present the maintained chapter text, while offering different ways to explore it.
+
+GitHub lets you inspect the files, read their formatted previews, and follow their changes. The website adds chapter navigation, visual styling, and interactive components. For example, the expandable *Chapter information* panel presents information about the chapter and its recent changes.
+
+We build the website with Astro, a tool that turns our source material into web pages. The published website reflects the latest successfully deployed version. Changes to the source files appear on the website after the next successful build and deployment. [Chapter 10](10-publishing.md#our-website-uses-astro) explains how this publishing process works.
+
+## Why I Created This Tutorial
 
 My motivation for creating this tutorial comes from using document-as-code in my own work. I have applied it to product development, roadmap work, and planning, as well as budgeting and workforce planning in my role as a line manager. For me, its relevance extends beyond documentation to how we organize information and use it in everyday decisions.
 
@@ -46,13 +60,17 @@ This chapter follows one onboarding example from editable instructions to a hand
 
 ## From Source Files to Documents
 
-Document-as-code applies software development practices to documentation. You maintain the original, editable content in files, which we call source files. You keep a history of changes and use repeatable processes to check the content and prepare it for readers.
+A source file holds information we maintain. A document brings selected information together for a reader. One document can draw on several source files, and one source file can contribute to several documents.
 
-To see what this means in practice, imagine preparing a handbook for new colleagues. They need to know how to request system access, collect their equipment, and find the right people to contact. These instructions belong together in the handbook, but different teams are responsible for keeping the parts up to date.
+<!-- example:start onboarding -->
 
-In our fictional example, each team maintains its instructions in a separate file. We can present those parts as a handbook without keeping all the text in one file. The files are organized around who maintains the information, while the handbook is organized around what a new colleague needs.
+## Example: An Onboarding Handbook
 
-Here are the three files we will use. Their names end in `.md` because they contain text in a format called Markdown. For now, you can simply open them and read the instructions; [chapter 4](04-markdown.md) explains the format.
+Imagine preparing a handbook for new colleagues. They need instructions for requesting system access, collecting equipment, and finding the right people to contact. These topics belong together for the reader, but different teams are responsible for keeping the parts up to date.
+
+In our fictional example, each team maintains its instructions in a separate file. We can then bring those instructions together as a handbook and reuse selected parts in training material. This lets us organize maintenance around the responsible teams and presentation around the reader's needs.
+
+The three source files are listed below. Their `.md` extension identifies them as Markdown files. Open any file to read its instructions; [chapter 4](04-markdown.md) explains how the format works.
 
 | Source file | What it contains | Who maintains it | Status |
 | --- | --- | --- | --- |
@@ -91,17 +109,17 @@ flowchart LR
 
 ### From a Review Copy to a Published Handbook
 
-The [handbook review copy](../assets/onboarding-showcase/handbook.md) brings all three sets of instructions together. As the table shows, the team contacts section still needs review, so this example handbook is a draft rather than a finished guide for new colleagues.
+The [handbook review copy](../assets/onboarding-showcase/handbook.md) combines the three procedures. The contacts procedure still needs review, so the handbook remains a draft.
 
-If all three procedures had been reviewed and approved, the team could prepare a handbook for new colleagues using those approved versions. It could share a starting page linking to the instructions in GitHub, or assemble them into one document for publication. Before release, the person responsible for the handbook would still check that the parts work together: nothing important is missing, the instructions do not conflict, and the links and presentation are suitable for readers.
+Once all three procedures are approved, the person responsible for the handbook checks that they work together: the instructions are consistent, nothing important is missing, and the links and presentation work for readers. The team can then publish the handbook according to its review process.
 
-Once those checks and any required publication approval were complete, the team could release a fixed edition tied to the reviewed versions. Alternatively, it could maintain a linked handbook whose instructions are reviewed whenever they change.
+Readers could receive a fixed edition containing the reviewed versions, or a starting page linking to instructions that are maintained over time.
 
 ### Reusing the Access Instructions for Training
 
-The arrow from `access.md` to the training excerpt shows a different use of the same source. The script copies only the access instructions into a [training excerpt](../assets/onboarding-showcase/training-excerpt.md). It does not write a lesson or create slides. A trainer can use that excerpt to prepare explanations, exercises, or a presentation suited to the group being trained.
+The arrow from `access.md` to the training excerpt shows how we can select information for another purpose. The script creates a [training excerpt](../assets/onboarding-showcase/training-excerpt.md) containing only the access instructions. A trainer uses it to prepare explanations, exercises, or slides suited to the audience.
 
-The responsibilities are different here: the onboarding team maintains the original instructions in our fictional example, the people maintaining the project look after the script, and the trainer checks and adapts the material for the session. When the instructions change, a project maintainer runs the script again and reviews the updated excerpt. The trainer then checks whether the teaching material also needs updating. In this example, creating updated outputs is a deliberate action, not a process that runs automatically after every edit.
+The onboarding team maintains the instructions, a project maintainer looks after the script, and the trainer maintains the teaching material. When the instructions change, the maintainer regenerates the excerpt and the trainer reviews its effect on the session. This example is rebuilt manually; later chapters show how updates can become part of an automated workflow.
 
 ### A Dashboard from the Same Files
 
@@ -129,9 +147,11 @@ You can inspect the [input data](../assets/onboarding-showcase/data.json) and [g
 
 Who keeps this dashboard up to date? In this repository, maintaining the example means maintaining both the script and this chapter. The script generates the saved chart when someone runs it; the table above is written in the chapter and must be updated to match. Neither refreshes itself when a source file changes. In a working team, the procedure owners would maintain their records, while a designated maintainer would look after the dashboard and its generation process. Later chapters explore how to automate more of that work.
 
-We have now seen all three outputs from the diagram: the handbook, the training excerpt, and the dashboard. Next, we will look inside one instruction file to see how its text and descriptive information support these different uses. Later in the project, we will build on this approach to produce a website, a PDF book, and finished presentations.
+Our tutorial website already demonstrates another use of maintained source files. The website view of [chapter 3](03-project-growth.md) adds an interactive view of the project's growth, and [chapter 10](10-publishing.md) explains website publishing and the planned PDF and presentation outputs.
 
-## Inside the Access Procedure
+We have now seen all three outputs from the diagram: the handbook, the training excerpt, and the dashboard. Next, we will look inside one instruction file to see how its text and descriptive information support these different uses.
+
+### Inside the Access Procedure
 
 A new colleague needs instructions, a trainer needs material for a session, and the onboarding team needs to know who maintains the procedure. The same file can provide all three with useful information.
 
@@ -163,6 +183,8 @@ Those fields become useful when tools are configured to interpret them. Here is 
 | Background material for an AI assistant | Selected text, version, audience, and task | Draft material suited to a particular purpose |
 
 The example script creates the handbook, training excerpt, and dashboard chart; the dashboard's accompanying table is maintained in this chapter. In [chapter 6](06-ai-native.md), we will assemble background material and instructions for an AI assistant into what we call a context package.
+
+<!-- example:end onboarding -->
 
 ## Review the Part That Changed
 
@@ -198,22 +220,19 @@ Document-as-code offers a way to bring that control closer to the people doing t
 
 Versioned text, review, and automated publishing predate today's generative AI tools. AI adds another use for those maintained sources. [Write the Docs describes the established docs-as-code practices](https://www.writethedocs.org/guide/docs-as-code/).
 
-## When Your Main Medium Is Not Text
+## When Your Tools Keep Information Inside
 
-Your source might be a systems model, an illustration, an animation, or a dataset. We use "information-as-code" as a broader description of applying versioning, review, and repeatable processing to those sources.
+Document-as-code is easier to adopt when information can be read, compared, and processed by other tools. Many teams, however, work with presentations, systems models, illustrations, or animations whose editable content depends on a particular application.
 
-The same question applies: **what do you maintain, and what views do people need from it?**
+This can make reuse and automation harder. A reviewer may need the application to understand what changed. Another tool may be able to display an exported image without accessing the relationships behind it. An AI assistant may receive the visible result but lack the structure and context needed to help maintain it.
 
-| Main medium | Source to maintain | Possible output |
-| --- | --- | --- |
-| Systems model | Model elements and relationships | Diagrams and selected explanations |
-| Illustration | Editable design file | Images for manuals and presentations |
-| Animation | Editable project, script, and assets | A rendered sequence |
-| Dataset | Records and transformation rules | Charts, tables, and dashboards |
+The difficulty is not the visual presentation itself. It is whether the underlying information is accessible. A diagram generated from a readable definition can fit naturally into a document-as-code workflow. A model held in a closed application may require an export, an integration, or a different way of maintaining the information.
 
-Preserve the editable source as well as useful exports. Some formats require specialist tools to compare changes or reproduce an output, so the review method needs to fit the medium.
+Adopting the approach may therefore mean changing part of your workflow or choosing different tools. You might keep a specialist application while exporting selected information for other uses. You might maintain shared facts in structured files and use the application to present them. Where the limitations are too restrictive, replacing the tool may be worthwhile.
 
-This tutorial begins with text and small datasets, then expands into visual assets. [Chapter 7](07-images.md) covers those assets, and [chapter 10](10-publishing.md) covers publishing choices. [Beyond GitHub](11-beyond-github.md) explores how lighter workflows can use familiar applications.
+Start with one important task. Can you inspect changes, extract the information you need, and regenerate a useful output? Check what is lost during export and where updates must be made. Maintaining an editable original and an exported copy also creates a responsibility to keep them consistent.
+
+This tutorial starts with text and small datasets because they make these connections easier to inspect and automate. [Chapter 7](07-images.md) explores visual sources, [chapter 10](10-publishing.md) covers publishing, and [chapter 11](11-beyond-github.md) considers workflows in other applications.
 
 ## Try It: Find a Reusable Part in Your Own Work
 

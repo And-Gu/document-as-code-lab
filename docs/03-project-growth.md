@@ -80,6 +80,16 @@ A shorter explanation may be an improvement. A chapter can become more useful wi
 
 Chapter 1's dashboard summarizes fictional procedure review states. This report measures the tutorial repository. A chapter marked `draft`, a procedure marked `approved`, and a capability marked `complete` describe different things; they should not be combined into one completion percentage.
 
+## Current Data and Historical Examples
+
+The charts below are saved historical measurements, labelled with the revisions they describe. They remain readable in GitHub's Markdown preview and do not refresh when the project changes.
+
+The [website version of this chapter](https://and-gu.github.io/document-as-code-lab/chapters/03-project-growth/) adds an interactive growth view here, immediately before the first historical chart. It uses the same measurement script and rules, but reads all committed revisions through the revision used for that website build. You can select a measure and compare revisions without replacing the historical examples.
+
+"Latest" means the latest built revision, not a live GitHub feed. The website refreshes after a successful deployment. Uncommitted edits are excluded from the widget, even in a local preview. Metadata, commit history, and generated data can therefore add another reading experience without changing the source of the tutorial's facts.
+
+<!-- interactive: project-growth -->
+
 ## Our First Committed Comparison
 
 The first commit, `8908932`, contains ten chapter outlines. The next, `9c91191`, records the first seven drafts, supporting examples, and processing scripts. Compare these actual revisions using the same measurement rules:
@@ -170,7 +180,7 @@ We have now reviewed the [feature register](../data/features.json) against the a
 
 Why separate the local site from the broader website milestone? They record different outcomes: a site we can run ourselves, and a publication readers can reach online. The widget adds another outcome: making each chapter's metadata and history visible. These milestones overlap and are not independent units of effort, so their count should not be interpreted as a percentage of the project finished.
 
-The updated register records four completed capabilities. The historical charts above still correctly show zero: the register had not recorded completion at those revisions. Commit `3522333` records the first two completed capabilities. The website and widget are recognized in this later register update; their count enters committed history when the update is committed. Until then, use `--include-working-tree` to see four as a labelled preview.
+The register records four completed capabilities. The historical charts above still correctly show zero: the register had not recorded completion at those revisions. Commit `3522333` records the first two completed capabilities, and `0b5b449` records four after recognizing the published website and chapter information widget.
 
 The entries are assessments supported by implementation and verification evidence. Their recording dates may be later than their implementation dates. This distinction matters: the capability chart shows when completion was recorded, not necessarily when the first working code appeared. Each completed entry includes evidence explaining the decision. Regenerating the report does not rewrite the earlier teaching snapshots.
 
@@ -187,7 +197,7 @@ The report separates measures with different units rather than combining them in
 
 For example, splitting one chapter into two can increase the chapter count without adding much information. Editing for clarity can reduce the word count. Neither change is automatically progress or a setback. Use the chart to find a change worth inspecting, then read the source and its review context.
 
-The current history chart uses separate panels for words, chapter files, drafted or completed chapters, and capabilities. The chapter-size chart uses horizontal bars so chapter titles remain readable. Both are generated from the same report, which could also supply a website dashboard or a presentation later.
+The generated history chart uses separate panels for words, chapter files, drafted or completed chapters, and capabilities. The chapter-size chart uses horizontal bars so chapter titles remain readable. The website widget uses the same report data, presented as a selectable measure. A presentation could reuse that data too.
 
 ## Git History Is Our First Dataset
 
@@ -203,7 +213,7 @@ Git and GitHub contribute different information. This exercise reads Git history
 
 The script counts chapter files directly inside `docs/`, including outlines. It measures their prose while excluding metadata and fenced examples, and leaves supporting files and generated outputs outside the totals. This is a measure of content volume, not a precise estimate of reading effort.
 
-The report records `measurement_version: 2`. Use the same rules across revisions; otherwise a change in measurement can look like a change in content. The optional [measurement reference](../reference/growth-measurement.md) lists exact inclusions, exclusions, and regeneration commands.
+The current report records `measurement_version: 3`. Its draft-or-complete count also includes chapters in review or approved, so approving chapter 1 does not reduce that count. The saved teaching charts use version 2; their numeric values are unchanged because those revisions contain no chapters with the newly included statuses. Use the same rules across revisions; otherwise a change in measurement can look like a change in content. The optional [measurement reference](../reference/growth-measurement.md) lists exact inclusions, exclusions, and regeneration commands.
 
 ## Track Capabilities Explicitly
 
@@ -238,7 +248,7 @@ The script creates three files in `build/growth/`:
 | `growth.png` | Separate historical panels for words, chapter files, drafted or completed chapters, and completed capabilities |
 | `chapter-sizes.png` | Word counts for individual chapters in the latest snapshot |
 
-These are generated outputs and are excluded from version control. You can regenerate them from the source. The JSON report is also a future input for an interactive website dashboard.
+These are generated outputs and are excluded from version control. You can regenerate them from the source. Astro runs the same script with `--json-only` before starting the local site or building it for publication. Its separate report in `build/site-growth/` supplies the interactive widget without rendering new chart images.
 
 The default report ends at `HEAD`, your current committed revision. Uncommitted edits are excluded. To inspect local edits without presenting them as history, run:
 
@@ -297,9 +307,9 @@ The [growth workflow](../.github/workflows/growth.yml) is configured to run on p
 
 Full history is requested with `fetch-depth: 0`. [The checkout documentation explains this setting](https://github.com/actions/checkout). The uploaded files can be downloaded from the workflow run; artifacts have retention limits and do not replace the source history. [GitHub documents workflow artifacts](https://docs.github.com/en/enterprise-cloud%40latest/actions/tutorials/store-and-share-data).
 
-The workflow does not commit generated reports back into the repository, so its output cannot trigger a cycle of new commits and builds. It does not yet publish a website or refresh README images. Those integrations belong to the later dashboard and publishing chapters.
+The growth workflow does not commit generated reports back into the repository, so its output cannot trigger a cycle of new commits and builds. It produces downloadable artifacts, not refreshed chapter or README images. A separate [Pages deployment workflow](../.github/workflows/deploy-pages.yml) publishes the Astro website. That build generates its own JSON report with the same measurement script for the interactive widget; it does not download the growth workflow's artifact. The saved chart images in this chapter remain historical examples.
 
-Local measurement and a successful GitHub workflow run are separate checks. The [first hosted run for 9c91191](https://github.com/And-Gu/document-as-code-lab/actions/runs/37135502115) completed successfully after the push to `main`, running the tests and uploading the `project-growth` artifact. Repository access is required to inspect this private run, and artifact availability is subject to retention limits. The fixed comparison above remains available with the tutorial's source files.
+Local measurement and a successful GitHub workflow run are separate checks. The [first hosted run for 9c91191](https://github.com/And-Gu/document-as-code-lab/actions/runs/37135502115) completed successfully after the push to `main`, running the tests and uploading the `project-growth` artifact. The repository was private at that time and is now public; artifact availability is subject to retention limits. The fixed comparison above remains available with the tutorial's source files.
 
 The downloaded artifact's JSON report matches the locally regenerated report for that revision. This verifies agreement for these inputs, not the correctness of every future measurement or an automatic completion decision for the feature register.
 

@@ -11,7 +11,7 @@ import textwrap
 import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
-MEASUREMENT_VERSION = 2
+MEASUREMENT_VERSION = 3
 
 
 def git(*args):
@@ -69,7 +69,7 @@ def snapshot(paths, read, identity):
         if any(f["status"] not in {"planned", "in-progress", "complete"} for f in features):
             raise ValueError("Unsupported feature status")
     return {**identity, "chapter_count": len(chapters),
-            "draft_or_complete_chapters": sum(c["status"] in {"draft", "complete"} for c in chapters),
+            "draft_or_complete_chapters": sum(c["status"] in {"draft", "in-review", "approved", "complete"} for c in chapters),
             "word_count": sum(c["words"] for c in chapters),
             "complete_features": None if features is None else sum(f["status"] == "complete" for f in features),
             "features": features, "chapters": chapters}
@@ -134,6 +134,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--ref", default="HEAD")
     parser.add_argument("--include-working-tree", action="store_true")
+    parser.add_argument("--json-only", action="store_true", help="Write report data without rendering charts")
     parser.add_argument("--output", type=Path, default=ROOT / "build/growth")
     args = parser.parse_args()
     if git("rev-parse", "--is-shallow-repository").strip() == "true":
@@ -151,13 +152,15 @@ def main():
             {"source_commit": tip, "kind": "working-tree", "committed_at": None})
     args.output.mkdir(parents=True, exist_ok=True)
     (args.output / "history.json").write_text(json.dumps(report, indent=2) + "\n")
-    render(report, args.output)
+    if not args.json_only:
+        render(report, args.output)
     latest = report.get("working_tree", history[-1])
     print(f"Measured {len(history)} committed revisions; latest: "
           f"{latest['chapter_count']} chapters, {latest['word_count']} prose words, "
           f"{latest['draft_or_complete_chapters']} draft or complete chapters, "
           f"{latest['complete_features']} completed capabilities.")
-    print(f"Report and charts: {args.output}")
+    label = "Report data" if args.json_only else "Report and charts"
+    print(f"{label}: {args.output}")
 
 
 if __name__ == "__main__":
