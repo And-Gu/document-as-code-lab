@@ -27,7 +27,7 @@ A new colleague may want a page they can find quickly on their phone. A trainer 
 
 Publishing is the process of selecting, preparing, checking, and delivering information for an audience. Converting Markdown into another file format is one part of that process. The larger task is deciding what readers need and making the result work for them.
 
-This chapter uses our onboarding example to plan three publications. The core exercise works with the files already in the project; an export extension introduces tools to try when you are ready to generate additional formats.
+This chapter uses our onboarding example to plan three publications. We also examine the tutorial's published website and HTML introduction deck. The core exercise works with the files already in the project; an export extension introduces tools to try when you are ready to generate additional formats.
 
 ## One Source, Several Reading Experiences
 
@@ -90,7 +90,7 @@ The responsibilities are separate:
 | GitHub Actions | Runs repeatable checks and the configured publishing process |
 | GitHub Pages | Hosts the generated website for readers |
 
-This separation lets us improve navigation or page layout without maintaining another copy of the chapters. Conversely, an accepted text change can reach the website through a new build. It does not automatically update a PDF or presentation; each output needs its own configured process.
+This separation lets us improve navigation or page layout without maintaining another copy of the chapters. An accepted text change can reach the website through a new build. Our HTML presentations now use that same build and deployment process, with their own selected messages and layouts. PDF book and PowerPoint export pipelines are not yet configured.
 
 You can inspect the current reading site locally using the [site instructions](../site/README.md). From `site/`, `npm run dev` starts the local site and `npm run build` creates production files in `site/dist/`. Those generated files are not the editable master and are not committed to the repository.
 
@@ -126,6 +126,28 @@ AI can help propose the sequence, draft notes, or suggest a visual. Give it the 
 
 PowerPoint can remain part of the workflow. Generated slides may provide a starting point for visual refinement, discussion, or delivery. Decide which changes belong only to that presentation and which should return to the maintained content.
 
+### Our HTML Presentations Use Astro and Reveal.js
+
+Our first presentation puts these principles into practice. Open the [published introduction deck](https://and-gu.github.io/document-as-code-lab/presentations/document-as-code/) or choose **Presentations** in the website's chapter menu. Its eight slides draw on chapters 1, 2, 8, and 10, moving from information reuse through collaboration and review to publishing.
+
+The [presentation definition](../presentations/document-as-code-intro.yaml) is a YAML file containing the selected messages, slide order, and chapter references. It does not copy entire chapters. The chapters remain the maintained knowledge; the YAML defines a particular teaching sequence.
+
+We separate three responsibilities:
+
+| Part | Responsibility |
+| --- | --- |
+| YAML in `presentations/` | Selects the story, messages, and source references |
+| Astro slide components and CSS in `site/` | Render the content and define its visual presentation |
+| [Reveal.js](https://revealjs.com/) | Provides slide navigation, keyboard controls, fullscreen, overview, transitions, and progress |
+
+Four reusable slide types support titles, short explanations, comparisons, and workflow diagrams. This lets us improve the layout without rewriting each slide. Reveal.js enhances the pages Astro creates; it is not a separate application or hosting service.
+
+To create a similar deck, add a YAML definition using those slide types and link each slide to its source chapters. The [presentation authoring notes](../presentations/README.md) describe the fields and verification steps. The existing Astro build discovers the definition and creates a presentation route. Changes merged into `main` are rebuilt and published through the same GitHub Pages workflow as the documentation.
+
+Source links make the relationship visible, but they do not automatically rewrite a slide when a chapter changes. Review the affected messages and update the YAML when needed. Likewise, rebuilding a deck does not approve its content.
+
+The HTML introduction deck is implemented and published. Speaker notes and presenter mode are not enabled in our integration; the PDF book, workshop deck, and PowerPoint export remain future work.
+
 ## Reuse Visuals, Adapt Their Presentation
 
 Chapter 7 distinguished editable visual sources from their rendered images. Publishing adds another decision: which representation works in each output?
@@ -144,7 +166,7 @@ Pandoc is one option for converting Markdown into formats such as HTML, Word, an
 
 Quarto is another candidate when the project needs coordinated websites, books, and presentations. Its [documentation](https://quarto.org/docs/guide/) describes these output types and their configuration. Choosing it would mean adding and maintaining the relevant project settings; its capabilities are not already configured in this repository.
 
-Astro is our selected and locally verified website tool. A complete publishing system for the website, PDF book, and presentations is still being developed; choosing Astro does not provide the other output pipelines. The existing onboarding builder produces Markdown and a chart. Use the trial to decide which additional tools fit our content, visual requirements, accessibility needs, and maintenance capacity.
+Astro publishes our reading website and, with Reveal.js, our first HTML presentation. Both use the existing GitHub Pages deployment. The PDF book, workshop deck, and file-export pipelines remain to be developed. The onboarding builder still produces Markdown and a chart rather than those formats. Use a small trial to choose additional tools according to the audience, visual requirements, accessibility needs, and maintenance capacity.
 
 ## Keep Changes Connected to Their Source
 

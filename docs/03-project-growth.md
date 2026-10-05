@@ -84,7 +84,7 @@ Chapter 1's dashboard summarizes fictional procedure review states. This report 
 
 The charts below are saved historical measurements, labelled with the revisions they describe. They remain readable in GitHub's Markdown preview and do not refresh when the project changes.
 
-The [website version of this chapter](https://and-gu.github.io/document-as-code-lab/chapters/03-project-growth/) adds an interactive growth view here, immediately before the first historical chart. It uses the same measurement script and rules, but reads all committed revisions through the revision used for that website build. You can select a measure and compare revisions without replacing the historical examples.
+The [website version of this chapter](https://and-gu.github.io/document-as-code-lab/chapters/03-project-growth/) adds an interactive growth view here, immediately before the first historical chart. It uses the same measurement script and rules, following the first-parent history through the revision used for that website build. After a merge, this measures the merged result rather than every separate branch commit. You can select a measure and compare revisions without replacing the historical examples.
 
 "Latest" means the latest built revision, not a live GitHub feed. The website refreshes after a successful deployment. Uncommitted edits are excluded from the widget, even in a local preview. Metadata, commit history, and generated data can therefore add another reading experience without changing the source of the tutorial's facts.
 
@@ -136,7 +136,7 @@ Commit `e7cd980` records a first draft of all twelve chapters, including the rem
 | Prose words | 16,416 | 25,656 | +9,240 |
 | Recorded completed capabilities | 0 | 0 | No change |
 
-The scope stayed at twelve chapter files, but five outlines became drafts. The separate measures now reveal progress that the file count alone would hide. All chapters are still drafts; the count does not mean that every exercise has been verified in its target environment.
+The scope stayed at twelve chapter files, but five outlines became drafts. The separate measures reveal progress that the file count alone would hide. At this historical checkpoint, all chapters were still drafts; the count did not mean that every exercise had been verified in its target environment.
 
 ![Word counts for the twelve drafted chapters, labelled by reading order and title. The introduction has 2725 words and the review chapter has 1576.](../assets/figures/growth-complete-draft/chapter-sizes.png)
 
@@ -166,6 +166,12 @@ Commit `d1b4f17` adds an expandable **Chapter information** panel to all twelve 
 
 This small widget demonstrates another use of the information we already maintain. Readers can inspect the state and history of the chapter without opening its source file. Its status label is not an approval decision, and its commit list is not a measure of writing effort. The widget is a chapter-level view, not the complete work-tracking dashboard planned in chapter 9.
 
+Later changes add two different kinds of progress. Chapters 1 and 2 now have their first approved editions. The website view of this chapter also adds the interactive growth chart described earlier. Chapter approval changes a review state; the chart adds a way to explore measured history. Neither creates another chapter file.
+
+Merge commit `f11393b` adds a published [HTML introduction deck](https://and-gu.github.io/document-as-code-lab/presentations/document-as-code/). Its eight slides select messages from chapters 1, 2, 8, and 10. YAML defines the teaching sequence, Astro renders reusable slide components, and Reveal.js provides presentation controls. The deck uses the same website build and GitHub Pages deployment. [Chapter 10](10-publishing.md#our-html-presentations-use-astro-and-revealjs) explains the arrangement and links to its authoring instructions.
+
+This is useful progress even though the presentation milestone is not complete. Its criterion requires both an introduction and a workshop deck to be generated and visually verified. The introduction has been checked locally and on GitHub Pages; the workshop remains to be developed. The register therefore marks presentations as `in-progress`, rather than treating one working deck as completion of the whole milestone.
+
 We have now reviewed the [feature register](../data/features.json) against the available evidence:
 
 | Capability | Current status | Evidence or remaining work |
@@ -174,13 +180,14 @@ We have now reviewed the [feature register](../data/features.json) against the a
 | Local Astro reading site | Complete | All twelve chapters render; build, type checks, local links, and Mermaid rendering have been verified |
 | Tutorial website | Complete | Production build and GitHub Pages deployment succeeded; the hosted reading experience was checked |
 | Chapter metadata and history widget | Complete | All twelve hosted chapters contain the panel; expansion and chapter-specific commit history were checked |
-| PDF book and presentation decks | Planned | Finished outputs still need generation and visual verification |
+| Presentation decks | In progress | The HTML introduction deck is published and verified; the workshop deck is still missing |
+| PDF book | Planned | The book still needs generation and visual verification |
 | GitHub dashboard | Planned | The combined chart and work-tracking view still needs implementation |
 | Workflow beyond GitHub | Planned | The exercise still needs verification in its stated environment |
 
 Why separate the local site from the broader website milestone? They record different outcomes: a site we can run ourselves, and a publication readers can reach online. The widget adds another outcome: making each chapter's metadata and history visible. These milestones overlap and are not independent units of effort, so their count should not be interpreted as a percentage of the project finished.
 
-The register records four completed capabilities. The historical charts above still correctly show zero: the register had not recorded completion at those revisions. Commit `3522333` records the first two completed capabilities, and `0b5b449` records four after recognizing the published website and chapter information widget.
+The register still records four completed capabilities. Adding the introduction deck does not raise that count because the presentation entry remains in progress. The historical charts above still correctly show zero: the register had not recorded completion at those revisions. Commit `3522333` records the first two completed capabilities, and `0b5b449` records four after recognizing the published website and chapter information widget.
 
 The entries are assessments supported by implementation and verification evidence. Their recording dates may be later than their implementation dates. This distinction matters: the capability chart shows when completion was recorded, not necessarily when the first working code appeared. Each completed entry includes evidence explaining the decision. Regenerating the report does not rewrite the earlier teaching snapshots.
 
@@ -197,7 +204,7 @@ The report separates measures with different units rather than combining them in
 
 For example, splitting one chapter into two can increase the chapter count without adding much information. Editing for clarity can reduce the word count. Neither change is automatically progress or a setback. Use the chart to find a change worth inspecting, then read the source and its review context.
 
-The generated history chart uses separate panels for words, chapter files, drafted or completed chapters, and capabilities. The chapter-size chart uses horizontal bars so chapter titles remain readable. The website widget uses the same report data, presented as a selectable measure. A presentation could reuse that data too.
+The generated history chart uses separate panels for words, chapter files, drafted or completed chapters, and capabilities. The chapter-size chart uses horizontal bars so chapter titles remain readable. The website widget applies the same measurement rules to the revision being built, presented as a selectable measure. A future slide could reuse that growth data; our current introduction deck instead reuses chapter 1's onboarding status chart.
 
 ## Git History Is Our First Dataset
 
@@ -211,9 +218,9 @@ Git and GitHub contribute different information. This exercise reads Git history
 
 ## Define the Rules Before Counting
 
-The script counts chapter files directly inside `docs/`, including outlines. It measures their prose while excluding metadata and fenced examples, and leaves supporting files and generated outputs outside the totals. This is a measure of content volume, not a precise estimate of reading effort.
+The script counts chapter files directly inside `docs/`, including outlines. It measures their prose while excluding metadata and fenced examples, and leaves supporting files and generated outputs outside the totals. Presentation YAML, Astro components, and generated HTML therefore do not add to the chapter word count. This measures tutorial prose, not all the information or software in the repository.
 
-The current report records `measurement_version: 3`. Its draft-or-complete count also includes chapters in review or approved, so approving chapter 1 does not reduce that count. The saved teaching charts use version 2; their numeric values are unchanged because those revisions contain no chapters with the newly included statuses. Use the same rules across revisions; otherwise a change in measurement can look like a change in content. The optional [measurement reference](../reference/growth-measurement.md) lists exact inclusions, exclusions, and regeneration commands.
+The current report records `measurement_version: 3`. Its draft-or-complete count also includes chapters in review or approved, so approving chapters 1 and 2 does not reduce that count. Individual review states remain available in the data. The saved teaching charts use version 2; their numeric values are unchanged because those revisions contain no chapters with the newly included statuses. Use the same rules across revisions; otherwise a change in measurement can look like a change in content. The optional [measurement reference](../reference/growth-measurement.md) lists exact inclusions, exclusions, and regeneration commands.
 
 ## Track Capabilities Explicitly
 
