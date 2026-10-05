@@ -14,15 +14,17 @@ visuals:
     source: ../assets/diagrams/workspace-to-automation.mmd
     embedded: true
     outputs: [web, pdf, slides]
-    caption: A proposed change is recorded, reviewed, and merged; the configured growth workflow then produces a report.
-    alt: Edit a source file, commit on a branch, review the diff in a pull request, and merge into main. The growth workflow then runs tests and measurement on a runner and saves report artifacts.
+    caption: A branch holds the proposal; build checks and review precede merging, followed by website publication and growth reporting.
+    alt: Create a branch, edit and commit, and open a pull request. An Astro build check and content review lead to merging into main. Separate workflows then publish the website and save growth reports.
 ---
 
 # GitHub as a Workspace for Knowledge and Automation
 
 GitHub is an online platform where people store files, track changes, and collaborate on shared work. It is built around Git, a version-control system that records how files change over time.
 
-GitHub is best known for software development, but the same capabilities are useful for documentation, diagrams, structured data, and other information. A repository can bring together the source material, discussions about proposed changes, and instructions for checking or publishing the results.
+GitHub is best known for software development, but its capabilities are also useful for documentation, diagrams, structured data, and other information. Work is organized in repositories. A repository is a project's shared collection of files, together with a recorded history of their changes.
+
+On GitHub, that repository also provides a place to discuss proposed changes, review contributions, and run automated checks or publishing tasks. Our tutorial uses it to keep the chapters, examples, and instructions for building the website together.
 
 AI-assisted tools make this approach more accessible to people without a software background. You can describe a desired change in everyday language and ask an agent to help edit files or prepare automation. You still decide what the information should mean and review the result.
 
@@ -34,51 +36,73 @@ By the end, you will know where to find the source, a recorded change, and evide
 
 ## More Than a Place to Store Files
 
-A repository is a collection of files with a recorded history. In this project, it contains tutorial chapters, examples, metadata, diagrams, and instructions for processing them.
+Our repository contains tutorial chapters, examples, metadata, diagrams, and instructions for processing them.
 
 Git records revisions. GitHub hosts repositories and provides browser tools for reading, editing, review, work tracking, and automation. A local working copy lets you use editors and AI tools on your own computer.
 
 The useful connection is that the content and the instructions for processing it can be reviewed together. If a chart changes unexpectedly, you can inspect both its input data and the script that produced it.
 
-## Find Your Way Around
+The website and the repository serve different purposes. GitHub is where we maintain the source material and collaborate on changes. Astro builds the reading website from those sources, and GitHub Pages hosts it. The website adds navigation and interactive views; the repository lets you inspect the files and the work behind them. [Chapter 10](10-publishing.md#our-website-uses-astro) explains the publishing process.
 
-Start with the [README](../README.md), then follow a question rather than trying to learn every GitHub feature at once:
+## Find Your Way Around GitHub
+
+To understand this workspace, we will follow the information behind the tutorial you are reading. Where is the chapter text maintained? How can you see what changed? Where do you check whether an automated task succeeded?
+
+If you are reading the tutorial on its website, open the [project repository on GitHub](https://github.com/And-Gu/document-as-code-lab) alongside it. Start with the [README](https://github.com/And-Gu/document-as-code-lab/blob/main/README.md), the project's introduction and guide to its contents. Use the questions in the table below to explore the files and the work around them.
 
 | Your question | Where to look | Example in this project |
 | --- | --- | --- |
-| Where is the maintained information? | Repository files | [The access procedure](../examples/onboarding-showcase/access.md) |
-| How is it turned into another view? | Processing scripts | [The onboarding builder](../scripts/build_onboarding_showcase.py) |
-| What does the result look like? | Saved examples or build outputs | [The handbook review copy](../assets/onboarding-showcase/handbook.md) |
-| What changed, and why? | File history and pull requests | A wording change and its review discussion |
-| What work remains? | Issues or a project board, when used | A task to clarify an instruction |
-| Did the automated process run? | Actions and its run logs | The growth report's tests and generated files |
+| Where is the maintained information? | Repository files | [The access procedure](https://github.com/And-Gu/document-as-code-lab/blob/main/examples/onboarding-showcase/access.md) |
+| How is it turned into another view? | Processing scripts | [The onboarding builder](https://github.com/And-Gu/document-as-code-lab/blob/main/scripts/build_onboarding_showcase.py) |
+| What does the result look like? | Saved examples or build outputs | [The handbook review copy](https://github.com/And-Gu/document-as-code-lab/blob/main/assets/onboarding-showcase/handbook.md) |
+| What changed, and why? | [File history](https://github.com/And-Gu/document-as-code-lab/commits/main/docs/01-introduction.md) and [pull requests](https://github.com/And-Gu/document-as-code-lab/pulls?q=is%3Apr) | A wording change and its review discussion |
+| What work remains? | [Issues](https://github.com/And-Gu/document-as-code-lab/issues) or a project board, when used | A task to clarify an instruction |
+| Did the automated process run? | [Actions and its run logs](https://github.com/And-Gu/document-as-code-lab/actions) | The growth report's tests and generated files |
 
-The file links above open existing material. The change discussion and task are examples of how a team could organize its work, not claims that those issues or pull requests already exist.
+These links open the GitHub workspace, even when you are reading this chapter on the website. The file links lead to existing material; the wording change and task illustrate what to look for in history, pull requests, and issues. An issue list or project board only shows work that someone has recorded there.
 
 ## Follow One Proposed Change
 
-Suppose the team wants the access procedure to explain when to use the confirmation reference number. A contributor prepares the wording on a branch: a separate line of work that leaves the shared main version unchanged while the proposal is being prepared.
+<!-- example:start proposed-change -->
+
+### Example: Clarifying the Access Instructions
+
+Suppose the onboarding team wants to clarify its access instructions. They need somewhere to prepare and review the change while readers continue using the current version.
+
+A branch provides that working space within the repository. It starts from an existing version and records proposed changes separately. The team can edit and discuss those changes before bringing them into the shared main version, conventionally called `main`.
+
+In our example, a contributor creates a branch and updates the access procedure there. The current instructions on `main` remain unchanged during review.
 
 A commit records the proposed revision. A pull request then brings its changes and discussion together. Reviewers inspect a diff, which shows the difference between the old and new source, and consider the handbook and training excerpt that reuse it. Merging brings the accepted changes into the main branch.
 
-The diagram below uses Mermaid, a text-based diagram notation, to show a proposed review sequence followed by our configured growth workflow. [Chapter 4](04-markdown.md) introduces the syntax; [Mermaid's introduction](https://mermaid.js.org/intro/) provides background.
+The diagram uses Mermaid, a text-based diagram notation, to connect this example with our configured automation. The Astro build check runs on the pull request. After merging, separate workflows publish the website and generate growth reports. [Chapter 4](04-markdown.md) introduces the syntax; [Mermaid's introduction](https://mermaid.js.org/intro/) provides background.
 
 ```mermaid
-flowchart LR
-    edit["Edit a source file"]
-    commit["Commit the proposal on a branch"]
-    review["Review the diff in a pull request"]
+flowchart TD
+    branch["Create a branch"]
+    edit["Edit and commit the proposal"]
+    pr["Open a pull request"]
+    check["Astro build check"]
+    review["Review the content and diff"]
     merge["Merge into main"]
-    workflow["Runner executes tests and growth measurement"]
-    outputs["Save report artifacts"]
-    edit --> commit --> review --> merge --> workflow --> outputs
+    website["Build and publish website to GitHub Pages"]
+    growth["Run tests and save growth reports"]
+    branch --> edit --> pr
+    pr --> check --> merge
+    pr --> review --> merge
+    merge --> website
+    merge --> growth
 ```
 
-*A proposed change is recorded, reviewed, and merged; the configured growth workflow then produces a report.*
+*A branch holds the proposal; build checks and review precede merging, followed by website publication and growth reporting.*
 
-Recording a commit does not approve its contents. A pull request makes review possible, but required reviewers and checks depend on the team's rules and repository settings. Approval of a procedure also does not automatically approve an assembled handbook. [Chapter 8](08-git-review.md) develops those distinctions.
+These workflows publish the website and measure repository growth. The example's assembled handbook and training excerpt still need to be regenerated separately.
 
-The diagram shows our chosen sequence, not a universal GitHub rule. Workflows can also be configured to check proposals before merging. Our current growth workflow runs after a push to `main`, or when started manually; it is not a pre-merge approval check.
+<!-- example:end proposed-change -->
+
+Recording a commit does not approve its contents. A pull request makes review possible, but required reviewers and checks depend on the team's rules and repository settings. Approval of a procedure also does not automatically approve an assembled handbook. [Chapter 8](08-git-review.md) follows this workflow in more detail, including how to review related changes and decide what an approval covers.
+
+The diagram shows our intended review sequence. The build check is configured, but requiring it and a review before merging depends on branch rules. The growth workflow runs after a push to `main`, or when started manually.
 
 ## Start in the Browser
 
@@ -115,61 +139,48 @@ A word processor, a content management system, and a repository platform have ov
 | Content management system | Managing content and editorial workflows for delivery channels | Content models, templates, plugins, APIs, or configured services |
 | Repository platform | Versioning source files and processing instructions together | Reviewable configuration and scripts, executed by automation services |
 
-Many content management systems have powerful automation and APIs. Word processors can also support structured content and automated tasks. But technical extensibility is not the same as giving users the authority and practical ability to make changes. The repository approach makes the files and processing rules explicit so a team can inspect and develop them together, when it has that authority.
-
-The tradeoff is setup and maintenance, but the same structure also supports AI-assisted work. An agent can use the source material and project instructions to help generate processing code, update related information, or prepare excerpts for different audiences. Version control makes those changes visible and reviewable.
-
-AI assistance can reduce the effort involved, but people still need to check meaning, consistency, and the generated results. A repository preview also offers less layout control than a presentation tool. The choice is therefore not necessarily one environment or another: maintain shared information in the repository, then use publishing and visual tools to shape how people experience it.
+A repository brings the content and the rules for processing it into the same workspace. With the right permissions, a team can improve both as its needs change. AI agents can help prepare those changes, and version control makes them available for review.
 
 ## Ownership Close to the Work
 
-In many organizations, authors can use a document application but cannot change its templates, integrations, or publishing rules. Those decisions belong to IT, marketing, or another central function. Even a small improvement can require a ticket, a handover, and a wait for another team's priorities and capacity.
+In many organizations, changes to document tools depend on IT, marketing, or another central function. Even a small improvement can require a ticket and a wait for another team's capacity.
 
-A software-oriented working environment offers a different possibility. The team maintaining the information can also maintain the templates, metadata, scripts, and checks around it. Improvements become part of its ongoing work rather than requests for another group to implement. Here, ownership means practical control and responsibility for that work, not ownership of every underlying platform component.
+A software-oriented environment lets the team maintain both its information and the templates, metadata, scripts, and checks around it. For example, the onboarding team could work with an AI agent to build and test a view of procedures awaiting review, grouped by owner. Improving the tools becomes part of everyday work.
 
-For example, the onboarding team might need a view of procedures awaiting review, grouped by owner. With access to its records and processing code, it can define the question, develop the view with an agent, test it, and improve it after use. The same approach can support a new excerpt format or a check for missing metadata. The team builds reusable capabilities around its actual needs.
-
-This autonomy is an organizational choice, not something GitHub grants automatically. A repository can be centrally controlled too. Teams need permission to change their tools, suitable infrastructure, and clear responsibility for maintaining the result. Shared security, access, and platform standards should establish boundaries within which teams can act; changes outside those boundaries still need coordination.
-
-More control also means more responsibility. Custom fields, scripts, and integrations need documentation, tests, and maintainers. Prefer small improvements that remove repeated work or improve quality, and extend existing capabilities before adding another tool. The aim is an evolving working environment the team can sustain, not a custom platform for its own sake.
+This autonomy requires organizational support: permission to make changes, agreed boundaries, and responsibility for maintenance. Start with small improvements that remove repeated work, and keep them documented and tested.
 
 ## Automation as Part of the Workspace
 
-Suppose an onboarding procedure changes. A configured workflow could check links, rebuild a handbook, and generate an updated work report from that revision.
+GitHub Actions runs repeatable tasks when a specified event occurs, such as a proposed change or an update to `main`. A workflow defines the tasks, and a runner is the machine that executes them. GitHub can provide the runner; the workflow instructions live alongside our content in `.github/workflows/`.
 
-In GitHub Actions, a workflow defines when to run and what jobs to perform. Jobs contain steps that run commands or reusable actions. The configuration is stored as YAML in `.github/workflows/`. [GitHub explains the workflow model](https://docs.github.com/en/actions/concepts/workflows-and-actions/workflows).
+This project checks the Astro website build on pull requests. After changes reach `main`, separate workflows generate growth reports and publish the website, including fresh data for chapter 3's interactive chart. The onboarding handbook and training excerpt still require someone to run their script; their updates have not been automated.
 
-A runner executes the job. GitHub provides hosted runners, so you can begin without installing and operating your own automation server. [GitHub documents hosted runners](https://docs.github.com/en/actions/how-tos/manage-runners/github-hosted-runners/use-github-hosted-runners).
-
-Our [growth workflow](../.github/workflows/growth.yml) already contains a concrete sequence: retrieve the repository history, install dependencies, run the tests, measure growth, and save the report and charts. Its configuration uses read-only repository content permissions and does not commit generated files back into the source. Its first hosted run succeeded for commit `9c91191`; [chapter 3](03-project-growth.md) links to the run and explains the results.
-
-There are two different examples to keep distinct:
-
-| Process | Available now | Not yet connected |
-| --- | --- | --- |
-| Onboarding showcase | A script assembles the handbook, training excerpt, and status chart | Automatic regeneration on GitHub |
-| Growth report | A script and Actions workflow measure repository history and save charts | Website publication and interactive dashboards |
-
-Changing a procedure therefore does not currently rebuild the handbook automatically. It can trigger the growth workflow after reaching `main`, but the chapter word count will remain unchanged because supporting examples are excluded. [Chapter 3](03-project-growth.md) explains those measurement rules.
-
-Availability depends on repository settings and permissions, and hosted automation has usage limits. Check the relevant account settings when planning repeated or heavier jobs.
+Each workflow automates the steps configured for it. A successful run confirms those steps completed; content approval remains a review decision. [Chapter 3](03-project-growth.md) explains the growth report, and [chapter 12](12-automation.md) develops the automation approach. [GitHub's workflow guide](https://docs.github.com/en/actions/concepts/workflows-and-actions/workflows) provides technical detail.
 
 ## AI Can Help You Build the Process
 
 Agentic AI tools can inspect files, edit sources, run checks, and refine their work using the results. [Codex](https://learn.chatgpt.com/docs/codex/cli) and [Claude Code](https://code.claude.com/docs/en/overview) are examples; their available actions depend on the environment and permissions.
 
-A chat response supplies suggested text. A repository-connected agent may also save the edit and check it. Ask for the actual changed files, a diff, and evidence of checks. [Chapter 4](04-markdown.md) provides a bounded editing prompt; [chapter 6](06-ai-native.md) explains context and coordinated maintenance.
+A repository gives an agent access to more than the passage being edited. It can inspect related chapters, shared terminology, examples, metadata, and the scripts that process them. This helps it understand how a change fits into the wider project and identify other files that need updating.
+
+For example, changing a procedure may also affect a training excerpt, a diagram, and a validation rule. An agent working with the repository can help update and check those connections. Compared with writing assistance focused on the current document, this supports a broader task: maintaining the information and the processes around it.
+
+That context still needs to be organized. Clear structure and project instructions help the agent find relevant sources; access to the repository alone does not ensure that it reads or understands everything.
+
+Review the changed files, their diff, and the results of checks. [Chapter 4](04-markdown.md) provides a bounded editing prompt; [chapter 6](06-ai-native.md) explains context and coordinated maintenance.
 
 The same approach can help develop a script or workflow from a stated need. You define the inputs, expected result, and acceptance criteria; the agent helps implement and test them. You normally create workflows and scripts, then choose a runner, rather than build the runner itself. Keep permissions limited to the task and follow organizational rules for sharing information.
 
 ## Try It: Follow a Change Through the Workspace
 
-1. Open the access source and handbook linked above. Identify which is maintained directly and which is generated.
-2. Open this chapter in source and preview. Find the file history and inspect one recorded change. Explain its purpose from the diff and commit message.
-3. Open an existing growth run in Actions, such as the [first successful run](https://github.com/And-Gu/document-as-code-lab/actions/runs/37135502115). Identify its source commit and inspect the job steps.
+Follow the actual change that introduced chapter 1's approved edition and the interactive growth view:
+
+1. Open [this chapter on GitHub](https://github.com/And-Gu/document-as-code-lab/blob/main/docs/02-github-workspace.md) and compare its source and preview.
+2. Open [pull request #1](https://github.com/And-Gu/document-as-code-lab/pull/1). In its changed files, inspect `docs/01-introduction.md` and identify the status change and one wording improvement. The pull request also contains site changes; its merge alone does not establish that every chapter is approved.
+3. Locate its merge revision, `3c5ab277f3073d8fe0ba69d823e494491d12db78`. Open the [growth run for that revision](https://github.com/And-Gu/document-as-code-lab/actions/runs/37230719162), confirm the source commit matches, and inspect the job steps. The [Pages deployment for the same revision](https://github.com/And-Gu/document-as-code-lab/actions/runs/37230719137) shows how it reached readers.
 4. If the `project-growth` artifact is still available, inspect its report and charts. Compare the report's source commit with the run's revision. Chapter 3 explains the measurements.
 
-This inspects existing work; it does not require creating a branch, merging a proposal, or configuring automation. The example run is private and its artifacts have retention limits. Without access, use chapter 3's [saved report](../assets/figures/growth-first-update/history.json) and mark the hosted-run inspection incomplete.
+This inspects existing work in a public repository. Downloading artifacts requires signing into GitHub with read access, and artifacts can expire; [GitHub explains artifact downloads](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/download-workflow-artifacts). If the report is unavailable, use chapter 3's [saved historical report](../assets/figures/growth-first-update/history.json) to inspect its structure. That fallback describes a different revision, `9c91191`, so do not present it as the result of this merge; note which checks you could not complete.
 
 **Expected result:** you can connect a source file, a recorded change, and a processing result, without assuming that recording or building them constitutes approval.
 

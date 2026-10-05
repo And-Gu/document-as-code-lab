@@ -1,8 +1,14 @@
-flowchart LR
-    edit["Edit a source file"]
-    commit["Commit the proposal on a branch"]
-    review["Review the diff in a pull request"]
+flowchart TD
+    branch["Create a branch"]
+    edit["Edit and commit the proposal"]
+    pr["Open a pull request"]
+    check["Astro build check"]
+    review["Review the content and diff"]
     merge["Merge into main"]
-    workflow["Runner executes tests and growth measurement"]
-    outputs["Save report artifacts"]
-    edit --> commit --> review --> merge --> workflow --> outputs
+    website["Build and publish website to GitHub Pages"]
+    growth["Run tests and save growth reports"]
+    branch --> edit --> pr
+    pr --> check --> merge
+    pr --> review --> merge
+    merge --> website
+    merge --> growth
