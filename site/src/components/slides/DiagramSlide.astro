@@ -1,0 +1,22 @@
+---
+import { ArrowRight, ArrowDown } from '@lucide/astro';
+import type { SlideOf } from '../../lib/presentations';
+interface Props { slide: SlideOf<'diagram'> }
+const { slide } = Astro.props;
+---
+<div class="slide-body">
+  <h2>{slide.title}</h2>
+  <p class="slide-message">{slide.message}</p>
+  <ol class="workflow-diagram">
+    {slide.steps.map((step, index) => <li>
+      <span class="step-number">{String(index + 1).padStart(2, '0')}</span>
+      <h3>{step.label}</h3><p>{step.detail}</p>
+      {index < slide.steps.length - 1 && <ArrowRight class="step-arrow" aria-hidden="true" size={24} />}
+    </li>)}
+  </ol>
+  {slide.outputs && <div class="diagram-outputs">
+    <ArrowDown aria-hidden="true" size={28} />
+    <ul>{slide.outputs.map((output) => <li>{output}</li>)}</ul>
+  </div>}
+  {slide.caption && <p class="diagram-caption">{slide.caption}</p>}
+</div>

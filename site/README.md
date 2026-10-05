@@ -6,6 +6,8 @@ The content collection reads chapters directly from `../docs/` and sorts them by
 
 The home page lists all chapters. Chapter pages include previous/next links, rendered images, and Mermaid diagrams. Linked Markdown examples, reference notes, and the glossary have reading pages under `/materials/`. Supporting files and original sources are available under `/files/` from an explicit selection of project folders.
 
+HTML slide decks are listed under `/presentations/`. YAML in `../presentations/` selects messages and links to the maintained chapters. Four Astro slide components render that content; Reveal.js provides presentation behavior within the same build and deployment. See the [presentation authoring notes](../presentations/README.md) for the format and verification steps. The dedicated theme is `src/styles/presentations.css`.
+
 From the repository root:
 
 The growth widget also needs Python and the repository's measurement dependencies. Set up `.venv` and install `requirements.txt` as described in chapter 3. The npm pre-dev and pre-build hooks use that environment when available, otherwise `python3`; set `PYTHON` to override the executable. Full Git history is required.

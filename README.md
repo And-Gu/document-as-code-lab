@@ -8,7 +8,9 @@ The project teaches document-as-code by applying it to itself. It also serves as
 
 Chapters 1 and 2 have their first approved editions; the other 10 chapters remain drafts. The [Astro reading site is published on GitHub Pages](https://and-gu.github.io/document-as-code-lab/) and reads the original Markdown sources, including diagrams and linked examples. Every chapter has an expandable metadata and Git-history widget. Pull requests run Astro checks and a production build; pushes to `main` build and deploy the website.
 
-A runnable onboarding showcase, historical growth reporting, structured-record processing, and record-to-Mermaid generation are also available. Growth reports are generated as GitHub Actions artifacts. Chapter 3's saved charts remain fixed historical examples, while its Astro view adds an interactive report measured from committed history during each site build. PDF book and presentation pipelines, the combined work-tracking dashboard, and verification of Microsoft-environment exercises remain future work. Approval of chapters 1 and 2 does not extend to the remaining chapter drafts or the fictional example procedures.
+A runnable onboarding showcase, historical growth reporting, structured-record processing, and record-to-Mermaid generation are also available. Growth reports are generated as GitHub Actions artifacts. Chapter 3's saved charts remain fixed historical examples, while its Astro view adds an interactive report measured from committed history during each site build. The PDF book, additional presentation decks, the combined work-tracking dashboard, and verification of Microsoft-environment exercises remain future work. Approval of chapters 1 and 2 does not extend to the remaining chapter drafts or the fictional example procedures.
+
+Run the site locally to try the first HTML introduction deck at `/document-as-code-lab/presentations/`. Its [YAML definition and authoring notes](presentations/README.md) select messages from chapters 1, 2, 8, and 10. Astro renders reusable slide components; Reveal.js provides navigation and presentation controls within the existing website build.
 
 ## Read Locally
 
@@ -84,6 +86,7 @@ Word counts measure content volume, not quality. The measurement rules distingui
 
 - `docs/`: tutorial chapters.
 - `site/`: Astro reading site using the original chapters and supporting material.
+- `presentations/`: selected teaching messages and chapter references for HTML slide decks.
 - `reference/`: optional technical detail linked from chapters, excluded from chapter metrics.
 - `examples/`: exercise sources and fixed showcase datasets, excluded from chapter metrics.
 - `data/`: capability metadata and future measurement data.

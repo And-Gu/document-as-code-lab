@@ -40,6 +40,8 @@ Done when exercises use the project's own content and data.
 
 ## 5. Add Book and Presentations
 
+The first HTML introduction deck uses YAML, reusable Astro components, and Reveal.js in the existing site build. Local production checks cover its eight slides, source links, navigation, overview, fullscreen, and desktop/phone layouts. The workshop deck and book remain to be developed; this does not yet meet the presentation capability's two-deck completion criterion.
+
 - Build a PDF book with readable print layout.
 - Build an introduction deck and a workshop deck.
 - Document how edits in Word or PowerPoint return to the source.
@@ -59,5 +61,5 @@ Done when readers can adapt the practices without relying on GitHub.
 ## Open Decisions
 
 - Primary audience and assumed technical knowledge.
-- Book and presentation tooling; Astro is selected for the website, and existing charts use Matplotlib.
+- Book and file-export tooling; Astro with Reveal.js is selected for HTML presentations, and existing charts use Matplotlib.
 - Microsoft account environment used for the portability exercise.

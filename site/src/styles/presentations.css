@@ -1,0 +1,83 @@
+:root {
+  --presentation-ink: #202623;
+  --presentation-green: #17684c;
+  --presentation-muted: #59635e;
+  --presentation-rule: #d7ded9;
+  --presentation-red: #a54255;
+}
+.presentation-page { margin: 0; background: #fff; color: var(--presentation-ink); font-family: system-ui, sans-serif; }
+.presentation-page * { box-sizing: border-box; letter-spacing: 0; }
+.presentation-toolbar { position: fixed; z-index: 30; inset: 0 0 auto; height: 48px; padding: 6px 18px; display: flex; align-items: center; justify-content: space-between; background: #fff; border-bottom: 1px solid var(--presentation-rule); }
+.presentation-toolbar a { display: inline-flex; align-items: center; gap: 8px; color: var(--presentation-green); font-size: 14px; text-decoration: none; }
+.presentation-toolbar > div { display: flex; gap: 8px; }
+.presentation-toolbar button { width: 36px; height: 36px; display: grid; place-items: center; border: 1px solid var(--presentation-rule); border-radius: 4px; background: #fff; color: var(--presentation-ink); cursor: pointer; }
+.presentation-toolbar button:disabled { opacity: 0.4; cursor: default; }
+.presentation-toolbar button:hover:not(:disabled) { background: #edf5f0; }
+.presentation-page a:focus-visible, .presentation-page button:focus-visible { outline: 3px solid var(--presentation-green); outline-offset: 3px; }
+.presentation-page .reveal { position: absolute; top: 48px; width: 100%; height: calc(100dvh - 48px); font-size: 28px; }
+.reveal .slides { text-align: left; }
+.reveal .slides > section { height: 720px; padding: 48px 50px 76px; }
+.reveal h1, .reveal h2, .reveal h3, .reveal p, .reveal ul, .reveal ol, .reveal figure { margin: 0; }
+.reveal h1, .reveal h2, .reveal h3 { color: var(--presentation-ink); font-weight: 650; line-height: 1.15; overflow-wrap: anywhere; }
+.reveal h1 { font-size: 88px; }
+.reveal h2 { font-size: 50px; max-width: 1120px; margin-bottom: 40px; }
+.reveal h3 { font-size: 29px; }
+.reveal p, .reveal li { line-height: 1.45; }
+.reveal .slide-message { font-size: 34px; max-width: 1060px; margin-bottom: 40px; }
+.reveal ul { padding-left: 28px; }
+.reveal ul li { padding-left: 8px; margin-bottom: 22px; }
+.reveal ul li::marker { color: var(--presentation-green); }
+.reveal a { color: var(--presentation-green); text-underline-offset: 4px; }
+.title-slide { padding-top: 105px; }
+.reveal .slide-context { color: var(--presentation-muted); font-size: 24px; margin-bottom: 35px; }
+.reveal .slide-subtitle { color: var(--presentation-green); font-size: 44px; margin-top: 36px; max-width: 940px; }
+.content-body { display: grid; gap: 42px; }
+.with-image .content-body { grid-template-columns: 1.15fr 1fr; align-items: start; }
+.with-image .slide-message { font-size: 28px; margin-bottom: 28px; }
+.with-image ul { font-size: 24px; }
+.reveal figure img { width: 100%; height: 300px; object-fit: contain; }
+.reveal figcaption { font-size: 19px; line-height: 1.45; color: var(--presentation-muted); margin-top: 18px; }
+.comparison-columns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 60px; }
+.comparison-column { border-top: 5px solid var(--presentation-red); padding-top: 28px; }
+.comparison-column + .comparison-column { border-color: var(--presentation-green); }
+.reveal .comparison-column h3 { margin-bottom: 34px; }
+.reveal .comparison-column li { margin-bottom: 30px; }
+.reveal .workflow-diagram { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 32px; padding: 0; list-style: none; margin-top: 46px; }
+.workflow-diagram li { position: relative; border-top: 3px solid var(--presentation-green); padding-top: 18px; }
+.step-number { display: block; color: var(--presentation-green); font-size: 20px; margin-bottom: 14px; }
+.reveal .workflow-diagram h3 { font-size: 27px; margin-bottom: 14px; }
+.reveal .workflow-diagram p { font-size: 23px; }
+.step-arrow { position: absolute; right: -28px; top: 46px; color: var(--presentation-muted); }
+.diagram-outputs { margin-top: 26px; color: var(--presentation-green); text-align: center; }
+.reveal .diagram-outputs ul { display: flex; justify-content: center; gap: 40px; padding: 0; list-style: none; margin-top: 12px; }
+.reveal .diagram-outputs li { font-size: 25px; padding: 0; margin: 0; }
+.reveal .diagram-caption { color: var(--presentation-muted); font-size: 20px; margin-top: 30px; }
+.slide-sources { position: absolute; bottom: 25px; left: 50px; right: 50px; display: flex; gap: 14px; border-top: 1px solid var(--presentation-rule); padding-top: 14px; font-size: 18px; color: var(--presentation-muted); }
+.reveal .progress { color: var(--presentation-green); height: 4px; }
+.reveal .controls { color: var(--presentation-green); }
+.reveal .slide-number { font-family: inherit; background: #fff; color: var(--presentation-muted); font-size: 14px; right: 18px; bottom: 10px; }
+.presentation-fallback { position: fixed; bottom: 20px; padding: 16px; background: #fff; z-index: 40; }
+@media (prefers-reduced-motion: reduce) { .reveal .slides section { transition: none !important; } }
+@media (max-width: 600px) {
+  .reveal .slides > section { height: 1400px; padding: 45px 40px 90px; }
+  .reveal h1 { font-size: 76px; }
+  .reveal h2 { font-size: 50px; }
+  .reveal .slide-message, .with-image .slide-message { font-size: 34px; margin-bottom: 32px; }
+  .reveal ul, .with-image ul { font-size: 30px; }
+  .with-image .content-body { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  .reveal figure img { height: 300px; }
+  .reveal figcaption { font-size: 24px; }
+  .comparison-columns { grid-template-columns: minmax(0, 1fr); gap: 35px; }
+  .reveal .comparison-column h3 { margin-bottom: 24px; font-size: 34px; }
+  .reveal .comparison-column li { margin-bottom: 20px; }
+  .reveal .workflow-diagram { grid-auto-flow: row; gap: 18px; margin-top: 24px; }
+  .workflow-diagram li { padding: 14px 0 8px 54px; }
+  .step-number { position: absolute; left: 0; top: 16px; font-size: 24px; }
+  .reveal .workflow-diagram h3 { font-size: 34px; margin-bottom: 8px; }
+  .reveal .workflow-diagram p { font-size: 28px; }
+  .step-arrow { display: none; }
+  .reveal .diagram-outputs ul { flex-direction: column; gap: 12px; }
+  .reveal .diagram-outputs li { font-size: 30px; }
+  .reveal .diagram-caption { font-size: 24px; }
+  .slide-sources { left: 40px; right: 40px; font-size: 24px; }
+}
