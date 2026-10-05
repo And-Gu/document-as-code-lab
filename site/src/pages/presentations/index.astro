@@ -1,0 +1,15 @@
+---
+import Documentation from '../../layouts/Documentation.astro';
+import { getPresentations } from '../../lib/presentations';
+import { siteUrl } from '../../lib/urls';
+const presentations = await getPresentations();
+---
+<Documentation title="Presentations">
+  <h1>Presentations</h1>
+  {presentations.map((presentation) => <article>
+    <h2><a href={siteUrl(`presentations/${presentation.slug}/`)}>{presentation.title}</a></h2>
+    <p>{presentation.description}</p>
+    <p>{presentation.slides.length} slides · <a href={siteUrl(`files/${presentation.sourceFile}`)}>Presentation source (YAML)</a></p>
+  </article>)}
+  <p><a href={siteUrl('presentation-notices.txt')}>Presentation dependency notices</a></p>
+</Documentation>

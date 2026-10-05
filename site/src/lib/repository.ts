@@ -17,7 +17,7 @@ export async function repositoryFiles() {
       }
     }
   }
-  for (const directory of ['docs', 'examples', 'reference', 'assets', 'data', 'scripts', '.github']) {
+  for (const directory of ['docs', 'examples', 'reference', 'assets', 'data', 'scripts', 'presentations', '.github']) {
     await collect(directory);
   }
   return files;

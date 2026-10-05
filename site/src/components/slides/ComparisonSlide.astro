@@ -1,0 +1,14 @@
+---
+import type { SlideOf } from '../../lib/presentations';
+interface Props { slide: SlideOf<'comparison'> }
+const { slide } = Astro.props;
+---
+<div class="slide-body">
+  <h2>{slide.title}</h2>
+  <div class="comparison-columns">
+    {[slide.left, slide.right].map((column) => <div class="comparison-column">
+      <h3>{column.title}</h3>
+      <ul>{column.items.map((item) => <li>{item}</li>)}</ul>
+    </div>)}
+  </div>
+</div>

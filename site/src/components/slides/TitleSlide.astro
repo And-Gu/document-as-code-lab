@@ -1,0 +1,10 @@
+---
+import type { SlideOf } from '../../lib/presentations';
+interface Props { slide: SlideOf<'title'> }
+const { slide } = Astro.props;
+---
+<div class="slide-body title-slide">
+  {slide.context && <p class="slide-context">{slide.context}</p>}
+  <h1>{slide.title}</h1>
+  <p class="slide-subtitle">{slide.subtitle}</p>
+</div>

@@ -1,0 +1,19 @@
+---
+import type { SlideOf } from '../../lib/presentations';
+import { siteUrl } from '../../lib/urls';
+interface Props { slide: SlideOf<'content'> }
+const { slide } = Astro.props;
+---
+<div class:list={['slide-body', { 'with-image': slide.image }]}>
+  <h2>{slide.title}</h2>
+  <div class="content-body">
+    <div>
+      <p class="slide-message">{slide.message}</p>
+      {slide.bullets.length > 0 && <ul>{slide.bullets.map((item) => <li>{item}</li>)}</ul>}
+    </div>
+    {slide.image && <figure>
+      <img src={siteUrl(`files/${slide.image.path}`)} alt={slide.image.alt} />
+      {slide.image.caption && <figcaption>{slide.image.caption}</figcaption>}
+    </figure>}
+  </div>
+</div>

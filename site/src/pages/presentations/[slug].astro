@@ -1,0 +1,27 @@
+---
+import { getPresentations } from '../../lib/presentations';
+import PresentationLayout from '../../layouts/PresentationLayout.astro';
+import TitleSlide from '../../components/slides/TitleSlide.astro';
+import ContentSlide from '../../components/slides/ContentSlide.astro';
+import ComparisonSlide from '../../components/slides/ComparisonSlide.astro';
+import DiagramSlide from '../../components/slides/DiagramSlide.astro';
+
+export async function getStaticPaths() {
+  return (await getPresentations()).map((presentation) => ({
+    params: { slug: presentation.slug }, props: { presentation },
+  }));
+}
+const { presentation } = Astro.props;
+---
+<PresentationLayout title={presentation.title} description={presentation.description}>
+  {presentation.slides.map((slide) => <section id={slide.id} class={`slide-${slide.type}`} aria-label={slide.title}>
+    {slide.type === 'title' && <TitleSlide slide={slide} />}
+    {slide.type === 'content' && <ContentSlide slide={slide} />}
+    {slide.type === 'comparison' && <ComparisonSlide slide={slide} />}
+    {slide.type === 'diagram' && <DiagramSlide slide={slide} />}
+    <footer class="slide-sources">
+      <span>Source</span>
+      {slide.references.map((source) => <a href={source.url} title={source.title}>Chapter {source.number}</a>)}
+    </footer>
+  </section>)}
+</PresentationLayout>

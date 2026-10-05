@@ -1,0 +1,76 @@
+---
+import { ArrowLeft, Grid2x2, Maximize } from '@lucide/astro';
+import { siteUrl } from '../lib/urls';
+import 'reveal.js/reveal.css';
+import '../styles/presentations.css';
+interface Props { title: string; description: string }
+const { title, description } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <title>{title} | Document-as-Code Lab</title>
+  </head>
+  <body class="presentation-page">
+    <nav class="presentation-toolbar" aria-label="Presentation tools">
+      <a href={siteUrl('presentations/')}><ArrowLeft size={18} aria-hidden="true" />Presentations</a>
+      <div>
+        <button type="button" id="presentation-overview" aria-label="Slide overview" title="Slide overview" disabled><Grid2x2 size={20} /></button>
+        <button type="button" id="presentation-fullscreen" aria-label="Enter fullscreen" title="Enter fullscreen" disabled><Maximize size={20} /></button>
+      </div>
+    </nav>
+    <main class="reveal" aria-label={title}>
+      <div class="slides"><slot /></div>
+    </main>
+    <noscript><p class="presentation-fallback">JavaScript is unavailable. <a href={siteUrl()}>Read the tutorial instead.</a></p></noscript>
+    <script>
+      import Reveal from 'reveal.js';
+      const root = document.querySelector<HTMLElement>('.reveal');
+      if (root) {
+        const narrow = window.matchMedia('(max-width: 600px)');
+        const deck = new Reveal(root, {
+          width: narrow.matches ? 720 : 1280, height: narrow.matches ? 1400 : 720, margin: 0.04,
+          controls: true, progress: true, slideNumber: 'c/t',
+          hash: true, hashOneBasedIndex: true,
+          overview: true, keyboard: true, touch: true,
+          scrollActivationWidth: 0,
+          center: false, transition: 'fade', transitionSpeed: 'fast',
+          disableLayout: false,
+        });
+        await deck.initialize();
+        const resize = () => deck.configure({
+          width: narrow.matches ? 720 : 1280, height: narrow.matches ? 1400 : 720,
+        });
+        narrow.addEventListener('change', resize);
+        const overview = document.querySelector<HTMLButtonElement>('#presentation-overview');
+        const fullscreen = document.querySelector<HTMLButtonElement>('#presentation-fullscreen');
+        if (overview) {
+          overview.disabled = false;
+          overview.onclick = () => deck.toggleOverview();
+        }
+        if (fullscreen && document.fullscreenEnabled) {
+          fullscreen.disabled = false;
+          fullscreen.onclick = () => {
+            if (document.fullscreenElement) void document.exitFullscreen();
+            else deck.triggerKey(70);
+          };
+          document.addEventListener('fullscreenchange', () => {
+            const label = document.fullscreenElement ? 'Exit fullscreen' : 'Enter fullscreen';
+            fullscreen.setAttribute('aria-label', label);
+            fullscreen.title = label;
+          });
+        }
+        window.addEventListener('pagehide', () => {
+          narrow.removeEventListener('change', resize);
+          deck.destroy();
+        }, { once: true });
+        window.addEventListener('pageshow', (event) => {
+          if (event.persisted) window.location.reload();
+        });
+      }
+    </script>
+  </body>
+</html>

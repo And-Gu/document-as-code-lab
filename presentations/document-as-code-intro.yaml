@@ -1,0 +1,104 @@
+slug: document-as-code
+title: Document-as-Code
+description: An introduction to maintained information, review, and reusable publications.
+slides:
+  - id: introduction
+    type: title
+    title: Document-as-Code
+    subtitle: Maintain the knowledge. Shape the view.
+    context: An introduction based on the living tutorial
+    sources: [docs/01-introduction.md]
+
+  - id: reuse
+    type: content
+    title: One source. Several useful views.
+    message: Maintain information around the people responsible for it. Present it around the reader's needs.
+    bullets:
+      - Instructions become a handbook or a training excerpt.
+      - Metadata reveals what needs attention.
+      - Shared sources provide context for AI-assisted work.
+    image:
+      path: assets/onboarding-showcase/review-status.png
+      alt: The fictional onboarding dataset contains two approved procedures and one draft.
+      caption: Chapter 1's fictional onboarding example. Not tutorial approval data.
+    sources: [docs/01-introduction.md]
+
+  - id: workspace
+    type: comparison
+    title: Bring the process into the workspace.
+    left:
+      title: Application-led work
+      items:
+        - Content lives in documents and applications.
+        - Changes to tools may depend on another team.
+        - Publishing follows each application's process.
+    right:
+      title: Repository-led work
+      items:
+        - Sources and processing rules live together.
+        - Teams can develop their tools within agreed boundaries.
+        - Checks and publishing are versioned alongside content.
+    sources: [docs/02-github-workspace.md]
+
+  - id: proposed-change
+    type: diagram
+    title: A proposal becomes shared information.
+    message: Keep the current version available while the team prepares and reviews a change.
+    steps:
+      - label: Branch
+        detail: Prepare the change.
+      - label: Commit
+        detail: Record the proposal.
+      - label: Pull request
+        detail: Inspect the diff and build.
+      - label: Review
+        detail: Check meaning and effects.
+      - label: Merge
+        detail: Update the shared source.
+    caption: Required review and checks depend on repository rules.
+    sources: [docs/02-github-workspace.md]
+
+  - id: review
+    type: content
+    title: Recording is not approving.
+    message: A review decision needs a scope, an identified version, and a responsible reviewer.
+    bullets:
+      - A commit records what the files contained.
+      - Accepting a change updates the shared source.
+      - Approving a publication covers a particular deliverable.
+    sources: [docs/08-git-review.md]
+
+  - id: publishing
+    type: diagram
+    title: Adapt the view. Keep the facts connected.
+    message: A presentation is not a handbook divided into slides.
+    steps:
+      - label: Shared sources
+        detail: Markdown, metadata, and visuals.
+      - label: Select and adapt
+        detail: Choose the audience, scope, and sequence.
+      - label: Check the output
+        detail: Review meaning, completeness, and presentation.
+    outputs: [Website, PDF handbook, Training presentation]
+    caption: These are publication choices, not three automatically implemented export pipelines.
+    sources: [docs/10-publishing.md]
+
+  - id: automation
+    type: content
+    title: Make repeatable work repeatable.
+    message: Astro builds the reading experience. GitHub Actions runs the process. GitHub Pages hosts the result.
+    bullets:
+      - A pull request checks that the website builds.
+      - Updates to main trigger the publishing workflow.
+      - A successful build does not establish content approval.
+    sources: [docs/02-github-workspace.md, docs/10-publishing.md]
+
+  - id: start-small
+    type: content
+    title: Start with one information item.
+    message: Choose something you maintain today. Give it an owner, a review process, and two useful views.
+    bullets:
+      - Keep the maintained facts in one source.
+      - Use AI to help develop and check the connections.
+      - Improve the process as the team's needs change.
+    sources: [docs/01-introduction.md]
