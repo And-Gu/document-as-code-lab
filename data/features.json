@@ -64,8 +64,14 @@
     {
       "id": "presentations",
       "name": "Presentation decks",
-      "status": "planned",
-      "completion_criterion": "Introduction and workshop decks are generated and visually verified."
+      "status": "in-progress",
+      "completion_criterion": "Introduction and workshop decks are generated and visually verified.",
+      "evidence": [
+        "Merge commit f11393b adds the YAML-defined eight-slide introduction deck, four reusable Astro slide types, and Reveal.js controls in the existing site build.",
+        "Production build and type checks pass; desktop and phone layouts, navigation, overview, fullscreen, and source links were checked locally.",
+        "Pages deployment run 37274330450 succeeded; the published introduction deck, chart asset, slide navigation, and chapter sidebar link were verified.",
+        "The workshop deck remains to be developed and visually verified."
+      ]
     },
     {
       "id": "portable-workflow",

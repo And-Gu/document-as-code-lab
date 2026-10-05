@@ -103,6 +103,29 @@ Keep three kinds of information distinct:
 
 A current status cannot tell us when an item entered that status. Measures such as time in progress need historical events or revisions. A completion percentage also needs an explicit denominator: completed tasks divided by all tasks is different from approved requirements divided by all requirements.
 
+## YAML for Structured Information
+
+We have already seen fields such as `id`, `owner`, and `status`. [YAML](https://yaml.org/spec/1.2.2/#chapter-2-language-overview) is a readable text format for storing this kind of structured information. It can hold individual values, lists, and groups of related fields.
+
+In our Markdown records, YAML appears as front matter between the opening `---` lines, followed by the prose. A standalone `.yaml` file instead holds structured information on its own. We use both approaches: metadata stays with a requirement's text, while a presentation's teaching sequence lives in a separate YAML file.
+
+For example, this excerpt from our [introduction deck definition](../presentations/document-as-code-intro.yaml) describes its opening slide:
+
+```yaml
+slides:
+  - id: introduction
+    type: title
+    title: Document-as-Code
+    subtitle: Maintain the knowledge. Shape the view.
+    sources: [docs/01-introduction.md]
+```
+
+`title:` pairs a field name with its value. The dash starts an item in the `slides` list, and the indentation groups that slide's fields together. The brackets in `sources` hold a list with one chapter reference. Use spaces, not tabs, for indentation; changing it can change the structure.
+
+The full definition selects messages from several chapters without copying their complete text. Astro reads it and chooses reusable slide components; Reveal.js supplies the presentation controls. The fields describe the content, not its colors or layout. [Chapter 10](10-publishing.md#our-html-presentations-use-astro-and-revealjs) explains the publishing arrangement, and the [authoring notes](../presentations/README.md) describe the supported fields. Source references make the connection visible; they do not automatically rewrite messages when a chapter changes.
+
+YAML defines how information is written. A schema defines what our tools accept, such as required fields and supported slide types. A file can be valid YAML but still fail those checks, or pass them while containing an incorrect message. Next, we return to requirements: a template helps an author create a record, and a schema checks its structure.
+
 ## Start with a Template
 
 A template gives an author a familiar starting point. It provides the fields to fill in and the sections to write, much like a Word template for a report or a PowerPoint template for a presentation.
