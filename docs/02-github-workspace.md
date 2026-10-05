@@ -1,7 +1,7 @@
 ---
 id: github-workspace
 chapter_number: 2
-status: draft
+status: approved
 audience: practitioners-new-to-repository-platforms
 learning_goal: Locate maintained sources, inspect a recorded change, and connect it to an automated result.
 visuals:
@@ -153,7 +153,9 @@ This autonomy requires organizational support: permission to make changes, agree
 
 GitHub Actions runs repeatable tasks when a specified event occurs, such as a proposed change or an update to `main`. A workflow defines the tasks, and a runner is the machine that executes them. GitHub can provide the runner; the workflow instructions live alongside our content in `.github/workflows/`.
 
-This project checks the Astro website build on pull requests. After changes reach `main`, separate workflows generate growth reports and publish the website, including fresh data for chapter 3's interactive chart. The onboarding handbook and training excerpt still require someone to run their script; their updates have not been automated.
+Our tutorial provides a practical example. We maintain its chapters as Markdown files and use Astro to turn them into the reading website introduced earlier. When those files change, we want to check that the website still builds and then publish the updated version.
+
+A pull request triggers that build check. After changes reach `main`, separate workflows generate growth reports and publish the website, including fresh data for chapter 3's interactive chart. The onboarding handbook and training excerpt still require someone to run their script; their updates have not been automated.
 
 Each workflow automates the steps configured for it. A successful run confirms those steps completed; content approval remains a review decision. [Chapter 3](03-project-growth.md) explains the growth report, and [chapter 12](12-automation.md) develops the automation approach. [GitHub's workflow guide](https://docs.github.com/en/actions/concepts/workflows-and-actions/workflows) provides technical detail.
 
@@ -161,7 +163,7 @@ Each workflow automates the steps configured for it. A successful run confirms t
 
 Agentic AI tools can inspect files, edit sources, run checks, and refine their work using the results. [Codex](https://learn.chatgpt.com/docs/codex/cli) and [Claude Code](https://code.claude.com/docs/en/overview) are examples; their available actions depend on the environment and permissions.
 
-A repository gives an agent access to more than the passage being edited. It can inspect related chapters, shared terminology, examples, metadata, and the scripts that process them. This helps it understand how a change fits into the wider project and identify other files that need updating.
+A repository gives an agent access to more than the passage being edited. It can inspect related chapters, shared terminology, examples, metadata, and the scripts that process them. The repository can also contain instructions for the agent, helping it behave consistently and follow agreed processes, such as checking related files and running tests before proposing a change. This context helps it understand how a change fits into the wider project and identify other files that need updating.
 
 For example, changing a procedure may also affect a training excerpt, a diagram, and a validation rule. An agent working with the repository can help update and check those connections. Compared with writing assistance focused on the current document, this supports a broader task: maintaining the information and the processes around it.
 
@@ -200,6 +202,6 @@ If the change is later accepted into `main`, inspect its growth run. Actions mus
 
 ### Other Environments
 
-The practices also apply to platforms such as [GitLab](https://docs.gitlab.com/ci/pipelines/) and [Bitbucket](https://support.atlassian.com/bitbucket-cloud/docs/get-started-with-bitbucket-pipelines/), although their workflow configurations differ. [Beyond GitHub](11-beyond-github.md) explores lighter approaches using familiar document applications.
+The practices described above also apply to platforms such as [GitLab](https://docs.gitlab.com/ci/pipelines/) and [Bitbucket](https://support.atlassian.com/bitbucket-cloud/docs/get-started-with-bitbucket-pipelines/), although their workflow configurations differ. [Beyond GitHub](11-beyond-github.md) explores lighter approaches using familiar document applications.
 
 The important connection is between the source revision, the review, and the processing result. Next, [Project Growth: History as Data](03-project-growth.md) explains how we calculate and interpret that result.
