@@ -6,9 +6,9 @@ The project teaches document-as-code by applying it to itself. It also serves as
 
 ## Status
 
-Chapter 1 has its first approved edition; the other 11 chapters remain drafts. The [Astro reading site is published on GitHub Pages](https://and-gu.github.io/document-as-code-lab/) and reads the original Markdown sources, including diagrams and linked examples. Every chapter has an expandable metadata and Git-history widget. Pull requests run Astro checks and a production build; pushes to `main` build and deploy the website.
+Chapters 1 and 2 have their first approved editions; the other 10 chapters remain drafts. The [Astro reading site is published on GitHub Pages](https://and-gu.github.io/document-as-code-lab/) and reads the original Markdown sources, including diagrams and linked examples. Every chapter has an expandable metadata and Git-history widget. Pull requests run Astro checks and a production build; pushes to `main` build and deploy the website.
 
-A runnable onboarding showcase, historical growth reporting, structured-record processing, and record-to-Mermaid generation are also available. Growth reports are generated as GitHub Actions artifacts. Chapter 3's saved charts remain fixed historical examples, while its Astro view adds an interactive report measured from committed history during each site build. PDF book and presentation pipelines, the combined work-tracking dashboard, and verification of Microsoft-environment exercises remain future work. Approval of chapter 1 does not extend to the remaining chapter drafts or the fictional example procedures.
+A runnable onboarding showcase, historical growth reporting, structured-record processing, and record-to-Mermaid generation are also available. Growth reports are generated as GitHub Actions artifacts. Chapter 3's saved charts remain fixed historical examples, while its Astro view adds an interactive report measured from committed history during each site build. PDF book and presentation pipelines, the combined work-tracking dashboard, and verification of Microsoft-environment exercises remain future work. Approval of chapters 1 and 2 does not extend to the remaining chapter drafts or the fictional example procedures.
 
 ## Read Locally
 
