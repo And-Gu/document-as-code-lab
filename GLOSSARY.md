@@ -41,4 +41,4 @@ These definitions describe how terms are used in this tutorial.
 | Agent harness | The surrounding system that supplies context, runs tools, and checks or records an agent's work |
 | Agentic AI tool | An AI tool that can take a sequence of actions, inspect results, and adjust its work using available tools |
 
-A template guides authoring; a schema checks structure. A commit records a revision; a push shares it with a remote. A generated output can be reviewed before it becomes a published output.
+A template guides authoring; a validator checks structure against a schema. A commit records a revision; a push shares it with a remote. A generated output can be reviewed before it becomes a published output.

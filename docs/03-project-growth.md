@@ -158,17 +158,17 @@ This report deliberately stops at the completed-draft commit. The explanation yo
 
 Commit `62eacec` adds a local Astro reading site. It reads the original chapter files rather than maintaining another copy of the text. Readers can browse all twelve chapters, follow links to supporting examples, and see images and Mermaid diagrams. The site builds successfully, passes its TypeScript checks, and has been checked for broken local links.
 
-This is a working capability, not just more tutorial content. You can try it by following the [site instructions](../site/README.md). Editing a chapter updates the local reading site from the same source. [Chapter 10](10-publishing.md#our-website-uses-astro) explains Astro's role in publishing.
+This is a working capability, not just more tutorial content. You can try it by following the [site instructions](../site/README.md). Editing a chapter updates the local reading site from the same source. [Chapter 11](11-publishing.md#our-website-uses-astro) explains Astro's role in publishing.
 
 Commit `815d650` adds the GitHub Pages deployment. The [tutorial website](https://and-gu.github.io/document-as-code-lab/) is now public, and its build and deployment have succeeded. We checked navigation, an image, and a Mermaid diagram on the hosted site. This completes the original website milestone: it builds from the maintained sources and is available to readers.
 
 Commit `d1b4f17` adds an expandable **Chapter information** panel to all twelve chapter pages. It shows the chapter's status, audience, learning goal, stable ID, and recent commit messages. CSS colors the panel according to the source's `status` field. Git history is collected during the build, so the displayed changes refer to the source revision used for publication rather than a live GitHub feed.
 
-This small widget demonstrates another use of the information we already maintain. Readers can inspect the state and history of the chapter without opening its source file. Its status label is not an approval decision, and its commit list is not a measure of writing effort. The widget is a chapter-level view, not the complete work-tracking dashboard planned in chapter 9.
+This small widget demonstrates another use of the information we already maintain. Readers can inspect the state and history of the chapter without opening its source file. Its status label is not an approval decision, and its commit list is not a measure of writing effort. The widget is a chapter-level view, not the complete work-tracking dashboard planned in chapter 10.
 
 Later changes add two different kinds of progress. Chapters 1 and 2 now have their first approved editions. The website view of this chapter also adds the interactive growth chart described earlier. Chapter approval changes a review state; the chart adds a way to explore measured history. Neither creates another chapter file.
 
-Merge commit `f11393b` adds a published [HTML introduction deck](https://and-gu.github.io/document-as-code-lab/presentations/document-as-code/). Its eight slides select messages from chapters 1, 2, 8, and 10. YAML defines the teaching sequence, Astro renders reusable slide components, and Reveal.js provides presentation controls. The deck uses the same website build and GitHub Pages deployment. [Chapter 10](10-publishing.md#our-html-presentations-use-astro-and-revealjs) explains the arrangement and links to its authoring instructions.
+Merge commit `f11393b` adds a published [HTML introduction deck](https://and-gu.github.io/document-as-code-lab/presentations/document-as-code/). Its eight slides select messages from the introduction, GitHub workspace, review, and publishing chapters (now chapters 1, 2, 9, and 11). YAML defines the teaching sequence, Astro renders reusable slide components, and Reveal.js provides presentation controls. The deck uses the same website build and GitHub Pages deployment. [Chapter 11](11-publishing.md#our-html-presentations-use-astro-and-revealjs) explains the arrangement and links to its authoring instructions.
 
 This is useful progress even though the presentation milestone is not complete. Its criterion requires both an introduction and a workshop deck to be generated and visually verified. The introduction has been checked locally and on GitHub Pages; the workshop remains to be developed. The register therefore marks presentations as `in-progress`, rather than treating one working deck as completion of the whole milestone.
 
@@ -284,7 +284,7 @@ Suggest one source change to inspect before drawing a conclusion.
 Do not edit files or change completion statuses.
 ```
 
-Check its figures against the JSON report. A plausible explanation is not evidence of why something changed. If you ask an agent to modify the counting rules, review the code and tests, update the measurement version, and regenerate comparable history. [Chapter 6](06-ai-native.md) develops this approach to context and verification.
+Check its figures against the JSON report. A plausible explanation is not evidence of why something changed. If you ask an agent to modify the counting rules, review the code and tests, update the measurement version, and regenerate comparable history. [Chapter 7](07-ai-native.md) develops this approach to context and verification.
 
 ## Try It: Compare Two Revisions
 

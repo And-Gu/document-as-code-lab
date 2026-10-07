@@ -2,129 +2,23 @@
 id: 03a-structured-content
 chapter_number: 5
 status: draft
-audience: practitioners-learning-to-process-content
-learning_goal: Validate structured records and generate useful views from shared inputs.
-visuals:
-  - id: records-to-views
-    status: source-ready
-    kind: diagram
-    purpose: Explain how validation and selection connect records to different views.
-    placement: after-from-prose-to-records
-    preferred_source: mermaid
-    source: ../assets/diagrams/records-to-views.mmd
-    embedded: true
-    outputs: [web, pdf, slides]
-    caption: Validate the records before selecting information for each view.
-    alt: Prose and metadata records pass through schema and relationship checks. Validated records supply a requirements document, a work dashboard, and selected AI context.
-  - id: onboarding-record-relationships
-    status: source-ready
-    kind: diagram
-    purpose: Distinguish validated record links from the procedure's conceptual connection.
-    placement: after-give-relationships-a-direction
-    preferred_source: mermaid
-    source: ../assets/diagrams/onboarding-record-relationships.mmd
-    embedded: true
-    outputs: [web, pdf, slides]
-    caption: Record links express intended implementation and verification, not completed work.
-    alt: TASK-003 implements REQ-014, which is verified by TEST-008. A dashed connection from PROC-001 to REQ-014 is conceptual and not checked by the processor.
+audience: practitioners-organizing-information-with-templates-and-metadata
+learning_goal: Create a readable record from a template and explain its metadata and rules.
 ---
 
-# Structured Content: Metadata, Rules, and Views
+# Templates and Metadata
 
-A procedure explains what someone should do. A team also needs to know which requirements have been agreed, who owns the implementation, and what still needs verification. Structured content makes that information explicit, so tools can select it, connect it, and present it for different purposes.
+Chapter 4 introduced Markdown and the metadata placed at the start of a file. Here, we use that structure to organize information a team needs to maintain: what has been requested, who is responsible, and whether the request has been agreed.
 
-We will follow the onboarding example from chapter 4, using a template to organize a requirement and processing its text and metadata into useful views. You can inspect the examples without installing anything. The exercise uses the Python environment from chapter 3 to validate records and generate a requirements document, a work dashboard, and an AI context package.
+We continue with the fictional onboarding service. Its access instructions tell a new colleague to keep a reference number. Behind that instruction is a requirement: the service must provide one.
+
+By the end of this chapter, you will be able to create a requirement file from a template, explain its fields, and review it for clarity and completeness. You need an editor or an AI agent that can edit files; no processing program is needed for this exercise.
 
 ## From Prose to Records
 
-An onboarding guide might explain that every access request needs a reference number. A requirements record makes that expectation identifiable, gives it a status and owner, and connects it to an intended test.
+A record is an information item with an identity and a consistent structure. In this example, each record is a separate Markdown file. Its prose explains the requirement; its metadata holds details such as its ID, owner, and status.
 
-A record combines prose with metadata. The prose explains the meaning; the fields let tools select, connect, and present it. Planning items and customer tickets can use the same approach, with fields suited to their own workflows.
-
-We can keep readable text in Markdown and metadata in its front matter. For larger datasets, separate JSON or YAML files may be more convenient. The important choice is where information is maintained and how the tools interpret it.
-
-```mermaid
-flowchart LR
-    records["Records: prose and metadata"]
-    rules["Field and relationship checks"]
-    valid["Validated records"]
-    doc["Requirements document"]
-    dashboard["Work dashboard"]
-    context["Selected AI context"]
-    records --> rules --> valid
-    valid --> doc
-    valid --> dashboard
-    valid --> context
-```
-
-*Validate the records before selecting information for each view.*
-
-Validation checks the structure. People still need to review whether the content and resulting views are useful and correct.
-
-## One Dataset, Several Questions
-
-Our [example dataset](../examples/structured-content/records/REQ-014.md) describes a fictional onboarding service:
-
-| ID | Type | Status | Meaning |
-| --- | --- | --- | --- |
-| REQ-014 | Requirement | approved | Request confirmations must include a reference number |
-| REQ-015 | Requirement | proposed | Requesters should be able to look up progress |
-| TASK-003 | Task | in-progress | Implement reference numbers |
-| TEST-008 | Test | planned | Check the confirmation |
-
-These records let us ask which requirements are approved, who owns the work, and what verification is intended. An approved requirement states an agreed expectation; it does not establish that the service already meets it.
-
-## Connect the Procedure to the Work
-
-The [procedure from chapter 4](../examples/onboarding/requesting-access.md) tells a requester to keep a reference number. The records here describe the expectation and work behind that instruction:
-
-We continue with chapter 4's draft exercise copy of `PROC-001`, not the approved demonstration in chapter 1's fixed showcase. The matching ID connects the teaching scenario; it does not transfer approval between the separate examples.
-
-| Item | Perspective | Connection |
-| --- | --- | --- |
-| PROC-001 | Reader-facing instruction | Explains what the requester should do |
-| REQ-014 | Service requirement | Requires the confirmation to supply a reference number |
-| TASK-003 | Implementation work | Records work intended to implement REQ-014 |
-| TEST-008 | Verification plan | Describes how REQ-014 is intended to be checked |
-
-These are related views of the same fictional scenario. The procedure is a draft illustration, while the records do not yet establish that the service is implemented and tested. Before publishing an operational instruction, reconcile it with evidence of the service's actual behavior.
-
-The procedure uses its own small metadata convention and is not processed by this chapter's requirement/task/test schema. Its connection to REQ-014 is explained here rather than stored as a machine-validated link. We could introduce such a relationship when a real query requires it.
-
-See the [shared vocabulary](../GLOSSARY.md) for the distinction between a record, a template, and a schema.
-
-Keep three kinds of information distinct:
-
-| Kind | Example | How it is maintained |
-| --- | --- | --- |
-| Authored content | Requirement and rationale | Written and reviewed |
-| Authored metadata | ID, owner, status, relationships | Maintained according to agreed rules |
-| Derived data | Counts by status or owner | Calculated from the records |
-
-A current status cannot tell us when an item entered that status. Measures such as time in progress need historical events or revisions. A completion percentage also needs an explicit denominator: completed tasks divided by all tasks is different from approved requirements divided by all requirements.
-
-## YAML for Structured Information
-
-We have already seen fields such as `id`, `owner`, and `status`. [YAML](https://yaml.org/spec/1.2.2/#chapter-2-language-overview) is a readable text format for storing this kind of structured information. It can hold individual values, lists, and groups of related fields.
-
-In our Markdown records, YAML appears as front matter between the opening `---` lines, followed by the prose. A standalone `.yaml` file instead holds structured information on its own. We use both approaches: metadata stays with a requirement's text, while a presentation's teaching sequence lives in a separate YAML file.
-
-For example, this excerpt from our [introduction deck definition](../presentations/document-as-code-intro.yaml) describes its opening slide:
-
-```yaml
-slides:
-  - id: introduction
-    type: title
-    title: Document-as-Code
-    subtitle: Maintain the knowledge. Shape the view.
-    sources: [docs/01-introduction.md]
-```
-
-`title:` pairs a field name with its value. The dash starts an item in the `slides` list, and the indentation groups that slide's fields together. The brackets in `sources` hold a list with one chapter reference. Use spaces, not tabs, for indentation; changing it can change the structure.
-
-The full definition selects messages from several chapters without copying their complete text. Astro reads it and chooses reusable slide components; Reveal.js supplies the presentation controls. The fields describe the content, not its colors or layout. [Chapter 10](10-publishing.md#our-html-presentations-use-astro-and-revealjs) explains the publishing arrangement, and the [authoring notes](../presentations/README.md) describe the supported fields. Source references make the connection visible; they do not automatically rewrite messages when a chapter changes.
-
-YAML defines how information is written. A schema defines what our tools accept, such as required fields and supported slide types. A file can be valid YAML but still fail those checks, or pass them while containing an incorrect message. Next, we return to requirements: a template helps an author create a record, and a schema checks its structure.
+The file remains readable as a document. Its fields also make it possible for tools to find approved requirements or group work by owner. Planning items and customer tickets can use the same approach, with fields chosen for their needs.
 
 ## Start with a Template
 
@@ -149,7 +43,7 @@ Describe one observable requirement.
 Explain why the requirement matters.
 ```
 
-Copy it into the `records/` directory, replace the placeholders, and write the content. Keep the new requirement proposed until it has been reviewed. Add test references only when the corresponding records exist.
+To use the template, copy it into `examples/structured-content/records/`, replace the placeholders, and write the requirement and its rationale: the reason it matters. Keep its status as `proposed` until it has been reviewed. The empty list `verified_by: []` leaves room for links to test records when those exist.
 
 Here is the complete existing [REQ-014 record](../examples/structured-content/records/REQ-014.md). It illustrates a filled-in template after a fictional review decision; a newly authored record should still start as `proposed`.
 
@@ -170,11 +64,11 @@ The access service must confirm a submitted request with a reference number.
 The requester needs a reference when asking about progress.
 ```
 
-The statement expresses the expectation and the rationale explains why it matters. The title and ID identify it in a document, the status controls selection, the owner supports work summaries, and the test reference connects it to intended verification. The ID remains stable if the title changes. Its `approved` status is example data, not an approval action performed by the processor.
+The statement says what the service must do, and the rationale explains why. The ID gives the record a stable identity even if its title changes. Tools can use the status to select approved requirements, the owner to group work by team, and `verified_by` to find the intended test.
 
 Templates can also guide AI-assisted authoring. Provide the template, the relevant source information, and instructions about assumptions. Ask the tool to create a proposed record and flag missing information rather than invent it. Review the result before accepting it.
 
-We keep templates in a separate directory so the processor does not count unfinished starting files as records. The placeholders are writing prompts; our current validator does not detect every unfilled placeholder or judge the quality of the prose.
+We keep templates in a separate directory so tools can distinguish starting files from maintained records. Replace every placeholder when creating a new file; later checks cannot judge whether the wording is complete or useful.
 
 There are two useful kinds of template:
 
@@ -183,191 +77,64 @@ There are two useful kinds of template:
 | Authoring template | Help a person or AI tool create consistent records | Requirement metadata, statement, and rationale |
 | Output template | Arrange selected records for an audience | A requirements document or AI context package |
 
-The authoring template provides a starting structure. An output template controls how information is presented after selection. In our small processor, output layouts are defined in Python; separate template files can be introduced when those layouts become more complex.
+This chapter uses an authoring template. The next chapter shows how a program selects records and arranges their content into outputs.
 
-## Check the Record with a Schema
+## YAML for Structured Information
 
-A template helps you create a record. A schema defines the rules that let a tool check its structure. It specifies required fields, their types, and allowed values.
+We have already seen fields such as `id`, `owner`, and `status`. [YAML](https://yaml.org/spec/1.2.2/#chapter-2-language-overview) is a readable text format for storing this kind of structured information. It can hold individual values, lists, and groups of related fields.
 
-Our [schema file](../examples/structured-content/schema.yaml) requires a nonempty string for the ID, type, status, owner, and title. You can write a valid record without copying the template, and you can fill in a template incorrectly. The processor checks the resulting record against the rules.
+In our Markdown records, YAML appears as front matter between the opening `---` lines, followed by the prose. A standalone `.yaml` file instead holds structured information on its own. We use both approaches: metadata stays with a requirement's text, while a presentation's teaching sequence lives in a separate YAML file.
 
-Each record type has its own statuses. Requirements can be proposed, approved, or retired. Tasks can be planned, in progress, or complete. Tests can be planned or complete; this example does not model test outcomes.
+For example, this excerpt from our [introduction deck definition](../presentations/document-as-code-intro.yaml) describes its opening slide:
 
-The processor rejects unknown fields rather than silently ignoring a misspelled status or owner. It also rejects duplicate IDs and empty record bodies.
-
-The distinction matters when checking a result:
-
-| Example | Processor result | What still needs review |
-| --- | --- | --- |
-| `verified_by: [TEST-999]` with no such test | Rejected: missing reference | Which real test should be linked |
-| A requirement marked `complete` | Rejected: unsupported requirement status | Whether its intended state is proposed, approved, or retired |
-| A valid record containing an incorrect requirement | May pass | Whether its meaning agrees with the source and stakeholders |
-| An unfilled template with nonempty placeholder strings | May pass | Whether all placeholders have been replaced |
-
-Passing validation means the implemented structural checks succeeded. It does not certify the facts, the review decision, or readiness for publication.
-
-Start with fields that support a real question. Additional fields create additional maintenance work. When the schema changes, record its version and decide how older records should be handled.
-
-## Give Relationships a Direction
-
-Our example uses two relationships:
-
-| Field | Source | Target | Meaning |
-| --- | --- | --- | --- |
-| verified_by | Requirement | Test | This test is intended to check the requirement |
-| implements | Task | Requirement | This task is intended to implement the requirement |
-
-The processor checks that each referenced ID exists and has the expected type. A requirement cannot use `verified_by` to point to a task.
-
-This Mermaid diagram makes the relationships visible. [Chapter 4](04-markdown.md) introduces its text-based notation.
-
-```mermaid
-flowchart LR
-    procedure["PROC-001: draft procedure"]
-    task["TASK-003: implementation work"]
-    requirement["REQ-014: reference-number requirement"]
-    test["TEST-008: planned test"]
-    task -->|implements: intended work| requirement
-    requirement -->|verified_by: intended check| test
-    procedure -. conceptual connection only .-> requirement
+```yaml
+slides:
+  - id: introduction
+    type: title
+    title: Document-as-Code
+    subtitle: Maintain the knowledge. Shape the view.
+    sources: [docs/01-introduction.md]
 ```
 
-*Record links express intended implementation and verification, not completed work.*
+`title:` pairs a field name with its value. The dash starts an item in the `slides` list, and the indentation groups that slide's fields together. The brackets in `sources` hold a list with one chapter reference. Use spaces, not tabs, for indentation; changing it can change the structure.
 
-The labelled solid arrows correspond to fields the processor checks. The dashed arrow explains the shared scenario; it is not stored or validated as a record relationship. These meanings are choices we made for this diagram, not rules imposed by Mermaid. Neither arrow style is evidence that the service works.
+The deck's messages are written for the presentation and linked to their source chapters. Astro reads the YAML to build the slides, but does not rewrite those messages when a chapter changes. [Chapter 11](11-publishing.md#our-html-presentations-use-astro-and-revealjs) explains the publishing process, and the [authoring notes](../presentations/README.md) describe the supported fields.
 
-The diagram is authored, not generated from the records: text-based does not automatically mean data-driven. If a relationship changes, checking this explanation belongs to the same task. Generated views need regeneration; authored views need an appropriate edit or an explicit decision to retain a labelled teaching snapshot.
+YAML supplies the notation for writing these values and lists. The next section introduces rules for which fields and values our tools accept.
 
-AI agents should help coordinate those updates, not leave the task at the first changed file. [Chapter 6](06-ai-native.md) explains the supporting instructions, skills, and harnesses; [chapter 7](07-images.md) develops diagram generation and rendering. Here, focus on the record fields and what their links mean. A valid link still does not prove implementation or a successful test.
+## Agree on Rules with a Schema
 
-Preserve IDs when records change. If an item is retired, retaining it with an explicit status can preserve the explanation behind older references. Deleting it requires a decision about its links and history.
+A template gives authors a starting point. A schema describes the rules a checking tool should apply, such as required fields and allowed statuses. The team chooses these rules to support its work.
 
-## Build Three Views
+Our [schema file](../examples/structured-content/schema.yaml) requires an ID, type, status, owner, and title. Requirements can have the status `proposed`, `approved`, or `retired`. Tasks and tests have different allowed statuses.
 
-The [record processor](../scripts/process_records.py) reads the files, validates metadata and relationships, then creates:
+These rules help keep records consistent. A requirement marked `complete`, for example, would not match our convention for requirements. However, a correctly structured file can still contain an unclear or incorrect statement. Review both the fields and the meaning.
 
-| Output | Selection | Purpose |
-| --- | --- | --- |
-| requirements.md | All requirements, with their statuses | Read expectations and distinguish proposals |
-| dashboard.md | All records, grouped by type, status, and owner | Inspect the distribution of work |
-| ai-context.md | Approved requirements only | Supply a bounded source for a training draft |
+A schema does not run itself. This project's schema uses a small format understood by a Python program included in the repository. [Chapter 6](06-processing.md) explains which files that program checks, how to run it, and what happens when a check fails.
 
-The dashboard is a Markdown summary, not an interactive application. GitHub can render it as tables. Later chapters will develop richer visual views.
+## Choose Fields That Help the Work
 
-### Inspect the Results Before Running
+Start with a question you need to answer. To find who should review a requirement, record its owner and status. To connect it to a planned test, record the test's ID. Avoid adding fields that nobody uses or maintains.
 
-These excerpts show the supplied four-record dataset. They omit the generated provenance headers and some content for readability; they are not live reports and will change when you edit the records.
+Keep IDs stable when titles or wording change. An approved requirement records an agreed expectation; it does not establish that the service has been implemented or tested. Those are separate pieces of information, which we connect in the next chapter.
 
-The requirements view answers **what has been requested or agreed?** Its REQ-014 entry includes this text:
+The owner and status describe the maintained record. A count of approved requirements is calculated from records. Update the sources first, then regenerate such summaries rather than maintaining the same totals by hand.
 
-```markdown
-## REQ-014: Access Confirmation
+## Try It: Create a Requirement Record
 
-Status: approved. Owner: onboarding-team.
+Work in your own exercise copy of the repository. Use a text editor or ask an AI agent to help.
 
-The access service must confirm a submitted request with a reference number.
-```
+1. Open [the requirement template](../examples/structured-content/templates/requirement.md). Copy it to `examples/structured-content/records/REQ-016.md`. If that ID already exists, inspect it or choose another unused ID.
+2. Express this fictional requirement in your own words: the requester must be able to identify which system an access request concerns.
+3. Replace every placeholder. Use `type: requirement`, `owner: onboarding-team`, and `status: proposed`. Leave `verified_by: []` empty because this exercise supplies no test.
+4. Write a short rationale explaining why the requester needs this information. Distinguish your reasoning from facts supplied by the example.
+5. Review the source and formatted preview. Is the requirement clear? Are the fields complete and consistent with the template? If you used an agent, check that it has not invented a process or promise.
+6. Inspect the diff and commit only the intended record with a message explaining its purpose. Keep its status as proposed.
 
-The full entry also includes the rationale and intended verification. REQ-015 appears separately with its proposed status, so inclusion in this document does not imply approval.
+**Expected result:** a readable requirement record with an ID, owner, proposed status, and rationale. This is an authored proposal; automated validation comes next.
 
-The dashboard answers **how is the recorded work distributed?** Its type-and-status table is:
+**If the structure is unclear:** compare the file with REQ-014 above. Check the two front-matter delimiters, field names, and indentation. An empty test list is appropriate when no test has been defined.
 
-| Type | Status | Count |
-| --- | --- | --- |
-| requirement | approved | 1 |
-| requirement | proposed | 1 |
-| task | in-progress | 1 |
-| test | planned | 1 |
+**Keep:** the record and its explanatory commit. Choose one field that would help organize an information item from your own work.
 
-This suggests checking implementation and verification before treating the approved requirement as operational behavior. It does not tell us how long the task has been in progress.
-
-The AI package answers **what selected information should guide this task?** It begins its task context with:
-
-```text
-Audience: onboarding trainer.
-
-Task: draft a brief explanation of the approved requirements for new colleagues.
-```
-
-It then states its selection and limitations and includes REQ-014's requirement and rationale. REQ-015 is excluded because it is proposed. A context package is therefore an intentional selection, not just the entire document pasted into a prompt.
-
-The package excludes the bodies of related tasks and tests. The processor prepares a file; it does not contact an AI service. Chapter 6 explores how to use and review that context.
-
-Every output records the base Git commit and a digest of the input files. The manifest also lists hashes for the schema, records, and processor. The commit identifies the working tree's base; the digest distinguishes the exact local inputs. Reproducing a result still requires preserving those inputs.
-
-### Optional Authoring Method: Use an AI Agent
-
-A template gives an agent a starting structure, the schema supplies checkable rules, and the source provides meaning. None replaces the others. Try this bounded authoring request in your exercise copy:
-
-```text
-Read examples/structured-content/templates/requirement.md and schema.yaml
-in the same structured-content directory. Inspect the existing records.
-Using only this fictional expectation, draft a new requirement:
-"The requester must be able to identify which system an access request concerns."
-Use the unused ID REQ-016; stop if it already exists.
-Set owner to onboarding-team and status to proposed.
-Keep verified_by empty; do not invent a test, service promise, or approval.
-Save it as examples/structured-content/records/REQ-016.md.
-Flag assumptions in your response and show the source diff.
-Run the record processor if the environment is ready; otherwise say so.
-Do not commit, push, or send records to another service.
-```
-
-Review whether the requirement expresses the supplied expectation, then inspect validation and generated views. A structurally valid invented promise remains wrong. Any rationale drafted by the agent also needs review.
-
-The example processor selects AI context by type and approval status only. `approved` does not establish permission to share a record with an AI service. Check confidentiality, intended audience, and organizational policy before using a package externally; this processor does not enforce those access boundaries.
-
-## Try It: Change a Record, Inspect the Views
-
-Activate the Python environment from [chapter 3](03-project-growth.md), which links to Git and Python preparation guides. The activation command below uses a macOS/Linux shell; Windows readers can use the platform-specific activation in the linked Python guide. From the repository root, run:
-
-```bash
-source .venv/bin/activate
-python scripts/process_records.py
-```
-
-The processor writes its three Markdown views and `manifest.json` to `build/records/`. These generated files are excluded from Git.
-
-### 1. Inspect the Starting Views
-
-Before opening them, predict where REQ-015 should appear from its type and status. Confirm that it is in the requirements document and dashboard but absent from the AI package. If you already changed the exercise records, use their actual starting values rather than expecting the fixed table above.
-
-### 2. Change a Status and Predict the Result
-
-In your exercise copy, change REQ-015 from `proposed` to `approved`. This simulates a review decision, not real approval. Predict the effect, then rebuild: the total requirement count stays the same, one count moves from proposed to approved, and REQ-015 enters the AI package. Confirm that the input digest changes too.
-
-If REQ-015 was already approved in your copy, select another proposed requirement and record the ID. If none exists, use the optional authoring step below first.
-
-**Expected result:** one source-field change updates the requirements document, dashboard counts, and selected AI context.
-
-**If processing fails:** check spelling, allowed statuses, and referenced IDs. Old generated files can survive a failed run; inspect the new manifest after a successful rerun.
-
-**Keep:** the intended exercise change and its explanatory commit. Return to your information item from chapter 1 and name one metadata field that would support a useful selection or view.
-
-### Optional: Author a Proposed Record
-
-Copy the requirement template into a new file in `records/`, or use the bounded AI prompt above. Use a unique ID, replace every placeholder, and leave the record proposed. Predict which outputs will change, then run the processor.
-
-The requirement should appear in the requirements document and dashboard, but not the approved-only AI package. Confirm that the input digest changed too. If you already created REQ-016 with the prompt, inspect that record rather than creating it twice.
-
-### Optional: Test a Validation Failure
-
-Temporarily change REQ-014's test reference to a nonexistent ID, such as `TEST-999`. Predict whether processing will succeed. Run the processor, inspect the missing-reference error, then restore `TEST-008` and run it successfully.
-
-When validation fails, the processor stops before writing outputs. Files from an earlier successful run may remain in `build/records/`; treat them as old results, not a successful rendering of the invalid inputs.
-
-Review the final source diff and commit only the intended exercise changes. Record your predictions and what the outputs actually showed.
-
-Restore deliberate errors before committing. Tests use independent fixtures, so exercise edits do not invalidate their starting assumptions. Generated views remain under `build/records/`.
-
-## Connect Existing Applications
-
-A requirements tool, planning application, or ticket system may already own the original records. Decide which system maintains each field before introducing an export or connection.
-
-Preserve external IDs and record retrieval times and source versions when available. A downloaded snapshot can become stale; a write-back integration needs explicit rules for conflicts and review. Our example is local and has no external synchronization.
-
-Choose information suitable for the audience and destination. An internal ticket may contain details that do not belong in a public manual or an AI context package. Selection rules should account for those boundaries as well as status.
-
-[Dashboards and Work Tracking in GitHub](09-dashboards.md) develops work views. [Beyond GitHub](11-beyond-github.md) explores how lighter workflows can apply the same principles.
-
-Next, [AI-Native Documentation and Context](06-ai-native.md) examines how to select and use source material for language-model tasks.
+Next, [Processing Information into Views](06-processing.md) follows the record from editing through validation and into generated outputs, on your computer and in an automated workflow.

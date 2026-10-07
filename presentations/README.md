@@ -2,7 +2,7 @@
 
 The tutorial chapters in `docs/` remain the maintained knowledge. Presentation YAML selects messages and a teaching sequence; it does not contain chapter copies. Review the selected messages against their linked chapters when either changes. Source links provide traceability, not automatic synchronization or approval.
 
-`document-as-code-intro.yaml` uses chapters 1, 2, 8, and 10. It builds at `/document-as-code-lab/presentations/document-as-code/`. The presentation index is `/document-as-code-lab/presentations/`.
+`document-as-code-intro.yaml` uses chapters 1, 2, 9, and 11. It builds at `/document-as-code-lab/presentations/document-as-code/`. The presentation index is `/document-as-code-lab/presentations/`.
 
 ## Define a Deck
 

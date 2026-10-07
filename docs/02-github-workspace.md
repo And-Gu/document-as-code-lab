@@ -1,7 +1,7 @@
 ---
 id: github-workspace
 chapter_number: 2
-status: approved
+status: in-review
 audience: practitioners-new-to-repository-platforms
 learning_goal: Locate maintained sources, inspect a recorded change, and connect it to an automated result.
 visuals:
@@ -40,9 +40,11 @@ Our repository contains tutorial chapters, examples, metadata, diagrams, and ins
 
 Git records revisions. GitHub hosts repositories and provides browser tools for reading, editing, review, work tracking, and automation. A local working copy lets you use editors and AI tools on your own computer.
 
+You can edit files in GitHub's browser editor or in a local working copy. Saving a file, recording a commit, and running a processing program are separate actions. [Chapter 6](06-processing.md#where-does-the-work-happen) explains where each happens, including how GitHub Actions runners execute configured jobs.
+
 The useful connection is that the content and the instructions for processing it can be reviewed together. If a chart changes unexpectedly, you can inspect both its input data and the script that produced it.
 
-The website and the repository serve different purposes. GitHub is where we maintain the source material and collaborate on changes. Astro builds the reading website from those sources, and GitHub Pages hosts it. The website adds navigation and interactive views; the repository lets you inspect the files and the work behind them. [Chapter 10](10-publishing.md#our-website-uses-astro) explains the publishing process.
+The website and the repository serve different purposes. GitHub is where we maintain the source material and collaborate on changes. Astro builds the reading website from those sources, and GitHub Pages hosts it. The website adds navigation and interactive views; the repository lets you inspect the files and the work behind them. [Chapter 11](11-publishing.md#our-website-uses-astro) explains the publishing process.
 
 ## Find Your Way Around GitHub
 
@@ -100,7 +102,7 @@ These workflows publish the website and measure repository growth. The example's
 
 <!-- example:end proposed-change -->
 
-Recording a commit does not approve its contents. A pull request makes review possible, but required reviewers and checks depend on the team's rules and repository settings. Approval of a procedure also does not automatically approve an assembled handbook. [Chapter 8](08-git-review.md) follows this workflow in more detail, including how to review related changes and decide what an approval covers.
+Recording a commit does not approve its contents. A pull request makes review possible, but required reviewers and checks depend on the team's rules and repository settings. Approval of a procedure also does not automatically approve an assembled handbook. [Chapter 9](09-git-review.md) follows this workflow in more detail, including how to review related changes and decide what an approval covers.
 
 The diagram shows our intended review sequence. The build check is configured, but requiring it and a review before merging depends on branch rules. The growth workflow runs after a push to `main`, or when started manually.
 
@@ -127,7 +129,7 @@ A proposed edit should still be reviewed. Compare the source and preview, inspec
 | Runner | The machine that executes a workflow job |
 | Artifact | Files saved from a workflow run for later inspection |
 
-Later, [Git, Review, and Collaboration](08-git-review.md) develops the review process. For now, use these terms to follow an existing change.
+Later, [Git, Review, and Collaboration](09-git-review.md) develops the review process. For now, use these terms to follow an existing change.
 
 ## How It Compares with Familiar Tools
 
@@ -157,7 +159,7 @@ Our tutorial provides a practical example. We maintain its chapters as Markdown 
 
 A pull request triggers that build check. After changes reach `main`, separate workflows generate growth reports and publish the website, including fresh data for chapter 3's interactive chart. The onboarding handbook and training excerpt still require someone to run their script; their updates have not been automated.
 
-Each workflow automates the steps configured for it. A successful run confirms those steps completed; content approval remains a review decision. [Chapter 3](03-project-growth.md) explains the growth report, and [chapter 12](12-automation.md) develops the automation approach. [GitHub's workflow guide](https://docs.github.com/en/actions/concepts/workflows-and-actions/workflows) provides technical detail.
+Each workflow automates the steps configured for it. A successful run confirms those steps completed; content approval remains a review decision. [Chapter 3](03-project-growth.md) explains the growth report, and [chapter 13](13-automation.md) develops the automation approach. [GitHub's workflow guide](https://docs.github.com/en/actions/concepts/workflows-and-actions/workflows) provides technical detail.
 
 ## AI Can Help You Build the Process
 
@@ -169,7 +171,7 @@ For example, changing a procedure may also affect a training excerpt, a diagram,
 
 That context still needs to be organized. Clear structure and project instructions help the agent find relevant sources; access to the repository alone does not ensure that it reads or understands everything.
 
-Review the changed files, their diff, and the results of checks. [Chapter 4](04-markdown.md) provides a bounded editing prompt; [chapter 6](06-ai-native.md) explains context and coordinated maintenance.
+Review the changed files, their diff, and the results of checks. [Chapter 4](04-markdown.md) provides a bounded editing prompt; [chapter 7](07-ai-native.md) explains context and coordinated maintenance.
 
 The same approach can help develop a script or workflow from a stated need. You define the inputs, expected result, and acceptance criteria; the agent helps implement and test them. You normally create workflows and scripts, then choose a runner, rather than build the runner itself. Keep permissions limited to the task and follow organizational rules for sharing information.
 
@@ -196,12 +198,12 @@ Return to the reusable information item you identified in chapter 1. Note where 
 
 For account and Git preparation, use [GitHub's setup guide](https://docs.github.com/en/get-started/git-basics/set-up-git). For later local exercises, follow [its cloning guide](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository), which includes command-line and GitHub Desktop options. A downloaded ZIP does not provide the Git history needed by chapter 3.
 
-In an editable exercise repository, improve one sentence on your own branch, inspect the diff, and record an explanatory commit. You can propose it through a pull request and follow the review process developed in chapter 8. Merging is not required to complete this chapter.
+In an editable exercise repository, improve one sentence on your own branch, inspect the diff, and record an explanatory commit. You can propose it through a pull request and follow the review process developed in chapter 9. Merging is not required to complete this chapter.
 
 If the change is later accepted into `main`, inspect its growth run. Actions must be enabled and the workflow installed; a local commit or a push to another branch does not trigger this workflow. Keep the source revision and any run evidence together.
 
 ### Other Environments
 
-The practices described above also apply to platforms such as [GitLab](https://docs.gitlab.com/ci/pipelines/) and [Bitbucket](https://support.atlassian.com/bitbucket-cloud/docs/get-started-with-bitbucket-pipelines/), although their workflow configurations differ. [Beyond GitHub](11-beyond-github.md) explores lighter approaches using familiar document applications.
+The practices described above also apply to platforms such as [GitLab](https://docs.gitlab.com/ci/pipelines/) and [Bitbucket](https://support.atlassian.com/bitbucket-cloud/docs/get-started-with-bitbucket-pipelines/), although their workflow configurations differ. [Beyond GitHub](12-beyond-github.md) explores lighter approaches using familiar document applications.
 
 The important connection is between the source revision, the review, and the processing result. Next, [Project Growth: History as Data](03-project-growth.md) explains how we calculate and interpret that result.

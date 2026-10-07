@@ -6,11 +6,11 @@ The project teaches document-as-code by applying it to itself. It also serves as
 
 ## Status
 
-Chapters 1 and 2 have their first approved editions; the other 10 chapters remain drafts. The [Astro reading site is published on GitHub Pages](https://and-gu.github.io/document-as-code-lab/) and reads the original Markdown sources, including diagrams and linked examples. Every chapter has an expandable metadata and Git-history widget. Pull requests run Astro checks and a production build; pushes to `main` build and deploy the website.
+Chapters 1 and 2 have prior approved editions; their current revisions are in review. The remaining 11 chapters are drafts. The [Astro reading site is published on GitHub Pages](https://and-gu.github.io/document-as-code-lab/) and reads the original Markdown sources, including diagrams and linked examples. Every chapter has an expandable metadata and Git-history widget. Pull requests run Astro checks and a production build; pushes to `main` build and deploy the website.
 
 A runnable onboarding showcase, historical growth reporting, structured-record processing, and record-to-Mermaid generation are also available. Growth reports are generated as GitHub Actions artifacts. Chapter 3's saved charts remain fixed historical examples, while its Astro view adds an interactive report measured from committed history during each site build. The PDF book, additional presentation decks, the combined work-tracking dashboard, and verification of Microsoft-environment exercises remain future work. Approval of chapters 1 and 2 does not extend to the remaining chapter drafts or the fictional example procedures.
 
-Run the site locally to try the first HTML introduction deck at `/document-as-code-lab/presentations/`. Its [YAML definition and authoring notes](presentations/README.md) select messages from chapters 1, 2, 8, and 10. Astro renders reusable slide components; Reveal.js provides navigation and presentation controls within the existing website build.
+Run the site locally to try the first HTML introduction deck at `/document-as-code-lab/presentations/`. Its [YAML definition and authoring notes](presentations/README.md) select messages from chapters 1, 2, 9, and 11. Astro renders reusable slide components; Reveal.js provides navigation and presentation controls within the existing website build.
 
 ## Read Locally
 
@@ -50,14 +50,15 @@ Filename prefixes and `chapter_number` metadata give the current reading order. 
 2. [GitHub as a Workspace for Knowledge and Automation](docs/02-github-workspace.md)
 3. [Project Growth: History as Data](docs/03-project-growth.md)
 4. [Markdown and Content Structure](docs/04-markdown.md)
-5. [Structured Content: Metadata, Rules, and Views](docs/05-structured-content.md)
-6. [AI-Native Documentation and Context](docs/06-ai-native.md)
-7. [Images, Diagrams, and Visual Sources](docs/07-images.md)
-8. [Git, Review, and Collaboration](docs/08-git-review.md)
-9. [Dashboards and Work Tracking in GitHub](docs/09-dashboards.md)
-10. [Publishing to Websites, Books, and Presentations](docs/10-publishing.md)
-11. [Beyond GitHub: OneDrive, Copilot, and Other Applications](docs/11-beyond-github.md)
-12. [Automation, Quality, and Further Experiments](docs/12-automation.md)
+5. [Templates and Metadata](docs/05-structured-content.md)
+6. [Processing Information into Views](docs/06-processing.md)
+7. [AI-Native Documentation and Context](docs/07-ai-native.md)
+8. [Images, Diagrams, and Visual Sources](docs/08-images.md)
+9. [Git, Review, and Collaboration](docs/09-git-review.md)
+10. [Dashboards and Work Tracking in GitHub](docs/10-dashboards.md)
+11. [Publishing to Websites, Books, and Presentations](docs/11-publishing.md)
+12. [Beyond GitHub: OneDrive, Copilot, and Other Applications](docs/12-beyond-github.md)
+13. [Automation, Quality, and Further Experiments](docs/13-automation.md)
 
 ## Outputs
 
@@ -78,7 +79,7 @@ Chapter 3 introduces an automated report updated on changes to the main branch:
 - Chapter count and word count, including per-chapter comparisons.
 - Historical values reconstructed from Git revisions.
 - Capability milestones from the versioned [feature register](data/features.json).
-- Work progress from GitHub issues and Projects (chapter 9 introduces work tracking; integration into this report remains planned).
+- Work progress from GitHub issues and Projects (chapter 10 introduces work tracking; integration into this report remains planned).
 
 Word counts measure content volume, not quality. The measurement rules distinguish substantive chapters from outlines and exclude generated files. Committed snapshots identify their source revision; optional working-copy measurements are labelled separately.
 
