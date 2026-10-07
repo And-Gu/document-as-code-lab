@@ -1,12 +1,14 @@
 ---
 id: 10-automation
-chapter_number: 12
+chapter_number: 13
 status: draft
 audience: practitioners-maintaining-repeatable-document-workflows
 learning_goal: Run and inspect repeatable checks, detect stale outputs, and distinguish automated evidence from publication decisions.
 ---
 
 # Automation, Quality, and Further Experiments
+
+Chapter 6 introduced where processing runs and what a GitHub Actions runner does. Here, we build on that foundation to choose checks, retain results, and maintain the workflow.
 
 
 Throughout this tutorial, we have changed a maintained source and followed its effects into other views. Doing that once demonstrates reuse. Doing it reliably after every relevant change requires a repeatable process.
@@ -29,7 +31,7 @@ For a publishing workflow, a sensible sequence is to validate the sources, gener
 | Inspect | Text, links, tables, and images work for readers | Review notes for the actual output |
 | Deliver | The reviewed edition reaches the intended audience | Publication location and edition identifier |
 
-A passing automated check answers a defined question. It cannot tell us that an instruction is useful merely because its metadata is valid. Keep the human decisions from chapter 8 visible in the workflow.
+A passing automated check answers a defined question. It cannot tell us that an instruction is useful merely because its metadata is valid. Keep the human decisions from chapter 9 visible in the workflow.
 
 ## What This Project Already Runs
 
@@ -131,7 +133,7 @@ The comparison should return to exit code 0. In a disposable project copy, you c
 
 ### Extend It: Check the Whole Change
 
-In a disposable project copy, repeat chapter 10's onboarding change and also change the contacts status. Run the showcase builder. Inspect the handbook, excerpt, data, and chart against the sources, then find the related table, caption, and alternative text in chapter 1. Record which values still need editing. This deliberately demonstrates the gap between generated assets and manually maintained explanations.
+In a disposable project copy, repeat chapter 11's onboarding change and also change the contacts status. Run the showcase builder. Inspect the handbook, excerpt, data, and chart against the sources, then find the related table, caption, and alternative text in chapter 1. Record which values still need editing. This deliberately demonstrates the gap between generated assets and manually maintained explanations.
 
 Next, run `python scripts/measure_growth.py --include-working-tree` after a chapter edit. Inspect the working-copy observation as described in chapter 3 and distinguish it from committed history. Keep generated outputs outside `docs/` so they do not become additional chapter content in the measurement.
 

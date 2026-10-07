@@ -66,7 +66,7 @@ slides:
       - A commit records what the files contained.
       - Accepting a change updates the shared source.
       - Approving a publication covers a particular deliverable.
-    sources: [docs/08-git-review.md]
+    sources: [docs/09-git-review.md]
 
   - id: publishing
     type: diagram
@@ -81,7 +81,7 @@ slides:
         detail: Review meaning, completeness, and presentation.
     outputs: [Website, PDF handbook, Training presentation]
     caption: These are publication choices, not three automatically implemented export pipelines.
-    sources: [docs/10-publishing.md]
+    sources: [docs/11-publishing.md]
 
   - id: automation
     type: content
@@ -91,7 +91,7 @@ slides:
       - A pull request checks that the website builds.
       - Updates to main trigger the publishing workflow.
       - A successful build does not establish content approval.
-    sources: [docs/02-github-workspace.md, docs/10-publishing.md]
+    sources: [docs/02-github-workspace.md, docs/11-publishing.md]
 
   - id: start-small
     type: content

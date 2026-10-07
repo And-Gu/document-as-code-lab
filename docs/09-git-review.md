@@ -1,6 +1,6 @@
 ---
 id: 06-git-review
-chapter_number: 8
+chapter_number: 9
 status: draft
 audience: practitioners-reviewing-shared-information
 learning_goal: Review a coordinated source change, record its scope and version, and distinguish acceptance from publication approval.
@@ -131,7 +131,7 @@ Before release, identify the source revision, selected items, build settings, an
 
 Inspect whether drafts were included intentionally, whether cross-references and terminology agree, and whether diagrams and tables remain readable. Acceptance of one requirement does not approve a complete handbook, database, or repository snapshot.
 
-If a defect is found after release, decide whether to correct, withdraw, or supersede that publication and record the decision. Preserve enough information to explain which output was affected. [Chapter 10](10-publishing.md) will develop the publishing side of this process.
+If a defect is found after release, decide whether to correct, withdraw, or supersede that publication and record the decision. Preserve enough information to explain which output was affected. [Chapter 11](11-publishing.md) will develop the publishing side of this process.
 
 ## Try It: Review a Coordinated Change
 
@@ -159,4 +159,4 @@ python scripts/build_record_diagram.py
 
 **Keep:** the intentional exercise commits and review note, separately from ignored generated files. Leave the branch unmerged if review is unfinished. Keep all fictional decisions clearly distinguished from real approval records.
 
-For your information item from chapter 1, name the review authority, approval scope, and one related output that needs checking. Next, [Dashboards and Work Tracking in GitHub](09-dashboards.md) explores how to make that outstanding work visible.
+For your information item from chapter 1, name the review authority, approval scope, and one related output that needs checking. Next, [Dashboards and Work Tracking in GitHub](10-dashboards.md) explores how to make that outstanding work visible.

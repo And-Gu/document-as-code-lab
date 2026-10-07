@@ -1,6 +1,6 @@
 ---
 id: 04-ai-native
-chapter_number: 6
+chapter_number: 7
 status: draft
 audience: practitioners-working-with-ai-assisted-content
 learning_goal: Prepare traceable context, assess an AI-generated draft, and define checks for related updates.
@@ -23,7 +23,7 @@ visuals:
 
 AI-native documentation is information maintained so that people and AI tools can work with it as part of everyday tasks. In this tutorial, that means clear source material, explicit context, traceable changes, and reviewable results. It does not mean that every document is written by AI.
 
-We have already prepared the foundations for this in our onboarding example. In chapter 5, we organized requirements into records and selected approved requirements for an AI context package. That package had a specific purpose: help a trainer explain the agreed requirements to new colleagues. We will now follow it from maintained source material into an AI-assisted drafting task.
+We have already prepared the foundations for this in our onboarding example. In chapter 5, we organized requirements into records. In chapter 6, we selected approved requirements for an AI context package. That package had a specific purpose: help a trainer explain the agreed requirements to new colleagues. We will now follow it from maintained source material into an AI-assisted drafting task.
 
 For the trainer, a fluent explanation is only part of a useful result. The draft must preserve the distinctions we established in the records: an agreed requirement is not a proposed feature, and neither is evidence that a capability has been implemented. The question is how to give an AI tool enough context to preserve those distinctions, then check that its draft does so.
 
@@ -49,7 +49,7 @@ More context is not automatically better context. A whole chapter may mix instru
 
 ## From Maintained Sources to Task Context
 
-The [record processor](../scripts/process_records.py) from chapter 5 selects approved requirements and packages their text with an audience, task, and limitations. It also records the source identity. It creates a file; it does not contact an AI service.
+The [record processor](../scripts/process_records.py) from chapter 6 selects approved requirements and packages their text with an audience, task, and limitations. It also records the source identity. It creates a file; it does not contact an AI service.
 
 ```mermaid
 flowchart LR
@@ -67,7 +67,7 @@ flowchart LR
 
 *Selected context supports drafting; source checks and human review determine what can be used.*
 
-This Mermaid diagram is an authored explanation, not a running agent workflow. As discussed in chapter 5, its related sources and wording should be checked together when the process changes.
+This Mermaid diagram is an authored explanation, not a running agent workflow. As discussed in chapter 6, its related sources and wording should be checked together when the process changes.
 
 Selection can begin with file paths and metadata filters. For larger collections, retrieval finds relevant items through search or links. Check scope, version, and missing dependencies rather than treating every matching result as suitable context.
 
@@ -91,7 +91,7 @@ Our practical conclusion is to start with the simplest approach that finds suffi
 
 ## Inspect Our Context Package
 
-After running chapter 5's processor, open `build/records/ai-context.md`. With the supplied starting dataset, REQ-014 is included and REQ-015 is excluded. If you changed statuses during the previous exercise, your package may legitimately include different records. Inspect it rather than assuming the starting selection still applies.
+After running chapter 6's processor, open `build/records/ai-context.md`. With the supplied starting dataset, REQ-014 is included and REQ-015 is excluded. If you changed statuses during the previous exercise, your package may legitimately include different records. Inspect it rather than assuming the starting selection still applies.
 
 The generated package supplies these task instructions:
 
@@ -137,7 +137,7 @@ Our processors illustrate this direction, not a complete autonomous platform. St
 
 An AI agent can help maintain authored explanations as well as generate new text. When the source changes, the desired task is to update and check affected material, not simply finish the first file.
 
-For example, changing REQ-014's intended test may affect its record, the relationship diagram in chapter 5, and the chapter's embedded source example. The generated requirements view must be rebuilt. The AI package excludes test relationships, so its requirement body may remain unchanged while its input digest changes. Each outcome deserves an explicit check.
+For example, changing REQ-014's intended test may affect its record, the relationship diagram in chapter 6, and chapter 5's embedded source example. The generated requirements view must be rebuilt. The AI package excludes test relationships, so its requirement body may remain unchanged while its input digest changes. Each outcome deserves an explicit check.
 
 Project instructions can identify the relevant sources and dependencies. A reusable skill can describe how to perform the update. A harness, the system surrounding the agent, can supply context, run generators and tests, and collect results. These mechanisms support coordination; they do not make every dependency discoverable automatically.
 
@@ -194,10 +194,10 @@ For each response, note supported claims, unsupported claims, missing qualificat
 
 ### Optional: Compare the Whole Chapter
 
-In a third fresh session, supply the same task with chapter 5's full text. Check whether the response distinguishes examples, proposals, and authoring instructions from requirements. Compare its source support with the curated-package response. This tests selection, not the assumption that shorter input is always better.
+In a third fresh session, supply the same task with chapter 6's full text. Check whether the response distinguishes examples, proposals, and authoring instructions from requirements. Compare its source support with the curated-package response. This tests selection, not the assumption that shorter input is always better.
 
 You can also complete a no-model version: inspect the input conditions and write what each establishes and leaves unknown. Label this as a context review, not an AI-output experiment.
 
 Finally, return to the information item you chose in chapter 1. Define one AI-assisted task, its permitted sources, and a claim the available material cannot support. Identify one related view an agent should check if that source changes.
 
-Next, [Images, Diagrams, and Visual Sources](07-images.md) explores how these maintenance and review practices apply to visuals.
+Next, [Images, Diagrams, and Visual Sources](08-images.md) explores how these maintenance and review practices apply to visuals.

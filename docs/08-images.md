@@ -1,6 +1,6 @@
 ---
 id: 05-images
-chapter_number: 7
+chapter_number: 8
 status: draft
 audience: practitioners-maintaining-visual-information
 learning_goal: Choose visual sources, generate a relationship diagram, and check affected views after a change.
@@ -25,7 +25,7 @@ A visual is part of the information we maintain, not just decoration added when 
 
 Document-as-code does not require replacing visual tools with text. It asks us to identify the editable source, record what the visual means, and keep it aligned with related information. The source might be Mermaid, an SVG drawing, a dataset, or a model in a specialist application.
 
-We will extend chapter 5's onboarding example into a generated diagram, then consider visual delivery and maintenance. The main exercise uses the existing Python environment. Rendering and the optional Napkin comparison use separate tools; generating source text and checking the visible result are separate tasks.
+We will extend chapter 6's onboarding example into a generated diagram, then consider visual delivery and maintenance. The main exercise uses the existing Python environment. Rendering and the optional Napkin comparison use separate tools; generating source text and checking the visible result are separate tasks.
 
 ## Choose the Visual for the Question
 
@@ -51,7 +51,7 @@ For a diagram answering only "what relationships are recorded?", we can generate
 
 ## Let Records Supply the Connections
 
-The [diagram generator](../scripts/build_record_diagram.py) reuses chapter 5's validation. It includes every validated record, including unconnected records, and draws only explicit relationships defined in the schema. It does not infer links from prose or include the separate procedure file.
+The [diagram generator](../scripts/build_record_diagram.py) reuses chapter 6's validation. It includes every validated record, including unconnected records, and draws only explicit relationships defined in the schema. It does not infer links from prose or include the separate procedure file.
 
 With the supplied starting records, it produces this Mermaid source and view:
 
@@ -67,7 +67,7 @@ flowchart LR
 
 *The starting dataset contains four records and two explicit relationships. This fixed teaching example is not a live view of your exercise files.*
 
-REQ-015 has no arrow because no relationship is recorded for it. That does not prove it is unrelated to the service. Likewise, `verified_by` identifies an intended test, not a passing result. The diagram omits status and owner; use chapter 5's dashboard for those questions.
+REQ-015 has no arrow because no relationship is recorded for it. That does not prove it is unrelated to the service. Likewise, `verified_by` identifies an intended test, not a passing result. The diagram omits status and owner; use chapter 6's dashboard for those questions.
 
 `flowchart LR` requests a left-to-right arrangement. Names such as `n0` are generated drawing identifiers, not record IDs; the labels retain the record IDs. Text between vertical bars names an arrow's relationship. [Mermaid's flowchart reference](https://mermaid.js.org/syntax/flowchart.html) explains the notation.
 
@@ -95,7 +95,7 @@ For local image export, follow the [official Mermaid CLI instructions](https://g
 mmdc -i build/record-diagram/relationships.mmd -o build/record-diagram/relationships.svg
 ```
 
-Record the renderer version and inspect the export. The renderer is not included in this project's Python dependencies, and this draft does not claim verified rendering across GitHub, PDF, and PowerPoint. [Chapter 4](04-markdown.md) explains preview compatibility; chapter 12 will develop repeatable build checks.
+Record the renderer version and inspect the export. The renderer is not included in this project's Python dependencies, and this draft does not claim verified rendering across GitHub, PDF, and PowerPoint. [Chapter 4](04-markdown.md) explains preview compatibility; chapter 13 will develop repeatable build checks.
 
 ## SVG, Raster Images, and Native Sources
 
@@ -134,7 +134,7 @@ Compare the result with Mermaid: which preserves the meaning more clearly, and w
 
 Use generators for connections and counts that follow explicit rules. Use people and agents for authored explanations that require judgment. Both belong in a coordinated update process.
 
-For this example, check the records, generated diagram, chapter 5's authored diagram and explanations, embedded teaching examples, and affected captions. Fixed snapshots may deliberately remain unchanged, but must remain labelled rather than becoming stale current-state claims.
+For this example, check the records, generated diagram, chapter 6's authored diagram and explanations, embedded teaching examples, and affected captions. Fixed snapshots may deliberately remain unchanged, but must remain labelled rather than becoming stale current-state claims.
 
 Ask an agent to report updated items, checked-but-unchanged items, and unverified items. Supply dependencies and generation commands through project instructions or skills. A harness can run checks and record results; this repository does not yet discover every affected visual automatically.
 
@@ -153,7 +153,7 @@ Use your own exercise copy and the chapter 3 Python environment. No external AI 
 1. Run the generator. Inspect its Mermaid text and manifest, then preview it if a renderer is available. Use your actual records if earlier exercises added items.
 2. In TASK-003, temporarily change `implements: [REQ-014]` to `implements: [REQ-015]`. This is a fictional maintenance experiment, not a product decision. Predict which arrow will move.
 3. Regenerate. Verify that the task now points to REQ-015, while REQ-014 still points to TEST-008. Check that the manifest digest changed.
-4. Compare the result with chapter 5's authored diagram. Note which explanations would need review for an intended change. Do not rewrite fixed teaching examples for this temporary experiment.
+4. Compare the result with chapter 6's authored diagram. Note which explanations would need review for an intended change. Do not rewrite fixed teaching examples for this temporary experiment.
 5. If a renderer is available, export SVG and inspect it at a book-column or slide size. Compare its content with the source, not just its appearance. Optionally compare with Napkin using the same relationships.
 6. Restore the task's original relationship and regenerate. The original diagram source and input digest should return when no other inputs have changed.
 
@@ -163,4 +163,4 @@ Use your own exercise copy and the chapter 3 Python environment. No external AI 
 
 **Keep:** comparison notes, input references, and any reviewed visual variant. Restore the temporary experiment; generated files remain under ignored `build/`. For your information item from chapter 1, identify one useful visual, its maintained source, and the checks needed when it changes.
 
-Next, [Git, Review, and Collaboration](08-git-review.md) develops review of coordinated changes and the scope of approval.
+Next, [Git, Review, and Collaboration](09-git-review.md) develops review of coordinated changes and the scope of approval.

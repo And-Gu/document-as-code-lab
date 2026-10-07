@@ -1,6 +1,6 @@
 ---
 id: 09-beyond-github
-chapter_number: 11
+chapter_number: 12
 status: draft
 audience: practitioners-adapting-document-as-code-to-familiar-workplaces
 learning_goal: Design a lightweight workflow with clear sources, review, reusable context, and traceable outputs outside GitHub.
@@ -84,7 +84,7 @@ For example, a handbook note can identify the access and equipment versions used
 
 ## Give Copilot a Bounded Task
 
-The context principles from chapter 6 still apply. An AI assistant needs the relevant information, the intended audience, and a clear task. Access to a large collection of files is not the same as knowing which versions and decisions matter.
+The context principles from chapter 7 still apply. An AI assistant needs the relevant information, the intended audience, and a clear task. Access to a large collection of files is not the same as knowing which versions and decisions matter.
 
 Copilot in Word can use referenced material to help draft content. The available experience depends on subscription or license, organization settings, platform, and app version. Check [Microsoft's Copilot in Word guidance](https://support.microsoft.com/en-gb/word/copilot/draft-and-add-content-with-copilot-in-word) for the environment you use. This chapter does not assume that every OneDrive account includes it.
 
@@ -114,7 +114,7 @@ An excerpt or summary can reveal information from a restricted source even when 
 
 ## Reuse Without Creating Competing Masters
 
-In a manual workflow, an author can assemble selected instructions into a handbook and adapt them for a presentation. Record the selection in the [publication brief](../examples/publishing/publication-brief.md), and check the results as described in chapter 10.
+In a manual workflow, an author can assemble selected instructions into a handbook and adapt them for a presentation. Record the selection in the [publication brief](../examples/publishing/publication-brief.md), and check the results as described in chapter 11.
 
 When the access procedure changes, use the register to find the handbook and training material that depend on it. Update those outputs and record the check. This is a manual version of following dependencies; it is useful even before the team has an automated builder.
 
@@ -145,4 +145,4 @@ Use the fictional [access procedure](../examples/onboarding-showcase/access.md),
 
 **Keep:** the source register, task brief, review observations, and environment details. These show which practices transferred successfully and which still rely on manual work.
 
-The next chapter, [Automation, Quality, and Further Experiments](12-automation.md), returns to the repository to make repeated checks more reliable and choose the next improvements deliberately.
+The next chapter, [Automation, Quality, and Further Experiments](13-automation.md), returns to the repository to make repeated checks more reliable and choose the next improvements deliberately.

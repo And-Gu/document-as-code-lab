@@ -14,27 +14,31 @@ visuals:
     source: ../assets/diagrams/markdown-source-and-views.mmd
     embedded: true
     outputs: [web, pdf, slides]
-    caption: Markdown supplies readable structure; configured tools create audience-specific views.
+    caption: The same Markdown source can be read directly or used to prepare different publications.
     alt: Markdown source is read directly by a reader or reviewer, and processed by configured tools into a website, book, slides, or selected AI context.
 ---
 
 # Markdown and Content Structure
 
-Markdown is a way to express document structure in ordinary text. Small markers identify headings, lists, links, and examples, while publishing tools decide how those elements appear. This makes the information easy to inspect, revise, and process without tying it to one page layout.
+Markdown lets you write and organize a document in a plain text file. Simple symbols mark headings, lists, links, and examples. You can read and edit the file directly, while a publishing tool turns those markers into formatted pages. The same source can therefore support different layouts and publications.
 
-By the end, you will be able to write a short Markdown section with headings, steps, a link, and basic metadata. You will also know which parts are portable and which depend on the publishing tool.
+By the end of this chapter, you will be able to write a short Markdown section with headings, steps, a link, and basic metadata. You will also understand which features work across common tools and which need support from a particular publishing tool.
 
-You can write Markdown directly or describe changes to an AI agent. Memorizing syntax is not the goal: understanding the resulting structure helps you review edits and provide useful context. We will follow the onboarding procedure from earlier chapters through source, preview, and a small improvement.
+You can write Markdown directly or describe changes to an AI agent. An AI agent is an AI assistant that can use tools to carry out a task, such as reading related files, editing a document, and checking the result. You explain the change you want in everyday language, and the agent helps turn it into an edit you can review.
 
-You need an editable copy of the repository and a text editor or an AI tool that can edit its files for the exercise. You can inspect the examples without changing anything.
+Learning a few Markdown conventions will help you give clearer instructions and check that the result is well structured. We will use the onboarding procedure from earlier chapters to compare its source text with the formatted preview, then make and review a small change.
+
+To do the exercise, you need a copy of the repository that you can edit, together with a text editor or an AI tool that can change its files. You can read and compare all the examples without setting up an editing environment.
 
 ## Structure Before Appearance
 
-You can read Markdown source in a text editor. A renderer interprets its markers and displays formatted content; a preview is one such view.
+When you write a document, you decide both what it says and how its parts fit together. A heading introduces a section, a numbered list gives steps in order, and a link directs the reader to related information. Markdown records these choices in the text itself.
 
-In Word, you might apply a heading style. In Markdown, you write a heading marker. Both express structure; the publishing environment decides how that structure looks.
+In Word, you might select a line and apply a heading style. In Markdown, you put a marker such as `##` before that line. A tool called a renderer reads the marker and displays the line as a heading. GitHub's formatted preview and our Astro website both render Markdown, although their headings can look different.
 
-A clear heading helps a reader navigate and gives a processing tool a section boundary. It can also help you select useful context for an AI task. Those benefits still depend on meaningful writing and appropriate tool configuration.
+A descriptive heading does more than change the text's appearance. It helps readers find the right instruction and helps tools identify where a section begins. For example, a section called "Follow Up on an Access Request" is easier to find and select for a training excerpt or an AI task than one called "Other Information."
+
+The diagram below shows the two ways we use the source: people can read it directly, and tools can process it into other views.
 
 ```mermaid
 flowchart LR
@@ -46,17 +50,17 @@ flowchart LR
     source --> tools --> views
 ```
 
-*Markdown supplies readable structure; configured tools create audience-specific views.*
+*The same Markdown source can be read directly or used to prepare different publications.*
 
-The source can be read directly or processed into different views. It does not define every detail of a page layout or automatically create a good presentation.
+Each output still needs decisions about content and presentation. A website may display a complete procedure, while a slide deck selects a few points for a particular session. Markdown gives those tools structured source material to work with.
 
 ## One Procedure, Source and Preview
 
-Return to our onboarding example. A new colleague wants to know how to request access and how to follow up.
+Let us apply this to the onboarding example. A new colleague needs to request access to a system and know how to ask about progress afterwards.
 
-Chapter 1 uses a fixed showcase with an access procedure marked `approved`. Here we use a separate [exercise copy](../examples/onboarding/requesting-access.md), marked `draft`, so you can practice editing it. Both use the illustrative ID `PROC-001`, but they are separate teaching examples, not a shared approval history. Changes to the exercise copy do not update the showcase.
+Chapter 1 demonstrated an access procedure marked `approved`. For this exercise, we use a separate [draft procedure](../examples/onboarding/requesting-access.md) that you can edit. Both examples use the ID `PROC-001`, but the draft has its own content and review status. Editing it leaves chapter 1's demonstration unchanged.
 
-Here is its reader-facing text, reproduced exactly; we will inspect its metadata later:
+Here is the procedure's text as it appears in the Markdown file. We will look at the metadata above it later in the chapter.
 
 ```markdown
 # Requesting Access
@@ -79,15 +83,15 @@ Have your team name and the system name ready. This example assumes your organiz
 Use the reference number when asking the service desk about progress. A submitted request does not mean access has been approved.
 ```
 
-The headings describe the reader's tasks. The introduction sets expectations, and the numbered list expresses an ordered procedure.
+The headings help the colleague find each task, and the numbered list shows the order of the steps. Even before the file is formatted, you can see how the instructions are organized.
 
-GitHub offers a formatted preview and a Code view of the source. They show the same file, not separate versions to maintain. A diff is different: it compares revisions or proposed changes. [GitHub documents its file views](https://docs.github.com/en/repositories/working-with-files/using-files/working-with-non-code-files).
+Open the exercise file on GitHub and switch between its Code view and formatted preview. The Code view shows the Markdown markers; the preview shows the headings and lists they produce. Both views come from the same file. [GitHub's guide explains these file views](https://docs.github.com/en/repositories/working-with-files/using-files/working-with-non-code-files).
 
-For example, the `## Follow Up` marker becomes a heading, while its paragraph remains ordinary prose. Open the linked exercise file to compare the full source and preview. A focused rendered comparison appears below.
+For example, `## Follow Up` appears as a heading in the preview, followed by the instruction as a paragraph. When you later edit that section, a diff will show which lines changed between the earlier and revised versions.
 
 ## Write Directly or Ask an Agent
 
-The editing method does not change what we maintain: a source file that people can inspect and tools can process. You can write the wording yourself or ask a repository-connected agent to make a bounded edit. A useful prompt names the source, audience, purpose, and constraints:
+You can make an edit yourself or ask an AI agent with access to the repository to help. Give it the filename, explain who will read the text, and describe the improvement you want. Include any limits it should respect. For example:
 
 ```text
 Edit examples/onboarding/requesting-access.md for a new colleague.
@@ -100,15 +104,15 @@ Show the diff and identify details that need confirmation.
 Do not commit or publish the change.
 ```
 
-If the tool only returns text in chat, the repository source still needs updating. If it edits files, inspect the saved result and its diff. The agentic workflow introduced in [chapter 2](02-github-workspace.md) can support both editing and checks, but a fluent answer is not evidence that an instruction is correct.
+Some AI tools suggest wording in chat; others can edit the file directly. Check where the result has been saved, then read the revised file and inspect its diff. The workflow introduced in [chapter 2](02-github-workspace.md) lets an agent help with both editing and checks. You still need to confirm that the instructions describe the actual process.
 
-Meaningful headings, consistent terms, and explicit assumptions help both human reviewers and LLMs interpret an excerpt. Supply the relevant source and conventions, then review facts, links, metadata, and the rendered result. [Chapter 6](06-ai-native.md) develops context selection and verification.
+Clear headings and consistent terms help the agent understand the material. Relevant sources and an explanation of what is known help it avoid filling gaps with guesses. Review the facts, links, metadata, and preview before accepting the edit. [Chapter 7](07-ai-native.md) explains how to prepare this context for AI-assisted work.
 
-## Make a Section Useful on Its Own
+## Use Clear Headings and References
 
-Imagine replacing the follow-up instruction with "Use it when asking about progress." Inside the full procedure, a reader might infer what "it" means. Extracted into a training note or an AI context package, the sentence loses that connection.
+Headings help readers find the information they need. Choose names that describe the task or topic, and make it clear what the instructions refer to. For example, "Use the access request reference number" is easier to follow than "Use it" when the preceding text mentions several things.
 
-The current section names the reference number, but a standalone excerpt can be more explicit. Here is a proposed revision, not a change already made to the exercise file:
+Our procedure already names the reference number. We can make the heading more specific and clarify where that number comes from. This is a suggested revision for comparison; the exercise file still contains the original wording.
 
 ```markdown
 ## Follow Up on an Access Request
@@ -118,7 +122,9 @@ the service desk about that request's progress. Submitting the request
 does not mean access has been approved.
 ```
 
-Rendered as a section, the same text reads:
+The same text appears below as a formatted example:
+
+<!-- example:start follow-up -->
 
 ## Follow Up on an Access Request
 
@@ -126,19 +132,21 @@ Use the confirmation reference number from your access request when asking
 the service desk about that request's progress. Submitting the request
 does not mean access has been approved.
 
-The example ends here. Its appearance depends on the renderer in which you read this chapter. The improvement is not just formatting: it identifies the task, names the reference, and preserves the distinction between submission and approval without inventing a new service policy.
+<!-- example:end follow-up -->
 
-A heading alone does not make content reusable. Include the context and qualifications needed to interpret the instruction, and check whether the excerpt depends on another section or asset.
+If you are reading the source, you will also see `<!-- example:start follow-up -->` and `<!-- example:end follow-up -->` around this example. They are HTML comments, which GitHub hides in its formatted preview. Our Astro website reads these markers and gives the enclosed example a distinct visual style. The marker names and their meaning are conventions we chose for this project, not built-in Markdown features.
 
-For this project, use one level-one heading (`#`) for the document title, level-two headings (`##`) for sections, and level-three headings (`###`) for subsections. Keep the hierarchy consistent rather than choosing a heading level for its font size.
+The heading names the task, and the paragraph identifies the reference number. Where readers need background information, explain it briefly or link to it. These choices also help when a file is included in another publication or supplied as context to an AI agent.
 
-Write paragraphs with one main idea and leave a blank line between them. Use complete sentences with enough context to stand on their own. A useful section should still make sense when selected for a handbook excerpt or an AI task.
+In this project, use one level-one heading (`#`) for the document title, level-two headings (`##`) for sections, and level-three headings (`###`) for subsections. Choose the level according to where the heading belongs in the document. The publishing tool determines its size and appearance.
 
-Reusing a section also requires an inclusion or transformation mechanism. Copying it manually creates another copy to maintain. Chapter 1's [showcase script](../scripts/build_onboarding_showcase.py) demonstrates simple assembly from source files; [chapter 10](10-publishing.md) develops publishing workflows for websites, PDFs, and presentations.
+Give each paragraph one main idea and leave a blank line between paragraphs. This makes both the source and the formatted text easier to follow.
+
+Chapter 1 explains how we organize information into reusable files. [Chapter 11](11-publishing.md#select-files-or-extract-sections) discusses how publishing tools assemble files and, when needed, select individual sections.
 
 ## A Small Set of Useful Elements
 
-You can do most introductory writing with a few elements:
+The following elements cover most of what you need for a short procedure:
 
 | Element | Source notation | Use |
 | --- | --- | --- |
@@ -149,41 +157,41 @@ You can do most introductory writing with a few elements:
 | Bullet | `- Team name` | List parallel items |
 | Ordered step | `1. Open the portal.` | Express a sequence |
 
-Use tables when readers need to compare items. Use prose when the explanation needs to develop an idea. Blank lines around lists, tables, and code blocks make the source easier to scan.
+A table works well when readers need to compare items, as in the list of elements above. Paragraphs are better for developing an explanation. Leave blank lines around lists, tables, and code blocks so their boundaries are easy to see in the source.
 
-A fenced code block preserves an example without interpreting it as ordinary document formatting. Place three backticks before and after the example, and add a language name such as `markdown`, `yaml`, or `bash` after the opening fence.
+A fenced code block displays source text or commands exactly as written. That is how we show Markdown examples without turning their markers into headings and lists. To create one, place three backticks before and after the text. Add a language name such as `markdown`, `yaml`, or `bash` immediately after the opening backticks. This command, for example, is displayed in a `bash` block:
 
 ```bash
 python scripts/measure_growth.py --include-working-tree
 ```
 
-The [CommonMark specification](https://spec.commonmark.org/spec) defines core Markdown elements. GitHub Flavored Markdown extends it with features such as tables and task lists. [Its specification describes those extensions](https://github.github.com/gfm/).
+Most of these elements are defined in the [CommonMark specification](https://spec.commonmark.org/spec). GitHub uses an extended version called [GitHub Flavored Markdown](https://github.github.com/gfm/), which also supports tables and task lists. This is one reason to check how a file appears in the tool your readers will use.
 
 ## Images Need Text Too
 
-An image reference has an exclamation mark, alternative text in brackets, and the asset path in parentheses:
+To include an image, write an exclamation mark followed by a description in square brackets and the image's path in parentheses. The description is called alternative text, or alt text:
 
 ```markdown
 ![Baseline chart with one revision, 10 chapter outlines, 829 prose words, and zero completed capabilities.](../assets/figures/growth-baseline.png)
 ```
 
-Alternative text communicates the image's purpose and key information when the image cannot be seen. A caption explains why it belongs in the surrounding discussion. For a complex chart, also provide its values or a longer explanation in the text, as chapter 3 does.
+Alternative text helps readers understand an image when they cannot see it, including when they use a screen reader. A visible caption connects the image to the surrounding discussion. For a complex chart, provide its values in a table or explain the main findings in the text, as chapter 3 does.
 
-Use meaningful headings, descriptive links, and table headers as part of the same practice. Accessibility begins in the source and needs checking again in each published format. [The images chapter](07-images.md) will develop this further.
+Clear headings, descriptive links, and table headers also make a document easier to navigate and understand. Check these features in the published result as well as the source. [Chapter 8](08-images.md) explains how to maintain and use different kinds of images.
 
 ## Links That Survive Everyday Changes
 
 Use descriptive link text so readers know what they will find. For example, link to [the growth measurement exercise](03-project-growth.md) instead of writing "click here."
 
-For files in this repository, use relative paths. A link from this chapter to another chapter starts in `docs/`; a link to [contribution guidance](../CONTRIBUTING.md) goes up one directory. GitHub resolves relative links against the current branch. [GitHub's formatting guide explains relative links](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
+For files in this repository, use relative paths: directions from the file containing the link to the file you want to open. From this chapter, `03-project-growth.md` points to another file in the same folder. The path `../CONTRIBUTING.md` goes up one folder to the [contribution guidance](../CONTRIBUTING.md). GitHub follows these links within the branch you are viewing. [Its formatting guide gives more examples](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
 
-Heading links can be useful, but a heading rename may change its generated anchor. Stable chapter IDs identify the content independently of its title; they do not automatically redirect a renamed file or repair a link. Update references when moving source files.
+You can also link to a heading within a document. The destination is usually generated from the heading's text, so renaming the heading can break the link. Check incoming links when changing headings or moving files. A chapter's stable ID helps our tools recognize its identity, but does not repair those links automatically.
 
-Use the same name for a concept throughout the tutorial. If "source revision" means a committed snapshot, avoid using it elsewhere to mean an uncommitted draft.
+Consistent terminology helps readers follow links between sections. For example, use "source revision" consistently for a recorded version, and make it clear when you mean local edits that have not yet been committed.
 
 ## Metadata Beside the Prose
 
-The exercise file starts with YAML front matter, a metadata block between two `---` lines. Here is its current block:
+Chapter 1 introduced metadata such as an instruction's owner and review status. Here, we look at how that information is written alongside the reader-facing text. At the start of our Markdown files, a block called YAML front matter holds fields between two `---` lines:
 
 ```yaml
 ---
@@ -194,23 +202,31 @@ learning_goal: Submit an access request and follow its progress.
 ---
 ```
 
-The ID identifies the procedure, the status records its draft state, and the owner names the team responsible for it. The learning goal describes what the reader should be able to do. These fields describe the information; they are not steps for requesting access.
+The `id` gives the procedure an identifier, `status` records that it is a draft, and `owner` names the responsible team. The `learning_goal` describes what readers should be able to do after following the instructions. These fields help us maintain and organize the procedure.
 
-Chapters use related fields, including `chapter_number`. This chapter retains the stable ID `03-markdown` even though it is now chapter 4. Our measurement script uses chapter IDs and statuses, but excludes the supporting procedure under `examples/` from chapter totals.
+Front matter describes the file as a whole. The example markers introduced earlier identify a particular passage for styling on our website. Both become useful when tools are configured to interpret them. The markers do not give that passage its own review status or change history.
 
-Front matter is a convention used by many tools, rather than a core Markdown requirement. Our field names have project-specific meanings. A publishing tool must be configured to interpret them, and another application may display or ignore them.
+Our chapters have similar metadata, including a `chapter_number` for their reading order. This chapter's ID is still `03-markdown`, although it moved to position 4 as the tutorial developed. Keeping the ID lets the measurement script recognize it across that change. The script counts chapters in `docs/`; this practice procedure lives in `examples/` and is outside those totals.
 
-Optional visual specifications use a `visuals` list, described in [CONTRIBUTING.md](../CONTRIBUTING.md). You do not need to add one for this chapter's text-editing exercise.
+Many publishing tools support front matter, but it is an addition to core Markdown. We choose the fields to suit our project and configure our tools to use them. Another application may display the fields differently or ignore them.
 
-Keep metadata small and useful. The next chapter, [Structured Content: Metadata, Rules, and Views](05-structured-content.md), introduces templates as starting points, then schemas as rules for checking the resulting records, followed by relationships and validation.
+Some chapters also have a `visuals` list describing planned or existing illustrations. The [contribution guidance](../CONTRIBUTING.md) explains those fields. The exercise here only needs the procedure's existing metadata.
+
+Choose metadata that supports a useful task, such as finding drafts or identifying their owners. [Chapter 5](05-structured-content.md) explains YAML in more detail, then shows how templates and validation rules help us create consistent records.
 
 ## Check the Source, Preview, and Target Format
 
-Review in three passes. First inspect the source and diff for meaning, metadata, and unintended edits. Then inspect the preview for readable headings, ordered steps, working links, and understandable diagrams. Finally, check each published format when its pipeline exists: a successful GitHub preview does not prove that a PDF or slide is usable.
+After editing, check both what the file says and how readers will see it:
+
+1. Read the source and its diff. Check the meaning, metadata, and any changes outside the intended section.
+2. Open the formatted preview. Check headings, step order, links, and diagrams.
+3. Inspect the outputs you publish. Our Astro website and HTML slides have their own layouts; a future PDF will need its own review too.
+
+Each check answers a different question. Correct Markdown can still contain an unclear instruction, and text that looks good in GitHub can be too long for a slide.
 
 ### Essential Preview Checks
 
-GitHub's repository preview provides a particular rendering environment. It does not run our publishing scripts, resolve custom include instructions, or turn our `visuals` metadata into images. A separately built website can have different capabilities.
+GitHub's preview formats the file using the features GitHub supports. It does not run our publishing scripts or create images from our `visuals` metadata. Our Astro site can add features because we control its build process.
 
 Use formatting that the renderer recognizes:
 
@@ -220,11 +236,11 @@ Use formatting that the renderer recognizes:
 - Keep opening and closing code fences balanced. A `markdown` fence displays an example as code; it does not render the example's headings.
 - Use a fenced block labelled `mermaid` for a diagram that GitHub should render.
 
-The checks above are enough for the core exercise. The following diagram example is optional background for readers inspecting Mermaid sources.
+These checks cover the formatting needed for the exercise. The next section explains how we include diagrams, for readers who want to understand the Mermaid blocks used throughout the tutorial.
 
 ### Optional: Diagram Fences and Rendering
 
-A four-backtick outer fence lets us display the three-backtick inner fence as an example:
+Mermaid describes diagrams in text. To display one in a GitHub Markdown preview, put its instructions inside a code block labelled `mermaid`, as shown below. We use four backticks around this teaching example so that its three-backtick fences remain visible:
 
 ````markdown
 ```mermaid
@@ -233,37 +249,37 @@ flowchart LR
 ```
 ````
 
-We keep editable Mermaid sources in `.mmd` files, but use embedded `mermaid` blocks for diagrams in the chapter preview. A Markdown link to a source file provides access to its text; it is not an instruction to include or render that file as a diagram.
+We also keep editable diagram sources in `.mmd` files. Linking to one lets readers inspect the source, while including the `mermaid` block in the chapter lets GitHub display the diagram there.
 
-The `mermaid` fence identifies the diagram language. `flowchart LR` requests a left-to-right flowchart; `request` identifies a node, brackets contain its label, and `-->` draws an arrow. See [Mermaid's flowchart guide](https://mermaid.js.org/syntax/flowchart.html) for more syntax.
+In this example, `flowchart LR` asks for a flowchart running from left to right. The names `request` and `review` identify its two nodes, the bracketed text supplies their labels, and `-->` connects them with an arrow. [Mermaid's flowchart guide](https://mermaid.js.org/syntax/flowchart.html) explains the notation in more detail.
 
-Rendering turns the diagram text into a visual. It does not check that the diagram agrees with a procedure or dataset. [Chapter 5](05-structured-content.md) shows why that distinction matters when diagrams describe record relationships.
+Check the meaning of a diagram as carefully as its appearance. A renderer can draw a valid arrow even when the relationship it describes is wrong. [Chapter 6](06-processing.md) explores this when connecting requirements, tasks, and tests.
 
-Mermaid support varies between renderers. Check the actual preview; [GitHub's diagram documentation](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-diagrams) explains supported use and how to inspect its Mermaid version.
+Different tools can support different Mermaid features or versions. Check the result in the tool you will publish with. [GitHub's diagram guide](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-diagrams) explains its support and how to find the Mermaid version it uses.
 
-GitHub also sanitizes rendered HTML. You cannot assume that custom scripts, embedded content, or layout styling will work in a repository preview. [The GitHub Flavored Markdown specification describes this additional processing](https://github.github.com/gfm/).
+GitHub also filters the HTML it displays for security. Custom scripts and styling that work on your own website may therefore be removed or ignored in its preview. [The GitHub Flavored Markdown specification describes this processing](https://github.github.com/gfm/).
 
-A wide table or diagram may need different treatment in print. [Chapter 7](07-images.md) develops visual sources and exports, and [chapter 10](10-publishing.md) covers publication choices. This chapter's diagram source is not a verified cross-format asset.
+A wide table or diagram may need a different layout on a printed page or a slide. [Chapter 8](08-images.md) explains visual sources and exports, and [chapter 11](11-publishing.md) discusses how to prepare each publication. The diagram in this chapter has not yet been verified in every output format.
 
 ## Try It: Improve an Onboarding Section
 
 Open the [example onboarding source](../examples/onboarding/requesting-access.md) in your own working copy. It describes a fictional service, so adapt it to a real workflow you understand before using it at work.
 
 1. Read the source and its Markdown preview, if your editor provides one. Identify its metadata, title, sections, and ordered steps.
-2. Draft a short section about a missing reference number, directly or with the prompt above. The source does not specify a recovery process. Do not fill that gap with an invented instruction; record the question for the owner in a separate maintainer note and leave the section explicitly incomplete until confirmed.
-3. Add a `## Maintainer Notes` section for unresolved questions and a link labelled `Contribution guidance for maintainers`. From the example directory, the link path is `../../CONTRIBUTING.md`. This is editorial material, not a step for the requester; it needs separate handling when publishing reader-only instructions.
+2. Draft a short section about a missing reference number, yourself or with the AI prompt above. The source does not explain how to recover it. Mark this part of the draft as incomplete and ask the owner what the requester should do. Keep that question in the maintainer notes described in the next step.
+3. Add a `## Maintainer Notes` section containing the question and a link labelled `Contribution guidance for maintainers`. From the example directory, the link path is `../../CONTRIBUTING.md`. These notes are for the people maintaining the procedure. Decide how to keep them separate from the instructions delivered to new colleagues.
 4. Compare the source and preview. Check the heading hierarchy, list order, link destination, and readability. If you used AI, review its assumptions as well. Keep the metadata status as `draft`.
-5. Read the new section without the surrounding procedure. Can you identify the task, the kind of reference number, and any unresolved information? Check that no instruction depends on an unexplained "it" or "as above."
+5. Read the revised procedure as a new colleague would. Do the headings help you find each task? Is it clear which reference number the instructions mean and which information still needs confirmation? Replace unclear references such as an unexplained "it" with specific wording.
 6. Inspect the diff and commit the intended change with a message explaining its purpose and any remaining review question.
 
-**Expected result:** a clearly scoped draft section, a separate maintainer note with a working link, and a reviewable revision. The missing recovery policy is visible rather than disguised as a finished instruction.
+**Expected result:** a draft section that identifies the task, a maintainer note asking for the missing recovery instructions, and a working link to the contribution guidance. Your commit records the change so another person can review it.
 
 **If formatting looks wrong:** compare the heading markers, blank lines, and code fences with the examples above. If a link fails, resolve its path from the file containing it rather than from the repository root.
 
-**Keep:** the improved example and its explanatory commit. Remove any unverified organizational assumptions before using the procedure outside this fictional exercise.
+**Keep:** the revised example and its explanatory commit. Confirm the procedure against your organization's actual process before using it at work.
 
-Apply the same standalone-reading check to the information item you selected in chapter 1. Note what context must travel with it when it becomes an excerpt or AI input.
+Now read the information item you selected in chapter 1 on its own. What would someone need to know if they encountered it in a training excerpt? Include that context when preparing the text for another reader or an AI task.
 
-If you run chapter 3's measurement script, this example does not increase the chapter count or chapter word total. That is intentional: a measurement should reflect its stated scope.
+If you run chapter 3's measurement script, edits to this example will leave the chapter count and chapter word total unchanged. The script measures files in `docs/`, while your exercise file is in `examples/`.
 
-Next, we will give records more explicit rules in [Structured Content: Metadata, Rules, and Views](05-structured-content.md).
+Next, [Templates and Metadata](05-structured-content.md) shows how to organize readable records with consistent fields. Chapter 6 then processes those records into useful views.

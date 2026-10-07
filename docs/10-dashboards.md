@@ -1,6 +1,6 @@
 ---
 id: 07-dashboards
-chapter_number: 9
+chapter_number: 10
 status: draft
 audience: practitioners-coordinating-content-and-development-work
 learning_goal: Connect a dashboard question to maintained data, responsible people, and evidence of progress.
@@ -21,7 +21,7 @@ visuals:
 # Dashboards and Work Tracking in GitHub
 
 
-In chapter 1, a small dashboard helped us identify instructions that needed review and the team responsible for them. Chapter 3 showed how the tutorial grows over time. Chapter 8 connected proposed changes to review decisions. We can now bring these ideas together: what information do we have, what needs attention, and what work is moving it forward?
+In chapter 1, a small dashboard helped us identify instructions that needed review and the team responsible for them. Chapter 3 showed how the tutorial grows over time. Chapter 9 connected proposed changes to review decisions. We can now bring these ideas together: what information do we have, what needs attention, and what work is moving it forward?
 
 A dashboard is a selected overview that helps someone understand a situation and decide what to do. It might be a table on a repository's starting page, a chart, or a work board. It does not need to be a separate application.
 
@@ -135,11 +135,11 @@ List stale links, missing owners, and unverified completion claims.
 Do not close issues or mark capabilities complete without approval.
 ```
 
-The rules, scripts, and agent instructions are part of the team's maintained tools. As the work changes, the team can improve them too. Chapter 12 will develop this automation further.
+The rules, scripts, and agent instructions are part of the team's maintained tools. As the work changes, the team can improve them too. Chapter 13 will develop this automation further.
 
 ## Try It: Connect a Measure to an Action
 
-Use the Python environment from chapter 3 and the structured records from chapter 5. Work in a disposable exercise copy if you plan to edit records. You do not need a GitHub Project for this first part.
+Use the Python environment from chapter 3 and the structured records introduced in chapter 5 and processed in chapter 6. Work in a disposable exercise copy if you plan to edit records. You do not need a GitHub Project for this first part.
 
 1. Run `python scripts/process_records.py` from the repository root.
 2. Open `build/records/dashboard.md`. Read its selection and version information before interpreting the counts.
@@ -169,4 +169,4 @@ Use a repository and a user or organization Project where you have permission to
 
 **Keep:** the board and evidence links for continued use, or clearly label the items as training exercises before leaving them in a shared workspace.
 
-For your own information example, choose one question, its maintained source, and the person who should act on the answer. Next, [Publishing to Websites, Books, and Presentations](10-publishing.md) considers how to deliver maintained information to different audiences.
+For your own information example, choose one question, its maintained source, and the person who should act on the answer. Next, [Publishing to Websites, Books, and Presentations](11-publishing.md) considers how to deliver maintained information to different audiences.

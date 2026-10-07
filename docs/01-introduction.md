@@ -1,7 +1,7 @@
 ---
 id: 01-introduction
 chapter_number: 1
-status: approved
+status: in-review
 audience: practitioners-familiar-with-documents-and-visual-tools
 learning_goal: Identify reusable information, its owner, and useful documents or visualizations built from it.
 visuals:
@@ -44,7 +44,7 @@ You can read the tutorial on the [website](https://and-gu.github.io/document-as-
 
 GitHub lets you inspect the files, read their formatted previews, and follow their changes. The website adds chapter navigation, visual styling, and interactive components. For example, the expandable *Chapter information* panel presents information about the chapter and its recent changes.
 
-We build the website with Astro, a tool that turns our source material into web pages. The published website reflects the latest successfully deployed version. Changes to the source files appear on the website after the next successful build and deployment. [Chapter 10](10-publishing.md#our-website-uses-astro) explains how this publishing process works.
+We build the website with Astro, a tool that turns our source material into web pages. The published website reflects the latest successfully deployed version. Changes to the source files appear on the website after the next successful build and deployment. [Chapter 11](11-publishing.md#our-website-uses-astro) explains how this publishing process works.
 
 ## Why I Created This Tutorial
 
@@ -61,6 +61,8 @@ This chapter follows one onboarding example from editable instructions to a hand
 ## From Source Files to Documents
 
 A source file holds information we maintain. A document brings selected information together for a reader. One document can draw on several source files, and one source file can contribute to several documents.
+
+In this tutorial, we mainly organize reusable information as separate files. A file should have a clear purpose, such as explaining one procedure, and contain the context needed to understand it. Choose what belongs together according to who maintains the information and how it will be used. Headings organize the content inside each file; they do not automatically make each section a separately maintained item.
 
 <!-- example:start onboarding -->
 
@@ -117,7 +119,7 @@ Readers could receive a fixed edition containing the reviewed versions, or a sta
 
 ### Reusing the Access Instructions for Training
 
-The arrow from `access.md` to the training excerpt shows how we can select information for another purpose. The script creates a [training excerpt](../assets/onboarding-showcase/training-excerpt.md) containing only the access instructions. A trainer uses it to prepare explanations, exercises, or slides suited to the audience.
+The arrow from `access.md` to the training excerpt shows how we can select information for another purpose. The script creates a [training excerpt](../assets/onboarding-showcase/training-excerpt.md) containing the full access procedure, leaving out the equipment and contacts procedures. Here, reuse means selecting a whole procedure file, rather than extracting a section within it. A trainer uses it to prepare explanations, exercises, or slides suited to the audience.
 
 The onboarding team maintains the instructions, a project maintainer looks after the script, and the trainer maintains the teaching material. When the instructions change, the maintainer regenerates the excerpt and the trainer reviews its effect on the session. This example is rebuilt manually; later chapters show how updates can become part of an automated workflow.
 
@@ -147,7 +149,7 @@ You can inspect the [input data](../assets/onboarding-showcase/data.json) and [g
 
 Who keeps this dashboard up to date? In this repository, maintaining the example means maintaining both the script and this chapter. The script generates the saved chart when someone runs it; the table above is written in the chapter and must be updated to match. Neither refreshes itself when a source file changes. In a working team, the procedure owners would maintain their records, while a designated maintainer would look after the dashboard and its generation process. Later chapters explore how to automate more of that work.
 
-Our tutorial website already demonstrates another use of maintained source files. The website view of [chapter 3](03-project-growth.md) adds an interactive view of the project's growth, and [chapter 10](10-publishing.md) explains website publishing and the planned PDF and presentation outputs.
+Our tutorial website already demonstrates another use of maintained source files. The website view of [chapter 3](03-project-growth.md) adds an interactive view of the project's growth, and [chapter 11](11-publishing.md) explains website publishing and the planned PDF and presentation outputs.
 
 We have now seen all three outputs from the diagram: the handbook, the training excerpt, and the dashboard. Next, we will look inside one instruction file to see how its text and descriptive information support these different uses.
 
@@ -182,7 +184,7 @@ Those fields become useful when tools are configured to interpret them. Here is 
 | Dashboard | Status and owner | Find material that needs attention |
 | Background material for an AI assistant | Selected text, version, audience, and task | Draft material suited to a particular purpose |
 
-The example script creates the handbook, training excerpt, and dashboard chart; the dashboard's accompanying table is maintained in this chapter. In [chapter 6](06-ai-native.md), we will assemble background material and instructions for an AI assistant into what we call a context package.
+The example script creates the handbook, training excerpt, and dashboard chart; the dashboard's accompanying table is maintained in this chapter. In [chapter 7](07-ai-native.md), we will assemble background material and instructions for an AI assistant into what we call a context package.
 
 <!-- example:end onboarding -->
 
@@ -196,7 +198,7 @@ Recording a change and approving it are separate actions. Saving a version in th
 
 In our example, `approved` refers to the procedure's review state. The contacts procedure remains draft, so assembling the files does not make the handbook an approved publication. The complete output still needs checks for consistency, completeness, and presentation.
 
-The [collaboration chapter](08-git-review.md) develops review workflows, while [structured content](05-structured-content.md) explains the rules behind fields such as status.
+The [collaboration chapter](09-git-review.md) develops review workflows, while [structured content](05-structured-content.md) explains the rules behind fields such as status.
 
 ## What This Enables in Everyday Work
 
@@ -210,7 +212,7 @@ When the access process changes, the team updates one source, reviews its conseq
 
 Document-as-code brings the benefits of the software development discipline to information work and is particularly useful when working with large language models (LLMs). Clear sections, defined terms, and recorded decisions help you provide an LLM with relevant context for a specific task.
 
-For example, give an AI assistant the access procedure, the intended audience, and a request for a short training explanation. Compare its draft with the source before using it. This supports AI-native documentation: organizing information so people and AI tools can use it in everyday work. [Chapter 6](06-ai-native.md) develops that approach.
+For example, give an AI assistant the access procedure, the intended audience, and a request for a short training explanation. Compare its draft with the source before using it. This supports AI-native documentation: organizing information so people and AI tools can use it in everyday work. [Chapter 7](07-ai-native.md) develops that approach.
 
 The broader shift is from producing individual documents to also developing the system that maintains them. The team can improve its templates, metadata, scripts, and checks as its needs change. AI agents can help turn those needs into tested changes, not just generate more text.
 
@@ -232,7 +234,7 @@ Adopting the approach may therefore mean changing part of your workflow or choos
 
 Start with one important task. Can you inspect changes, extract the information you need, and regenerate a useful output? Check what is lost during export and where updates must be made. Maintaining an editable original and an exported copy also creates a responsibility to keep them consistent.
 
-This tutorial starts with text and small datasets because they make these connections easier to inspect and automate. [Chapter 7](07-images.md) explores visual sources, [chapter 10](10-publishing.md) covers publishing, and [chapter 11](11-beyond-github.md) considers workflows in other applications.
+This tutorial starts with text and small datasets because they make these connections easier to inspect and automate. [Chapter 8](08-images.md) explores visual sources, [chapter 11](11-publishing.md) covers publishing, and [chapter 12](12-beyond-github.md) considers workflows in other applications.
 
 ## Try It: Find a Reusable Part in Your Own Work
 

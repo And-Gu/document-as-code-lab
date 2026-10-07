@@ -1,6 +1,6 @@
 ---
 id: 08-publishing
-chapter_number: 10
+chapter_number: 11
 status: draft
 audience: practitioners-publishing-shared-information-for-different-audiences
 learning_goal: Select and adapt shared sources for different publications, then trace and review the resulting outputs.
@@ -52,6 +52,18 @@ flowchart LR
 *Reuse the maintained information while shaping each publication for its readers.*
 
 The middle step matters. A presentation is not a handbook divided into slides, and a website needs more than a long page of exported text. We keep the facts together while allowing each output to have its own introduction, order, navigation, and visual treatment.
+
+## Select Files or Extract Sections
+
+Chapter 1 organizes the onboarding instructions as separate files, each containing one procedure. Our handbook script reads all three procedure files and combines their text. The training excerpt uses the complete access procedure and leaves out the other two. Both outputs reuse information at file level.
+
+Sometimes a publication needs only part of a longer file. A publishing tool can extract that section, but it needs a rule for finding where the selection starts and ends. A team might use a heading or explicit markers in the source. Markdown headings alone do not perform that extraction, and renaming a heading may require updating the selection rule.
+
+Files remain the sources we edit and track. Extracting a section does not give it a separate review status or maintenance process. Check that the selected text includes the context readers need, and rebuild and review the output when its source changes. Keep the selection rules with the publishing code so they can be reviewed too.
+
+Our HTML introduction deck uses another approach: its YAML file contains messages written for the session, with references to the source chapters. It does not automatically extract chapter sections. Those references help us identify what to review when a chapter changes, but the slide wording still needs to be updated separately.
+
+Start with whole-file reuse when it meets the reader's needs. Add section extraction when there is a clear reason to maintain the extra selection rules.
 
 ## Start with a Publication Brief
 
@@ -122,13 +134,13 @@ The access procedure can support a short training sequence:
 
 The underlying instructions stay the same, but the teaching sequence adds explanation and practice. Put supporting detail in speaker notes or a handout rather than shrinking all the text onto a slide. Distinguish examples you create for teaching from facts stated in the source.
 
-AI can help propose the sequence, draft notes, or suggest a visual. Give it the selected source, audience, session purpose, and boundaries, as in chapter 6. Review whether it has invented a service address, response time, or process step that the source does not support.
+AI can help propose the sequence, draft notes, or suggest a visual. Give it the selected source, audience, session purpose, and boundaries, as in chapter 7. Review whether it has invented a service address, response time, or process step that the source does not support.
 
 PowerPoint can remain part of the workflow. Generated slides may provide a starting point for visual refinement, discussion, or delivery. Decide which changes belong only to that presentation and which should return to the maintained content.
 
 ### Our HTML Presentations Use Astro and Reveal.js
 
-Our first presentation puts these principles into practice. Open the [published introduction deck](https://and-gu.github.io/document-as-code-lab/presentations/document-as-code/) or choose **Presentations** in the website's chapter menu. Its eight slides draw on chapters 1, 2, 8, and 10, moving from information reuse through collaboration and review to publishing.
+Our first presentation puts these principles into practice. Open the [published introduction deck](https://and-gu.github.io/document-as-code-lab/presentations/document-as-code/) or choose **Presentations** in the website's chapter menu. Its eight slides draw on chapters 1, 2, 9, and 11, moving from information reuse through collaboration and review to publishing.
 
 The [presentation definition](../presentations/document-as-code-intro.yaml) is a YAML file containing the selected messages, slide order, and chapter references. It does not copy entire chapters. The chapters remain the maintained knowledge; the YAML defines a particular teaching sequence.
 
@@ -150,13 +162,13 @@ The HTML introduction deck is implemented and published. Speaker notes and prese
 
 ## Reuse Visuals, Adapt Their Presentation
 
-Chapter 7 distinguished editable visual sources from their rendered images. Publishing adds another decision: which representation works in each output?
+Chapter 8 distinguished editable visual sources from their rendered images. Publishing adds another decision: which representation works in each output?
 
 An interactive chart needs a static alternative in a printed book. A detailed diagram may fit a full book page but need simplification for a presentation. A website may let readers enlarge an image; a slide shown across a meeting room cannot rely on that interaction.
 
 Keep the meaning and source data consistent while adapting size, labels, and detail. Preserve captions, units, source versions, and relevant qualifications. Do not assume that a Mermaid block displayed by GitHub will become a diagram in every exporter. Check the chosen renderer and use a suitable image export when required.
 
-For charts, repeat the checks from chapter 9: readable labels, adequate contrast, and an explanation that does not depend on color alone. Review representative images in every target format before scaling up to the full tutorial.
+For charts, repeat the checks from chapter 10: readable labels, adequate contrast, and an explanation that does not depend on color alone. Review representative images in every target format before scaling up to the full tutorial.
 
 ## Choose Tools with a Small Trial
 
@@ -176,7 +188,7 @@ If a trainer corrects a factual instruction in a slide, review the correction in
 
 Repeated manual changes to generated files will be lost when those files are rebuilt unless the changes are incorporated into the process. Record presentation-specific additions alongside their source references, and avoid letting an exported document become an untracked competing master.
 
-For each release, retain the selected inputs, their order, the source revision, tool versions, relevant settings, and the exact outputs reviewed. Local uncommitted edits need to be accounted for too; a commit identifier alone does not describe them. Chapter 8's review record provides a place to connect evidence to a decision.
+For each release, retain the selected inputs, their order, the source revision, tool versions, relevant settings, and the exact outputs reviewed. Local uncommitted edits need to be accounted for too; a commit identifier alone does not describe them. Chapter 9's review record provides a place to connect evidence to a decision.
 
 ## Try It: Prepare Three Publications
 
@@ -211,4 +223,4 @@ The PDF command requires a PDF engine configured for Pandoc; see its [PDF guidan
 
 Open each successful output and compare it with the brief. Check page breaks in the PDF, text fit in the slides, and headings and links in the HTML. Confirm that the source clarification is present wherever it belongs. Record converter versions and checks, including any failed or untested format. A successful conversion is the starting point for this review.
 
-The next chapter, [Beyond GitHub: OneDrive, Copilot, and Other Applications](11-beyond-github.md), considers how to carry these practices into environments where readers and authors use different tools.
+The next chapter, [Beyond GitHub: OneDrive, Copilot, and Other Applications](12-beyond-github.md), considers how to carry these practices into environments where readers and authors use different tools.
