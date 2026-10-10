@@ -8,6 +8,8 @@ The home page lists all chapters. Chapter pages include previous/next links, ren
 
 HTML slide decks are listed under `/presentations/`. YAML in `../presentations/` selects messages and links to the maintained chapters. Four Astro slide components render that content; Reveal.js provides presentation behavior within the same build and deployment. See the [presentation authoring notes](../presentations/README.md) for the format and verification steps. The dedicated theme is `src/styles/presentations.css`.
 
+Chapter 10's `<!-- interactive: budget-table -->` marker mounts `BudgetTable.astro`. It bundles the official `@rhpaiva/cssv` 0.5.0 renderer (MIT) and reads `examples/dashboards/department-budget.cssv` at build time. The file supplies data and table CSS; `src/styles/budget-table.css` styles the surrounding controls. Our component adds sorting, filtering, and totals, not cell editing or formula evaluation. Only reviewed repository content is loaded. The Markdown table remains as a no-JavaScript/error fallback; keep its values synchronized with the example file. No third-party CDN is required.
+
 From the repository root:
 
 The growth widget also needs Python and the repository's measurement dependencies. Set up `.venv` and install `requirements.txt` as described in chapter 3. The npm pre-dev and pre-build hooks use that environment when available, otherwise `python3`; set `PYTHON` to override the executable. Full Git history is required.
@@ -23,6 +25,7 @@ Check and build:
 ```bash
 npm run check
 npm run build
+node scripts/test-budget.mjs
 ```
 
 Astro requires Node 22.12 or newer. This project includes Node 22 as a local development dependency, so npm scripts use a compatible runtime even when the system Node version is older. No global Node installation is changed.

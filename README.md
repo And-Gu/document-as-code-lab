@@ -64,7 +64,7 @@ Filename prefixes and `chapter_number` metadata give the current reading order. 
 
 | Output | Purpose |
 | --- | --- |
-| Website | Published tutorial with chapter metadata and history; a combined interactive dashboard remains planned |
+| Website | Published tutorial with chapter metadata and history; chapter 10 adds a CSSV budget-table example with sorting and filtering; a combined work-tracking dashboard remains planned |
 | PDF book | Coherent long-form reading |
 | Presentations | Introduction, workshop, and technical deep dive |
 | GitHub dashboard | Repository status, growth charts, and work tracking |

@@ -97,73 +97,75 @@ These are not yet one automatically refreshed dashboard. The teaching chart is a
 
 For each view, tell readers what it includes and which version or observation it represents. Provide a route back to the underlying records. Someone should be able to move from "one task in progress" to the task and understand what is left to do.
 
-## Optional: Let a Table Carry Its Styling
+## Missing Excel? Tables and Spreadsheets
 
-A Markdown table is easy to read in GitHub. On a website, CSS can make the same values easier to scan, for example by highlighting records that need review. Where should those styling rules live: in the website, or with the exported data?
+Moving information into a repository does not remove the need for tables. You may still want to compare spending, scan a plan, or highlight values that need attention. A text file can hold the data while a reading tool provides a familiar table view.
 
-[CSSV, Comma-Separated Styled Values](https://github.com/rhpaiva/cssv), explores the second approach. It puts a CSS block above CSV data in a plain-text file. A CSSV renderer reads both parts and builds a styled HTML table. It is a project-specific format requiring that renderer, not a built-in feature of GitHub or a browser.
+[CSSV, Comma-Separated Styled Values](https://github.com/rhpaiva/cssv), explores one way to do this. It puts CSS styling above CSV data in a plain-text file. A dedicated renderer turns that file into a styled HTML table. GitHub can show its source, but does not render CSSV itself.
 
-<!-- example:start cssv-review-queue -->
+<!-- example:start cssv-department-budget -->
 
-### Example: Which Procedure Needs Review?
+### Example: Where Are We Over Budget?
 
-Return to chapter 1's [three fictional procedure files](../examples/onboarding-showcase/README.md). The question is still: **which procedure needs review, and who should act?** Here is a fixed teaching snapshot of their metadata:
+A manager is reviewing a fictional department's annual budget. All amounts are in Swedish kronor (SEK). Variance means actual spending minus planned spending: a positive value means overspending, not money remaining.
 
-| Procedure | Owner | Status |
-| --- | --- | --- |
-| Requesting access | onboarding-team | approved |
-| Collecting equipment | workplace-team | approved |
-| Finding team contacts | people-team | draft |
+<!-- interactive: budget-table -->
 
-The next action is to ask the people team to review the contacts instructions. A styled view can draw attention to that row while retaining the status text, so its meaning does not depend on color.
+| Category | Planned SEK | Actual SEK | Variance SEK |
+| --- | ---: | ---: | ---: |
+| Equipment | 60,000 | 72,000 | 12,000 |
+| Training | 40,000 | 32,000 | -8,000 |
+| Travel | 30,000 | 39,000 | 9,000 |
+| Software | 50,000 | 48,000 | -2,000 |
+| Team events | 20,000 | 20,000 | 0 |
 
-Our [CSSV example file](../examples/dashboards/review-queue.cssv) contains the same three rows plus table styling. Its key rules are:
+The [Astro version of this section](https://and-gu.github.io/document-as-code-lab/chapters/10-dashboards/#missing-excel-tables-and-spreadsheets) replaces this saved table with a styled, interactive view when JavaScript is available. It reads the actual [department-budget.cssv file](../examples/dashboards/department-budget.cssv), not a separate set of website values. The table above remains readable in GitHub and when JavaScript is unavailable.
+
+Choose **Over budget** to isolate Equipment and Travel. Together they exceed their allocations by 21,000 SEK. Across all five categories, lower spending elsewhere reduces the net overspend to 11,000 SEK. The view's totals always describe the rows currently shown.
+
+### What Comes from CSSV?
+
+The file supplies the values, number formatting, and table styling. This rule highlights positive variance values:
 
 ```css
-table { --cssv-key: status; }
-tr[data-key="draft"] {
-  background: #fff3cd;
-  color: #493500;
-  font-weight: 600;
+[data-col="Variance SEK"].positive {
+  color: #982b17;
+  font-weight: 700;
 }
 ```
 
-In CSSV, `--cssv-key: status` tells the renderer to expose each row's status as its `data-key` attribute. The second rule selects draft rows and gives them a pale yellow background, dark text, and stronger emphasis. These rules change presentation, not the records' approval states. The [CSSV specification](https://github.com/rhpaiva/cssv/blob/main/SPEC.md) describes the table structure and styling hooks.
+The renderer identifies numeric cells and exposes their column names and signs to CSS. A second rule shades rows with positive variance. The numbers retain their meaning without color. The [CSSV specification](https://github.com/rhpaiva/cssv/blob/main/SPEC.md) describes these styling hooks.
 
 In the example file, the CSS sits between two `---` lines, followed by:
 
 ```csv
-procedure,owner,status
-Requesting access,onboarding-team,approved
-Collecting equipment,workplace-team,approved
-Finding team contacts,people-team,draft
+Category,Planned SEK,Actual SEK,Variance SEK
+Equipment,60000,72000,12000
+Training,40000,32000,-8000
+Travel,30000,39000,9000
+Software,50000,48000,-2000
+Team events,20000,20000,0
 ```
 
 These delimiters resemble the front matter introduced in chapter 4, but this block contains CSS, not YAML metadata. Its meaning comes from the program reading it.
 
-To try the styled version, open the example file and use the editor linked from the [CSSV website](https://cssv.dev/). In your experiment, change the final row's status from `draft` to `approved`. The highlight should disappear while the other values stay the same. This simulates a change for learning; it does not approve the source procedure.
+Our Astro component adds sorting, filtering, and totals. These are website features, not spreadsheet formulas supplied by CSSV. Variance values are stored explicitly in this teaching file; CSSV does not recalculate them. If you change a planned or actual amount, update its variance too.
 
-**Expected result:** the renderer highlights the draft row, and changing its status changes the styling. The Markdown table above remains a fixed example. This tutorial does not currently load the CSSV renderer into its Astro pages.
+Try **Largest overspend first**, then switch between **All categories** and **Over budget**. Expand **Inspect CSSV source** to see how the values and styling produce the view. For a local experiment, change Equipment's actual spending to `58000` and variance to `-2000` in the CSSV file, then rebuild the site. Alternatively, use the editor on the [CSSV website](https://cssv.dev/) to experiment with the file's styling.
 
-**If you see raw text:** check that you are using a CSSV renderer. GitHub's source view and an ordinary text editor show the file's contents rather than applying its styles. Follow the project's instructions for the renderer version you use.
+**Expected result:** Equipment no longer has an overspend highlight and disappears from the filtered view. Our component updates its totals. The saved Markdown table does not refresh automatically: update it alongside any intentional change to the teaching data.
 
-<!-- example:end cssv-review-queue -->
+**If you see only the static table:** check that JavaScript is enabled and the website build includes the CSSV component. Opening the downloaded file in a text editor shows source, not the styled result.
 
-### Choose Where Styling Belongs
+<!-- example:end cssv-department-budget -->
 
-There are three useful options for this review queue:
+### When to Keep Excel
 
-| Approach | Where presentation is defined | Useful when |
-| --- | --- | --- |
-| Markdown table | The reading tool's table styling | Readers need a simple view in GitHub and other Markdown tools |
-| Astro table with shared CSS | The website's components and stylesheet | The view should match the rest of the site |
-| CSSV export | The file's CSS block, optionally importing shared CSS | The data should travel with a chosen presentation |
+This is a published table, not a replacement for a spreadsheet application. Excel remains useful for exploratory calculations, complex models, charts, and interactive cell editing. You can export data for a repository-based publication while continuing to use Excel where it serves the work best.
 
-For this project, keep the procedure files authoritative. The supplied CSSV file is a manually prepared teaching snapshot. A maintained dashboard could generate its CSV rows from those records and combine them with a reusable stylesheet. That export step is not implemented here.
+Use plain CSV when other applications need the values without presentation. Use website CSS when tables should share the site's design. CSSV is an experimental option when the data should travel with its own styling. Its complete file is not ordinary CSV: extract the data portion before importing it into tools that expect CSV.
 
-Adding the CSS block means the complete file should not be treated as ordinary CSV by other tools; export or extract its data portion when needed. Likewise, a Markdown export or printed report needs its own presentation checks. Styling portability depends on renderer support.
-
-The useful lesson is the choice, rather than the file extension. Keep data and styling separate when many publications need different presentations. Package them together when a portable, styled report serves the reader better. Before adopting an external renderer, check its supported browsers, accessibility, and handling of styles from untrusted files.
+This site bundles the official CSSV renderer at a pinned version and loads only the reviewed example file. It does not accept uploaded styles or fetch a renderer from an external CDN. Before adopting CSSV more broadly, check browser support, accessibility, and how styles from other sources are handled.
 
 ## Track the Work with GitHub Projects
 

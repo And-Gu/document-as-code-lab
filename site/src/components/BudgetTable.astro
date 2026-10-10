@@ -1,0 +1,81 @@
+---
+import { readFile } from 'node:fs/promises';
+import path from 'node:path';
+import { repositoryRoot } from '../lib/repository';
+import { siteUrl } from '../lib/urls';
+import '../styles/budget-table.css';
+const source = await readFile(path.join(repositoryRoot, 'examples/dashboards/department-budget.cssv'), 'utf8');
+---
+<template id="budget-table-template">
+  <section class="budget-table" aria-labelledby="budget-title">
+    <h3 id="budget-title">Department Budget</h3>
+    <p>Fictional annual budget · SEK · Positive variance means overspending.</p>
+    <div class="budget-table__controls">
+      <label>View<select data-budget-filter disabled><option value="all">All categories</option><option value="over">Over budget</option></select></label>
+      <label>Sort by<select data-budget-sort disabled><option value="category">Category A–Z</option><option value="variance">Largest overspend first</option><option value="actual">Actual spending, highest first</option></select></label>
+    </div>
+    <p data-budget-summary role="status">Loading budget table...</p>
+    <div class="budget-table__viewport" tabindex="0" role="region" aria-label="Department budget table"></div>
+    <details><summary>Inspect CSSV source</summary><pre><code>{source}</code></pre></details>
+    <p><a href={siteUrl('files/examples/dashboards/department-budget.cssv')} download>Download CSSV</a></p>
+  </section>
+</template>
+<script type="application/json" id="budget-table-source" set:html={JSON.stringify(source).replaceAll('<', '\\u003c')} />
+<script>
+  import '@rhpaiva/cssv/cssv-table.js';
+  type CssvTable = HTMLElement & {
+    update: (source: string) => Promise<void>;
+    table: HTMLTableElement | null;
+    errors: { message: string; fatal: boolean }[];
+    model: { rows: { number: number; fields: string[] }[] };
+  };
+  const host = document.querySelector('#budget-table-widget');
+  const template = document.querySelector<HTMLTemplateElement>('#budget-table-template');
+  const data = document.querySelector('#budget-table-source');
+  if (host && template && data?.textContent) {
+    host.append(template.content.cloneNode(true));
+    const filter = host.querySelector<HTMLSelectElement>('[data-budget-filter]')!;
+    const sort = host.querySelector<HTMLSelectElement>('[data-budget-sort]')!;
+    const summary = host.querySelector<HTMLElement>('[data-budget-summary]')!;
+    const table = document.createElement('cssv-table') as CssvTable;
+    table.lang = 'en-GB';
+    host.querySelector('.budget-table__viewport')!.append(table);
+    async function load() {
+      try {
+        await table.update(JSON.parse(data!.textContent!));
+        if (!table.table || table.errors.length) throw new Error('CSSV rendering failed');
+        table.table.setAttribute('aria-label', 'Fictional department budget in SEK');
+        const rows = table.model.rows.map(row => ({
+          element: table.table!.querySelector<HTMLTableRowElement>(`tbody tr[data-row="${row.number}"]`)!,
+          category: row.fields[0], planned: Number(row.fields[1]),
+          actual: Number(row.fields[2]), variance: Number(row.fields[3]),
+        }));
+        function update() {
+          const ordered = [...rows].sort((a, b) => sort.value === 'category'
+            ? a.category.localeCompare(b.category)
+            : sort.value === 'actual' ? b.actual - a.actual : b.variance - a.variance);
+          const visible = ordered.filter(row => filter.value !== 'over' || row.variance > 0);
+          for (const row of ordered) {
+            row.element.hidden = !visible.includes(row);
+            table.table!.tBodies[0].append(row.element);
+          }
+          const total = (key: 'planned' | 'actual' | 'variance') => visible.reduce((sum, row) => sum + row[key], 0).toLocaleString('en-GB');
+          summary.textContent = `${visible.length} of ${rows.length} categories · Planned ${total('planned')} SEK · Actual ${total('actual')} SEK · Variance ${total('variance')} SEK (shown rows)`;
+        }
+        filter.disabled = sort.disabled = false;
+        filter.addEventListener('change', update);
+        sort.addEventListener('change', update);
+        update();
+        // Keep the Markdown snapshot available unless enhancement has succeeded.
+        const fallback = host!.nextElementSibling;
+        if (fallback instanceof HTMLElement && fallback.tagName === 'TABLE') {
+          fallback.hidden = true;
+          fallback.style.display = 'none';
+        }
+      } catch {
+        summary.textContent = 'The interactive table could not load. Use the static table below or download the source.';
+      }
+    }
+    load();
+  }
+</script>

@@ -1,0 +1,26 @@
+---
+table {
+  --cssv-key: Category;
+  border-collapse: collapse;
+  width: 100%;
+  font-family: system-ui, sans-serif;
+  color: #202823;
+  background: #ffffff;
+}
+th, td { padding: 0.8rem; border-bottom: 1px solid #d6dedb; text-align: left; }
+thead { background: #e9f1ed; }
+td.number {
+  --cssv-format: "maximumFractionDigits:0,useGrouping:true";
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+tr:has([data-col="Variance SEK"].positive) { background: #fff1e5; }
+[data-col="Variance SEK"].positive { color: #982b17; font-weight: 700; }
+[data-col="Variance SEK"].negative { color: #176344; }
+---
+Category,Planned SEK,Actual SEK,Variance SEK
+Equipment,60000,72000,12000
+Training,40000,32000,-8000
+Travel,30000,39000,9000
+Software,50000,48000,-2000
+Team events,20000,20000,0

@@ -166,6 +166,8 @@ Chapter 8 distinguished editable visual sources from their rendered images. Publ
 
 An interactive chart needs a static alternative in a printed book. A detailed diagram may fit a full book page but need simplification for a presentation. A website may let readers enlarge an image; a slide shown across a meeting room cannot rely on that interaction.
 
+Chapter 10's budget example demonstrates this distinction with a table. Markdown readers see a saved table; Astro uses the CSSV source to render a styled table with sorting and filtering. The website controls do not belong to the source file, and a static publication needs a readable table without them.
+
 Keep the meaning and source data consistent while adapting size, labels, and detail. Preserve captions, units, source versions, and relevant qualifications. Do not assume that a Mermaid block displayed by GitHub will become a diagram in every exporter. Check the chosen renderer and use a suitable image export when required.
 
 For charts, repeat the checks from chapter 10: readable labels, adequate contrast, and an explanation that does not depend on color alone. Review representative images in every target format before scaling up to the full tutorial.

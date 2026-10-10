@@ -5,6 +5,7 @@ import { getChapters, chapterTitle } from '../../lib/chapters';
 import { siteUrl } from '../../lib/urls';
 import ChapterInformation from '../../components/ChapterInformation.astro';
 import ProjectGrowth from '../../components/ProjectGrowth.astro';
+import BudgetTable from '../../components/BudgetTable.astro';
 
 export async function getStaticPaths() {
   const chapters = await getChapters();
@@ -24,6 +25,7 @@ const { Content, headings } = await render(chapter);
     <ChapterInformation chapter={chapter} />
     <Content />
     {chapter.id === '03-project-growth' && <ProjectGrowth />}
+    {chapter.id === '10-dashboards' && <BudgetTable />}
   </article>
   <div class="chapter-navigation" aria-label="Chapter navigation">
     {previous && <a href={siteUrl(`chapters/${previous.id}/`)}>Previous: {chapterTitle(previous)}</a>}
