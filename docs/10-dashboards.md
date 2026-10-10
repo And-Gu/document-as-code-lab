@@ -78,7 +78,7 @@ Choose one place to maintain each fact:
 | Capability definition and acceptance criterion | Feature register | Link tasks and evidence to that criterion |
 | Review evidence for a change | Pull request and review record | Link to the reviewed version |
 
-These are choices for a workflow, not mandatory rules. Chapter 5's file-based tasks remain a useful alternative. Avoid maintaining the same task status independently in a file, an issue, and a spreadsheet. When more than one representation is needed, decide which one is authoritative and how the others are refreshed.
+These are choices for a workflow, not mandatory rules. Chapter 6's file-based tasks remain a useful alternative. Avoid maintaining the same task status independently in a file, an issue, and a spreadsheet. When more than one representation is needed, decide which one is authoritative and how the others are refreshed.
 
 GitHub Issues and Projects are service data, not files included in an ordinary Git clone. A content-history report therefore does not also preserve your work board. For a combined historical report, retain dated work-data snapshots or other suitable history alongside the source revisions you measure.
 
@@ -90,12 +90,80 @@ This project already has several building blocks:
 
 - Chapter 1's [status chart](../assets/onboarding-showcase/review-status.png) and accompanying table illustrate a review queue using fictional procedures.
 - Chapter 3's [historical comparison](03-project-growth.md) shows measured changes between identified revisions.
-- Chapter 5's [record processor](../scripts/process_records.py) creates a local `build/records/dashboard.md` from structured records.
+- Chapter 6's [record processor](../scripts/process_records.py) creates a local `build/records/dashboard.md` from structured records.
 - The [feature register](../data/features.json) holds the capability criteria we want to satisfy.
 
 These are not yet one automatically refreshed dashboard. The teaching chart is a fixed example, the record dashboard is generated locally, and the growth workflow produces downloadable reports. A link to a report and an embedded image also have different update paths: generating a new chart does not replace an older image saved in the README.
 
 For each view, tell readers what it includes and which version or observation it represents. Provide a route back to the underlying records. Someone should be able to move from "one task in progress" to the task and understand what is left to do.
+
+## Optional: Let a Table Carry Its Styling
+
+A Markdown table is easy to read in GitHub. On a website, CSS can make the same values easier to scan, for example by highlighting records that need review. Where should those styling rules live: in the website, or with the exported data?
+
+[CSSV, Comma-Separated Styled Values](https://github.com/rhpaiva/cssv), explores the second approach. It puts a CSS block above CSV data in a plain-text file. A CSSV renderer reads both parts and builds a styled HTML table. It is a project-specific format requiring that renderer, not a built-in feature of GitHub or a browser.
+
+<!-- example:start cssv-review-queue -->
+
+### Example: Which Procedure Needs Review?
+
+Return to chapter 1's [three fictional procedure files](../examples/onboarding-showcase/README.md). The question is still: **which procedure needs review, and who should act?** Here is a fixed teaching snapshot of their metadata:
+
+| Procedure | Owner | Status |
+| --- | --- | --- |
+| Requesting access | onboarding-team | approved |
+| Collecting equipment | workplace-team | approved |
+| Finding team contacts | people-team | draft |
+
+The next action is to ask the people team to review the contacts instructions. A styled view can draw attention to that row while retaining the status text, so its meaning does not depend on color.
+
+Our [CSSV example file](../examples/dashboards/review-queue.cssv) contains the same three rows plus table styling. Its key rules are:
+
+```css
+table { --cssv-key: status; }
+tr[data-key="draft"] {
+  background: #fff3cd;
+  color: #493500;
+  font-weight: 600;
+}
+```
+
+In CSSV, `--cssv-key: status` tells the renderer to expose each row's status as its `data-key` attribute. The second rule selects draft rows and gives them a pale yellow background, dark text, and stronger emphasis. These rules change presentation, not the records' approval states. The [CSSV specification](https://github.com/rhpaiva/cssv/blob/main/SPEC.md) describes the table structure and styling hooks.
+
+In the example file, the CSS sits between two `---` lines, followed by:
+
+```csv
+procedure,owner,status
+Requesting access,onboarding-team,approved
+Collecting equipment,workplace-team,approved
+Finding team contacts,people-team,draft
+```
+
+These delimiters resemble the front matter introduced in chapter 4, but this block contains CSS, not YAML metadata. Its meaning comes from the program reading it.
+
+To try the styled version, open the example file and use the editor linked from the [CSSV website](https://cssv.dev/). In your experiment, change the final row's status from `draft` to `approved`. The highlight should disappear while the other values stay the same. This simulates a change for learning; it does not approve the source procedure.
+
+**Expected result:** the renderer highlights the draft row, and changing its status changes the styling. The Markdown table above remains a fixed example. This tutorial does not currently load the CSSV renderer into its Astro pages.
+
+**If you see raw text:** check that you are using a CSSV renderer. GitHub's source view and an ordinary text editor show the file's contents rather than applying its styles. Follow the project's instructions for the renderer version you use.
+
+<!-- example:end cssv-review-queue -->
+
+### Choose Where Styling Belongs
+
+There are three useful options for this review queue:
+
+| Approach | Where presentation is defined | Useful when |
+| --- | --- | --- |
+| Markdown table | The reading tool's table styling | Readers need a simple view in GitHub and other Markdown tools |
+| Astro table with shared CSS | The website's components and stylesheet | The view should match the rest of the site |
+| CSSV export | The file's CSS block, optionally importing shared CSS | The data should travel with a chosen presentation |
+
+For this project, keep the procedure files authoritative. The supplied CSSV file is a manually prepared teaching snapshot. A maintained dashboard could generate its CSV rows from those records and combine them with a reusable stylesheet. That export step is not implemented here.
+
+Adding the CSS block means the complete file should not be treated as ordinary CSV by other tools; export or extract its data portion when needed. Likewise, a Markdown export or printed report needs its own presentation checks. Styling portability depends on renderer support.
+
+The useful lesson is the choice, rather than the file extension. Keep data and styling separate when many publications need different presentations. Package them together when a portable, styled report serves the reader better. Before adopting an external renderer, check its supported browsers, accessibility, and handling of styles from untrusted files.
 
 ## Track the Work with GitHub Projects
 
@@ -143,7 +211,7 @@ Use the Python environment from chapter 3 and the structured records introduced 
 
 1. Run `python scripts/process_records.py` from the repository root.
 2. Open `build/records/dashboard.md`. Read its selection and version information before interpreting the counts.
-3. Find TASK-003 in `examples/structured-content/records/task-003.md`. In the supplied example it is in progress, belongs to the service team, and implements REQ-014.
+3. Find TASK-003 in `examples/structured-content/records/TASK-003.md`. In the supplied example it is in progress, belongs to the service team, and implements REQ-014.
 4. Write a short dashboard note linking to the task and requirement. State the next action: obtain implementation and verification evidence before treating the requirement as delivered.
 5. In your exercise copy, change the task's owner to another fictional team and run the processor again. Compare the owner counts and the input digest at the top of the report. The task-status count should remain unchanged.
 
