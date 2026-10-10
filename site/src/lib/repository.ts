@@ -5,7 +5,7 @@ export const repositoryRoot = path.resolve(process.cwd(), '..');
 
 export async function repositoryFiles() {
   const files = ['README.md', 'LICENSE.md', 'AGENTS.md', 'GLOSSARY.md', 'CONTRIBUTING.md', 'ROADMAP.md', 'requirements.txt', 'site/README.md'];
-  const extensions = /\.(md|json|yaml|yml|py|mmd|png|svg|jpg|jpeg|webp|gif|txt)$/i;
+  const extensions = /\.(md|json|yaml|yml|py|mmd|png|svg|jpg|jpeg|webp|gif|txt|cssv)$/i;
   async function collect(directory: string) {
     const entries = await readdir(path.join(repositoryRoot, directory), { withFileTypes: true });
     for (const entry of entries) {
