@@ -1,0 +1,16 @@
+---
+import { siteUrl } from '../../lib/urls';
+import { measures } from '../../lib/dashboard/metrics-api';
+---
+<section class="dashboard-panel" id="dashboard-growth" data-url={siteUrl('data/project-metrics.json')} aria-labelledby="growth-title">
+  <div class="dashboard-panel-heading"><h2 id="growth-title">Project growth</h2><span class="dashboard-state" data-state="Loading">Loading</span></div>
+  <p class="dashboard-error" role="status"></p><p class="dashboard-provenance"></p><p class="dashboard-lag"></p>
+  <div class="dashboard-growth-controls">
+    <label>Measure<select data-metric disabled>{measures.map(([field, label]) => <option value={field}>{label}</option>)}</select></label>
+    <label>Compare from<select data-from disabled></select></label><label>Compare to<select data-to disabled></select></label>
+  </div>
+  <div class="dashboard-chart"><canvas role="img" aria-label="Project growth by revision. The measured history table contains the chart values."></canvas></div>
+  <p class="dashboard-comparison" aria-live="polite"></p>
+  <details><summary>Measured history</summary><table><thead><tr><th scope="col">Revision (UTC)</th>{measures.map(([, label]) => <th scope="col">{label}</th>)}</tr></thead><tbody></tbody></table></details>
+  <p class="dashboard-note">Committed snapshots, refreshed after website deployment. Revision spacing represents order, not elapsed time. Counts show volume and recorded milestones, not quality or effort.</p>
+</section>

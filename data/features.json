@@ -52,8 +52,13 @@
     {
       "id": "github-dashboard",
       "name": "GitHub dashboard",
-      "status": "planned",
-      "completion_criterion": "Repository charts update from measured data and link to work tracking."
+      "status": "in-progress",
+      "completion_criterion": "Repository charts update from measured data and link to work tracking.",
+      "evidence": [
+        "The local Astro Project Control Center at /dashboard/ fetches issues, pull requests, main commits, and workflow runs through the public GitHub API in the browser.",
+        "Its growth chart fetches a generated versioned measurement snapshot, with source revision, comparison controls, and an accessible history table.",
+        "Hosted deployment and verification remain pending."
+      ]
     },
     {
       "id": "pdf-book",
