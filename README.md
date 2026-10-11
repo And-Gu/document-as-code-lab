@@ -26,7 +26,7 @@ npm run dev
 
 Open the local URL printed by Astro, using the `/document-as-code-lab/` base path. Changes to the original chapter files update the site; no duplicate chapter copies are maintained. See the [site README](site/README.md) for checks, build commands, and the GitHub Pages deployment flow.
 
-Use Node 22.12 or newer and a full Git checkout. The site generates growth data with Python before starting or building. The separate [PDF design trial](publishing/pdf/README.md) has optional dependencies and does not run as part of the website build. Its three-page proof is not the full book; automatic Mermaid CLI rendering still needs verification outside the restricted local environment.
+Use Node 22.12 or newer and a full Git checkout. The site generates growth data with Python before starting or building. The separate [PDF design trial](publishing/pdf/README.md) has optional dependencies and does not run as part of the website build. A dedicated manual/pull-request workflow builds its three-page proof with Mermaid CLI and saves review artifacts. Its first hosted run remains to be verified; this is not the full book or a published PDF edition.
 
 ## Quality Checks
 
