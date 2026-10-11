@@ -39,7 +39,19 @@ PYTHONPATH=build/pdf-tools .venv/bin/python scripts/build_pdf_proof.py \
   --prepared-svg build/pdf-proof/onboarding.svg
 ```
 
-This option accepts a prepared asset and records that fact and its hash in the manifest. It does not verify that an arbitrary supplied SVG matches the Mermaid source; inspect that relationship. The normal CLI path still needs an end-to-end check in an environment that permits launching Chromium. The browser-assisted proof is not a verified automated pipeline.
+This option accepts a prepared asset and records that fact and its hash in the manifest. It does not verify that an arbitrary supplied SVG matches the Mermaid source; inspect that relationship. The normal CLI path has since been verified in GitHub Actions, as described below. The prepared-SVG fallback does not itself verify automated rendering.
+
+## Automated Review Build
+
+The `PDF design proof` workflow in `.github/workflows/pdf-proof.yml` runs on pull requests to `main` and can be started manually from GitHub's Actions tab once the workflow is on the default branch. It is separate from Astro and does not deploy to Pages, commit generated files, or publish an approved edition. There is no push-to-main trigger yet.
+
+The Ubuntu 22.04 runner installs the locked Mermaid CLI dependencies and Puppeteer's matching Chrome browser with its sandbox enabled. It installs the pinned Pandoc/Typst Python packages and Poppler inspection tools, runs the focused tests, then calls `scripts/build_pdf_proof.py` without `--prepared-svg`.
+
+`scripts/verify_pdf_proof.py` requires Mermaid CLI provenance, matching source and SVG hashes, native SVG labels and shapes, three PDF pages, expected searchable metadata and budget values, and no raster images. It records font information for review. These are checks for this particular proof, not a general publication validator.
+
+Open a successful workflow run and download its `pdf-design-proof-<commit>` artifact. It contains the PDF, diagram, manifest, verification report, and page PNGs for visual inspection. Artifacts are retained for 14 days; they are review copies, not permanent releases. A pull-request run measures GitHub's test merge revision, which may differ from the branch's latest commit.
+
+The [first successful hosted run](https://github.com/And-Gu/document-as-code-lab/actions/runs/38117896788) rendered Mermaid through Chromium with its sandbox enabled, built the three-page PDF, and passed the artifact checks. All three generated page previews were visually inspected. The report confirms searchable metadata and budget values, embedded fonts, and no raster images. Full-book layout and accessibility verification remain future work. Fork pull requests may require a maintainer to approve the workflow run. No deployment secrets or write token are needed.
 
 ## Inputs and Outputs
 

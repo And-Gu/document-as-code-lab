@@ -63,7 +63,8 @@
       "evidence": [
         "publishing/pdf/ and scripts/build_pdf_proof.py produce a three-excerpt Pandoc/Typst design proof with chapter metadata, a native budget table, and a prepared vector diagram.",
         "The three-page proof was visually checked; Mermaid CLI launch is blocked in the local restricted environment, so its SVG was prepared through the browser.",
-        "Full-book generation, automated diagram rendering, navigation, and accessibility verification remain outstanding."
+        "GitHub Actions run 38117896788 rendered Mermaid through sandboxed Chromium, built and checked the three-page PDF, and uploaded review artifacts; all three page previews were visually inspected.",
+        "Full-book generation, navigation, and accessibility verification remain outstanding."
       ]
     },
     {

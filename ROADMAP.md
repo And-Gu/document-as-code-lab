@@ -43,7 +43,7 @@ Done when exercises use the project's own content and data.
 The first HTML introduction deck uses YAML, reusable Astro components, and Reveal.js in the existing site build. Local production checks cover its eight slides, source links, navigation, overview, fullscreen, and desktop/phone layouts. The workshop deck and book remain to be developed; this does not yet meet the presentation capability's two-deck completion criterion.
 
 - Build a PDF book with readable print layout.
-- Review the Pandoc/Typst three-excerpt proof, then verify automated Mermaid rendering and expand to full-book navigation, pagination, and accessibility checks. See `publishing/pdf/README.md` and the proposed chapter outline in `reference/pdf-publication.md`.
+- Expand the verified Pandoc/Typst three-excerpt proof and automated Mermaid rendering to full-book navigation, pagination, and accessibility checks. See `publishing/pdf/README.md` and the proposed chapter outline in `reference/pdf-publication.md`.
 - Build an introduction deck and a workshop deck.
 - Document how edits in Word or PowerPoint return to the source.
 - Verify shared diagrams in each output.

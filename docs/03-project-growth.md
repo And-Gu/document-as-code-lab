@@ -181,7 +181,7 @@ We have now reviewed the [feature register](../data/features.json) against the a
 | Tutorial website | Complete | Production build and GitHub Pages deployment succeeded; the hosted reading experience was checked |
 | Chapter metadata and history widget | Complete | All twelve hosted chapters contain the panel; expansion and chapter-specific commit history were checked |
 | Presentation decks | In progress | The HTML introduction deck is published and verified; the workshop deck is still missing |
-| PDF book | In progress | A three-excerpt Pandoc/Typst proof has been visually checked; full-book generation and automated diagram rendering remain unverified |
+| PDF book | In progress | A three-excerpt Pandoc/Typst proof with automated Mermaid rendering passed GitHub Actions checks and visual review; full-book generation remains outstanding |
 | GitHub dashboard | Planned | The combined chart and work-tracking view still needs implementation |
 | Workflow beyond GitHub | Planned | The exercise still needs verification in its stated environment |
 
