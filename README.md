@@ -8,7 +8,7 @@ The project teaches document-as-code by applying it to itself. It also serves as
 
 Chapter 1 is approved; the current revision of chapter 2 is in review. The remaining 11 chapters are drafts. The [Astro reading site is published on GitHub Pages](https://and-gu.github.io/document-as-code-lab/) and reads the original Markdown sources, including diagrams and linked examples. Every chapter has an expandable metadata and Git-history widget. Pull requests run Astro checks and a production build; pushes to `main` build and deploy the website.
 
-A runnable onboarding showcase, historical growth reporting, structured-record processing, and record-to-Mermaid generation are also available. Growth reports are generated as GitHub Actions artifacts. Chapter 3's saved charts remain fixed historical examples, while its Astro view adds an interactive report measured from committed history during each site build. The Project Control Center is implemented locally at `/document-as-code-lab/dashboard/`, linked from the chapter menu. It fetches GitHub operations in the browser and displays separately labelled growth measurements; publication and hosted verification are pending. The PDF book, additional presentation decks, and verification of Microsoft-environment exercises remain future work. Chapter approval does not extend to other chapter drafts or fictional example procedures.
+A runnable onboarding showcase, historical growth reporting, structured-record processing, and record-to-Mermaid generation are also available. Growth reports are generated as GitHub Actions artifacts. Chapter 3's saved charts remain fixed historical examples, while its Astro view adds an interactive report measured from committed history during each site build. The [Project Control Center is published on GitHub Pages](https://and-gu.github.io/document-as-code-lab/dashboard/), linked from the chapter menu. It fetches GitHub operations in the browser and displays separately labelled growth measurements. Hosted issues, pull requests, commits, and growth controls have been verified; the workflow panel's successful hosted retrieval still needs checking after the anonymous API allowance resets. The PDF book, additional presentation decks, and verification of Microsoft-environment exercises remain future work. Chapter approval does not extend to other chapter drafts or fictional example procedures.
 
 Run the site locally to try the first HTML introduction deck at `/document-as-code-lab/presentations/`. Its [YAML definition and authoring notes](presentations/README.md) select messages from chapters 1, 2, 9, and 11. Astro renders reusable slide components; Reveal.js provides navigation and presentation controls within the existing website build.
 
@@ -72,7 +72,7 @@ Filename prefixes and `chapter_number` metadata give the current reading order. 
 
 | Output | Purpose |
 | --- | --- |
-| Website | Published tutorial with chapter metadata and history; chapter 10 adds a CSSV budget-table example; the local Project Control Center awaits publication |
+| Website | Published tutorial with chapter metadata and history, a CSSV budget-table example, and the Project Control Center |
 | PDF book | Coherent long-form reading |
 | Presentations | Introduction, workshop, and technical deep dive |
 | GitHub dashboard | Repository status, growth charts, and work tracking |
