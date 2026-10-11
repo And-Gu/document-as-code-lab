@@ -4,9 +4,9 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "predev": "node scripts/growth-report.mjs",
+    "predev": "node scripts/growth-report.mjs && node scripts/operational-snapshot.mjs",
     "dev": "astro dev",
-    "prebuild": "node scripts/growth-report.mjs",
+    "prebuild": "node scripts/growth-report.mjs && node scripts/operational-snapshot.mjs",
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
