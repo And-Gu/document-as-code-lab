@@ -6,9 +6,9 @@ The project teaches document-as-code by applying it to itself. It also serves as
 
 ## Status
 
-Chapters 1 and 2 have prior approved editions; their current revisions are in review. The remaining 11 chapters are drafts. The [Astro reading site is published on GitHub Pages](https://and-gu.github.io/document-as-code-lab/) and reads the original Markdown sources, including diagrams and linked examples. Every chapter has an expandable metadata and Git-history widget. Pull requests run Astro checks and a production build; pushes to `main` build and deploy the website.
+Chapter 1 is approved; the current revision of chapter 2 is in review. The remaining 11 chapters are drafts. The [Astro reading site is published on GitHub Pages](https://and-gu.github.io/document-as-code-lab/) and reads the original Markdown sources, including diagrams and linked examples. Every chapter has an expandable metadata and Git-history widget. Pull requests run Astro checks and a production build; pushes to `main` build and deploy the website.
 
-A runnable onboarding showcase, historical growth reporting, structured-record processing, and record-to-Mermaid generation are also available. Growth reports are generated as GitHub Actions artifacts. Chapter 3's saved charts remain fixed historical examples, while its Astro view adds an interactive report measured from committed history during each site build. The PDF book, additional presentation decks, the combined work-tracking dashboard, and verification of Microsoft-environment exercises remain future work. Approval of chapters 1 and 2 does not extend to the remaining chapter drafts or the fictional example procedures.
+A runnable onboarding showcase, historical growth reporting, structured-record processing, and record-to-Mermaid generation are also available. Growth reports are generated as GitHub Actions artifacts. Chapter 3's saved charts remain fixed historical examples, while its Astro view adds an interactive report measured from committed history during each site build. The Project Control Center is implemented locally at `/document-as-code-lab/dashboard/`, linked from the chapter menu. It fetches GitHub operations in the browser and displays separately labelled growth measurements; publication and hosted verification are pending. The PDF book, additional presentation decks, and verification of Microsoft-environment exercises remain future work. Chapter approval does not extend to other chapter drafts or fictional example procedures.
 
 Run the site locally to try the first HTML introduction deck at `/document-as-code-lab/presentations/`. Its [YAML definition and authoring notes](presentations/README.md) select messages from chapters 1, 2, 9, and 11. Astro renders reusable slide components; Reveal.js provides navigation and presentation controls within the existing website build.
 
@@ -30,7 +30,7 @@ Use Node 22.12 or newer and a full Git checkout. The site generates growth data 
 
 ## Quality Checks
 
-Run the Python suite from the repository root with `.venv/bin/python -m unittest discover -s tests`. From `site/`, run `npm run check`, `node scripts/test-budget.mjs`, and `npm run build`. PDF-specific tests and visual checks are listed in the [PDF trial instructions](publishing/pdf/README.md). A successful build does not replace visual review or approve content.
+Run the Python suite from the repository root with `.venv/bin/python -m unittest discover -s tests`. From `site/`, run `npm run check`, `npm run test:dashboard`, `node scripts/test-budget.mjs`, and `npm run build`. PDF-specific tests and visual checks are listed in the [PDF trial instructions](publishing/pdf/README.md). A successful build does not replace visual review or approve content.
 
 ## Explore the Showcase
 
@@ -72,7 +72,7 @@ Filename prefixes and `chapter_number` metadata give the current reading order. 
 
 | Output | Purpose |
 | --- | --- |
-| Website | Published tutorial with chapter metadata and history; chapter 10 adds a CSSV budget-table example with sorting and filtering; a combined work-tracking dashboard remains planned |
+| Website | Published tutorial with chapter metadata and history; chapter 10 adds a CSSV budget-table example; the local Project Control Center awaits publication |
 | PDF book | Coherent long-form reading |
 | Presentations | Introduction, workshop, and technical deep dive |
 | GitHub dashboard | Repository status, growth charts, and work tracking |

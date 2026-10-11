@@ -1,0 +1,35 @@
+---
+import Documentation from '../../layouts/Documentation.astro';
+import { RefreshCw } from '@lucide/astro';
+import { repositoryUrl } from '../../lib/dashboard/config';
+import '../../styles/dashboard.css';
+import Growth from '../../components/dashboard/Growth.astro';
+const widgets = [['issues', 'Open issues'], ['pulls', 'Open pull requests'], ['commits', 'Recent commits on main'], ['workflows', 'Workflow status']];
+---
+<Documentation title="Project Control Center">
+  <div id="control-center">
+    <div class="dashboard-heading"><h1>Project Control Center</h1><button id="dashboard-refresh" type="button"><RefreshCw size={16} aria-hidden="true" /> Refresh / Retry</button></div>
+    <div class="dashboard-links" aria-label="Repository links">{[['Repository', ''], ['Actions', '/actions'], ['Issues', '/issues'], ['Pull requests', '/pulls']].map(([name, suffix]) => <a href={`${repositoryUrl}${suffix}`}>{name}</a>)}</div>
+    <p class="dashboard-note">GitHub API responses may be cached or delayed. Refresh pauses while this tab is hidden and slows down as the API allowance runs low.</p>
+    <p id="dashboard-announcement" role="status" aria-live="polite">Loading repository data…</p>
+    <noscript><p>Enable JavaScript for repository data and charts. The repository links above remain available.</p></noscript>
+    <div class="dashboard-grid">{widgets.map(([key, title]) => <section class="dashboard-panel" data-widget={key} aria-labelledby={`${key}-title`}>
+      <div class="dashboard-panel-heading"><h2 id={`${key}-title`}>{title}</h2><span class="dashboard-state" data-state="Loading">Loading</span></div>
+      <p class="dashboard-summary"></p><p class="dashboard-error"></p><p class="dashboard-time"></p>
+      {(key === 'issues' || key === 'pulls') && <label>Filter by title, author, or label<input type="search" data-filter={key} /></label>}
+      <ul class="dashboard-items"></ul><p class="dashboard-scope"></p>
+    </section>)}</div>
+    <section class="dashboard-panel" id="dashboard-activity" aria-labelledby="activity-title"><h2 id="activity-title">Limited activity feed</h2>
+      <label>Activity type<select id="activity-filter"><option value="all">All</option>{widgets.map(([key, title]) => <option value={key}>{title}</option>)}</select></label>
+      <p class="dashboard-note">Up to 20 items from the retrieved lists, ordered by their update or commit time.</p><ul class="dashboard-items"></ul>
+    </section>
+    <Growth />
+  </div>
+  <script>
+    import { startDashboard } from '../../lib/dashboard/controller';
+    import { startGrowth } from '../../lib/dashboard/growth-controller';
+    const start = () => { startGrowth(); startDashboard(); };
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, { once: true });
+    else start();
+  </script>
+</Documentation>

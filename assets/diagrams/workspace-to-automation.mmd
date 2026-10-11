@@ -1,14 +1,11 @@
 flowchart TD
-    branch["Create a branch"]
-    edit["Edit and commit the proposal"]
-    pr["Open a pull request"]
-    check["Astro build check"]
-    review["Review the content and diff"]
-    merge["Merge into main"]
-    website["Build and publish website to GitHub Pages"]
-    growth["Run tests and save growth reports"]
-    branch --> edit --> pr
-    pr --> check --> merge
-    pr --> review --> merge
-    merge --> website
-    merge --> growth
+    A[Create branch and edit access procedure] --> B[Commit change]
+    B --> C[Open pull request]
+    C --> D[Astro and PDF proof checks]
+    C --> E[Content review]
+    D --> F{Checks and review accepted?}
+    E --> F
+    F -->|Yes| G[Merge into main]
+    F -->|No| A
+    G --> H[Publish Astro website]
+    G --> I[Generate project-growth report]

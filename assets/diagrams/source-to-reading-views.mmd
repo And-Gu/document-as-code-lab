@@ -1,0 +1,10 @@
+flowchart LR
+    S["Maintained Markdown sources<br/>in a Git repository"]
+    G["GitHub preview<br/>Read Markdown"]
+    A["Astro build"]
+    W["Website<br/>hosted on GitHub Pages"]
+    P["PDF generation"]
+    B["PDF design proof<br/>Full book in development"]
+    S --> G
+    S --> A --> W
+    S --> P --> B
