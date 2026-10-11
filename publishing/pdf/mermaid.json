@@ -1,0 +1,7 @@
+{
+  "theme": "neutral",
+  "look": "classic",
+  "htmlLabels": false,
+  "flowchart": { "htmlLabels": false },
+  "themeVariables": { "fontFamily": "Arial", "fontSize": "16px" }
+}

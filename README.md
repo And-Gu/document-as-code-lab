@@ -17,12 +17,20 @@ Run the site locally to try the first HTML introduction deck at `/document-as-co
 Run the Astro site from the repository root:
 
 ```bash
+python3 -m venv .venv
+.venv/bin/python -m pip install -r requirements.txt
 cd site
-npm install
+npm ci
 npm run dev
 ```
 
 Open the local URL printed by Astro, using the `/document-as-code-lab/` base path. Changes to the original chapter files update the site; no duplicate chapter copies are maintained. See the [site README](site/README.md) for checks, build commands, and the GitHub Pages deployment flow.
+
+Use Node 22.12 or newer and a full Git checkout. The site generates growth data with Python before starting or building. The separate [PDF design trial](publishing/pdf/README.md) has optional dependencies and does not run as part of the website build. Its three-page proof is not the full book; automatic Mermaid CLI rendering still needs verification outside the restricted local environment.
+
+## Quality Checks
+
+Run the Python suite from the repository root with `.venv/bin/python -m unittest discover -s tests`. From `site/`, run `npm run check`, `node scripts/test-budget.mjs`, and `npm run build`. PDF-specific tests and visual checks are listed in the [PDF trial instructions](publishing/pdf/README.md). A successful build does not replace visual review or approve content.
 
 ## Explore the Showcase
 
@@ -88,6 +96,7 @@ Word counts measure content volume, not quality. The measurement rules distingui
 - `docs/`: tutorial chapters.
 - `site/`: Astro reading site using the original chapters and supporting material.
 - `presentations/`: selected teaching messages and chapter references for HTML slide decks.
+- `publishing/pdf/`: optional PDF trial dependencies, Mermaid configuration, and Typst layout template.
 - `reference/`: optional technical detail linked from chapters, excluded from chapter metrics.
 - `examples/`: exercise sources and fixed showcase datasets, excluded from chapter metrics.
 - `data/`: capability metadata and future measurement data.

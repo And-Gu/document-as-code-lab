@@ -35,6 +35,7 @@ Distinguish chapter draft status, approval, capability completion, and successfu
 
 - From `site/`, run `npm run check` and `npm run build`. Use `ASTRO_TELEMETRY_DISABLED=1` when sandboxed execution requires it.
 - Run `.venv/bin/python -m unittest discover -s tests` from the root when changing measurement or processing behavior.
+- Run `node scripts/test-budget.mjs` from `site/` when validating the website. For the optional PDF proof, follow `publishing/pdf/README.md`, run its focused tests, and inspect rendered pages. Record whether Mermaid CLI or a prepared SVG was used; do not claim the full PDF pipeline is verified from the prepared-SVG path alone.
 - For milestone changes, regenerate `scripts/measure_growth.py` reports with the appropriate Python environment; use `--include-working-tree` before committing.
 - Check `git diff --check`, changed-file scope, internal links, and representative images and diagrams. Verify one title and one widget per chapter when changing their rendering.
 - If Markdown rendering configuration changes but old HTML persists locally, use `npm exec astro sync -- --force` before rebuilding.

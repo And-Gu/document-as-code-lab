@@ -22,7 +22,7 @@ Done when an update produces verifiable current and historical metrics.
 
 ## 3. Publish the First Website
 
-Current status: Astro publishes all twelve chapters to GitHub Pages, with metadata and Git-history panels. Production deployment, navigation, images, and Mermaid rendering have been verified. Chapter 3 also has an interactive growth widget using committed history at build time; its saved charts remain historical snapshots. Extending this view into a combined work-tracking dashboard remains a next step. Chapters 1 and 2 have their first approved editions.
+Current status: Astro publishes all thirteen chapters to GitHub Pages, with metadata and Git-history panels. Production deployment, navigation, images, and Mermaid rendering have been verified. Chapter 3 has an interactive growth widget using committed history at build time; its saved charts remain historical snapshots. Chapter 10 has a CSSV budget table with sorting and filtering. A combined work-tracking dashboard remains a next step. Chapters 1 and 2 have prior approved editions; their current revisions are in review.
 
 - Compare a small set of publishing tools against the tutorial's needs.
 - Publish chapters and a basic growth dashboard.
@@ -43,6 +43,7 @@ Done when exercises use the project's own content and data.
 The first HTML introduction deck uses YAML, reusable Astro components, and Reveal.js in the existing site build. Local production checks cover its eight slides, source links, navigation, overview, fullscreen, and desktop/phone layouts. The workshop deck and book remain to be developed; this does not yet meet the presentation capability's two-deck completion criterion.
 
 - Build a PDF book with readable print layout.
+- Review the Pandoc/Typst three-excerpt proof, then verify automated Mermaid rendering and expand to full-book navigation, pagination, and accessibility checks. See `publishing/pdf/README.md` and the proposed chapter outline in `reference/pdf-publication.md`.
 - Build an introduction deck and a workshop deck.
 - Document how edits in Word or PowerPoint return to the source.
 - Verify shared diagrams in each output.
@@ -61,5 +62,5 @@ Done when readers can adapt the practices without relying on GitHub.
 ## Open Decisions
 
 - Primary audience and assumed technical knowledge.
-- Book and file-export tooling; Astro with Reveal.js is selected for HTML presentations, and existing charts use Matplotlib.
+- Whether the Pandoc/Typst book trial meets full-publication needs; Astro with Reveal.js is selected for HTML presentations, and existing charts use Matplotlib.
 - Microsoft account environment used for the portability exercise.

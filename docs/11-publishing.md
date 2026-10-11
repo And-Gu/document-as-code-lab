@@ -114,6 +114,8 @@ Because this is a project website, its address includes `/document-as-code-lab/`
 
 ## Assemble a PDF for Continuous Reading
 
+We are developing a [small PDF design trial and a proposed practical chapter](../reference/pdf-publication.md). It uses Pandoc, Typst, and SVG diagrams from Mermaid CLI. This is separate from the Astro website; the full-book publishing pipeline is not yet implemented.
+
 A PDF provides a stable edition that can be downloaded, shared, or printed. Its structure should help readers understand the material without relying on the surrounding website.
 
 Arrange sections in a deliberate reading order. Add a title, edition information, and enough context to explain the selection. A longer book also needs consistent heading levels, page numbers, a contents page, and useful cross-references. A two-page excerpt may need much less.

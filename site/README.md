@@ -16,7 +16,7 @@ The growth widget also needs Python and the repository's measurement dependencie
 
 ```bash
 cd site
-npm install
+npm ci
 npm run dev
 ```
 

@@ -56,7 +56,7 @@ After using the approach for a while, my experience is that it has significant p
 
 The project is for anyone who wants an introduction to the principles of document-as-code. It also introduces closely related concepts, such as automation, information reuse, visualization, and AI-supported work. Beginners can follow the concepts and exercises without prior experience with software development tools. More experienced readers can examine the examples and the rules behind their visualizations.
 
-This chapter follows one onboarding example from editable instructions to a handbook, training material, and a visual overview of what needs review. At the end, you will identify a similar opportunity in your own work. The [shared vocabulary](../GLOSSARY.md) explains unfamiliar terms.
+This chapter introduces an onboarding example that we develop throughout the tutorial. Here, we show how shared instructions can support a handbook, training material, and a visual overview of what needs review. Later chapters explore how to structure the information, process it, review changes, and publish different views. At the end of this chapter, you will identify a similar opportunity in your own work. The [shared vocabulary](../GLOSSARY.md) explains unfamiliar terms.
 
 ## From Source Files to Documents
 

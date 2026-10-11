@@ -58,8 +58,13 @@
     {
       "id": "pdf-book",
       "name": "PDF book",
-      "status": "planned",
-      "completion_criterion": "The book is generated from source and visually verified."
+      "status": "in-progress",
+      "completion_criterion": "The book is generated from source and visually verified.",
+      "evidence": [
+        "publishing/pdf/ and scripts/build_pdf_proof.py produce a three-excerpt Pandoc/Typst design proof with chapter metadata, a native budget table, and a prepared vector diagram.",
+        "The three-page proof was visually checked; Mermaid CLI launch is blocked in the local restricted environment, so its SVG was prepared through the browser.",
+        "Full-book generation, automated diagram rendering, navigation, and accessibility verification remain outstanding."
+      ]
     },
     {
       "id": "presentations",
