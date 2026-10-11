@@ -8,7 +8,7 @@ The project teaches document-as-code by applying it to itself. It also serves as
 
 Chapter 1 is approved; the current revision of chapter 2 is in review. The remaining 11 chapters are drafts. The [Astro reading site is published on GitHub Pages](https://and-gu.github.io/document-as-code-lab/) and reads the original Markdown sources, including diagrams and linked examples. Every chapter has an expandable metadata and Git-history widget. Pull requests run Astro checks and a production build; pushes to `main` build and deploy the website.
 
-A runnable onboarding showcase, historical growth reporting, structured-record processing, and record-to-Mermaid generation are also available. Growth reports are generated as GitHub Actions artifacts. Chapter 3's saved charts remain fixed historical examples, while its Astro view adds an interactive report measured from committed history during each site build. The [Project Control Center is published on GitHub Pages](https://and-gu.github.io/document-as-code-lab/dashboard/), linked from the chapter menu. It reads published operational snapshots by default, generated on main deployments and hourly, with optional live retrieval and separately labelled growth measurements. Hosted snapshot retrieval, timestamps, issues, pull requests, commits, and all four workflows have been verified. Workflow states describe collection time rather than current live status. The PDF book, additional presentation decks, and verification of Microsoft-environment exercises remain future work. Chapter approval does not extend to other chapter drafts or fictional example procedures.
+A runnable onboarding showcase, historical growth reporting, structured-record processing, and record-to-Mermaid generation are also available. Growth reports are generated as GitHub Actions artifacts. Chapter 3 introduces the standalone dashboard. Saved growth charts remain fixed historical examples, while the dashboard adds an interactive report measured from committed history during each site build. The [Project Control Center is published on GitHub Pages](https://and-gu.github.io/document-as-code-lab/dashboard/), linked from the chapter menu. It reads published operational snapshots by default, generated on main deployments and hourly, with optional live retrieval and separately labelled growth measurements. Hosted snapshot retrieval, timestamps, issues, pull requests, commits, and all four workflows have been verified. Workflow states describe collection time rather than current live status. The PDF book, additional presentation decks, and verification of Microsoft-environment exercises remain future work. Chapter approval does not extend to other chapter drafts or fictional example procedures.
 
 Run the site locally to try the first HTML introduction deck at `/document-as-code-lab/presentations/`. Its [YAML definition and authoring notes](presentations/README.md) select messages from chapters 1, 2, 9, and 11. Astro renders reusable slide components; Reveal.js provides navigation and presentation controls within the existing website build.
 
@@ -56,7 +56,7 @@ Filename prefixes and `chapter_number` metadata give the current reading order. 
 
 1. [Document-as-Code: The Living Tutorial](docs/01-introduction.md)
 2. [GitHub as a Workspace for Knowledge and Automation](docs/02-github-workspace.md)
-3. [Project Growth: History as Data](docs/03-project-growth.md)
+3. [Project Control Center: The Repository at a Glance](docs/03-project-growth.md)
 4. [Markdown and Content Structure](docs/04-markdown.md)
 5. [Templates and Metadata](docs/05-structured-content.md)
 6. [Processing Information into Views](docs/06-processing.md)
@@ -82,12 +82,12 @@ Outputs share source material, but each needs appropriate structure and editoria
 
 ## Growth Tracking
 
-Chapter 3 introduces an automated report updated on changes to the main branch:
+Chapter 3 links to the Project Control Center, whose growth measurements are regenerated during website builds:
 
 - Chapter count and word count, including per-chapter comparisons.
 - Historical values reconstructed from Git revisions.
 - Capability milestones from the versioned [feature register](data/features.json).
-- Work progress from GitHub issues and Projects (chapter 10 introduces work tracking; integration into this report remains planned).
+- Operational snapshots of GitHub issues, pull requests, commits, and workflow runs. GitHub Projects fields are not integrated into the dashboard.
 
 Word counts measure content volume, not quality. The measurement rules distinguish substantive chapters from outlines and exclude generated files. Committed snapshots identify their source revision; optional working-copy measurements are labelled separately.
 

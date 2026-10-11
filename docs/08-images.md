@@ -79,7 +79,7 @@ REQ-015 has no arrow because no relationship is recorded for it. That does not p
 | Render | Turn Mermaid into a visible diagram or image | Compatible preview or Mermaid renderer |
 | Refresh | Run the required steps after a change | Manual exercise now; automated integration later |
 
-From the repository root, with the chapter 3 environment active, run:
+From the repository root, with the Python environment from the [measurement reference](../reference/growth-measurement.md#prepare-a-local-environment) active, run:
 
 ```bash
 python scripts/build_record_diagram.py
@@ -109,7 +109,7 @@ For a SysML model, animation, or complex illustration, preserve the native sourc
 
 ## Charts Need Data, Not Invented Shapes
 
-Chapter 3's charts are generated from measured history. Keep the data, selection rules, units, and revision identity alongside a chart. A plausible curve is not a substitute for observations.
+The Project Control Center's growth charts are generated from measured history. Keep the data, selection rules, units, and revision identity alongside a chart. A plausible curve is not a substitute for observations.
 
 An AI agent can help write plotting code or explain a chart. Review the input selection and calculations as well as the image. Do not add observations to make a sparse history look convincing. When data changes, regeneration and review of captions and conclusions belong to the same update.
 
@@ -148,7 +148,7 @@ Keep source paths, input revisions or hashes, export methods, and tool versions 
 
 ## Try It: Change a Relationship
 
-Use your own exercise copy and the chapter 3 Python environment. No external AI service is required.
+Use your own exercise copy and the Python environment from the [measurement reference](../reference/growth-measurement.md#prepare-a-local-environment). No external AI service is required.
 
 1. Run the generator. Inspect its Mermaid text and manifest, then preview it if a renderer is available. Use your actual records if earlier exercises added items.
 2. In TASK-003, temporarily change `implements: [REQ-014]` to `implements: [REQ-015]`. This is a fictional maintenance experiment, not a product decision. Predict which arrow will move.

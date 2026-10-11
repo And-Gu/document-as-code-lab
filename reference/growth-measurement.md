@@ -16,6 +16,31 @@ Version 2 corrected historical counting to exclude nested Markdown files, matchi
 
 The current renderer shows four history panels, including the existing draft-or-complete count, and uses reading-order numbers and titles for chapter-size labels. Fixed older images retain their original layout and measurement version. Matplotlib caches stay under ignored `build/`, not alongside saved teaching assets.
 
+## Prepare a Local Environment
+
+Use a local clone with full Git history. Follow [GitHub's setup guide](https://docs.github.com/en/get-started/git-basics/set-up-git) and [cloning guide](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) if needed. A downloaded ZIP does not include that history.
+
+From the repository root, create an isolated Python environment and install the dependencies:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+```
+
+These commands use a macOS/Linux shell. Windows readers can use the activation commands in [Python's virtual environment guide](https://docs.python.org/3/library/venv.html). Once activated, the `python` commands are the same.
+
+## Measure Local Edits
+
+The default report ends at `HEAD`, your current committed revision. From the repository root, run:
+
+```bash
+python scripts/measure_growth.py
+python scripts/measure_growth.py --include-working-tree
+```
+
+The second command adds a separately labelled working-tree observation for uncommitted edits. Its source commit identifies the base revision, not an exact version of those edits. Keep generated JSON and charts under the ignored `build/growth/` directory; use committed revisions for reproducible comparisons.
+
 ## Reproduce a Revision
 
 With the Python environment active, from the repository root:

@@ -4,7 +4,7 @@
 
 - Agree on audience and expected prior knowledge.
 - Draft chapters 1 and 2 to introduce the approach and the GitHub workspace.
-- Develop chapter 3's growth exercise using the recurring example.
+- Bring the detailed growth-measurement explanation and historical teaching comparisons into chapter 10; chapter 3 is now a short introduction linking to the dashboard.
 - Define chapter status, chapter counting, word counting, and capability milestones.
 - Keep this README aligned with implemented behavior.
 
@@ -22,7 +22,7 @@ Done when an update produces verifiable current and historical metrics.
 
 ## 3. Publish the First Website
 
-Current status: Astro publishes all thirteen chapters to GitHub Pages, with metadata and Git-history panels. Production deployment, navigation, images, and Mermaid rendering have been verified. Chapter 3 has an interactive growth widget using committed history at build time; its saved charts remain historical snapshots. Chapter 10 has a CSSV budget table with sorting and filtering. The Project Control Center is published at `/dashboard/` with authenticated, build-generated operational snapshots on main deployment and an hourly schedule; optional live retrieval remains available. Pages deployment 38152410515 verified all four operational sources, workflow states, source revision, and generation timestamps. Workflow states describe collection time, and scheduled runs may be delayed. Chapter 1 is approved; the current revision of chapter 2 is in review.
+Current status: Astro publishes all thirteen chapters to GitHub Pages, with metadata and Git-history panels. Production deployment, navigation, images, and Mermaid rendering have been verified. Chapter 3 introduces the standalone Project Control Center, whose growth widget uses committed history at build time. Saved charts under `assets/figures/` remain historical snapshots. Chapter 10 has a CSSV budget table with sorting and filtering. The Project Control Center is published at `/dashboard/` with authenticated, build-generated operational snapshots on main deployment and an hourly schedule; optional live retrieval remains available. Pages deployment 38152410515 verified all four operational sources, workflow states, source revision, and generation timestamps. Workflow states describe collection time, and scheduled runs may be delayed. Chapter 1 is approved; the current revision of chapter 2 is in review.
 
 - Compare a small set of publishing tools against the tutorial's needs.
 - Publish chapters and a basic growth dashboard.

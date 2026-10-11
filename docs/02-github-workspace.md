@@ -168,7 +168,7 @@ Teams often rely on a specialist function to change document templates or workfl
 
 **GitHub Actions** executes configured workflows on events such as a pull request or an update to `main`. A **runner** executes each job; workflow definitions live in `.github/workflows/`.
 
-In this project, a pull request triggers an Astro build check and a separate PDF proof build. The PDF workflow renders Mermaid diagrams and saves review artifacts; it can also run manually. After changes reach `main`, separate workflows publish the website and generate growth reports. The website build also refreshes chapter 3's interactive data. The onboarding handbook and training excerpt still require someone to run their script. A successful workflow confirms that its configured tasks ran, not that the content is correct or approved. [Chapters 6](06-processing.md), [11](11-publishing.md), and [13](13-automation.md) explain execution and publishing in detail.
+In this project, a pull request triggers an Astro build check and a separate PDF proof build. The PDF workflow renders Mermaid diagrams and saves review artifacts; it can also run manually. After changes reach `main`, separate workflows publish the website and generate growth reports. The website build also refreshes the Project Control Center's growth data, introduced in chapter 3. The onboarding handbook and training excerpt still require someone to run their script. A successful workflow confirms that its configured tasks ran, not that the content is correct or approved. [Chapters 6](06-processing.md), [11](11-publishing.md), and [13](13-automation.md) explain execution and publishing in detail.
 
 ## AI Can Help You Build the Process
 
@@ -183,7 +183,7 @@ Explore an existing change in the public tutorial repository:
 1. Open this chapter in GitHub and compare Markdown source with its preview.
 2. Open [pull request #1](https://github.com/And-Gu/document-as-code-lab/pull/1). Inspect changes to `docs/01-introduction.md` and find a status change and a wording improvement.
 3. Find the merge commit `3c5ab277f3073d8fe0ba69d823e494491d12db78`. Check the [growth workflow run](https://github.com/And-Gu/document-as-code-lab/actions/runs/37230719162) and [Pages deployment](https://github.com/And-Gu/document-as-code-lab/actions/runs/37230719137) for that revision.
-4. If its growth-report artifact is available, check the recorded source commit. Artifacts may expire; [chapter 3](03-project-growth.md) includes a [saved report](../assets/figures/growth-first-update/history.json) from a **different** revision (`9c91191`) for comparison, not as evidence of this merge.
+4. If its growth-report artifact is available, check the recorded source commit. Artifacts may expire; the repository includes a [saved report](../assets/figures/growth-first-update/history.json) from a **different** revision (`9c91191`) for comparison, not as evidence of this merge.
 
 Downloading artifacts requires signing in with read access. If an artifact has expired, record that limitation and use the saved report to inspect its structure.
 
@@ -193,10 +193,10 @@ Downloading artifacts requires signing in with read access. If an artifact has e
 
 ## Optional: Propose Your Own Change
 
-For local setup, use [GitHub's setup guide](https://docs.github.com/en/get-started/git-basics/set-up-git) and [cloning guide](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository). A downloaded ZIP does not contain the history needed for chapter 3.
+For local setup, use [GitHub's setup guide](https://docs.github.com/en/get-started/git-basics/set-up-git) and [cloning guide](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository). A downloaded ZIP does not contain the history needed for growth measurements.
 
-In a repository you can edit, improve one sentence on a branch, inspect the diff, and commit it with a meaningful message. If appropriate, open a pull request. Merging is not required for this exercise. Chapter 9 develops the review workflow; chapter 3 explains how to trace generated results to a revision.
+In a repository you can edit, improve one sentence on a branch, inspect the diff, and commit it with a meaningful message. If appropriate, open a pull request. Merging is not required for this exercise. Chapter 9 develops the review workflow; the [measurement reference](../reference/growth-measurement.md) explains how to trace generated results to a revision.
 
 ## Other Environments
 
-GitLab and Bitbucket offer related repository practices, though details differ. The essential connection is between **the maintained source, the reviewed change, and the processing result**. Next, [chapter 3](03-project-growth.md) explores how project history becomes data.
+GitLab and Bitbucket offer related repository practices, though details differ. The essential connection is between **the maintained source, the reviewed change, and the processing result**. Next, [chapter 3](03-project-growth.md) introduces the Project Control Center and its views of repository activity and growth.

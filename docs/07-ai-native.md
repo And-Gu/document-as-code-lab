@@ -163,7 +163,7 @@ Ask for record IDs beside factual claims, then inspect whether those records act
 
 ## Try It: Compare a Task with and without Sources
 
-Use the fictional dataset in your own working copy. With the Python environment from chapter 3 active, regenerate the package:
+Use the fictional dataset in your own working copy. With the Python environment from the [measurement reference](../reference/growth-measurement.md#prepare-a-local-environment) active, regenerate the package:
 
 ```bash
 python scripts/process_records.py

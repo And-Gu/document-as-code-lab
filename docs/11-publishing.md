@@ -201,7 +201,7 @@ Use a disposable copy of the project for source edits so the fixed examples in c
 1. Make three working copies of the publication brief: one for a website, one for a PDF handbook, and one for an access-training presentation.
 2. Identify the audience, purpose, and ordered sources for each. Label all three as fictional teaching material. Explain whether contacts is included and how its draft status affects the publication.
 3. Sketch the website navigation and the PDF reading order. Write a three-slide teaching outline based on the access procedure. Keep these plans alongside the briefs.
-4. In the disposable project copy, add a clearly fictional clarification to the access instructions. Record the exact edit. With the chapter 3 Python environment active, run `python scripts/build_onboarding_showcase.py` from that copy's root.
+4. In the disposable project copy, add a clearly fictional clarification to the access instructions. Record the exact edit. With the Python environment described in the [measurement reference](../reference/growth-measurement.md#prepare-a-local-environment) active, run `python scripts/build_onboarding_showcase.py` from that copy's root.
 5. Inspect the regenerated handbook and training excerpt. Both should contain the clarification; the status chart should retain its counts because no status changed. Update the presentation outline if the teaching sequence needs to explain the clarification.
 6. Record which outputs changed, which remained unchanged, and what still requires an actual format-specific export and visual check.
 
