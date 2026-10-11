@@ -1,6 +1,7 @@
 import { GitHubApi } from './github-api';
 import { failed } from './types';
 import type { Collection, DataResult, Item } from './types';
+import { fetchSnapshot } from './snapshot-api';
 
 const keys = ['issues', 'pulls', 'commits', 'workflows'] as const;
 type Key = typeof keys[number];
@@ -29,6 +30,8 @@ export function startDashboard() {
   const results: Record<Key, DataResult<Collection>> = { issues: { state: 'Loading' }, pulls: { state: 'Loading' }, commits: { state: 'Loading' }, workflows: { state: 'Loading' } };
   let controller: AbortController | undefined, timer: ReturnType<typeof setTimeout> | undefined, disposed = false, resumeRequested = false;
   const refreshButton = root.querySelector<HTMLButtonElement>('#dashboard-refresh')!;
+  const liveButton = root.querySelector<HTMLButtonElement>('#dashboard-live-refresh')!;
+  const snapshotTime = root.querySelector<HTMLElement>('#dashboard-snapshot-time')!;
   const announcement = root.querySelector<HTMLElement>('#dashboard-announcement')!;
   function render(key: Key) {
     const panel = root!.querySelector<HTMLElement>(`[data-widget="${key}"]`)!, result = results[key];
@@ -56,12 +59,23 @@ export function startDashboard() {
     for (const { item, key } of items.slice(0, 20)) list.append(itemElement(item, `${key} · ${results[key].state} · `));
     if (!items.length) { const li = document.createElement('li'); li.textContent = 'No activity available in the retrieved lists.'; list.append(li); }
   }
-  async function refresh() {
+  async function refresh(live = false) {
     if (controller || disposed || document.hidden) return;
     clearTimeout(timer); controller = new AbortController(); const signal = controller.signal;
     const deadline = setTimeout(() => controller?.abort(new Error('GitHub refresh timed out. Retry to retrieve data.')), 45000);
-    refreshButton.disabled = true; announcement.textContent = 'Refreshing repository data…';
-    await Promise.allSettled(keys.map(async key => {
+    refreshButton.disabled = true; liveButton.disabled = true;
+    announcement.textContent = live ? 'Requesting live GitHub data…' : 'Loading published snapshot…';
+    if (!live) {
+      try {
+        const snapshot = await fetchSnapshot(`${import.meta.env.BASE_URL.replace(/\/?$/, '/')}data/project-operations.json`, signal);
+        for (const key of keys) results[key] = snapshot.results[key].data ? snapshot.results[key] : failed(results[key], snapshot.results[key].error ?? 'Snapshot source unavailable');
+        snapshotTime.replaceChildren('Snapshot generated at: ', timestamp(snapshot.generated_at), ` · source ${snapshot.source_commit.slice(0, 7)}`);
+      } catch (error) {
+        for (const key of keys) results[key] = failed(results[key], error instanceof Error ? error.message : 'Snapshot unavailable');
+      }
+      for (const key of keys) render(key);
+      activity();
+    } else await Promise.allSettled(keys.map(async key => {
       results[key] = { ...results[key], state: 'Loading', error: undefined }; render(key);
       try {
         results[key] = { data: await api[key](signal), retrievedAt: new Date().toISOString(), state: 'Live API' };
@@ -72,19 +86,21 @@ export function startDashboard() {
     }));
     clearTimeout(deadline); controller = undefined;
     if (disposed) return;
-    refreshButton.disabled = false;
+    refreshButton.disabled = false; liveButton.disabled = false;
     if (resumeRequested) { resumeRequested = false; void refresh(); return; }
     const problems = keys.filter(key => ['Stale', 'Unavailable'].includes(results[key].state)).length;
-    announcement.textContent = problems ? `${problems} data sources need attention. Last successful data is retained where available.` : 'Repository data refreshed.';
-    if (!document.hidden) timer = setTimeout(refresh, api.pollingDelay());
+    announcement.textContent = problems ? `${problems} data sources need attention. Last successful data is retained where available.` : live ? 'Live API data retrieved. Automatic refresh uses the published snapshot.' : 'Published snapshot loaded.';
+    if (!document.hidden) timer = setTimeout(() => void refresh(), 300000);
   }
   const visibility = () => { clearTimeout(timer); if (document.hidden) controller?.abort(); else if (controller) resumeRequested = true; else void refresh(); };
   const manual = () => { document.dispatchEvent(new Event('dashboard:refresh')); void refresh(); };
+  const manualLive = () => { void refresh(true); };
   const input = () => { for (const key of keys) render(key); activity(); };
-  const dispose = () => { disposed = true; clearTimeout(timer); controller?.abort(); document.removeEventListener('visibilitychange', visibility); root.removeEventListener('input', input); refreshButton.removeEventListener('click', manual); };
+  const dispose = () => { disposed = true; clearTimeout(timer); controller?.abort(); document.removeEventListener('visibilitychange', visibility); root.removeEventListener('input', input); refreshButton.removeEventListener('click', manual); liveButton.removeEventListener('click', manualLive); };
   document.addEventListener('visibilitychange', visibility);
   document.addEventListener('astro:before-swap', dispose, { once: true });
   window.addEventListener('pagehide', () => { dispose(); window.addEventListener('pageshow', event => { if (event.persisted) startDashboard(); }, { once: true }); }, { once: true });
   refreshButton.addEventListener('click', manual); root.addEventListener('input', input);
+  liveButton.addEventListener('click', manualLive);
   void refresh();
 }

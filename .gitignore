@@ -8,6 +8,7 @@ __pycache__/
 build/
 dist/
 site/public/data/project-metrics.json
+site/public/data/project-operations.json
 
 # Local credentials
 .env

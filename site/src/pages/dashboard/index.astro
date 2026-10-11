@@ -8,9 +8,10 @@ const widgets = [['issues', 'Open issues'], ['pulls', 'Open pull requests'], ['c
 ---
 <Documentation title="Project Control Center">
   <div id="control-center">
-    <div class="dashboard-heading"><h1>Project Control Center</h1><button id="dashboard-refresh" type="button"><RefreshCw size={16} aria-hidden="true" /> Refresh / Retry</button></div>
+    <div class="dashboard-heading"><h1>Project Control Center</h1><button id="dashboard-refresh" type="button"><RefreshCw size={16} aria-hidden="true" /> Refresh snapshot</button><button id="dashboard-live-refresh" type="button"><RefreshCw size={16} aria-hidden="true" /> Fetch live data</button></div>
     <div class="dashboard-links" aria-label="Repository links">{[['Repository', ''], ['Actions', '/actions'], ['Issues', '/issues'], ['Pull requests', '/pulls']].map(([name, suffix]) => <a href={`${repositoryUrl}${suffix}`}>{name}</a>)}</div>
-    <p class="dashboard-note">GitHub API responses may be cached or delayed. Refresh pauses while this tab is hidden and slows down as the API allowance runs low.</p>
+    <p class="dashboard-note">Published snapshots update after changes to main, hourly, and on manual deployment. Scheduled runs can be delayed. Optional live retrieval uses GitHub's anonymous API allowance.</p>
+    <p id="dashboard-snapshot-time"></p>
     <p id="dashboard-announcement" role="status" aria-live="polite">Loading repository data…</p>
     <noscript><p>Enable JavaScript for repository data and charts. The repository links above remain available.</p></noscript>
     <div class="dashboard-grid">{widgets.map(([key, title]) => <section class="dashboard-panel" data-widget={key} aria-labelledby={`${key}-title`}>

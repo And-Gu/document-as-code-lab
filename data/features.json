@@ -55,10 +55,10 @@
       "status": "in-progress",
       "completion_criterion": "Repository charts update from measured data and link to work tracking.",
       "evidence": [
-        "The Astro Project Control Center at /dashboard/ fetches issues, pull requests, main commits, and workflow runs through the public GitHub API in the browser.",
+        "The Astro Project Control Center at /dashboard/ has a pending snapshot-first update: authenticated collection during Pages builds publishes operational JSON, with hourly deployment and optional anonymous live retrieval.",
         "Its growth chart fetches a generated versioned measurement snapshot, with source revision, comparison controls, and an accessible history table.",
         "Pages deployment run 38151024814 published merge commit 19dea93. Hosted issues, pull requests, main commits, growth controls, and the generated JSON source revision were verified.",
-        "The hosted workflow panel correctly reports anonymous API rate limiting; its successful hosted retrieval remains to be verified after the allowance resets."
+        "The hosted workflow panel correctly reports anonymous API rate limiting. The replacement operational snapshot requires hosted verification after deployment."
       ]
     },
     {

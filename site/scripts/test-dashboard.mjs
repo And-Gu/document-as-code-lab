@@ -1,10 +1,12 @@
 import assert from 'node:assert/strict';
 import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import ts from 'typescript';
+import { execFileSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
 
 const output = new URL('../../build/dashboard-tests/', import.meta.url);
 await mkdir(output, { recursive: true });
-for (const name of ['config', 'types', 'github-api', 'metrics-api']) {
+for (const name of ['config', 'types', 'github-api', 'metrics-api', 'snapshot-api']) {
   const source = await readFile(new URL(`../src/lib/dashboard/${name}.ts`, import.meta.url), 'utf8');
   const js = ts.transpileModule(source, { compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.ES2022 } }).outputText.replace(/from '(\.\/[^']+)'/g, "from '$1.mjs'");
   await writeFile(new URL(`${name}.mjs`, output), js);
@@ -73,3 +75,42 @@ await assert.rejects(fetchMetrics('/data.json', signal, async () => new Response
 const generated = parseMetrics(JSON.parse(await readFile(new URL('../public/data/project-metrics.json', import.meta.url), 'utf8')));
 assert.ok(generated.history.length > 1);
 console.log('Versioned metrics generation, schema validation, provenance, lag, and base-path fetch passed.');
+const { parseSnapshot, fetchSnapshot, snapshotKeys } = await import(new URL('snapshot-api.mjs', output));
+const { repository } = await import(new URL('config.mjs', output));
+const snapshot = { schema_version: 1, generated_at: '2026-10-11T11:00:00Z', source_commit: 'a'.repeat(40), repository,
+  results: Object.fromEntries(snapshotKeys.map(key => [key, { state: 'Published snapshot', retrievedAt: '2026-10-11T11:00:00Z', data: issues }])) };
+assert.deepEqual(parseSnapshot(snapshot), snapshot);
+assert.throws(() => parseSnapshot({ ...snapshot, schema_version: 2 }), /provenance/);
+assert.throws(() => parseSnapshot({ ...snapshot, repository: { ...repository, name: 'other' } }), /provenance/);
+assert.throws(() => parseSnapshot({ ...snapshot, results: { ...snapshot.results, issues: { ...snapshot.results.issues, data: { ...issues, total: -1 } } } }), /collection/);
+assert.equal(parseSnapshot({ ...snapshot, results: { ...snapshot.results, workflows: { state: 'Unavailable', error: 'Collection failed' } } }).results.workflows.state, 'Unavailable');
+let snapshotCalls = 0;
+await fetchSnapshot('/document-as-code-lab/data/project-operations.json', signal, async (url, options) => {
+  snapshotCalls++; assert.equal(url, '/document-as-code-lab/data/project-operations.json'); assert.equal(options.credentials, 'omit');
+  return new Response(JSON.stringify(snapshot));
+});
+assert.equal(snapshotCalls, 1);
+await assert.rejects(fetchSnapshot('/snapshot.json', signal, async () => new Response('', { status: 503 })), /503/);
+console.log('Operational snapshot provenance, partial failure, validation, and single static-file retrieval passed.');
+const generator = new URL('./operational-snapshot.mjs', import.meta.url);
+const fixtureOutput = new URL('generated-operations.json', output);
+const collectorTest = `
+  process.env.GITHUB_TOKEN = 'test-token-never-publish';
+  process.argv = ['node', 'collector', '--output', ${JSON.stringify(fileURLToPath(fixtureOutput))}];
+  globalThis.fetch = async (url, options) => {
+    if (options.headers.Authorization !== 'Bearer test-token-never-publish') throw new Error('Missing collector authentication');
+    if (url.includes('/pulls?')) return new Response('{}', { status: 503 });
+    if (url.includes('/actions/workflows?')) return new Response(JSON.stringify({ workflows: [{ id: 42 }] }));
+    if (url.includes('/actions/workflows/42/runs?')) return new Response(JSON.stringify({ workflow_runs: [{ id: 99, name: 'Test build', html_url: 'https://github.com/And-Gu/document-as-code-lab/actions/runs/99', status: 'completed', conclusion: 'failure', head_branch: 'main', updated_at: '2026-10-11T10:00:00Z' }] }));
+    return new Response('[]');
+  };
+  await import(${JSON.stringify(generator.href)});
+`;
+execFileSync(process.execPath, ['--input-type=module', '-e', collectorTest], { stdio: 'pipe' });
+const fixtureText = await readFile(fixtureOutput, 'utf8');
+assert.ok(!fixtureText.includes('test-token-never-publish'));
+const collected = parseSnapshot(JSON.parse(fixtureText));
+assert.equal(collected.results.pulls.state, 'Unavailable');
+assert.equal(collected.results.issues.data.total, 0);
+assert.equal(collected.results.workflows.data.items[0].state, 'failure');
+console.log('Authenticated build collector, partial-source failure, workflow conclusions, and credential exclusion passed.');
