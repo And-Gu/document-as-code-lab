@@ -52,13 +52,13 @@
     {
       "id": "github-dashboard",
       "name": "GitHub dashboard",
-      "status": "in-progress",
+      "status": "complete",
       "completion_criterion": "Repository charts update from measured data and link to work tracking.",
       "evidence": [
-        "The Astro Project Control Center at /dashboard/ has a pending snapshot-first update: authenticated collection during Pages builds publishes operational JSON, with hourly deployment and optional anonymous live retrieval.",
+        "The Astro Project Control Center at /dashboard/ reads operational JSON collected with the read-only Actions token during Pages builds, with hourly deployment and optional anonymous live retrieval.",
         "Its growth chart fetches a generated versioned measurement snapshot, with source revision, comparison controls, and an accessible history table.",
         "Pages deployment run 38151024814 published merge commit 19dea93. Hosted issues, pull requests, main commits, growth controls, and the generated JSON source revision were verified.",
-        "The hosted workflow panel correctly reports anonymous API rate limiting. The replacement operational snapshot requires hosted verification after deployment."
+        "Pages deployment 38152410515 published source revision 829db09. Hosted operational JSON and all four panels were verified, including workflow states, generation timestamps, and successful snapshot refresh. Browser console reported no errors; local request tracing verifies no automatic GitHub API calls."
       ]
     },
     {
