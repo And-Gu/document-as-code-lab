@@ -62,7 +62,7 @@ The diagram describes how we can combine these perspectives. It does not mean th
 
 A chapter can remain a draft while a task to correct one example is complete. A requirement can be approved while its implementation is still in progress. Likewise, a closed task to investigate PDF tools does not mean that we have a working PDF publishing capability.
 
-Our [feature register](../data/features.json) describes capabilities and their completion criteria. Keep those criteria separate from task completion. The chapter 3 measurements read the recorded capability states; they do not independently verify that each capability works.
+Our [feature register](../data/features.json) describes capabilities and their completion criteria. Keep those criteria separate from task completion. The dashboard's growth measurements read the recorded capability states; they do not independently verify that each capability works.
 
 ## Choose Where the Information Lives
 
@@ -89,7 +89,7 @@ The repository README is a useful starting point. It can link to chapters, work 
 This project already has several building blocks:
 
 - Chapter 1's [status chart](../assets/onboarding-showcase/review-status.png) and accompanying table illustrate a review queue using fictional procedures.
-- Chapter 3's [historical comparison](03-project-growth.md) shows measured changes between identified revisions.
+- Chapter 3 introduces the [Project Control Center](https://and-gu.github.io/document-as-code-lab/dashboard/), which compares measured growth between identified revisions.
 - Chapter 6's [record processor](../scripts/process_records.py) creates a local `build/records/dashboard.md` from structured records.
 - The [feature register](../data/features.json) holds the capability criteria we want to satisfy.
 
@@ -173,7 +173,7 @@ GitHub Projects provides table, board, and roadmap views of work items, includin
 
 For the workshop example, we could use these stages: **To do**, **In progress**, **Review**, and **Done**. We choose their meaning. Here, Done means that the particular task's acceptance criteria have been met and its evidence has been linked.
 
-An issue titled "Check the chapter 3 exercise before the workshop" should identify the chapter, the expected result, and how to record the check. Assign the work to a person who can act on it. The person responsible for writing a chapter is not necessarily the person checking its exercise.
+An issue titled "Check the chapter 4 exercise before the workshop" should identify the chapter, the expected result, and how to record the check. Assign the work to a person who can act on it. The person responsible for writing a chapter is not necessarily the person checking its exercise.
 
 A milestone can group issues for a shared delivery goal, such as a workshop edition. Keep chapter status, task stage, and milestone completion distinct so readers understand what progress means. [GitHub's milestone guidance](https://docs.github.com/en/issues/using-labels-and-milestones-to-track-work/about-milestones) explains this grouping.
 
@@ -185,7 +185,7 @@ A useful dashboard makes its limits understandable without overwhelming the read
 
 Use measures that match the question. A count of assigned tasks is not an estimate of someone's workload: tasks differ in size and difficulty. Word count describes volume, not clarity. A higher number of closed issues does not necessarily mean greater value delivered. Use these measures to discuss the work, not rank individuals.
 
-For visual clarity, label categories and values directly, use consistent scales, and do not rely on color alone. Include a table or text summary with a chart. When showing trends, distinguish zero from missing data and explain changes in the counting rules. Chapter 3's measurement notes show why those definitions matter.
+For visual clarity, label categories and values directly, use consistent scales, and do not rely on color alone. Include a table or text summary with a chart. When showing trends, distinguish zero from missing data and explain changes in the counting rules. The [measurement reference](../reference/growth-measurement.md) explains these definitions.
 
 An interactive website could add filters by chapter, owner, or period using the same underlying data. That is a later extension, not a prerequisite for a useful overview. It will also need accessible controls, clear data freshness, and appropriate access restrictions. Aggregating private project data into a public chart can expose information even when the source links remain private.
 
@@ -209,7 +209,7 @@ The rules, scripts, and agent instructions are part of the team's maintained too
 
 ## Try It: Connect a Measure to an Action
 
-Use the Python environment from chapter 3 and the structured records introduced in chapter 5 and processed in chapter 6. Work in a disposable exercise copy if you plan to edit records. You do not need a GitHub Project for this first part.
+Use the Python environment described in the [measurement reference](../reference/growth-measurement.md#prepare-a-local-environment) and the structured records introduced in chapter 5 and processed in chapter 6. Work in a disposable exercise copy if you plan to edit records. You do not need a GitHub Project for this first part.
 
 1. Run `python scripts/process_records.py` from the repository root.
 2. Open `build/records/dashboard.md`. Read its selection and version information before interpreting the counts.

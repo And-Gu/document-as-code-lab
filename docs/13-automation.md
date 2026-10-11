@@ -37,7 +37,7 @@ A passing automated check answers a defined question. It cannot tell us that an 
 
 The [growth workflow](../.github/workflows/growth.yml) runs on pushes to `main` and can also be started manually. It retrieves the repository history, prepares Python, installs the declared dependencies, runs the tests, and generates growth reports. It then uploads the JSON data and charts as a downloadable artifact.
 
-The workflow has read-only repository-content permission and does not commit generated reports back into the source. It measures recorded revisions, so a local uncommitted edit is not part of the hosted report. Chapter 3 explains how to include working-copy measurements explicitly when exploring changes locally.
+The workflow has read-only repository-content permission and does not commit generated reports back into the source. It measures recorded revisions, so a local uncommitted edit is not part of the hosted report. The [measurement reference](../reference/growth-measurement.md#measure-local-edits) explains how to include working-copy measurements explicitly when exploring changes locally.
 
 Other useful scripts are available, but they are not all steps in that hosted workflow:
 
@@ -50,7 +50,7 @@ Other useful scripts are available, but they are not all steps in that hosted wo
 
 The last script deliberately writes tracked teaching assets. Run it only when you intend to inspect and update those examples, or use a disposable project copy. The other outputs are local build results ignored by Git.
 
-The growth workflow produces report artifacts. A separate Astro pull-request workflow checks the website build, and the Pages deployment workflow builds and publishes the website after changes reach `main`. That build also regenerates the data for chapter 3's interactive growth widget. Book generation, procedure approval, and checks of every chapter caption are outside these workflows. Knowing these boundaries helps us decide what to add next.
+The growth workflow produces report artifacts. A separate Astro pull-request workflow checks the website build, and the Pages deployment workflow builds and publishes the website after changes reach `main`. That build also regenerates the data for the Project Control Center's interactive growth chart. Book generation, procedure approval, and checks of every chapter caption are outside these workflows. Knowing these boundaries helps us decide what to add next.
 
 ## Check More Than the Build Result
 
@@ -95,7 +95,7 @@ The current growth workflow avoids output-commit loops by uploading results inst
 
 ## Try It: Make a Stale View Fail a Check
 
-Use the Python environment from chapter 3. This exercise uses the existing structured-record processor and fresh output directories. Keep any files you want to retain elsewhere before reusing these directory names.
+Use the Python environment from the [measurement reference](../reference/growth-measurement.md#prepare-a-local-environment). This exercise uses the existing structured-record processor and fresh output directories. Keep any files you want to retain elsewhere before reusing these directory names.
 
 First run the tests and generate two views from identical inputs:
 
@@ -135,7 +135,7 @@ The comparison should return to exit code 0. In a disposable project copy, you c
 
 In a disposable project copy, repeat chapter 11's onboarding change and also change the contacts status. Run the showcase builder. Inspect the handbook, excerpt, data, and chart against the sources, then find the related table, caption, and alternative text in chapter 1. Record which values still need editing. This deliberately demonstrates the gap between generated assets and manually maintained explanations.
 
-Next, run `python scripts/measure_growth.py --include-working-tree` after a chapter edit. Inspect the working-copy observation as described in chapter 3 and distinguish it from committed history. Keep generated outputs outside `docs/` so they do not become additional chapter content in the measurement.
+Next, run `python scripts/measure_growth.py --include-working-tree` after a chapter edit. Inspect the working-copy observation as described in the [measurement reference](../reference/growth-measurement.md#measure-local-edits) and distinguish it from committed history. Keep generated outputs outside `docs/` so they do not become additional chapter content in the measurement.
 
 Turning these exercises into one hosted quality workflow is a next implementation step. Add focused checks, test an intentional failure, and review the workflow before enabling it. The current growth workflow remains unchanged by this chapter.
 

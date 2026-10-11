@@ -175,13 +175,13 @@ To include an image, write an exclamation mark followed by a description in squa
 ![Baseline chart with one revision, 10 chapter outlines, 829 prose words, and zero completed capabilities.](../assets/figures/growth-baseline.png)
 ```
 
-Alternative text helps readers understand an image when they cannot see it, including when they use a screen reader. A visible caption connects the image to the surrounding discussion. For a complex chart, provide its values in a table or explain the main findings in the text, as chapter 3 does.
+Alternative text helps readers understand an image when they cannot see it, including when they use a screen reader. A visible caption connects the image to the surrounding discussion. For a complex chart, provide its values in a table or explain the main findings in the text, as the Project Control Center's measured-history table does.
 
 Clear headings, descriptive links, and table headers also make a document easier to navigate and understand. Check these features in the published result as well as the source. [Chapter 8](08-images.md) explains how to maintain and use different kinds of images.
 
 ## Links That Survive Everyday Changes
 
-Use descriptive link text so readers know what they will find. For example, link to [the growth measurement exercise](03-project-growth.md) instead of writing "click here."
+Use descriptive link text so readers know what they will find. For example, link to [the Project Control Center introduction](03-project-growth.md) instead of writing "click here."
 
 For files in this repository, use relative paths: directions from the file containing the link to the file you want to open. From this chapter, `03-project-growth.md` points to another file in the same folder. The path `../CONTRIBUTING.md` goes up one folder to the [contribution guidance](../CONTRIBUTING.md). GitHub follows these links within the branch you are viewing. [Its formatting guide gives more examples](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
 
@@ -280,6 +280,6 @@ Open the [example onboarding source](../examples/onboarding/requesting-access.md
 
 Now read the information item you selected in chapter 1 on its own. What would someone need to know if they encountered it in a training excerpt? Include that context when preparing the text for another reader or an AI task.
 
-If you run chapter 3's measurement script, edits to this example will leave the chapter count and chapter word total unchanged. The script measures files in `docs/`, while your exercise file is in `examples/`.
+If you run the [growth measurement script](../reference/growth-measurement.md), edits to this example will leave the chapter count and chapter word total unchanged. The script measures files in `docs/`, while your exercise file is in `examples/`.
 
 Next, [Templates and Metadata](05-structured-content.md) shows how to organize readable records with consistent fields. Chapter 6 then processes those records into useful views.

@@ -33,7 +33,7 @@ visuals:
 
 Chapter 5 gave us readable records with consistent metadata. Those fields become more useful when a program checks them and prepares views for different readers.
 
-Here, we follow one change from a record to a requirements document, a work dashboard, and an AI context package. First, we explain where the program runs. You can read the examples without installing anything; the hands-on exercise uses the Python environment introduced in chapter 3.
+Here, we follow one change from a record to a requirements document, a work dashboard, and an AI context package. First, we explain where the program runs. You can read the examples without installing anything; the hands-on exercise uses a Python environment, with setup described in the [measurement reference](../reference/growth-measurement.md#prepare-a-local-environment).
 
 By the end of this chapter, you will be able to distinguish editing from processing, explain what a runner does, and rebuild the views after changing a record.
 
@@ -45,7 +45,7 @@ You can edit the same kind of file in a browser or on your computer. The locatio
 
 A local working copy contains editable project files. A text editor changes those files. Git records selected changes as commits, and a Git application provides controls for reviewing and sharing them. Python runs our processing program. An editor or agent may bring these controls together, but each still does a different job.
 
-Saving a record locally does not send it to GitHub or regenerate a report. Committing records a version locally; pushing sends commits to GitHub. If you edit through GitHub's browser interface, bring those changes into your local copy before processing them there. [The review chapter](09-git-review.md) explains the collaboration workflow, and chapter 3 links to setup guides.
+Saving a record locally does not send it to GitHub or regenerate a report. Committing records a version locally; pushing sends commits to GitHub. If you edit through GitHub's browser interface, bring those changes into your local copy before processing them there. [The review chapter](09-git-review.md) explains the collaboration workflow, and the [measurement reference](../reference/growth-measurement.md#prepare-a-local-environment) links to setup guides.
 
 ### In GitHub's File Editor
 
@@ -247,7 +247,7 @@ The package excludes the text of related tasks and tests. The processor prepares
 
 ## Try It: Change a Record, Inspect the Views
 
-Activate the Python environment from [chapter 3](03-project-growth.md), which links to Git and Python preparation guides. The activation command below uses a macOS/Linux shell; Windows readers can use the platform-specific activation in the linked Python guide. From the repository root, run:
+Prepare and activate the Python environment using the [measurement reference](../reference/growth-measurement.md#prepare-a-local-environment), which links to Git and Python preparation guides. The activation command below uses a macOS/Linux shell; Windows readers can use the platform-specific activation in the linked Python guide. From the repository root, run:
 
 ```bash
 source .venv/bin/activate
