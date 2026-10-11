@@ -39,7 +39,7 @@ PYTHONPATH=build/pdf-tools .venv/bin/python scripts/build_pdf_proof.py \
   --prepared-svg build/pdf-proof/onboarding.svg
 ```
 
-This option accepts a prepared asset and records that fact and its hash in the manifest. It does not verify that an arbitrary supplied SVG matches the Mermaid source; inspect that relationship. The normal CLI path still needs an end-to-end check in an environment that permits launching Chromium. The browser-assisted proof is not a verified automated pipeline.
+This option accepts a prepared asset and records that fact and its hash in the manifest. It does not verify that an arbitrary supplied SVG matches the Mermaid source; inspect that relationship. The normal CLI path has since been verified in GitHub Actions, as described below. The prepared-SVG fallback does not itself verify automated rendering.
 
 ## Automated Review Build
 
@@ -51,7 +51,7 @@ The Ubuntu 22.04 runner installs the locked Mermaid CLI dependencies and Puppete
 
 Open a successful workflow run and download its `pdf-design-proof-<commit>` artifact. It contains the PDF, diagram, manifest, verification report, and page PNGs for visual inspection. Artifacts are retained for 14 days; they are review copies, not permanent releases. A pull-request run measures GitHub's test merge revision, which may differ from the branch's latest commit.
 
-The workflow still needs its first successful hosted run and visual review before automated rendering can be recorded as verified. Fork pull requests may require a maintainer to approve the workflow run. No deployment secrets or write token are needed.
+The [first successful hosted run](https://github.com/And-Gu/document-as-code-lab/actions/runs/38117896788) rendered Mermaid through Chromium with its sandbox enabled, built the three-page PDF, and passed the artifact checks. All three generated page previews were visually inspected. The report confirms searchable metadata and budget values, embedded fonts, and no raster images. Full-book layout and accessibility verification remain future work. Fork pull requests may require a maintainer to approve the workflow run. No deployment secrets or write token are needed.
 
 ## Inputs and Outputs
 
