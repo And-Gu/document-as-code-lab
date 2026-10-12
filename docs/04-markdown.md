@@ -24,8 +24,6 @@ Markdown lets you write and organize a document in a plain text file. Simple sym
 
 By the end of this chapter, you will be able to write a short Markdown section with headings, steps, a link, and basic metadata. You will also understand which features work across common tools and which need support from a particular publishing tool.
 
-You can write Markdown directly or describe changes to an AI agent. An AI agent is an AI assistant that can use tools to carry out a task, such as reading related files, editing a document, and checking the result. You explain the change you want in everyday language, and the agent helps turn it into an edit you can review.
-
 Learning a few Markdown conventions will help you give clearer instructions and check that the result is well structured. We will use the onboarding procedure from earlier chapters to compare its source text with the formatted preview, then make and review a small change.
 
 To do the exercise, you need a copy of the repository that you can edit, together with a text editor or an AI tool that can change its files. You can read and compare all the examples without setting up an editing environment.
@@ -85,34 +83,18 @@ Use the reference number when asking the service desk about progress. A submitte
 
 The headings help the colleague find each task, and the numbered list shows the order of the steps. Even before the file is formatted, you can see how the instructions are organized.
 
-Open the exercise file on GitHub and switch between its Code view and formatted preview. The Code view shows the Markdown markers; the preview shows the headings and lists they produce. Both views come from the same file. [GitHub's guide explains these file views](https://docs.github.com/en/repositories/working-with-files/using-files/working-with-non-code-files).
+Open [Requesting Access on GitHub](https://github.com/And-Gu/document-as-code-lab/blob/main/examples/onboarding/requesting-access.md). At the top of the file, switch between **Code** and **Preview**:
 
-For example, `## Follow Up` appears as a heading in the preview, followed by the instruction as a paragraph. When you later edit that section, a diff will show which lines changed between the earlier and revised versions.
+- **Code** shows the text stored in the file, including symbols such as `##` before a heading and numbers before the steps.
+- **Preview** displays that same text as a formatted document, with headings and numbered lists.
 
-## Write Directly or Ask an Agent
+For example, Code shows the line `## Follow Up`, while Preview displays **Follow Up** as a heading. You are looking at two presentations of the same version, not changing the file. [GitHub's guide to viewing Markdown source](https://docs.github.com/en/repositories/working-with-files/using-files/working-with-non-code-files#disabling-markdown-rendering) illustrates the Code control.
 
-You can make an edit yourself or ask an AI agent with access to the repository to help. Give it the filename, explain who will read the text, and describe the improvement you want. Include any limits it should respect. For example:
+Comparing versions is a separate task. A **diff** highlights the text added and removed between two versions of a file. [Chapter 9](09-git-review.md) explains how to use that comparison when reviewing a proposed change.
 
-```text
-Edit examples/onboarding/requesting-access.md for a new colleague.
-Add a section on what to do if the reference number is missing.
-Use clear, natural English and the existing heading structure.
-Keep the metadata status as draft and leave the fixed showcase unchanged.
-Do not invent a portal address, recovery process, or response-time guarantee.
-Put unresolved questions in a separate maintainer note, not in reader steps.
-Show the diff and identify details that need confirmation.
-Do not commit or publish the change.
-```
+You can write Markdown yourself or ask an AI tool to make the changes. Either way, the headings, lists, and links in the resulting file follow the same conventions.
 
-Some AI tools suggest wording in chat; others can edit the file directly. Check where the result has been saved, then read the revised file and inspect its diff. The workflow introduced in [chapter 2](02-github-workspace.md) lets an agent help with both editing and checks. You still need to confirm that the instructions describe the actual process.
-
-Clear headings and consistent terms help the agent understand the material. Relevant sources and an explanation of what is known help it avoid filling gaps with guesses. Review the facts, links, metadata, and preview before accepting the edit. [Chapter 7](07-ai-native.md) explains how to prepare this context for AI-assisted work.
-
-## Use Clear Headings and References
-
-Headings help readers find the information they need. Choose names that describe the task or topic, and make it clear what the instructions refer to. For example, "Use the access request reference number" is easier to follow than "Use it" when the preceding text mentions several things.
-
-Our procedure already names the reference number. We can make the heading more specific and clarify where that number comes from. This is a suggested revision for comparison; the exercise file still contains the original wording.
+The example below shows the same passage in two forms: first as Markdown source, then as formatted text. Notice how `##` identifies the heading and a blank line separates it from the paragraph.
 
 ```markdown
 ## Follow Up on an Access Request
@@ -134,9 +116,7 @@ does not mean access has been approved.
 
 <!-- example:end follow-up -->
 
-If you are reading the source, you will also see `<!-- example:start follow-up -->` and `<!-- example:end follow-up -->` around this example. They are HTML comments, which GitHub hides in its formatted preview. Our Astro website reads these markers and gives the enclosed example a distinct visual style. The marker names and their meaning are conventions we chose for this project, not built-in Markdown features.
-
-The heading names the task, and the paragraph identifies the reference number. Where readers need background information, explain it briefly or link to it. These choices also help when a file is included in another publication or supplied as context to an AI agent.
+If you are reading the source, you will also see `<!-- example:start follow-up -->` and `<!-- example:end follow-up -->` around this example. They are HTML comments: visible in the source, but not shown in GitHub's Preview view. Our Astro website reads these markers and gives the enclosed example a distinct visual style. The marker names and their meaning are conventions we chose for this project, not built-in Markdown features.
 
 In this project, use one level-one heading (`#`) for the document title, level-two headings (`##`) for sections, and level-three headings (`###`) for subsections. Choose the level according to where the heading belongs in the document. The publishing tool determines its size and appearance.
 
@@ -152,18 +132,62 @@ The following elements cover most of what you need for a short procedure:
 | --- | --- | --- |
 | Heading | `## Follow Up` | Name a section |
 | Emphasis | `**Keep the reference number.**` | Highlight a meaningful point |
-| Inline code | `` `status` `` | Identify a field, command, or filename |
+| Inline code | `` `status` `` | Show a short literal value within a sentence |
+| Fenced code block | Three backticks above and below the text | Display a separate example or several lines of source |
 | Link | `[Chapter 3](03-project-growth.md)` | Connect related material |
 | Bullet | `- Team name` | List parallel items |
 | Ordered step | `1. Open the portal.` | Express a sequence |
+| Table | Header row, separator row, then data rows | Compare information in columns |
 
 A table works well when readers need to compare items, as in the list of elements above. Paragraphs are better for developing an explanation. Leave blank lines around lists, tables, and code blocks so their boundaries are easy to see in the source.
 
-A fenced code block displays source text or commands exactly as written. That is how we show Markdown examples without turning their markers into headings and lists. To create one, place three backticks before and after the text. Add a language name such as `markdown`, `yaml`, or `bash` immediately after the opening backticks. This command, for example, is displayed in a `bash` block:
+### Create a Table
+
+Write the column headings on the first line, followed by a separator row and the data rows:
+
+```markdown
+| Information | Example |
+| --- | --- |
+| Team name | Product Development |
+| System name | Planning System |
+```
+
+The `|` characters separate the cells. The row of `---` entries separates the column headings from the data. Each following line adds a row. Use the same number of cells in every row and leave a blank line before and after the table.
+
+GitHub's Preview view and Astro display this source as a formatted table:
+
+| Information | Example |
+| --- | --- |
+| Team name | Product Development |
+| System name | Planning System |
+
+### Inline Code and Fenced Code Blocks
+
+Both forms display literal text, but they serve different purposes. **Inline code** stays within a sentence. Put one backtick on each side of a field name, filename, or short command:
+
+```markdown
+Keep the `status` field set to `draft`.
+```
+
+This appears as: Keep the `status` field set to `draft`.
+
+A **fenced code block** stands on its own and can contain several lines. Put three backticks on a separate line before and after the text.
+
+The word after the opening backticks identifies the type of content. For example, `markdown` labels Markdown source, `yaml` labels structured data, and `bash` labels shell commands entered in a terminal. The label helps the renderer highlight the syntax; it does not run the commands. Here is the source for a command example:
+
+````markdown
+```bash
+python scripts/measure_growth.py --include-working-tree
+```
+````
+
+It appears as:
 
 ```bash
 python scripts/measure_growth.py --include-working-tree
 ```
+
+Displaying a command does not run it. Similarly, a block labelled `markdown` shows the source notation rather than formatting its contents as headings and lists. That is how this chapter presents examples you can inspect or copy.
 
 Most of these elements are defined in the [CommonMark specification](https://spec.commonmark.org/spec). GitHub uses an extended version called [GitHub Flavored Markdown](https://github.github.com/gfm/), which also supports tables and task lists. This is one reason to check how a file appears in the tool your readers will use.
 
@@ -266,9 +290,9 @@ A wide table or diagram may need a different layout on a printed page or a slide
 Open the [example onboarding source](../examples/onboarding/requesting-access.md) in your own working copy. It describes a fictional service, so adapt it to a real workflow you understand before using it at work.
 
 1. Read the source and its Markdown preview, if your editor provides one. Identify its metadata, title, sections, and ordered steps.
-2. Draft a short section about a missing reference number, yourself or with the AI prompt above. The source does not explain how to recover it. Mark this part of the draft as incomplete and ask the owner what the requester should do. Keep that question in the maintainer notes described in the next step.
+2. Draft a short section about a missing reference number. The source does not explain how to recover it. Mark this part of the draft as incomplete and ask the owner what the requester should do. Keep that question in the maintainer notes described in the next step.
 3. Add a `## Maintainer Notes` section containing the question and a link labelled `Contribution guidance for maintainers`. From the example directory, the link path is `../../CONTRIBUTING.md`. These notes are for the people maintaining the procedure. Decide how to keep them separate from the instructions delivered to new colleagues.
-4. Compare the source and preview. Check the heading hierarchy, list order, link destination, and readability. If you used AI, review its assumptions as well. Keep the metadata status as `draft`.
+4. Compare the source and preview. Check the heading hierarchy, list order, link destination, and readability. Keep the metadata status as `draft`.
 5. Read the revised procedure as a new colleague would. Do the headings help you find each task? Is it clear which reference number the instructions mean and which information still needs confirmation? Replace unclear references such as an unexplained "it" with specific wording.
 6. Inspect the diff and commit the intended change with a message explaining its purpose and any remaining review question.
 
