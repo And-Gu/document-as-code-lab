@@ -1,7 +1,7 @@
 ---
 id: 02-project-growth
 chapter_number: 3
-status: draft
+status: approved
 audience: practitioners-learning-data-driven-documentation
 learning_goal: Explore the Project Control Center and distinguish operational snapshots from growth measurements.
 ---
