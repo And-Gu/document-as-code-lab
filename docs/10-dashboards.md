@@ -147,7 +147,7 @@ Software,50000,48000,-2000
 Team events,20000,20000,0
 ```
 
-These delimiters resemble the front matter introduced in chapter 4, but this block contains CSS, not YAML metadata. Its meaning comes from the program reading it.
+These delimiters resemble the front matter introduced in chapter 5, but this block contains CSS, not YAML metadata. Its meaning comes from the program reading it.
 
 Our Astro component adds sorting, filtering, and totals. These are website features, not spreadsheet formulas supplied by CSSV. Variance values are stored explicitly in this teaching file; CSSV does not recalculate them. If you change a planned or actual amount, update its variance too.
 

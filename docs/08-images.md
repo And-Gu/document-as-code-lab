@@ -16,6 +16,17 @@ visuals:
     outputs: [web, pdf, slides]
     caption: The starting dataset contains four records and two explicit relationships.
     alt: TASK-003 implements REQ-014, which is verified by TEST-008. REQ-015 has no recorded relationship. The procedure is outside this dataset.
+  - id: onboarding-record-relationships
+    status: source-ready
+    kind: diagram
+    purpose: Distinguish validated record links from the procedure's conceptual connection.
+    placement: after-describe-relationships-with-mermaid
+    preferred_source: mermaid
+    source: ../assets/diagrams/onboarding-record-relationships.mmd
+    embedded: true
+    outputs: [web, pdf, slides]
+    caption: Record links express intended implementation and verification, not completed work.
+    alt: TASK-003 implements REQ-014, which is verified by TEST-008. A dashed connection from PROC-001 to REQ-014 is conceptual and not checked by the processor.
 ---
 
 # Images, Diagrams, and Visual Sources
@@ -45,9 +56,43 @@ Mermaid and SVG serve different roles. Mermaid describes diagrams; SVG is a vect
 
 Mermaid turns text descriptions into diagrams. You name items and connections, while a renderer arranges and draws them. Its source can be reviewed alongside prose in a diff. [The Mermaid introduction](https://mermaid.js.org/intro/) describes this approach.
 
-Chapter 5's [authored diagram](../assets/diagrams/onboarding-record-relationships.mmd) includes a conceptual connection to the procedure. That is useful explanatory judgment, but the connection is not present in record metadata.
+This [authored diagram](../assets/diagrams/onboarding-record-relationships.mmd) connects chapter 6's records to the draft procedure. The procedure connection is explanatory judgment, not a link stored in record metadata.
+
+```mermaid
+flowchart LR
+    procedure["PROC-001: draft procedure"]
+    task["TASK-003: implementation work"]
+    requirement["REQ-014: reference-number requirement"]
+    test["TEST-008: planned test"]
+    task -->|implements: intended work| requirement
+    requirement -->|verified_by: intended check| test
+    procedure -. conceptual connection only .-> requirement
+```
+
+*Record links express intended implementation and verification, not completed work.*
+
+The solid arrows show relationships stored in the records and checked by the processor. The dashed arrow connects the procedure to the scenario for the reader; it is not a stored relationship. We chose these arrow styles to distinguish the two meanings.
+
+This diagram is written in Mermaid but is not generated from the records. Changing a record therefore does not update the diagram automatically. Include related diagrams and explanations in the review of a change: regenerate outputs built from data, and edit maintained illustrations where needed. Keep a historical example unchanged only when it is clearly labelled as such.
 
 For a diagram answering only "what relationships are recorded?", we can generate the source instead. This avoids maintaining those same connections twice. It does not remove the need to review selection rules or the resulting layout.
+
+### Display Mermaid in Markdown
+
+To display a Mermaid diagram in GitHub's Preview view, put its instructions inside a fenced block labelled `mermaid`. This teaching example uses four backticks around the outer block so its three-backtick fences stay visible:
+
+````markdown
+```mermaid
+flowchart LR
+    request["Access request"] --> review["Team review"]
+```
+````
+
+Here, `flowchart LR` requests a left-to-right layout. `request` and `review` identify the nodes, the bracketed text supplies their labels, and `-->` connects them with an arrow. The label on a code fence matters: a `markdown` block shows these instructions as text; a supported `mermaid` block renders the diagram.
+
+Editable `.mmd` files hold Mermaid source on its own. Linking to one lets readers inspect the instructions; embedding a Mermaid block lets a compatible renderer display them in the chapter. Keep the embedded instructions aligned with their maintained source.
+
+Different renderers may support different Mermaid versions or features. Check the result on GitHub and in each publication you produce. [GitHub's diagram guide](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-diagrams) explains its support and version checks.
 
 ## Let Records Supply the Connections
 
@@ -95,7 +140,7 @@ For local image export, follow the [official Mermaid CLI instructions](https://g
 mmdc -i build/record-diagram/relationships.mmd -o build/record-diagram/relationships.svg
 ```
 
-Record the renderer version and inspect the export. The renderer is not included in this project's Python dependencies, and this draft does not claim verified rendering across GitHub, PDF, and PowerPoint. [Chapter 4](04-markdown.md) explains preview compatibility; chapter 13 will develop repeatable build checks.
+Record the renderer version and inspect the export. The renderer is not included in this project's Python dependencies, and this draft does not claim verified rendering across GitHub, PDF, and PowerPoint. The Mermaid section above explains preview compatibility; chapter 13 will develop repeatable build checks.
 
 ## SVG, Raster Images, and Native Sources
 
@@ -134,13 +179,21 @@ Compare the result with Mermaid: which preserves the meaning more clearly, and w
 
 Use generators for connections and counts that follow explicit rules. Use people and agents for authored explanations that require judgment. Both belong in a coordinated update process.
 
-For this example, check the records, generated diagram, chapter 6's authored diagram and explanations, embedded teaching examples, and affected captions. Fixed snapshots may deliberately remain unchanged, but must remain labelled rather than becoming stale current-state claims.
+For this example, check the records, generated diagram, the authored diagram above and explanations, embedded teaching examples, and affected captions. Fixed snapshots may deliberately remain unchanged, but must remain labelled rather than becoming stale current-state claims.
 
 Ask an agent to report updated items, checked-but-unchanged items, and unverified items. Supply dependencies and generation commands through project instructions or skills. A harness can run checks and record results; this repository does not yet discover every affected visual automatically.
 
 ## Make Visuals Understandable and Traceable
 
 Provide a caption explaining the point, alternative text describing essential information, and a longer explanation or data table when needed. Do not encode important distinctions through color alone. [W3C's complex-image guidance](https://www.w3.org/WAI/tutorials/images/complex/) explains descriptions for charts and diagrams.
+
+For an image in Markdown, put the alternative description between square brackets after `!`, followed by the image path in parentheses:
+
+```markdown
+![Baseline chart with one revision, 10 chapter outlines, 829 prose words, and zero completed capabilities.](../assets/figures/growth-baseline.png)
+```
+
+Alternative text explains the image when a reader cannot see it; a visible caption connects it to the discussion. For a complex chart, include its values in a table or explain the main findings in the surrounding text. Check that descriptions, labels, and captions remain useful in the published output, not only in the source.
 
 Check labels, arrow direction, contrast, clipping, and reading order at the intended size. A desktop diagram may need another arrangement in print or on a slide. For animations, provide an equivalent static explanation or transcript.
 
@@ -153,7 +206,7 @@ Use your own exercise copy and the Python environment from the [measurement refe
 1. Run the generator. Inspect its Mermaid text and manifest, then preview it if a renderer is available. Use your actual records if earlier exercises added items.
 2. In TASK-003, temporarily change `implements: [REQ-014]` to `implements: [REQ-015]`. This is a fictional maintenance experiment, not a product decision. Predict which arrow will move.
 3. Regenerate. Verify that the task now points to REQ-015, while REQ-014 still points to TEST-008. Check that the manifest digest changed.
-4. Compare the result with chapter 6's authored diagram. Note which explanations would need review for an intended change. Do not rewrite fixed teaching examples for this temporary experiment.
+4. Compare the result with the authored diagram above. Note which explanations would need review for an intended change. Do not rewrite fixed teaching examples for this temporary experiment.
 5. If a renderer is available, export SVG and inspect it at a book-column or slide size. Compare its content with the source, not just its appearance. Optionally compare with Napkin using the same relationships.
 6. Restore the task's original relationship and regenerate. The original diagram source and input digest should return when no other inputs have changed.
 

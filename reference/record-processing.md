@@ -2,6 +2,18 @@
 
 These optional activities extend [Processing Information into Views](../docs/06-processing.md). Complete its main exercise first, and work in your own exercise copy.
 
+## Validation Rules
+
+The processor reads `examples/structured-content/schema.yaml` and records directly inside `examples/structured-content/records/`. Its `--input` option can select another directory with the same layout. The schema uses a project-specific format; the Python code implements its checks.
+
+Required fields must contain nonempty text. Record types and statuses must be supported. Unknown fields, duplicate IDs, empty record bodies, repeated relationship targets, missing references, and references to the wrong type are rejected.
+
+Requirements support `proposed`, `approved`, and `retired`; tasks support `planned`, `in-progress`, and `complete`; tests support `planned` and `complete`. Test status does not model pass or fail.
+
+A misspelled owner or nonempty template placeholder can still pass. The processor does not check a team directory or judge the meaning of the prose. The chapters and separate onboarding procedure are outside this validation.
+
+The record maintainer agrees on rules; the processor maintainer tests their implementation. [The tests](../tests/test_records.py) check valid and invalid fixtures, not every current exercise record. Changing a schema may require coordinated record, template, and code updates.
+
 ## Connect the Procedure to the Work
 
 The [draft procedure from chapter 4](../examples/onboarding/requesting-access.md) tells a requester to keep a reference number. We use that exercise copy of `PROC-001` here; chapter 1's approved demonstration remains a separate example. The table connects the instruction to the requirement, implementation task, and planned test behind it.
@@ -15,7 +27,7 @@ The [draft procedure from chapter 4](../examples/onboarding/requesting-access.md
 
 An approved requirement describes what has been agreed. The task and test record the work needed to deliver and check it. Before using the procedure at work, someone must confirm that its instructions match how the service actually behaves.
 
-The procedure is outside the four-record dataset processed in this chapter. We explain its connection to the requirement in the text and diagram; the program does not check that connection.
+The procedure is outside the four-record dataset processed in this chapter. We explain its connection to the requirement in the text and chapter 8's authored diagram; the program does not check that connection.
 
 Keep three kinds of information distinct:
 

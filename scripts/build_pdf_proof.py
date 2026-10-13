@@ -89,7 +89,7 @@ def main():
     pieces = ["= From Markdown to a Designed PDF\n\nA publishing trial using maintained chapter excerpts. Whole-page SVG export is excluded. This is not the full tutorial or an approved publication.\n\n"]
     for filename, title, section_title in [
         ("01-introduction.md", "1. Information Becomes a Publication", "From Source Files to Documents"),
-        ("05-structured-content.md", "2. Templates and Metadata", "YAML for Structured Information"),
+        ("05-structured-content.md", "2. Templates and Metadata", "From Documents to Records"),
         ("10-dashboards.md", "3. A Table for Print", "Missing Excel? Tables and Spreadsheets"),
     ]:
         meta, ast = chapter(filename)
@@ -103,8 +103,7 @@ def main():
             visual = meta["visuals"][0]
             pieces.append(f'\n#figure(image("onboarding.svg", width: 100%, alt: {quoted(visual["alt"])}), caption: [{visual["caption"]}])\n')
         elif meta["chapter_number"] == 5:
-            # Omit the transition to a section outside this selected excerpt.
-            pieces.append(render(ast, blocks[:-1]))
+            pieces.append(render(ast, blocks))
         else:
             pieces.append(render(ast, [b for b in blocks if b["t"] == "Para"][:1]))
             _, _, data = (ROOT / inputs[4]).read_text().split("---", 2)

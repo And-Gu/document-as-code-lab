@@ -8,7 +8,7 @@ learning_goal: Run and inspect repeatable checks, detect stale outputs, and dist
 
 # Automation, Quality, and Further Experiments
 
-Chapter 6 introduced where processing runs and what a GitHub Actions runner does. Here, we build on that foundation to choose checks, retain results, and maintain the workflow.
+Chapter 6 showed how a program validates records and builds views. Here, we decide when that program should run, where it runs, and how to retain and inspect the results.
 
 
 Throughout this tutorial, we have changed a maintained source and followed its effects into other views. Doing that once demonstrates reuse. Doing it reliably after every relevant change requires a repeatable process.
@@ -32,6 +32,14 @@ For a publishing workflow, a sensible sequence is to validate the sources, gener
 | Deliver | The reviewed edition reaches the intended audience | Publication location and edition identifier |
 
 A passing automated check answers a defined question. It cannot tell us that an instruction is useful merely because its metadata is valid. Keep the human decisions from chapter 9 visible in the workflow.
+
+### What Runs on a Runner?
+
+A GitHub Actions workflow contains jobs, and each job runs on a machine called a **runner**. GitHub can provide that machine, or an organization can manage its own. The workflow chooses when jobs begin and which steps they execute; the processing program chooses which records to check.
+
+A record-validation job could check out the repository, prepare Python, install dependencies, and run `python scripts/process_records.py`. If validation fails, the command returns a failure that the workflow can report. Preventing a merge also requires repository rules that make that check mandatory.
+
+Generated files must be retained or published explicitly; running a program alone does not distribute its outputs. See [GitHub's Actions introduction](https://docs.github.com/en/actions/get-started/understand-github-actions) for workflows, jobs, and runners.
 
 ## What This Project Already Runs
 

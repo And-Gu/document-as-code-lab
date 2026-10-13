@@ -120,6 +120,14 @@ When the access procedure changes, use the register to find the handbook and tra
 
 If someone corrects the presentation, decide whether the correction belongs in the source procedure. Keep shared facts there. Keep event-specific examples and layout choices with the presentation. Otherwise, the next author may copy an older instruction and undo the improvement.
 
+### Connect to an Existing System
+
+A requirements tool, planning application, or ticket system may already maintain the original records. Decide which system owns each field before exporting it or introducing synchronization.
+
+Preserve original IDs and, where available, the source version and retrieval time. An export can become outdated. If changes also flow back, agree how conflicting edits are resolved and who reviews them. The tutorial's record processor reads local files only; it does not synchronize applications.
+
+Choose information suitable for the destination. An internal ticket may contain details that do not belong in a public manual or an AI context package.
+
 ## Know When to Add Automation
 
 Start by recording where the work is repetitive or error-prone. Repeatedly assembling the same sections, finding missing owners, or updating several copies of a fact may justify a script or a supported workflow service.

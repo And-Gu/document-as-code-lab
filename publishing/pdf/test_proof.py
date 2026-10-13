@@ -73,8 +73,14 @@ class ProofTests(unittest.TestCase):
     def test_chapter_metadata_and_selection(self):
         meta, ast = proof.chapter('05-structured-content.md')
         self.assertEqual(meta['chapter_number'], 5)
-        blocks = proof.section(ast, 'YAML for Structured Information')
-        self.assertTrue(any(block['t'] == 'CodeBlock' for block in blocks))
+        blocks = proof.section(ast, 'From Documents to Records')
+        examples = [block['c'][1] for block in blocks if block['t'] == 'CodeBlock']
+        self.assertTrue(any('id: REQ-014' in text for text in examples))
+
+    def test_metadata_field_reference_is_selectable(self):
+        _, ast = proof.chapter('05-structured-content.md')
+        blocks = proof.section(ast, 'Understanding YAML Metadata')
+        self.assertTrue(any(block['t'] == 'Table' for block in blocks))
 
     def test_missing_section_fails(self):
         _, ast = proof.chapter('01-introduction.md')

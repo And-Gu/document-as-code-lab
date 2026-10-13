@@ -51,7 +51,7 @@ flowchart LR
 
 *Reuse the maintained information while shaping each publication for its readers.*
 
-The middle step matters. A presentation is not a handbook divided into slides, and a website needs more than a long page of exported text. We keep the facts together while allowing each output to have its own introduction, order, navigation, and visual treatment.
+The middle step matters. A presentation is not a handbook divided into slides, and a website needs more than a long page of exported text. We keep the facts together while allowing each output to have its own introduction, order, navigation, and visual treatment. The editable [Markdown source-and-views diagram](../assets/diagrams/markdown-source-and-views.mmd) also summarizes how readable source can supply configured publishing tools.
 
 ## Select Files or Extract Sections
 
@@ -60,6 +60,8 @@ Chapter 1 organizes the onboarding instructions as separate files, each containi
 Sometimes a publication needs only part of a longer file. A publishing tool can extract that section, but it needs a rule for finding where the selection starts and ends. A team might use a heading or explicit markers in the source. Markdown headings alone do not perform that extraction, and renaming a heading may require updating the selection rule.
 
 Files remain the sources we edit and track. Extracting a section does not give it a separate review status or maintenance process. Check that the selected text includes the context readers need, and rebuild and review the output when its source changes. Keep the selection rules with the publishing code so they can be reviewed too.
+
+Our source can also identify example passages with paired HTML comments such as `<!-- example:start follow-up -->` and `<!-- example:end follow-up -->`. They are visible in the source, but not shown in GitHub's Preview view. Astro interprets them to style the enclosed example; they do not automatically extract it into another publication or give it a separate approval status. The [site instructions](../site/README.md) document the convention. Chapter front matter may also describe planned visuals; the [contribution guidance](../CONTRIBUTING.md) explains those project-specific fields.
 
 Our HTML introduction deck uses another approach: its YAML file contains messages written for the session, with references to the source chapters. It does not automatically extract chapter sections. Those references help us identify what to review when a chapter changes, but the slide wording still needs to be updated separately.
 
@@ -146,6 +148,19 @@ Our first presentation puts these principles into practice. Open the [published 
 
 The [presentation definition](../presentations/document-as-code-intro.yaml) is a YAML file containing the selected messages, slide order, and chapter references. It does not copy entire chapters. The chapters remain the maintained knowledge; the YAML defines a particular teaching sequence.
 
+Unlike the front matter attached to a Markdown record in chapter 5, this standalone YAML file holds structured information on its own. Its opening slide is defined as:
+
+```yaml
+slides:
+  - id: introduction
+    type: title
+    title: Document-as-Code
+    subtitle: Maintain the knowledge. Shape the view.
+    sources: [docs/01-introduction.md]
+```
+
+`title:` pairs a field name with its value. The dash starts an item in the `slides` list, and indentation groups its fields. The brackets in `sources` contain a list of chapter references. Use spaces, not tabs, for indentation. The excerpt omits other slide fields for clarity.
+
 We separate three responsibilities:
 
 | Part | Responsibility |
@@ -173,6 +188,14 @@ Chapter 10's budget example demonstrates this distinction with a table. Markdown
 Keep the meaning and source data consistent while adapting size, labels, and detail. Preserve captions, units, source versions, and relevant qualifications. Do not assume that a Mermaid block displayed by GitHub will become a diagram in every exporter. Check the chosen renderer and use a suitable image export when required.
 
 For charts, repeat the checks from chapter 10: readable labels, adequate contrast, and an explanation that does not depend on color alone. Review representative images in every target format before scaling up to the full tutorial.
+
+### Check Source, Preview, and Target Format
+
+Each check answers a different question. Read the source and diff to check meaning, metadata, and the scope of a change. Use the Markdown preview to check headings, step order, links, and supported diagrams. Inspect each delivered format to check the reader's experience: a clear paragraph can still be too long for a slide, and a table can be too wide for a PDF page.
+
+GitHub's Preview view does not run our publishing scripts or render illustrations from our `visuals` metadata. It also filters HTML for security, so custom scripts and styling from our website may be removed or ignored. [The GitHub Flavored Markdown specification](https://github.github.com/gfm/) describes this processing. Astro can add interactive views because we control its build and website code; those features do not automatically appear in GitHub or a static export.
+
+Check the actual result in every format you publish. Verify headings, table headers, meaningful link text, image descriptions, and navigation. A valid Markdown file or successful build is not evidence that every target format is readable and complete.
 
 ## Choose Tools with a Small Trial
 

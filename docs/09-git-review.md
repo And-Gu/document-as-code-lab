@@ -66,6 +66,28 @@ The change should explain its reason, identify an appropriate reviewer, and list
 
 An issue can hold the question and acceptance criteria before editing begins. Link the eventual proposal to it and retain the decision's rationale. Resolving a discussion or closing an issue does not by itself establish approval of every linked source item.
 
+### Compare Changes Before Recording Them
+
+Editing changes the text. Saving writes those edits to your local file. A **diff** compares versions and highlights added and removed lines; a **commit** records a selected set of changes in Git. A **merge** combines work from a branch with another branch, usually after review. These are separate actions, not different names for saving.
+
+In a local copy, inspect changes that have not yet been staged with `git diff`. Staging selects changes for the next commit; `git diff --cached` shows that selection for review. Commit only the intended changes, with a message explaining their purpose. The [Git diff reference](https://git-scm.com/docs/git-diff) explains these comparisons. GitHub's browser editor uses its own commit dialog; follow the chosen branch and review process rather than assuming it is saving a local file.
+
+For a document change, inspect the surrounding text and rendered preview as well as the diff. GitHub can also show a rendered comparison of Markdown changes; its [guide to prose differences](https://docs.github.com/en/repositories/working-with-files/using-files/working-with-non-code-files#rendering-differences-in-prose-documents) explains that view.
+
+### Edit Locally or in GitHub
+
+A local working copy lets you edit files and run the processor on your computer. Saving changes a file; committing records a selected version locally; pushing shares commits with GitHub. If you also edit through GitHub's browser, bring those changes into your local copy before processing it.
+
+GitHub's file editor records changes through a commit dialog. It does not run this project's record validator merely because you save a schema or record. Follow [GitHub's editing guide](https://docs.github.com/en/repositories/working-with-files/managing-files/editing-files) and use a branch for proposed changes.
+
+For example, removing `proposed` from the schema does not update existing records. Those records fail validation the next time the processor runs against the changed schema. Review rule changes together with affected records, templates, and processing code. [Chapter 13](13-automation.md) explains how a workflow can run these checks.
+
+### Keep Links Working
+
+Relative links are resolved from the file containing them. GitHub follows them within the branch being viewed; our Astro site maps them to publication routes. A heading link includes a fragment generated from the heading text, so renaming the heading can break incoming links.
+
+When moving a file or renaming a heading, check its incoming links, example paths, and published destinations. A stable content ID helps our tools recognize the item, but does not repair those links automatically. Keep terms such as "source revision" consistent so readers can distinguish recorded versions from uncommitted edits.
+
 ## Follow the Effects of the Change
 
 For this proposal, the review should consider:
