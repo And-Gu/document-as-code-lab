@@ -1,22 +1,3 @@
----
-id: 08-publishing
-chapter_number: 11
-status: draft
-audience: practitioners-publishing-shared-information-for-different-audiences
-learning_goal: Select and adapt shared sources for different publications, then trace and review the resulting outputs.
-visuals:
-  - id: source-to-publications
-    status: source-ready
-    kind: diagram
-    purpose: Show audience-specific selection and adaptation between shared sources and publications.
-    placement: after-one-source-several-reading-experiences
-    preferred_source: mermaid
-    source: ../assets/diagrams/source-to-publications.mmd
-    embedded: true
-    outputs: [web, pdf, slides]
-    caption: Reuse the maintained information while shaping each publication for its readers.
-    alt: Shared instructions and visuals feed three different preparations, leading to a website, PDF handbook, and training presentation.
----
 
 # Publishing to Websites, Books, and Presentations
 
@@ -138,7 +119,7 @@ The access procedure can support a short training sequence:
 
 The underlying instructions stay the same, but the teaching sequence adds explanation and practice. Put supporting detail in speaker notes or a handout rather than shrinking all the text onto a slide. Distinguish examples you create for teaching from facts stated in the source.
 
-AI can help propose the sequence, draft notes, or suggest a visual. Give it the selected source, audience, session purpose, and boundaries, as in chapter 7. Review whether it has invented a service address, response time, or process step that the source does not support.
+AI can help propose the sequence, draft notes, or suggest a visual. Give it the selected source, audience, session purpose, and boundaries, as in chapter 8. Review whether it has invented a service address, response time, or process step that the source does not support.
 
 PowerPoint can remain part of the workflow. Generated slides may provide a starting point for visual refinement, discussion, or delivery. Decide which changes belong only to that presentation and which should return to the maintained content.
 
@@ -179,15 +160,15 @@ The HTML introduction deck is implemented and published. Speaker notes and prese
 
 ## Reuse Visuals, Adapt Their Presentation
 
-Chapter 8 distinguished editable visual sources from their rendered images. Publishing adds another decision: which representation works in each output?
+Chapter 9 distinguished editable visual sources from their rendered images. Publishing adds another decision: which representation works in each output?
 
 An interactive chart needs a static alternative in a printed book. A detailed diagram may fit a full book page but need simplification for a presentation. A website may let readers enlarge an image; a slide shown across a meeting room cannot rely on that interaction.
 
-Chapter 10's budget example demonstrates this distinction with a table. Markdown readers see a saved table; Astro uses the CSSV source to render a styled table with sorting and filtering. The website controls do not belong to the source file, and a static publication needs a readable table without them.
+The [dashboard guide's budget example](dashboards-and-work-tracking.md#missing-excel-tables-and-spreadsheets) demonstrates this distinction with a table. Markdown readers see a saved table; Astro uses the CSSV source to render a styled table with sorting and filtering. The website controls do not belong to the source file, and a static publication needs a readable table without them.
 
 Keep the meaning and source data consistent while adapting size, labels, and detail. Preserve captions, units, source versions, and relevant qualifications. Do not assume that a Mermaid block displayed by GitHub will become a diagram in every exporter. Check the chosen renderer and use a suitable image export when required.
 
-For charts, repeat the checks from chapter 10: readable labels, adequate contrast, and an explanation that does not depend on color alone. Review representative images in every target format before scaling up to the full tutorial.
+For charts, repeat the dashboard guide's checks: readable labels, adequate contrast, and an explanation that does not depend on color alone. Review representative images in every target format before scaling up to the full tutorial.
 
 ### Check Source, Preview, and Target Format
 
@@ -215,7 +196,7 @@ If a trainer corrects a factual instruction in a slide, review the correction in
 
 Repeated manual changes to generated files will be lost when those files are rebuilt unless the changes are incorporated into the process. Record presentation-specific additions alongside their source references, and avoid letting an exported document become an untracked competing master.
 
-For each release, retain the selected inputs, their order, the source revision, tool versions, relevant settings, and the exact outputs reviewed. Local uncommitted edits need to be accounted for too; a commit identifier alone does not describe them. Chapter 9's review record provides a place to connect evidence to a decision.
+For each release, retain the selected inputs, their order, the source revision, tool versions, relevant settings, and the exact outputs reviewed. Local uncommitted edits need to be accounted for too; a commit identifier alone does not describe them. Chapter 10's review record provides a place to connect evidence to a decision.
 
 ## Try It: Prepare Three Publications
 
@@ -250,4 +231,4 @@ The PDF command requires a PDF engine configured for Pandoc; see its [PDF guidan
 
 Open each successful output and compare it with the brief. Check page breaks in the PDF, text fit in the slides, and headings and links in the HTML. Confirm that the source clarification is present wherever it belongs. Record converter versions and checks, including any failed or untested format. A successful conversion is the starting point for this review.
 
-The next chapter, [Beyond GitHub: OneDrive, Copilot, and Other Applications](12-beyond-github.md), considers how to carry these practices into environments where readers and authors use different tools.
+The next chapter, [Beyond GitHub: OneDrive, Copilot, and Other Applications](../docs/13-beyond-github.md), considers how to carry these practices into environments where readers and authors use different tools.

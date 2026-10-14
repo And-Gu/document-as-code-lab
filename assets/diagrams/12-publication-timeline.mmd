@@ -1,0 +1,5 @@
+flowchart LR
+ A[Revision A] --> B[Build A passed] --> P[Published A]
+ C[Revision B] --> D[Build B failed]
+ D -.->|No deployment| P
+ E[Revision C] --> F[Build C passed] --> G[Published C]

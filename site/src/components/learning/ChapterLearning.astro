@@ -1,0 +1,33 @@
+---
+import MarkdownPlayground from './MarkdownPlayground.astro';
+import Quiz from './Quiz.astro';
+import OnboardingLab from './OnboardingLab.astro';
+import candidates from '../../../../examples/learning/questions.json';
+import '../../styles/learning.css';
+interface Props { chapterNumber: number; }
+const { chapterNumber } = Astro.props;
+const key = `chapter-${String(chapterNumber).padStart(2, '0')}` as keyof typeof candidates;
+const questions = candidates[key].map((question, index) => ({
+  id: `question-${index + 1}`, question: question.question,
+  type: question.type === 'true_false' ? 'true-false' as const : 'single' as const,
+  options: question.options.map((label, option) => ({ value: String(option), label })),
+  correct: [question.type === 'true_false' ? question.options[question.correctIndex].toLowerCase() : String(question.correctIndex)], explanation: question.feedback,
+}));
+const markdownExample = '# Requesting System Access\n\nTo request access:\n\n1. Open the service portal.\n2. Select the system you need.\n3. Save the request reference.\n\nFor questions, contact the **IT support team**.';
+---
+{chapterNumber === 1 && <div data-learning-target="onboarding-lab-widget"><OnboardingLab mode="overview" /></div>}
+{chapterNumber === 4 && <div id="practice-markdown" data-learning-target="markdown-playground-widget"><MarkdownPlayground initial={markdownExample} /></div>}
+{chapterNumber === 5 && <div data-learning-target="metadata-lab-widget"><OnboardingLab mode="metadata" /></div>}
+{chapterNumber === 7 && <div data-learning-target="processing-lab-widget"><OnboardingLab mode="processing" /></div>}
+{chapterNumber === 7 && <div data-learning-target="readiness-lab-widget"><OnboardingLab mode="overview" /></div>}
+{chapterNumber === 11 && <div data-learning-target="metadata-lab-widget"><OnboardingLab mode="metadata" /></div>}
+<div data-learning-target="chapter-quiz-widget"><Quiz id={key} questions={questions} /></div>
+<script>
+  function placeLearning() {
+    document.querySelectorAll<HTMLElement>('[data-learning-target]').forEach((content) => {
+      const target = document.getElementById(content.dataset.learningTarget!);
+      if (target) target.append(content);
+    });
+  }
+  placeLearning(); document.addEventListener('astro:page-load', placeLearning);
+</script>

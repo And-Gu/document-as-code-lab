@@ -1,22 +1,3 @@
----
-id: 06-git-review
-chapter_number: 9
-status: draft
-audience: practitioners-reviewing-shared-information
-learning_goal: Review a coordinated source change, record its scope and version, and distinguish acceptance from publication approval.
-visuals:
-  - id: change-review-release
-    status: source-ready
-    kind: diagram
-    purpose: Separate source review from publication review.
-    placement: after-three-decisions-not-one
-    preferred_source: mermaid
-    source: ../assets/diagrams/change-review-release.mmd
-    embedded: true
-    outputs: [web, pdf, slides]
-    caption: Accepting a source change does not automatically approve every output built from it.
-    alt: A recorded proposal and affected views undergo source review, followed by merge, output building, publication review, and release. Each review can request corrections.
----
 
 # Git, Review, and Collaboration
 
@@ -25,7 +6,7 @@ Review is how a team decides whether a change is ready to use. Version control h
 
 In a document-as-code workflow, a small change can be reviewed without asking someone to reread an entire handbook. But a small source edit may affect several outputs. Good review combines a focused diff with an explicit check of those consequences.
 
-We will follow a proposed clarification to the onboarding requirement from chapter 5. You will identify affected information, inspect the evidence, and record a decision tied to a source version. The exercise can be completed locally; a GitHub pull request adds a shared place for discussion when you have access and a reviewer.
+We will follow a proposed clarification to the onboarding requirement linked from chapter 5 and detailed in the [record-processing guide](../reference/record-processing.md#templates-and-requirements). You will identify affected information, inspect the evidence, and record a decision tied to a source version. The exercise can be completed locally; a GitHub pull request adds a shared place for discussion when you have access and a reviewer.
 
 ## Three Decisions, Not One
 
@@ -80,7 +61,7 @@ A local working copy lets you edit files and run the processor on your computer.
 
 GitHub's file editor records changes through a commit dialog. It does not run this project's record validator merely because you save a schema or record. Follow [GitHub's editing guide](https://docs.github.com/en/repositories/working-with-files/managing-files/editing-files) and use a branch for proposed changes.
 
-For example, removing `proposed` from the schema does not update existing records. Those records fail validation the next time the processor runs against the changed schema. Review rule changes together with affected records, templates, and processing code. [Chapter 13](13-automation.md) explains how a workflow can run these checks.
+For example, removing `proposed` from the schema does not update existing records. Those records fail validation the next time the processor runs against the changed schema. Review rule changes together with affected records, templates, and processing code. [Chapter 14](../docs/14-automation.md) explains how a workflow can run these checks.
 
 ### Keep Links Working
 
@@ -153,7 +134,7 @@ Before release, identify the source revision, selected items, build settings, an
 
 Inspect whether drafts were included intentionally, whether cross-references and terminology agree, and whether diagrams and tables remain readable. Acceptance of one requirement does not approve a complete handbook, database, or repository snapshot.
 
-If a defect is found after release, decide whether to correct, withdraw, or supersede that publication and record the decision. Preserve enough information to explain which output was affected. [Chapter 11](11-publishing.md) will develop the publishing side of this process.
+If a defect is found after release, decide whether to correct, withdraw, or supersede that publication and record the decision. Preserve enough information to explain which output was affected. [Chapter 12](../docs/12-publishing.md) will develop the publishing side of this process.
 
 ## Try It: Review a Coordinated Change
 
@@ -181,4 +162,4 @@ python scripts/build_record_diagram.py
 
 **Keep:** the intentional exercise commits and review note, separately from ignored generated files. Leave the branch unmerged if review is unfinished. Keep all fictional decisions clearly distinguished from real approval records.
 
-For your information item from chapter 1, name the review authority, approval scope, and one related output that needs checking. Next, [Dashboards and Work Tracking in GitHub](10-dashboards.md) explores how to make that outstanding work visible.
+For your information item from chapter 1, name the review authority, approval scope, and one related output that needs checking. Next, [Dashboards and Work Tracking in GitHub](../reference/dashboards-and-work-tracking.md) explores how to make that outstanding work visible.

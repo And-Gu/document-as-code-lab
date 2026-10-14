@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import Documentation from '../../layouts/Documentation.astro';
 import { siteUrl } from '../../lib/urls';
+import BudgetTable from '../../components/BudgetTable.astro';
 
 export async function getStaticPaths() {
   return (await getCollection('materials')).map((material) => ({
@@ -16,5 +17,5 @@ const title = headings.find((heading) => heading.depth === 1)?.text ?? material.
 
 <Documentation title={title}>
   <p class="chapter-meta"><a href={siteUrl(`files/${material.id}.md`)}>Source file</a></p>
-  <article><Content /></article>
+  <article><Content />{material.id === 'reference/dashboards-and-work-tracking' && <BudgetTable />}</article>
 </Documentation>

@@ -1,141 +1,95 @@
 ---
 id: 03a-structured-content
 chapter_number: 5
-status: draft
-audience: practitioners-organizing-information-with-templates-and-metadata
-learning_goal: Create a readable record from a template and explain its metadata and rules.
+status: in-review
+learning_goal: "Distinguish procedure text from metadata and explain how stable fields enable checking, filtering and relationships."
+visuals:
+  - id: metadata-flow
+    status: source-ready
+    kind: diagram
+    preferred_source: mermaid
+    source: ../assets/diagrams/05-metadata-flow.mmd
+    embedded: true
+    outputs: [web, pdf, slides]
+    caption: "Validation and filtering turn procedure metadata into a review queue when processing runs."
+    alt: " A[Access.md] --> V[Validate fields and filter];  E[Equipment.md] --> V;  C[Contacts.md] --> V;  V --> Q[Review queue]"
 ---
 
-# Templates and Metadata
+# Structure Makes Information Actionable
 
-Markdown gives us a simple way to write structured documents. But what happens when we need to manage hundreds of requirements, tasks, or procedures?
+Markdown tells a reader what to do. Structured information tells software what an item *is*, who owns it, and how it relates to other items.
 
-Imagine asking:
+In our Onboarding Lab, the text of the access procedure is useful to a new employee. The team maintaining the procedure also needs to know its owner, identity, and review status.
 
-- Which requirements are approved?
-- Who is responsible for them?
-- Which requirements have associated tests?
+## Metadata: information about information
 
-Answering these questions manually becomes difficult as information grows.
-
-**Metadata gives each information item a consistent identity and a set of fields that tools can use.**
-
-In this chapter, we will create a requirement using a template, describe it with YAML metadata, and introduce rules for keeping records consistent.
-
-## From Documents to Records
-
-Chapter 4 used an onboarding procedure explaining how someone requests system access.
-
-One instruction was to keep the confirmation reference number.
-
-For this fictional service, we express the corresponding expectation as a requirement: it must provide that number.
-
-Our existing [REQ-014 record](../examples/structured-content/records/REQ-014.md) stores that requirement as a separate Markdown file. Its approved status illustrates a fictional review decision; new records start as proposed:
+A Markdown file can begin with structured fields, often called **frontmatter**:
 
 ```markdown
 ---
-id: REQ-014
-type: requirement
-status: approved
+id: PROC-001
 owner: onboarding-team
-title: Access Confirmation
-verified_by: [TEST-008]
+status: approved
 ---
 
-The access service must confirm a submitted
-request with a reference number.
+# Requesting System Access
 
-## Rationale
-
-The requester needs a reference when
-asking about progress.
+Submit a request through the service portal.
 ```
 
-This is a **structured record**: a readable document with a consistent identity and metadata.
+The `---` lines separate metadata from the main text. The example uses YAML, a common text format for structured fields. These names and values are choices made for our project; GitHub does not require them.
 
-The text describes what the service must do. The metadata describes the record so that people and tools can organize it.
+The text describes a procedure. The metadata identifies that procedure and records how it is maintained. Keeping both together makes it easier to inspect the information in context.
 
-For example, a program could select every record with `type: requirement` and `status: approved`.
+## From fields to useful views
 
-## Understanding YAML Metadata
+Once multiple procedures use consistent fields, software can answer practical questions: Which procedures are drafts? Who owns them? Which item needs review?
 
-The information between the two `---` lines is called *YAML front matter*.
 
-[YAML](https://yaml.org/spec/1.2.2/#chapter-2-language-overview) is a text format for representing structured information. In this example, each field has a name and a value. Front matter describes the file as a whole; the prose follows it.
+```mermaid
+flowchart LR
+ A[Access.md] --> V[Validate fields and filter]
+ E[Equipment.md] --> V
+ C[Contacts.md] --> V
+ V --> Q[Review queue]
+```
 
-| Field | Purpose |
-|---|---|
-| `id` | Unique, stable identifier |
-| `type` | Kind of record |
-| `status` | Current lifecycle state |
-| `owner` | Responsible team or person |
-| `title` | Human-readable name |
-| `verified_by` | References to related test records |
+*Validation and filtering turn procedure metadata into a review queue when processing runs.*
 
-The notation is straightforward:
+These are the current fictional [showcase procedure sources](../examples/onboarding-showcase/README.md):
 
-- `status: approved` assigns a value to a field.
-- `verified_by: [TEST-008]` contains a list with one item.
-- `verified_by: []` represents an empty list.
+| Procedure | Owner | Review status |
+| --- | --- | --- |
+| System access | Onboarding team | Approved |
+| Equipment | Workplace team | Approved |
+| Contacts | People team | Draft |
 
-Use spaces, not tabs, for indentation when grouping fields or writing lists. Indentation affects the structure.
+A status view can identify **Contacts** as the item needing review. Unlike an independently maintained chart, a computed view can stay aligned with the source data whenever the processing runs.
 
-The metadata fields are conventions chosen by our project. YAML provides the syntax but does not define what `approved` or `verified_by` means.
+## Agree on meaning, not just field names
 
-A record's status also needs careful interpretation. An approved requirement means that the requirement has been accepted; it does not mean the system has been implemented or tested.
+Structure works only when fields mean the same thing across files. Does `approved` mean a procedure has passed content review? Who may change it? Is an owner a person or a team? What happens if a field is missing?
 
-## Templates and Schemas
+Validation can check simple rules such as a required `id`, an allowed `status` value, or a unique identifier. It cannot decide whether the underlying procedure is sensible or safe.
 
-How do we ensure that different authors create records in a consistent way?
+An authoring [template](../examples/structured-content/templates/requirement.md) provides a consistent starting layout. A [schema](../examples/structured-content/schema.yaml) expresses rules that a compatible processor can check. A saved YAML file does not validate records by itself. Our requirement schema does not apply to the procedure example above.
 
-We use two complementary mechanisms.
+**Do not confuse two statuses:** a procedure may be approved while an individual employee's onboarding task remains unfinished. Document review and operational completion belong to different information records.
 
-| Aspect | Template | Schema |
-|---|---|---|
-| Purpose | Help create a record | Define consistency rules |
-| Provides | Fields and suggested content | Required fields and allowed values |
-| Used by | Authors and AI assistants | Validation tools |
+## Relationships extend the model
 
-A **template** provides a starting point. For example, our [requirement template](../examples/structured-content/templates/requirement.md) includes metadata fields, a requirement statement, and a rationale.
+Some onboarding activities depend on others. System orientation may require completed access and security training. Those dependencies should be recorded explicitly if software is expected to identify blocked activities.
 
-Our [schema](../examples/structured-content/schema.yaml) defines rules, such as requiring an `id` and restricting requirement statuses to `proposed`, `approved`, or `retired`. The project chooses these rules; YAML does not enforce them on its own.
+We do not need a large modeling language to express a small relationship. We do need stable identifiers, agreed meanings, and validation appropriate to the risk.
 
-A validation tool can apply those rules and report violations.
+<!-- interactive: metadata-lab -->
 
-However, a record that passes validation can still contain an incorrect or ambiguous requirement. Structural consistency and content quality are different things.
+The website demonstration changes a practice copy of Contacts and refreshes its review queue only after Run checks and build. If its owner is missing, validation fails and the previous result is labelled as such. It does not approve or edit the repository's procedure.
 
-[Chapter 6](06-processing.md) demonstrates automated validation and processing. A schema needs a tool that understands and applies its rules; it is not activated just by saving the file.
+For a runnable requirement example, inspect [REQ-014](../examples/structured-content/records/REQ-014.md) and the [template and record guide](../reference/record-processing.md#templates-and-requirements). The later AI and diagram exercises use those requirement, task, and test records rather than employee onboarding task data.
 
-Not every piece of information needs the same fields.
+## What to remember
 
-A requirement may need an owner, approval status, and references to tests. A meeting decision may instead need a decision date, participants, and rationale.
+**Structure lets software interpret information consistently.** [Chapter 6](06-information-architecture.md) introduces identities and relationships. [Chapter 7](07-processing.md) shows how processing uses that structure to create outputs and perform checks.
 
-Start with the questions you want to answer, then choose fields that help answer them.
-
-Avoid collecting metadata that nobody maintains or uses.
-
-## Try It: Create a Requirement
-
-Let's add a requirement to our fictional onboarding service.
-
-Use the [requirement template](../examples/structured-content/templates/requirement.md) to create a proposed requirement stating that users must be able to identify the system associated with an access request. Work in your own exercise copy of the repository.
-
-1. Copy the template to `examples/structured-content/records/REQ-016.md`. If that ID already exists, choose an unused ID and matching filename.
-2. Replace every placeholder. Use the matching ID, `type: requirement`, `owner: onboarding-team`, and `status: proposed`.
-3. Write one clear requirement statement and a short rationale.
-4. Leave `verified_by: []` empty because no test has been identified.
-5. Review the record for clarity, completeness, and consistency.
-
-You can write the record manually or ask an AI assistant to create it from the template. In either case, review its content and do not allow the assistant to invent missing requirements.
-
-**Expected result:** A readable requirement record with structured metadata, ready for review and subsequent validation. Creating the file does not automatically run a check.
-
-**If the structure is unclear:** Compare the file with REQ-014 above. Check the front-matter delimiters, field names, indentation, and remaining placeholders.
-
-**Keep:** The proposed record. Chapter 6 uses these records for processing; chapter 9 covers recording and reviewing changes.
-
-## What Comes Next?
-
-We now have structured information with consistent fields and clear ownership.
-
-In [Chapter 6: Processing Information into Views](06-processing.md), we will use programs to validate records, follow relationships, and generate useful outputs from the information we maintain.
+<!-- interactive: chapter-quiz -->

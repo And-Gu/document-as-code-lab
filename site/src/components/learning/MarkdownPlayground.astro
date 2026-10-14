@@ -1,0 +1,46 @@
+---
+import { Copy, RotateCcw } from '@lucide/astro';
+import { renderLearningMarkdown } from '../../lib/learning';
+interface Props { title?: string; initial?: string; }
+const { title = 'Try Markdown', initial = '# Requesting Access\n\nFollow these steps to request **system access**.\n\n## Before You Start\n\n- Your team name\n- The system you need\n\n## Submit Your Request\n\n1. Open the service portal.\n2. Submit the request.\n\n| Item | Status |\n| --- | --- |\n| Access request | Submitted |\n| Approval | Pending |' } = Astro.props;
+---
+<section class="learning-tool md-playground" data-markdown-playground aria-label={title}>
+  <div class="learning-toolbar">
+    <h3>{title}</h3>
+    <div class="learning-actions">
+      <button type="button" data-reset disabled title="Restore the original example" aria-label="Restore the original example"><RotateCcw size={18} /></button>
+      <button type="button" data-copy disabled title="Copy Markdown" aria-label="Copy Markdown"><Copy size={18} /></button>
+    </div>
+  </div>
+  <div class="mdp-panels">
+    <label class="mdp-panel">Markdown source<textarea data-source rows="15" spellcheck="false" disabled>{initial}</textarea></label>
+    <div class="mdp-panel"><span class="mdp-label">Rendered preview</span><div data-preview class="mdp-preview" role="region" aria-label="Rendered Markdown preview" tabindex="0" set:html={renderLearningMarkdown(initial)} /></div>
+  </div>
+  <p class="learning-status" data-status role="status">Fictional example · Unsaved practice</p>
+  <noscript><p>Enable JavaScript to edit the example. The source and preview above remain readable.</p></noscript>
+</section>
+<script>
+  import { renderLearningMarkdown } from '../../lib/learning';
+  function init() {
+    document.querySelectorAll<HTMLElement>('[data-markdown-playground]').forEach((root) => {
+      if (root.dataset.ready) return;
+      root.dataset.ready = 'true';
+      const source = root.querySelector<HTMLTextAreaElement>('[data-source]')!;
+      const preview = root.querySelector<HTMLElement>('[data-preview]')!;
+      const status = root.querySelector<HTMLElement>('[data-status]')!;
+      const initial = source.value;
+      const render = () => { preview.innerHTML = renderLearningMarkdown(source.value); };
+      source.disabled = false;
+      root.querySelectorAll<HTMLButtonElement>('button').forEach((button) => { button.disabled = false; });
+      source.addEventListener('input', () => { render(); status.textContent = 'Fictional example · Unsaved practice'; });
+      root.querySelector('[data-reset]')!.addEventListener('click', () => {
+        source.value = initial; render(); source.focus(); source.setSelectionRange(0, 0); source.scrollTop = 0; preview.scrollTop = 0; status.textContent = 'Example restored.';
+      });
+      root.querySelector('[data-copy]')!.addEventListener('click', async () => {
+        try { await navigator.clipboard.writeText(source.value); status.textContent = 'Markdown copied.'; }
+        catch { source.focus(); source.select(); status.textContent = 'Clipboard unavailable. Copy the selected text manually.'; }
+      });
+    });
+  }
+  init(); document.addEventListener('astro:page-load', init);
+</script>

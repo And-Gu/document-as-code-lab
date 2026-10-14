@@ -1,0 +1,6 @@
+flowchart LR
+ P[Proposed change] --> D[Diff]
+ D --> C[Comments and checks]
+ C --> G{Accepted?}
+ G -->|No| P
+ G -->|Yes| M[Merge under project rules]

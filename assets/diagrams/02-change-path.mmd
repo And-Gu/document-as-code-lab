@@ -1,0 +1,7 @@
+flowchart LR
+ E[Edit source] --> C[Commit]
+ C --> P[Propose pull request]
+ P --> R{Review and checks pass?}
+ R -->|No| E
+ R -->|Yes| M[Merge accepted change]
+ M -.-> B[Separate build and publication]

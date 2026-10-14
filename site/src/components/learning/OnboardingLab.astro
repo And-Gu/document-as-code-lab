@@ -1,0 +1,106 @@
+---
+import { readFile } from 'node:fs/promises';
+import path from 'node:path';
+import { parse } from 'yaml';
+import { Play } from '@lucide/astro';
+import { repositoryRoot } from '../../lib/repository';
+import { processProcedures, type ProcedureSource } from '../../lib/learning';
+interface Props { mode: 'overview' | 'metadata' | 'processing'; }
+const { mode } = Astro.props;
+const records: ProcedureSource[] = await Promise.all(['access', 'equipment', 'contacts'].map(async (name) => {
+  const source = await readFile(path.join(repositoryRoot, `examples/onboarding-showcase/${name}.md`), 'utf8');
+  const [, front, body] = source.split('---');
+  return { ...parse(front), body: body.trim() };
+}));
+const initial = processProcedures(records);
+const overview = mode === 'overview';
+---
+<section class="learning-tool onboarding-lab" data-onboarding-lab data-mode={mode} aria-label="Onboarding Lab">
+  <h3>Onboarding Lab</h3>
+  <p class="learning-status">Fictional browser-only simulation · No files or approvals are changed</p>
+  <script type="application/json" data-lab-source set:html={JSON.stringify(records).replaceAll('<', '\\u003c')} />
+  {overview ? <label class="lab-control">Employee system-access task<select data-access disabled><option value="delayed">Delayed</option><option value="complete">Complete</option></select></label> : <div class="lab-controls">
+    <label class="lab-control">Contacts review status<select data-contacts disabled><option value="draft">draft</option><option value="approved">approved</option><option value="invalid">invalid (test a failure)</option></select></label>
+    <label><input type="checkbox" data-missing-owner disabled />Remove Contacts owner</label>
+    <button type="button" data-build disabled><Play size={18} />Run checks and build</button>
+  </div>}
+  <div class="lab-tabs" role="tablist" aria-label="Onboarding information" hidden>
+    {['Sources', 'Rules', 'Results'].map((name, index) => <button type="button" role="tab" id={`${mode}-tab-${index}`} aria-controls={`${mode}-panel-${index}`} aria-selected={index === 2 ? 'true' : 'false'} tabindex={index === 2 ? 0 : -1} data-tab={index}>{name}</button>)}
+  </div>
+  <section id={`${mode}-panel-0`} role="tabpanel" aria-labelledby={`${mode}-tab-0`} tabindex="0" data-panel="0">
+    <h4>Maintained sources</h4>
+    <table><thead><tr><th>Procedure</th><th>Owner</th><th>Review state</th></tr></thead><tbody>{records.map((record) => <tr><td>{record.id}</td><td data-owner={record.id}>{record.owner}</td><td data-review={record.id}>{record.status}</td></tr>)}</tbody></table>
+    {overview && <p>Employee tasks are separate: security training is complete; system access starts delayed.</p>}
+  </section>
+  <section id={`${mode}-panel-1`} role="tabpanel" aria-labelledby={`${mode}-tab-1`} tabindex="0" data-panel="1">
+    <h4>Explicit rules</h4>
+    {overview ? <p>System orientation requires completed access and completed security training. Procedure approval does not complete either employee task.</p> : <p>Each procedure needs a unique ID, an owner, a draft or approved review state, and nonempty text. The handbook combines the text; the review queue selects draft procedures. A valid field is not evidence of human approval.</p>}
+  </section>
+  <section id={`${mode}-panel-2`} role="tabpanel" aria-labelledby={`${mode}-tab-2`} tabindex="0" data-panel="2">
+    <h4>{overview ? 'Employee readiness' : 'Generated practice result'}</h4>
+    <p data-lab-status role="status">{overview ? 'System orientation: Blocked. Access is delayed; security training is complete.' : 'Initial result · Not published'}</p>
+    {!overview && <>
+      <p>Procedures awaiting review:</p><ul data-queue>{initial.queue.map((item) => <li>{item}</li>)}</ul>
+      {mode === 'processing' && <details><summary>Handbook text</summary><pre data-handbook>{initial.handbook}</pre></details>}
+      <details><summary>Previous generated result</summary><p data-previous>No build has been requested yet.</p></details>
+    </>}
+  </section>
+  <noscript><p>The sources, rules, and initial result are shown above. Enable JavaScript to explore changes.</p></noscript>
+</section>
+<script>
+  import { processProcedures, orientationReadiness, type ProcedureSource } from '../../lib/learning';
+  function init() {
+    document.querySelectorAll<HTMLElement>('[data-onboarding-lab]').forEach((root) => {
+      if (root.dataset.ready) return;
+      root.dataset.ready = 'true';
+      const records = JSON.parse(root.querySelector('[data-lab-source]')!.textContent!) as ProcedureSource[];
+      const status = root.querySelector<HTMLElement>('[data-lab-status]')!;
+      const tabs = [...root.querySelectorAll<HTMLButtonElement>('[data-tab]')];
+      const panels = [...root.querySelectorAll<HTMLElement>('[data-panel]')];
+      function selectTab(index: number) {
+        tabs.forEach((tab, i) => { tab.setAttribute('aria-selected', String(i === index)); tab.tabIndex = i === index ? 0 : -1; panels[i].hidden = i !== index; });
+      }
+      root.querySelector<HTMLElement>('[role="tablist"]')!.hidden = false;
+      tabs.forEach((tab, i) => {
+        tab.addEventListener('click', () => selectTab(i));
+        tab.addEventListener('keydown', (event) => {
+          const target = event.key === 'ArrowRight' ? (i + 1) % 3 : event.key === 'ArrowLeft' ? (i + 2) % 3 : event.key === 'Home' ? 0 : event.key === 'End' ? 2 : undefined;
+          if (target !== undefined) { event.preventDefault(); selectTab(target); tabs[target].focus(); }
+        });
+      });
+      selectTab(2);
+      root.querySelectorAll<HTMLSelectElement | HTMLButtonElement | HTMLInputElement>('select, button, input').forEach((control) => { control.disabled = false; });
+      const access = root.querySelector<HTMLSelectElement>('[data-access]');
+      if (access) {
+        access.addEventListener('change', () => { status.textContent = `System orientation: ${orientationReadiness(access.value, 'complete')}. Access is ${access.value}; security training is complete.`; });
+        return;
+      }
+      const contacts = records.find((record) => record.id === 'PROC-003')!;
+      const owner = contacts.owner;
+      const review = root.querySelector<HTMLSelectElement>('[data-contacts]')!;
+      const missing = root.querySelector<HTMLInputElement>('[data-missing-owner]')!;
+      let result = processProcedures(records);
+      const previous = root.querySelector<HTMLElement>('[data-previous]')!;
+      function edit() {
+        contacts.status = review.value; contacts.owner = missing.checked ? '' : owner;
+        root.querySelector<HTMLElement>('[data-owner="PROC-003"]')!.textContent = contacts.owner || '(missing)';
+        root.querySelector<HTMLElement>('[data-review="PROC-003"]')!.textContent = contacts.status;
+        status.textContent = 'Practice source changed · Showing the previous generated result until a successful build';
+      }
+      review.addEventListener('change', edit); missing.addEventListener('change', edit);
+      root.querySelector('[data-build]')!.addEventListener('click', () => {
+        selectTab(2);
+        previous.textContent = result.queue.length ? `Review queue: ${result.queue.join(', ')}` : 'Review queue: no draft procedures.';
+        try {
+          result = processProcedures(records);
+          const queue = root.querySelector('[data-queue]')!;
+          queue.replaceChildren();
+          for (const item of result.queue.length ? result.queue : ['No draft procedures.']) { const li = document.createElement('li'); li.textContent = item; queue.append(li); }
+          const handbook = root.querySelector('[data-handbook]'); if (handbook) handbook.textContent = result.handbook;
+          status.textContent = 'Validation passed · Practice result rebuilt · Not approved or published';
+        } catch (error) { status.textContent = `${error instanceof Error ? error.message : 'Validation failed.'} No new result generated; the previous result is still shown.`; }
+      });
+    });
+  }
+  init(); document.addEventListener('astro:page-load', init);
+</script>

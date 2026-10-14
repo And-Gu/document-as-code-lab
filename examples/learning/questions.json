@@ -1,0 +1,339 @@
+{
+  "chapter-01": [
+    {
+      "type": "single_select",
+      "question": "What makes a maintained source useful for multiple outputs?",
+      "options": [
+        "It is written in Markdown",
+        "Outputs are configured to use the shared information",
+        "It is stored on GitHub",
+        "Every output has the same layout"
+      ],
+      "correctIndex": 1,
+      "feedback": "Reuse depends on explicit relationships and processing, not on a file format or platform."
+    },
+    {
+      "type": "single_select",
+      "question": "Which statement best describes Document-as-Code?",
+      "options": [
+        "Replacing all documents with code",
+        "Applying versioning, review and processing to maintained information",
+        "Publishing every file as a website",
+        "Using AI to write all procedures"
+      ],
+      "correctIndex": 1,
+      "feedback": "The approach applies software-style discipline to information; it is not tied to one output or tool."
+    }
+  ],
+  "chapter-02": [
+    {
+      "type": "single_select",
+      "question": "A contributor makes a Git commit. What is established by that action alone?",
+      "options": [
+        "The change is approved",
+        "The website is updated",
+        "A revision is recorded",
+        "All checks succeeded"
+      ],
+      "correctIndex": 2,
+      "feedback": "A commit records a revision. Review, automated checks and publication are separate."
+    },
+    {
+      "type": "single_select",
+      "question": "Which tool records commits and branches?",
+      "options": [
+        "Git",
+        "Astro",
+        "Markdown",
+        "GitHub Pages"
+      ],
+      "correctIndex": 0,
+      "feedback": "Git is the version-control system; GitHub hosts Git repositories and adds collaboration tools."
+    }
+  ],
+  "chapter-03": [
+    {
+      "type": "single_select",
+      "question": "Why record a source revision in a generated report?",
+      "options": [
+        "To prove its content is approved",
+        "To connect the report to its inputs",
+        "To increase the commit count",
+        "To replace validation"
+      ],
+      "correctIndex": 1,
+      "feedback": "A recorded revision supports provenance; it does not itself prove correctness."
+    },
+    {
+      "type": "single_select",
+      "question": "What is a limitation of using commit counts as a quality measure?",
+      "options": [
+        "Commits cannot be compared",
+        "A large number of edits need not mean high value",
+        "Git does not record changes",
+        "Every commit changes published pages"
+      ],
+      "correctIndex": 1,
+      "feedback": "Activity and value are different; the importance and correctness of changes matter."
+    }
+  ],
+  "chapter-04": [
+    {
+      "type": "single_select",
+      "question": "Which Markdown line creates a top-level heading?",
+      "options": [
+        "# Access instructions",
+        "- Access instructions",
+        "**Access instructions**",
+        "[Access instructions](#)"
+      ],
+      "correctIndex": 0,
+      "feedback": "A leading # followed by a space denotes a level-one heading."
+    },
+    {
+      "type": "single_select",
+      "question": "Why can Markdown help with reviewing changes?",
+      "options": [
+        "It automatically approves edits",
+        "Its plain-text source can be compared in a diff",
+        "It prevents duplicate information",
+        "It always generates multiple documents"
+      ],
+      "correctIndex": 1,
+      "feedback": "Text-based source can be inspected and compared; approval and reuse require other practices."
+    }
+  ],
+  "chapter-05": [
+    {
+      "type": "single_select",
+      "question": "In a procedure file, what does 'owner: onboarding-team' describe?",
+      "options": [
+        "The person currently onboarding",
+        "The team responsible for maintaining the procedure",
+        "The last person to read the page",
+        "The system needed by an employee"
+      ],
+      "correctIndex": 1,
+      "feedback": "The owner field is metadata about the maintained procedure."
+    },
+    {
+      "type": "single_select",
+      "question": "A procedure is approved, but a new employee has not received access. Which interpretation is correct?",
+      "options": [
+        "The procedure must be a draft",
+        "The employee's access is automatically complete",
+        "Procedure approval and task completion are separate",
+        "The employee cannot use the procedure"
+      ],
+      "correctIndex": 2,
+      "feedback": "Approval concerns the procedure's review state; task completion concerns an individual onboarding case."
+    }
+  ],
+  "chapter-06": [
+    {
+      "type": "single_select",
+      "question": "Which item should remain identifiable if a procedure is renamed?",
+      "options": [
+        "Its stable ID",
+        "Its display title",
+        "Its file position"
+      ],
+      "correctIndex": 0,
+      "feedback": "A stable identifier allows relationships to survive a title change."
+    },
+    {
+      "type": "true_false",
+      "question": "An impact link proves a linked item must be changed.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctIndex": 1,
+      "feedback": "A link identifies a candidate for review; the effect still needs assessment."
+    }
+  ],
+  "chapter-07": [
+    {
+      "type": "true_false",
+      "question": "A successful processing run necessarily means the resulting handbook is approved.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctIndex": 1,
+      "feedback": "Automated processing and human content approval are separate."
+    },
+    {
+      "type": "single_select",
+      "question": "Which output should use operational activity completion?",
+      "options": [
+        "Procedure review queue",
+        "Onboarding readiness view",
+        "Procedure approval list"
+      ],
+      "correctIndex": 1,
+      "feedback": "Readiness concerns completion and dependencies, not procedure approval."
+    }
+  ],
+  "chapter-08": [
+    {
+      "type": "single_select",
+      "question": "What makes an AI-generated training note easier to verify?",
+      "options": [
+        "Selecting current procedures and requesting source references",
+        "Adding more unrelated documents",
+        "Removing review constraints"
+      ],
+      "correctIndex": 0,
+      "feedback": "Relevant current sources and references make checking more practical."
+    },
+    {
+      "type": "true_false",
+      "question": "A commit created by an AI agent is automatically an approved change.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctIndex": 1,
+      "feedback": "Changes proposed by agents still require the applicable review process."
+    }
+  ],
+  "chapter-09": [
+    {
+      "type": "single_select",
+      "question": "Which representation best preserves editable dependency links?",
+      "options": [
+        "Static screenshot only",
+        "Structured activity records",
+        "Printed report only"
+      ],
+      "correctIndex": 1,
+      "feedback": "Structured records can preserve identifiers and relationship types."
+    },
+    {
+      "type": "true_false",
+      "question": "A PDF and a live dashboard must always be generated at the same time.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctIndex": 1,
+      "feedback": "Outputs may have distinct release schedules."
+    }
+  ],
+  "chapter-10": [
+    {
+      "type": "single_select",
+      "question": "What does a commit primarily provide?",
+      "options": [
+        "A recorded revision",
+        "Formal content approval",
+        "A published handbook"
+      ],
+      "correctIndex": 0,
+      "feedback": "A commit records repository history; acceptance and publication are separate."
+    },
+    {
+      "type": "true_false",
+      "question": "Reviewers should consider affected outputs in addition to changed lines.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctIndex": 0,
+      "feedback": "Source changes can affect linked materials and generated views."
+    }
+  ],
+  "chapter-11": [
+    {
+      "type": "single_select",
+      "question": "Which check can automatically detect a nonexistent activity reference?",
+      "options": [
+        "Reference validation",
+        "Writing-style review",
+        "Management signoff"
+      ],
+      "correctIndex": 0,
+      "feedback": "A reference check can verify whether an identifier resolves."
+    },
+    {
+      "type": "true_false",
+      "question": "A passing schema validation proves the owner is the right team.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctIndex": 1,
+      "feedback": "It can confirm that an owner field exists, not its real-world correctness."
+    }
+  ],
+  "chapter-12": [
+    {
+      "type": "single_select",
+      "question": "If a new build fails, what should remain available in a safe release process?",
+      "options": [
+        "The last successful publication",
+        "A broken replacement page",
+        "An unreviewed draft"
+      ],
+      "correctIndex": 0,
+      "feedback": "A failed build should not silently overwrite a working publication."
+    },
+    {
+      "type": "true_false",
+      "question": "A source revision and a published edition always mean the same version.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctIndex": 1,
+      "feedback": "Publication can lag source changes."
+    }
+  ],
+  "chapter-13": [
+    {
+      "type": "single_select",
+      "question": "What is the first question when two applications contain the same field?",
+      "options": [
+        "Which one is authoritative?",
+        "Which has the nicer interface?",
+        "Which exports more images?"
+      ],
+      "correctIndex": 0,
+      "feedback": "Field ownership determines correct updates and conflict handling."
+    },
+    {
+      "type": "true_false",
+      "question": "Exporting a diagram as an image always preserves its model relationships.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctIndex": 1,
+      "feedback": "Visual appearance alone may not preserve object identities and links."
+    }
+  ],
+  "chapter-14": [
+    {
+      "type": "single_select",
+      "question": "Which is a sensible first adoption target?",
+      "options": [
+        "One useful output with accountable sources",
+        "Converting every archive at once",
+        "Counting all available file types"
+      ],
+      "correctIndex": 0,
+      "feedback": "A focused useful result permits early feedback and improvement."
+    },
+    {
+      "type": "true_false",
+      "question": "Document-as-Code adoption can require changes to team responsibilities.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctIndex": 0,
+      "feedback": "Maintaining rules, pipelines, and sources requires explicit ownership."
+    }
+  ]
+}

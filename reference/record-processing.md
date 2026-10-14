@@ -1,6 +1,166 @@
 # Record Processing: Experiments and Traceability
 
-These optional activities extend [Processing Information into Views](../docs/06-processing.md). Complete its main exercise first, and work in your own exercise copy.
+This runnable requirement example complements [chapter 5](../docs/05-structured-content.md) and [chapter 7](../docs/07-processing.md). It uses requirements, tasks, and tests for the same fictional service, not employee readiness records. Work in your own exercise copy.
+
+## Templates and Requirements
+
+## From Documents to Records
+
+Chapter 4 used an onboarding procedure explaining how someone requests system access.
+
+One instruction was to keep the confirmation reference number.
+
+For this fictional service, we express the corresponding expectation as a requirement: it must provide that number.
+
+Our existing [REQ-014 record](../examples/structured-content/records/REQ-014.md) stores that requirement as a separate Markdown file. Its approved status illustrates a fictional review decision; new records start as proposed:
+
+```markdown
+---
+id: REQ-014
+type: requirement
+status: approved
+owner: onboarding-team
+title: Access Confirmation
+verified_by: [TEST-008]
+---
+
+The access service must confirm a submitted
+request with a reference number.
+
+## Rationale
+
+The requester needs a reference when
+asking about progress.
+```
+
+This is a **structured record**: a readable document with a consistent identity and metadata.
+
+The text describes what the service must do. The metadata describes the record so that people and tools can organize it.
+
+For example, a program could select every record with `type: requirement` and `status: approved`.
+
+## Understanding YAML Metadata
+
+The information between the two `---` lines is called *YAML front matter*.
+
+[YAML](https://yaml.org/spec/1.2.2/#chapter-2-language-overview) is a text format for representing structured information. In this example, each field has a name and a value. Front matter describes the file as a whole; the prose follows it.
+
+| Field | Purpose |
+|---|---|
+| `id` | Unique, stable identifier |
+| `type` | Kind of record |
+| `status` | Current lifecycle state |
+| `owner` | Responsible team or person |
+| `title` | Human-readable name |
+| `verified_by` | References to related test records |
+
+The notation is straightforward:
+
+- `status: approved` assigns a value to a field.
+- `verified_by: [TEST-008]` contains a list with one item.
+- `verified_by: []` represents an empty list.
+
+Use spaces, not tabs, for indentation when grouping fields or writing lists. Indentation affects the structure.
+
+The metadata fields are conventions chosen by our project. YAML provides the syntax but does not define what `approved` or `verified_by` means.
+
+A record's status also needs careful interpretation. An approved requirement means that the requirement has been accepted; it does not mean the system has been implemented or tested.
+
+## Templates and Schemas
+
+How do we ensure that different authors create records in a consistent way?
+
+We use two complementary mechanisms.
+
+| Aspect | Template | Schema |
+|---|---|---|
+| Purpose | Help create a record | Define consistency rules |
+| Provides | Fields and suggested content | Required fields and allowed values |
+| Used by | Authors and AI assistants | Validation tools |
+
+A **template** provides a starting point. For example, our [requirement template](../examples/structured-content/templates/requirement.md) includes metadata fields, a requirement statement, and a rationale.
+
+Our [schema](../examples/structured-content/schema.yaml) defines rules, such as requiring an `id` and restricting requirement statuses to `proposed`, `approved`, or `retired`. The project chooses these rules; YAML does not enforce them on its own.
+
+A validation tool can apply those rules and report violations.
+
+However, a record that passes validation can still contain an incorrect or ambiguous requirement. Structural consistency and content quality are different things.
+
+[Chapter 7](../docs/07-processing.md) demonstrates automated validation and processing. A schema needs a tool that understands and applies its rules; it is not activated just by saving the file.
+
+Not every piece of information needs the same fields.
+
+A requirement may need an owner, approval status, and references to tests. A meeting decision may instead need a decision date, participants, and rationale.
+
+Start with the questions you want to answer, then choose fields that help answer them.
+
+Avoid collecting metadata that nobody maintains or uses.
+
+## Try It: Create a Requirement
+
+Let's add a requirement to our fictional onboarding service.
+
+Use the [requirement template](../examples/structured-content/templates/requirement.md) to create a proposed requirement stating that users must be able to identify the system associated with an access request. Work in your own exercise copy of the repository.
+
+1. Copy the template to `examples/structured-content/records/REQ-016.md`. If that ID already exists, choose an unused ID and matching filename.
+2. Replace every placeholder. Use the matching ID, `type: requirement`, `owner: onboarding-team`, and `status: proposed`.
+3. Write one clear requirement statement and a short rationale.
+4. Leave `verified_by: []` empty because no test has been identified.
+5. Review the record for clarity, completeness, and consistency.
+
+You can write the record manually or ask an AI assistant to create it from the template. In either case, review its content and do not allow the assistant to invent missing requirements.
+
+**Expected result:** A readable requirement record with structured metadata, ready for review and subsequent validation. Creating the file does not automatically run a check.
+
+**If the structure is unclear:** Compare the file with REQ-014 above. Check the front-matter delimiters, field names, indentation, and remaining placeholders.
+
+**Keep:** The proposed record. Chapter 7 uses these records for processing; chapter 10 covers recording and reviewing changes.
+
+
+## Try It: Update a Requirement
+
+Let's experiment with the actual records in the repository.
+
+You will need a local copy of the repository with Python and its required libraries installed. Follow the [linked environment setup guide](growth-measurement.md#prepare-a-local-environment) if you have not prepared the environment. Activate that environment before running the commands.
+
+From the repository root, run:
+
+```bash
+python scripts/process_records.py
+```
+
+The processor creates three files under `build/records/`:
+
+- `requirements.md`
+- `dashboard.md`
+- `ai-context.md`
+
+Open them and inspect their contents.
+
+Now edit:
+
+[REQ-015](../examples/structured-content/records/REQ-015.md)
+
+Change its status from `proposed` to `approved`. For this exercise, treat the change as a simulated approval rather than a real project decision.
+
+If REQ-015 is already approved in your exercise copy, use another proposed requirement and note its ID. Create one using the requirement exercise above if necessary.
+
+Run the processor again.
+
+**Check the result:** Does the requirements view reflect the new status? Have the dashboard counts changed? Is REQ-015 now included in the AI context?
+
+Finally, try introducing an invalid status and rerun the processor. Observe the validation error, then restore the correct value.
+
+Remember that files from an earlier successful run may remain after a failed run. They should not be mistaken for newly validated results.
+
+**Expected result:** One source change updates three views, while an invalid status prevents new outputs.
+
+**If the result differs:** Check the starting records, allowed statuses, and the latest terminal message. Compare against your own dataset if it differs from the four supplied records.
+
+**Keep:** Restore deliberate errors and retain a short note about the source change and its effects. Leave generated files under ignored `build/records/`. [Chapter 10](../docs/10-git-review.md) covers reviewing and recording source changes.
+
+For input fingerprints, manifests, and further validation experiments, see the [processing reference](record-processing.md).
+
 
 ## Validation Rules
 
@@ -27,7 +187,7 @@ The [draft procedure from chapter 4](../examples/onboarding/requesting-access.md
 
 An approved requirement describes what has been agreed. The task and test record the work needed to deliver and check it. Before using the procedure at work, someone must confirm that its instructions match how the service actually behaves.
 
-The procedure is outside the four-record dataset processed in this chapter. We explain its connection to the requirement in the text and chapter 8's authored diagram; the program does not check that connection.
+The procedure is outside the four-record dataset processed in this chapter. We explain its connection to the requirement in the text and chapter 9's authored diagram; the program does not check that connection.
 
 Keep three kinds of information distinct:
 
@@ -37,7 +197,7 @@ Keep three kinds of information distinct:
 | Authored metadata | ID, owner, status, relationships | Maintained according to agreed rules |
 | Derived data | Counts by status or owner | Calculated from the records |
 
-The first two kinds are maintained by authors; the third is calculated. For example, change a requirement's status in its record and let the program recalculate the totals. A status alone cannot tell you how long work has been in progress; that needs history. [Chapter 10](../docs/10-dashboards.md) explores how to choose and interpret such measures.
+The first two kinds are maintained by authors; the third is calculated. For example, change a requirement's status in its record and let the program recalculate the totals. A status alone cannot tell you how long work has been in progress; that needs history. The [dashboard guide](dashboards-and-work-tracking.md) explores how to choose and interpret such measures.
 
 ## Identify the Inputs Behind a Result
 
@@ -80,4 +240,4 @@ Review the final source diff and commit only the intended exercise changes. Reco
 Restore deliberate errors before committing. Keep generated views under `build/records/`, outside version control.
 
 
-Return to [chapter 6](../docs/06-processing.md) for the full processing sequence.
+Return to [chapter 7](../docs/07-processing.md) for the processing concepts.

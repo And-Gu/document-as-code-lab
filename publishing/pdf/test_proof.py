@@ -73,19 +73,26 @@ class ProofTests(unittest.TestCase):
     def test_chapter_metadata_and_selection(self):
         meta, ast = proof.chapter('05-structured-content.md')
         self.assertEqual(meta['chapter_number'], 5)
-        blocks = proof.section(ast, 'From Documents to Records')
+        blocks = proof.section(ast, 'Metadata: information about information')
         examples = [block['c'][1] for block in blocks if block['t'] == 'CodeBlock']
-        self.assertTrue(any('id: REQ-014' in text for text in examples))
+        self.assertTrue(any('id: PROC-001' in text for text in examples))
 
     def test_metadata_field_reference_is_selectable(self):
         _, ast = proof.chapter('05-structured-content.md')
-        blocks = proof.section(ast, 'Understanding YAML Metadata')
+        blocks = proof.section(ast, 'From fields to useful views')
         self.assertTrue(any(block['t'] == 'Table' for block in blocks))
 
     def test_missing_section_fails(self):
         _, ast = proof.chapter('01-introduction.md')
         with self.assertRaises(ValueError):
             proof.section(ast, 'A section that does not exist')
+
+    def test_dashboard_reference_retains_table_without_chapter_number(self):
+        meta, ast = proof.chapter('../reference/dashboards-and-work-tracking.md')
+        self.assertEqual(meta['chapter_number'], 'reference')
+        self.assertEqual(meta['id'], '07-dashboards')
+        blocks = proof.section(ast, 'Missing Excel? Tables and Spreadsheets')
+        self.assertTrue(any(block['t'] == 'Table' for block in blocks))
 
     def test_relative_links_become_web_links(self):
         ast = json.loads(proof.convert('[Notes](../presentations/README.md)', 'json'))

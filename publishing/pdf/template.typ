@@ -8,6 +8,6 @@
 #show raw.where(block: true): it => block(width: 100%, inset: 10pt, fill: rgb("f1f4f3"), radius: 3pt)[#text(size: 9pt, it)]
 #set table(stroke: (bottom: 0.5pt + rgb("cbd5ce")), inset: 8pt)
 #let chapter-info(number, status, id, revision) = block(width: 100%, inset: 10pt, fill: rgb("edf3ef"), stroke: (left: 3pt + rgb("205e48")))[
-  #text(font: "Libertinus Sans", size: 9pt)[*CHAPTER #number · #status* \ Source ID: #id \ Source revision: #revision]
+  #text(font: "Libertinus Sans", size: 9pt)[*#if number == "reference" [REFERENCE] else [CHAPTER #number] · #status* \ Source ID: #id \ Source revision: #revision]
 ]
 #include "body.typ"

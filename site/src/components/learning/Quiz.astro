@@ -1,0 +1,79 @@
+---
+import { Check, RotateCcw } from '@lucide/astro';
+import { prepareQuestions, type QuizQuestion } from '../../lib/learning';
+interface Props { id: string; title?: string; questions: QuizQuestion[]; }
+const { id, title = 'Check your understanding', questions } = Astro.props;
+const prepared = prepareQuestions(questions);
+---
+<section class="learning-tool learning-quiz" data-learning-quiz aria-labelledby={`${id}-title`}>
+  <h3 id={`${id}-title`}>{title}</h3>
+  <script type="application/json" data-questions set:html={JSON.stringify(prepared).replaceAll('<', '\\u003c')} />
+  <form>
+    {prepared.map((question, index) => (
+      <div class="lq-question">
+        <fieldset disabled>
+          <legend>{index + 1}. {question.question}</legend>
+          {question.options.map((option) => (
+            <label><input type={question.type === 'multiple' ? 'checkbox' : 'radio'} name={`${id}-${question.id}`} value={option.value} /><span>{option.label}</span></label>
+          ))}
+        </fieldset>
+        {question.hint && <details class="lq-hint"><summary>Show hint</summary><p>{question.hint}</p></details>}
+        <p class="lq-feedback" data-feedback role="status" hidden />
+      </div>
+    ))}
+    <div class="learning-actions">
+      <button type="submit" disabled><Check size={18} />Check answers</button>
+      <button type="reset" disabled><RotateCcw size={18} />Try again</button>
+    </div>
+    <p class="lq-score" data-score role="status" />
+  </form>
+  <noscript><p>Enable JavaScript to answer the questions and receive feedback.</p></noscript>
+</section>
+<script>
+  import { answerMatches, prepareQuestions, type QuizQuestion } from '../../lib/learning';
+  function init() {
+    document.querySelectorAll<HTMLElement>('[data-learning-quiz]').forEach((root) => {
+      if (root.dataset.ready) return;
+      root.dataset.ready = 'true';
+      const form = root.querySelector<HTMLFormElement>('form')!;
+      const score = root.querySelector<HTMLElement>('[data-score]')!;
+      let questions: ReturnType<typeof prepareQuestions>;
+      try {
+        const input = JSON.parse(root.querySelector('[data-questions]')!.textContent!) as QuizQuestion[];
+        if (!Array.isArray(input) || !input.length) throw new Error('No questions');
+        questions = prepareQuestions(input);
+      } catch { score.textContent = 'The quiz could not load.'; return; }
+      const blocks = [...root.querySelectorAll<HTMLElement>('.lq-question')];
+      root.querySelectorAll<HTMLFieldSetElement | HTMLButtonElement>('fieldset, button').forEach((control) => { control.disabled = false; });
+      function clearFeedback() {
+        score.textContent = '';
+        blocks.forEach((block) => {
+          const feedback = block.querySelector<HTMLElement>('[data-feedback]')!;
+          feedback.hidden = true; feedback.textContent = ''; delete feedback.dataset.result;
+        });
+      }
+      form.addEventListener('change', clearFeedback);
+      form.addEventListener('reset', () => {
+        clearFeedback();
+        root.querySelectorAll<HTMLDetailsElement>('details').forEach((details) => { details.open = false; });
+        requestAnimationFrame(() => form.querySelector<HTMLInputElement>('input')?.focus());
+      });
+      form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        let correctCount = 0;
+        questions.forEach((question, index) => {
+          const block = blocks[index];
+          const selected = [...block.querySelectorAll<HTMLInputElement>('input:checked')].map((input) => input.value);
+          const correct = answerMatches(selected, question.correct);
+          if (correct) correctCount++;
+          const feedback = block.querySelector<HTMLElement>('[data-feedback]')!;
+          feedback.dataset.result = correct ? 'correct' : 'incorrect';
+          feedback.textContent = selected.length ? `${correct ? 'Correct.' : 'Not quite.'} ${question.explanation}` : 'Select an answer first.';
+          feedback.hidden = false;
+        });
+        score.textContent = `${correctCount} of ${questions.length} correct.`;
+      });
+    });
+  }
+  init(); document.addEventListener('astro:page-load', init);
+</script>

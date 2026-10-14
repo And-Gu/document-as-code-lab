@@ -1,6 +1,6 @@
 # PDF Design Trial
 
-This is a small proof, not the full book pipeline. It reads selected excerpts from chapters 1, 5, and 10, including chapter 5's REQ-014 record example, renders the maintained onboarding diagram as SVG, and builds a native table from the CSSV budget values. Whole-page SVG export is out of scope.
+This is a small proof, not the full book pipeline. It reads selected excerpts from chapters 1, 5, and 10, including chapter 5's PROC-001 record example, renders the maintained onboarding diagram as SVG, and builds a native table from the CSSV budget values. Whole-page SVG export is out of scope.
 
 ## Local Tools
 

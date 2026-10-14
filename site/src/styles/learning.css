@@ -1,0 +1,44 @@
+.learning-tool { --learning-accent: #17684c; border: 1px solid #d5ddda; border-radius: 8px; padding: 1rem; margin: 1rem 0 1.5rem; background: #fff; color: #222; }
+.learning-tool h3 { margin: 0; font-size: 1.15rem; line-height: 1.4; }
+.learning-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1rem; }
+.learning-actions { display: flex; flex-wrap: wrap; gap: .5rem; }
+.learning-tool button { display: inline-flex; align-items: center; justify-content: center; gap: .4rem; min-height: 2.75rem; padding: .5rem .75rem; border: 1px solid #b5c5be; border-radius: 4px; font: inherit; font-size: .875rem; color: #222; background: #f3f7f5; cursor: pointer; }
+.learning-toolbar button { width: 2.75rem; padding: .5rem; }
+.learning-tool button:hover { background: #e5efea; }
+.learning-tool button:disabled { opacity: .55; cursor: default; }
+.learning-tool :is(button, textarea, input, summary, [tabindex]):focus-visible { outline: 2px solid var(--learning-accent); outline-offset: 3px; }
+.mdp-panels { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 1rem; }
+.mdp-panel { min-width: 0; font-size: .875rem; font-weight: 600; }
+.mdp-label { display: block; }
+.mdp-panel textarea, .mdp-preview { display: block; box-sizing: border-box; width: 100%; height: 24rem; margin-top: .5rem; padding: .75rem; border: 1px solid #ccd5d1; border-radius: 4px; overflow: auto; font-weight: 400; background: #fafcfb; color: #222; }
+.mdp-panel textarea { resize: vertical; font: .85rem/1.6 ui-monospace, SFMono-Regular, Consolas, monospace; }
+.mdp-preview { overflow-wrap: anywhere; line-height: 1.6; }
+.mdp-preview h1 { margin: .25rem 0 .75rem; font-size: 1.35rem; line-height: 1.3; }
+.mdp-preview h2 { margin: 1rem 0 .5rem; font-size: 1.15rem; }
+.mdp-preview h3 { margin: 1rem 0 .5rem; font-size: 1rem; }
+.mdp-preview p, .mdp-preview ul, .mdp-preview ol { margin: .5rem 0; }
+.mdp-preview pre { padding: .5rem; font-size: .8rem; }
+.mdp-preview th, .mdp-preview td { padding: .35rem .5rem; }
+.learning-status { color: #555; font-size: .8rem; margin: .75rem 0 0; }
+.lq-question { margin: 1rem 0; padding-bottom: 1rem; border-bottom: 1px solid #e1e6e3; }
+.lq-question fieldset { margin: 0; padding: 0; border: 0; min-width: 0; }
+.lq-question legend { font-weight: 600; margin-bottom: .5rem; }
+.lq-question label { display: flex; align-items: flex-start; gap: .6rem; padding: .5rem 0; font-size: .9rem; cursor: pointer; }
+.lq-question input { margin-top: .4rem; accent-color: var(--learning-accent); flex: 0 0 auto; }
+.lq-hint { font-size: .875rem; margin-top: .5rem; }
+.lq-hint summary { cursor: pointer; color: #17684c; }
+.lq-feedback { padding: .6rem .75rem; border-left: 3px solid #17684c; background: #f0f7f3; font-size: .9rem; }
+.lq-feedback[data-result="incorrect"] { border-left-color: #ad5135; background: #fff4ef; }
+.lq-score { margin-bottom: 0; font-size: .9rem; font-weight: 600; }
+@media (max-width: 700px) { .mdp-panels { grid-template-columns: minmax(0, 1fr); } .learning-toolbar { align-items: flex-start; } }
+.lab-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; margin: 1rem 0; }
+.lab-control { display: flex; flex-direction: column; gap: .25rem; font-size: .875rem; margin: 1rem 0; }
+.lab-control select { font: inherit; padding: .5rem; min-height: 2.75rem; border: 1px solid #b5c5be; border-radius: 4px; background: #fff; color: #222; }
+.lab-tabs { display: flex; gap: .25rem; border-bottom: 1px solid #d5ddda; margin-top: 1rem; }
+.lab-tabs button { border: 0; border-radius: 0; background: transparent; border-bottom: 3px solid transparent; }
+.lab-tabs button[aria-selected="true"] { border-bottom-color: #17684c; font-weight: 600; }
+.onboarding-lab [role="tabpanel"] { padding-top: .5rem; min-height: 10rem; }
+.onboarding-lab h4 { margin: .75rem 0; }
+.onboarding-lab pre { white-space: pre-wrap; overflow-wrap: anywhere; max-height: 20rem; }
+.onboarding-lab :is(select, [role="tabpanel"]):focus-visible { outline: 2px solid #17684c; outline-offset: 3px; }
+.lab-tabs[hidden], .onboarding-lab [role="tabpanel"][hidden] { display: none; }

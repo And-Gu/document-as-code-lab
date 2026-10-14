@@ -1,0 +1,6 @@
+flowchart LR
+ I[Maintained sources] --> V{Validate}
+ V -->|Fail| F[Report errors]
+ V -->|Pass| T[Transform and assemble]
+ T --> O[Generated outputs]
+ O -.-> P[Separate publishing workflow]

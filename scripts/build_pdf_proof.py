@@ -79,7 +79,7 @@ def main():
     revision = subprocess.check_output(["git", "rev-parse", "--short", "HEAD"], cwd=ROOT, text=True).strip()
     dirty = bool(subprocess.check_output(["git", "status", "--porcelain"], cwd=ROOT, text=True).strip())
     label = revision + (" + working-tree changes" if dirty else "")
-    inputs = ["docs/01-introduction.md", "docs/05-structured-content.md", "docs/10-dashboards.md", "assets/diagrams/onboarding-assembly.mmd", "examples/dashboards/department-budget.cssv"]
+    inputs = ["docs/01-introduction.md", "docs/05-structured-content.md", "reference/dashboards-and-work-tracking.md", "assets/diagrams/01-source-to-outcomes.mmd", "examples/dashboards/department-budget.cssv"]
     args = [str(CONFIG / "node_modules/.bin/mmdc"), "-i", str(ROOT / inputs[3]), "-o", str(OUT / "onboarding.svg"), "-c", str(CONFIG / "mermaid.json"), "-b", "transparent"]
     if options.prepared_svg:
         if options.prepared_svg.resolve() != (OUT / 'onboarding.svg').resolve():
@@ -88,9 +88,9 @@ def main():
         subprocess.run(args, cwd=ROOT, check=True, env=os.environ.copy())
     pieces = ["= From Markdown to a Designed PDF\n\nA publishing trial using maintained chapter excerpts. Whole-page SVG export is excluded. This is not the full tutorial or an approved publication.\n\n"]
     for filename, title, section_title in [
-        ("01-introduction.md", "1. Information Becomes a Publication", "From Source Files to Documents"),
-        ("05-structured-content.md", "2. Templates and Metadata", "From Documents to Records"),
-        ("10-dashboards.md", "3. A Table for Print", "Missing Excel? Tables and Spreadsheets"),
+        ("01-introduction.md", "1. Information Becomes a Publication", "From a document to maintained information"),
+        ("05-structured-content.md", "2. Structure and Metadata", "From fields to useful views"),
+        ("../reference/dashboards-and-work-tracking.md", "3. A Table for Print", "Missing Excel? Tables and Spreadsheets"),
     ]:
         meta, ast = chapter(filename)
         if len(pieces) > 1:
@@ -100,10 +100,11 @@ def main():
         blocks = section(ast, section_title)
         if meta["chapter_number"] == 1:
             pieces.append(render(ast, [b for b in blocks if b["t"] == "Para"][:2]))
-            visual = meta["visuals"][0]
+            visual = next(item for item in meta["visuals"] if item["source"].endswith("01-source-to-outcomes.mmd"))
             pieces.append(f'\n#figure(image("onboarding.svg", width: 100%, alt: {quoted(visual["alt"])}), caption: [{visual["caption"]}])\n')
         elif meta["chapter_number"] == 5:
-            pieces.append(render(ast, blocks))
+            metadata = section(ast, "Metadata: information about information")
+            pieces.append(render(ast, [b for b in metadata if b["t"] == "CodeBlock"] + [b for b in blocks if b["t"] in ["Para", "Table"]]))
         else:
             pieces.append(render(ast, [b for b in blocks if b["t"] == "Para"][:1]))
             _, _, data = (ROOT / inputs[4]).read_text().split("---", 2)
@@ -121,7 +122,7 @@ def main():
                     pieces.append(f"table.cell(fill: {fill})[{cell}],\n")
             pieces.append(",".join(f"[*{cell}*]" for cell in ["Total", *(f"{n:,}" for n in totals)]) + ")\n")
             pieces.append("\nThe PDF uses the data from the CSSV file, with native Typst table styling. Browser CSS, sorting, and filtering are not carried into this publication.\n\nEquipment and Travel together exceed their allocations by 21,000 SEK. The net variance across all categories is 11,000 SEK.\n")
-            pieces.append('#link("https://and-gu.github.io/document-as-code-lab/chapters/10-dashboards/#missing-excel-tables-and-spreadsheets")[Explore the interactive website example.]\n')
+            pieces.append('#link("https://and-gu.github.io/document-as-code-lab/materials/reference/dashboards-and-work-tracking/#missing-excel-tables-and-spreadsheets")[Explore the interactive website example.]\n')
     pieces.append("\n== Publication Notes\nSource excerpts retain their chapter status. The book needs its own publication review. Tables remain text, the Mermaid diagram is SVG, and there are no screenshots of document pages.\n\nThis proof does not yet test full-book navigation, every diagram, long-table pagination, or PDF/UA conformance.\n")
     (OUT / "body.typ").write_text("\n".join(pieces))
     (OUT / 'proof.typ').write_text((CONFIG / 'template.typ').read_text().replace('#include "body.typ"', '\n'.join(pieces)))

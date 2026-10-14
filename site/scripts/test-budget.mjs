@@ -4,7 +4,7 @@ import { parse } from '@rhpaiva/cssv';
 import widget from '../plugins/growth-widget.mjs';
 
 const source = readFileSync(new URL('../../examples/dashboards/department-budget.cssv', import.meta.url), 'utf8');
-const chapter = readFileSync(new URL('../../docs/10-dashboards.md', import.meta.url), 'utf8');
+const chapter = readFileSync(new URL('../../reference/dashboards-and-work-tracking.md', import.meta.url), 'utf8');
 const model = parse(source);
 assert.deepEqual(model.columns, ['Category', 'Planned SEK', 'Actual SEK', 'Variance SEK']);
 assert.equal(model.rows.length, 5);

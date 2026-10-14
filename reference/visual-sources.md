@@ -1,33 +1,3 @@
----
-id: 05-images
-chapter_number: 8
-status: draft
-audience: practitioners-maintaining-visual-information
-learning_goal: Choose visual sources, generate a relationship diagram, and check affected views after a change.
-visuals:
-  - id: recorded-relationships
-    status: source-ready
-    kind: diagram
-    purpose: Show explicit relationships in the starting dataset, including an unconnected requirement.
-    placement: after-let-records-supply-the-connections
-    preferred_source: mermaid
-    source: ../assets/diagrams/recorded-relationships.mmd
-    embedded: true
-    outputs: [web, pdf, slides]
-    caption: The starting dataset contains four records and two explicit relationships.
-    alt: TASK-003 implements REQ-014, which is verified by TEST-008. REQ-015 has no recorded relationship. The procedure is outside this dataset.
-  - id: onboarding-record-relationships
-    status: source-ready
-    kind: diagram
-    purpose: Distinguish validated record links from the procedure's conceptual connection.
-    placement: after-describe-relationships-with-mermaid
-    preferred_source: mermaid
-    source: ../assets/diagrams/onboarding-record-relationships.mmd
-    embedded: true
-    outputs: [web, pdf, slides]
-    caption: Record links express intended implementation and verification, not completed work.
-    alt: TASK-003 implements REQ-014, which is verified by TEST-008. A dashed connection from PROC-001 to REQ-014 is conceptual and not checked by the processor.
----
 
 # Images, Diagrams, and Visual Sources
 
@@ -36,7 +6,7 @@ A visual is part of the information we maintain, not just decoration added when 
 
 Document-as-code does not require replacing visual tools with text. It asks us to identify the editable source, record what the visual means, and keep it aligned with related information. The source might be Mermaid, an SVG drawing, a dataset, or a model in a specialist application.
 
-We will extend chapter 6's onboarding example into a generated diagram, then consider visual delivery and maintenance. The main exercise uses the existing Python environment. Rendering and the optional Napkin comparison use separate tools; generating source text and checking the visible result are separate tasks.
+We will extend chapter 7's onboarding example into a generated diagram, then consider visual delivery and maintenance. The main exercise uses the existing Python environment. Rendering and the optional Napkin comparison use separate tools; generating source text and checking the visible result are separate tasks.
 
 ## Choose the Visual for the Question
 
@@ -56,7 +26,7 @@ Mermaid and SVG serve different roles. Mermaid describes diagrams; SVG is a vect
 
 Mermaid turns text descriptions into diagrams. You name items and connections, while a renderer arranges and draws them. Its source can be reviewed alongside prose in a diff. [The Mermaid introduction](https://mermaid.js.org/intro/) describes this approach.
 
-This [authored diagram](../assets/diagrams/onboarding-record-relationships.mmd) connects chapter 6's records to the draft procedure. The procedure connection is explanatory judgment, not a link stored in record metadata.
+This [authored diagram](../assets/diagrams/onboarding-record-relationships.mmd) connects chapter 7's records to the draft procedure. The procedure connection is explanatory judgment, not a link stored in record metadata.
 
 ```mermaid
 flowchart LR
@@ -96,7 +66,7 @@ Different renderers may support different Mermaid versions or features. Check th
 
 ## Let Records Supply the Connections
 
-The [diagram generator](../scripts/build_record_diagram.py) reuses chapter 6's validation. It includes every validated record, including unconnected records, and draws only explicit relationships defined in the schema. It does not infer links from prose or include the separate procedure file.
+The [diagram generator](../scripts/build_record_diagram.py) reuses chapter 7's validation. It includes every validated record, including unconnected records, and draws only explicit relationships defined in the schema. It does not infer links from prose or include the separate procedure file.
 
 With the supplied starting records, it produces this Mermaid source and view:
 
@@ -112,7 +82,7 @@ flowchart LR
 
 *The starting dataset contains four records and two explicit relationships. This fixed teaching example is not a live view of your exercise files.*
 
-REQ-015 has no arrow because no relationship is recorded for it. That does not prove it is unrelated to the service. Likewise, `verified_by` identifies an intended test, not a passing result. The diagram omits status and owner; use chapter 6's dashboard for those questions.
+REQ-015 has no arrow because no relationship is recorded for it. That does not prove it is unrelated to the service. Likewise, `verified_by` identifies an intended test, not a passing result. The diagram omits status and owner; use chapter 7's dashboard for those questions.
 
 `flowchart LR` requests a left-to-right arrangement. Names such as `n0` are generated drawing identifiers, not record IDs; the labels retain the record IDs. Text between vertical bars names an arrow's relationship. [Mermaid's flowchart reference](https://mermaid.js.org/syntax/flowchart.html) explains the notation.
 
@@ -140,7 +110,7 @@ For local image export, follow the [official Mermaid CLI instructions](https://g
 mmdc -i build/record-diagram/relationships.mmd -o build/record-diagram/relationships.svg
 ```
 
-Record the renderer version and inspect the export. The renderer is not included in this project's Python dependencies, and this draft does not claim verified rendering across GitHub, PDF, and PowerPoint. The Mermaid section above explains preview compatibility; chapter 13 will develop repeatable build checks.
+Record the renderer version and inspect the export. The renderer is not included in this project's Python dependencies, and this draft does not claim verified rendering across GitHub, PDF, and PowerPoint. The Mermaid section above explains preview compatibility; chapter 14 will develop repeatable build checks.
 
 ## SVG, Raster Images, and Native Sources
 
@@ -216,4 +186,4 @@ Use your own exercise copy and the Python environment from the [measurement refe
 
 **Keep:** comparison notes, input references, and any reviewed visual variant. Restore the temporary experiment; generated files remain under ignored `build/`. For your information item from chapter 1, identify one useful visual, its maintained source, and the checks needed when it changes.
 
-Next, [Git, Review, and Collaboration](09-git-review.md) develops review of coordinated changes and the scope of approval.
+Next, [Git, Review, and Collaboration](../docs/10-git-review.md) develops review of coordinated changes and the scope of approval.

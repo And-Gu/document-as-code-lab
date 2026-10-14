@@ -6,9 +6,9 @@ The project teaches document-as-code by applying it to itself. It also serves as
 
 ## Status
 
-Chapters 1 and 3 are approved; the current revision of chapter 2 is in review. The remaining 10 chapters are drafts. The [Astro reading site is published on GitHub Pages](https://and-gu.github.io/document-as-code-lab/) and reads the original Markdown sources, including diagrams and linked examples. Every chapter has an expandable metadata and Git-history widget. Pull requests run Astro checks and a production build; pushes to `main` build and deploy the website.
+All 14 chapters have been rewritten and are in review. The [Astro reading site is published on GitHub Pages](https://and-gu.github.io/document-as-code-lab/) and reads the original Markdown sources, including diagrams and linked examples. Every chapter has an expandable metadata and Git-history widget. Pull requests run Astro checks and a production build; pushes to `main` build and deploy the website.
 
-A runnable onboarding showcase, historical growth reporting, structured-record processing, and record-to-Mermaid generation are also available. Growth reports are generated as GitHub Actions artifacts. Chapter 3 introduces the standalone dashboard. Saved growth charts remain fixed historical examples, while the dashboard adds an interactive report measured from committed history during each site build. The [Project Control Center is published on GitHub Pages](https://and-gu.github.io/document-as-code-lab/dashboard/), linked from the chapter menu. It reads published operational snapshots by default, generated on main deployments and hourly, with optional live retrieval and separately labelled growth measurements. Hosted snapshot retrieval, timestamps, issues, pull requests, commits, and all four workflows have been verified. Workflow states describe collection time rather than current live status. The PDF book, additional presentation decks, and verification of Microsoft-environment exercises remain future work. Chapter approval does not extend to other chapter drafts or fictional example procedures.
+A runnable onboarding showcase, historical growth reporting, structured-record processing, and record-to-Mermaid generation are also available. Growth reports are generated as GitHub Actions artifacts. Chapter 3 connects source history to traceability and links to the standalone dashboard. Saved growth charts remain fixed historical examples, while the dashboard adds an interactive report measured from committed history during each site build. The [Project Control Center is published on GitHub Pages](https://and-gu.github.io/document-as-code-lab/dashboard/), linked from the chapter menu. It reads published operational snapshots by default, generated on main deployments and hourly, with optional live retrieval and separately labelled growth measurements. Hosted snapshot retrieval, timestamps, issues, pull requests, commits, and all four workflows have been verified. Workflow states describe collection time rather than current live status. The PDF book, additional presentation decks, and verification of Microsoft-environment exercises remain future work. Chapter approval does not extend to other chapter drafts or fictional example procedures.
 
 Run the site locally to try the first HTML introduction deck at `/document-as-code-lab/presentations/`. Its [YAML definition and authoring notes](presentations/README.md) select messages from chapters 1, 2, 9, and 11. Astro renders reusable slide components; Reveal.js provides navigation and presentation controls within the existing website build.
 
@@ -36,7 +36,7 @@ Run the Python suite from the repository root with `.venv/bin/python -m unittest
 
 Chapter 1 follows three [procedure source files](examples/onboarding-showcase/README.md) into an assembled [handbook review copy](assets/onboarding-showcase/handbook.md), a [training excerpt](assets/onboarding-showcase/training-excerpt.md), and a [review-status chart](assets/onboarding-showcase/review-status.png). The [generation script](scripts/build_onboarding_showcase.py) builds these views from the same sources.
 
-These are fixed, fictional teaching examples, not operationally approved instructions or a finished publishing system. The handbook includes draft material, the training excerpt is not a slide deck, and the chart is not an interactive dashboard. Chapter 4 uses a separate draft copy for its editing exercise.
+These are fixed, fictional teaching examples, not operationally approved instructions or a finished publishing system. The handbook includes draft material, the training excerpt is not a slide deck, and the chart is not an interactive dashboard. Chapter 4 links a separate draft copy and adds browser-only Markdown practice. Chapters 1, 5, and 6 add fictional lab simulations; their employee readiness and practice builds do not change the fixed source files or approve publications. All 14 chapters have short website-only quizzes. Detailed dashboard, visual, AI, publishing, and automation exercises remain in linked reference guides.
 
 ## Learning Goals
 
@@ -54,19 +54,22 @@ Start with the [shared vocabulary](GLOSSARY.md) whenever a term is unfamiliar. L
 
 Filename prefixes and `chapter_number` metadata give the current reading order. Stable `id` values may contain older numbers; they identify the same content across reorganizations, not its current position.
 
-1. [Document-as-Code: The Living Tutorial](docs/01-introduction.md)
-2. [GitHub as a Workspace for Knowledge and Automation](docs/02-github-workspace.md)
-3. [Project Control Center: The Repository at a Glance](docs/03-project-growth.md)
-4. [Markdown and Content Structure](docs/04-markdown.md)
-5. [Templates and Metadata](docs/05-structured-content.md)
-6. [Processing Information into Views](docs/06-processing.md)
-7. [AI-Native Documentation and Context](docs/07-ai-native.md)
-8. [Images, Diagrams, and Visual Sources](docs/08-images.md)
-9. [Git, Review, and Collaboration](docs/09-git-review.md)
-10. [Dashboards and Work Tracking in GitHub](docs/10-dashboards.md)
-11. [Publishing to Websites, Books, and Presentations](docs/11-publishing.md)
-12. [Beyond GitHub: OneDrive, Copilot, and Other Applications](docs/12-beyond-github.md)
-13. [Automation, Quality, and Further Experiments](docs/13-automation.md)
+1. [Document-as-Code: Information We Can Work With](docs/01-introduction.md)
+2. [A Shared Workspace for Information](docs/02-github-workspace.md)
+3. [History Is Useful Information](docs/03-project-growth.md)
+4. [Markdown: Readable Sources
+# Requesting System Access](docs/04-markdown.md)
+5. [Structure Makes Information Actionable
+# Requesting System Access](docs/05-structured-content.md)
+6. [Information Architecture and Traceability](docs/06-information-architecture.md)
+7. [From Sources to Results](docs/07-processing.md)
+8. [AI Needs Context, Not Just Prompts](docs/08-ai-native.md)
+9. [Beyond Documents: Reusable Information and Visualization](docs/09-images.md)
+10. [Reviewing Changes Together](docs/10-git-review.md)
+11. [Quality Checks You Can Run](docs/11-quality-checks.md)
+12. [From Build to Publication](docs/12-publishing.md)
+13. [Working Across Tools](docs/13-beyond-github.md)
+14. [From Tutorial to Real Practice](docs/14-automation.md)
 
 ## Outputs
 
@@ -119,3 +122,5 @@ Review the complete first draft and published reading site with readers, verify 
 ## Licensing
 
 Original software is licensed under MIT; original educational content is licensed under CC BY 4.0. See [LICENSE.md](LICENSE.md) for scope, attribution, and third-party exceptions.
+
+The 14-chapter editorial structure keeps practical detail in [reference guides](reference/record-processing.md). The [dashboard guide](reference/dashboards-and-work-tracking.md) retains work tracking and the interactive budget table. Chapter 6 now covers architecture; processing is chapter 7. Earlier published chapter URLs have redirects in Astro.

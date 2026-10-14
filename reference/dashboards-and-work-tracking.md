@@ -1,27 +1,14 @@
 ---
 id: 07-dashboards
-chapter_number: 10
-status: draft
-audience: practitioners-coordinating-content-and-development-work
-learning_goal: Connect a dashboard question to maintained data, responsible people, and evidence of progress.
-visuals:
-  - id: dashboard-sources
-    status: source-ready
-    kind: diagram
-    purpose: Distinguish content history from work tracking while connecting both to a useful overview.
-    placement: after-two-kinds-of-progress
-    preferred_source: mermaid
-    source: ../assets/diagrams/dashboard-sources.mmd
-    embedded: true
-    outputs: [web, pdf, slides]
-    caption: Content records and work tracking answer different questions in a shared overview.
-    alt: Files and recorded revisions supply content measures. Issues and project fields supply work measures. Both contribute to an overview linked to sources and evidence.
+chapter_number: reference
+status: in-review
 ---
+
 
 # Dashboards and Work Tracking in GitHub
 
 
-In chapter 1, a small dashboard helped us identify instructions that needed review and the team responsible for them. Chapter 3 showed how the tutorial grows over time. Chapter 9 connected proposed changes to review decisions. We can now bring these ideas together: what information do we have, what needs attention, and what work is moving it forward?
+In chapter 1, a small dashboard helped us identify instructions that needed review and the team responsible for them. Chapter 3 showed how the tutorial grows over time. Chapter 10 connected proposed changes to review decisions. We can now bring these ideas together: what information do we have, what needs attention, and what work is moving it forward?
 
 A dashboard is a selected overview that helps someone understand a situation and decide what to do. It might be a table on a repository's starting page, a chart, or a work board. It does not need to be a separate application.
 
@@ -78,7 +65,7 @@ Choose one place to maintain each fact:
 | Capability definition and acceptance criterion | Feature register | Link tasks and evidence to that criterion |
 | Review evidence for a change | Pull request and review record | Link to the reviewed version |
 
-These are choices for a workflow, not mandatory rules. Chapter 6's file-based tasks remain a useful alternative. Avoid maintaining the same task status independently in a file, an issue, and a spreadsheet. When more than one representation is needed, decide which one is authoritative and how the others are refreshed.
+These are choices for a workflow, not mandatory rules. Chapter 7's file-based tasks remain a useful alternative. Avoid maintaining the same task status independently in a file, an issue, and a spreadsheet. When more than one representation is needed, decide which one is authoritative and how the others are refreshed.
 
 GitHub Issues and Projects are service data, not files included in an ordinary Git clone. A content-history report therefore does not also preserve your work board. For a combined historical report, retain dated work-data snapshots or other suitable history alongside the source revisions you measure.
 
@@ -90,7 +77,7 @@ This project already has several building blocks:
 
 - Chapter 1's [status chart](../assets/onboarding-showcase/review-status.png) and accompanying table illustrate a review queue using fictional procedures.
 - Chapter 3 introduces the [Project Control Center](https://and-gu.github.io/document-as-code-lab/dashboard/), which compares measured growth between identified revisions.
-- Chapter 6's [record processor](../scripts/process_records.py) creates a local `build/records/dashboard.md` from structured records.
+- Chapter 7's [record processor](../scripts/process_records.py) creates a local `build/records/dashboard.md` from structured records.
 - The [feature register](../data/features.json) holds the capability criteria we want to satisfy.
 
 These are not yet one automatically refreshed dashboard. The teaching chart is a fixed example, the record dashboard is generated locally, and the growth workflow produces downloadable reports. A link to a report and an embedded image also have different update paths: generating a new chart does not replace an older image saved in the README.
@@ -205,11 +192,11 @@ List stale links, missing owners, and unverified completion claims.
 Do not close issues or mark capabilities complete without approval.
 ```
 
-The rules, scripts, and agent instructions are part of the team's maintained tools. As the work changes, the team can improve them too. Chapter 13 will develop this automation further.
+The rules, scripts, and agent instructions are part of the team's maintained tools. As the work changes, the team can improve them too. Chapter 14 will develop this automation further.
 
 ## Try It: Connect a Measure to an Action
 
-Use the Python environment described in the [measurement reference](../reference/growth-measurement.md#prepare-a-local-environment) and the structured records introduced in chapter 5 and processed in chapter 6. Work in a disposable exercise copy if you plan to edit records. You do not need a GitHub Project for this first part.
+Use the Python environment described in the [measurement reference](../reference/growth-measurement.md#prepare-a-local-environment) and the structured records introduced in chapter 5 and processed in chapter 7. Work in a disposable exercise copy if you plan to edit records. You do not need a GitHub Project for this first part.
 
 1. Run `python scripts/process_records.py` from the repository root.
 2. Open `build/records/dashboard.md`. Read its selection and version information before interpreting the counts.
@@ -239,4 +226,4 @@ Use a repository and a user or organization Project where you have permission to
 
 **Keep:** the board and evidence links for continued use, or clearly label the items as training exercises before leaving them in a shared workspace.
 
-For your own information example, choose one question, its maintained source, and the person who should act on the answer. Next, [Publishing to Websites, Books, and Presentations](11-publishing.md) considers how to deliver maintained information to different audiences.
+For your own information example, choose one question, its maintained source, and the person who should act on the answer. Next, [Publishing to Websites, Books, and Presentations](../docs/12-publishing.md) considers how to deliver maintained information to different audiences.

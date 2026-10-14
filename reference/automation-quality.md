@@ -1,14 +1,7 @@
----
-id: 10-automation
-chapter_number: 13
-status: draft
-audience: practitioners-maintaining-repeatable-document-workflows
-learning_goal: Run and inspect repeatable checks, detect stale outputs, and distinguish automated evidence from publication decisions.
----
 
 # Automation, Quality, and Further Experiments
 
-Chapter 6 showed how a program validates records and builds views. Here, we decide when that program should run, where it runs, and how to retain and inspect the results.
+Chapter 7 showed how a program validates records and builds views. Here, we decide when that program should run, where it runs, and how to retain and inspect the results.
 
 
 Throughout this tutorial, we have changed a maintained source and followed its effects into other views. Doing that once demonstrates reuse. Doing it reliably after every relevant change requires a repeatable process.
@@ -19,7 +12,7 @@ This final chapter brings the existing scripts together, examines what the hoste
 
 ## Turn a Repeated Task into a Workflow
 
-A workflow describes when work begins, which steps run, and what happens if a step fails. The runner is the machine executing those steps. Both terms appeared in chapter 2; here we use them to connect the individual exercises.
+A workflow describes when work begins, which steps run, and what happens if a step fails. The runner is the machine executing those steps. Here we define these terms and use them to connect the individual exercises.
 
 For a publishing workflow, a sensible sequence is to validate the sources, generate the selected outputs, check those outputs, and retain the results for review. Stop before delivery when a required check fails. The exact checks depend on the publication and the consequences of an error.
 
@@ -31,7 +24,7 @@ For a publishing workflow, a sensible sequence is to validate the sources, gener
 | Inspect | Text, links, tables, and images work for readers | Review notes for the actual output |
 | Deliver | The reviewed edition reaches the intended audience | Publication location and edition identifier |
 
-A passing automated check answers a defined question. It cannot tell us that an instruction is useful merely because its metadata is valid. Keep the human decisions from chapter 9 visible in the workflow.
+A passing automated check answers a defined question. It cannot tell us that an instruction is useful merely because its metadata is valid. Keep the human decisions from chapter 10 visible in the workflow.
 
 ### What Runs on a Runner?
 
@@ -69,7 +62,7 @@ Source checks should cover fields, references, and selection rules. Output check
 For the onboarding showcase, think through the effects of two changes:
 
 - A wording change in access should reach the handbook and training excerpt. The status count can remain unchanged.
-- A status change in contacts should affect the data, chart, and handbook status label. The explanatory table, caption, and alternative text in chapter 1 also need attention.
+- A status change in contacts should affect the data, chart, and handbook status label. The procedure table in chapter 5 and the related links and captions in chapter 1 also need attention.
 
 The current builder does not rewrite that surrounding chapter prose. Either maintain it as an explicit review task or extend the publishing process to derive repeated values from the same data. An agent can find likely references and propose updates, but its report should identify what it checked and what it could not verify.
 
@@ -141,7 +134,7 @@ The comparison should return to exit code 0. In a disposable project copy, you c
 
 ### Extend It: Check the Whole Change
 
-In a disposable project copy, repeat chapter 11's onboarding change and also change the contacts status. Run the showcase builder. Inspect the handbook, excerpt, data, and chart against the sources, then find the related table, caption, and alternative text in chapter 1. Record which values still need editing. This deliberately demonstrates the gap between generated assets and manually maintained explanations.
+In a disposable project copy, repeat chapter 12's onboarding change and also change the contacts status. Run the showcase builder. Inspect the handbook, excerpt, data, and chart against the sources, then find the procedure table in chapter 5 and the related links and captions in chapter 1. Record which values still need editing. This deliberately demonstrates the gap between generated assets and manually maintained explanations.
 
 Next, run `python scripts/measure_growth.py --include-working-tree` after a chapter edit. Inspect the working-copy observation as described in the [measurement reference](../reference/growth-measurement.md#measure-local-edits) and distinguish it from committed history. Keep generated outputs outside `docs/` so they do not become additional chapter content in the measurement.
 

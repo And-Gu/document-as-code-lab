@@ -4,7 +4,7 @@
 
 - Agree on audience and expected prior knowledge.
 - Draft chapters 1 and 2 to introduce the approach and the GitHub workspace.
-- Bring the detailed growth-measurement explanation and historical teaching comparisons into chapter 10; chapter 3 is now a short introduction linking to the dashboard.
+- Keep history and traceability in chapter 3, with the actual dashboard linked. Detailed dashboard and measurement material lives in the reference guides.
 - Define chapter status, chapter counting, word counting, and capability milestones.
 - Keep this README aligned with implemented behavior.
 
@@ -22,7 +22,7 @@ Done when an update produces verifiable current and historical metrics.
 
 ## 3. Publish the First Website
 
-Current status: Astro publishes all thirteen chapters to GitHub Pages, with metadata and Git-history panels. Production deployment, navigation, images, and Mermaid rendering have been verified. Chapter 3 introduces the standalone Project Control Center, whose growth widget uses committed history at build time. Saved charts under `assets/figures/` remain historical snapshots. Chapter 10 has a CSSV budget table with sorting and filtering. The Project Control Center is published at `/dashboard/` with authenticated, build-generated operational snapshots on main deployment and an hourly schedule; optional live retrieval remains available. Pages deployment 38152410515 verified all four operational sources, workflow states, source revision, and generation timestamps. Workflow states describe collection time, and scheduled runs may be delayed. Chapters 1 and 3 are approved; the current revision of chapter 2 is in review.
+Published baseline: Astro publishes the tutorial to GitHub Pages, with metadata and Git-history panels. Production deployment, navigation, images, and Mermaid rendering have been verified. Chapter 3 introduces the standalone Project Control Center, whose growth widget uses committed history at build time. Saved charts under `assets/figures/` remain historical snapshots. The CSSV budget table with sorting and filtering is retained in the dashboard reference guide. The Project Control Center is published at `/dashboard/` with authenticated, build-generated operational snapshots on main deployment and an hourly schedule; optional live retrieval remains available. Pages deployment 38152410515 verified all four operational sources, workflow states, source revision, and generation timestamps. Workflow states describe collection time, and scheduled runs may be delayed. The editorial structure contains 14 in-review chapters awaiting content approval. Full-book generation and several interactive exercises remain future work.
 
 - Compare a small set of publishing tools against the tutorial's needs.
 - Publish chapters and a basic growth dashboard.
