@@ -7,6 +7,32 @@ const compiled = ts.transpileModule(source, {
   compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.ES2022 },
 }).outputText.replace("from 'markdown-it'", `from '${import.meta.resolve('markdown-it')}'`);
 const { prepareQuestions, answerMatches, renderLearningMarkdown, processProcedures, orientationReadiness, selectProcedureContent } = await import(`data:text/javascript;base64,${Buffer.from(compiled).toString('base64')}`);
+const metadataSource = await readFile(new URL('../src/lib/metadata-practice.ts', import.meta.url), 'utf8');
+const metadataCompiled = ts.transpileModule(metadataSource, {
+  compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.ES2022 },
+}).outputText.replace("from 'ajv'", `from '${import.meta.resolve('ajv')}'`).replace("from 'yaml'", `from '${import.meta.resolve('yaml')}'`);
+const { readPracticeFrontmatter, validatePracticeMetadata } = await import(`data:text/javascript;base64,${Buffer.from(metadataCompiled).toString('base64')}`);
+const practiceSchema = JSON.parse(await readFile(new URL('../../examples/learning/procedure.schema.json', import.meta.url), 'utf8'));
+const practiceSource = '---\nid: PROC-003\nowner: people-team\nstatus: draft\n---\n\n# Contacts\n\nAsk the people team.';
+assert.equal(validatePracticeMetadata(practiceSource, practiceSchema).valid, true, 'Draft is valid, not approved');
+assert.equal(validatePracticeMetadata(practiceSource.replace('draft', 'approved'), practiceSchema).valid, true);
+assert.match(validatePracticeMetadata(practiceSource.replace('owner: people-team\n', ''), practiceSchema).errors.join(), /owner/);
+assert.match(validatePracticeMetadata(practiceSource.replace('draft', 'ready'), practiceSchema).errors.join(), /draft, approved/);
+assert.equal(validatePracticeMetadata(practiceSource.replace('people-team', '"   "'), practiceSchema).valid, false);
+assert.equal(validatePracticeMetadata(practiceSource.replace('people-team', '42'), practiceSchema).valid, false);
+assert.equal(validatePracticeMetadata(practiceSource.replace('PROC-003', 'item'), practiceSchema).valid, false);
+assert.equal(validatePracticeMetadata(practiceSource.replace('status: draft', 'status: draft\nextra: field'), practiceSchema).valid, false);
+assert.equal(validatePracticeMetadata(practiceSource.replace('status: draft', 'status: [draft'), practiceSchema).valid, false);
+assert.equal(validatePracticeMetadata(practiceSource.replace('status: draft', 'status: draft\nstatus: approved'), practiceSchema).valid, false);
+assert.equal(validatePracticeMetadata('# No frontmatter', practiceSchema).valid, false);
+assert.equal(validatePracticeMetadata('---\n- draft\n---\n# Contacts', practiceSchema).valid, false);
+assert.equal(validatePracticeMetadata('---\n', practiceSchema).valid, false);
+assert.equal(validatePracticeMetadata(practiceSource.replaceAll('\n', '\r\n'), practiceSchema).valid, true);
+assert.equal(readPracticeFrontmatter(practiceSource).body, '# Contacts\n\nAsk the people team.');
+assert.equal(readPracticeFrontmatter(practiceSource.replace('draft', '[draft')).body, '# Contacts\n\nAsk the people team.');
+const unsafePractice = practiceSource.replace('Ask the people team.', '<script>alert(1)</script>\n\n[run](javascript:alert(1))');
+const safePreview = renderLearningMarkdown(readPracticeFrontmatter(unsafePractice).body);
+assert.ok(!safePreview.includes('<script>') && !safePreview.includes('href="javascript:'));
 const question = { id: 'heading', question: 'Heading?', options: [{ value: 'a', label: 'Yes' }, { value: 'b', label: 'No' }], correct: ['a'], explanation: 'A heading.' };
 assert.equal(prepareQuestions([question])[0].type, 'single');
 assert.equal(prepareQuestions([{ ...question, type: 'true-false', correct: ['false'] }])[0].options[1].value, 'false');
@@ -41,14 +67,26 @@ for (const slug of slugs) {
   assert.ok(html.includes('id="chapter-quiz-widget"'), slug);
   assert.ok(!html.includes('[AGENT'), slug);
   assert.ok(!html.includes('VISUAL:'), slug);
-  assert.equal((html.match(/data-markdown-playground/g) ?? []).length, slug === '04-markdown' ? 1 : 0);
+  assert.equal((html.match(/data-markdown-playground/g) ?? []).length, ['04-markdown', '05-structured-content'].includes(slug) ? 1 : 0);
 }
+const metadataChapter = await readFile(new URL('../dist/chapters/05-structured-content/index.html', import.meta.url), 'utf8');
+assert.equal((metadataChapter.match(/data-schema-practice/g) ?? []).length, 1);
+assert.ok(!metadataChapter.includes('data-onboarding-lab'), 'The old processing widget is not mounted in chapter 5');
+assert.ok(!chapter.includes('data-schema-practice'), 'Chapter 4 remains a plain Markdown playground');
+assert.match(metadataChapter, /data-validate disabled/);
+assert.match(metadataChapter, /data-state="valid"/);
+assert.ok(metadataChapter.includes('Validation passed: the starting metadata matches the schema.'));
+assert.ok(metadataChapter.includes('View the schema (JSON)'));
+assert.ok(metadataChapter.includes('initial validation result'));
 const candidates = JSON.parse(await readFile(new URL('../../examples/learning/questions.json', import.meta.url), 'utf8'));
-for (const items of Object.values(candidates)) {
+for (const [chapterId, items] of Object.entries(candidates)) {
   assert.ok(items.every(q => ['single_select', 'true_false'].includes(q.type)));
   const prepared = prepareQuestions(items.map((q, i) => ({ id: String(i), question: q.question, type: q.type === 'true_false' ? 'true-false' : 'single', options: q.options.map((label, i) => ({ value: String(i), label })), correct: [q.type === 'true_false' ? q.options[q.correctIndex].toLowerCase() : String(q.correctIndex)], explanation: q.feedback })));
-  assert.equal(prepared.length, 2);
+  assert.equal(prepared.length, chapterId === 'chapter-05' ? 4 : 2, chapterId);
 }
+assert.ok(metadataChapter.includes('name="chapter-05-question-4"'));
+assert.ok(metadataChapter.includes('status: unknown'));
+assert.equal(validatePracticeMetadata(practiceSource.replace('draft', 'unknown'), practiceSchema).valid, false);
 const procedures = [{ id: 'PROC-001', owner: 'team', status: 'approved', body: '# Access' }, { id: 'PROC-003', owner: 'people', status: 'draft', body: '# Contacts' }];
 assert.deepEqual(processProcedures(procedures).queue, ['PROC-003 · people']);
 const approved = procedures.map(p => ({ ...p, status: 'approved' }));
@@ -98,4 +136,4 @@ assert.ok(processingChapter.includes('data-access'), 'The readiness lab remains 
 assert.ok(processingChapter.includes('data-build'), 'The processing lab remains available in chapter 7');
 const contacts = await readFile(new URL('../../examples/onboarding-showcase/contacts.md', import.meta.url), 'utf8');
 assert.match(contacts, /status: draft/);
-console.log('Fourteen lesson mounts, quiz mapping, Markdown safety, procedure processing, validation failures, readiness, and source inclusion rules passed.');
+console.log('Fourteen lesson mounts, quiz mapping, Markdown safety, YAML parsing, JSON Schema validation, procedure processing, readiness, and source inclusion rules passed.');

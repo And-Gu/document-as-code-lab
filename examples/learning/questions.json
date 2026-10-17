@@ -108,25 +108,49 @@
       "type": "single_select",
       "question": "In a procedure file, what does 'owner: onboarding-team' describe?",
       "options": [
-        "The person currently onboarding",
-        "The team responsible for maintaining the procedure",
-        "The last person to read the page",
-        "The system needed by an employee"
+        "The team that made the most recent edit",
+        "The team responsible for maintaining the procedure, not necessarily the team authorized to approve it",
+        "The team that approved the latest revision",
+        "The team responsible for running the validation program"
       ],
       "correctIndex": 1,
-      "feedback": "The owner field is metadata about the maintained procedure."
+      "feedback": "The owner is responsible for maintaining the procedure. Who may approve it is a separate decision in the team's review process; ownership alone does not grant approval authority."
     },
     {
       "type": "single_select",
-      "question": "A procedure is approved, but a new employee has not received access. Which interpretation is correct?",
+      "question": "How do frontmatter and YAML relate in the procedure example?",
       "options": [
-        "The procedure must be a draft",
-        "The employee's access is automatically complete",
-        "Procedure approval and task completion are separate",
-        "The employee cannot use the procedure"
+        "Frontmatter checks the fields, while YAML approves the procedure",
+        "YAML is used only inside Markdown frontmatter",
+        "Frontmatter is the opening metadata block; YAML is the format used to write its fields",
+        "Frontmatter contains the instructions, while YAML controls their appearance"
       ],
       "correctIndex": 2,
-      "feedback": "Approval concerns the procedure's review state; task completion concerns an individual onboarding case."
+      "feedback": "Frontmatter describes the block's position and purpose. YAML is a structured text format that can also be used in separate files."
+    },
+    {
+      "type": "single_select",
+      "question": "You enter 'status: unknown' in the practice file and select Validate metadata. Why does the check fail?",
+      "options": [
+        "The schema allows only draft or approved as status values",
+        "Unknown is invalid YAML syntax",
+        "GitHub permits only approved procedures",
+        "The source file must be committed before it can be checked"
+      ],
+      "correctIndex": 0,
+      "feedback": "Unknown is valid text in YAML, but it is outside the status values allowed by this practice schema. The validator applies that rule when you run the check."
+    },
+    {
+      "type": "single_select",
+      "question": "The practice file has 'status: draft' and passes validation. What does that result establish?",
+      "options": [
+        "A reviewer has accepted the instructions",
+        "The instructions are accurate and safe to follow",
+        "The identifier is unique across the repository",
+        "The metadata satisfies the rules checked by the practice schema"
+      ],
+      "correctIndex": 3,
+      "feedback": "A passing check confirms the configured metadata rules, including draft as an allowed status. It does not establish human approval, instruction accuracy, or cross-file identifier uniqueness."
     }
   ],
   "chapter-06": [

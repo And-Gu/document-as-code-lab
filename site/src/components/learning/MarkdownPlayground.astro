@@ -1,8 +1,12 @@
 ---
-import { Copy, RotateCcw } from '@lucide/astro';
+import { Copy, RotateCcw, CheckCheck } from '@lucide/astro';
 import { renderLearningMarkdown } from '../../lib/learning';
-interface Props { title?: string; initial?: string; }
+import { readPracticeFrontmatter, validatePracticeMetadata } from '../../lib/metadata-practice';
+interface Props { title?: string; initial?: string; validationSchema?: object; }
 const { title = 'Try Markdown', initial = '# Requesting Access\n\nFollow these steps to request **system access**.\n\n## Before You Start\n\n- Your team name\n- The system you need\n\n## Submit Your Request\n\n1. Open the service portal.\n2. Submit the request.\n\n| Item | Status |\n| --- | --- |\n| Access request | Submitted |\n| Approval | Pending |' } = Astro.props;
+const { validationSchema } = Astro.props;
+const initialValidation = validationSchema ? validatePracticeMetadata(initial, validationSchema) : undefined;
+const previewSource = validationSchema ? readPracticeFrontmatter(initial).body : initial;
 ---
 <section class="learning-tool md-playground" data-markdown-playground aria-label={title}>
   <div class="learning-toolbar">
@@ -13,14 +17,27 @@ const { title = 'Try Markdown', initial = '# Requesting Access\n\nFollow these s
     </div>
   </div>
   <div class="mdp-panels">
-    <label class="mdp-panel">Markdown source<textarea data-source rows="15" spellcheck="false" disabled>{initial}</textarea></label>
-    <div class="mdp-panel"><span class="mdp-label">Rendered preview</span><div data-preview class="mdp-preview" role="region" aria-label="Rendered Markdown preview" tabindex="0" set:html={renderLearningMarkdown(initial)} /></div>
+    <label class="mdp-panel">Markdown source<textarea data-source rows="15" spellcheck="false" aria-label="Markdown source" aria-describedby={validationSchema ? 'metadata-validation-result' : undefined} disabled>{initial}</textarea></label>
+    <div class="mdp-panel"><span class="mdp-label">Rendered preview</span><div data-preview class="mdp-preview" role="region" aria-label="Rendered Markdown preview" tabindex="0" set:html={renderLearningMarkdown(previewSource)} /></div>
   </div>
+  {validationSchema && <div data-schema-practice>
+    <script type="application/json" data-validation-schema set:html={JSON.stringify(validationSchema).replaceAll('<', '\\u003c')} />
+    <h4>Schema for this practice file</h4>
+    <p>All three fields are required. The identifier must look like <code>PROC-003</code>, the owner must contain text, and the status must be <code>draft</code> or <code>approved</code>. Extra fields are not allowed.</p>
+    <details><summary>View the schema (JSON)</summary><pre><code>{JSON.stringify(validationSchema, null, 2)}</code></pre></details>
+    <div class="schema-actions"><button type="button" data-validate disabled><CheckCheck size={18} />Validate metadata</button></div>
+    <div id="metadata-validation-result" class="schema-result" data-validation-result data-state={initialValidation?.valid ? 'valid' : 'invalid'} role="status" aria-live="polite" aria-atomic="true">
+      <p data-validation-summary>{initialValidation?.valid ? 'Validation passed: the starting metadata matches the schema.' : 'Validation failed: correct the fields listed below.'}</p>
+      <ul data-validation-errors hidden={!initialValidation?.errors.length}>{initialValidation?.errors.map((error) => <li>{error}</li>)}</ul>
+    </div>
+    <p class="learning-status">Only this file's metadata is checked. A passing result does not approve the instructions or check identifiers against other files.</p>
+  </div>}
   <p class="learning-status" data-status role="status">Fictional example · Unsaved practice</p>
-  <noscript><p>Enable JavaScript to edit the example. The source and preview above remain readable.</p></noscript>
+  <noscript><p>Enable JavaScript to edit{validationSchema ? ' and validate' : ''} the example. The source, preview{validationSchema ? ', schema, and initial validation result' : ''} remain readable.</p></noscript>
 </section>
 <script>
   import { renderLearningMarkdown } from '../../lib/learning';
+  import { readPracticeFrontmatter, validatePracticeMetadata } from '../../lib/metadata-practice';
   function init() {
     document.querySelectorAll<HTMLElement>('[data-markdown-playground]').forEach((root) => {
       if (root.dataset.ready) return;
@@ -29,12 +46,36 @@ const { title = 'Try Markdown', initial = '# Requesting Access\n\nFollow these s
       const preview = root.querySelector<HTMLElement>('[data-preview]')!;
       const status = root.querySelector<HTMLElement>('[data-status]')!;
       const initial = source.value;
-      const render = () => { preview.innerHTML = renderLearningMarkdown(source.value); };
+      const schemaElement = root.querySelector('[data-validation-schema]');
+      const schema: object | undefined = schemaElement ? JSON.parse(schemaElement.textContent!) : undefined;
+      const result = root.querySelector<HTMLElement>('[data-validation-result]');
+      function showValidation(reset = false) {
+        if (!schema || !result) return;
+        const checked = validatePracticeMetadata(source.value, schema);
+        result.dataset.state = checked.valid ? 'valid' : 'invalid';
+        root.querySelector('[data-validation-summary]')!.textContent = checked.valid
+          ? `Validation passed: ${reset ? 'the starting' : 'your'} metadata matches the schema.`
+          : 'Validation failed: correct the fields listed below.';
+        const errors = root.querySelector<HTMLElement>('[data-validation-errors]')!;
+        errors.replaceChildren(...checked.errors.map((message) => { const item = document.createElement('li'); item.textContent = message; return item; }));
+        errors.hidden = checked.errors.length === 0;
+        source.setAttribute('aria-invalid', String(!checked.valid));
+      }
+      const render = () => { preview.innerHTML = renderLearningMarkdown(schema ? readPracticeFrontmatter(source.value).body : source.value); };
       source.disabled = false;
       root.querySelectorAll<HTMLButtonElement>('button').forEach((button) => { button.disabled = false; });
-      source.addEventListener('input', () => { render(); status.textContent = 'Fictional example · Unsaved practice'; });
+      source.addEventListener('input', () => {
+        render(); status.textContent = 'Fictional example · Unsaved practice';
+        if (result) {
+          result.dataset.state = 'unchecked';
+          root.querySelector('[data-validation-summary]')!.textContent = 'Edited: select Validate metadata to check the current source.';
+          root.querySelector<HTMLElement>('[data-validation-errors]')!.hidden = true;
+          source.removeAttribute('aria-invalid');
+        }
+      });
+      root.querySelector('[data-validate]')?.addEventListener('click', () => showValidation());
       root.querySelector('[data-reset]')!.addEventListener('click', () => {
-        source.value = initial; render(); source.focus(); source.setSelectionRange(0, 0); source.scrollTop = 0; preview.scrollTop = 0; status.textContent = 'Example restored.';
+        source.value = initial; render(); showValidation(true); source.focus(); source.setSelectionRange(0, 0); source.scrollTop = 0; preview.scrollTop = 0; status.textContent = 'Example restored.';
       });
       root.querySelector('[data-copy]')!.addEventListener('click', async () => {
         try { await navigator.clipboard.writeText(source.value); status.textContent = 'Markdown copied.'; }

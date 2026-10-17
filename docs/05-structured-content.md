@@ -17,13 +17,13 @@ visuals:
 
 # Structure Makes Information Actionable
 
-Markdown tells a reader what to do. Structured information tells software what an item *is*, who owns it, and how it relates to other items.
+Chapter 4 introduced Markdown as a way to write readable text with headings, lists, and tables. We can also add structured fields that software can read directly, such as a procedure's identifier, owner, and review status.
 
-In our Onboarding Lab, the text of the access procedure is useful to a new employee. The team maintaining the procedure also needs to know its owner, identity, and review status.
+Consider the access procedure from our Onboarding Lab. A new colleague reads the instructions to request access. The team maintaining those instructions needs to know who is responsible for them and whether they have been reviewed. Recording those details in consistent fields lets software group procedures by owner or find those awaiting review.
 
 ## Metadata: information about information
 
-A Markdown file can begin with structured fields, often called **frontmatter**:
+**Metadata** describes the content: for example, which procedure a file contains, who owns it, and its review state. In a Markdown file, we can place these details in a block at the beginning, called **frontmatter**. Here, we write the fields using **YAML**, a text format for structured information:
 
 ```markdown
 ---
@@ -37,9 +37,9 @@ status: approved
 Submit a request through the service portal.
 ```
 
-The `---` lines separate metadata from the main text. The example uses YAML, a common text format for structured fields. These names and values are choices made for our project; GitHub does not require them.
+The `---` lines mark the frontmatter block. YAML is not limited to frontmatter: it can also be used in separate files for configuration, data records, and presentation definitions. Frontmatter describes where the metadata sits; YAML describes how its fields are written. These field names and values are choices made for our project; GitHub does not require them.
 
-The text describes a procedure. The metadata identifies that procedure and records how it is maintained. Keeping both together makes it easier to inspect the information in context.
+The instruction explains how to request access. The `id` gives the procedure a stable reference, `owner` names the responsible team, and `status` records its review state. Readers can see these details alongside the instruction, while software can read the fields without having to infer them from the prose.
 
 ## From fields to useful views
 
@@ -70,23 +70,54 @@ A status view can identify **Contacts** as the item needing review. Unlike an in
 
 Structure works only when fields mean the same thing across files. Does `approved` mean a procedure has passed content review? Who may change it? Is an owner a person or a team? What happens if a field is missing?
 
-Validation can check simple rules such as a required `id`, an allowed `status` value, or a unique identifier. It cannot decide whether the underlying procedure is sensible or safe.
+Once the team agrees on these meanings, it can turn some of them into rules that software checks. This is called **validation**. For example, a check can flag a missing `id`, a duplicated identifier, or a `status` value outside the agreed list. These checks help keep the records consistent; people still need to judge whether the procedure itself is sensible and safe.
 
-An authoring [template](../examples/structured-content/templates/requirement.md) provides a consistent starting layout. A [schema](../examples/structured-content/schema.yaml) expresses rules that a compatible processor can check. A saved YAML file does not validate records by itself. Our requirement schema does not apply to the procedure example above.
+An authoring [template](../examples/structured-content/templates/requirement.md) provides a consistent starting layout. A [schema](../examples/structured-content/schema.yaml) defines the rules for the records. To check those records, a program must read the schema and apply its rules to the selected files. Saving the schema does not start that check automatically.
 
-**Do not confuse two statuses:** a procedure may be approved while an individual employee's onboarding task remains unfinished. Document review and operational completion belong to different information records.
+The linked template and schema are examples for requirement records, such as REQ-014. They are not configured to check the onboarding procedures shown here. The editor exercise below uses a separate schema for procedure metadata.
 
-## Relationships extend the model
+## Concepts so far
 
-Some onboarding activities depend on others. System orientation may require completed access and security training. Those dependencies should be recorded explicitly if software is expected to identify blocked activities.
+| Concept | Meaning | Example |
+| --- | --- | --- |
+| Source text | The content someone reads. | Instructions for requesting access. |
+| Structured field | A named value that software can read directly. | `owner: onboarding-team` |
+| Record | Information maintained as one identifiable item. | A procedure with its text and metadata. |
+| Metadata | Information describing the content. | Its identifier, owner, and review status. |
+| Frontmatter | A metadata block at the beginning of a Markdown file. | Fields between the opening `---` lines. |
+| YAML | A text format for structured information, used in frontmatter or separate files. | `status: approved` |
+| Identifier | A stable reference for an item. | `id: PROC-001` |
+| Owner | The person or team responsible for maintaining an item. | `owner: onboarding-team` |
+| Review status | The recorded state of the content's review. | `draft` or `approved` |
+| Authoring template | A starting layout for creating consistent records. | The linked requirement template. |
+| Schema | Rules describing the fields and values a record may contain. | The linked schema for requirement records. |
+| Validation | Checking records against defined rules. | Flagging a missing identifier or an invalid status. |
+| Processing | Running software to read, check, or transform sources. | Selecting draft procedures for review. |
+| Derived view | A presentation calculated from source information. | A review queue listing Contacts. |
 
-We do not need a large modeling language to express a small relationship. We do need stable identifiers, agreed meanings, and validation appropriate to the risk.
+## Relationships between information items
+
+Metadata can also record connections between maintained information items. For example, an access procedure might refer to a security policy that explains which checks are required. Recording the policy's identifier makes that relationship explicit, rather than relying on a reader or tool to recognize its title in the text.
+
+If the policy changes, software can list the procedures that refer to it, helping the team identify instructions that may need review. A check can flag a reference to a missing item; people still need to decide whether the linked information is relevant and consistent. Chapter 6 develops these relationships further.
+
+## Try schema validation
+
+Use the Markdown editor from chapter 4 to edit a practice copy of Contacts, this time including its YAML frontmatter. The [practice schema](../examples/learning/procedure.schema.json) requires an identifier such as `PROC-003`, an owner containing text, and a status of `draft` or `approved`. It also rejects extra fields. The editor uses this schema when you select **Validate metadata**.
+
+Try these changes to the metadata in the source editor:
+
+1. Change `status: draft` to `status: unknown`, then select **Validate metadata**. The check rejects `unknown` because the schema allows only `draft` or `approved`.
+2. Change the status back to `draft`, remove the `owner` line, and validate again. This time, the check reports a missing required field.
+3. Restore `owner: people-team` and validate. The metadata passes: `draft` is an allowed value, not evidence that the procedure is approved.
+
+The preview shows the procedure text separately from its metadata. Use the reset button to restore the original example at any time.
+
+Edits stay in your browser. The check validates this file's metadata only; it does not save changes, generate a handbook, or check the instruction's accuracy.
 
 <!-- interactive: metadata-lab -->
 
-The website demonstration changes a practice copy of Contacts and refreshes its review queue only after Run checks and build. If its owner is missing, validation fails and the previous result is labelled as such. It does not approve or edit the repository's procedure.
-
-For a runnable requirement example, inspect [REQ-014](../examples/structured-content/records/REQ-014.md) and the [template and record guide](../reference/record-processing.md#templates-and-requirements). The later AI and diagram exercises use those requirement, task, and test records rather than employee onboarding task data.
+For a runnable requirement example, inspect [REQ-014](../examples/structured-content/records/REQ-014.md) and the [template and record guide](../reference/record-processing.md#templates-and-requirements). Those records are also used in later AI and diagram exercises.
 
 ## What to remember
 

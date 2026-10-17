@@ -47,3 +47,11 @@
 .selection-badge[data-tone="pending"] { color: #704800; background: #fff1cc; }
 .selection-badge[data-tone="included"] { color: #164b75; background: #e8f2fc; }
 .selection-feedback { padding: .75rem 1rem; border-left: 3px solid #976400; color: #704800; background: #fff8e7; }
+.schema-actions { margin: 1rem 0; }
+.schema-result { padding: .75rem 1rem; border-left: 3px solid #24638f; background: #f0f6fc; color: #164b75; }
+.schema-result[data-state="valid"] { border-color: #17684c; background: #f0f7f3; color: #145139; }
+.schema-result[data-state="invalid"] { border-color: #a03e2b; background: #fff0eb; color: #7b2d20; }
+.schema-result p { margin: 0; }
+.schema-result ul { margin-bottom: 0; overflow-wrap: anywhere; }
+.schema-result ul[hidden] { display: none; }
+[data-schema-practice] pre { max-height: 20rem; overflow: auto; white-space: pre-wrap; overflow-wrap: anywhere; }

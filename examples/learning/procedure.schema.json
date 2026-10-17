@@ -1,0 +1,12 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Procedure metadata practice schema",
+  "type": "object",
+  "required": ["id", "owner", "status"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string", "pattern": "^PROC-[0-9]{3}$" },
+    "owner": { "type": "string", "pattern": "\\S" },
+    "status": { "type": "string", "enum": ["draft", "approved"] }
+  }
+}
