@@ -10,6 +10,7 @@ const presentations = await getPresentations();
     <h2><a href={siteUrl(`presentations/${presentation.slug}/`)}>{presentation.title}</a></h2>
     <p>{presentation.description}</p>
     <p>{presentation.slides.length} slides · <a href={siteUrl(`files/${presentation.sourceFile}`)}>Presentation source (YAML)</a></p>
+    {presentation.slides.some((slide) => slide.notes) && <p><a href={siteUrl(`presentations/${presentation.slug}/notes/`)}>Speaker notes and chapter references</a></p>}
   </article>)}
   <p><a href={siteUrl('presentation-notices.txt')}>Presentation dependency notices</a></p>
 </Documentation>

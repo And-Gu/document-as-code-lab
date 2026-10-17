@@ -1,0 +1,18 @@
+---
+import Documentation from '../../../layouts/Documentation.astro';
+import { getPresentations } from '../../../lib/presentations';
+import { siteUrl } from '../../../lib/urls';
+export async function getStaticPaths() {
+  return (await getPresentations()).filter((deck) => deck.slides.some((slide) => slide.notes)).map((presentation) => ({ params: { slug: presentation.slug }, props: { presentation } }));
+}
+const { presentation } = Astro.props;
+---
+<Documentation title={`Speaker notes: ${presentation.title}`}>
+  <h1>{presentation.title}</h1><p>Speaker notes · Suggested session length: 15 minutes</p>
+  <p><a href={siteUrl(`presentations/${presentation.slug}/`)}>Launch the presentation</a> · <a href={siteUrl()}>Tutorial home</a></p>
+  {presentation.slides.map((slide, index) => <section id={slide.id}>
+    <h2>{index + 1}. {slide.title}</h2>
+    <p>{slide.notes ?? 'Refer to the slide and linked chapters.'}</p>
+    <p>{slide.references.map((source, i) => <>{i > 0 ? ' · ' : ''}<a href={source.url}>Chapter {source.number}: {source.title}</a></>)}</p>
+  </section>)}
+</Documentation>

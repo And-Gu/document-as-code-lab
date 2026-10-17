@@ -12,6 +12,7 @@
     "check": "astro check",
     "test:learning": "node scripts/test-learning.mjs",
     "test:content": "node scripts/test-content.mjs",
+    "test:homepage": "node scripts/test-homepage.mjs",
     "test:dashboard": "node scripts/growth-report.mjs && node scripts/test-dashboard.mjs"
   },
   "dependencies": {

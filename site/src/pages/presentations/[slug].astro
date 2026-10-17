@@ -5,6 +5,7 @@ import TitleSlide from '../../components/slides/TitleSlide.astro';
 import ContentSlide from '../../components/slides/ContentSlide.astro';
 import ComparisonSlide from '../../components/slides/ComparisonSlide.astro';
 import DiagramSlide from '../../components/slides/DiagramSlide.astro';
+import { siteUrl } from '../../lib/urls';
 
 export async function getStaticPaths() {
   return (await getPresentations()).map((presentation) => ({
@@ -13,7 +14,7 @@ export async function getStaticPaths() {
 }
 const { presentation } = Astro.props;
 ---
-<PresentationLayout title={presentation.title} description={presentation.description}>
+<PresentationLayout title={presentation.title} description={presentation.description} notesUrl={presentation.slides.some((slide) => slide.notes) ? siteUrl(`presentations/${presentation.slug}/notes/`) : undefined}>
   {presentation.slides.map((slide) => <section id={slide.id} class={`slide-${slide.type}`} aria-label={slide.title}>
     {slide.type === 'title' && <TitleSlide slide={slide} />}
     {slide.type === 'content' && <ContentSlide slide={slide} />}

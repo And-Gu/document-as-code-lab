@@ -4,9 +4,16 @@ The tutorial chapters in `docs/` remain the maintained knowledge. Presentation Y
 
 `document-as-code-intro.yaml` uses chapters 1, 2, 9, and 11. It builds at `/document-as-code-lab/presentations/document-as-code/`. The presentation index is `/document-as-code-lab/presentations/`.
 
+Two complementary ten-slide packs are also defined here:
+
+- `information-model.yaml`: concept and mechanics at `/presentations/information-model/`.
+- `information-value.yaml`: benefits, limitations, and adoption at `/presentations/information-value/`.
+
+These paths use the site's `/document-as-code-lab/` prefix. Each new pack has a readable `/notes/` page generated from the same YAML, with chapter references. The homepage links to both packs; the index retains the original introduction. All decks and note pages are included in the GitHub Pages deployment.
+
 ## Define a Deck
 
-Add a `.yaml` file in this folder. `slug`, `title`, `description`, and `slides` are required. Each slide has a unique `id`, `type`, `title`, and `sources` list of existing `docs/*.md` paths. The slug defines its route; the slide ID defines its hash link, such as `#/review`.
+Add a `.yaml` file in this folder. `slug`, `title`, `description`, and `slides` are required. Each slide has a unique `id`, `type`, `title`, and `sources` list of existing `docs/*.md` paths. An optional plain-text `notes` field supplies speaker notes. The slug defines its route; the slide ID defines its hash link, such as `#/review`.
 
 ```yaml
 slug: my-introduction
@@ -39,4 +46,4 @@ Astro reads YAML and renders `src/components/slides/`. `PresentationLayout.astro
 
 Right/PageDown and Left/PageUp navigate. Home and End jump to the first and last slide. O toggles overview, Escape closes overview, and F enters fullscreen; use Escape to leave fullscreen. The toolbar provides overview and fullscreen buttons. Chapter source links leave the deck; browser Back returns to its slide hash.
 
-Check desktop and narrow screens, every slide, source links, images, and keyboard controls under the configured base path. Check the published pages after deployment as well. Notes/presenter mode and PDF/PowerPoint export are not configured in this first version.
+Check desktop and narrow screens, every slide, source links, images, and keyboard controls under the configured base path. Check the published pages after deployment as well. Speaker notes are separate static reading pages, not a synchronized presenter window. PDF/PowerPoint export is not configured.

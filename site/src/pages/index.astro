@@ -1,17 +1,88 @@
 ---
+import { ArrowRight, BookOpen, Network, ShieldCheck, Compass, FileText, PanelsTopLeft, ChartNoAxesCombined, Presentation, Bot, Workflow } from '@lucide/astro';
 import Documentation from '../layouts/Documentation.astro';
 import { getChapters, chapterTitle } from '../lib/chapters';
+import { getPresentations } from '../lib/presentations';
 import { siteUrl } from '../lib/urls';
+import '../styles/home.css';
 const chapters = await getChapters();
+const groups = [
+  { start: 1, end: 4, title: 'Working with sources', description: 'Understand the approach, the workspace, history, and readable source files.', icon: BookOpen, tone: 'sage' },
+  { start: 5, end: 9, title: 'Making information useful', description: 'Add structure, relationships, processing, AI context, and visual representations.', icon: Network, tone: 'violet' },
+  { start: 10, end: 12, title: 'Building confidence', description: 'Review changes, check information, and publish useful results.', icon: ShieldCheck, tone: 'ochre' },
+  { start: 13, end: 14, title: 'Applying the approach', description: 'Connect existing tools and choose a manageable first implementation.', icon: Compass, tone: 'sage' },
+];
+const packs = (await getPresentations()).filter((deck) => ['information-model', 'information-value'].includes(deck.slug));
+const stages = [
+  { label: 'Maintain', detail: 'Readable sources and clear ownership', icon: FileText },
+  { label: 'Review', detail: 'Proposed changes and recorded decisions', icon: ShieldCheck },
+  { label: 'Process', detail: 'Explicit checks and selection rules', icon: Workflow },
+  { label: 'Reuse & transform', detail: 'Shape information for its audience', icon: Network },
+];
 ---
-
-<Documentation title="Project Documentation">
-  <h1>Document-as-Code: The Living Tutorial</h1>
-  <p>A tutorial and visualization lab for maintaining, reviewing, and reusing information.</p>
-  <h2>Contents</h2>
-  <ol>
-    {chapters.map((chapter) => (
-      <li><a href={siteUrl(`chapters/${chapter.id}/`)}>{chapterTitle(chapter)}</a></li>
-    ))}
-  </ol>
+<Documentation title="Document-as-Code" wide>
+  <div class="home">
+    <section class="home-hero" aria-labelledby="home-title">
+      <img class="home-art" src={siteUrl('files/assets/illustrations/information-workshop.jpg')} alt="Colored-pencil illustration of two engineers reviewing shared information, with a laptop, source sheets, and a handbook." width="1536" height="1024" fetchpriority="high" />
+      <div class="hero-copy">
+        <p class="home-eyebrow">The living tutorial & engineering lab</p>
+        <h1 id="home-title">Document-as-Code</h1>
+        <p class="hero-headline">From static documents to information we can work with.</p>
+        <p>Document-as-Code applies software engineering practices to the management of information. Sources are maintained in readable formats, changes are versioned and reviewed, and automated processes can validate, transform, and publish the information.</p>
+        <div class="home-actions">
+          <a class="home-primary" href={siteUrl(`chapters/${chapters[0].id}/`)}>Start learning <ArrowRight size={18} aria-hidden="true" /></a>
+          <a href="#concept">Explore the concept <ArrowRight size={18} aria-hidden="true" /></a>
+        </div>
+      </div>
+    </section>
+    <section id="concept" class="home-section" aria-labelledby="concept-title">
+      <p class="home-eyebrow">From sources to results</p><h2 id="concept-title">Maintain once. Use in different ways.</h2>
+      <p>By separating information from how it is presented, the same maintained sources can support documents, websites, dashboards, visualizations, AI workflows, and other applications.</p>
+      <ol class="source-flow">
+        {stages.map(({ label, detail, icon: Icon }) => <li><Icon size={26} aria-hidden="true" /><h3>{label}</h3><p>{detail}</p><ArrowRight class="flow-arrow" size={20} aria-hidden="true" /></li>)}
+      </ol>
+      <h3>Possible outputs</h3>
+      <div class="flow-outputs" role="group" aria-label="Possible outputs">
+        <span><FileText size={19} aria-hidden="true" />Documents</span><span><PanelsTopLeft size={19} aria-hidden="true" />Websites</span><span><ChartNoAxesCombined size={19} aria-hidden="true" />Dashboards</span><span><Network size={19} aria-hidden="true" />Diagrams</span><span><Bot size={19} aria-hidden="true" />AI context</span><span><Presentation size={19} aria-hidden="true" />Presentations</span>
+      </div>
+      <p class="home-caption">Review and processing can repeat as sources change. Choose the rules and outputs each task needs; no single tool or strictly linear workflow is required.</p>
+    </section>
+    <section class="home-section" aria-labelledby="benefits-title">
+      <h2 id="benefits-title">Why it matters</h2>
+      <div class="benefit-columns">
+        <div><ShieldCheck size={24} aria-hidden="true" /><h3>More confidence in the information</h3><p>Inspect changes, identify responsible owners, and connect results to the sources that produced them. Checks support review; they do not replace it.</p></div>
+        <div><Workflow size={24} aria-hidden="true" /><h3>Less repeated work</h3><p>Reuse shared information and automate repeatable checks and publication, instead of maintaining independent copies.</p></div>
+        <div><Network size={24} aria-hidden="true" /><h3>Richer uses for the same sources</h3><p>Connect records, create useful views, and provide AI tools with selected context that people can inspect and review.</p></div>
+      </div>
+    </section>
+    <section id="learning-path" class="home-section" aria-labelledby="learning-title">
+      <p class="home-eyebrow">14 chapters · Read in sequence or explore a topic</p><h2 id="learning-title">Choose a learning path</h2>
+      <div class="learning-paths">
+        {groups.map(({ start, end, title, description, icon: Icon, tone }) => <article class={`learning-path path-${tone}`}>
+          <div class="path-heading"><Icon size={28} aria-hidden="true" /><span>Chapters {start}–{end}</span></div>
+          <h3>{title}</h3><p>{description}</p>
+          <ol start={start}>{chapters.filter((chapter) => chapter.data.chapter_number >= start && chapter.data.chapter_number <= end).map((chapter) => <li><a href={siteUrl(`chapters/${chapter.id}/`)} title={chapter.data.learning_goal}>{chapterTitle(chapter)}</a></li>)}</ol>
+        </article>)}
+      </div>
+    </section>
+    <section id="working-lab" class="home-section" aria-labelledby="lab-title">
+      <h2 id="lab-title">Explore the working lab</h2>
+      <p>The tutorial uses this repository as a working example. Try a focused exercise or inspect the project's recorded activity.</p>
+      <ul class="lab-directory">
+        <li><a href={siteUrl('chapters/01-introduction/#onboarding-lab-widget')}>Choose content for a handbook <ArrowRight size={18} aria-hidden="true" /></a><p>Browser-only simulation · Compare inclusion rules against fictional source review states.</p></li>
+        <li><a href={siteUrl('chapters/04-markdown/#markdown-playground-widget')}>Edit Markdown and see the result <ArrowRight size={18} aria-hidden="true" /></a><p>Browser-only practice · Edit headings, lists, and a table. Changes are not saved.</p></li>
+        <li><a href={siteUrl('chapters/05-structured-content/#metadata-lab-widget')}>Validate procedure metadata <ArrowRight size={18} aria-hidden="true" /></a><p>Browser-only practice · Check YAML fields against a visible schema. Passing is not approval.</p></li>
+        <li><a href={siteUrl('materials/reference/dashboards-and-work-tracking/')}>Explore a spreadsheet-style view <ArrowRight size={18} aria-hidden="true" /></a><p>Fictional fixed dataset · Sort and filter a department budget using CSSV.</p></li>
+        <li><a href={siteUrl('dashboard/')}>Open the Project Control Center <ArrowRight size={18} aria-hidden="true" /></a><p>Growth measured at build time · Operational snapshots refreshed on deployment and hourly, with retrieval times. Optional live retrieval is separate.</p></li>
+      </ul>
+      <p class="home-caption">Each chapter also includes a short practice quiz. Fictional example statuses do not constitute operational approval.</p>
+    </section>
+    <section id="presentations" class="home-section" aria-labelledby="present-title">
+      <h2 id="present-title">Present and share</h2><p>Two complementary conversations: how the approach works, and when its benefits justify the change.</p>
+      <div class="presentation-packs">
+        {packs.map((pack) => <article><Presentation size={25} aria-hidden="true" /><h3><a href={siteUrl(`presentations/${pack.slug}/`)}>{pack.title}</a></h3><p>{pack.description}</p><p class="home-caption">{pack.slides.length} slides · <a href={siteUrl(`presentations/${pack.slug}/notes/`)}>Speaker notes</a></p></article>)}
+      </div>
+      <p><a href={siteUrl('presentations/')}>All presentations, including the original introduction <ArrowRight size={18} aria-hidden="true" /></a></p>
+    </section>
+  </div>
 </Documentation>

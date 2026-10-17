@@ -1,0 +1,99 @@
+slug: information-model
+title: "Document-as-Code: Rethinking How We Work with Information"
+description: "For engineers and practitioners: maintained sources, metadata, relationships, review, processing, and AI context."
+slides:
+  - id: information
+    type: title
+    title: Information we can work with
+    subtitle: One maintained source can support more than one publication
+    context: "Document-as-Code | Concept and mechanics"
+    sources: [docs/01-introduction.md]
+    notes: "Ask the audience where the same instruction appears in their work. A handbook, training guide, and website may each contain a copy. This session explores a different arrangement: maintain the information deliberately, then select and present it for each audience. It is not a requirement to use GitHub or Markdown."
+  - id: documents
+    type: comparison
+    title: A document is one useful view
+    left:
+      title: A self-contained publication
+      items: ["Content, layout, and delivery together", "Useful for reading and exchange", "Shared passages may be copied"]
+    right:
+      title: Maintained source information
+      items: ["Content has a clear owner", "Outputs refer to shared sources", "Presentation can vary by audience"]
+    sources: [docs/01-introduction.md, docs/12-publishing.md]
+    notes: "Do not portray word processors as incapable of automation or structured content. The distinction is how a team organizes its maintained sources and outputs. Self-contained documents remain valuable delivery formats. The question is where updates are made and how repeated information stays consistent."
+  - id: sources-and-outputs
+    type: diagram
+    title: Separate the source from its presentation
+    message: Reuse needs explicit selection and processing rules
+    steps:
+      - { label: Maintain, detail: "Procedure text and review metadata" }
+      - { label: Select, detail: "Choose content suitable for the audience" }
+      - { label: Transform, detail: "Apply an output template or calculation" }
+    outputs: [Handbook, Website, Training material]
+    caption: "A conceptual model, not a guarantee that every output updates automatically."
+    sources: [docs/01-introduction.md, docs/07-processing.md]
+    notes: "Use the fictional onboarding example. Contacts remains draft, so a rule including it would produce a review copy, not a finished handbook. Review and processing can repeat. There is no universal sequence or single required publishing tool."
+  - id: readable-sources
+    type: content
+    title: Markdown is one source format
+    message: People can read the text; tools can process the same file
+    bullets: ["Headings and lists express readable structure", "Small text changes can be compared", "Other information may need JSON, models, or media files"]
+    sources: [docs/04-markdown.md]
+    notes: "Open the chapter 4 playground after the session if useful. A file does not become reusable merely because it is Markdown. Structured records and specialized engineering models may be better represented in other formats. Prefer an accessible source that preserves the information."
+  - id: history-and-review
+    type: comparison
+    title: Recording is not the same as approving
+    left:
+      title: Recorded history
+      items: ["What changed and when", "Author and revision reference", "A diff between versions"]
+    right:
+      title: Review evidence
+      items: ["Who examined the change", "Which revision they reviewed", "Their decision and unresolved questions"]
+    sources: [docs/02-github-workspace.md, docs/03-project-growth.md]
+    notes: "Keep this conceptual; it is not a Git walkthrough. A commit records a revision, not approval of every item. A review decision applies to a particular revision. If an AI agent changes several files, examine the relevant diffs and their consistency together."
+  - id: metadata
+    type: content
+    title: Give software explicit fields
+    message: Procedure metadata answers questions that prose leaves implicit
+    bullets: ["id: PROC-003 identifies the item", "owner: people-team identifies its maintainer", "status: draft records its review state"]
+    sources: [docs/05-structured-content.md]
+    notes: "These field names are project conventions, not requirements of Markdown or GitHub. Frontmatter is the opening metadata block; YAML is one way to write its fields. The chapter 5 practice schema accepts draft as a valid value. Passing that check does not approve the content. Ownership does not automatically grant approval authority."
+  - id: relationships
+    type: content
+    title: Link information that must stay consistent
+    message: A policy change can identify related procedures for review
+    image:
+      path: assets/diagrams/information-relationships.svg
+      alt: "A security policy is referenced by access and equipment procedures, which are included in a handbook."
+      caption: "Illustrative source relationships, not task dependencies."
+    sources: [docs/06-information-architecture.md]
+    notes: "The diagram is illustrative, not an export of implemented records. A relationship identifies where to investigate; it does not prove that every linked item must change. Stable identifiers and clear relationship meanings are what make these references useful."
+  - id: processing
+    type: diagram
+    title: Make processing rules inspectable
+    message: Checks and transformations are maintained work too
+    steps:
+      - { label: Read, detail: "Load selected source files" }
+      - { label: Check, detail: "Validate fields and references" }
+      - { label: Transform, detail: "Assemble a view for its audience" }
+    outputs: [Review queue, Handbook, AI context]
+    caption: "A successful run establishes only what its configured checks cover."
+    sources: [docs/07-processing.md, docs/11-quality-checks.md]
+    notes: "Distinguish a valid record, accurate instructions, and an approved publication. Automation can detect a missing owner or an unsupported status, but it cannot establish every semantic claim. A build may succeed while the selected sources are still drafts."
+  - id: ai-context
+    type: comparison
+    title: Give AI relevant evidence, not just a prompt
+    left:
+      title: A request alone
+      items: ["Draft a training guide", "Unclear source revision", "Unclear limits on proposed changes"]
+    right:
+      title: Selected context
+      items: ["Reviewed access instructions", "Audience and output requirements", "Project rules and required checks"]
+    sources: [docs/08-ai-native.md]
+    notes: "Agents can inspect related files and instructions, but access alone does not ensure appropriate context. Select relevant versions, separate proposals from accepted requirements, and keep restricted information within its access boundaries. People remain responsible for checking results."
+  - id: first-use
+    type: content
+    title: Try one complete information flow
+    message: Choose a source, a consumer, and one useful output
+    bullets: ["Name the owner and review responsibility", "Try the source and metadata labs", "Inspect the result and improve the rules"]
+    sources: [docs/01-introduction.md, docs/05-structured-content.md, docs/14-automation.md]
+    notes: "Return to the tutorial homepage for the chapter groups and working labs. The goal is maintainable, traceable, reusable, processable information, not a change of editor. Start with one recurring information problem before building a broader platform."

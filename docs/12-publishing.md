@@ -71,7 +71,7 @@ A build can pass before a release decision is made. The site currently deploys a
 
 Pull requests run the Astro check/build and a separate PDF proof workflow. Changes on main build and deploy Astro to [GitHub Pages](https://and-gu.github.io/document-as-code-lab/). The site also has hourly deployment triggers to refresh operational snapshots; scheduled execution can be delayed. The showcase handbook is not rebuilt by the website workflow.
 
-The [publishing guide](../reference/publishing-workflows.md) retains the Astro setup, YAML slide decks, Markdown/source selection, and PDF/print concerns. The [three-excerpt PDF proof](../publishing/pdf/README.md) is not a full book. The [presentation collection](../presentations/README.md) explains the working HTML deck.
+The [publishing guide](../reference/publishing-workflows.md) retains the Astro setup, YAML slide decks, Markdown/source selection, and PDF/print concerns. The [three-excerpt PDF proof](../publishing/pdf/README.md) is not a full book. The [presentation collection](../presentations/README.md) explains the HTML decks and their separate speaker-note pages.
 
 **Key point:** A source revision, a generated artifact, and a published edition are distinct things that should remain traceable.
 

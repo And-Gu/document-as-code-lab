@@ -27,7 +27,7 @@ Choose one outcome you can demonstrate. Avoid converting an entire document arch
 
 ## Build a small, complete path
 
-The Onboarding Lab began with three procedures and grew into a system that could track changes, define relationships, run checks, assemble outputs, support AI tasks, and publish results. An organization should follow the same incremental pattern:
+The tutorial begins with three procedures and explores history, relationships, checks, outputs, and AI context through working examples and browser-only simulations. For your own implementation, build a small path that delivers one useful result:
 
 1. Identify the information and its accountable owner.
 2. Choose a readable, maintainable representation.
@@ -50,6 +50,25 @@ flowchart LR
 Information processing needs ownership too. Who maintains the templates? Who fixes a broken build? Who approves changes to rules? Which parts can teams improve without a central specialist? Define these responsibilities before the system becomes critical.
 
 Make feedback part of normal work. Useful measures might include time to update a procedure, defects found before publication, time spent assembling a report, or the number of independently maintained copies eliminated. Do not optimize for commit counts or file counts without a clear reason.
+
+## Keep governance clear and proportionate
+
+Name who maintains the information, who may approve it, and who maintains its schema and processing code. These responsibilities may belong to different people. Review changes to checks and templates as well as changes to content, and retain decisions against the revisions they cover.
+
+Agree access boundaries and what happens when a check or publication fails. A failed refresh should not silently replace a usable result with incomplete information. Label retained results with their age and failure state so consumers can decide whether to use them.
+
+## Common ways to lose the benefit
+
+| Failure | A better starting point |
+| --- | --- |
+| Move files into Git but leave ownership and reuse undefined. | Define one maintained source, an owner, and a useful output. |
+| Treat valid syntax or a passing build as proof of accurate content. | Combine automated checks with review of meaning and suitability. |
+| Build a platform before testing a real need. | Improve one recurring task and measure the result before expanding. |
+| Make contribution depend on developer skills alone. | Offer accessible editors, examples, support, and review routes. |
+
+## When another approach is simpler
+
+Informal brainstorming, temporary notes, and one-off material may not justify a maintained processing workflow. Keep authoritative records in a suitable controlled system when access rules, specialist models, or existing review processes require it. Use links or controlled exports where they solve the problem; there is no need to replace every application.
 
 ## Where AI fits
 

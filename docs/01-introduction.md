@@ -1,7 +1,7 @@
 ---
 id: 01-introduction
 chapter_number: 1
-status: approved
+status: in-review
 learning_goal: "Explain why processable information matters now and distinguish maintained sources, their review states, and their uses."
 visuals:
   - id: why-now
@@ -29,6 +29,8 @@ visuals:
 A document is useful when someone can read it. Information becomes more powerful when we can also update, connect, check, and reuse it. **Document-as-Code** applies practices from software development to information: maintain readable sources, record changes, review proposed updates, and automate repeatable work.
 
 This tutorial is both an introduction and a working example. Its source material is maintained as [Markdown files in the repository](https://github.com/And-Gu/document-as-code-lab/tree/main/docs). Astro builds the [reading website](https://and-gu.github.io/document-as-code-lab/) from those same files. The website adds interactive practice and dashboards; GitHub's Markdown preview remains a readable version without those controls.
+
+You may also encounter the term **Docs-as-Code**, particularly for maintaining and publishing documentation. This lab builds on that foundation and emphasizes information that can also be structured, connected, and reused in models, dashboards, and AI workflows. These are related practices, not competing definitions.
 
 ## Why now?
 

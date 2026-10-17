@@ -38,3 +38,7 @@ jobs:
       - run: npm run test:dashboard
       - run: npm run check
       - run: npm run build
+      - run: npm run test:learning
+      - run: npm run test:content
+      - run: npm run test:homepage
+      - run: node scripts/test-budget.mjs

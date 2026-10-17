@@ -12,6 +12,7 @@ const common = {
   id: identifier,
   title: text,
   sources: z.array(text.regex(/^docs\/[a-z0-9-]+\.md$/)).min(1),
+  notes: text.optional(),
 };
 const column = z.object({ title: text, items: z.array(text).min(1).max(4) }).strict();
 export const slideSchema = z.discriminatedUnion('type', [

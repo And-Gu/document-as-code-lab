@@ -1,10 +1,10 @@
 ---
-import { ArrowLeft, Grid2x2, Maximize } from '@lucide/astro';
+import { ArrowLeft, Grid2x2, Maximize, NotebookText } from '@lucide/astro';
 import { siteUrl } from '../lib/urls';
 import 'reveal.js/reveal.css';
 import '../styles/presentations.css';
-interface Props { title: string; description: string }
-const { title, description } = Astro.props;
+interface Props { title: string; description: string; notesUrl?: string }
+const { title, description, notesUrl } = Astro.props;
 ---
 <!doctype html>
 <html lang="en">
@@ -18,6 +18,7 @@ const { title, description } = Astro.props;
     <nav class="presentation-toolbar" aria-label="Presentation tools">
       <a href={siteUrl('presentations/')}><ArrowLeft size={18} aria-hidden="true" />Presentations</a>
       <div>
+        {notesUrl && <a class="notes-link" href={notesUrl} title="Speaker notes" aria-label="Speaker notes"><NotebookText size={20} aria-hidden="true" /></a>}
         <button type="button" id="presentation-overview" aria-label="Slide overview" title="Slide overview" disabled><Grid2x2 size={20} /></button>
         <button type="button" id="presentation-fullscreen" aria-label="Enter fullscreen" title="Enter fullscreen" disabled><Maximize size={20} /></button>
       </div>

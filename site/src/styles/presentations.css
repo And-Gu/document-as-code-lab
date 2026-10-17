@@ -10,6 +10,7 @@
 .presentation-toolbar { position: fixed; z-index: 30; inset: 0 0 auto; height: 48px; padding: 6px 18px; display: flex; align-items: center; justify-content: space-between; background: #fff; border-bottom: 1px solid var(--presentation-rule); }
 .presentation-toolbar a { display: inline-flex; align-items: center; gap: 8px; color: var(--presentation-green); font-size: 14px; text-decoration: none; }
 .presentation-toolbar > div { display: flex; gap: 8px; }
+.presentation-toolbar .notes-link { display: grid; place-items: center; width: 36px; height: 36px; border: 1px solid var(--presentation-rule); border-radius: 4px; }
 .presentation-toolbar button { width: 36px; height: 36px; display: grid; place-items: center; border: 1px solid var(--presentation-rule); border-radius: 4px; background: #fff; color: var(--presentation-ink); cursor: pointer; }
 .presentation-toolbar button:disabled { opacity: 0.4; cursor: default; }
 .presentation-toolbar button:hover:not(:disabled) { background: #edf5f0; }

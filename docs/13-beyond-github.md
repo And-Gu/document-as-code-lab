@@ -44,6 +44,19 @@ flowchart LR
 
 Each has trade-offs. Imports can become stale. Exports may lose relationships. Two-way synchronization can create conflicts if both sides can edit the same field.
 
+## Choose a toolchain around the authoritative source
+
+Different information can remain in different tools. Choose where each kind is maintained before deciding how to connect it.
+
+| Arrangement | A suitable use | What to make explicit |
+| --- | --- | --- |
+| Repository with readable sources | Procedures, metadata, and shared processing rules. | Ownership, review evidence, and publishing rules. |
+| Document library or cloud folder | Teams primarily maintain Word files, spreadsheets, or presentations. | Which copy is authoritative, who can edit it, and how revisions are identified. |
+| Engineering model or business system | Domain-specific relationships and controlled records already have a maintained home. | Stable references, permitted exports, and the meaning preserved by each interface. |
+| Hybrid workflow | A report combines sources maintained in several systems. | Import times, provenance, conflict rules, and responsibility for failed updates. |
+
+For example, keep a procedure in its maintained source and import a permitted HR value for a report. Do not create a second editable master merely to put everything in one repository. A link or one-way import is often enough; two-way synchronization needs a clear reason and conflict handling.
+
 ## Protect meaning and access
 
 An accessible format is not automatically a permitted format. Confidential records, personal data, regulated information, and external-system credentials may require stricter handling. Examples in this tutorial are fictional; do not put real employee data or restricted information in a public repository.

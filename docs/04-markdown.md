@@ -1,7 +1,7 @@
 ---
 id: 03-markdown
 chapter_number: 4
-status: approved
+status: in-review
 learning_goal: "Read and edit common Markdown structures and explain why plain-text sources are useful."
 ---
 
@@ -84,6 +84,19 @@ Plain-text files are straightforward to compare in version control. They also wo
 This does not mean every kind of information belongs in Markdown. Detailed CAD models, binary media, and large structured datasets may need other formats.
 
 Applications can also expose data through documented file formats or exports, often using [JSON (JavaScript Object Notation)](https://www.json.org/). These let scripts and AI agents read and process the data without using the application's interface. Check that the format preserves the information you need and is supported by the tools you want to use.
+
+### Optional: other readable source formats
+
+Markdown is one choice among several. The publishing tools and contributors' needs help determine which format fits.
+
+| Format | Useful when | Consider |
+| --- | --- | --- |
+| Markdown | Readable prose and common headings, lists, and tables are enough. | Extensions and rendering differ between tools. |
+| [MDX](https://mdxjs.com/docs/what-is-mdx/) | Markdown needs embedded JSX components. | It requires a compatible build and introduces executable code. |
+| [AsciiDoc](https://docs.asciidoctor.org/) | Technical publications need richer document features. | Use a processor that supports its syntax and output requirements. |
+| [reStructuredText](https://docutils.sourceforge.io/rst.html) | Structured technical documentation benefits from directives and references. | Contributor familiarity and the chosen publishing tool matter. |
+
+This project keeps chapters in Markdown and adds interactive components through Astro. You do not need to adopt another format to follow the tutorial.
 
 ## Markdown is not a full information model
 

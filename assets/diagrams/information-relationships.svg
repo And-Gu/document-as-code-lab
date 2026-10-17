@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="440" viewBox="0 0 800 440" role="img" aria-labelledby="title desc">
+  <title id="title">Relationships between maintained information</title>
+  <desc id="desc">Access and equipment procedures refer to a security policy. A handbook includes both procedures. Arrows identify relationships, not task order.</desc>
+  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8" fill="#64715e"/></marker></defs>
+  <rect width="800" height="440" fill="#fff"/>
+  <g fill="none" stroke="#64715e" stroke-width="3" marker-end="url(#arrow)"><path d="M110 220V95H180"/><path d="M110 220V345H180"/></g>
+  <g font-family="system-ui,sans-serif" fill="#27312a" font-size="30" text-anchor="middle">
+    <rect x="15" y="175" width="190" height="90" rx="4" fill="#edf2e9" stroke="#829173"/><text x="110" y="228">Handbook</text>
+    <rect x="180" y="45" width="255" height="100" rx="4" fill="#f6f1e5" stroke="#ab945c"/><text x="307" y="88">Access</text><text x="307" y="119" font-size="20">PROC-001</text>
+    <rect x="180" y="295" width="255" height="100" rx="4" fill="#f6f1e5" stroke="#ab945c"/><text x="307" y="338">Equipment</text><text x="307" y="369" font-size="20">PROC-002</text>
+    <rect x="510" y="170" width="260" height="100" rx="4" fill="#f0edf4" stroke="#9583a3"/><text x="640" y="213">Security policy</text><text x="640" y="244" font-size="18">POL-001</text>
+    <text x="92" y="160" font-size="17">includes</text><text x="92" y="290" font-size="17">includes</text><text x="600" y="90" font-size="17">refers to</text><text x="600" y="345" font-size="17">refers to</text>
+  </g>
+  <g fill="none" stroke="#64715e" stroke-width="3" marker-end="url(#arrow)"><path d="M435 95H640V165"/><path d="M435 345H640V275"/></g>
+</svg>

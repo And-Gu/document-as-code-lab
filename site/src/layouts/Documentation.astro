@@ -6,8 +6,9 @@ import '../styles/tutorial-examples.css';
 interface Props {
   title: string;
   activeChapter?: string;
+  wide?: boolean;
 }
-const { title, activeChapter } = Astro.props;
+const { title, activeChapter, wide = false } = Astro.props;
 const chapters = await getChapters();
 ---
 
@@ -21,7 +22,7 @@ const chapters = await getChapters();
   <body>
     <a class="skip-link" href="#content">Skip to content</a>
     <header><a href={siteUrl()}>Document-as-Code Lab</a></header>
-    <div class="documentation">
+    <div class:list={['documentation', { 'documentation-wide': wide }]}>
       <nav aria-label="Chapters">
         <details id="chapter-menu" open>
           <summary>Chapters</summary>
@@ -71,6 +72,8 @@ const chapters = await getChapters();
   header { padding: 1rem 1.5rem; border-bottom: 1px solid #ddd; }
   header a { font-weight: 650; text-decoration: none; }
   .documentation { display: grid; grid-template-columns: 17rem minmax(0, 1fr); max-width: 86rem; margin: auto; }
+  .documentation-wide { max-width: 100rem; }
+  .documentation-wide main { max-width: none; }
   nav { padding: 1.5rem; border-right: 1px solid #ddd; font-size: 0.875rem; }
   nav summary { font-weight: 650; cursor: pointer; }
   nav ol { padding-left: 1.4rem; }

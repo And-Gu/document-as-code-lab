@@ -6,11 +6,11 @@ The project teaches document-as-code by applying it to itself. It also serves as
 
 ## Status
 
-All 14 chapters have been rewritten. Chapters 1 through 4 are approved; the remaining chapters are in review. The [Astro reading site is published on GitHub Pages](https://and-gu.github.io/document-as-code-lab/) and reads the original Markdown sources, including diagrams and linked examples. Every chapter has an expandable metadata and Git-history widget. Pull requests run Astro checks and a production build; pushes to `main` build and deploy the website.
+All 14 chapters have been rewritten. Chapters 2, 3, and 6 are approved; the remaining chapters are in review. Chapters 1 and 4 have returned to review following additions about the approach and source formats. The [Astro reading site is published on GitHub Pages](https://and-gu.github.io/document-as-code-lab/) and reads the original Markdown sources, including diagrams and linked examples. Every chapter has an expandable metadata and Git-history widget. Pull requests run Astro checks and a production build; pushes to `main` build and deploy the website.
 
-A runnable onboarding showcase, historical growth reporting, structured-record processing, and record-to-Mermaid generation are also available. Growth reports are generated as GitHub Actions artifacts. Chapter 3 connects source history to traceability and links to the standalone dashboard. Saved growth charts remain fixed historical examples, while the dashboard adds an interactive report measured from committed history during each site build. The [Project Control Center is published on GitHub Pages](https://and-gu.github.io/document-as-code-lab/dashboard/), linked from the chapter menu. It reads published operational snapshots by default, generated on main deployments and hourly, with optional live retrieval and separately labelled growth measurements. Hosted snapshot retrieval, timestamps, issues, pull requests, commits, and all four workflows have been verified. Workflow states describe collection time rather than current live status. The PDF book, additional presentation decks, and verification of Microsoft-environment exercises remain future work. Chapter approval does not extend to other chapter drafts or fictional example procedures.
+A runnable onboarding showcase, historical growth reporting, structured-record processing, and record-to-Mermaid generation are also available. Growth reports are generated as GitHub Actions artifacts. Chapter 3 connects source history to traceability and links to the standalone dashboard. Saved growth charts remain fixed historical examples, while the dashboard adds an interactive report measured from committed history during each site build. The [Project Control Center is published on GitHub Pages](https://and-gu.github.io/document-as-code-lab/dashboard/), linked from the chapter menu. It reads published operational snapshots by default, generated on main deployments and hourly, with optional live retrieval and separately labelled growth measurements. Hosted snapshot retrieval, timestamps, issues, pull requests, commits, and all four workflows have been verified. Workflow states describe collection time rather than current live status. The full PDF book, a hands-on workshop deck, and verification of Microsoft-environment exercises remain future work. Chapter approval does not extend to other chapter drafts or fictional example procedures.
 
-Run the site locally to try the first HTML introduction deck at `/document-as-code-lab/presentations/`. Its [YAML definition and authoring notes](presentations/README.md) select messages from chapters 1, 2, 9, and 11. Astro renders reusable slide components; Reveal.js provides navigation and presentation controls within the existing website build.
+The grouped learning homepage links to the [presentation collection](https://and-gu.github.io/document-as-code-lab/presentations/). Two ten-slide packs cover the information model and its value, with separate speaker-note pages; the original eight-slide introduction is retained. The [YAML definitions and authoring notes](presentations/README.md) describe how Astro renders reusable slide components and Reveal.js provides navigation within the existing website build. A hands-on workshop deck remains future work.
 
 ## Read Locally
 
@@ -57,10 +57,8 @@ Filename prefixes and `chapter_number` metadata give the current reading order. 
 1. [Document-as-Code: Information We Can Work With](docs/01-introduction.md)
 2. [A Shared Workspace for Information](docs/02-github-workspace.md)
 3. [History Is Useful Information](docs/03-project-growth.md)
-4. [Markdown: Readable Sources
-# Requesting System Access](docs/04-markdown.md)
-5. [Structure Makes Information Actionable
-# Requesting System Access](docs/05-structured-content.md)
+4. [Markdown: Readable Sources](docs/04-markdown.md)
+5. [Structure Makes Information Actionable](docs/05-structured-content.md)
 6. [Information Architecture and Traceability](docs/06-information-architecture.md)
 7. [From Sources to Results](docs/07-processing.md)
 8. [AI Needs Context, Not Just Prompts](docs/08-ai-native.md)
