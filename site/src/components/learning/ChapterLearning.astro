@@ -15,7 +15,7 @@ const questions = candidates[key].map((question, index) => ({
 }));
 const markdownExample = '# Requesting System Access\n\nTo request access:\n\n1. Open the service portal.\n2. Select the system you need.\n3. Save the request reference.\n\nFor questions, contact the **IT support team**.';
 ---
-{chapterNumber === 1 && <div data-learning-target="onboarding-lab-widget"><OnboardingLab mode="overview" /></div>}
+{chapterNumber === 1 && <div data-learning-target="onboarding-lab-widget"><OnboardingLab mode="selection" /></div>}
 {chapterNumber === 4 && <div id="practice-markdown" data-learning-target="markdown-playground-widget"><MarkdownPlayground initial={markdownExample} /></div>}
 {chapterNumber === 5 && <div data-learning-target="metadata-lab-widget"><OnboardingLab mode="metadata" /></div>}
 {chapterNumber === 7 && <div data-learning-target="processing-lab-widget"><OnboardingLab mode="processing" /></div>}

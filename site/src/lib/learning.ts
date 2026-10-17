@@ -62,3 +62,16 @@ export function processProcedures(records: ProcedureSource[]) {
 export function orientationReadiness(access: string, securityTraining: string) {
   return access === 'complete' && securityTraining === 'complete' ? 'Ready to start' : 'Blocked';
 }
+
+export type HandbookRule = 'approved-only' | 'include-drafts';
+export function selectProcedureContent(records: ProcedureSource[], rule: HandbookRule) {
+  if (!['approved-only', 'include-drafts'].includes(rule)) throw new Error('Unknown inclusion rule.');
+  const included = records.filter((record) => record.status === 'approved' || (rule === 'include-drafts' && record.status === 'draft'));
+  const excluded = records.filter((record) => !included.includes(record));
+  return {
+    included,
+    excluded,
+    isComplete: excluded.length === 0,
+    isReviewCopy: included.some((record) => record.status === 'draft'),
+  };
+}

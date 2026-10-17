@@ -1,8 +1,8 @@
 ---
 id: 01-introduction
 chapter_number: 1
-status: in-review
-learning_goal: "Explain why processable information matters now and distinguish maintained sources from their uses."
+status: approved
+learning_goal: "Explain why processable information matters now and distinguish maintained sources, their review states, and their uses."
 visuals:
   - id: why-now
     status: source-ready
@@ -20,8 +20,8 @@ visuals:
     source: ../assets/diagrams/01-source-to-outcomes.mmd
     embedded: true
     outputs: [web, pdf, slides]
-    caption: "Procedure text supplies handbooks and training material. Task records supply progress and readiness views."
-    alt: "Procedure text is selected and assembled into a handbook and training material. Separate task records provide progress and dependencies used to calculate readiness for the next activity."
+    caption: "One set of maintained procedures can support different outputs, including an overview of the information's review state."
+    alt: "Procedure sources feed selection and assembly of an onboarding handbook and training material, while procedure metadata feeds a review-status overview."
 ---
 
 # Document-as-Code: Information We Can Work With
@@ -40,7 +40,6 @@ This tutorial is both an introduction and a working example. Its source material
 
 These trends do not make Document-as-Code mandatory. They make its central idea more useful: **maintain information in a form that people and tools can work with.**
 
-
 ```mermaid
 flowchart LR
  S[Software-driven development] --> N[Accessible and maintained information]
@@ -51,60 +50,65 @@ flowchart LR
 
 *Software-driven development, AI-native workflows, and digital engineering all benefit from accessible, maintained information.*
 
-
 ## From a document to maintained information
 
-Consider an onboarding process. New colleagues need to request system access, collect equipment, and find the right contacts. These are tasks people carry out. Procedures explain how to do them; their text may appear in a handbook or training guide.
+Consider an onboarding process. New colleagues need instructions for requesting system access, collecting equipment, and finding the right contacts. These instructions can appear in a handbook, training guide, or website.
 
-Tracking the work requires different information. A task record might show that one colleague has received equipment but is still waiting for system access. These records can supply a progress overview. They do not replace the instructions, and reviewing an instruction does not complete anyone's task.
+If each publication contains its own copy, one change to a procedure may require several manual updates. Copies can become inconsistent, and it may be unclear which version has been reviewed.
 
-We could copy instructions into each publication and enter progress separately in several reports. But every change would then require finding and updating those copies.
-
-A different approach is to maintain each kind of **source information** where it belongs and configure outputs to use it. Handbooks and training guides can reuse procedure text. Progress reports can use task records. A readiness overview can use completed tasks and their dependencies to show whether the next activity can begin.
+Instead, we can maintain each procedure as **source information**, with an owner, revision history, and review state. Different outputs can then use the same maintained sources. A handbook and a training guide can reuse approved procedure content; an overview can show which procedures still need review.
 
 The source might be Markdown text, structured data, or both. A document is one way to present that information, not necessarily the only way.
 
-
 ```mermaid
 flowchart LR
- P[Procedure text] --> R[Select and assemble]
+ P[Maintained procedures] --> R[Select and assemble]
  R --> H[Onboarding handbook]
  R --> T[Training material]
- A[Task progress and dependencies] --> C[Calculate readiness]
- C --> V[Readiness overview]
+ P --> M[Read review metadata]
+ M --> V[Review-status overview]
 ```
 
-*Procedure text supplies handbooks and training material. Task records supply progress and readiness views.*
+*One set of maintained procedures can support different outputs, including an overview of the information's review state.*
 
-
-**Reuse of text and information is designed, not automatic.** Saving text in Markdown or GitHub does not eliminate duplication. Someone must decide what information is shared and how each output uses it.
+**Reuse of text and information is designed, not automatic.** Saving text in Markdown or GitHub does not eliminate duplication. Someone must decide what information is shared, which source states are acceptable, and how each output uses them.
 
 ## Explore the Onboarding Lab
 
-Throughout this tutorial, we use a small fictional onboarding system. It includes three procedures: access, equipment, and contacts. Separate task records represent a colleague's progress. Later chapters explain how owners, review states, task completion, and dependencies support different views.
+Throughout this tutorial, we use a small fictional onboarding system. It includes three procedures: system access, equipment, and contacts. Each has content and metadata such as an owner and review state. Later chapters show how changes, relationships, checks, and processing can turn these maintained sources into useful results.
 
-### A fictional change to follow
+### Choose how the information can be used
 
-Suppose a colleague has completed security training but is still waiting for system access. System orientation requires both, so it cannot begin yet. The readiness overview shows this dependency. Once access is available, it shows that orientation can start; it does not mark orientation itself as completed.
+Access and Equipment are approved in our fictional example; Contacts is still draft. Suppose we want a handbook covering all three procedures. What should qualify for inclusion?
 
-The access procedure could already be reviewed and approved throughout this scenario. Its approval concerns the instructions, not the colleague's progress.
+An **approved-content-only** rule selects Access and Equipment but excludes Contacts, leaving the intended handbook incomplete. A rule that **includes drafts for review** allows all three, but the resulting handbook would need to be labelled a review copy. The source statuses stay the same; the rule determines how the information can be used.
 
-The website offers a browser-only simulation of this scenario. It does not update files, grant access, or approve procedures.
+The website lets you compare these rules in a **browser-only inclusion preview**. It does not change source statuses or generate a handbook. These are choices for our example, not rules imposed by GitHub or Markdown. Later chapters introduce processing and publication.
 
 <!-- interactive: onboarding-lab -->
 
-The existing [procedure sources](../examples/onboarding-showcase/README.md) also produce a fixed [handbook review copy](../assets/onboarding-showcase/handbook.md), [training excerpt](../assets/onboarding-showcase/training-excerpt.md), and [review-status chart](../assets/onboarding-showcase/review-status.png). The chart answers a different question: which instructions still need review? Contacts is still a draft in that example, so the handbook is not an approved publication.
+### See examples made from the sources
 
-Both examples follow the same principle: maintained information → explicit rules → useful results. The sources and rules differ because the views answer different questions. Later chapters unpack each part.
+The lab shows how a rule changes which information qualifies for use. To see what different outputs can look like, open these examples already generated from the same [procedure sources](../examples/onboarding-showcase/README.md):
+
+- The [handbook review copy](../assets/onboarding-showcase/handbook.md) combines all three procedures. It includes draft Contacts content, so it is material for review rather than an approved guide for new colleagues.
+- The [training excerpt](../assets/onboarding-showcase/training-excerpt.md) selects only the access instructions for a trainer to adapt.
+- The [review-status chart](../assets/onboarding-showcase/review-status.png) uses the procedures' review states to show how many are approved and how many still need review.
+
+These are saved examples. Changing the rule in the lab does not update them.
+
+Both examples follow the same principle: **maintained information → explicit rules → useful results**. Later chapters unpack each part.
+
+> **What about task management?** GitHub Issues and Projects can track proposed updates and reviews. Closing an issue does not approve a source revision; approving a procedure does not complete an employee's onboarding tasks. Here, we focus on maintained information and its lifecycle.
 
 ## Beyond documentation
 
-The same approach can support checklists, reports, diagrams, simulation inputs, dashboards, and AI-assisted work. It can also help teams review not only information but the rules that process it.
+The approach above can support checklists, reports, diagrams, simulation inputs, dashboards, and AI-assisted work. It can also help teams review not only information but the rules that process it.
 
 We will explore where information lives, how its changes are recorded, how Markdown and metadata work, and how processing produces different results. You can follow the demonstrations without installing development tools. The actual repository is available for readers who want to inspect the implementation.
 
-Choose one instruction, plan, or report from your own work. Keep it in mind as you explore its possible owners, review process, and outputs in later chapters. [The shared vocabulary](../GLOSSARY.md) explains unfamiliar terms.
+Each chapter builds on the onboarding example, introducing new concepts and practical demonstrations along the way.
 
-> **Takeaway:** Document-as-Code is not primarily about writing a document in a different editor. It is about making information maintainable, traceable, reusable, and processable.
+> **Takeaway:** Document-as-Code is not primarily about writing documents in a different format, tool, or editor. It is about managing information so that it can be maintained, reviewed, traced, reused, and processed by both people and tools.
 
 <!-- interactive: chapter-quiz -->

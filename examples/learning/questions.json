@@ -5,7 +5,7 @@
       "question": "What makes a maintained source useful for multiple outputs?",
       "options": [
         "It is written in Markdown",
-        "Outputs are configured to use the shared information",
+        "The handbook, training material, and other outputs use the same maintained sources",
         "It is stored on GitHub",
         "Every output has the same layout"
       ],

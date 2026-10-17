@@ -1,0 +1,98 @@
+---
+import { selectProcedureContent, type ProcedureSource } from '../../lib/learning';
+interface Props { records: ProcedureSource[]; }
+const { records } = Astro.props;
+const names: Record<string, string> = { 'PROC-001': 'Access', 'PROC-002': 'Equipment', 'PROC-003': 'Contacts' };
+const initial = selectProcedureContent(records, 'approved-only');
+---
+<section class="learning-tool onboarding-lab" data-procedure-selection-lab aria-label="Onboarding Lab: source status and selection">
+  <h3>Onboarding Lab</h3>
+  <p class="learning-status">Fictional browser-only example. No source statuses are changed and no handbook is generated or published.</p>
+  <script type="application/json" data-selection-source set:html={JSON.stringify(records).replaceAll('<', '\\u003c')} />
+  <h4>Starting assumptions</h4>
+  <p>The intended handbook covers three procedures: Access, Equipment, and Contacts. Access and Equipment are approved; Contacts is draft. These are fictional review states, not employee progress.</p>
+  <h4>Try this</h4>
+  <p>Compare <strong>Approved content only</strong> with <strong>Include drafts for review</strong>. Notice which procedures qualify and what that means for the intended handbook. The sources stay the same; only the selection rule changes.</p>
+  <label class="lab-control">Handbook inclusion rule
+    <select data-inclusion-rule disabled>
+      <option value="approved-only">Approved content only</option>
+      <option value="include-drafts">Include drafts for review</option>
+    </select>
+  </label>
+  <div class="lab-tabs" role="tablist" aria-label="Procedure selection" hidden>
+    {['Sources', 'Rules', 'Results'].map((name, index) => <button type="button" role="tab" id={`selection-tab-${index}`} aria-controls={`selection-panel-${index}`} aria-selected={index === 2 ? 'true' : 'false'} tabindex={index === 2 ? 0 : -1} data-selection-tab={index}>{name}</button>)}
+  </div>
+  <section id="selection-panel-0" role="tabpanel" aria-labelledby="selection-tab-0" tabindex="0" data-selection-panel="0">
+    <h4>Maintained procedure sources</h4>
+    <table>
+      <thead><tr><th>Procedure</th><th>Owner</th><th>Review state</th></tr></thead>
+      <tbody>{records.map((record) => <tr><td>{names[record.id] ?? record.id} ({record.id})</td><td>{record.owner}</td><td><span class="selection-badge" data-tone={record.status === 'approved' ? 'approved' : 'pending'}>{record.status}</span></td></tr>)}</tbody>
+    </table>
+  </section>
+  <section id="selection-panel-1" role="tabpanel" aria-labelledby="selection-tab-1" tabindex="0" data-selection-panel="1">
+    <h4>Two possible inclusion rules</h4>
+    <ul>
+      <li><strong>Approved content only:</strong> exclude draft procedures. Here, Contacts is excluded, leaving the intended three-part handbook incomplete.</li>
+      <li><strong>Include drafts for review:</strong> allow all three procedures, but label the intended output a review copy because Contacts is still draft.</li>
+    </ul>
+    <p>These are choices for this example, not rules imposed by GitHub. Qualifying for inclusion does not approve a combined handbook.</p>
+  </section>
+  <section id="selection-panel-2" role="tabpanel" aria-labelledby="selection-tab-2" tabindex="0" data-selection-panel="2">
+    <h4>Which content qualifies?</h4>
+    <table>
+      <thead><tr><th>Procedure</th><th>Selection</th><th>Reason</th></tr></thead>
+      <tbody>{records.map((record) => <tr data-selection-row={record.id}>
+        <td>{names[record.id] ?? record.id}</td>
+        <td><span class="selection-badge" data-selection-decision data-tone={initial.included.includes(record) ? 'included' : 'pending'}>{initial.included.includes(record) ? 'Qualifies' : 'Excluded'}</span></td>
+        <td data-selection-reason>{record.status === 'approved' ? 'Approved source' : 'Draft excluded by this rule'}</td>
+      </tr>)}</tbody>
+    </table>
+    <p class="selection-feedback" data-selection-summary role="status">2 of 3 procedures qualify. Contacts is excluded, so the intended handbook is incomplete.</p>
+    <p><strong>The lesson:</strong> Source status describes the information. Selection rules determine how that information can be used.</p>
+  </section>
+  <noscript><p>Without JavaScript: Approved content only selects Access and Equipment, excluding draft Contacts. Include drafts for review allows all three, but only for a review copy. Neither rule changes the source statuses.</p></noscript>
+</section>
+<script>
+  import { selectProcedureContent, type HandbookRule, type ProcedureSource } from '../../lib/learning';
+  function init() {
+    document.querySelectorAll<HTMLElement>('[data-procedure-selection-lab]').forEach((root) => {
+      if (root.dataset.ready) return;
+      root.dataset.ready = 'true';
+      const records: ProcedureSource[] = JSON.parse(root.querySelector('[data-selection-source]')!.textContent!);
+      const selection = root.querySelector<HTMLSelectElement>('[data-inclusion-rule]')!;
+      const tabs = [...root.querySelectorAll<HTMLButtonElement>('[data-selection-tab]')];
+      const panels = [...root.querySelectorAll<HTMLElement>('[data-selection-panel]')];
+      function selectTab(index: number) {
+        tabs.forEach((tab, i) => {
+          tab.setAttribute('aria-selected', String(i === index)); tab.tabIndex = i === index ? 0 : -1;
+          panels[i].hidden = i !== index;
+        });
+      }
+      selection.addEventListener('change', () => {
+        const result = selectProcedureContent(records, selection.value as HandbookRule);
+        root.querySelectorAll<HTMLElement>('[data-selection-row]').forEach((row) => {
+          const record = records.find((item) => item.id === row.dataset.selectionRow)!;
+          const included = result.included.includes(record);
+          const decision = row.querySelector<HTMLElement>('[data-selection-decision]')!;
+          decision.textContent = included ? 'Qualifies' : 'Excluded';
+          decision.dataset.tone = included ? 'included' : 'pending';
+          row.querySelector('[data-selection-reason]')!.textContent = record.status === 'approved' ? 'Approved source' : included ? 'Draft allowed for review only' : 'Draft excluded by this rule';
+        });
+        root.querySelector('[data-selection-summary]')!.textContent = result.isReviewCopy
+          ? 'All 3 procedures qualify for a review copy. Contacts is still draft; this does not qualify as a finished handbook.'
+          : `${result.included.length} of ${records.length} procedures qualify. Contacts is excluded, so the intended handbook is incomplete.`;
+        selectTab(2);
+      });
+      root.querySelector<HTMLElement>('[role="tablist"]')!.hidden = false;
+      tabs.forEach((tab, i) => {
+        tab.addEventListener('click', () => selectTab(i));
+        tab.addEventListener('keydown', (event) => {
+          const next = event.key === 'ArrowRight' ? (i + 1) % 3 : event.key === 'ArrowLeft' ? (i + 2) % 3 : event.key === 'Home' ? 0 : event.key === 'End' ? 2 : undefined;
+          if (next !== undefined) { event.preventDefault(); selectTab(next); tabs[next].focus(); }
+        });
+      });
+      selectTab(2); selection.disabled = false;
+    });
+  }
+  init(); document.addEventListener('astro:page-load', init);
+</script>

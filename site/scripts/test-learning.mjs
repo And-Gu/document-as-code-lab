@@ -6,7 +6,7 @@ const source = await readFile(new URL('../src/lib/learning.ts', import.meta.url)
 const compiled = ts.transpileModule(source, {
   compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.ES2022 },
 }).outputText.replace("from 'markdown-it'", `from '${import.meta.resolve('markdown-it')}'`);
-const { prepareQuestions, answerMatches, renderLearningMarkdown, processProcedures, orientationReadiness } = await import(`data:text/javascript;base64,${Buffer.from(compiled).toString('base64')}`);
+const { prepareQuestions, answerMatches, renderLearningMarkdown, processProcedures, orientationReadiness, selectProcedureContent } = await import(`data:text/javascript;base64,${Buffer.from(compiled).toString('base64')}`);
 const question = { id: 'heading', question: 'Heading?', options: [{ value: 'a', label: 'Yes' }, { value: 'b', label: 'No' }], correct: ['a'], explanation: 'A heading.' };
 assert.equal(prepareQuestions([question])[0].type, 'single');
 assert.equal(prepareQuestions([{ ...question, type: 'true-false', correct: ['false'] }])[0].options[1].value, 'false');
@@ -55,4 +55,44 @@ assert.throws(() => processProcedures([{ ...procedures[0], status: 'invalid' }])
 assert.equal(orientationReadiness('delayed', 'complete'), 'Blocked');
 assert.equal(orientationReadiness('complete', 'complete'), 'Ready to start');
 assert.equal(orientationReadiness('complete', 'planned'), 'Blocked');
-console.log('Fourteen lesson mounts, quiz mapping, Markdown safety, procedure processing, validation failures, and readiness rules passed.');
+const untouched = structuredClone(procedures);
+const approvedOnly = selectProcedureContent(procedures, 'approved-only');
+assert.deepEqual(approvedOnly.included.map(record => record.id), ['PROC-001']);
+assert.deepEqual(approvedOnly.excluded.map(record => record.id), ['PROC-003']);
+assert.equal(approvedOnly.isComplete, false);
+assert.equal(approvedOnly.isReviewCopy, false);
+const forReview = selectProcedureContent(procedures, 'include-drafts');
+assert.equal(forReview.included.length, 2);
+assert.equal(forReview.excluded.length, 0);
+assert.equal(forReview.isComplete, true);
+assert.equal(forReview.isReviewCopy, true);
+assert.deepEqual(procedures, untouched, 'Selection must not change source statuses or text');
+assert.deepEqual(selectProcedureContent(procedures, 'approved-only'), approvedOnly, 'Switching back restores the original selection');
+assert.equal(selectProcedureContent(approved, 'approved-only').isComplete, true);
+assert.equal(selectProcedureContent(approved, 'include-drafts').isReviewCopy, false);
+assert.throws(() => selectProcedureContent(procedures, 'invalid'), /Unknown inclusion rule/);
+assert.equal(selectProcedureContent([{ ...procedures[0], status: 'invalid' }], 'include-drafts').included.length, 0);
+const introduction = await readFile(new URL('../dist/chapters/01-introduction/index.html', import.meta.url), 'utf8');
+assert.equal((introduction.match(/data-procedure-selection-lab/g) ?? []).length, 1);
+assert.ok(!introduction.includes('data-access'));
+assert.ok(!introduction.includes('Employee readiness'));
+assert.ok(!introduction.includes('data-build-revision'));
+assert.ok(!introduction.includes('Revision 2'));
+assert.ok(introduction.includes('Handbook inclusion rule'));
+assert.ok(introduction.includes('Starting assumptions'));
+assert.ok(introduction.includes('Try this'));
+assert.ok(introduction.includes('only the selection rule changes'));
+assert.ok(introduction.includes('Contacts is excluded'));
+assert.ok(introduction.includes('Source status describes the information. Selection rules determine how that information can be used.'));
+assert.ok(introduction.includes('<noscript>'));
+for (const index of [0, 1, 2]) {
+  assert.match(introduction, new RegExp(`<section[^>]*data-selection-panel="${index}"[^>]*>`));
+  assert.doesNotMatch(introduction, new RegExp(`<section[^>]*data-selection-panel="${index}"[^>]*hidden`));
+}
+assert.match(introduction, /<select data-inclusion-rule disabled>/);
+const processingChapter = await readFile(new URL('../dist/chapters/07-processing/index.html', import.meta.url), 'utf8');
+assert.ok(processingChapter.includes('data-access'), 'The readiness lab remains available in chapter 7');
+assert.ok(processingChapter.includes('data-build'), 'The processing lab remains available in chapter 7');
+const contacts = await readFile(new URL('../../examples/onboarding-showcase/contacts.md', import.meta.url), 'utf8');
+assert.match(contacts, /status: draft/);
+console.log('Fourteen lesson mounts, quiz mapping, Markdown safety, procedure processing, validation failures, readiness, and source inclusion rules passed.');

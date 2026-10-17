@@ -5,7 +5,8 @@ import { parse } from 'yaml';
 import { Play } from '@lucide/astro';
 import { repositoryRoot } from '../../lib/repository';
 import { processProcedures, type ProcedureSource } from '../../lib/learning';
-interface Props { mode: 'overview' | 'metadata' | 'processing'; }
+import ProcedureSelectionLab from './ProcedureSelectionLab.astro';
+interface Props { mode: 'overview' | 'metadata' | 'processing' | 'selection'; }
 const { mode } = Astro.props;
 const records: ProcedureSource[] = await Promise.all(['access', 'equipment', 'contacts'].map(async (name) => {
   const source = await readFile(path.join(repositoryRoot, `examples/onboarding-showcase/${name}.md`), 'utf8');
@@ -15,7 +16,7 @@ const records: ProcedureSource[] = await Promise.all(['access', 'equipment', 'co
 const initial = processProcedures(records);
 const overview = mode === 'overview';
 ---
-<section class="learning-tool onboarding-lab" data-onboarding-lab data-mode={mode} aria-label="Onboarding Lab">
+{mode === 'selection' ? <ProcedureSelectionLab records={records} /> : <section class="learning-tool onboarding-lab" data-onboarding-lab data-mode={mode} aria-label="Onboarding Lab">
   <h3>Onboarding Lab</h3>
   <p class="learning-status">Fictional browser-only simulation · No files or approvals are changed</p>
   <script type="application/json" data-lab-source set:html={JSON.stringify(records).replaceAll('<', '\\u003c')} />
@@ -46,7 +47,7 @@ const overview = mode === 'overview';
     </>}
   </section>
   <noscript><p>The sources, rules, and initial result are shown above. Enable JavaScript to explore changes.</p></noscript>
-</section>
+</section>}
 <script>
   import { processProcedures, orientationReadiness, type ProcedureSource } from '../../lib/learning';
   function init() {

@@ -42,3 +42,8 @@
 .onboarding-lab pre { white-space: pre-wrap; overflow-wrap: anywhere; max-height: 20rem; }
 .onboarding-lab :is(select, [role="tabpanel"]):focus-visible { outline: 2px solid #17684c; outline-offset: 3px; }
 .lab-tabs[hidden], .onboarding-lab [role="tabpanel"][hidden] { display: none; }
+.selection-badge { display: inline-block; width: fit-content; max-width: 100%; box-sizing: border-box; padding: .2rem .5rem; border-radius: 4px; font-size: .875rem; }
+.selection-badge[data-tone="approved"] { color: #145139; background: #e7f4eb; }
+.selection-badge[data-tone="pending"] { color: #704800; background: #fff1cc; }
+.selection-badge[data-tone="included"] { color: #164b75; background: #e8f2fc; }
+.selection-feedback { padding: .75rem 1rem; border-left: 3px solid #976400; color: #704800; background: #fff8e7; }

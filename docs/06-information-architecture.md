@@ -75,7 +75,7 @@ Consider changing the wording of REQ-001. Its link identifies PROC-001 as a cand
 | PROC-001 | Access procedure | Check whether the instructions still agree |
 | ACT-003 | System orientation | Check whether its guidance or prerequisites need adjustment |
 
-ACT-001 means system access, ACT-002 means security training, and ACT-003 means system orientation. These synthetic activities explain the readiness simulation in chapter 1. They are not the requirement/task/test records processed by the Python example.
+ACT-001 means system access, ACT-002 means security training, and ACT-003 means system orientation. These synthetic activities explain the readiness simulation in chapter 7. They are not the requirement/task/test records processed by the Python example.
 
 
 **Key point:** Good information architecture makes change easier to understand. More files and links do not automatically make a better system.
