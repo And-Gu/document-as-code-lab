@@ -1,5 +1,6 @@
 flowchart LR
- S[Procedure sources and activity data] --> P[Configured processing]
- P --> H[Onboarding handbook]
- P --> T[Training material]
- P --> D[Readiness view]
+ P[Procedure text] --> R[Select and assemble]
+ R --> H[Onboarding handbook]
+ R --> T[Training material]
+ A[Task progress and dependencies] --> C[Calculate readiness]
+ C --> V[Readiness overview]

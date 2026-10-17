@@ -11,8 +11,8 @@ visuals:
     source: ../assets/diagrams/01-why-now.mmd
     embedded: true
     outputs: [web, pdf, slides]
-    caption: "Three conceptual pressures make accessible, maintained information more useful; this is not a statistical chart."
-    alt: " S[Software-driven development] --> N[Accessible and maintained information];  A[AI-native workflows] --> N;  D[Digital engineering] --> N;  N --> R[Versioned sources and processing rules]"
+    caption: "Software-driven development, AI-native workflows, and digital engineering all benefit from accessible, maintained information."
+    alt: "Software-driven development, AI-native workflows, and digital engineering connect to accessible, maintained information and versioned processing rules."
   - id: source-to-outcomes
     status: source-ready
     kind: diagram
@@ -20,8 +20,8 @@ visuals:
     source: ../assets/diagrams/01-source-to-outcomes.mmd
     embedded: true
     outputs: [web, pdf, slides]
-    caption: "Configured rules connect maintained sources to outputs. The readiness view in the lab is a simulation, not an existing handbook-builder output."
-    alt: " S[Procedure sources and activity data] --> P[Configured processing];  P --> H[Onboarding handbook];  P --> T[Training material];  P --> D[Readiness view]"
+    caption: "Procedure text supplies handbooks and training material. Task records supply progress and readiness views."
+    alt: "Procedure text is selected and assembled into a handbook and training material. Separate task records provide progress and dependencies used to calculate readiness for the next activity."
 ---
 
 # Document-as-Code: Information We Can Work With
@@ -49,46 +49,53 @@ flowchart LR
  N --> R[Versioned sources and processing rules]
 ```
 
-*Three conceptual pressures make accessible, maintained information more useful; this is not a statistical chart.*
+*Software-driven development, AI-native workflows, and digital engineering all benefit from accessible, maintained information.*
 
 
 ## From a document to maintained information
 
-Consider an onboarding process. New colleagues need to request system access, collect equipment, and find the right contacts. These instructions may appear in a handbook, a training guide, or a status overview.
+Consider an onboarding process. New colleagues need to request system access, collect equipment, and find the right contacts. These are tasks people carry out. Procedures explain how to do them; their text may appear in a handbook or training guide.
 
-We could maintain each output independently. But when an access procedure changes, someone must find every copy and update it.
+Tracking the work requires different information. A task record might show that one colleague has received equipment but is still waiting for system access. These records can supply a progress overview. They do not replace the instructions, and reviewing an instruction does not complete anyone's task.
 
-A different approach is to maintain the **source information** and use it to produce the views people need. The source might be Markdown text, structured data, or both. A document is then one way to present that information—not necessarily the only way.
+We could copy instructions into each publication and enter progress separately in several reports. But every change would then require finding and updating those copies.
+
+A different approach is to maintain each kind of **source information** where it belongs and configure outputs to use it. Handbooks and training guides can reuse procedure text. Progress reports can use task records. A readiness overview can use completed tasks and their dependencies to show whether the next activity can begin.
+
+The source might be Markdown text, structured data, or both. A document is one way to present that information, not necessarily the only way.
 
 
 ```mermaid
 flowchart LR
- S[Procedure sources and activity data] --> P[Configured processing]
- P --> H[Onboarding handbook]
- P --> T[Training material]
- P --> D[Readiness view]
+ P[Procedure text] --> R[Select and assemble]
+ R --> H[Onboarding handbook]
+ R --> T[Training material]
+ A[Task progress and dependencies] --> C[Calculate readiness]
+ C --> V[Readiness overview]
 ```
 
-*Configured rules connect maintained sources to outputs. The readiness view in the lab is a simulation, not an existing handbook-builder output.*
+*Procedure text supplies handbooks and training material. Task records supply progress and readiness views.*
 
 
-**Reuse is designed, not automatic.** Saving text in Markdown or GitHub does not eliminate duplication. Someone must decide what information is shared and how each output uses it.
+**Reuse of text and information is designed, not automatic.** Saving text in Markdown or GitHub does not eliminate duplication. Someone must decide what information is shared and how each output uses it.
 
 ## Explore the Onboarding Lab
 
-Throughout this tutorial, we use a small fictional onboarding system. It starts with three instructions: access, equipment, and contacts. As the tutorial progresses, it gains owners, statuses, dependencies, validation rules, and generated views.
+Throughout this tutorial, we use a small fictional onboarding system. It includes three procedures: access, equipment, and contacts. Separate task records represent a colleague's progress. Later chapters explain how owners, review states, task completion, and dependencies support different views.
 
 ### A fictional change to follow
 
-Suppose system access is delayed while security training is complete. System orientation requires both, so it remains blocked. The readiness view changes when access is completed. These employee task states are separate from the review status of the instructions.
+Suppose a colleague has completed security training but is still waiting for system access. System orientation requires both, so it cannot begin yet. The readiness overview shows this dependency. Once access is available, it shows that orientation can start; it does not mark orientation itself as completed.
+
+The access procedure could already be reviewed and approved throughout this scenario. Its approval concerns the instructions, not the colleague's progress.
 
 The website offers a browser-only simulation of this scenario. It does not update files, grant access, or approve procedures.
 
 <!-- interactive: onboarding-lab -->
 
-The existing [procedure sources](../examples/onboarding-showcase/README.md) also produce a fixed [handbook review copy](../assets/onboarding-showcase/handbook.md), [training excerpt](../assets/onboarding-showcase/training-excerpt.md), and [review-status chart](../assets/onboarding-showcase/review-status.png). Contacts is still a draft in that example, so the handbook is not an approved publication. These are different from the simulated employee readiness view.
+The existing [procedure sources](../examples/onboarding-showcase/README.md) also produce a fixed [handbook review copy](../assets/onboarding-showcase/handbook.md), [training excerpt](../assets/onboarding-showcase/training-excerpt.md), and [review-status chart](../assets/onboarding-showcase/review-status.png). The chart answers a different question: which instructions still need review? Contacts is still a draft in that example, so the handbook is not an approved publication.
 
-The point is not the dashboard. It is the chain behind it: maintained information → explicit rules → useful results. Later chapters unpack each part.
+Both examples follow the same principle: maintained information → explicit rules → useful results. The sources and rules differ because the views answer different questions. Later chapters unpack each part.
 
 ## Beyond documentation
 
