@@ -1,7 +1,7 @@
 ---
 id: information-architecture
 chapter_number: 6
-status: in-review
+status: approved
 learning_goal: "Organize information into clear objects and relationships; assess likely impacts of a change."
 visuals:
   - id: information-relationships
@@ -30,8 +30,6 @@ Start with three questions: Who maintains this information? When does it change?
 ## Give important items stable identities
 
 A filename helps a person locate a document. A stable identifier helps software and people refer to an information object even if its title changes. For example, `PROC-001` may identify the access procedure, while `ACT-003` identifies the operational security-training activity.
-
-Do not confuse the two. **Procedure approval** describes whether instructions have been reviewed. **Activity completion** describes whether an onboarding task has been carried out. An approved procedure does not mean a new employee has system access.
 
 ## Connect information with explicit relationships
 

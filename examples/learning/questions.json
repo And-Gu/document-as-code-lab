@@ -167,13 +167,13 @@
     },
     {
       "type": "true_false",
-      "question": "An impact link proves a linked item must be changed.",
+      "question": "If REQ-001 changes, the linked procedure PROC-001 must also be changed.",
       "options": [
         "True",
         "False"
       ],
       "correctIndex": 1,
-      "feedback": "A link identifies a candidate for review; the effect still needs assessment."
+      "feedback": "The relationship identifies PROC-001 as a candidate for review. A reviewer checks whether the revised requirement affects its instructions before deciding whether an edit is needed."
     }
   ],
   "chapter-07": [
