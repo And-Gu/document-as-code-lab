@@ -1,7 +1,7 @@
 ---
 id: github-workspace
 chapter_number: 2
-status: in-review
+status: approved
 learning_goal: "Distinguish a repository, Git and GitHub, and follow the path from proposed edit to accepted source."
 visuals:
   - id: git-github
@@ -32,7 +32,7 @@ When information matters to several people, they need to know where it lives, wh
 
 A **repository** is a collection of maintained files and their change history. It can hold documentation, structured data, diagrams, tests, and the instructions that process them.
 
-**Git** records changes to those files. A *commit* identifies a recorded revision. A *branch* lets someone prepare changes separately. A *diff* shows what changed between versions.
+**Git** records changes to those files, preserving their history so that people can compare versions and work on changes separately.
 
 **GitHub** hosts repositories and adds collaboration tools, including pull requests, access management, and automation. Git and GitHub are not synonyms: Git can work without GitHub, and comparable hosted platforms also exist.
 
@@ -47,11 +47,21 @@ flowchart TB
 *Git records versions; GitHub hosts the repository and adds collaboration and automation.*
 
 
-A **workspace** is broader than the repository itself. It includes the editors, people, workflows, and tools used to maintain the information. In our example, GitHub is the shared hub, but an editor or AI assistant may work with a local copy.
+A **workspace** is broader than the repository itself. It includes the editors, people, workflows, and tools used to maintain the information. In this project, GitHub hosts the repository where the team shares and reviews changes. Authors can edit files directly on GitHub or work on a copy of the repository stored on their own computer, using an editor or AI assistant. Changes made on that computer must be sent to GitHub before others can review them there.
+
+## Branches, Commits, and Pull Requests
+
+Changes move from an author's working version into the shared source through a few distinct steps:
+
+- **Branch:** A separate line of work where changes can be prepared without changing `main`, the shared baseline.
+- **Commit:** A recorded set of changes, with a message explaining what changed.
+- **Diff:** A comparison showing the lines added, changed, or removed.
+- **Pull request (PR):** A proposal to bring changes from one branch into another, with discussion, review, and checks.
+- **Merge:** Incorporating those changes into the target branch, usually `main`.
 
 ## Follow a proposed change
 
-Suppose the access instructions need a new step. The contributor edits the source on a branch and commits the change. A pull request presents the proposed change for review. Reviewers can compare versions, discuss the wording, and check whether related outputs still work.
+Suppose the access instructions used in chapter 1 need a new step. The contributor edits the source on a branch and commits the change. A pull request presents the proposed change for review. Reviewers can compare versions, discuss the wording, and check whether related outputs still work.
 
 After acceptance, the change can be merged into the main branch. This updates the maintained source. Any published output changes only when its build or publishing process runs successfully.
 
@@ -85,7 +95,9 @@ Our example has procedure files such as `access.md`, `equipment.md`, and `contac
 
 In the [real repository](https://github.com/And-Gu/document-as-code-lab), start with the [README](../README.md), locate the chapter and onboarding files, and look at the history of one file. Reading and exploring should not require creating an account. Modifying a repository is an optional advanced activity.
 
-GitHub Actions, runners, and deployment configuration become important later, when we examine processing and publishing. With suitable permissions, a team can maintain its processing rules as well as its information. Agents can use those files and repository instructions as shared context, but the team still needs to review results and maintain its tools.
+As you explore, you will find more than the information itself. The repository also holds rules for checking changes and publishing results. For example, a proposed change can trigger a website build check, while an accepted change can trigger publication. GitHub Actions runs this automation; later chapters explain its workflows and runners.
+
+With suitable permissions, the team can improve these rules alongside the information. An AI agent can use both as context when helping with changes, while people remain responsible for reviewing the results and maintaining the tools.
 
 For now, remember the essential relationship: **the repository holds maintained sources; Git records their history; GitHub provides a shared place to work with them.**
 
