@@ -66,15 +66,15 @@
     },
     {
       "type": "single_select",
-      "question": "What is a limitation of using commit counts as a quality measure?",
+      "question": "An AI agent proposes changes to an access procedure and two related guides. What should reviewers examine?",
       "options": [
-        "Commits cannot be compared",
-        "A large number of edits need not mean high value",
-        "Git does not record changes",
-        "Every commit changes published pages"
+        "Only the access procedure, because the guides cover the same topic",
+        "The diffs across all three files, checking that the instructions remain consistent",
+        "Only the agent's summary, because it describes the intended changes",
+        "Only the build results, because successful checks establish consistency"
       ],
       "correctIndex": 1,
-      "feedback": "Activity and value are different; the importance and correctness of changes matter."
+      "feedback": "Review the actual changes across all affected files. A summary or successful build alone does not establish that the instructions remain consistent."
     }
   ],
   "chapter-04": [
