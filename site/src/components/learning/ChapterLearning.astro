@@ -13,7 +13,7 @@ const questions = candidates[key].map((question, index) => ({
   options: question.options.map((label, option) => ({ value: String(option), label })),
   correct: [question.type === 'true_false' ? question.options[question.correctIndex].toLowerCase() : String(question.correctIndex)], explanation: question.feedback,
 }));
-const markdownExample = '# Requesting System Access\n\nTo request access:\n\n1. Open the service portal.\n2. Select the system you need.\n3. Save the request reference.\n\nFor questions, contact the **IT support team**.';
+const markdownExample = '# Requesting System Access\n\nTo request access:\n\n1. Open the service portal.\n2. Select the system you need.\n3. Save the request reference.\n\nFor questions, contact the **IT support team**.\n\n| Field | Example |\n| --- | --- |\n| Team | Engineering |\n| System | Project workspace |';
 ---
 {chapterNumber === 1 && <div data-learning-target="onboarding-lab-widget"><OnboardingLab mode="selection" /></div>}
 {chapterNumber === 4 && <div id="practice-markdown" data-learning-target="markdown-playground-widget"><MarkdownPlayground initial={markdownExample} /></div>}

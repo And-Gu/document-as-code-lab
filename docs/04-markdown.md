@@ -1,7 +1,7 @@
 ---
 id: 03-markdown
 chapter_number: 4
-status: in-review
+status: approved
 learning_goal: "Read and edit common Markdown structures and explain why plain-text sources are useful."
 ---
 
@@ -9,7 +9,9 @@ learning_goal: "Read and edit common Markdown structures and explain why plain-t
 
 Markdown is a lightweight way to format plain text. A Markdown file stays readable in a text editor, while a renderer can present it with headings, lists, links, tables, and other formatting.
 
-We use Markdown for this tutorial because people and tools can inspect and update the source without opening a specific word processor. Markdown is a useful choice, not a requirement of Document-as-Code.
+We use Markdown for this tutorial because people and tools can inspect and update the source without opening a specific word processor. Document-as-Code is not tied to Markdown: the same versioning, review, and processing practices can be applied to other source formats.
+
+Many of us create and revise Markdown through an interactive AI chat, describing what we want rather than typing every formatting marker ourselves.
 
 ## Source and presentation
 
@@ -33,7 +35,7 @@ The source is easy to read. A renderer displays it as a heading, a numbered list
 
 <!-- interactive: markdown-playground -->
 
-**Self-check:** Add a fourth numbered step, then add a link to an imaginary support page using `[Support](https://example.com/support)`. Check the rendered result; this playground does not grade the edits or save them into the repository.
+**Self-check:** Add a fourth numbered step, then add a link to an imaginary support page using `[Support](https://example.com/support)`. Change a value in the example table and check the preview. Don't worry, this playground does not grade your edits or save them into the repository.
 
 Experiment with a heading (`#`), emphasis (`**text**`), a link (`[label](url)`), and a list. Italics use `*text*`, while bold uses `**text**`. The preview helps you see what changes and what stays in the source.
 
@@ -46,7 +48,32 @@ Experiment with a heading (`#`), emphasis (`**text**`), a link (`[label](url)`),
 | Link | `[label](url)` |
 | List item | `1. Step` or `- Item` |
 
-Tables use pipes between columns and a separator row such as `| --- | --- |` below the headings. Inline code uses single backticks; multi-line literal examples use three backticks on separate lines. Labels such as `markdown` or `bash` describe the contents of a code block; they do not execute it.
+### Tables
+
+Use a pipe character (`|`) to separate columns. The first row contains the column headings; the next row uses dashes to separate those headings from the data:
+
+```markdown
+| Field | Example |
+| --- | --- |
+| Team | Engineering |
+| System | Project workspace |
+```
+
+Each following line adds a row. You can edit this table in the playground and see the result beside the source.
+
+### Inline code and code blocks
+
+Use **inline code** for a short literal value within a sentence, such as a filename. Put one backtick before and after it: writing \`access.md\` displays `access.md`.
+
+A **fenced code block** displays several lines exactly as written, rather than treating them as ordinary Markdown. Put three backticks on a line before the example and three more on a line after it:
+
+````markdown
+```bash
+echo "Hello"
+```
+````
+
+The optional label after the opening backticks names the language: `bash` for shell commands, or `markdown` for Markdown source. A renderer can use it to color the syntax. The block above displays a command; it does not run it.
 
 For a separate file exercise, open the [draft access procedure](../examples/onboarding/requesting-access.md). It is not the fixed approved showcase copy. [GitHub's illustrated guide](https://docs.github.com/en/repositories/working-with-files/using-files/working-with-non-code-files#disabling-markdown-rendering) explains its source and preview controls.
 
@@ -54,7 +81,9 @@ For a separate file exercise, open the [draft access procedure](../examples/onbo
 
 Plain-text files are straightforward to compare in version control. They also work well with scripts and AI tools because the content is directly accessible. Small changes are usually easy to inspect in a diff.
 
-This does not mean every kind of information belongs in Markdown. Detailed CAD models, binary media, and large structured datasets may need other formats. The important point is to choose sources that suit the information and remain maintainable.
+This does not mean every kind of information belongs in Markdown. Detailed CAD models, binary media, and large structured datasets may need other formats.
+
+Applications can also expose data through documented file formats or exports, often using [JSON (JavaScript Object Notation)](https://www.json.org/). These let scripts and AI agents read and process the data without using the application's interface. Check that the format preserves the information you need and is supported by the tools you want to use.
 
 ## Markdown is not a full information model
 

@@ -30,6 +30,9 @@ assert.equal((chapter.match(/data-learning-quiz/g) ?? []).length, 1);
 assert.ok(chapter.includes('name="chapter-04-question-1"'));
 assert.ok(chapter.includes('Which Markdown line creates a top-level heading?'));
 assert.ok(chapter.includes('# Requesting System Access'));
+assert.ok(chapter.includes('| Field | Example |'), 'The playground source includes a table');
+assert.match(chapter, /<th>Field<\/th>/, 'The initial table is rendered without requiring JavaScript');
+assert.match(chapter, /<td>Project workspace<\/td>/);
 assert.doesNotMatch(renderLearningMarkdown('| Item | Status |\n| Access | Pending |'), /<table>/);
 const slugs = ["01-introduction","02-github-workspace","03-project-growth","04-markdown","05-structured-content","06-information-architecture","07-processing","08-ai-native","09-images","10-git-review","11-quality-checks","12-publishing","13-beyond-github","14-automation"];
 for (const slug of slugs) {
