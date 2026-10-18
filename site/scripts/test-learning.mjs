@@ -60,7 +60,7 @@ assert.ok(chapter.includes('| Field | Example |'), 'The playground source includ
 assert.match(chapter, /<th>Field<\/th>/, 'The initial table is rendered without requiring JavaScript');
 assert.match(chapter, /<td>Project workspace<\/td>/);
 assert.doesNotMatch(renderLearningMarkdown('| Item | Status |\n| Access | Pending |'), /<table>/);
-const slugs = ["01-introduction","02-github-workspace","03-project-growth","04-markdown","05-structured-content","06-information-architecture","07-processing","08-ai-native","09-images","10-quality-checks","11-publishing","12-beyond-github","13-automation"];
+const slugs = ["01-introduction","02-github-workspace","03-project-growth","04-markdown","05-structured-content","06-information-architecture","07-processing","08-ai-native","09-images","10-publishing","11-beyond-github","12-automation"];
 for (const slug of slugs) {
   const html = await readFile(new URL(`../dist/chapters/${slug}/index.html`, import.meta.url), 'utf8');
   assert.equal((html.match(/data-learning-quiz/g) ?? []).length, 1, slug);
@@ -79,10 +79,11 @@ assert.ok(metadataChapter.includes('Validation passed: the starting metadata mat
 assert.ok(metadataChapter.includes('View the schema (JSON)'));
 assert.ok(metadataChapter.includes('initial validation result'));
 const candidates = JSON.parse(await readFile(new URL('../../examples/learning/questions.json', import.meta.url), 'utf8'));
-assert.equal(Object.keys(candidates).length, 13);
-const qualityChapter = await readFile(new URL('../dist/chapters/10-quality-checks/index.html', import.meta.url), 'utf8');
-assert.ok(qualityChapter.includes('data-onboarding-lab'));
-assert.ok(qualityChapter.includes('name="chapter-10-question-1"'));
+assert.equal(Object.keys(candidates).length, 12);
+const publishingChapter = await readFile(new URL('../dist/chapters/10-publishing/index.html', import.meta.url), 'utf8');
+assert.ok(!publishingChapter.includes('data-onboarding-lab'));
+assert.ok(publishingChapter.includes('name="chapter-10-question-1"'));
+assert.ok(publishingChapter.includes('From Build to Publication'));
 for (const [chapterId, items] of Object.entries(candidates)) {
   assert.ok(items.every(q => ['single_select', 'true_false'].includes(q.type)));
   const prepared = prepareQuestions(items.map((q, i) => ({ id: String(i), question: q.question, type: q.type === 'true_false' ? 'true-false' : 'single', options: q.options.map((label, i) => ({ value: String(i), label })), correct: [q.type === 'true_false' ? q.options[q.correctIndex].toLowerCase() : String(q.correctIndex)], explanation: q.feedback })));
@@ -165,4 +166,4 @@ assert.throws(() => processProcedures([...fixed, readPracticeProcedure(practiceS
 assert.throws(() => processProcedures([...fixed, readPracticeProcedure(practiceSource.split('\n\n')[0], practiceSchema)]), /procedure text is required/);
 const contacts = await readFile(new URL('../../examples/onboarding-showcase/contacts.md', import.meta.url), 'utf8');
 assert.match(contacts, /status: draft/);
-console.log('Thirteen lesson mounts, quiz mapping, Markdown safety, YAML parsing, JSON Schema validation, procedure processing, readiness, and source inclusion rules passed.');
+console.log('Twelve lesson mounts, quiz mapping, Markdown safety, YAML parsing, JSON Schema validation, procedure processing, readiness, and source inclusion rules passed.');

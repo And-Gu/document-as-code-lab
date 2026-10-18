@@ -231,4 +231,4 @@ The PDF command requires a PDF engine configured for Pandoc; see its [PDF guidan
 
 Open each successful output and compare it with the brief. Check page breaks in the PDF, text fit in the slides, and headings and links in the HTML. Confirm that the source clarification is present wherever it belongs. Record converter versions and checks, including any failed or untested format. A successful conversion is the starting point for this review.
 
-The next chapter, [Beyond GitHub: OneDrive, Copilot, and Other Applications](../docs/12-beyond-github.md), considers how to carry these practices into environments where readers and authors use different tools.
+The next chapter, [Beyond GitHub: OneDrive, Copilot, and Other Applications](../docs/11-beyond-github.md), considers how to carry these practices into environments where readers and authors use different tools.

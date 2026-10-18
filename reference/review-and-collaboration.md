@@ -61,7 +61,7 @@ A local working copy lets you edit files and run the processor on your computer.
 
 GitHub's file editor records changes through a commit dialog. It does not run this project's record validator merely because you save a schema or record. Follow [GitHub's editing guide](https://docs.github.com/en/repositories/working-with-files/managing-files/editing-files) and use a branch for proposed changes.
 
-For example, removing `proposed` from the schema does not update existing records. Those records fail validation the next time the processor runs against the changed schema. Review rule changes together with affected records, templates, and processing code. [Chapter 13](../docs/13-automation.md) explains how a workflow can run these checks.
+For example, removing `proposed` from the schema does not update existing records. Those records fail validation the next time the processor runs against the changed schema. Review rule changes together with affected records, templates, and processing code. [Chapter 12](../docs/12-automation.md) explains how a workflow can run these checks.
 
 ### Keep Links Working
 
@@ -134,7 +134,7 @@ Before release, identify the source revision, selected items, build settings, an
 
 Inspect whether drafts were included intentionally, whether cross-references and terminology agree, and whether diagrams and tables remain readable. Acceptance of one requirement does not approve a complete handbook, database, or repository snapshot.
 
-If a defect is found after release, decide whether to correct, withdraw, or supersede that publication and record the decision. Preserve enough information to explain which output was affected. [Chapter 11](../docs/11-publishing.md) will develop the publishing side of this process.
+If a defect is found after release, decide whether to correct, withdraw, or supersede that publication and record the decision. Preserve enough information to explain which output was affected. [Chapter 10](../docs/10-publishing.md) will develop the publishing side of this process.
 
 ## Try It: Review a Coordinated Change
 

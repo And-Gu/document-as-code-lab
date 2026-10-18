@@ -1,6 +1,6 @@
 ---
 id: 09-beyond-github
-chapter_number: 12
+chapter_number: 11
 status: in-review
 learning_goal: "Choose authoritative information sources and integration patterns without creating uncontrolled copies."
 visuals:
@@ -74,6 +74,6 @@ The [portable workflow guide](../reference/workflows-across-tools.md) retains th
 
 **Key point:** Good integration preserves ownership, provenance, and meaning across tool boundaries.
 
-**Next:** [Chapter 13](13-automation.md) turns the principles into a realistic adoption plan.
+**Next:** [Chapter 12](12-automation.md) turns the principles into a realistic adoption plan.
 
 <!-- interactive: chapter-quiz -->

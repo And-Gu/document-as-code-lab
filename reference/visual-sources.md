@@ -110,7 +110,7 @@ For local image export, follow the [official Mermaid CLI instructions](https://g
 mmdc -i build/record-diagram/relationships.mmd -o build/record-diagram/relationships.svg
 ```
 
-Record the renderer version and inspect the export. The renderer is not included in this project's Python dependencies, and this draft does not claim verified rendering across GitHub, PDF, and PowerPoint. The Mermaid section above explains preview compatibility; chapter 13 will develop repeatable build checks.
+Record the renderer version and inspect the export. The renderer is not included in this project's Python dependencies, and this draft does not claim verified rendering across GitHub, PDF, and PowerPoint. The Mermaid section above explains preview compatibility; chapter 12 will develop repeatable build checks.
 
 ## SVG, Raster Images, and Native Sources
 

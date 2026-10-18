@@ -1,6 +1,6 @@
 ---
 id: 10-automation
-chapter_number: 13
+chapter_number: 12
 status: in-review
 learning_goal: "Choose a valuable starting use case and build a maintainable, reviewable Document-as-Code workflow."
 visuals:

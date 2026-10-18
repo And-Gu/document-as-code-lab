@@ -192,7 +192,7 @@ List stale links, missing owners, and unverified completion claims.
 Do not close issues or mark capabilities complete without approval.
 ```
 
-The rules, scripts, and agent instructions are part of the team's maintained tools. As the work changes, the team can improve them too. Chapter 13 will develop this automation further.
+The rules, scripts, and agent instructions are part of the team's maintained tools. As the work changes, the team can improve them too. Chapter 12 will develop this automation further.
 
 ## Try It: Connect a Measure to an Action
 
@@ -226,4 +226,4 @@ Use a repository and a user or organization Project where you have permission to
 
 **Keep:** the board and evidence links for continued use, or clearly label the items as training exercises before leaving them in a shared workspace.
 
-For your own information example, choose one question, its maintained source, and the person who should act on the answer. Next, [Publishing to Websites, Books, and Presentations](../docs/11-publishing.md) considers how to deliver maintained information to different audiences.
+For your own information example, choose one question, its maintained source, and the person who should act on the answer. Next, [Publishing to Websites, Books, and Presentations](../docs/10-publishing.md) considers how to deliver maintained information to different audiences.

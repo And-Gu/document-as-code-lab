@@ -96,6 +96,6 @@ Identify the directly linked delivery and the dependent delivery. Explain which 
 
 **Key point:** Document-as-Code becomes more powerful when information is not only published, but also **available to explore, connect, and reuse**.
 
-**Next:** [Chapter 10](10-quality-checks.md) introduces checks that help keep maintained sources and their views consistent.
+**Next:** [Chapter 10](10-publishing.md) shows how maintained sources become published outputs.
 
 <!-- interactive: chapter-quiz -->

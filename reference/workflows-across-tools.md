@@ -107,7 +107,7 @@ An excerpt or summary can reveal information from a restricted source even when 
 
 ## Reuse Without Creating Competing Masters
 
-In a manual workflow, an author can assemble selected instructions into a handbook and adapt them for a presentation. Record the selection in the [publication brief](../examples/publishing/publication-brief.md), and check the results as described in chapter 11.
+In a manual workflow, an author can assemble selected instructions into a handbook and adapt them for a presentation. Record the selection in the [publication brief](../examples/publishing/publication-brief.md), and check the results as described in chapter 10.
 
 When the access procedure changes, use the register to find the handbook and training material that depend on it. Update those outputs and record the check. This is a manual version of following dependencies; it is useful even before the team has an automated builder.
 
@@ -146,4 +146,4 @@ Use the fictional [access procedure](../examples/onboarding-showcase/access.md),
 
 **Keep:** the source register, task brief, review observations, and environment details. These show which practices transferred successfully and which still rely on manual work.
 
-The next chapter, [Automation, Quality, and Further Experiments](../docs/13-automation.md), returns to the repository to make repeated checks more reliable and choose the next improvements deliberately.
+The next chapter, [Automation, Quality, and Further Experiments](../docs/12-automation.md), returns to the repository to make repeated checks more reliable and choose the next improvements deliberately.

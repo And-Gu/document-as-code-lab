@@ -250,29 +250,6 @@
   "chapter-10": [
     {
       "type": "single_select",
-      "question": "Which check can automatically detect a nonexistent activity reference?",
-      "options": [
-        "Reference validation",
-        "Writing-style review",
-        "Management signoff"
-      ],
-      "correctIndex": 0,
-      "feedback": "A reference check can verify whether an identifier resolves."
-    },
-    {
-      "type": "true_false",
-      "question": "A passing schema validation proves the owner is the right team.",
-      "options": [
-        "True",
-        "False"
-      ],
-      "correctIndex": 1,
-      "feedback": "It can confirm that an owner field exists, not its real-world correctness."
-    }
-  ],
-  "chapter-11": [
-    {
-      "type": "single_select",
       "question": "If a new build fails, what should remain available in a safe release process?",
       "options": [
         "The last successful publication",
@@ -293,7 +270,7 @@
       "feedback": "Publication can lag source changes."
     }
   ],
-  "chapter-12": [
+  "chapter-11": [
     {
       "type": "single_select",
       "question": "What is the first question when two applications contain the same field?",
@@ -316,7 +293,7 @@
       "feedback": "Visual appearance alone may not preserve object identities and links."
     }
   ],
-  "chapter-13": [
+  "chapter-12": [
     {
       "type": "single_select",
       "question": "Which is a sensible first adoption target?",
