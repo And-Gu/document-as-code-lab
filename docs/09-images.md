@@ -11,7 +11,7 @@ visuals:
     source: ../assets/diagrams/09-one-source-views.mmd
     embedded: true
     outputs: [web, pdf, slides]
-    caption: "Conceptual relationships in the fictional onboarding scenario; not a live system."
+    caption: "Procedure sources support handbooks and review queues; activity records support dependency graphs and readiness dashboards."
     alt: " P[Procedure source] --> H[Handbook];  P --> Q[Procedure review queue];  A[Activity records] --> D[Dependency graph];  A --> R[Readiness dashboard]"
 ---
 
@@ -25,7 +25,7 @@ Many teams work with presentations, diagrams, specialist models, and visual edit
 
 An exported image can show what a model looks like. It rarely tells another tool which objects are connected or what those connections mean. A readable diagram definition or structured model export can preserve more of that information.
 
-This does **not** mean all information must be Markdown or that specialist tools should be replaced. It means selecting a suitable authoritative representation and understanding what is lost when information is exported.
+The framework introduced in this tutorial applies beyond Markdown: maintain an identifiable source, review its changes, check its structure, and generate views for different purposes. A specialist model or diagram can participate too, provided its information is accessible through a suitable format or interface. The practical question is whether we can apply those practices while preserving the information's meaning, not whether we can convert everything to text.
 
 ## One source, different views
 
@@ -45,7 +45,7 @@ flowchart LR
  A --> R[Readiness dashboard]
 ```
 
-*This is a conceptual illustration of the fictional scenario, not a live system.*
+*Procedure sources support handbooks and review queues; activity records support dependency graphs and readiness dashboards.*
 
 Each view answers a different question. The dashboard should not be treated as the authoritative source simply because it is easier to read.
 

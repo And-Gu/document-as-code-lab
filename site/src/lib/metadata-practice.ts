@@ -1,5 +1,6 @@
 import Ajv from 'ajv';
 import { parseDocument } from 'yaml';
+import type { ProcedureSource } from './learning';
 
 export function readPracticeFrontmatter(source: string) {
   const normalized = source.replace(/\r\n?/g, '\n');
@@ -17,6 +18,14 @@ export function readPracticeFrontmatter(source: string) {
 }
 
 const ajv = new Ajv({ allErrors: true });
+export function readPracticeProcedure(source: string, schema: object): ProcedureSource {
+  const checked = validatePracticeMetadata(source, schema);
+  if (!checked.valid) throw new Error(checked.errors.join('\n'));
+  const parsed = readPracticeFrontmatter(source);
+  const metadata = parsed.metadata as Pick<ProcedureSource, 'id' | 'owner' | 'status'>;
+  return { id: metadata.id, owner: metadata.owner, status: metadata.status, body: parsed.body };
+}
+
 export function validatePracticeMetadata(source: string, schema: object) {
   const parsed = readPracticeFrontmatter(source);
   if (parsed.errors.length) return { valid: false, errors: parsed.errors };

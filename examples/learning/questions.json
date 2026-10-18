@@ -189,37 +189,38 @@
     },
     {
       "type": "single_select",
-      "question": "Which output should use operational activity completion?",
+      "question": "You edit the Contacts text and see the change in its preview, but the generated handbook still has the old wording. What updates the handbook?",
       "options": [
-        "Procedure review queue",
-        "Onboarding readiness view",
-        "Procedure approval list"
+        "Validate the Contacts metadata without rebuilding",
+        "Run checks and build successfully using the edited source",
+        "Change the Contacts status to approved without rebuilding"
       ],
       "correctIndex": 1,
-      "feedback": "Readiness concerns completion and dependencies, not procedure approval."
+      "feedback": "The preview follows the editor immediately. The handbook is a separate generated output: it changes after the configured checks pass and the build combines the current sources."
     }
   ],
   "chapter-08": [
     {
       "type": "single_select",
-      "question": "What makes an AI-generated training note easier to verify?",
+      "question": "What is the distinction between a chat prompt and an AI agent?",
       "options": [
-        "Selecting current procedures and requesting source references",
-        "Adding more unrelated documents",
-        "Removing review constraints"
+        "A prompt gives instructions; an agent combines a model with tools whose access and actions depend on its configuration",
+        "A sufficiently detailed prompt gives the model access to the repository it names",
+        "An agent is simply a longer prompt containing more background information"
       ],
       "correctIndex": 0,
-      "feedback": "Relevant current sources and references make checking more practical."
+      "feedback": "A prompt describes the task; it does not grant access. An agent can retrieve sources or run checks through configured tools and permissions. A chat interface can also provide those tools: the distinction concerns the system's capabilities, not how its interface looks."
     },
     {
-      "type": "true_false",
-      "question": "A commit created by an AI agent is automatically an approved change.",
+      "type": "single_select",
+      "question": "An agent updates a procedure and its build passes. What provides a basis for accepting the change?",
       "options": [
-        "True",
-        "False"
+        "The passing build alone establishes that the instructions are accurate",
+        "Reviewing the diff and generated outputs alongside the check results",
+        "The agent used versioned sources, so its changes need no further review"
       ],
       "correctIndex": 1,
-      "feedback": "Changes proposed by agents still require the applicable review process."
+      "feedback": "The build verifies configured processing, while the diff and outputs make the change inspectable. Reviewers use that evidence to assess meaning and suitability before acceptance."
     }
   ],
   "chapter-09": [

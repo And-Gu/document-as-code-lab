@@ -2,6 +2,8 @@
 import MarkdownPlayground from './MarkdownPlayground.astro';
 import Quiz from './Quiz.astro';
 import OnboardingLab from './OnboardingLab.astro';
+import ProcessingPlayground from './ProcessingPlayground.astro';
+import { readPracticeProcedure } from '../../lib/metadata-practice';
 import candidates from '../../../../examples/learning/questions.json';
 import '../../styles/learning.css';
 import { readFile } from 'node:fs/promises';
@@ -18,13 +20,15 @@ const questions = candidates[key].map((question, index) => ({
   correct: [question.type === 'true_false' ? question.options[question.correctIndex].toLowerCase() : String(question.correctIndex)], explanation: question.feedback,
 }));
 const markdownExample = '# Requesting System Access\n\nTo request access:\n\n1. Open the service portal.\n2. Select the system you need.\n3. Save the request reference.\n\nFor questions, contact the **IT support team**.\n\n| Field | Example |\n| --- | --- |\n| Team | Engineering |\n| System | Project workspace |';
-const metadataExample = chapterNumber === 5 ? await readFile(path.join(repositoryRoot, 'examples/onboarding-showcase/contacts.md'), 'utf8') : '';
+const metadataExample = [5, 7].includes(chapterNumber) ? await readFile(path.join(repositoryRoot, 'examples/onboarding-showcase/contacts.md'), 'utf8') : '';
+const fixedProcedures = chapterNumber === 7 ? await Promise.all(['access', 'equipment'].map(async (name) =>
+  readPracticeProcedure(await readFile(path.join(repositoryRoot, `examples/onboarding-showcase/${name}.md`), 'utf8'), procedureSchema)
+)) : [];
 ---
 {chapterNumber === 1 && <div data-learning-target="onboarding-lab-widget"><OnboardingLab mode="selection" /></div>}
 {chapterNumber === 4 && <div id="practice-markdown" data-learning-target="markdown-playground-widget"><MarkdownPlayground initial={markdownExample} /></div>}
 {chapterNumber === 5 && <div data-learning-target="metadata-lab-widget"><MarkdownPlayground title="Onboarding Lab: validate metadata" initial={metadataExample} validationSchema={procedureSchema} /></div>}
-{chapterNumber === 7 && <div data-learning-target="processing-lab-widget"><OnboardingLab mode="processing" /></div>}
-{chapterNumber === 7 && <div data-learning-target="readiness-lab-widget"><OnboardingLab mode="overview" /></div>}
+{chapterNumber === 7 && <div data-learning-target="processing-lab-widget"><ProcessingPlayground initial={metadataExample} fixedRecords={fixedProcedures} schema={procedureSchema} /></div>}
 {chapterNumber === 11 && <div data-learning-target="metadata-lab-widget"><OnboardingLab mode="metadata" /></div>}
 <div data-learning-target="chapter-quiz-widget"><Quiz id={key} questions={questions} /></div>
 <script>

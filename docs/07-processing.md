@@ -11,7 +11,7 @@ visuals:
     source: ../assets/diagrams/07-processing-chain.mmd
     embedded: true
     outputs: [web, pdf, slides]
-    caption: "Conceptual relationships in the fictional onboarding scenario; not a live system."
+    caption: "From maintained sources through checks and transformations to generated outputs and publication."
     alt: " S[Sources] --> C[Checks] --> T[Transformations] --> O[Generated outputs];  H[Human review] -.-> O;  O --> P[Separate publication]"
 ---
 
@@ -21,7 +21,7 @@ Maintained information becomes more useful when we can transform it into results
 
 ## One processing chain
 
-The Onboarding Lab models procedures and synthetic employee activities. A processor could read them, check fields and references, and produce a handbook, excerpt, and readiness summary. The repository's actual [showcase builder](../scripts/build_onboarding_showcase.py) reads procedure files and generates a handbook review copy, an access-only training excerpt, and review-status data and a chart. It does not calculate employee readiness.
+We will follow the three onboarding procedures introduced in earlier chapters. A small program reads those files and generates a handbook review copy, an access-only training excerpt, and a review-status chart. The repository contains the processing code alongside the source information.
 
 
 ```mermaid
@@ -31,43 +31,42 @@ flowchart LR
  O --> P[Separate publication]
 ```
 
-*This is a conceptual illustration of the fictional scenario, not a live system.*
+*Sources pass through configured checks and transformations before the results are published.*
 
 The process contains four distinct steps:
 
-1. **Read sources.** Load procedure text and activity records.
-2. **Check rules.** Find missing identifiers, unknown dependencies, or invalid status values.
+1. **Read sources.** Load procedure text and metadata.
+2. **Check rules.** Apply the configured validation rules. As introduced in [chapter 5](05-structured-content.md), a schema can define required fields and allowed values. Additional checks can detect duplicate identifiers or references to missing records.
 3. **Transform.** Select, combine, or calculate information for a purpose.
 4. **Generate outputs.** Produce readable pages, structured reports, or visualizations.
 
-The same sources can serve several audiences. A handbook uses procedure text; a review queue uses procedure ownership and approval status; a readiness view uses operational activity completion and dependencies. These are different questions and should not share one ambiguous `status` field.
+The same sources can serve several audiences. A handbook combines procedure text; a training excerpt selects instructions for a particular session; a review queue uses ownership and review status to identify procedures needing attention.
 
-The showcase files use `status` specifically for procedure review. In a combined procedure/activity model, explicit names such as `review_status` and `completion_status` make the distinction clearer. These are modeling choices, not new fields understood automatically by the existing Python processor.
+In these procedure files, `status` records whether the instructions are draft or approved. The processing rules use that meaning when selecting procedures for the review queue. Field names, allowed values, and the rules that interpret them need to agree; renaming a field also requires updating the schema and processing code that use it.
 
 ## Processing is not publication
 
-If an instruction changes, the processor can produce an updated handbook. But readers do not automatically receive it. A separate publication step determines what version becomes available and when.
+If an instruction changes, the processor can produce an updated handbook. Readers do not necessarily receive that update automatically: publication depends on how the Document-as-Code system is configured. One setup may publish after checks and review; another may require someone to release the result. The setup determines which version readers can access and when it becomes available.
 
 Likewise, a successful build does not mean that the text is accurate or approved. It only shows that the configured tasks completed successfully. Meaning, suitability, and formal acceptance can require human judgment.
 
 ## Explore: Run the pipeline
 
-The website simulation starts with the three procedure records. Remove the Contacts owner, then run checks and build. It stops with an error and retains a labelled previous result. Restore the owner, change Contacts from draft to approved, and rerun. Observe the updated **review queue**, not employee readiness. Changing this practice field does not approve the real source.
+The website simulation builds on the Markdown editor from chapters 4 and 5. You can edit the Contacts procedure's text and metadata; Access and Equipment remain fixed. The rendered preview updates as you type, while the generated handbook text and review queue wait for a successful build.
 
-The separate readiness simulation below changes the employee access task. Orientation responds to that activity, while the procedure text remains unchanged.
+1. Delete the `owner` line from the Contacts metadata, then select **Run checks and build**. Schema validation fails, so no new output is generated. The last successful result remains visible.
+2. Restore `owner: people-team`, edit a sentence in the procedure text, and run again. Find your revision in the **Handbook review copy**. Contacts remains in the review queue because its status is `draft`.
+3. Change `status: draft` to `status: approved` and run again. Contacts disappears from the review queue because the selection rule includes only drafts.
 
-<!-- interactive: readiness-lab -->
+You can also try `status: unknown` to trigger a schema error, or change the identifier to `PROC-001` to trigger a duplicate-ID error across the three files. Use **Restore the original example** to reset the editor, then run the build to restore its outputs.
+
+Unlike chapter 5's single-file validation, this build processes all three procedures together. The handbook review copy includes their text, including drafts; the review queue lists only draft procedures. A text edit changes the handbook, while a status edit changes the queue. Both outputs follow explicit rules applied to the same sources. Changing the practice copy does not approve the maintained procedure or publish a handbook.
 
 <!-- interactive: processing-lab -->
 
 ## Why this matters
 
-Processing rules are part of the maintained system. They can be versioned, tested, reviewed, and improved alongside the information they transform. This is what makes repeated outputs consistent—and makes the process inspectable when something goes wrong.
-
-
-## Run the repository processor
-
-The [requirement-record guide](../reference/record-processing.md) retains the runnable REQ-014, task, and test examples. With its Python environment active, run `python scripts/process_records.py` from the repository root. It creates requirements, dashboard, and AI-context Markdown under ignored `build/records/`. It does not process the synthetic ACT records, call an AI service, or publish results.
+Processing rules are part of the maintained system. **They can be versioned, tested, reviewed, and improved alongside the information they transform.** This is what makes repeated outputs consistent—and makes the process inspectable when something goes wrong.
 
 **Next:** [Chapter 8](08-ai-native.md) explores what AI can do with these maintained sources and clear processing boundaries.
 

@@ -11,7 +11,7 @@ const metadataSource = await readFile(new URL('../src/lib/metadata-practice.ts',
 const metadataCompiled = ts.transpileModule(metadataSource, {
   compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.ES2022 },
 }).outputText.replace("from 'ajv'", `from '${import.meta.resolve('ajv')}'`).replace("from 'yaml'", `from '${import.meta.resolve('yaml')}'`);
-const { readPracticeFrontmatter, validatePracticeMetadata } = await import(`data:text/javascript;base64,${Buffer.from(metadataCompiled).toString('base64')}`);
+const { readPracticeFrontmatter, validatePracticeMetadata, readPracticeProcedure } = await import(`data:text/javascript;base64,${Buffer.from(metadataCompiled).toString('base64')}`);
 const practiceSchema = JSON.parse(await readFile(new URL('../../examples/learning/procedure.schema.json', import.meta.url), 'utf8'));
 const practiceSource = '---\nid: PROC-003\nowner: people-team\nstatus: draft\n---\n\n# Contacts\n\nAsk the people team.';
 assert.equal(validatePracticeMetadata(practiceSource, practiceSchema).valid, true, 'Draft is valid, not approved');
@@ -67,7 +67,7 @@ for (const slug of slugs) {
   assert.ok(html.includes('id="chapter-quiz-widget"'), slug);
   assert.ok(!html.includes('[AGENT'), slug);
   assert.ok(!html.includes('VISUAL:'), slug);
-  assert.equal((html.match(/data-markdown-playground/g) ?? []).length, ['04-markdown', '05-structured-content'].includes(slug) ? 1 : 0);
+  assert.equal((html.match(/data-markdown-playground/g) ?? []).length, ['04-markdown', '05-structured-content', '07-processing'].includes(slug) ? 1 : 0);
 }
 const metadataChapter = await readFile(new URL('../dist/chapters/05-structured-content/index.html', import.meta.url), 'utf8');
 assert.equal((metadataChapter.match(/data-schema-practice/g) ?? []).length, 1);
@@ -85,6 +85,10 @@ for (const [chapterId, items] of Object.entries(candidates)) {
   assert.equal(prepared.length, chapterId === 'chapter-05' ? 4 : 2, chapterId);
 }
 assert.ok(metadataChapter.includes('name="chapter-05-question-4"'));
+const aiChapter = await readFile(new URL('../dist/chapters/08-ai-native/index.html', import.meta.url), 'utf8');
+assert.ok(!aiChapter.includes('Explore: Check the briefing'));
+assert.ok(aiChapter.includes('What is the distinction between a chat prompt and an AI agent?'));
+assert.ok(aiChapter.includes('Reviewing the diff and generated outputs alongside the check results'));
 assert.ok(metadataChapter.includes('status: unknown'));
 assert.equal(validatePracticeMetadata(practiceSource.replace('draft', 'unknown'), practiceSchema).valid, false);
 const procedures = [{ id: 'PROC-001', owner: 'team', status: 'approved', body: '# Access' }, { id: 'PROC-003', owner: 'people', status: 'draft', body: '# Contacts' }];
@@ -132,8 +136,29 @@ for (const index of [0, 1, 2]) {
 }
 assert.match(introduction, /<select data-inclusion-rule disabled>/);
 const processingChapter = await readFile(new URL('../dist/chapters/07-processing/index.html', import.meta.url), 'utf8');
-assert.ok(processingChapter.includes('data-access'), 'The readiness lab remains available in chapter 7');
-assert.ok(processingChapter.includes('data-build'), 'The processing lab remains available in chapter 7');
+assert.ok(!processingChapter.includes('data-access'), 'Chapter 7 does not mount the employee-readiness simulation');
+assert.ok(!processingChapter.includes('readiness-lab-widget'));
+assert.ok(!processingChapter.includes('Employee readiness'));
+assert.ok(!processingChapter.includes('operational activity completion'));
+assert.equal((processingChapter.match(/data-processing-playground/g) ?? []).length, 1);
+assert.ok(processingChapter.includes('data-process-build disabled'), 'The processing editor has an explicit build action');
+assert.ok(processingChapter.includes('data-process-handbook'));
+assert.ok(processingChapter.includes('data-process-queue'));
+assert.ok(processingChapter.includes('Generated handbook review copy'));
+assert.ok(processingChapter.includes('Combine the text of all three procedures, including drafts.'));
+assert.ok(processingChapter.includes('What updates the handbook?'));
+assert.ok(processingChapter.includes('View the fixed Access and Equipment sources'));
+const editable = readPracticeProcedure(practiceSource, practiceSchema);
+assert.equal(editable.id, 'PROC-003');
+const fixed = [{ id: 'PROC-001', owner: 'it-team', status: 'approved', body: '# Access' }];
+assert.match(processProcedures([...fixed, editable]).handbook, /Ask the people team/);
+const changedText = readPracticeProcedure(practiceSource.replace('Ask the people team.', 'Contact the service desk.'), practiceSchema);
+assert.match(processProcedures([...fixed, changedText]).handbook, /Contact the service desk/);
+assert.deepEqual(processProcedures([...fixed, readPracticeProcedure(practiceSource.replace('draft', 'approved'), practiceSchema)]).queue, []);
+assert.throws(() => readPracticeProcedure(practiceSource.replace('draft', 'unknown'), practiceSchema), /draft, approved/);
+assert.throws(() => readPracticeProcedure(practiceSource.replace('owner: people-team\n', ''), practiceSchema), /owner/);
+assert.throws(() => processProcedures([...fixed, readPracticeProcedure(practiceSource.replace('PROC-003', 'PROC-001'), practiceSchema)]), /unique ID/);
+assert.throws(() => processProcedures([...fixed, readPracticeProcedure(practiceSource.split('\n\n')[0], practiceSchema)]), /procedure text is required/);
 const contacts = await readFile(new URL('../../examples/onboarding-showcase/contacts.md', import.meta.url), 'utf8');
 assert.match(contacts, /status: draft/);
 console.log('Fourteen lesson mounts, quiz mapping, Markdown safety, YAML parsing, JSON Schema validation, procedure processing, readiness, and source inclusion rules passed.');

@@ -1,0 +1,75 @@
+---
+import { Play } from '@lucide/astro';
+import MarkdownPlayground from './MarkdownPlayground.astro';
+import { processProcedures, renderLearningMarkdown, type ProcedureSource } from '../../lib/learning';
+import { readPracticeProcedure } from '../../lib/metadata-practice';
+interface Props { initial: string; fixedRecords: ProcedureSource[]; schema: object; }
+const { initial, fixedRecords, schema } = Astro.props;
+const initialResult = processProcedures([...fixedRecords, readPracticeProcedure(initial, schema)]);
+---
+<section data-processing-playground aria-label="Onboarding Lab: process procedure sources">
+  <p>Starting sources: Access and Equipment are approved; Contacts is a draft. Edit only Contacts below. Its preview follows your edits immediately; the two generated outputs keep their last successful result until you build again.</p>
+  <MarkdownPlayground title="Onboarding Lab: edit and process" initial={initial} validationSchema={schema} />
+  <script type="application/json" data-fixed-procedures set:html={JSON.stringify(fixedRecords).replaceAll('<', '\\u003c')} />
+  <details><summary>View the fixed Access and Equipment sources</summary>
+    {fixedRecords.map((record) => <pre>{`---\nid: ${record.id}\nowner: ${record.owner}\nstatus: ${record.status}\n---\n\n${record.body}`}</pre>)}
+  </details>
+  <h3>Build the practice outputs</h3>
+  <p><strong>Validate metadata</strong> checks only the edited file. <strong>Run checks and build</strong> also checks all three identifiers for duplicates and requires procedure text, then generates both outputs.</p>
+  <table><thead><tr><th>Output</th><th>Rule</th><th>What to try</th></tr></thead><tbody>
+    <tr><td>Handbook review copy</td><td>Combine the text of all three procedures, including drafts.</td><td>Edit a Contacts sentence, then build.</td></tr>
+    <tr><td>Review queue</td><td>List only procedures whose status is <code>draft</code>.</td><td>Change Contacts to <code>approved</code>, then build.</td></tr>
+  </tbody></table>
+  <div class="learning-actions"><button type="button" data-process-build disabled><Play size={18} />Run checks and build</button></div>
+  <p data-process-status data-state="valid" class="schema-result" role="status" aria-live="polite">Starting outputs · Contacts is included in the handbook review copy and listed for review.</p>
+  <h4>Procedures awaiting review</h4>
+  <ul data-process-queue>{initialResult.queue.map((item) => <li>{item}</li>)}</ul>
+  <h4>Handbook review copy</h4>
+  <div data-process-handbook class="mdp-preview" role="region" aria-label="Generated handbook review copy" tabindex="0" set:html={renderLearningMarkdown(initialResult.handbook)} />
+  <details><summary>Previous generated result</summary><pre data-process-previous>No build has been requested yet.</pre></details>
+  <p class="learning-status">Practice outputs stay in this browser. Builds do not edit repository files, approve instructions, or publish a handbook.</p>
+  <noscript><p>Enable JavaScript to edit and build. The starting sources and outputs remain readable.</p></noscript>
+</section>
+<script>
+  import { processProcedures, renderLearningMarkdown, type ProcedureSource } from '../../lib/learning';
+  import { readPracticeProcedure } from '../../lib/metadata-practice';
+  function init() {
+    document.querySelectorAll<HTMLElement>('[data-processing-playground]').forEach((root) => {
+      if (root.dataset.ready) return;
+      root.dataset.ready = 'true';
+      const source = root.querySelector<HTMLTextAreaElement>('[data-source]')!;
+      const schema = JSON.parse(root.querySelector('[data-validation-schema]')!.textContent!) as object;
+      const fixed = JSON.parse(root.querySelector('[data-fixed-procedures]')!.textContent!) as ProcedureSource[];
+      const status = root.querySelector<HTMLElement>('[data-process-status]')!;
+      const queue = root.querySelector('[data-process-queue]')!;
+      const handbook = root.querySelector('[data-process-handbook]')!;
+      const previous = root.querySelector('[data-process-previous]')!;
+      let result = processProcedures([...fixed, readPracticeProcedure(source.value, schema)]);
+      function markEdited() {
+        status.dataset.state = 'unchecked';
+        status.textContent = 'Source edited · Outputs still show the last successful build. Select Run checks and build to update them.';
+      }
+      source.addEventListener('input', markEdited);
+      root.querySelector('[data-reset]')!.addEventListener('click', markEdited);
+      const build = root.querySelector<HTMLButtonElement>('[data-process-build]')!;
+      build.disabled = false;
+      build.addEventListener('click', () => {
+        try {
+          const next = processProcedures([...fixed, readPracticeProcedure(source.value, schema)]);
+          previous.textContent = `Previous review queue: ${result.queue.join(', ') || 'No draft procedures.'}\n\n${result.handbook}`;
+          result = next;
+          queue.replaceChildren(...(result.queue.length ? result.queue : ['No draft procedures.']).map((text) => {
+            const item = document.createElement('li'); item.textContent = text; return item;
+          }));
+          handbook.innerHTML = renderLearningMarkdown(result.handbook);
+          status.dataset.state = 'valid';
+          status.textContent = 'Checks passed · Both outputs now use the current source. This handbook remains a practice review copy.';
+        } catch (error) {
+          status.dataset.state = 'invalid';
+          status.textContent = `Build stopped: ${error instanceof Error ? error.message : 'Validation failed.'} No new outputs generated; the last successful result is still shown.`;
+        }
+      });
+    });
+  }
+  init(); document.addEventListener('astro:page-load', init);
+</script>
