@@ -1,6 +1,6 @@
 # Proposed Chapter: From Markdown to a Designed PDF
 
-Status: outline for a proposed chapter after chapter 12. The existing chapters have not been renumbered while the publishing proof is under review.
+Status: optional publication reference linked from chapter 11, not a numbered tutorial chapter. The publishing proof remains under review.
 
 ## Purpose
 

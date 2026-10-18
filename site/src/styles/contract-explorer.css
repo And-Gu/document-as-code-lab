@@ -1,0 +1,41 @@
+.contract-explorer { container-type: inline-size; margin: 1.5rem 0; padding: 1rem; border: 1px solid #c7d0cc; border-radius: 6px; color: #26302c; background: #fff; font-size: .9rem; }
+.ce-header { border-bottom: 1px solid #dce1df; padding-bottom: .8rem; }
+.ce-header h3 { margin: 0; font-size: 1.2rem; }
+.ce-header p { margin: .25rem 0; font-weight: 600; }
+.ce-header small { color: #536159; overflow-wrap: anywhere; }
+.ce-tabs { display: flex; gap: .25rem; flex-wrap: wrap; margin-top: .8rem; }
+.ce-tabs button { display: inline-flex; align-items: center; gap: .35rem; min-height: 38px; padding: .45rem .65rem; background: #f5f7f5; border: 1px solid #c7d0cc; border-radius: 4px; color: inherit; font: inherit; cursor: pointer; }
+.ce-tabs button[aria-selected="true"] { background: #e8f1eb; border-color: #385b48; font-weight: 600; }
+.contract-explorer :is(button,select,a):focus-visible { outline: 3px solid #9e730d; outline-offset: 3px; }
+.ce-summary { min-height: 1.5rem; padding: .6rem 0; border-bottom: 1px solid #dce1df; }
+.ce-control { display: flex; flex-direction: column; gap: .25rem; font-weight: 600; }
+.ce-control select { width: 100%; min-width: 0; padding: .5rem; font: inherit; color: inherit; background: #fff; border: 1px solid #aebbb4; border-radius: 4px; }
+.ce-filters { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; }
+.ce-table-wrap { overflow-x: auto; margin: .75rem 0; }
+.contract-explorer table { width: 100%; font-size: .85rem; border-collapse: collapse; }
+.contract-explorer caption { text-align: left; font-weight: 600; margin-bottom: .5rem; }
+.contract-explorer :is(th,td) { padding: .55rem; vertical-align: top; border-bottom: 1px solid #dce1df; text-align: left; }
+.contract-explorer td p { margin: 0 0 .75rem; }
+.ce-terms { margin-bottom: .75rem; }
+.ce-record-link { display: inline; padding: .2rem 0; border: 0; background: transparent; color: #285340; text-decoration: underline; text-underline-offset: .15rem; cursor: pointer; font: inherit; text-align: left; overflow-wrap: anywhere; }
+.ce-record-link:hover { color: #152f24; }
+.ce-details { border-top: 2px solid #8b9e91; margin-top: 1rem; padding-top: .5rem; }
+.ce-details h4 { margin: .4rem 0; }
+.ce-details :is(p,ul) { margin: .5rem 0; }
+.ce-details :is(a,code), .ce-digest { overflow-wrap: anywhere; word-break: break-word; }
+.ce-record-status { padding-left: .6rem; border-left: 4px solid #71877a; font-weight: 600; }
+.ce-record-status[data-status="proposed"], .ce-notice { border-left: 4px solid #9e730d; padding: .5rem .75rem; background: #fff9e9; }
+.ce-candidate { border-left: 3px dashed #78618b; padding-left: .7rem; margin: .75rem 0; }
+.ce-candidate p { margin: .2rem 0; }
+.ce-graph { display: none; position: relative; aspect-ratio: 12 / 7; margin: .7rem 0; background: #fafcfb; }
+.ce-enhanced .ce-graph { display: block; }
+.ce-graph svg { position: absolute; width: 100%; height: 100%; }
+.ce-graph line { stroke: #72867a; stroke-width: 1.5; }
+.ce-graph polygon { fill: #53695c; }
+.ce-graph text { fill: #344c3e; font: 13px system-ui; paint-order: stroke; stroke: #fafcfb; stroke-width: 5px; }
+.ce-node { position: absolute; transform: translate(-50%,-50%); display: flex; flex-direction: column; justify-content: center; width: 21%; min-height: 56px; max-width: 152px; padding: .35rem; border: 1px solid #9dad9f; border-radius: 4px; background: #fff; color: #293e32; font: inherit; font-size: .78rem; line-height: 1.25; cursor: pointer; }
+.ce-node[data-selected="true"] { background: #e7f0e9; border: 2px solid #456a52; }
+.ce-node span { overflow-wrap: anywhere; }
+.contract-explorer [hidden] { display: none !important; }
+@container (max-width: 600px) { .ce-enhanced .ce-graph { display: none; } .ce-filters { grid-template-columns: 1fr; } }
+@media (max-width: 700px) { .ce-enhanced .ce-graph { display: none; } .ce-filters { grid-template-columns: 1fr; } .contract-explorer { padding: .75rem; } .ce-tabs button { flex: 1 1 auto; font-size: .85rem; } }

@@ -1,6 +1,6 @@
 ---
 id: quality-checks
-chapter_number: 11
+chapter_number: 10
 status: in-review
 learning_goal: "Distinguish machine-checkable rules from judgments that require people."
 visuals:
@@ -71,6 +71,6 @@ The [automation and quality guide](../reference/automation-quality.md) retains w
 
 **Key point:** Automation improves consistency by checking defined properties. Responsibility for information quality remains with people and their processes.
 
-**Next:** [Chapter 12](12-publishing.md) shows how checked sources become published outputs.
+**Next:** [Chapter 11](11-publishing.md) shows how checked sources become published outputs.
 
 <!-- interactive: chapter-quiz -->

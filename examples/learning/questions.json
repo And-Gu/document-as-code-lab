@@ -226,50 +226,28 @@
   "chapter-09": [
     {
       "type": "single_select",
-      "question": "Which representation best preserves editable dependency links?",
+      "question": "What changes when you switch from a customer-focused view to a delivery-focused view of the same maintained records?",
       "options": [
-        "Static screenshot only",
-        "Structured activity records",
-        "Printed report only"
+        "The records must be copied into a new source for each view",
+        "The selected information and its presentation change; the underlying records remain the same",
+        "The delivery relationships can be guessed from the record titles"
       ],
       "correctIndex": 1,
-      "feedback": "Structured records can preserve identifiers and relationship types."
+      "feedback": "Different questions select and present the same maintained information in different ways. Record identities and explicit relationships remain the source for each view."
     },
     {
-      "type": "true_false",
-      "question": "A PDF and a live dashboard must always be generated at the same time.",
+      "type": "single_select",
+      "question": "AMD-001 is proposed and linked to DEL-101. DEL-102 depends on DEL-101. What does following these connections establish?",
       "options": [
-        "True",
-        "False"
+        "The amendment is effective and both deliveries must change",
+        "DEL-101 is directly linked, and DEL-102 is a candidate for review if the amendment is accepted",
+        "No review is useful until someone changes the delivery records"
       ],
       "correctIndex": 1,
-      "feedback": "Outputs may have distinct release schedules."
+      "feedback": "The recorded links support impact assessment. They do not make a proposed amendment effective or prove that every connected item needs an edit."
     }
   ],
   "chapter-10": [
-    {
-      "type": "single_select",
-      "question": "What does a commit primarily provide?",
-      "options": [
-        "A recorded revision",
-        "Formal content approval",
-        "A published handbook"
-      ],
-      "correctIndex": 0,
-      "feedback": "A commit records repository history; acceptance and publication are separate."
-    },
-    {
-      "type": "true_false",
-      "question": "Reviewers should consider affected outputs in addition to changed lines.",
-      "options": [
-        "True",
-        "False"
-      ],
-      "correctIndex": 0,
-      "feedback": "Source changes can affect linked materials and generated views."
-    }
-  ],
-  "chapter-11": [
     {
       "type": "single_select",
       "question": "Which check can automatically detect a nonexistent activity reference?",
@@ -292,7 +270,7 @@
       "feedback": "It can confirm that an owner field exists, not its real-world correctness."
     }
   ],
-  "chapter-12": [
+  "chapter-11": [
     {
       "type": "single_select",
       "question": "If a new build fails, what should remain available in a safe release process?",
@@ -315,7 +293,7 @@
       "feedback": "Publication can lag source changes."
     }
   ],
-  "chapter-13": [
+  "chapter-12": [
     {
       "type": "single_select",
       "question": "What is the first question when two applications contain the same field?",
@@ -338,7 +316,7 @@
       "feedback": "Visual appearance alone may not preserve object identities and links."
     }
   ],
-  "chapter-14": [
+  "chapter-13": [
     {
       "type": "single_select",
       "question": "Which is a sensible first adoption target?",

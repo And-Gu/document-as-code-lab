@@ -1,6 +1,6 @@
 ---
 id: 08-publishing
-chapter_number: 12
+chapter_number: 11
 status: in-review
 learning_goal: "Explain how checked sources are built, released, and made available to readers."
 visuals:
@@ -75,6 +75,6 @@ The [publishing guide](../reference/publishing-workflows.md) retains the Astro s
 
 **Key point:** A source revision, a generated artifact, and a published edition are distinct things that should remain traceable.
 
-**Next:** [Chapter 13](13-beyond-github.md) considers how this approach connects to the applications people already use.
+**Next:** [Chapter 12](12-beyond-github.md) considers how this approach connects to the applications people already use.
 
 <!-- interactive: chapter-quiz -->

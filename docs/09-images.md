@@ -2,78 +2,100 @@
 id: 05-images
 chapter_number: 9
 status: in-review
-learning_goal: "Evaluate reusable information representations and build views without locking their meaning in a single output."
-visuals:
-  - id: one-source-views
-    status: source-ready
-    kind: diagram
-    preferred_source: mermaid
-    source: ../assets/diagrams/09-one-source-views.mmd
-    embedded: true
-    outputs: [web, pdf, slides]
-    caption: "Procedure sources support handbooks and review queues; activity records support dependency graphs and readiness dashboards."
-    alt: " P[Procedure source] --> H[Handbook];  P --> Q[Procedure review queue];  A[Activity records] --> D[Dependency graph];  A --> R[Readiness dashboard]"
+learning_goal: "Explain how one maintained information model can answer different questions through interactive views, while preserving source identity and meaning."
+visuals: []
 ---
 
-# Beyond Documents: Reusable Information and Visualization
+# Information You Can Explore
 
-A document is one way to present information. A diagram, model, chart, or dashboard may present the same underlying facts differently. The critical question is whether the **information behind the view** remains available for other uses.
+A document answers the questions its author anticipated. Maintained, structured information can support other questions without requiring someone to write a new document for each one.
 
-## When your tools keep information inside
+So far, we have identified information objects and their relationships ([chapter 6](06-information-architecture.md)), then used processing to produce outputs ([chapter 7](07-processing.md)). Now we take the next step: **let people explore those relationships and choose the view they need.**
 
-Many teams work with presentations, diagrams, specialist models, and visual editors. Some preserve useful data in an accessible format. Others make it difficult to inspect relationships or process information without opening a specific application.
+## A customer, two projects, several commitments
 
-An exported image can show what a model looks like. It rarely tells another tool which objects are connected or what those connections mean. A readable diagram definition or structured model export can preserve more of that information.
+Imagine a company delivering multiple projects to the same customer. Each project has its own deliveries and schedule, but some contracts cover more than one project. Amendments may change the terms for particular deliveries.
 
-The framework introduced in this tutorial applies beyond Markdown: maintain an identifiable source, review its changes, check its structure, and generate views for different purposes. A specialist model or diagram can participate too, provided its information is accessible through a suitable format or interface. The practical question is whether we can apply those practices while preserving the information's meaning, not whether we can convert everything to text.
+Our fictional example contains:
 
-## One source, different views
-
-The Onboarding Lab has procedures, activity records, and dependencies. From those sources, we can prepare:
-
-- A handbook for employees, using procedural instructions.
-- A dependency graph for planners, using activity links.
-- A readiness dashboard, using operational progress.
-- A review queue, using document approval state and ownership.
-
-
-```mermaid
-flowchart LR
- P[Procedure source] --> H[Handbook]
- P --> Q[Procedure review queue]
- A[Activity records] --> D[Dependency graph]
- A --> R[Readiness dashboard]
-```
-
-*Procedure sources support handbooks and review queues; activity records support dependency graphs and readiness dashboards.*
-
-Each view answers a different question. The dashboard should not be treated as the authoritative source simply because it is easier to read.
-
-## Choosing a representation
-
-Before adopting a file format or tool, ask: Can we identify individual information objects? Can we inspect changes? Can another tool read the relationships? Can we regenerate the result? Who owns the authoritative version?
-
-A closed application can be suitable if it has dependable interfaces or exports. A plain-text file can be unsuitable if important meaning remains implicit. Evaluate the workflow, not the file extension alone.
-
-## Explore: Switch representations
-
-Consider ACT-003, system orientation. A table can list its prerequisites, a graph can show their direction, and a timeline would need dates in addition to those links. Do not invent dates from completion status alone. A screenshot preserves appearance but cannot supply editable activity IDs or relationship fields.
-
-| Activity | Prerequisites | Starting completion state |
+| Record | What it represents | Connection |
 | --- | --- | --- |
-| ACT-001: system access | None in this example | delayed |
-| ACT-002: security training | None in this example | complete |
-| ACT-003: system orientation | ACT-001 and ACT-002 | not started; blocked |
+| CUST-01 | Northstar Logistics | Customer for both projects |
+| PRJ-101 | Depot rollout | Includes DEL-101 and DEL-102 |
+| PRJ-102 | Training services | Includes DEL-103 |
+| AGR-001 | Framework agreement | Applies to both projects |
+| AGR-002 | Project delivery order | Applies to PRJ-101 |
+| AMD-001 | Proposed amendment | Proposes changes to AGR-002 affecting DEL-101 |
+| DEL-101 | Interface package | Part of PRJ-101 |
+| DEL-102 | Acceptance workshop | Part of PRJ-101; depends on DEL-101 |
+| DEL-103 | Training package | Part of PRJ-102 |
 
-A 3D view would add value only if spatial relationships matter. For this onboarding example, a clear 2D dependency graph is better.
+These are **fictional teaching records**, maintained as [Markdown sources in the repository](../examples/contract-explorer/README.md), not actual contracts. Their relationships are explicitly recorded; an application must not invent them by guessing from titles.
 
+## Same information, different questions
 
-## Inspect working visualizations
+Consider three questions from three different people.
 
-The [Project Control Center](https://and-gu.github.io/document-as-code-lab/dashboard/) uses actual repository history and published operational snapshots, not the ACT simulation. The [dashboard and spreadsheet guide](../reference/dashboards-and-work-tracking.md#missing-excel-tables-and-spreadsheets) retains the interactive CSSV budget table. The [visual-source guide](../reference/visual-sources.md) covers Mermaid, generated record diagrams, SVG, raster images, and Napkin.
+**Account manager: Which projects share an agreement?**
 
-**Key point:** Reuse depends on accessible meaning, not on how attractive the output looks.
+Show the customer, its projects, and the agreements linked to each one. The shared framework agreement becomes visible without opening every contract.
 
-**Next:** [Chapter 10](10-git-review.md) examines how teams propose, review, and accept changes to these sources.
+**Delivery manager: What depends on the interface package?**
+
+Switch to a delivery-focused view. DEL-102 depends on DEL-101. A list of documents would be less useful than seeing that relationship directly.
+
+**Contract manager: What should we review if the amendment is accepted?**
+
+Select AMD-001 and follow its recorded connections. DEL-101 is directly affected; PRJ-101 and dependent DEL-102 are *candidates for review*. The connections do not prove that every item needs a change, or that the proposed amendment is already effective.
+
+The underlying records have not changed. **Only the question and the view have changed.**
+
+## Explore: One source, three views
+
+The website's Contract Explorer reads the same nine records for all three views. It is a fictional example, updated when the site is built. In GitHub's Markdown preview, use the record table and linked sources to follow the same relationships.
+
+The explorer offers three selectable perspectives:
+
+| View | Reader can do | What it reveals |
+| --- | --- | --- |
+| **Relationships** | Select a customer, project, agreement, or delivery | Connected records, with labeled links |
+| **Commitments** | Filter deliveries by project or agreement | Delivery names, planned dates if recorded, and associated terms |
+| **Change impact** | Select an agreement or proposed amendment | Direct links and possible downstream review candidates |
+
+Selecting a record reveals its **source file, status, revision, and explicit relationships**. The interface distinguishes *recorded connections* from *possible impacts inferred by following those connections*.
+
+For example, if AMD-001 is **proposed**, the view must not quietly present it as a signed amendment. Likewise, an agreement's approval state does not establish whether a delivery is complete. **Document status and delivery status are different information.**
+
+The explorer is not a new system of record. Selection and filtering change the view, not the maintained files. Source edits appear after the site is rebuilt.
+
+<!-- interactive: contract-explorer -->
+
+## Why this is more than a dashboard
+
+A dashboard usually answers a set of predefined questions. An exploratory interface allows readers to select an object, follow a relationship, and ask the next question.
+
+That is where structured information becomes especially useful. A record has an identity; its relationships have meanings; its status belongs to a defined process. Those details let people navigate the information rather than only read a published snapshot.
+
+The same approach can support a knowledge graph, portfolio overview, dependency view, or AI-assisted query interface. Each is an application of maintained information—not a reason to maintain separate copies of it.
+
+## Keep the connection to the sources
+
+An attractive visualization can still mislead. A line between two objects must mean something specific. A date needs a source. A missing link means *no recorded link*, not proof that the objects are unrelated.
+
+When a source changes, generated views should refresh through a defined process. Users should be able to inspect which source and revision produced the view. If a proposed change may affect other items, treat them as review candidates, not automatically approved updates.
+
+For practical guidance on Mermaid, SVG, generated diagrams, and accessible visuals, see the [visual-source reference](../reference/visual-sources.md).
+
+## Try it: Follow the impact
+
+In the Contract Explorer, choose **AMD-001**, then switch from **Relationships** to **Change impact**. Without the interactive view, follow the same connections in the record table and linked sources.
+
+Identify the directly linked delivery and the dependent delivery. Explain which relationships are recorded and which items merely deserve further review. Check whether the amendment is proposed or effective.
+
+**Expected result:** You can answer a new question from the same information without editing a presentation or duplicating the contract records.
+
+**Key point:** Document-as-Code becomes more powerful when information is not only published, but also **available to explore, connect, and reuse**.
+
+**Next:** [Chapter 10](10-quality-checks.md) introduces checks that help keep maintained sources and their views consistent.
 
 <!-- interactive: chapter-quiz -->

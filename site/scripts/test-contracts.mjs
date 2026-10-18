@@ -1,0 +1,97 @@
+import assert from 'node:assert/strict';
+import { readFile, mkdtemp, cp, writeFile, rm } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import path from 'node:path';
+import ts from 'typescript';
+import { parse } from 'parse5';
+const root = path.resolve('..');
+const compile = code => ts.transpileModule(code, { compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.ES2022 } }).outputText;
+const modelUrl = `data:text/javascript;base64,${Buffer.from(compile(await readFile('src/lib/contract-model.ts', 'utf8'))).toString('base64')}`;
+const { deliveryCommitments, changeImpact, immediateEdges, statusScope, edgesFrom } = await import(modelUrl);
+const loaderCode = compile(await readFile('src/lib/contract-loader.ts', 'utf8'))
+  .replace("from './contract-model'", `from '${modelUrl}'`)
+  .replace("from 'ajv'", `from '${import.meta.resolve('ajv')}'`).replace("from 'yaml'", `from '${import.meta.resolve('yaml')}'`);
+const { loadContractExplorer, validateContractRecords } = await import(`data:text/javascript;base64,${Buffer.from(loaderCode).toString('base64')}`);
+const schema = JSON.parse(await readFile('../examples/contract-explorer/schema.json', 'utf8'));
+const data = await loadContractExplorer(root);
+assert.equal(data.records.length, 9);
+assert.equal(data.edges.length, 11);
+assert.equal(immediateEdges(data, 'CUST-01').length, 2);
+assert.equal(deliveryCommitments(data).length, 3);
+assert.deepEqual(deliveryCommitments(data, '', 'AGR-002').map(row => row.delivery.id), ['DEL-101', 'DEL-102']);
+assert.equal(deliveryCommitments(data, 'PRJ-102', 'AGR-002').length, 0);
+assert.equal(deliveryCommitments(data, '', 'AGR-001').length, 3);
+assert.equal(deliveryCommitments(data).find(row => row.delivery.id === 'DEL-103').delivery.planned_date, undefined);
+assert.equal(deliveryCommitments(data).find(row => row.delivery.id === 'DEL-102').delivery.status, 'not-recorded');
+const impact = changeImpact(data, 'AMD-001');
+assert.deepEqual(impact.direct.map(edge => edge.target).sort(), ['AGR-002', 'DEL-101']);
+assert.deepEqual(impact.candidates.map(candidate => candidate.id).sort(), ['DEL-102', 'PRJ-101']);
+assert.ok(impact.candidates.every(candidate => candidate.path.every(edge => data.edges.some(recorded => recorded.id === edge.id))));
+assert.equal(data.records.find(record => record.id === 'AMD-001').status, 'proposed');
+assert.equal(statusScope(data.records.find(record => record.id === 'DEL-101')), 'Delivery execution status');
+assert.equal(statusScope(data.records.find(record => record.id === 'AGR-001')), 'Agreement lifecycle status');
+assert.equal(statusScope(data.records.find(record => record.id === 'AMD-001')), 'Amendment lifecycle status');
+const invalid = edit => { const records = structuredClone(data.records); edit(records); assert.throws(() => validateContractRecords(records, schema)); };
+invalid(records => { delete records[0].id; });
+invalid(records => { records[0].id = 'bad-id'; });
+invalid(records => { records.push(records[0]); });
+invalid(records => { records[0].status = 'signed-magically'; });
+invalid(records => { records.find(record => record.type === 'delivery').status = 'effective'; });
+invalid(records => { records[0].relations.push({ type: 'guessed', target: 'PRJ-101' }); });
+invalid(records => { records[0].relations.push({ type: 'applies_to', target: 'PRJ-999' }); });
+invalid(records => { records.find(record => record.id === 'CUST-01').relations[0].target = 'DEL-101'; });
+invalid(records => { records.find(record => record.id === 'DEL-101').planned_date = '2026-02-30'; });
+invalid(records => { records.find(record => record.id === 'DEL-101').relations = []; });
+invalid(records => { records.find(record => record.id === 'DEL-101').relations.push({ type: 'depends_on', target: 'DEL-102' }); });
+const temporary = await mkdtemp(path.join(tmpdir(), 'contract-explorer-'));
+try {
+  await cp(path.join(root, 'examples/contract-explorer'), path.join(temporary, 'examples/contract-explorer'), { recursive: true });
+  const target = path.join(temporary, 'examples/contract-explorer/records/DEL-103.md');
+  const source = await readFile(target, 'utf8');
+  await writeFile(target, source.replace('status: planned', 'status: complete\nplanned_date: "2026-12-01"').replace('target: PRJ-102', 'target: PRJ-101\n  - type: depends_on\n    target: DEL-101'));
+  const rebuilt = await loadContractExplorer(temporary);
+  assert.equal(deliveryCommitments(rebuilt, '', 'AGR-002').length, 3, 'A source relationship edit changes coverage after rebuilding');
+  assert.equal(deliveryCommitments(rebuilt).find(row => row.delivery.id === 'DEL-103').delivery.planned_date, '2026-12-01');
+  assert.equal(immediateEdges(rebuilt, 'PRJ-102').some(edge => edge.source === 'DEL-103'), false);
+  assert.ok(changeImpact(rebuilt, 'AMD-001').candidates.some(candidate => candidate.id === 'DEL-103'), 'Source edits update traversal-derived impact candidates');
+  assert.notEqual(rebuilt.records.find(record => record.id === 'DEL-103').digest, data.records.find(record => record.id === 'DEL-103').digest);
+  const amendment = path.join(temporary, 'examples/contract-explorer/records/AMD-001.md');
+  await writeFile(amendment, (await readFile(amendment, 'utf8')).replace('status: proposed', 'status: effective'));
+  const effective = await loadContractExplorer(temporary);
+  assert.equal(effective.records.find(record => record.id === 'AMD-001').status, 'effective');
+  assert.equal(effective.records.find(record => record.id === 'DEL-102').status, 'not-recorded', 'Agreement lifecycle does not complete a delivery');
+  await writeFile(target, source.replace('status: planned', 'status: impossible'));
+  await assert.rejects(loadContractExplorer(temporary), /DEL-103/);
+} finally { await rm(temporary, { recursive: true, force: true }); }
+const html = await readFile('dist/chapters/09-images/index.html', 'utf8');
+const controllerSource = await readFile('src/lib/contract-controller.ts', 'utf8');
+assert.doesNotMatch(controllerSource, /\bfetch\s*\(|XMLHttpRequest|localStorage|sessionStorage/, 'Explorer has no external retrieval or persistence');
+assert.equal((html.match(/data-contract-explorer/g) ?? []).length, 1);
+assert.ok(html.includes('id="contract-explorer-widget"'));
+assert.ok(html.includes('Fictional example'));
+assert.ok(html.includes('<noscript>'));
+assert.ok(html.includes('Table alternative to the graph'));
+assert.ok(!html.includes('Proposed interactive lab'));
+const match = /<script[^>]*data-ce-data[^>]*>([\s\S]*?)<\/script>/.exec(html);
+assert.ok(match, 'The validated build snapshot is embedded once');
+const snapshot = JSON.parse(match[1]);
+assert.deepEqual(snapshot.edges, edgesFrom(snapshot.records));
+const nodes = [];
+function walk(node) { nodes.push(node); for (const child of node.childNodes ?? []) walk(child); }
+walk(parse(html));
+const hasAttr = (node, name) => node.attrs?.some(attribute => attribute.name === name);
+const fallback = nodes.find(node => hasAttr(node, 'data-ce-fallback'));
+assert.ok(fallback && !hasAttr(fallback, 'hidden'), 'Without JavaScript the source-record fallback is visible');
+for (const record of snapshot.records) assert.ok(nodes.some(node => node.attrs?.some(attribute => attribute.name === 'id' && attribute.value === `ce-source-${record.id}`)));
+assert.equal(nodes.filter(node => hasAttr(node, 'data-ce-panel') && !hasAttr(node, 'hidden')).length, 3, 'All initial views remain readable without JavaScript');
+for (const record of snapshot.records) {
+  const original = await readFile(path.join(root, record.source), 'utf8');
+  assert.equal(await readFile(path.join('dist/files', record.source), 'utf8'), original, 'Source links serve original Markdown bytes, not derived UI records');
+  assert.ok(html.includes(`/document-as-code-lab/files/${record.source}`));
+}
+const urlsCode = compile(await readFile('src/lib/urls.ts', 'utf8'));
+for (const base of ['/', '/document-as-code-lab/']) {
+  const { siteUrl } = await import(`data:text/javascript;base64,${Buffer.from(urlsCode.replace('import.meta.env.BASE_URL', JSON.stringify(base))).toString('base64')}`);
+  assert.equal(siteUrl('files/examples/contract-explorer/records/AMD-001.md'), `${base}files/examples/contract-explorer/records/AMD-001.md`);
+}
+console.log('Contract sources, schema failures, relation types, coverage, impact provenance, source edits, lifecycle separation, original-source links, fallback, and both base paths passed.');

@@ -7,7 +7,7 @@ slides:
     title: We need usable information
     subtitle: Document production is only one part of the work
     context: "Why Document-as-Code? | Benefits and adoption"
-    sources: [docs/01-introduction.md, docs/14-automation.md]
+    sources: [docs/01-introduction.md, docs/13-automation.md]
     notes: "Begin with a practical question: what information decision is difficult today? This session addresses value and adoption, rather than teaching syntax or configuring tools. The examples are illustrative; they do not establish measured savings."
   - id: duplication
     type: comparison
@@ -29,7 +29,7 @@ slides:
       - { label: Rules, detail: "Select suitable content and apply presentation choices" }
     outputs: [Handbook, Training, Website]
     caption: "Reuse is designed. Audience-specific wording still needs review."
-    sources: [docs/01-introduction.md, docs/12-publishing.md]
+    sources: [docs/01-introduction.md, docs/11-publishing.md]
     notes: "The intended benefit is fewer independently maintained copies, not identical output everywhere. A training excerpt can omit details that remain in the full procedure. Changes reach an output when its processing and publication rules run."
   - id: accountability
     type: content
@@ -47,14 +47,14 @@ slides:
     right:
       title: A focused source change
       items: ["Shows the changed passages", "Includes affected related sources", "Records questions and decisions"]
-    sources: [docs/03-project-growth.md, docs/10-git-review.md]
+    sources: [docs/03-project-growth.md, docs/02-github-workspace.md]
     notes: "These are workflow choices, not inherent limitations of word processors. Smaller reviewable changes can improve focus. They do not remove the need to assess a complete publication when its composition, audience, or risk calls for it."
   - id: repeatable-work
     type: content
     title: Automate work that repeats
     message: Let people spend more time on meaning and judgment
     bullets: ["Check required fields and internal links", "Assemble a recurring report", "Publish selected outputs consistently"]
-    sources: [docs/07-processing.md, docs/11-quality-checks.md, docs/12-publishing.md]
+    sources: [docs/07-processing.md, docs/10-quality-checks.md, docs/11-publishing.md]
     notes: "Do not promise a percentage improvement without evidence. These are candidates for reducing repeated work. Scripts, checks, and publishing rules require ownership and maintenance; compare that effort with the actual recurring task."
   - id: change-impact
     type: content
@@ -79,12 +79,12 @@ slides:
     right:
       title: Costs to plan for
       items: ["Learning and contributor support", "Tooling and integration maintenance", "Ownership, access, and review rules"]
-    sources: [docs/13-beyond-github.md, docs/14-automation.md]
+    sources: [docs/12-beyond-github.md, docs/13-automation.md]
     notes: "Not every conversation or temporary note needs this treatment. A hybrid approach can keep authoritative information in existing systems and import only what is needed. Teams need practical permission to improve their workflow, with boundaries for security and platform responsibilities."
   - id: pilot
     type: content
     title: Pilot a real information problem
     message: Measure the outcome before extending the platform
     bullets: ["Pick one recurring source-to-output task", "Agree an owner, consumer, and review rule", "Compare update effort, defects, and usefulness after use"]
-    sources: [docs/14-automation.md, docs/03-project-growth.md]
+    sources: [docs/13-automation.md, docs/03-project-growth.md]
     notes: "Choose measures suited to the problem rather than tracking more activity for its own sake. Review results with the people maintaining and consuming the information. Continue only where the benefit justifies the effort. The tutorial's labs provide examples, not a universal adoption score."

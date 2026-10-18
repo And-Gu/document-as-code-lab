@@ -7,8 +7,9 @@ import { parse as parseYaml } from 'yaml';
 
 const root = fileURLToPath(new URL('../../', import.meta.url));
 const dist = path.join(root, 'site/dist');
-const expected = ["01-introduction","github-workspace","02-project-growth","03-markdown","03a-structured-content","information-architecture","processing-information","04-ai-native","05-images","06-git-review","quality-checks","08-publishing","09-beyond-github","10-automation"];
-const slugs = ["01-introduction","02-github-workspace","03-project-growth","04-markdown","05-structured-content","06-information-architecture","07-processing","08-ai-native","09-images","10-git-review","11-quality-checks","12-publishing","13-beyond-github","14-automation"];
+const expected = ["01-introduction","github-workspace","02-project-growth","03-markdown","03a-structured-content","information-architecture","processing-information","04-ai-native","05-images","quality-checks","08-publishing","09-beyond-github","10-automation"];
+const slugs = ["01-introduction","02-github-workspace","03-project-growth","04-markdown","05-structured-content","06-information-architecture","07-processing","08-ai-native","09-images","10-quality-checks","11-publishing","12-beyond-github","13-automation"];
+assert.equal((await readdir(path.join(root, 'docs'))).filter(name => name.endsWith('.md')).length, 13);
 for (const [index, slug] of slugs.entries()) {
   const source = await readFile(path.join(root, `docs/${slug}.md`), 'utf8');
   const front = source.match(/^---\n([\s\S]*?)\n---\n/);
@@ -57,4 +58,11 @@ for (const file of files) {
   }
 }
 assert.deepEqual(errors, []);
+for (const [old, target] of Object.entries({
+  '10-git-review': '02-github-workspace', '11-quality-checks': '10-quality-checks',
+  '12-publishing': '11-publishing', '13-beyond-github': '12-beyond-github', '14-automation': '13-automation',
+})) {
+  const redirect = await readFile(path.join(dist, 'chapters', old, 'index.html'), 'utf8');
+  assert.ok(redirect.includes(`/document-as-code-lab/chapters/${target}/`), `Missing redirect: ${old}`);
+}
 console.log(`Stable chapter IDs, maintained Mermaid sources, and ${links} internal links/assets across ${files.length} HTML pages passed.`);

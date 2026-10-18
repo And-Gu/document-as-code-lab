@@ -9,8 +9,8 @@ const chapters = await getChapters();
 const groups = [
   { start: 1, end: 4, title: 'Working with sources', description: 'Understand the approach, the workspace, history, and readable source files.', icon: BookOpen, tone: 'sage' },
   { start: 5, end: 9, title: 'Making information useful', description: 'Add structure, relationships, processing, AI context, and visual representations.', icon: Network, tone: 'violet' },
-  { start: 10, end: 12, title: 'Building confidence', description: 'Review changes, check information, and publish useful results.', icon: ShieldCheck, tone: 'ochre' },
-  { start: 13, end: 14, title: 'Applying the approach', description: 'Connect existing tools and choose a manageable first implementation.', icon: Compass, tone: 'sage' },
+  { start: 10, end: 11, title: 'Building confidence', description: 'Check information and publish useful results.', icon: ShieldCheck, tone: 'ochre' },
+  { start: 12, end: 13, title: 'Applying the approach', description: 'Connect existing tools and choose a manageable first implementation.', icon: Compass, tone: 'sage' },
 ];
 const packs = (await getPresentations()).filter((deck) => ['information-model', 'information-value'].includes(deck.slug));
 const stages = [
@@ -56,7 +56,7 @@ const stages = [
       </div>
     </section>
     <section id="learning-path" class="home-section" aria-labelledby="learning-title">
-      <p class="home-eyebrow">14 chapters · Read in sequence or explore a topic</p><h2 id="learning-title">Choose a learning path</h2>
+      <p class="home-eyebrow">{chapters.length} chapters · Read in sequence or explore a topic</p><h2 id="learning-title">Choose a learning path</h2>
       <div class="learning-paths">
         {groups.map(({ start, end, title, description, icon: Icon, tone }) => <article class={`learning-path path-${tone}`}>
           <div class="path-heading"><Icon size={28} aria-hidden="true" /><span>Chapters {start}–{end}</span></div>
@@ -72,6 +72,7 @@ const stages = [
         <li><a href={siteUrl('chapters/01-introduction/#onboarding-lab-widget')}>Choose content for a handbook <ArrowRight size={18} aria-hidden="true" /></a><p>Browser-only simulation · Compare inclusion rules against fictional source review states.</p></li>
         <li><a href={siteUrl('chapters/04-markdown/#markdown-playground-widget')}>Edit Markdown and see the result <ArrowRight size={18} aria-hidden="true" /></a><p>Browser-only practice · Edit headings, lists, and a table. Changes are not saved.</p></li>
         <li><a href={siteUrl('chapters/05-structured-content/#metadata-lab-widget')}>Validate procedure metadata <ArrowRight size={18} aria-hidden="true" /></a><p>Browser-only practice · Check YAML fields against a visible schema. Passing is not approval.</p></li>
+        <li><a href={siteUrl('chapters/09-images/#contract-explorer-widget')}>Explore customer projects and agreements <ArrowRight size={18} aria-hidden="true" /></a><p>Fictional records · Explore relationships, delivery commitments, and change-impact review candidates.</p></li>
         <li><a href={siteUrl('materials/reference/dashboards-and-work-tracking/')}>Explore a spreadsheet-style view <ArrowRight size={18} aria-hidden="true" /></a><p>Fictional fixed dataset · Sort and filter a department budget using CSSV.</p></li>
         <li><a href={siteUrl('dashboard/')}>Open the Project Control Center <ArrowRight size={18} aria-hidden="true" /></a><p>Growth measured at build time · Operational snapshots refreshed on deployment and hourly, with retrieval times. Optional live retrieval is separate.</p></li>
       </ul>

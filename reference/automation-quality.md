@@ -24,7 +24,7 @@ For a publishing workflow, a sensible sequence is to validate the sources, gener
 | Inspect | Text, links, tables, and images work for readers | Review notes for the actual output |
 | Deliver | The reviewed edition reaches the intended audience | Publication location and edition identifier |
 
-A passing automated check answers a defined question. It cannot tell us that an instruction is useful merely because its metadata is valid. Keep the human decisions from chapter 10 visible in the workflow.
+A passing automated check answers a defined question. It cannot tell us that an instruction is useful merely because its metadata is valid. Keep the human decisions described in the [review and collaboration guide](review-and-collaboration.md) visible in the workflow.
 
 ### What Runs on a Runner?
 
@@ -134,7 +134,7 @@ The comparison should return to exit code 0. In a disposable project copy, you c
 
 ### Extend It: Check the Whole Change
 
-In a disposable project copy, repeat chapter 12's onboarding change and also change the contacts status. Run the showcase builder. Inspect the handbook, excerpt, data, and chart against the sources, then find the procedure table in chapter 5 and the related links and captions in chapter 1. Record which values still need editing. This deliberately demonstrates the gap between generated assets and manually maintained explanations.
+In a disposable project copy, repeat chapter 11's onboarding change and also change the contacts status. Run the showcase builder. Inspect the handbook, excerpt, data, and chart against the sources, then find the procedure table in chapter 5 and the related links and captions in chapter 1. Record which values still need editing. This deliberately demonstrates the gap between generated assets and manually maintained explanations.
 
 Next, run `python scripts/measure_growth.py --include-working-tree` after a chapter edit. Inspect the working-copy observation as described in the [measurement reference](../reference/growth-measurement.md#measure-local-edits) and distinguish it from committed history. Keep generated outputs outside `docs/` so they do not become additional chapter content in the measurement.
 

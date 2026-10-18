@@ -8,7 +8,7 @@ status: in-review
 # Dashboards and Work Tracking in GitHub
 
 
-In chapter 1, a small dashboard helped us identify instructions that needed review and the team responsible for them. Chapter 3 showed how the tutorial grows over time. Chapter 10 connected proposed changes to review decisions. We can now bring these ideas together: what information do we have, what needs attention, and what work is moving it forward?
+In chapter 1, a small dashboard helped us identify instructions that needed review and the team responsible for them. Chapter 3 showed how history supports traceability, and chapter 2 introduced reviewing proposed changes. We can now bring these ideas together: what information do we have, what needs attention, and what work is moving it forward?
 
 A dashboard is a selected overview that helps someone understand a situation and decide what to do. It might be a table on a repository's starting page, a chart, or a work board. It does not need to be a separate application.
 
@@ -192,7 +192,7 @@ List stale links, missing owners, and unverified completion claims.
 Do not close issues or mark capabilities complete without approval.
 ```
 
-The rules, scripts, and agent instructions are part of the team's maintained tools. As the work changes, the team can improve them too. Chapter 14 will develop this automation further.
+The rules, scripts, and agent instructions are part of the team's maintained tools. As the work changes, the team can improve them too. Chapter 13 will develop this automation further.
 
 ## Try It: Connect a Measure to an Action
 
@@ -226,4 +226,4 @@ Use a repository and a user or organization Project where you have permission to
 
 **Keep:** the board and evidence links for continued use, or clearly label the items as training exercises before leaving them in a shared workspace.
 
-For your own information example, choose one question, its maintained source, and the person who should act on the answer. Next, [Publishing to Websites, Books, and Presentations](../docs/12-publishing.md) considers how to deliver maintained information to different audiences.
+For your own information example, choose one question, its maintained source, and the person who should act on the answer. Next, [Publishing to Websites, Books, and Presentations](../docs/11-publishing.md) considers how to deliver maintained information to different audiences.

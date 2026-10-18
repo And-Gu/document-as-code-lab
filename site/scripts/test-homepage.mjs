@@ -14,8 +14,10 @@ const groups = all(home, node => hasClass(node, 'learning-path'));
 assert.equal(groups.length, 4);
 assert.equal(all(home, node => node.tagName === 'h1').length, 1);
 const groupLinks = groups.map(group => all(group, node => node.tagName === 'a').map(node => attr(node, 'href')));
-assert.deepEqual(groupLinks.map(links => links.length), [4, 5, 3, 2]);
-assert.equal(new Set(groupLinks.flat()).size, 14);
+assert.deepEqual(groupLinks.map(links => links.length), [4, 5, 2, 2]);
+assert.equal(new Set(groupLinks.flat()).size, 13);
+assert.ok(!groupLinks.flat().some(link => link.includes('10-git-review')));
+assert.ok(groupLinks.flat().some(link => link.includes('10-quality-checks')));
 assert.ok(groupLinks.flat().every(link => link.startsWith('/document-as-code-lab/chapters/')));
 for (const id of ['concept', 'learning-path', 'working-lab', 'presentations']) assert.equal(all(home, node => attr(node, 'id') === id).length, 1);
 const image = all(home, node => hasClass(node, 'home-art'))[0];
@@ -38,4 +40,4 @@ for (const slug of ['information-model', 'information-value']) {
 }
 const original = parse(await read('../dist/presentations/document-as-code/index.html'));
 assert.equal(all(original, node => node.tagName === 'section' && attr(node, 'aria-label')).length, 8);
-console.log('Homepage groups cover all 14 chapters; two ten-slide packs, notes, image, base paths, and original eight-slide deck passed.');
+console.log('Homepage groups cover all 13 chapters; two ten-slide packs, notes, image, base paths, and original eight-slide deck passed.');

@@ -110,7 +110,7 @@ For local image export, follow the [official Mermaid CLI instructions](https://g
 mmdc -i build/record-diagram/relationships.mmd -o build/record-diagram/relationships.svg
 ```
 
-Record the renderer version and inspect the export. The renderer is not included in this project's Python dependencies, and this draft does not claim verified rendering across GitHub, PDF, and PowerPoint. The Mermaid section above explains preview compatibility; chapter 14 will develop repeatable build checks.
+Record the renderer version and inspect the export. The renderer is not included in this project's Python dependencies, and this draft does not claim verified rendering across GitHub, PDF, and PowerPoint. The Mermaid section above explains preview compatibility; chapter 13 will develop repeatable build checks.
 
 ## SVG, Raster Images, and Native Sources
 
@@ -186,4 +186,4 @@ Use your own exercise copy and the Python environment from the [measurement refe
 
 **Keep:** comparison notes, input references, and any reviewed visual variant. Restore the temporary experiment; generated files remain under ignored `build/`. For your information item from chapter 1, identify one useful visual, its maintained source, and the checks needed when it changes.
 
-Next, [Git, Review, and Collaboration](../docs/10-git-review.md) develops review of coordinated changes and the scope of approval.
+Next, [Git, Review, and Collaboration](review-and-collaboration.md) develops review of coordinated changes and the scope of approval.

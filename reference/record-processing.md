@@ -114,7 +114,7 @@ You can write the record manually or ask an AI assistant to create it from the t
 
 **If the structure is unclear:** Compare the file with REQ-014 above. Check the front-matter delimiters, field names, indentation, and remaining placeholders.
 
-**Keep:** The proposed record. Chapter 7 uses these records for processing; chapter 10 covers recording and reviewing changes.
+**Keep:** The proposed record. This guide processes the records; the [review and collaboration guide](review-and-collaboration.md) covers recording and reviewing changes.
 
 
 ## Try It: Update a Requirement
@@ -157,7 +157,7 @@ Remember that files from an earlier successful run may remain after a failed run
 
 **If the result differs:** Check the starting records, allowed statuses, and the latest terminal message. Compare against your own dataset if it differs from the four supplied records.
 
-**Keep:** Restore deliberate errors and retain a short note about the source change and its effects. Leave generated files under ignored `build/records/`. [Chapter 10](../docs/10-git-review.md) covers reviewing and recording source changes.
+**Keep:** Restore deliberate errors and retain a short note about the source change and its effects. Leave generated files under ignored `build/records/`. The [review and collaboration guide](review-and-collaboration.md) covers reviewing and recording source changes.
 
 For input fingerprints, manifests, and further validation experiments, see the [processing reference](record-processing.md).
 

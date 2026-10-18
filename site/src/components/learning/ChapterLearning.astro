@@ -3,6 +3,7 @@ import MarkdownPlayground from './MarkdownPlayground.astro';
 import Quiz from './Quiz.astro';
 import OnboardingLab from './OnboardingLab.astro';
 import ProcessingPlayground from './ProcessingPlayground.astro';
+import ContractExplorer from './ContractExplorer.astro';
 import { readPracticeProcedure } from '../../lib/metadata-practice';
 import candidates from '../../../../examples/learning/questions.json';
 import '../../styles/learning.css';
@@ -29,7 +30,8 @@ const fixedProcedures = chapterNumber === 7 ? await Promise.all(['access', 'equi
 {chapterNumber === 4 && <div id="practice-markdown" data-learning-target="markdown-playground-widget"><MarkdownPlayground initial={markdownExample} /></div>}
 {chapterNumber === 5 && <div data-learning-target="metadata-lab-widget"><MarkdownPlayground title="Onboarding Lab: validate metadata" initial={metadataExample} validationSchema={procedureSchema} /></div>}
 {chapterNumber === 7 && <div data-learning-target="processing-lab-widget"><ProcessingPlayground initial={metadataExample} fixedRecords={fixedProcedures} schema={procedureSchema} /></div>}
-{chapterNumber === 11 && <div data-learning-target="metadata-lab-widget"><OnboardingLab mode="metadata" /></div>}
+{chapterNumber === 9 && <div data-learning-target="contract-explorer-widget"><ContractExplorer /></div>}
+{chapterNumber === 10 && <div data-learning-target="metadata-lab-widget"><OnboardingLab mode="metadata" /></div>}
 <div data-learning-target="chapter-quiz-widget"><Quiz id={key} questions={questions} /></div>
 <script>
   function placeLearning() {

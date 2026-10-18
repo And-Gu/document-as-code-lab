@@ -196,7 +196,7 @@ If a trainer corrects a factual instruction in a slide, review the correction in
 
 Repeated manual changes to generated files will be lost when those files are rebuilt unless the changes are incorporated into the process. Record presentation-specific additions alongside their source references, and avoid letting an exported document become an untracked competing master.
 
-For each release, retain the selected inputs, their order, the source revision, tool versions, relevant settings, and the exact outputs reviewed. Local uncommitted edits need to be accounted for too; a commit identifier alone does not describe them. Chapter 10's review record provides a place to connect evidence to a decision.
+For each release, retain the selected inputs, their order, the source revision, tool versions, relevant settings, and the exact outputs reviewed. Local uncommitted edits need to be accounted for too; a commit identifier alone does not describe them. The [review and collaboration guide](review-and-collaboration.md) explains how a review record connects evidence to a decision.
 
 ## Try It: Prepare Three Publications
 
@@ -231,4 +231,4 @@ The PDF command requires a PDF engine configured for Pandoc; see its [PDF guidan
 
 Open each successful output and compare it with the brief. Check page breaks in the PDF, text fit in the slides, and headings and links in the HTML. Confirm that the source clarification is present wherever it belongs. Record converter versions and checks, including any failed or untested format. A successful conversion is the starting point for this review.
 
-The next chapter, [Beyond GitHub: OneDrive, Copilot, and Other Applications](../docs/13-beyond-github.md), considers how to carry these practices into environments where readers and authors use different tools.
+The next chapter, [Beyond GitHub: OneDrive, Copilot, and Other Applications](../docs/12-beyond-github.md), considers how to carry these practices into environments where readers and authors use different tools.
