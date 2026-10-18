@@ -2,79 +2,110 @@
 id: 08-publishing
 chapter_number: 10
 status: in-review
-learning_goal: "Explain how checked sources are built, released, and made available to readers."
+learning_goal: "Explain how GitHub Actions uses repository events to check, build, and publish information; distinguish a workflow artifact from a GitHub Pages deployment."
 visuals:
-  - id: publication-timeline
+  - id: actions-to-pages
     status: source-ready
     kind: diagram
     preferred_source: mermaid
-    source: ../assets/diagrams/12-publication-timeline.mmd
+    source: ../assets/diagrams/10-actions-to-pages.mmd
     embedded: true
     outputs: [web, pdf, slides]
-    caption: "Conceptual relationships in the fictional onboarding scenario; not a live system."
-    alt: " A[Revision A] --> B[Build A passed] --> P[Published A];  C[Revision B] --> D[Build B failed];  D -.->|No deployment| P;  E[Revision C] --> F[Build C passed] --> G[Published C]"
+    caption: "Pull-request checks and published website deployments serve different purposes; only an authorized, successful deployment changes the site."
+    alt: "A pull request triggers checks and review. After a change reaches main, or an hourly refresh starts, the deployment workflow builds the Astro site and deploys its static files to GitHub Pages."
 ---
 
-# From Build to Publication
+# Automating Information with GitHub Actions
 
-Maintained information and published information are not always the same version. A source file can change today while a website or PDF still reflects yesterday's successful publication.
+In [Chapter 7](07-processing.md), we ran a program to check information and generate results. But if someone changes a source tomorrow, who will remember to run it again?
 
-## Separate the stages
+**GitHub Actions turns repeatable operations into workflows triggered by events.** This repository uses it to check contributions, measure project growth, prepare a PDF proof, and publish the tutorial website.
 
-The Document-as-Code Lab website provides a useful example. The project maintains Markdown sources in GitHub. Astro builds web pages from those sources. GitHub Pages serves the deployed website. A PDF edition would need its own build and release process.
+## From running a script to running a workflow
 
+A script defines *what to do*. A workflow defines *when to run it, where it runs, and what happens to the result*.
+
+| Term | Meaning |
+| --- | --- |
+| **Event** | A pull request, push, manual request, or schedule that starts a run |
+| **Workflow** | A versioned YAML file in `.github/workflows/` |
+| **Job** | Steps that run together, usually on one runner |
+| **Runner** | The machine executing a job |
+| **Artifact** | An output retained from a run, such as a report or PDF proof |
+
+These are not new kinds of documents. They are a way to run the checks and generators we already maintain, consistently and visibly.
+
+## What runs in this tutorial?
+
+The [repository](https://github.com/And-Gu/document-as-code-lab) contains four workflows with different purposes:
+
+| Workflow | Trigger | Result |
+| --- | --- | --- |
+| [Astro PR check](../.github/workflows/astro-pr-check.yml) | Pull request targeting `main` | Website, content, learning-component, and dashboard checks; no publication |
+| [Deploy Astro to GitHub Pages](../.github/workflows/deploy-pages.yml) | Push to `main`, manual dispatch, or hourly schedule | Builds and publishes the website, including refreshed build-time data |
+| [Measure project growth](../.github/workflows/growth.yml) | Push to `main` or manual dispatch | Tests, measured history, and downloadable report artifacts |
+| [PDF design proof](../.github/workflows/pdf-proof.yml) | Pull request or manual dispatch | A limited PDF and page images for inspection, not a finished book |
+
+Each has its own purpose and permission boundary. **A passing pull-request check does not publish a website; a downloaded artifact is not a public website.**
+
+## From a change to GitHub Pages
+
+Follow a typical update to this tutorial:
 
 ```mermaid
-flowchart LR
- A[Revision A] --> B[Build A passed] --> P[Published A]
- C[Revision B] --> D[Build B failed]
- D -.->|No deployment| P
- E[Revision C] --> F[Build C passed] --> G[Published C]
+flowchart TB
+    edit["Proposed change"] --> pr["Pull request"]
+    pr --> check["GitHub Actions: checks and build test"]
+    check --> review["Review and decision"]
+    review -->|Merged to main| deploy["Deployment workflow"]
+    schedule["Hourly refresh schedule"] --> deploy
+    deploy --> astro["Astro builds HTML, CSS and JavaScript"]
+    astro --> pages["GitHub Pages hosts the built files"]
+    pages --> reader["Reader opens the published website"]
 ```
 
-*This is a conceptual illustration of the fictional scenario, not a live system.*
+*This is an explanatory flow, not a claim that every merge requires a particular approval rule. Required checks and approvals depend on repository settings. Scheduled runs may be delayed.*
 
-Think in four steps:
+**Astro** builds the site. **GitHub Actions** runs that build and deploys its result. **GitHub Pages** serves the resulting HTML, CSS, JavaScript, images, and data files to readers at:
 
-1. **Change:** A contributor records new source information.
-2. **Check and build:** Configured tasks validate and generate outputs.
-3. **Release decision:** The team selects which result should be distributed.
-4. **Publish:** A website, package, or document edition becomes available to readers.
+[and-gu.github.io/document-as-code-lab/](https://and-gu.github.io/document-as-code-lab/)
 
-Some projects automate all four steps after a merge. Others require explicit approval before release. The correct choice depends on the information and the risks of publishing it.
+GitHub Pages is static hosting. It does not run Astro or the project's Python scripts for each visitor. Those operations run before publication; JavaScript in the reader's browser makes quizzes, the Contract Explorer, presentations, and other controls interactive. The dashboard also has an optional, explicitly requested live GitHub API retrieval; most of its data is a published snapshot.
 
-## A failed build should not silently change the publication
+The deployment workflow also runs on an hourly schedule to refresh those snapshots. A site may therefore receive an updated dataset without any chapter text being edited.
 
-Suppose revision B introduces an invalid reference. If the build fails, the published site should remain on its last successful release, revision A. After the error is fixed and a new build passes, the deployment can move forward.
+## Read the actual deployment definition
 
-This distinction is essential for auditability: when someone reads a page, we should be able to determine which source revision produced it.
+Open [`deploy-pages.yml`](../.github/workflows/deploy-pages.yml). Its triggers include:
 
-## Different outputs, different schedules
+```yaml
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  schedule:
+    - cron: '17 * * * *'
+```
 
-The same sources may feed a frequently updated internal dashboard and a PDF handbook released quarterly. Maintaining one source does not force every output to update at the same moment. Each delivery process needs explicit triggers, checks, and release rules.
+The build job checks out the repository, prepares Python, and invokes the Astro build action. A separate deployment job uses `actions/deploy-pages` to publish the built site. The workflow runs on GitHub-hosted runners; visitors receive its output, not the development environment.
 
-## Explore: Publication timeline
+The YAML file is maintained and versioned with the rest of the project. Changing a workflow deserves review too: a faulty build rule can affect every output it produces.
 
-Read this fictional timeline; A, B, and C are labels, not real commit hashes.
+## Explore: Inspect a real run
 
-| Source | Build | Release state | What readers receive |
-| --- | --- | --- | --- |
-| A | Passed | Published | A |
-| B | Failed | Not published | A remains available |
-| C | Passed | Awaiting release decision | A remains available |
-| C | Passed | Published | C |
+Open the public [Actions page](https://github.com/And-Gu/document-as-code-lab/actions) and inspect a recent **Deploy Astro to GitHub Pages** run.
 
-A build can pass before a release decision is made. The site currently deploys automatically after changes reach main; this table illustrates a process with a separate release decision, not that configuration.
+1. Find its trigger, source commit, and build/deploy jobs.
+2. Check whether the build succeeded and whether the deployment job ran.
+3. Open the published site. What kinds of files and interactive experiences can a static host serve?
+4. Compare it with a **Measure project growth** run. Where do the downloadable artifacts go, and why are they not automatically part of the website?
 
+**Expected result:** You can trace a published result to a workflow run and source revision, and explain the difference between an Action, an artifact, and GitHub Pages.
 
-## What this repository publishes
+A failed build does not establish that a new edition is ready to publish. A successful build establishes only that configured checks passed; it does not approve the meaning of the information. Likewise, a finished job may still need inspection of the actual page.
 
-Pull requests run the Astro check/build and a separate PDF proof workflow. Changes on main build and deploy Astro to [GitHub Pages](https://and-gu.github.io/document-as-code-lab/). The site also has hourly deployment triggers to refresh operational snapshots; scheduled execution can be delayed. The showcase handbook is not rebuilt by the website workflow.
+The [automation and quality reference](../reference/automation-quality.md) covers further checks, runner permissions, failure handling, and stale outputs. [Chapter 11](11-beyond-github.md) brings the entire site architecture together.
 
-The [publishing guide](../reference/publishing-workflows.md) retains the Astro setup, YAML slide decks, Markdown/source selection, and PDF/print concerns. The [three-excerpt PDF proof](../publishing/pdf/README.md) is not a full book. The [presentation collection](../presentations/README.md) explains the HTML decks and their separate speaker-note pages.
-
-**Key point:** A source revision, a generated artifact, and a published edition are distinct things that should remain traceable.
-
-**Next:** [Chapter 11](11-beyond-github.md) considers how this approach connects to the applications people already use.
+**Key point:** GitHub Actions makes information work repeatable. GitHub Pages distributes the finished result. Neither replaces responsibility for the sources and their meaning.
 
 <!-- interactive: chapter-quiz -->

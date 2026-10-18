@@ -2,7 +2,7 @@
 
 The tutorial chapters in `docs/` remain the maintained knowledge. Presentation YAML selects messages and a teaching sequence; it does not contain chapter copies. Review the selected messages against their linked chapters when either changes. Source links provide traceability, not automatic synchronization or approval.
 
-`document-as-code-intro.yaml` uses chapters 1, 2, 9, and 11. It builds at `/document-as-code-lab/presentations/document-as-code/`. The presentation index is `/document-as-code-lab/presentations/`.
+`document-as-code-intro.yaml` uses chapters 1, 2, 9, and 10. It builds at `/document-as-code-lab/presentations/document-as-code/`. The presentation index is `/document-as-code-lab/presentations/`.
 
 Two complementary ten-slide packs are also defined here:
 
@@ -12,6 +12,8 @@ Two complementary ten-slide packs are also defined here:
 These paths use the site's `/document-as-code-lab/` prefix. Each new pack has a readable `/notes/` page generated from the same YAML, with chapter references. The homepage links to both packs; the index retains the original introduction. All decks and note pages are included in the GitHub Pages deployment.
 
 ## Define a Deck
+
+`lab-architecture.yaml` adds a nine-slide tour of the maintained sources, Astro, browser components, Actions/Pages, and the Microsoft 365 comparison. It builds at `/presentations/lab-architecture/`, with notes at `/presentations/lab-architecture/notes/`. It uses the same slide components, Reveal.js runtime, and Pages deployment as the other decks.
 
 Add a `.yaml` file in this folder. `slug`, `title`, `description`, and `slides` are required. Each slide has a unique `id`, `type`, `title`, and `sources` list of existing `docs/*.md` paths. An optional plain-text `notes` field supplies speaker notes. The slug defines its route; the slide ID defines its hash link, such as `#/review`.
 

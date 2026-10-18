@@ -1,0 +1,9 @@
+flowchart TB
+    edit["Proposed change"] --> pr["Pull request"]
+    pr --> check["GitHub Actions: checks and build test"]
+    check --> review["Review and decision"]
+    review -->|Merged to main| deploy["Deployment workflow"]
+    schedule["Hourly refresh schedule"] --> deploy
+    deploy --> astro["Astro builds HTML, CSS and JavaScript"]
+    astro --> pages["GitHub Pages hosts the built files"]
+    pages --> reader["Reader opens the published website"]

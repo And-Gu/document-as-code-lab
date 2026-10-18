@@ -125,7 +125,7 @@ PowerPoint can remain part of the workflow. Generated slides may provide a start
 
 ### Our HTML Presentations Use Astro and Reveal.js
 
-Our first presentation puts these principles into practice. Open the [published introduction deck](https://and-gu.github.io/document-as-code-lab/presentations/document-as-code/) or choose **Presentations** in the website's chapter menu. Its eight slides draw on chapters 1, 2, 9, and 11, moving from information reuse through collaboration and review to publishing.
+Our first presentation puts these principles into practice. Open the [published introduction deck](https://and-gu.github.io/document-as-code-lab/presentations/document-as-code/) or choose **Presentations** in the website's chapter menu. Its eight slides draw on chapters 1, 2, 9, and 10, moving from information reuse through collaboration and review to publishing.
 
 The [presentation definition](../presentations/document-as-code-intro.yaml) is a YAML file containing the selected messages, slide order, and chapter references. It does not copy entire chapters. The chapters remain the maintained knowledge; the YAML defines a particular teaching sequence.
 
@@ -160,7 +160,7 @@ The HTML introduction deck is implemented and published. Speaker notes and prese
 
 ## Reuse Visuals, Adapt Their Presentation
 
-Chapter 9 distinguished editable visual sources from their rendered images. Publishing adds another decision: which representation works in each output?
+The [visual sources guide](visual-sources.md) distinguishes editable sources from their rendered images. Publishing adds another decision: which representation works in each output?
 
 An interactive chart needs a static alternative in a printed book. A detailed diagram may fit a full book page but need simplification for a presentation. A website may let readers enlarge an image; a slide shown across a meeting room cannot rely on that interaction.
 
@@ -231,4 +231,4 @@ The PDF command requires a PDF engine configured for Pandoc; see its [PDF guidan
 
 Open each successful output and compare it with the brief. Check page breaks in the PDF, text fit in the slides, and headings and links in the HTML. Confirm that the source clarification is present wherever it belongs. Record converter versions and checks, including any failed or untested format. A successful conversion is the starting point for this review.
 
-The next chapter, [Beyond GitHub: OneDrive, Copilot, and Other Applications](../docs/11-beyond-github.md), considers how to carry these practices into environments where readers and authors use different tools.
+[Chapter 11, Behind the Lab](../docs/11-beyond-github.md), traces this tutorial's implementation and compares it with a Microsoft 365 alternative. The [portable workflow guide](workflows-across-tools.md) develops that alternative in more detail.

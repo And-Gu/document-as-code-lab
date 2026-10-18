@@ -250,47 +250,49 @@
   "chapter-10": [
     {
       "type": "single_select",
-      "question": "If a new build fails, what should remain available in a safe release process?",
+      "question": "The Astro pull-request check succeeds. What has happened to the published website?",
       "options": [
-        "The last successful publication",
-        "A broken replacement page",
-        "An unreviewed draft"
+        "Nothing from this check: it validates the proposed site without deploying it",
+        "GitHub Pages now serves the pull-request version",
+        "Every chapter has been approved"
       ],
       "correctIndex": 0,
-      "feedback": "A failed build should not silently overwrite a working publication."
+      "feedback": "The PR workflow checks a proposed change. A separate workflow deploys from main; passing checks is not content approval."
     },
     {
-      "type": "true_false",
-      "question": "A source revision and a published edition always mean the same version.",
+      "type": "single_select",
+      "question": "The PDF proof workflow uploads a successful artifact. Where is the proof available?",
       "options": [
-        "True",
-        "False"
+        "In that workflow run's retained artifacts; it is not automatically published on Pages",
+        "As a new public PDF book on GitHub Pages",
+        "Inside the Markdown source of every chapter"
       ],
-      "correctIndex": 1,
-      "feedback": "Publication can lag source changes."
+      "correctIndex": 0,
+      "feedback": "Actions artifacts and GitHub Pages are different destinations. The limited proof is downloadable while retained, subject to GitHub access requirements."
     }
   ],
   "chapter-11": [
     {
       "type": "single_select",
-      "question": "What is the first question when two applications contain the same field?",
+      "question": "How can this GitHub Pages site provide an interactive Contract Explorer without running an Astro server for each reader?",
       "options": [
-        "Which one is authoritative?",
-        "Which has the nicer interface?",
-        "Which exports more images?"
+        "Astro prepares the data and pages at build time; JavaScript in the reader's browser handles navigation",
+        "GitHub Pages runs the Python record processor on every click",
+        "The browser rewrites the maintained Markdown records"
       ],
       "correctIndex": 0,
-      "feedback": "Field ownership determines correct updates and conflict handling."
+      "feedback": "Pages serves built files. Browser JavaScript provides interaction over the validated snapshot without changing the source records."
     },
     {
-      "type": "true_false",
-      "question": "Exporting a diagram as an image always preserves its model relationships.",
+      "type": "single_select",
+      "question": "A Copilot agent can answer questions using permitted SharePoint documents. What does that establish about editing those documents?",
       "options": [
-        "True",
-        "False"
+        "Reading access alone does not establish editing ability; editing needs suitable tools and permissions",
+        "The agent can automatically edit every document it can read",
+        "The library now provides Git-style pull requests"
       ],
-      "correctIndex": 1,
-      "feedback": "Visual appearance alone may not preserve object identities and links."
+      "correctIndex": 0,
+      "feedback": "Knowledge grounding is different from file editing. Office tools or configured actions and flows need appropriate permissions; OneDrive and SharePoint are not Git."
     }
   ],
   "chapter-12": [

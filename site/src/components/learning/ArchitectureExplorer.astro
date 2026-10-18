@@ -1,0 +1,41 @@
+---
+import { FileText, Network, Presentation, ChartNoAxesCombined, FileDown, ArrowRight } from '@lucide/astro';
+import { architectureExamples, validateArchitectureSources } from '../../lib/architecture';
+import { repositoryFiles, repositoryRoot } from '../../lib/repository';
+import { siteUrl } from '../../lib/urls';
+import '../../styles/architecture-explorer.css';
+await validateArchitectureSources(repositoryRoot, new Set(await repositoryFiles()));
+const icons = [FileText, Network, Presentation, ChartNoAxesCombined, FileDown];
+const outputUrl = (value: string) => value.startsWith('https://') ? value : siteUrl(value);
+---
+<section class="architecture-explorer" data-architecture-explorer aria-labelledby="architecture-title">
+  <h3 id="architecture-title">Follow an output back to its sources</h3>
+  <div class="architecture-tabs" role="tablist" aria-label="Output to trace" data-architecture-tabs hidden>
+    {architectureExamples.map((example, index) => {
+      const Icon = icons[index];
+      return <button type="button" role="tab" id={`architecture-tab-${example.id}`} aria-controls={`architecture-panel-${example.id}`} aria-selected={index === 0 ? 'true' : 'false'} tabindex={index === 0 ? 0 : -1} data-architecture-tab={example.id}><Icon size={18} aria-hidden="true" />{example.label}</button>;
+    })}
+  </div>
+  {architectureExamples.map((example, index) => <section id={`architecture-panel-${example.id}`} data-architecture-panel={example.id} aria-labelledby={`architecture-heading-${example.id}`} hidden={index !== 0}>
+    <h4 id={`architecture-heading-${example.id}`}>{example.label}</h4>
+    <ol class="architecture-path">
+      <li><h5>Maintained source</h5><p>{example.source}</p><ul>{example.sources.map(source => <li><a href={siteUrl(`files/${source}`)}><code>{source}</code></a></li>)}</ul><ArrowRight class="architecture-arrow" size={20} aria-hidden="true" /></li>
+      <li><h5>Transformation / runtime</h5><p>{example.transform}</p><ul>{example.processors.map(source => <li><a href={siteUrl(`files/${source}`)}><code>{source}</code></a></li>)}</ul><ArrowRight class="architecture-arrow" size={20} aria-hidden="true" /></li>
+      <li><h5>Delivered result</h5><p>{example.result}</p><a href={outputUrl(example.output)}>{example.outputLabel}</a></li>
+    </ol>
+    <dl class="architecture-context"><dt>Update trigger</dt><dd>{example.trigger}</dd><dt>Important distinction</dt><dd>{example.boundary}</dd></dl>
+  </section>)}
+  <details class="architecture-fallback" data-architecture-fallback open>
+    <summary>All five source-to-output paths</summary>
+    <div class="architecture-table" role="region" aria-label="Architecture overview" tabindex="0"><table>
+      <caption>Maintained sources, processing, results, and update triggers</caption>
+      <thead><tr><th>Output / Sources</th><th>Processing / Result</th><th>Update trigger</th></tr></thead>
+      <tbody>{architectureExamples.map(example => <tr><th scope="row">{example.label}<ul>{example.sources.map(source => <li><a href={siteUrl(`files/${source}`)}>{source}</a></li>)}</ul></th><td>{example.transform}<p>{example.result}</p><p>{example.boundary}</p><a href={outputUrl(example.output)}>{example.outputLabel}</a></td><td>{example.trigger}</td></tr>)}</tbody>
+    </table></div>
+  </details>
+</section>
+<script>
+  import { initArchitectureExplorers } from '../../lib/architecture-controller';
+  initArchitectureExplorers();
+  document.addEventListener('astro:page-load', initArchitectureExplorers);
+</script>

@@ -14,7 +14,7 @@ For a capability, publication, or workflow change, inspect the following files a
 - `README.md`: current status, available outputs, links, next milestone, and licensing.
 - `site/README.md`: reproducible local commands, deployment, base path, and widget behavior.
 - `docs/03-project-growth.md`: the history and traceability chapter with a dashboard link. `data/features.json`: capability milestones and verification evidence. Mark complete only after its criterion is verified.
-- `docs/10-publishing.md`: actual publishing tools, hosted status, and remaining output pipelines.
+- `docs/10-publishing.md` and `docs/11-beyond-github.md`: actual workflow behavior, hosted status, lab architecture, and remaining output pipelines.
 - `ROADMAP.md`: remaining work and decisions; do not leave completed choices described as undecided.
 - `CONTRIBUTING.md` and `LICENSE.md`: conventions, license scope, and attribution when relevant.
 - Supporting assets, tables, captions, links, and source lists when their inputs change.

@@ -2,7 +2,7 @@
 # Beyond GitHub: OneDrive, Copilot, and Other Applications
 
 
-The previous chapter followed shared information into websites, books, and presentations. But your colleagues may work mainly in Word, PowerPoint, and shared folders. They may not have access to GitHub or permission to introduce a new publishing system.
+The [publishing guide](publishing-workflows.md) follows shared information into websites, books, and presentations. But your colleagues may work mainly in Word, PowerPoint, and shared folders. They may not have access to GitHub or permission to introduce a new publishing system.
 
 You can still use many of the principles we have explored: maintain information in identifiable parts, make ownership clear, review changes, reuse selected sources, and check the outputs. The tools change, and some steps become manual, but the purpose remains the same.
 
@@ -107,7 +107,7 @@ An excerpt or summary can reveal information from a restricted source even when 
 
 ## Reuse Without Creating Competing Masters
 
-In a manual workflow, an author can assemble selected instructions into a handbook and adapt them for a presentation. Record the selection in the [publication brief](../examples/publishing/publication-brief.md), and check the results as described in chapter 10.
+In a manual workflow, an author can assemble selected instructions into a handbook and adapt them for a presentation. Record the selection in the [publication brief](../examples/publishing/publication-brief.md), and check the results as described in the [publishing guide](publishing-workflows.md).
 
 When the access procedure changes, use the register to find the handbook and training material that depend on it. Update those outputs and record the check. This is a manual version of following dependencies; it is useful even before the team has an automated builder.
 

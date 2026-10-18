@@ -1,0 +1,36 @@
+.architecture-explorer { margin: 1.5rem 0; border: 1px solid #bbc9c5; border-radius: 6px; padding: 1rem; background: #fafcfb; min-width: 0; }
+.architecture-explorer h3 { margin: 0 0 1rem; font-size: 1.15rem; }
+.architecture-explorer h4 { margin: 1rem 0; font-size: 1.05rem; }
+.architecture-explorer h5 { margin: 0; font-size: .9rem; }
+.architecture-tabs { display: flex; flex-wrap: wrap; gap: .35rem; padding-bottom: .75rem; border-bottom: 1px solid #d1dad7; }
+.architecture-explorer [hidden] { display: none !important; }
+.architecture-tabs button { display: inline-flex; align-items: center; justify-content: flex-start; gap: .4rem; min-height: 2.8rem; max-width: 100%; border: 1px solid #b4c2bd; border-radius: 4px; background: #fff; color: #26382f; padding: .4rem .55rem; font: inherit; font-size: .85rem; text-align: left; cursor: pointer; }
+.architecture-tabs button svg { flex-shrink: 0; }
+.architecture-tabs button[aria-selected="true"] { border-color: #17684c; background: #e4f1eb; font-weight: 650; box-shadow: inset 0 -3px #17684c; }
+.architecture-explorer :is(button, a, summary, [tabindex]):focus-visible { outline: 3px solid #985716; outline-offset: 3px; }
+.architecture-path { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.4rem; margin: 0; padding: 0; list-style: none; }
+.architecture-path > li { position: relative; min-width: 0; border-top: 3px solid #568773; padding-top: .65rem; }
+.architecture-path > li:nth-child(2) { border-color: #8a6f9c; }
+.architecture-path > li:nth-child(3) { border-color: #aa7a30; }
+.architecture-path p, .architecture-context, .architecture-path ul { font-size: .875rem; }
+.architecture-path ul { padding-left: 1.1rem; }
+.architecture-path li, .architecture-explorer code, .architecture-table a { overflow-wrap: anywhere; }
+.architecture-arrow { position: absolute; right: -1.25rem; top: .6rem; color: #52645b; }
+.architecture-context { display: grid; grid-template-columns: 8rem minmax(0, 1fr); gap: .5rem .75rem; border-top: 1px solid #d1dad7; padding-top: 1rem; margin: 1rem 0; }
+.architecture-context dt { font-weight: 650; }
+.architecture-context dd { margin: 0; }
+.architecture-fallback { border-top: 1px solid #d1dad7; padding-top: .75rem; }
+.architecture-fallback summary { cursor: pointer; font-size: .875rem; }
+.architecture-table { overflow-x: auto; margin-top: .75rem; }
+.architecture-table table { display: table; font-size: .8rem; }
+.architecture-table caption { text-align: left; margin-bottom: .5rem; }
+.architecture-table th { font-weight: 600; }
+.architecture-table ul { margin-bottom: 0; padding-left: 1rem; font-weight: 400; }
+@media (max-width: 700px) {
+  .architecture-explorer { padding: .8rem; }
+  .architecture-tabs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .architecture-path { grid-template-columns: minmax(0, 1fr); gap: 1rem; }
+  .architecture-arrow { display: none; }
+  .architecture-context { grid-template-columns: minmax(0, 1fr); }
+  .architecture-context dd + dt { margin-top: .5rem; }
+}

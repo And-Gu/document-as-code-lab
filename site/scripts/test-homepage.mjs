@@ -25,15 +25,16 @@ const image = all(home, node => hasClass(node, 'home-art'))[0];
 assert.ok(attr(image, 'src').endsWith('/information-workshop.jpg'));
 assert.ok(attr(image, 'alt'));
 assert.ok((await readFile(new URL('../../assets/illustrations/information-workshop.jpg', import.meta.url))).length > 10000);
-for (const slug of ['information-model', 'information-value']) {
+for (const slug of ['information-model', 'information-value', 'lab-architecture']) {
   const definition = yaml(await read(`../../presentations/${slug}.yaml`));
-  assert.equal(definition.slides.length, 10);
-  assert.equal(new Set(definition.slides.map(slide => slide.id)).size, 10);
+  const slideCount = slug === 'lab-architecture' ? 9 : 10;
+  assert.equal(definition.slides.length, slideCount);
+  assert.equal(new Set(definition.slides.map(slide => slide.id)).size, slideCount);
   assert.ok(definition.slides.every(slide => slide.notes && slide.sources.length));
   const deck = parse(await read(`../dist/presentations/${slug}/index.html`));
   const notes = parse(await read(`../dist/presentations/${slug}/notes/index.html`));
-  assert.equal(all(deck, node => node.tagName === 'section' && attr(node, 'aria-label')).length, 10);
-  assert.equal(all(notes, node => node.tagName === 'section').length, 10);
+  assert.equal(all(deck, node => node.tagName === 'section' && attr(node, 'aria-label')).length, slideCount);
+  assert.equal(all(notes, node => node.tagName === 'section').length, slideCount);
   assert.ok(all(deck, node => attr(node, 'href') === `/document-as-code-lab/presentations/${slug}/notes/`).length);
   assert.ok(all(home, node => attr(node, 'href') === `/document-as-code-lab/presentations/${slug}/`).length);
   for (const slide of definition.slides) assert.ok(all(notes, node => attr(node, 'id') === slide.id).length);
@@ -41,4 +42,4 @@ for (const slug of ['information-model', 'information-value']) {
 }
 const original = parse(await read('../dist/presentations/document-as-code/index.html'));
 assert.equal(all(original, node => node.tagName === 'section' && attr(node, 'aria-label')).length, 8);
-console.log('Homepage groups cover all 12 chapters; two ten-slide packs, notes, image, base paths, and original eight-slide deck passed.');
+console.log('Homepage groups cover all 12 chapters; two ten-slide packs, nine-slide architecture deck, notes, image, base paths, and original eight-slide deck passed.');

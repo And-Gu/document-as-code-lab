@@ -83,7 +83,7 @@ assert.equal(Object.keys(candidates).length, 12);
 const publishingChapter = await readFile(new URL('../dist/chapters/10-publishing/index.html', import.meta.url), 'utf8');
 assert.ok(!publishingChapter.includes('data-onboarding-lab'));
 assert.ok(publishingChapter.includes('name="chapter-10-question-1"'));
-assert.ok(publishingChapter.includes('From Build to Publication'));
+assert.ok(publishingChapter.includes('Automating Information with GitHub Actions'));
 for (const [chapterId, items] of Object.entries(candidates)) {
   assert.ok(items.every(q => ['single_select', 'true_false'].includes(q.type)));
   const prepared = prepareQuestions(items.map((q, i) => ({ id: String(i), question: q.question, type: q.type === 'true_false' ? 'true-false' : 'single', options: q.options.map((label, i) => ({ value: String(i), label })), correct: [q.type === 'true_false' ? q.options[q.correctIndex].toLowerCase() : String(q.correctIndex)], explanation: q.feedback })));
@@ -167,3 +167,4 @@ assert.throws(() => processProcedures([...fixed, readPracticeProcedure(practiceS
 const contacts = await readFile(new URL('../../examples/onboarding-showcase/contacts.md', import.meta.url), 'utf8');
 assert.match(contacts, /status: draft/);
 console.log('Twelve lesson mounts, quiz mapping, Markdown safety, YAML parsing, JSON Schema validation, procedure processing, readiness, and source inclusion rules passed.');
+await import('./test-architecture.mjs');

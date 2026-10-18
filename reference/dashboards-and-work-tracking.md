@@ -226,4 +226,4 @@ Use a repository and a user or organization Project where you have permission to
 
 **Keep:** the board and evidence links for continued use, or clearly label the items as training exercises before leaving them in a shared workspace.
 
-For your own information example, choose one question, its maintained source, and the person who should act on the answer. Next, [Publishing to Websites, Books, and Presentations](../docs/10-publishing.md) considers how to deliver maintained information to different audiences.
+For your own information example, choose one question, its maintained source, and the person who should act on the answer. The [publishing guide](publishing-workflows.md) considers how to deliver maintained information to different audiences. [Chapter 10](../docs/10-publishing.md) explains the workflows that automate this lab's checks and deployment.

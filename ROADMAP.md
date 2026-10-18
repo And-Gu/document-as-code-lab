@@ -22,6 +22,8 @@ Done when an update produces verifiable current and historical metrics.
 
 ## 3. Publish the First Website
 
+Chapters 10 and 11 explain the actual workflows and lab architecture. The read-only Architecture Explorer traces five output paths, with validated source links and a no-JavaScript overview. A fourth HTML deck, `lab-architecture`, adds nine slides and notes through the existing build and Pages deployment pipeline. The chapter content remains in review.
+
 Published baseline: Astro publishes the tutorial to GitHub Pages, with metadata and Git-history panels. Production deployment, navigation, images, and Mermaid rendering have been verified. Chapter 3 introduces the standalone Project Control Center, whose growth widget uses committed history at build time. Saved charts under `assets/figures/` remain historical snapshots. The CSSV budget table with sorting and filtering is retained in the dashboard reference guide. The Project Control Center is published at `/dashboard/` with authenticated, build-generated operational snapshots on main deployment and an hourly schedule; optional live retrieval remains available. Pages deployment 38152410515 verified all four operational sources, workflow states, source revision, and generation timestamps. Workflow states describe collection time, and scheduled runs may be delayed. Chapters 2, 3, and 6 are approved. Chapters 1 and 4 have returned to review following additions; the remaining 9 chapters are in review. Full-book generation and several interactive exercises remain future work.
 
 - Compare a small set of publishing tools against the tutorial's needs.
@@ -42,7 +44,7 @@ Done when exercises use the project's own content and data.
 
 ## 5. Add Book and Presentations
 
-The first HTML introduction deck uses YAML, reusable Astro components, and Reveal.js in the existing site build. Local production checks cover its eight slides, source links, navigation, overview, fullscreen, and desktop/phone layouts. Two additional ten-slide packs cover the information model and its value, with chapter references and separate speaker-note pages. The homepage groups all 12 chapters into four learning paths. All three decks are included in the site build and Pages deployment. The hands-on workshop deck and book remain to be developed; the new concept packs do not meet the presentation capability's introduction-and-workshop completion criterion.
+The first HTML introduction deck uses YAML, reusable Astro components, and Reveal.js in the existing site build. Local production checks cover its eight slides, source links, navigation, overview, fullscreen, and desktop/phone layouts. Two additional ten-slide packs cover the information model and its value, with chapter references and separate speaker-note pages. The nine-slide architecture deck explains the lab's implementation. The homepage groups all 12 chapters into four learning paths. All four decks are included in the site build and Pages deployment. The hands-on workshop deck and book remain to be developed; these decks do not meet the presentation capability's introduction-and-workshop completion criterion.
 
 - Build a PDF book with readable print layout.
 - Expand the verified Pandoc/Typst three-excerpt proof and automated Mermaid rendering to full-book navigation, pagination, and accessibility checks. See `publishing/pdf/README.md` and the proposed chapter outline in `reference/pdf-publication.md`.

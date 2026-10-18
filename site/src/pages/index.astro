@@ -9,10 +9,10 @@ const chapters = await getChapters();
 const groups = [
   { start: 1, end: 4, title: 'Working with sources', description: 'Understand the approach, the workspace, history, and readable source files.', icon: BookOpen, tone: 'sage' },
   { start: 5, end: 9, title: 'Making information useful', description: 'Add structure, relationships, processing, AI context, and visual representations.', icon: Network, tone: 'violet' },
-  { start: 10, end: 10, title: 'Publishing results', description: 'Build websites, books, and presentations from maintained sources.', icon: ShieldCheck, tone: 'ochre' },
-  { start: 11, end: 12, title: 'Applying the approach', description: 'Connect existing tools and choose a manageable first implementation.', icon: Compass, tone: 'sage' },
+  { start: 10, end: 10, title: 'Automating information', description: 'Run checks, build outputs, and distinguish workflow artifacts from website publication.', icon: Workflow, tone: 'ochre' },
+  { start: 11, end: 12, title: 'Applying the approach', description: 'Explore this lab’s architecture, compare environments, and choose a manageable first implementation.', icon: Compass, tone: 'sage' },
 ];
-const packs = (await getPresentations()).filter((deck) => ['information-model', 'information-value'].includes(deck.slug));
+const packs = (await getPresentations()).filter((deck) => ['information-model', 'information-value', 'lab-architecture'].includes(deck.slug));
 const stages = [
   { label: 'Maintain', detail: 'Readable sources and clear ownership', icon: FileText },
   { label: 'Review', detail: 'Proposed changes and recorded decisions', icon: ShieldCheck },
@@ -73,13 +73,14 @@ const stages = [
         <li><a href={siteUrl('chapters/04-markdown/#markdown-playground-widget')}>Edit Markdown and see the result <ArrowRight size={18} aria-hidden="true" /></a><p>Browser-only practice · Edit headings, lists, and a table. Changes are not saved.</p></li>
         <li><a href={siteUrl('chapters/05-structured-content/#metadata-lab-widget')}>Validate procedure metadata <ArrowRight size={18} aria-hidden="true" /></a><p>Browser-only practice · Check YAML fields against a visible schema. Passing is not approval.</p></li>
         <li><a href={siteUrl('chapters/09-images/#contract-explorer-widget')}>Explore customer projects and agreements <ArrowRight size={18} aria-hidden="true" /></a><p>Fictional records · Explore relationships, delivery commitments, and change-impact review candidates.</p></li>
+        <li><a href={siteUrl('chapters/11-beyond-github/#architecture-explorer-widget')}>Trace an output to its sources <ArrowRight size={18} aria-hidden="true" /></a><p>Repository architecture · Compare the sources, processing, results, and update triggers for five outputs.</p></li>
         <li><a href={siteUrl('materials/reference/dashboards-and-work-tracking/')}>Explore a spreadsheet-style view <ArrowRight size={18} aria-hidden="true" /></a><p>Fictional fixed dataset · Sort and filter a department budget using CSSV.</p></li>
         <li><a href={siteUrl('dashboard/')}>Open the Project Control Center <ArrowRight size={18} aria-hidden="true" /></a><p>Growth measured at build time · Operational snapshots refreshed on deployment and hourly, with retrieval times. Optional live retrieval is separate.</p></li>
       </ul>
       <p class="home-caption">Each chapter also includes a short practice quiz. Fictional example statuses do not constitute operational approval.</p>
     </section>
     <section id="presentations" class="home-section" aria-labelledby="present-title">
-      <h2 id="present-title">Present and share</h2><p>Two complementary conversations: how the approach works, and when its benefits justify the change.</p>
+      <h2 id="present-title">Present and share</h2><p>Explore how the approach works, when its benefits justify the change, and how this lab puts it into practice.</p>
       <div class="presentation-packs">
         {packs.map((pack) => <article><Presentation size={25} aria-hidden="true" /><h3><a href={siteUrl(`presentations/${pack.slug}/`)}>{pack.title}</a></h3><p>{pack.description}</p><p class="home-caption">{pack.slides.length} slides · <a href={siteUrl(`presentations/${pack.slug}/notes/`)}>Speaker notes</a></p></article>)}
       </div>

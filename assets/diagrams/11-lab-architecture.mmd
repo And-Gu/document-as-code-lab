@@ -1,0 +1,8 @@
+flowchart TB
+    chapters["Markdown chapters and references"] --> build["Astro site build"]
+    records["Structured example records"] --> build
+    slides["Presentation YAML"] --> build
+    components["Astro layouts and components"] --> build
+    actions["GitHub Actions executes build"] --> build
+    build --> pages["GitHub Pages: HTML, CSS, JS and data files"]
+    pages --> experiences["Chapter pages, interactive labs, dashboards and slide decks"]

@@ -4,7 +4,12 @@ import path from 'node:path';
 export const repositoryRoot = path.resolve(process.cwd(), '..');
 
 export async function repositoryFiles() {
-  const files = ['README.md', 'LICENSE.md', 'AGENTS.md', 'GLOSSARY.md', 'CONTRIBUTING.md', 'ROADMAP.md', 'requirements.txt', 'site/README.md', 'tests/test_records.py'];
+  const files = ['README.md', 'LICENSE.md', 'AGENTS.md', 'GLOSSARY.md', 'CONTRIBUTING.md', 'ROADMAP.md', 'requirements.txt', 'site/README.md', 'tests/test_records.py',
+    'site/src/content.config.ts', 'site/src/pages/chapters/[slug].astro',
+    'site/src/lib/contract-loader.ts', 'site/src/lib/contract-controller.ts',
+    'site/src/lib/presentations.ts', 'site/src/layouts/PresentationLayout.astro',
+    'site/scripts/growth-report.mjs', 'site/scripts/operational-snapshot.mjs',
+    'site/src/lib/dashboard/controller.ts'];
   const extensions = /\.(md|json|yaml|yml|py|mmd|png|svg|jpg|jpeg|webp|gif|txt|cssv|typ)$/i;
   async function collect(directory: string) {
     const entries = await readdir(path.join(repositoryRoot, directory), { withFileTypes: true });

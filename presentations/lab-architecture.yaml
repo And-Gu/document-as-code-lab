@@ -1,0 +1,123 @@
+slug: lab-architecture
+title: "Behind the Lab: From Sources to Experience"
+description: "A guided tour of the Document-as-Code Lab: Markdown, Astro, GitHub, GitHub Pages, interactive components, presentations, and an alternative Microsoft 365 approach."
+slides:
+  - id: opening
+    type: title
+    title: The tutorial is built the way it teaches
+    subtitle: Maintained sources become a website, interactive applications, and presentations
+    context: "Document-as-Code Lab | Behind the architecture"
+    sources: [docs/01-introduction.md, docs/11-beyond-github.md]
+    notes: "The website is not a manually maintained HTML copy of the chapters. It is an output built from the same repository that readers are learning about. Explain the architecture with concrete examples, not a tour of product logos."
+
+  - id: start-with-sources
+    type: content
+    title: We maintain information before choosing a view
+    message: One repository separates the information from the software that presents it
+    bullets:
+      - "docs/ and reference/ hold Markdown chapters and guides"
+      - "examples/ holds structured fictional records"
+      - "presentations/ holds slide-deck messages and chapter references"
+      - "site/ holds Astro layouts and interactive components"
+    sources: [docs/04-markdown.md, docs/09-images.md, docs/11-beyond-github.md]
+    notes: "The contract records are maintained as Markdown rather than copied into a dashboard. Presentation YAML contains editorial messages, not complete chapter copies. Keeping these roles separate makes it easier to review the right thing."
+
+  - id: github-collaboration
+    type: comparison
+    title: Git records changes; GitHub supports collaboration
+    left:
+      title: Maintained information
+      items:
+        - "Source files and structured records"
+        - "Versions and diffs"
+        - "Reviewable changes"
+    right:
+      title: Repository workflow
+      items:
+        - "Pull requests for proposed edits"
+        - "Checks from GitHub Actions"
+        - "Merge and deployment under configured rules"
+    sources: [docs/02-github-workspace.md, docs/03-project-growth.md, docs/10-publishing.md]
+    notes: "Distinguish a commit, a PR review, and content approval. A merge does not certify the accuracy of all published information. GitHub supplies an environment for discussion and automation around the maintained files."
+
+  - id: build-the-site
+    type: diagram
+    title: Astro turns sources into a readable website
+    message: The same build assembles HTML pages and the code for browser interaction
+    steps:
+      - { label: Read, detail: "Markdown, record data, and presentation YAML" }
+      - { label: Assemble, detail: "Astro layouts and reusable components" }
+      - { label: Build, detail: "HTML, CSS, JavaScript, images, and data" }
+      - { label: Publish, detail: "GitHub Pages serves the built files" }
+    outputs: [Chapter pages, Interactive labs, HTML slide decks]
+    caption: "Static hosting can deliver interactive applications through browser JavaScript."
+    sources: [docs/07-processing.md, docs/10-publishing.md, docs/11-beyond-github.md]
+    notes: "Important distinction: Astro and Python run during local development or a workflow build, not on the GitHub Pages server for each visitor. GitHub Pages hosts files. The browser executes bundled JavaScript where an interaction is required."
+
+  - id: interactive-views
+    type: content
+    title: The browser can explore information without owning it
+    message: Interactive components change the experience, not the authoritative source
+    bullets:
+      - "Chapter exercises simulate editing and processing in the browser"
+      - "The Contract Explorer reads build-time data from validated Markdown records"
+      - "The dashboard presents published snapshots and optional live retrieval"
+      - "Readers can inspect source links and revisions"
+    sources: [docs/07-processing.md, docs/09-images.md, docs/11-beyond-github.md]
+    notes: "Do not suggest that the chapter labs write changes back to GitHub. Contract Explorer shows relationships, commitments and possible impacts, but is not a contract management system. Its source records stay authoritative."
+
+  - id: presentations
+    type: content
+    title: Presentations reuse knowledge without copying a chapter
+    message: YAML defines the teaching sequence; Astro and Reveal.js render the slides
+    bullets:
+      - "Short messages reference the maintained chapters"
+      - "Reusable slide components establish a consistent format"
+      - "HTML decks and speaker-note pages share the site build"
+      - "Presentation wording still needs editorial review after source changes"
+    sources: [docs/09-images.md, docs/11-beyond-github.md]
+    notes: "Open the presentation collection in the browser. Discuss why an effective slide is a curated interpretation rather than an entire paragraph carried unchanged into another format."
+
+  - id: automate-and-publish
+    type: diagram
+    title: GitHub Actions runs the pipeline; Pages serves the result
+    message: A successful build and a published website are distinct results
+    steps:
+      - { label: PR, detail: "Check proposed changes without publishing" }
+      - { label: Main, detail: "Trigger the deployment workflow on a push" }
+      - { label: Build, detail: "Astro generates the deployable site" }
+      - { label: Deploy, detail: "GitHub Pages receives the built files" }
+    outputs: [Check results, Artifacts, Public website]
+    caption: "Other workflows generate growth reports and PDF proof artifacts without publishing them as pages."
+    sources: [docs/10-publishing.md]
+    notes: "The repository also uses a scheduled hourly deployment to refresh data snapshots. Actions artifacts and GitHub Pages are separate destinations. A successful build cannot independently prove semantic correctness or content approval."
+
+  - id: another-environment
+    type: comparison
+    title: The principles work beyond GitHub
+    left:
+      title: This tutorial
+      items:
+        - "Markdown in GitHub"
+        - "Pull requests and Actions"
+        - "Astro on GitHub Pages"
+    right:
+      title: Possible Microsoft 365 workflow
+      items:
+        - "Word and Excel in SharePoint or OneDrive"
+        - "File history, review, Power Automate"
+        - "Copilot and authorized agent tools"
+    sources: [docs/11-beyond-github.md]
+    notes: "Emphasize equivalent goals, not identical mechanics. Copilot can use permitted documents as knowledge, but a read-only knowledge connection is not an editing tool. Agents need configured actions and permissions to modify files. OneDrive is not Git and SharePoint does not automatically give Git-style PRs or reproducible builds."
+
+  - id: closing
+    type: content
+    title: Build an environment around useful information
+    message: Choose maintained sources, make changes inspectable, and deliver more than one view
+    bullets:
+      - "Identify ownership and the authoritative source"
+      - "Add structure, relationships, and checks where useful"
+      - "Automate repeatable work; review meaningful changes"
+      - "Let the tools follow the need, not the other way around"
+    sources: [docs/01-introduction.md, docs/11-beyond-github.md, docs/12-automation.md]
+    notes: "End by returning to the tutorial's core distinction: document-as-code is not primarily changing the editor or file format. The objective is working with reliable maintained information across multiple outputs and tasks."

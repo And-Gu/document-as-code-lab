@@ -65,11 +65,13 @@ Filename prefixes and `chapter_number` metadata give the current reading order. 
 7. [From Sources to Results](docs/07-processing.md)
 8. [AI Needs Context, Not Just Prompts](docs/08-ai-native.md)
 9. [Information You Can Explore](docs/09-images.md)
-10. [From Build to Publication](docs/10-publishing.md)
-11. [Working Across Tools](docs/11-beyond-github.md)
+10. [Automating Information with GitHub Actions](docs/10-publishing.md)
+11. [Behind the Lab: How We Built This Tutorial](docs/11-beyond-github.md)
 12. [From Tutorial to Real Practice](docs/12-automation.md)
 
 ## Outputs
+
+Chapters 10 and 11 explain the repository's workflows and architecture. Chapter 11 includes a read-only [Architecture Explorer](https://and-gu.github.io/document-as-code-lab/chapters/11-beyond-github/#architecture-explorer-widget) and a nine-slide [architecture presentation](https://and-gu.github.io/document-as-code-lab/presentations/lab-architecture/) with speaker notes. Both are included in the website build and Pages deployment; the chapter content remains in review.
 
 | Output | Purpose |
 | --- | --- |
