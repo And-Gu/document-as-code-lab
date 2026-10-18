@@ -44,6 +44,7 @@ for (const file of files) {
   }
   walk(parseHtml(await readFile(file, 'utf8')));
   for (const value of attributes) {
+    assert.ok(!value.includes('/files/.github/'), `Pages artifacts exclude .github: ${file}: ${value}`);
     const url = new URL(value, 'https://example.com');
     let target = path.join(dist, decodeURIComponent(url.pathname.replace('/document-as-code-lab/', '')));
     links++;

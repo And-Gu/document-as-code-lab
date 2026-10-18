@@ -39,6 +39,9 @@ assert.notEqual(attr(fallback, 'open'), undefined, 'The overview remains open wi
 assert.equal(all(fallback, n => n.tagName === 'tbody')[0].childNodes.filter(n => n.tagName === 'tr').length, 5);
 assert.equal(all(dom, n => attr(n, 'data-architecture-panel') !== undefined).length, 5);
 assert.ok(!chapter.includes('Proposed site component'));
+assert.ok(chapter.includes('https://github.com/And-Gu/document-as-code-lab/blob/main/.github/workflows/deploy-pages.yml'));
+assert.ok(chapter.includes('https://github.com/And-Gu/document-as-code-lab/blob/main/.github/workflows/pdf-proof.yml'));
+assert.ok(!chapter.includes('/files/.github/'));
 assert.ok(chapter.includes('Copilot agent can answer questions'));
 
 // Exercise the small controller without a browser or a second DOM dependency.

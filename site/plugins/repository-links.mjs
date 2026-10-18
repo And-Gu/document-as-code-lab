@@ -21,7 +21,10 @@ export default function repositoryLinks({ base = '' } = {}) {
       if (relative.startsWith('../') || path.isAbsolute(relative)) return;
 
       const encoded = relative.split('/').map(encodeURIComponent).join('/');
-      if (/^docs\/[^/]+\.md$/.test(relative)) {
+      // The Pages upload excludes .github; keep workflow links on GitHub itself.
+      if (relative.startsWith('.github/')) {
+        node.properties[property] = `https://github.com/And-Gu/document-as-code-lab/blob/main/${encoded}${suffix}`;
+      } else if (/^docs\/[^/]+\.md$/.test(relative)) {
         node.properties[property] = `${prefix}/chapters/${encoded.slice(5, -3)}/${suffix}`;
       } else if (relative.endsWith('.md')) {
         node.properties[property] = `${prefix}/materials/${encoded.slice(0, -3)}/${suffix}`;

@@ -7,6 +7,9 @@ import '../../styles/architecture-explorer.css';
 await validateArchitectureSources(repositoryRoot, new Set(await repositoryFiles()));
 const icons = [FileText, Network, Presentation, ChartNoAxesCombined, FileDown];
 const outputUrl = (value: string) => value.startsWith('https://') ? value : siteUrl(value);
+const sourceUrl = (source: string) => source.startsWith('.github/')
+  ? `https://github.com/And-Gu/document-as-code-lab/blob/main/${source.split('/').map(encodeURIComponent).join('/')}`
+  : siteUrl(`files/${source}`);
 ---
 <section class="architecture-explorer" data-architecture-explorer aria-labelledby="architecture-title">
   <h3 id="architecture-title">Follow an output back to its sources</h3>
@@ -19,8 +22,8 @@ const outputUrl = (value: string) => value.startsWith('https://') ? value : site
   {architectureExamples.map((example, index) => <section id={`architecture-panel-${example.id}`} data-architecture-panel={example.id} aria-labelledby={`architecture-heading-${example.id}`} hidden={index !== 0}>
     <h4 id={`architecture-heading-${example.id}`}>{example.label}</h4>
     <ol class="architecture-path">
-      <li><h5>Maintained source</h5><p>{example.source}</p><ul>{example.sources.map(source => <li><a href={siteUrl(`files/${source}`)}><code>{source}</code></a></li>)}</ul><ArrowRight class="architecture-arrow" size={20} aria-hidden="true" /></li>
-      <li><h5>Transformation / runtime</h5><p>{example.transform}</p><ul>{example.processors.map(source => <li><a href={siteUrl(`files/${source}`)}><code>{source}</code></a></li>)}</ul><ArrowRight class="architecture-arrow" size={20} aria-hidden="true" /></li>
+      <li><h5>Maintained source</h5><p>{example.source}</p><ul>{example.sources.map(source => <li><a href={sourceUrl(source)}><code>{source}</code></a></li>)}</ul><ArrowRight class="architecture-arrow" size={20} aria-hidden="true" /></li>
+      <li><h5>Transformation / runtime</h5><p>{example.transform}</p><ul>{example.processors.map(source => <li><a href={sourceUrl(source)}><code>{source}</code></a></li>)}</ul><ArrowRight class="architecture-arrow" size={20} aria-hidden="true" /></li>
       <li><h5>Delivered result</h5><p>{example.result}</p><a href={outputUrl(example.output)}>{example.outputLabel}</a></li>
     </ol>
     <dl class="architecture-context"><dt>Update trigger</dt><dd>{example.trigger}</dd><dt>Important distinction</dt><dd>{example.boundary}</dd></dl>
@@ -30,7 +33,7 @@ const outputUrl = (value: string) => value.startsWith('https://') ? value : site
     <div class="architecture-table" role="region" aria-label="Architecture overview" tabindex="0"><table>
       <caption>Maintained sources, processing, results, and update triggers</caption>
       <thead><tr><th>Output / Sources</th><th>Processing / Result</th><th>Update trigger</th></tr></thead>
-      <tbody>{architectureExamples.map(example => <tr><th scope="row">{example.label}<ul>{example.sources.map(source => <li><a href={siteUrl(`files/${source}`)}>{source}</a></li>)}</ul></th><td>{example.transform}<p>{example.result}</p><p>{example.boundary}</p><a href={outputUrl(example.output)}>{example.outputLabel}</a></td><td>{example.trigger}</td></tr>)}</tbody>
+      <tbody>{architectureExamples.map(example => <tr><th scope="row">{example.label}<ul>{example.sources.map(source => <li><a href={sourceUrl(source)}>{source}</a></li>)}</ul></th><td>{example.transform}<p>{example.result}</p><p>{example.boundary}</p><a href={outputUrl(example.output)}>{example.outputLabel}</a></td><td>{example.trigger}</td></tr>)}</tbody>
     </table></div>
   </details>
 </section>
