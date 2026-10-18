@@ -66,6 +66,8 @@ The 12-chapter reading order covers information architecture at chapter 6 and wo
 
 Workflow source links open the maintained files on GitHub. The Pages artifact upload excludes `.github`, so links under `/files/.github/` would return 404 even when the local build contains those files. The content tests reject these unavailable Pages paths.
 
+The production build uses `astro build --force` to regenerate cached Markdown as well as components. A change to a rendering plugin must reach every chapter even when its Markdown source is unchanged; restoring an older content cache must not preserve obsolete URLs.
+
 Chapter 11 adds a read-only Architecture Explorer through the `architecture-explorer` marker. Its five curated paths in `src/lib/architecture.ts` are checked at build time against existing files and the public source-file selection in `repositoryFiles()`. Only selected implementation files are exposed, not the entire site directory. `ArchitectureExplorer.astro` supplies a static table; `architecture-controller.ts` adds tabs with arrow, Home, and End navigation. Style it in `src/styles/architecture-explorer.css`.
 
 The architecture component never requests APIs, saves data, or starts workflows. Its PDF path leads to workflow artifacts, not a public book. Its dashboard path distinguishes published snapshots from optional live retrieval. The nine-slide `lab-architecture` deck and notes use the existing presentation pipeline and Pages deployment. Chapters 10 and 11 remain in review. Content, learning, and homepage tests cover source links, quiz mapping, the explorer, and deck structure.

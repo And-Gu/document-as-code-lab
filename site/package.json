@@ -7,7 +7,7 @@
     "predev": "node scripts/growth-report.mjs && node scripts/operational-snapshot.mjs",
     "dev": "astro dev",
     "prebuild": "node scripts/growth-report.mjs && node scripts/operational-snapshot.mjs",
-    "build": "astro build",
+    "build": "astro build --force",
     "preview": "astro preview",
     "check": "astro check",
     "test:learning": "node scripts/test-learning.mjs",
