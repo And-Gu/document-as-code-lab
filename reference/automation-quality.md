@@ -156,6 +156,23 @@ Use the [feature register](../data/features.json) to record capability progress 
 
 ## Bring It Back to Your Own Work
 
+### Plan a First Increment
+
+Choose information that changes often, has several consumers, or needs repetitive checks. Start with one useful outcome rather than converting an entire archive or building a platform before testing a real need.
+
+| Decision | Question |
+| --- | --- |
+| Information | Which maintained item will you start with? |
+| Owner | Who is accountable for its meaning and updates? |
+| Consumer | Who needs the result? |
+| Output | Which useful view will you generate first? |
+| Initial check | What error should the process detect? |
+| Evidence | What observable improvement would justify continuing? |
+
+Review the plan with the owner and consumer. Name who maintains the templates, checks, and publishing process, and who handles failures. Keep access boundaries and review responsibilities clear, including for AI-assisted changes. Offer accessible editors, examples, and support so contribution does not depend on developer skills alone.
+
+Compare update effort, defects found, or report preparation time before extending the workflow. Commit and file counts alone do not demonstrate value. Temporary notes and one-off work may not need this structure; keep authoritative information in existing controlled systems where they fit the task better.
+
 Return to the information item you chose in chapter 1. You can now describe its owner, source, metadata, review process, useful views, AI context, and publication needs. Choose one repeated step to improve and one check that would make the result more trustworthy.
 
 Document-as-code is not a requirement to replace every familiar application. It is a way to make information and the processes around it easier to inspect, reuse, and develop. Start with a manageable improvement, learn from the people using it, and let the tools grow with the work.

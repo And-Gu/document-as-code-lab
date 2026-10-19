@@ -192,7 +192,7 @@ List stale links, missing owners, and unverified completion claims.
 Do not close issues or mark capabilities complete without approval.
 ```
 
-The rules, scripts, and agent instructions are part of the team's maintained tools. As the work changes, the team can improve them too. Chapter 12 will develop this automation further.
+The rules, scripts, and agent instructions are part of the team's maintained tools. As the work changes, the team can improve them too. The [automation and quality guide](automation-quality.md) develops these practices further.
 
 ## Try It: Connect a Measure to an Action
 

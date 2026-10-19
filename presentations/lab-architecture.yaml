@@ -119,5 +119,5 @@ slides:
       - "Add structure, relationships, and checks where useful"
       - "Automate repeatable work; review meaningful changes"
       - "Let the tools follow the need, not the other way around"
-    sources: [docs/01-introduction.md, docs/11-beyond-github.md, docs/12-automation.md]
+    sources: [docs/01-introduction.md, docs/11-beyond-github.md]
     notes: "End by returning to the tutorial's core distinction: document-as-code is not primarily changing the editor or file format. The objective is working with reliable maintained information across multiple outputs and tasks."

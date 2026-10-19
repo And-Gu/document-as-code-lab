@@ -61,7 +61,7 @@ A local working copy lets you edit files and run the processor on your computer.
 
 GitHub's file editor records changes through a commit dialog. It does not run this project's record validator merely because you save a schema or record. Follow [GitHub's editing guide](https://docs.github.com/en/repositories/working-with-files/managing-files/editing-files) and use a branch for proposed changes.
 
-For example, removing `proposed` from the schema does not update existing records. Those records fail validation the next time the processor runs against the changed schema. Review rule changes together with affected records, templates, and processing code. [Chapter 12](../docs/12-automation.md) explains how a workflow can run these checks.
+For example, removing `proposed` from the schema does not update existing records. Those records fail validation the next time the processor runs against the changed schema. Review rule changes together with affected records, templates, and processing code. [Chapter 10](../docs/10-publishing.md) explains how a workflow can run these checks.
 
 ### Keep Links Working
 

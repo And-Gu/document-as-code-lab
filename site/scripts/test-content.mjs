@@ -7,9 +7,9 @@ import { parse as parseYaml } from 'yaml';
 
 const root = fileURLToPath(new URL('../../', import.meta.url));
 const dist = path.join(root, 'site/dist');
-const expected = ["01-introduction","github-workspace","02-project-growth","03-markdown","03a-structured-content","information-architecture","processing-information","04-ai-native","05-images","08-publishing","09-beyond-github","10-automation"];
-const slugs = ["01-introduction","02-github-workspace","03-project-growth","04-markdown","05-structured-content","06-information-architecture","07-processing","08-ai-native","09-images","10-publishing","11-beyond-github","12-automation"];
-assert.equal((await readdir(path.join(root, 'docs'))).filter(name => name.endsWith('.md')).length, 12);
+const expected = ["01-introduction","github-workspace","02-project-growth","03-markdown","03a-structured-content","information-architecture","processing-information","04-ai-native","05-images","08-publishing","09-beyond-github"];
+const slugs = ["01-introduction","02-github-workspace","03-project-growth","04-markdown","05-structured-content","06-information-architecture","07-processing","08-ai-native","09-images","10-publishing","11-beyond-github"];
+assert.equal((await readdir(path.join(root, 'docs'))).filter(name => name.endsWith('.md')).length, 11);
 for (const [index, slug] of slugs.entries()) {
   const source = await readFile(path.join(root, `docs/${slug}.md`), 'utf8');
   const front = source.match(/^---\n([\s\S]*?)\n---\n/);
@@ -61,8 +61,8 @@ for (const file of files) {
 assert.deepEqual(errors, []);
 for (const [old, target] of Object.entries({
   '10-git-review': '02-github-workspace',
-  '11-publishing': '10-publishing', '12-beyond-github': '11-beyond-github', '13-automation': '12-automation',
-  '12-publishing': '10-publishing', '13-beyond-github': '11-beyond-github', '14-automation': '12-automation',
+  '11-publishing': '10-publishing', '12-beyond-github': '11-beyond-github',
+  '12-publishing': '10-publishing', '13-beyond-github': '11-beyond-github',
 })) {
   const redirect = await readFile(path.join(dist, 'chapters', old, 'index.html'), 'utf8');
   assert.ok(redirect.includes(`/document-as-code-lab/chapters/${target}/`), `Missing redirect: ${old}`);
@@ -71,4 +71,19 @@ for (const old of ['10-quality-checks', '11-quality-checks']) {
   const redirect = await readFile(path.join(dist, 'chapters', old, 'index.html'), 'utf8');
   assert.ok(redirect.includes('/document-as-code-lab/materials/reference/automation-quality/'), `Missing quality reference redirect: ${old}`);
 }
+for (const old of ['12-automation', '13-automation', '14-automation']) {
+  const redirect = await readFile(path.join(dist, 'chapters', old, 'index.html'), 'utf8');
+  assert.ok(redirect.includes('/document-as-code-lab/materials/reference/automation-quality/#plan-a-first-increment'), `Missing adoption reference redirect: ${old}`);
+  assert.ok(!redirect.includes('data-learning-quiz'), 'A retired URL is not another chapter');
+}
+const lastChapter = parseHtml(await readFile(path.join(dist, 'chapters/11-beyond-github/index.html'), 'utf8'));
+function findNodes(node, predicate) {
+  return [...(predicate(node) ? [node] : []), ...(node.childNodes ?? []).flatMap(child => findNodes(child, predicate))];
+}
+const attribute = (node, name) => node.attrs?.find(attr => attr.name === name)?.value;
+const navigation = findNodes(lastChapter, node => attribute(node, 'aria-label') === 'Chapter navigation')[0];
+const navLinks = findNodes(navigation, node => node.tagName === 'a');
+assert.equal(navLinks.length, 1, 'The final chapter has only a previous link');
+assert.equal(attribute(navLinks[0], 'href'), '/document-as-code-lab/chapters/10-publishing/');
+assert.ok(!findNodes(lastChapter, node => node.tagName === 'a').some(node => /\/chapters\/(12|13|14)-automation\//.test(attribute(node, 'href') ?? '')));
 console.log(`Stable chapter IDs, maintained Mermaid sources, and ${links} internal links/assets across ${files.length} HTML pages passed.`);

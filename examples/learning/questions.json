@@ -294,28 +294,5 @@
       "correctIndex": 0,
       "feedback": "Knowledge grounding is different from file editing. Office tools or configured actions and flows need appropriate permissions; OneDrive and SharePoint are not Git."
     }
-  ],
-  "chapter-12": [
-    {
-      "type": "single_select",
-      "question": "Which is a sensible first adoption target?",
-      "options": [
-        "One useful output with accountable sources",
-        "Converting every archive at once",
-        "Counting all available file types"
-      ],
-      "correctIndex": 0,
-      "feedback": "A focused useful result permits early feedback and improvement."
-    },
-    {
-      "type": "true_false",
-      "question": "Document-as-Code adoption can require changes to team responsibilities.",
-      "options": [
-        "True",
-        "False"
-      ],
-      "correctIndex": 0,
-      "feedback": "Maintaining rules, pipelines, and sources requires explicit ownership."
-    }
   ]
 }

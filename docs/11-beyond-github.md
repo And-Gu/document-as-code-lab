@@ -125,6 +125,10 @@ The deciding question is not *Which product owns the file?* It is **Can people a
 
 **Key point:** This lab combines sources, software, and publishing into one reviewable system. The tools can change; the principles of ownership, accessibility, processing, and traceability do not.
 
-**Next:** [Chapter 12](12-automation.md) helps you choose a manageable first application in your own work.
+## Start with one useful outcome
+
+Choose one recurring information problem, an accountable owner, and a consumer who needs the result. Build a small, complete path from maintained sources through review and checks to one useful output. Agree who maintains the information, who reviews it, and who maintains the processing rules; these can be different people.
+
+Measure whether the result reduces update effort, catches errors, or helps the consumer make a decision. Extend the workflow when the benefit justifies the maintenance, learning, and support it requires. The [first-increment exercise](../reference/automation-quality.md#plan-a-first-increment) helps you turn that choice into a practical plan.
 
 <!-- interactive: chapter-quiz -->

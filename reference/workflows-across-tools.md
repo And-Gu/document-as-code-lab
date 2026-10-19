@@ -146,4 +146,4 @@ Use the fictional [access procedure](../examples/onboarding-showcase/access.md),
 
 **Keep:** the source register, task brief, review observations, and environment details. These show which practices transferred successfully and which still rely on manual work.
 
-The next chapter, [Automation, Quality, and Further Experiments](../docs/12-automation.md), returns to the repository to make repeated checks more reliable and choose the next improvements deliberately.
+The [automation and quality guide](automation-quality.md) explains how to make repeated checks reliable and includes a [first-increment exercise](automation-quality.md#plan-a-first-increment) for choosing a manageable improvement.

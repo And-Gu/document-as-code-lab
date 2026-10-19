@@ -77,7 +77,7 @@ slides:
       - { label: Transform, detail: "Assemble a view for its audience" }
     outputs: [Review queue, Handbook, AI context]
     caption: "A successful run establishes only what its configured checks cover."
-    sources: [docs/07-processing.md, docs/12-automation.md]
+    sources: [docs/07-processing.md, docs/10-publishing.md]
     notes: "Distinguish a valid record, accurate instructions, and an approved publication. Automation can detect a missing owner or an unsupported status, but it cannot establish every semantic claim. A build may succeed while the selected sources are still drafts."
   - id: ai-context
     type: comparison
@@ -95,5 +95,5 @@ slides:
     title: Try one complete information flow
     message: Choose a source, a consumer, and one useful output
     bullets: ["Name the owner and review responsibility", "Try the source and metadata labs", "Inspect the result and improve the rules"]
-    sources: [docs/01-introduction.md, docs/05-structured-content.md, docs/12-automation.md]
+    sources: [docs/01-introduction.md, docs/05-structured-content.md, docs/11-beyond-github.md]
     notes: "Return to the tutorial homepage for the chapter groups and working labs. The goal is maintainable, traceable, reusable, processable information, not a change of editor. Start with one recurring information problem before building a broader platform."
