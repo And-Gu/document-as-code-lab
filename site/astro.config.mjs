@@ -4,6 +4,7 @@ import repositoryLinks from './plugins/repository-links.mjs';
 import chapterTitle from './plugins/chapter-title.mjs';
 import growthWidget from './plugins/growth-widget.mjs';
 import exampleSections from './plugins/example-sections.mjs';
+import chapterSemantics from './plugins/chapter-semantics.mjs';
 
 const base = '/document-as-code-lab';
 
@@ -32,6 +33,6 @@ export default defineConfig({
     '/chapters/11-quality-checks/': `${base}/materials/reference/automation-quality/`,
   },
   markdown: {
-    processor: unified({ rehypePlugins: [[repositoryLinks, { base }], chapterTitle, growthWidget, exampleSections] }),
+    processor: unified({ rehypePlugins: [[repositoryLinks, { base }], chapterTitle, growthWidget, exampleSections, chapterSemantics] }),
   },
 });

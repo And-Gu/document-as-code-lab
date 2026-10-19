@@ -3,6 +3,7 @@ import { getCollection, render } from 'astro:content';
 import Documentation from '../../layouts/Documentation.astro';
 import { siteUrl } from '../../lib/urls';
 import BudgetTable from '../../components/BudgetTable.astro';
+import { getChapters, chapterTitle } from '../../lib/chapters';
 
 export async function getStaticPaths() {
   return (await getCollection('materials')).map((material) => ({
@@ -13,9 +14,24 @@ export async function getStaticPaths() {
 const { material } = Astro.props;
 const { Content, headings } = await render(material);
 const title = headings.find((heading) => heading.depth === 1)?.text ?? material.id;
+const relatedNumbers: Record<string, number[]> = {
+  'reference/review-and-collaboration': [2],
+  'reference/growth-measurement': [3],
+  'reference/record-processing': [5, 7],
+  'reference/visual-sources': [6, 9],
+  'reference/ai-context-and-agents': [8],
+  'reference/project-knowledge': [8],
+  'reference/automation-quality': [10, 11],
+  'reference/publishing-workflows': [10],
+  'reference/workflows-across-tools': [11],
+  'presentations/README': [11],
+  'site/README': [11],
+};
+const relatedChapters = (await getChapters()).filter(chapter => relatedNumbers[material.id]?.includes(chapter.data.chapter_number));
 ---
 
 <Documentation title={title}>
   <p class="chapter-meta"><a href={siteUrl(`files/${material.id}.md`)}>Source file</a></p>
+  {relatedChapters.length > 0 && <p class="material-return">Return to the tutorial: {relatedChapters.map((chapter, index) => <>{index > 0 && ' · '}<a href={siteUrl(`chapters/${chapter.id}/`)}>Chapter {chapter.data.chapter_number}: {chapterTitle(chapter)}</a></>)}</p>}
   <article><Content />{material.id === 'reference/dashboards-and-work-tracking' && <BudgetTable />}</article>
 </Documentation>

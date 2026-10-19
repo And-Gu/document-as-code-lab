@@ -1,0 +1,53 @@
+[
+  {
+    "id": "metadata-owner-validity",
+    "chapter": 5,
+    "marker": "scenario-check-metadata",
+    "heading": "Would this metadata pass validation?",
+    "context": "The schema requires an id, a nonempty owner, and a status of draft or approved. The record contains id: PROC-003, owner: unknown-team, and status: draft.",
+    "question": "Can this record pass the configured schema check?",
+    "choices": [
+      { "id": "yes", "label": "Yes, if those are the only applicable schema constraints." },
+      { "id": "no", "label": "No, the schema automatically verifies that the team exists." },
+      { "id": "approval", "label": "Only after the procedure is approved." }
+    ],
+    "correctChoice": "yes",
+    "hint": "Does the schema check the owner's meaning, or only that it contains text?",
+    "feedback": "The schema can accept a nonempty owner value without knowing whether it names the correct team. A valid field does not prove an accurate or approved procedure.",
+    "takeaway": "Structural validation, factual accuracy, and approval are different checks."
+  },
+  {
+    "id": "policy-change-impact",
+    "chapter": 6,
+    "marker": "scenario-check-traceability",
+    "heading": "Does a related procedure need to change?",
+    "context": "A security policy changes. The Access and Equipment procedures both explicitly reference it, but neither procedure has been edited.",
+    "question": "What is justified by those recorded relationships?",
+    "choices": [
+      { "id": "rewrite", "label": "Both procedures must be rewritten automatically." },
+      { "id": "review", "label": "Review both procedures for possible impact." },
+      { "id": "ignore", "label": "Wait until someone edits the procedures before inspecting the links." }
+    ],
+    "correctChoice": "review",
+    "hint": "A relationship identifies where to investigate; it does not determine new wording.",
+    "feedback": "The references identify likely review candidates. They do not prove that either procedure is incorrect or must change.",
+    "takeaway": "Traceability supports impact analysis; it does not replace judgment."
+  },
+  {
+    "id": "agent-knowledge-locations",
+    "chapter": 8,
+    "marker": "scenario-check-agent-knowledge",
+    "heading": "Where should this information belong?",
+    "context": "A team decides that requirement identifiers stay stable across revisions to preserve traceability to tests and decisions.",
+    "question": "What is the most maintainable arrangement?",
+    "choices": [
+      { "id": "agents-all", "label": "Put every rule and its full history into AGENTS.md." },
+      { "id": "separate", "label": "Maintain the identifier rule in the information model, its rationale in a decision record, and link to both from agent instructions." },
+      { "id": "repeat", "label": "Repeat the same rule and rationale in each requirement file." }
+    ],
+    "correctChoice": "separate",
+    "hint": "How can one updated rule remain authoritative without losing the reasons behind it?",
+    "feedback": "The information model defines the current rule; a decision record explains its rationale; AGENTS.md points the agent to these maintained sources and relevant checks.",
+    "takeaway": "Agent instructions help locate project knowledge; they should not become a competing source of truth."
+  }
+]

@@ -104,7 +104,9 @@ Open the public [Actions page](https://github.com/And-Gu/document-as-code-lab/ac
 
 A failed build does not establish that a new edition is ready to publish. A successful build establishes only that configured checks passed; it does not approve the meaning of the information. Likewise, a finished job may still need inspection of the actual page.
 
-The [automation and quality reference](../reference/automation-quality.md) covers further checks, runner permissions, failure handling, and stale outputs. [Chapter 11](11-beyond-github.md) brings the entire site architecture together.
+> **Explore further:** What does a runner execute, and what remains after failure? The [automation and quality guide](../reference/automation-quality.md) follows workflow steps, permissions, retained artifacts, and stale outputs. No local setup is needed to inspect the public runs. The [publishing guide](../reference/publishing-workflows.md) covers output-specific build choices.
+
+[Chapter 11](11-beyond-github.md) brings the entire site architecture together.
 
 **Key point:** GitHub Actions makes information work repeatable. GitHub Pages distributes the finished result. Neither replaces responsibility for the sources and their meaning.
 

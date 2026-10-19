@@ -68,6 +68,9 @@ const controllerSource = await readFile('src/lib/contract-controller.ts', 'utf8'
 assert.doesNotMatch(controllerSource, /\bfetch\s*\(|XMLHttpRequest|localStorage|sessionStorage/, 'Explorer has no external retrieval or persistence');
 assert.equal((html.match(/data-contract-explorer/g) ?? []).length, 1);
 assert.ok(html.includes('id="contract-explorer-widget"'));
+assert.match(html, /data-ce-guide="AMD-001"/);
+assert.ok(html.includes('If proposed amendment AMD-001 were accepted'));
+assert.ok(controllerSource.includes("switchView('impact')"));
 assert.ok(html.includes('Fictional example'));
 assert.ok(html.includes('<noscript>'));
 assert.ok(html.includes('Table alternative to the graph'));

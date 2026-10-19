@@ -64,6 +64,8 @@ Unlike chapter 5's single-file validation, this build processes all three proced
 
 <!-- interactive: processing-lab -->
 
+> **Explore further:** Want to run the actual record processor? The [record-processing guide](../reference/record-processing.md) covers selected inputs, validation failures, and generated results. It is an optional local exercise requiring a checkout, Python, and the listed dependencies.
+
 ## Why this matters
 
 Processing rules are part of the maintained system. **They can be versioned, tested, reviewed, and improved alongside the information they transform.** This is what makes repeated outputs consistent—and makes the process inspectable when something goes wrong.

@@ -19,6 +19,7 @@ const views = [{ id: 'relationships', title: 'Relationships', Icon: Network }, {
     <small>Snapshot built <time datetime={data.builtAt}>{data.builtAt}</time> · {data.records.length} maintained records</small>
   </header>
   <script type="application/json" data-ce-data set:html={JSON.stringify(data).replaceAll('<', '\\u003c')} />
+  <p class="ce-guided-entry"><button type="button" data-ce-guide={initialChange.id} aria-controls="ce-panel-impact" disabled><GitBranch size={18} aria-hidden="true" />Explore change impact</button></p>
   <div class="ce-tabs" role="tablist" aria-label="Explorer view">
     {views.map(({id, title, Icon}) =>
       <button type="button" role="tab" id={`ce-tab-${id}`} aria-controls={`ce-panel-${id}`} aria-selected={id === 'relationships' ? 'true' : 'false'} tabindex={id === 'relationships' ? 0 : -1} data-ce-view={id} disabled><Icon size={17} />{title}</button>

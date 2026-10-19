@@ -1,7 +1,7 @@
 ---
 id: information-architecture
 chapter_number: 6
-status: approved
+status: in-review
 learning_goal: "Organize information into clear objects and relationships; assess likely impacts of a change."
 visuals:
   - id: information-relationships
@@ -29,7 +29,7 @@ Start with three questions: Who maintains this information? When does it change?
 
 ## Give important items stable identities
 
-A filename helps a person locate a document. A stable identifier helps software and people refer to an information object even if its title changes. For example, `PROC-001` may identify the access procedure, while `ACT-003` identifies the operational security-training activity.
+A filename helps a person locate a document. A stable identifier helps software and people refer to an information object even if its title changes. For example, `PROC-001` may identify the access procedure, while `ACT-003` identifies the system-orientation activity.
 
 ## Connect information with explicit relationships
 
@@ -63,6 +63,8 @@ Suppose the requirement for system access is updated. We can follow relationship
 
 A simple graph is enough to begin. More complex projects may need stronger types, validation rules, ownership, and a way to detect missing or circular references. Introduce that complexity when it solves a real problem.
 
+<!-- interactive: scenario-check-traceability -->
+
 ## Explore: Change impact
 
 Consider changing the wording of REQ-001. Its link identifies PROC-001 as a candidate for review; the procedure's guidance link then identifies ACT-003. A reviewer decides whether either needs an edit. An automated reference check can establish that an ID exists, not whether the relationship is appropriate.
@@ -77,6 +79,8 @@ ACT-001 means system access, ACT-002 means security training, and ACT-003 means 
 
 
 **Key point:** Good information architecture makes change easier to understand. More files and links do not automatically make a better system.
+
+> **Explore further:** How do these relationships become readable diagrams? The [visual-source guide](../reference/visual-sources.md) explains which representations preserve meaning and how to make their outputs accessible. Reading the guide needs no local setup.
 
 **Next:** [Chapter 7](07-processing.md) focuses on processing procedure text and metadata into a handbook and review queue.
 

@@ -99,6 +99,8 @@ As you explore, you will find more than the information itself. The repository a
 
 With suitable permissions, the team can improve these rules alongside the information. An AI agent can use both as context when helping with changes, while people remain responsible for reviewing the results and maintaining the tools.
 
+> **Explore further:** Want to inspect a proposed change? The [collaboration guide](../reference/review-and-collaboration.md) explains diffs, review scope, and approval boundaries. Its optional contribution steps are separate from the browser-first tutorial.
+
 For now, remember the essential relationship: **the repository holds maintained sources; Git records their history; GitHub provides a shared place to work with them.**
 
 <!-- interactive: chapter-quiz -->

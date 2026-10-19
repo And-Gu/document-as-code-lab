@@ -1,0 +1,31 @@
+:root {
+  --chapter-sage: #52644a;
+  --chapter-violet: #716081;
+  --chapter-ochre: #906a26;
+  --chapter-line: #d6ddd3;
+}
+.scenario-check { margin: 1.75rem 0; padding: 1rem 0 1rem 1rem; border-block: 1px solid var(--chapter-line); border-inline-start: 3px solid var(--chapter-violet); min-width: 0; font-size: .94rem; letter-spacing: 0; }
+.scenario-check .scenario-eyebrow { color: #5b486b; font-size: .8rem; font-weight: 650; margin: 0 0 .4rem; }
+.scenario-check h3 { margin: 0; font-size: 1.12rem; }
+.scenario-check fieldset { margin: 1rem 0 .6rem; padding: 0; border: 0; min-width: 0; }
+.scenario-check legend { font-weight: 650; margin-bottom: .6rem; }
+.scenario-check label { display: flex; gap: .65rem; padding: .6rem .5rem; cursor: pointer; border-bottom: 1px solid #e7eae5; }
+.scenario-check label:has(input:checked) { background: #f1eef5; }
+.scenario-check input { flex: 0 0 auto; margin: .35rem 0 0; accent-color: var(--chapter-violet); }
+.scenario-check summary { cursor: pointer; color: #5b486b; }
+.scenario-actions { display: flex; flex-wrap: wrap; gap: .75rem; margin: .9rem 0; }
+.scenario-actions button { display: inline-flex; align-items: center; gap: .45rem; min-height: 44px; padding: .5rem .75rem; border: 1px solid #9daca0; border-radius: 4px; background: #f0f4ed; color: #30402c; font: inherit; cursor: pointer; }
+.scenario-check :is(input, button, summary):focus-visible { outline: 3px solid var(--chapter-violet); outline-offset: 3px; }
+.scenario-check [data-scenario-feedback]:not(:empty) { margin-top: 1rem; padding: .75rem 1rem; background: #f6f3e9; border-inline-start: 3px solid var(--chapter-ochre); }
+.scenario-check [data-result="correct"]:not(:empty) { background: #eef4eb; border-color: var(--chapter-sage); }
+.scenario-check [data-scenario-feedback] p { margin: .25rem 0 .5rem; }
+.scenario-check [hidden] { display: none !important; }
+.supporting-reference, .source-note { margin: 1.5rem 0; padding: .75rem 1rem; font-size: .94rem; border-inline-start: 3px solid var(--chapter-sage); background: #f5f7f3; }
+.source-note { border-color: var(--chapter-ochre); background: #faf8f1; }
+.material-return { font-size: .875rem; padding-bottom: 1rem; border-bottom: 1px solid var(--chapter-line); }
+.supporting-reference > :first-child, .source-note > :first-child { margin-top: 0; }
+.supporting-reference > :last-child, .source-note > :last-child { margin-bottom: 0; }
+@media (max-width: 600px) {
+  .scenario-check { padding-inline-start: .75rem; }
+  .scenario-check label { padding-inline: .25rem; }
+}

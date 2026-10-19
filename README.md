@@ -6,7 +6,7 @@ The project teaches document-as-code by applying it to itself. It also serves as
 
 ## Status
 
-All 11 chapters have been rewritten. Chapters 2, 3, and 6 are approved; the remaining chapters are in review. Chapters 1 and 4 have returned to review following additions about the approach and source formats. The [Astro reading site is published on GitHub Pages](https://and-gu.github.io/document-as-code-lab/) and reads the original Markdown sources, including diagrams and linked examples. Every chapter has an expandable metadata and Git-history widget. Pull requests run Astro checks and a production build; pushes to `main` build and deploy the website.
+All 11 chapters have been rewritten. Chapters 2 and 3 are approved; the remaining chapters are in review. Chapters 1 and 4 returned to review following additions about the approach and source formats; chapter 6 returns to review for its revised traceability scenario and corrected activity description. The [Astro reading site is published on GitHub Pages](https://and-gu.github.io/document-as-code-lab/) and reads the original Markdown sources, including diagrams and linked examples. Every chapter has an expandable metadata and Git-history widget. Pull requests run Astro checks and a production build; pushes to `main` build and deploy the website.
 
 A runnable onboarding showcase, historical growth reporting, structured-record processing, and record-to-Mermaid generation are also available. Growth reports are generated as GitHub Actions artifacts. Chapter 3 connects source history to traceability and links to the standalone dashboard. Saved growth charts remain fixed historical examples, while the dashboard adds an interactive report measured from committed history during each site build. The [Project Control Center is published on GitHub Pages](https://and-gu.github.io/document-as-code-lab/dashboard/), linked from the chapter menu. It reads published operational snapshots by default, generated on main deployments and hourly, with optional live retrieval and separately labelled growth measurements. Hosted snapshot retrieval, timestamps, issues, pull requests, commits, and all four workflows have been verified. Workflow states describe collection time rather than current live status. The full PDF book, a hands-on workshop deck, and verification of Microsoft-environment exercises remain future work. Chapter approval does not extend to other chapter drafts or fictional example procedures.
 
@@ -63,7 +63,7 @@ Filename prefixes and `chapter_number` metadata give the current reading order. 
 5. [Structure Makes Information Actionable](docs/05-structured-content.md)
 6. [Information Architecture and Traceability](docs/06-information-architecture.md)
 7. [From Sources to Results](docs/07-processing.md)
-8. [AI Needs Context, Not Just Prompts](docs/08-ai-native.md)
+8. [Making Information Usable by AI Agents](docs/08-ai-native.md)
 9. [Information You Can Explore](docs/09-images.md)
 10. [Automating Information with GitHub Actions](docs/10-publishing.md)
 11. [Behind the Lab: How We Built This Tutorial](docs/11-beyond-github.md)
@@ -114,9 +114,13 @@ Word counts measure content volume, not quality. The measurement rules distingui
 
 Further publishing scripts and output-specific configuration will be added as the corresponding exercises are implemented.
 
+## Tutorial Design
+
+The [v1.2 specification register](spec/tutorial/README.md) links the reusable template, lab specification, original audit, and dated decisions. It records design intent separately from implementation and verification. The [project source map](reference/project-knowledge.md) locates authoritative rules and sources. In-context scenario checks in chapters 5, 6, and 8 complement the existing labs and quizzes without scoring or storing answers.
+
 ## Next Milestone
 
-Review the complete first draft and published reading site with readers, verify the remaining environment-dependent exercises, and develop the PDF, presentation, and dashboard pipelines. Keep the capability register aligned with verification evidence.
+Review the chapter text and local experience with the tutorial owner, verify the remaining environment-dependent exercises, and develop the PDF, presentation, and dashboard pipelines. Keep the capability register aligned with verification evidence.
 
 ## Licensing
 

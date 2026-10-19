@@ -8,6 +8,9 @@
 .ce-tabs button[aria-selected="true"] { background: #e8f1eb; border-color: #385b48; font-weight: 600; }
 .contract-explorer :is(button,select,a):focus-visible { outline: 3px solid #9e730d; outline-offset: 3px; }
 .ce-summary { min-height: 1.5rem; padding: .6rem 0; border-bottom: 1px solid #dce1df; }
+.ce-guided-entry { margin: .8rem 0; }
+.ce-guided-entry button { display: inline-flex; align-items: center; gap: .45rem; min-height: 44px; max-width: 100%; padding: .5rem .75rem; font: inherit; font-weight: 600; color: #374b2f; background: #eef3eb; border: 1px solid #87977d; border-radius: 4px; cursor: pointer; }
+.ce-guided-entry button:disabled { display: none; }
 .ce-control { display: flex; flex-direction: column; gap: .25rem; font-weight: 600; }
 .ce-control select { width: 100%; min-width: 0; padding: .5rem; font: inherit; color: inherit; background: #fff; border: 1px solid #aebbb4; border-radius: 4px; }
 .ce-filters { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; }

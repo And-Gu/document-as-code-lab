@@ -8,9 +8,9 @@ import '../styles/home.css';
 const chapters = await getChapters();
 const groups = [
   { start: 1, end: 4, title: 'Working with sources', description: 'Understand the approach, the workspace, history, and readable source files.', icon: BookOpen, tone: 'sage' },
-  { start: 5, end: 9, title: 'Making information useful', description: 'Add structure, relationships, processing, AI context, and visual representations.', icon: Network, tone: 'violet' },
-  { start: 10, end: 10, title: 'Automating information', description: 'Run checks, build outputs, and distinguish workflow artifacts from website publication.', icon: Workflow, tone: 'ochre' },
-  { start: 11, end: 11, title: 'Applying the approach', description: 'Explore this lab’s architecture, compare environments, and choose a manageable first implementation.', icon: Compass, tone: 'sage' },
+  { start: 5, end: 7, title: 'Making information processable', description: 'Add metadata, meaningful relationships, validation, and repeatable processing.', icon: Network, tone: 'violet' },
+  { start: 8, end: 9, title: 'Using information in new ways', description: 'Prepare project knowledge for agents and explore connected information.', icon: Compass, tone: 'sage' },
+  { start: 10, end: 11, title: 'Making it a working environment', description: 'Automate checks and publication, inspect the lab architecture, and compare environments.', icon: Workflow, tone: 'ochre' },
 ];
 const packs = (await getPresentations()).filter((deck) => ['information-model', 'information-value', 'lab-architecture'].includes(deck.slug));
 const stages = [

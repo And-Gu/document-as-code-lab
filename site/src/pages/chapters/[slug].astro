@@ -23,7 +23,7 @@ const { Content, headings } = await render(chapter);
     <h1 id={headings.find((heading) => heading.depth === 1)?.slug ?? chapter.id}>{chapterTitle(chapter)}</h1>
     <ChapterInformation chapter={chapter} />
     <Content />
-    {chapter.data.chapter_number <= 11 && <ChapterLearning chapterNumber={chapter.data.chapter_number} />}
+    {chapter.data.chapter_number <= 11 && <ChapterLearning chapterNumber={chapter.data.chapter_number} chapterSource={`docs/${chapter.id}.md`} />}
   </article>
   <div class="chapter-navigation" aria-label="Chapter navigation">
     {previous && <a href={siteUrl(`chapters/${previous.id}/`)}>Previous: {chapterTitle(previous)}</a>}

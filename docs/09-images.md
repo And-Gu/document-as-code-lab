@@ -68,6 +68,8 @@ For example, if AMD-001 is **proposed**, the view must not quietly present it as
 
 The explorer is not a new system of record. Selection and filtering change the view, not the maintained files. Source edits appear after the site is rebuilt.
 
+**If proposed amendment AMD-001 were accepted, which deliveries deserve review?** Start with **Explore change impact** below, then inspect the directly linked delivery and follow the dependency to a further review candidate. Without JavaScript, read the Change impact list and linked records; the same recorded paths remain available.
+
 <!-- interactive: contract-explorer -->
 
 ## Why this is more than a dashboard
@@ -84,15 +86,7 @@ An attractive visualization can still mislead. A line between two objects must m
 
 When a source changes, generated views should refresh through a defined process. Users should be able to inspect which source and revision produced the view. If a proposed change may affect other items, treat them as review candidates, not automatically approved updates.
 
-For practical guidance on Mermaid, SVG, generated diagrams, and accessible visuals, see the [visual-source reference](../reference/visual-sources.md).
-
-## Try it: Follow the impact
-
-In the Contract Explorer, choose **AMD-001**, then switch from **Relationships** to **Change impact**. Without the interactive view, follow the same connections in the record table and linked sources.
-
-Identify the directly linked delivery and the dependent delivery. Explain which relationships are recorded and which items merely deserve further review. Check whether the amendment is proposed or effective.
-
-**Expected result:** You can answer a new question from the same information without editing a presentation or duplicating the contract records.
+> **Explore further:** Want to create reusable diagrams and views? The [visual-source guide](../reference/visual-sources.md) explains Mermaid, SVG, raster images, source provenance, and accessible alternatives. Reading needs no setup; optional rendering examples identify their tools.
 
 **Key point:** Document-as-Code becomes more powerful when information is not only published, but also **available to explore, connect, and reuse**.
 

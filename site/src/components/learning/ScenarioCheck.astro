@@ -1,0 +1,38 @@
+---
+import { Check, RotateCcw } from '@lucide/astro';
+import type { ScenarioCheck } from '../../lib/scenario-checks';
+interface Props { scenario: ScenarioCheck; }
+const { scenario } = Astro.props;
+const id = scenario.id;
+---
+<section class="scenario-check" data-scenario-check={id} aria-labelledby={`${id}-title`}>
+  <p class="scenario-eyebrow">Consider the situation</p>
+  <h3 id={`${id}-title`}>{scenario.heading}</h3>
+  <p>{scenario.context}</p>
+  <script type="application/json" data-scenario-data set:html={JSON.stringify(scenario).replaceAll('<', '\\u003c')} />
+  <form hidden>
+    <fieldset>
+      <legend>{scenario.question}</legend>
+      {scenario.choices.map(choice => <label><input type="radio" name={id} value={choice.id} /><span>{choice.label}</span></label>)}
+    </fieldset>
+    {scenario.hint && <details data-scenario-hint><summary>Show hint</summary><p>{scenario.hint}</p></details>}
+    <div class="scenario-actions">
+      <button type="submit"><Check size={18} aria-hidden="true" />Check answer</button>
+      <button type="reset"><RotateCcw size={18} aria-hidden="true" />Try again</button>
+    </div>
+    <div data-scenario-feedback role="status" aria-live="polite" aria-atomic="true"></div>
+  </form>
+  <div data-scenario-fallback>
+    <p><strong>{scenario.question}</strong></p>
+    <ul>{scenario.choices.map(choice => <li>{choice.label}</li>)}</ul>
+    <details><summary>Read the explanation</summary>
+      <p><strong>{scenario.choices.find(choice => choice.id === scenario.correctChoice)!.label}</strong></p>
+      <p>{scenario.feedback}</p><p>{scenario.takeaway}</p>
+    </details>
+  </div>
+</section>
+<script>
+  import { initScenarioChecks } from '../../lib/scenario-controller';
+  initScenarioChecks();
+  document.addEventListener('astro:page-load', initScenarioChecks);
+</script>

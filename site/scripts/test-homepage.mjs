@@ -14,7 +14,7 @@ const groups = all(home, node => hasClass(node, 'learning-path'));
 assert.equal(groups.length, 4);
 assert.equal(all(home, node => node.tagName === 'h1').length, 1);
 const groupLinks = groups.map(group => all(group, node => node.tagName === 'a').map(node => attr(node, 'href')));
-assert.deepEqual(groupLinks.map(links => links.length), [4, 5, 1, 1]);
+assert.deepEqual(groupLinks.map(links => links.length), [4, 3, 2, 2]);
 assert.equal(new Set(groupLinks.flat()).size, 11);
 assert.ok(!groupLinks.flat().some(link => /\/(12|13|14)-automation\//.test(link)));
 assert.ok(!groupLinks.flat().some(link => link.includes('10-git-review')));

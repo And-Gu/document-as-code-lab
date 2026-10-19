@@ -149,6 +149,13 @@ export function initContractExplorers() {
       });
     });
     recordSelect.addEventListener('change', () => select(recordSelect.value));
+    root.querySelector<HTMLButtonElement>('[data-ce-guide]')!.addEventListener('click', event => {
+      const id = (event.currentTarget as HTMLButtonElement).dataset.ceGuide!;
+      recordSelect.value = id;
+      root.querySelector<HTMLSelectElement>('[data-ce-change]')!.value = id;
+      switchView('impact');
+      root.querySelector<HTMLButtonElement>('[data-ce-view="impact"]')!.focus();
+    });
     for (const name of ['project', 'agreement']) root.querySelector(`[data-ce-${name}]`)!.addEventListener('change', showCommitments);
     root.querySelector('[data-ce-change]')!.addEventListener('change', showImpact);
     root.querySelector<HTMLElement>('[data-ce-fallback]')!.hidden = true;

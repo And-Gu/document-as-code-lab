@@ -76,6 +76,8 @@ An authoring [template](../examples/structured-content/templates/requirement.md)
 
 The linked template and schema are examples for requirement records, such as REQ-014. They are not configured to check the onboarding procedures shown here. The editor exercise below uses a separate schema for procedure metadata.
 
+<!-- interactive: scenario-check-metadata -->
+
 ## Concepts so far
 
 | Concept | Meaning | Example |
@@ -117,7 +119,7 @@ Edits stay in your browser. The check validates this file's metadata only; it do
 
 <!-- interactive: metadata-lab -->
 
-For a runnable requirement example, inspect [REQ-014](../examples/structured-content/records/REQ-014.md) and the [template and record guide](../reference/record-processing.md#templates-and-requirements). Those records are also used in later AI and diagram exercises.
+> **Explore further:** Want to run validation on maintained requirement records? The [template and record guide](../reference/record-processing.md#templates-and-requirements) follows [REQ-014](../examples/structured-content/records/REQ-014.md) through the local processor. Reading needs no setup; running it requires a checkout, Python, and the linked dependencies.
 
 ## What to remember
 

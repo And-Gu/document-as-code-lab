@@ -20,6 +20,12 @@ HTML slide decks are listed under `/presentations/`. YAML in `../presentations/`
 
 The dashboard reference guide's `<!-- interactive: budget-table -->` marker mounts `BudgetTable.astro`. It bundles the official `@rhpaiva/cssv` 0.5.0 renderer (MIT) and reads `examples/dashboards/department-budget.cssv` at build time. The file supplies data and table CSS; `src/styles/budget-table.css` styles the surrounding controls. Our component adds sorting, filtering, and totals, not cell editing or formula evaluation. Only reviewed repository content is loaded. The Markdown table remains as a no-JavaScript/error fallback; keep its values synchronized with the example file. No third-party CDN is required.
 
+Chapters 5, 6, and 8 add optional in-context scenario checks from `examples/learning/scenario-checks.json`, validated against its JSON Schema at build time. `ScenarioCheck.astro` shares quiz configuration checks but has no score, tracking, persistence, or network calls. Answers appear after Check answer, with a hint and retry; without JavaScript, a collapsed explanation remains readable. Explicit `scenario-check-metadata`, `scenario-check-traceability`, and `scenario-check-agent-knowledge` markers place the checks near their concepts. Style these, source notes, and reference invitations through `src/styles/chapter-learning.css`. Run `npm run test:scenarios` after building.
+
+Chapter 9 adds an **Explore change impact** action that selects the existing amendment and impact tab, with the same records and traversal as free exploration. No separate guided dataset is maintained.
+
+The [tutorial specification register](../spec/tutorial/README.md) describes the four curriculum groups (1–4, 5–7, 8–9, 10–11) and owner-review gates. It is available under `/materials/spec/tutorial/README/`, outside chapter numbering. The [project source map](../reference/project-knowledge.md) links authoritative information homes rather than duplicating their rules.
+
 All 11 chapters add quizzes from `../examples/learning/questions.json`, mapped to the existing Quiz API. Chapter 4 adds its Markdown playground at the chapter's practice marker. These are website-only enhancements: the chapter stays in `docs/04-markdown.md`, with no MDX conversion or duplicated chapter. `src/components/learning/ChapterLearning.astro` selects the practice content and positions the tools; reusable components are in the same folder. Style them through `src/styles/learning.css`. The initial components were adapted from the supplied `document-as-code-learning.zip`. The chapter rewrite package supplies the current quiz questions. Marker names (`onboarding-lab`, `markdown-playground`, `metadata-lab`, `processing-lab`, `chapter-quiz`) mount components without MDX; the renderer creates hosts and `ChapterLearning.astro` moves the corresponding components into them.
 
 The playground uses bundled `markdown-it` with raw HTML and images disabled, and rejects unsafe link schemes. It does not send input to a server, load learner-entered images, or save edits. Chapter 5 reuses this editor with a practice copy of Contacts and `examples/learning/procedure.schema.json`. The bundled `yaml` parser reads the frontmatter; Ajv validates it against that JSON Schema only when Validate metadata is selected. Editing marks the previous check as out of date. The prose preview excludes frontmatter, and malformed or duplicate YAML fields produce errors. The check covers required fields, types, identifier format, allowed statuses, and extra fields, not human approval, prose accuracy, relationships, or cross-file ID uniqueness. Reset restores and checks the initial example. The source, preview, schema, and initial check remain readable without JavaScript. Quiz questions are rendered as accessible fieldsets; single-choice, multiple-choice, and true/false types are supported. Answers are included in the public page, so this is a practice aid, not a secure examination. Responses are not persisted or tracked. `Quiz.astro` requires a unique `id` per instance. Run `npm run test:learning` after building to check scoring, configuration validation, Markdown safety, YAML parsing, schema validation, and lesson mounting; also inspect editing, reset, feedback, and mobile layout in a browser.
@@ -39,6 +45,9 @@ Check and build:
 ```bash
 npm run check
 npm run build
+npm run test:learning
+npm run test:content
+npm run test:homepage
 node scripts/test-budget.mjs
 ```
 

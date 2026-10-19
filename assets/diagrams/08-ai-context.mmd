@@ -1,6 +1,10 @@
-flowchart LR
- T[Task and audience] --> C[Selected context]
- S[Versioned sources] --> C
- R[Rules and constraints] --> C
- C --> A[AI draft]
- A --> V[Source-grounded review]
+flowchart TB
+ accTitle: Project knowledge map
+ accDescr: Working instructions link to architecture, terminology, decisions, and maintained sources. Checks and review assess the result.
+ A[AGENTS.md: working instructions] --> P[Project architecture and source map]
+ A --> G[Glossary and writing conventions]
+ A --> D[Decision records and rationale]
+ P --> S[Maintained sources, relationships and schemas]
+ G --> S
+ D --> S
+ S --> V[Checks and source-grounded review]

@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "array",
+  "minItems": 1,
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["id", "chapter", "marker", "heading", "context", "question", "choices", "correctChoice", "feedback", "takeaway"],
+    "properties": {
+      "id": { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" },
+      "chapter": { "type": "integer", "minimum": 1, "maximum": 11 },
+      "marker": { "type": "string", "pattern": "^scenario-check-[a-z-]+$" },
+      "heading": { "type": "string", "pattern": "\\S" },
+      "context": { "type": "string", "pattern": "\\S" },
+      "question": { "type": "string", "pattern": "\\S" },
+      "choices": {
+        "type": "array", "minItems": 2, "maxItems": 4,
+        "items": {
+          "type": "object", "additionalProperties": false, "required": ["id", "label"],
+          "properties": {
+            "id": { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" },
+            "label": { "type": "string", "pattern": "\\S" }
+          }
+        }
+      },
+      "correctChoice": { "type": "string", "minLength": 1 },
+      "hint": { "type": "string", "pattern": "\\S" },
+      "feedback": { "type": "string", "pattern": "\\S" },
+      "takeaway": { "type": "string", "pattern": "\\S" }
+    }
+  }
+}

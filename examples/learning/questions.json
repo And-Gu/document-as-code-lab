@@ -142,15 +142,15 @@
     },
     {
       "type": "single_select",
-      "question": "The practice file has 'status: draft' and passes validation. What does that result establish?",
+      "question": "Two procedure files each pass the single-file practice schema and both use PROC-003. What else must be checked?",
       "options": [
-        "A reviewer has accepted the instructions",
-        "The instructions are accurate and safe to follow",
-        "The identifier is unique across the repository",
-        "The metadata satisfies the rules checked by the practice schema"
+        "Whether their headings use the same Markdown level",
+        "Whether identifiers are unique across the selected records",
+        "Whether both files use approved as their status",
+        "Whether their previews look identical"
       ],
-      "correctIndex": 3,
-      "feedback": "A passing check confirms the configured metadata rules, including draft as an allowed status. It does not establish human approval, instruction accuracy, or cross-file identifier uniqueness."
+      "correctIndex": 1,
+      "feedback": "A single-file schema cannot compare its identifier with other files. Cross-file processing must check uniqueness across the selected records."
     }
   ],
   "chapter-06": [
@@ -166,14 +166,15 @@
       "feedback": "A stable identifier allows relationships to survive a title change."
     },
     {
-      "type": "true_false",
-      "question": "If REQ-001 changes, the linked procedure PROC-001 must also be changed.",
+      "type": "single_select",
+      "question": "Why distinguish a procedure link from an activity prerequisite?",
       "options": [
-        "True",
-        "False"
+        "Both mean the same thing and can use the same label",
+        "A procedure link identifies guidance; a prerequisite identifies something that must happen first",
+        "A procedure link proves the activity has been completed"
       ],
       "correctIndex": 1,
-      "feedback": "The relationship identifies PROC-001 as a candidate for review. A reviewer checks whether the revised requirement affects its instructions before deciding whether an edit is needed."
+      "feedback": "Relationships have different meanings. Guidance identifies instructions used by an activity; a prerequisite identifies a dependency, not proof of completion."
     }
   ],
   "chapter-07": [
@@ -205,7 +206,7 @@
       "question": "What is the distinction between a chat prompt and an AI agent?",
       "options": [
         "A prompt gives instructions; an agent combines a model with tools whose access and actions depend on its configuration",
-        "A sufficiently detailed prompt gives the model access to the repository it names",
+        "Naming a repository in a chat prompt is enough for the model to read its files",
         "An agent is simply a longer prompt containing more background information"
       ],
       "correctIndex": 0,

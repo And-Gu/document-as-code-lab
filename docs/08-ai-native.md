@@ -2,7 +2,7 @@
 id: 04-ai-native
 chapter_number: 8
 status: in-review
-learning_goal: "Explain how source selection, instructions, constraints, and checking support dependable AI-assisted work."
+learning_goal: "Explain how agent instructions, project information architecture, terminology, decisions, maintained sources, and checks make information usable by AI agents."
 visuals:
   - id: ai-context
     status: source-ready
@@ -11,58 +11,65 @@ visuals:
     source: ../assets/diagrams/08-ai-context.mmd
     embedded: true
     outputs: [web, pdf, slides]
-    caption: "The task determines which sources and rules are supplied to the AI. The resulting draft is then checked against those sources."
-    alt: " T[Task and audience] --> C[Selected context];  S[Versioned sources] --> C;  R[Rules and constraints] --> C;  C --> A[AI draft];  A --> V[Source-grounded review]"
+    caption: "Agent instructions point to maintained project knowledge. Agents still need appropriate tools to find sources and verification before changes are accepted."
+    alt: "The AGENTS.md entry point points to information architecture, terminology, decisions and authoritative sources; validation and review remain separate checks."
 ---
 
-# AI Needs Context, Not Just Prompts
+# Making Information Usable by AI Agents
 
-An **AI agent** combines a language model with tools for reading information, proposing changes, and running checks. The usefulness of its results depends on a clear task, relevant sources, and a way to assess what it produces.
+We have organized information into identifiable sources (chapters 4–6) and used processing rules to produce results (chapter 7). The same groundwork helps AI agents work with a project. **What matters is not just supplying more text to a model, but making maintained information discoverable, interpretable and safe to change.**
 
-Document-as-Code gives agents a familiar working environment: maintained sources, references, version history, and configured checks. With suitable tools and permissions, an agent can use these to work with information as it would with software. The repository organizes the sources; the surrounding environment provides access.
+An agent is an AI-powered tool that can use permitted operations such as reading files, editing sources and running checks. File access alone does not tell it which documents govern the project, why conventions exist, or whether it may publish a result.
 
-Building that access into everyday work is a step toward **AI-native work**: preparing information and workflows for routine AI use, rather than assembling everything separately for each conversation. Document-as-Code supports this approach without requiring AI or implying that every document is AI-written.
+## Start with an entry point, not a giant prompt
 
-## Combine the request with relevant sources
+This repository has an actual [`AGENTS.md`](../AGENTS.md) file. It tells working agents where the maintained chapters live, which paths Astro reads, how chapter IDs are preserved, what related information may need checking, and which commands verify changes.
 
-Consider this request: *Write a short briefing about requesting system access for new employees.* The agent needs the maintained procedure to describe your organization's process accurately.
+`AGENTS.md` is a **working-instructions entry point**. It should stay concise and lead to the maintained knowledge needed for the task. Different agent products have different instructions and file-discovery conventions; simply placing a file in a repository does not guarantee that every agent reads it.
 
-The **prompt** states what you want the AI to do. **Context** is the information available to help it do that work. For the briefing, we can specify:
+## What knowledge should a project maintain?
 
-- **Task:** Produce a short briefing about requesting system access.
-- **Audience:** New employees, with no internal system knowledge.
-- **Source:** The maintained [access procedure](../examples/onboarding-showcase/access.md), with its revision identified.
-- **Constraints:** No invented portal names; cite source sections; flag missing details.
-- **Review rule:** A reviewer checks the briefing against that procedure before use.
+| Kind of information | The question it answers | Example in this lab |
+| --- | --- | --- |
+| **Information architecture** | What objects, sources and relationships exist? | [Project source map](../reference/project-knowledge.md): chapters, guides, records and rendering |
+| **Language and terminology** | What do our terms mean, and how should we write? | [`GLOSSARY.md`](../GLOSSARY.md) and [`CONTRIBUTING.md`](../CONTRIBUTING.md) |
+| **Decisions and rationale** | Why did we choose this structure; what was rejected or superseded? | [Tutorial design decisions](../spec/tutorial/04-DESIGN-DECISIONS.md) |
+| **Authoritative content** | What current material can substantiate a claim? | Markdown sources, metadata and schemas |
+| **Checks and boundaries** | What can be verified, and who decides whether to accept it? | Tests, build rules, review and publication conventions |
 
+A decision record might explain why this site keeps chapter sources in `docs/` rather than duplicating them inside Astro. The project structure describes *what exists*; the decision explains *why*. An agent's instructions tell it **where to find and apply both**. Decision records must reflect real choices, not be invented afterward as if approved historically.
 
 ```mermaid
-flowchart LR
- T[Task and audience] --> C[Selected context]
- S[Versioned sources] --> C
- R[Rules and constraints] --> C
- C --> A[AI draft]
- A --> V[Source-grounded review]
+flowchart TB
+ accTitle: Project knowledge map
+ accDescr: Working instructions link to architecture, terminology, decisions, and maintained sources. Checks and review assess the result.
+ A[AGENTS.md: working instructions] --> P[Project architecture and source map]
+ A --> G[Glossary and writing conventions]
+ A --> D[Decision records and rationale]
+ P --> S[Maintained sources, relationships and schemas]
+ G --> S
+ D --> S
+ S --> V[Checks and source-grounded review]
 ```
 
-*The task determines which sources and rules are supplied to the AI. The resulting draft is then checked against those sources.*
+> **Source note:** The diagram maps routes through project knowledge. Linked files are read when needed; they are not automatically loaded into a model.
 
-The agent needs to read the procedure itself. You can supply its text or let the agent use Git to retrieve a working copy of the repository, then read the procedure using its file-access tools. Mentioning the procedure's name alone is not enough. For this briefing, the relevant context is the procedure's instructions, conditions, and references, not the whole repository.
+## Keep source authority and permissions clear
 
-## Make coordinated, reviewable changes
+A proposed requirement is not an approved requirement. A generated handbook is not its authoritative source. A passing build is not approval. These distinctions matter to an agent as much as to a human contributor.
 
-An agent can work across related information and processing rules. For example, it can update a procedure, revise an affected explanation, and rebuild the outputs. [Repository instructions](../AGENTS.md) can identify related files and the checks expected for that work.
+An agent still needs to select relevant current files, identify source revisions, follow permitted relationships, and report what it changed or could not verify. Confidential material must remain within its permitted environment. Nothing in `AGENTS.md` grants permissions that the surrounding tools or organization have not provided.
 
-A change can pass technical checks while altering meaning or omitting important information. The practices introduced earlier help us assess it: diffs show the edits, schemas check structured fields, and builds produce outputs to inspect. Reviewers use this evidence to judge whether the change is suitable.
+## Explore: Where should a project rule live?
 
-Keep changes focused enough to review together, and identify anything that has not been checked. Acceptance and publication follow the team's configured process.
+Where would you maintain a stable-identifier rule and the explanation of why it exists?
 
-## Continue with the working example
+<!-- interactive: scenario-check-agent-knowledge -->
 
-The [AI context and agent guide](../reference/ai-context-and-agents.md) offers an optional trainer exercise using records selected by the [requirement processor](../scripts/process_records.py). It also covers confidentiality, source retrieval, and comparing responses with and without supplied context.
+> **Explore further:** The [agent context and project-knowledge guide](../reference/ai-context-and-agents.md) examines this repository's guidance, source selection, decision records, permissions and verification in greater detail. No AI account is needed to read it; its optional local examples require suitable tooling.
 
-**Key point:** Useful AI assistance depends on accessible sources, relevant context, and a workflow that makes the results inspectable.
+**Key point:** A project becomes more useful to AI agents when its architecture, terminology, decisions, authoritative sources, and checks are maintained as accessible, connected information—not hidden in one person's prompt.
 
-**Next:** [Chapter 9](09-images.md) explores reusable representations and visualizations beyond conventional documents.
+**Next:** [Chapter 9](09-images.md) shows how people can explore the same structured information through different views.
 
 <!-- interactive: chapter-quiz -->

@@ -96,6 +96,8 @@ You can already inspect the same path manually:
 
 For a guided overview, open the [Behind the Lab: From Sources to Experience presentation](/document-as-code-lab/presentations/lab-architecture/) or inspect its [YAML source](../presentations/lab-architecture.yaml).
 
+> **Explore further:** Want to reuse the site or slide pattern? The [Astro site guide](../site/README.md) explains source routing and components; the [presentation guide](../presentations/README.md) explains YAML decks and speaker notes. Reading needs no setup; local builds require the tools listed in each guide.
+
 ## What would this look like with Microsoft 365?
 
 GitHub is our implementation choice, not a prerequisite for working with maintained, reusable information. A team could use familiar Microsoft 365 tools and still apply many of the same principles.
@@ -115,7 +117,9 @@ For example, a team could keep working documents in a managed **SharePoint docum
 
 **OneDrive is a file-sharing and storage environment, not a Git repository.** Neither OneDrive nor SharePoint automatically supplies Git-style pull requests or reproducible source builds. The alternatives can support similar *goals*, but the mechanics and capabilities differ. For team-controlled information, a SharePoint library often provides clearer ownership and governance than a personal OneDrive folder.
 
-For more detail, see the [portable workflow reference](../reference/workflows-across-tools.md) and Microsoft's documentation for [Copilot in OneDrive](https://support.microsoft.com/en-us/onedrive/get-started-with-copilot-in-onedrive), [agent knowledge sources](https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/knowledge-sources), and the [OneDrive for Business connector](https://learn.microsoft.com/en-us/connectors/onedriveforbusiness/). The tutorial's Microsoft workflow is an illustration, not a validated deployment in an organization.
+> **Explore further:** Use a Microsoft environment for a similar information flow: the [portable workflow guide](../reference/workflows-across-tools.md) compares file history, review, Copilot, and automation. Optional hands-on work depends on organizational permissions and licensing.
+
+For product details, see Microsoft's documentation for [Copilot in OneDrive](https://support.microsoft.com/en-us/onedrive/get-started-with-copilot-in-onedrive), [agent knowledge sources](https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/knowledge-sources), and the [OneDrive for Business connector](https://learn.microsoft.com/en-us/connectors/onedriveforbusiness/). The tutorial's Microsoft workflow is an illustration, not a validated deployment in an organization.
 
 ## Choose the environment for the information
 

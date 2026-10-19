@@ -11,6 +11,7 @@
     "preview": "astro preview",
     "check": "astro check",
     "test:learning": "node scripts/test-learning.mjs",
+    "test:scenarios": "node scripts/test-scenarios.mjs",
     "test:content": "node scripts/test-content.mjs",
     "test:homepage": "node scripts/test-homepage.mjs",
     "test:contracts": "node scripts/test-contracts.mjs",

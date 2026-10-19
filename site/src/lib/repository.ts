@@ -22,7 +22,7 @@ export async function repositoryFiles() {
       }
     }
   }
-  for (const directory of ['docs', 'examples', 'reference', 'assets', 'data', 'scripts', 'presentations', 'publishing', '.github']) {
+  for (const directory of ['docs', 'examples', 'reference', 'assets', 'data', 'scripts', 'presentations', 'publishing', 'spec', '.github']) {
     await collect(directory);
   }
   return files;

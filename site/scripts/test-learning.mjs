@@ -15,6 +15,7 @@ const { readPracticeFrontmatter, validatePracticeMetadata, readPracticeProcedure
 const practiceSchema = JSON.parse(await readFile(new URL('../../examples/learning/procedure.schema.json', import.meta.url), 'utf8'));
 const practiceSource = '---\nid: PROC-003\nowner: people-team\nstatus: draft\n---\n\n# Contacts\n\nAsk the people team.';
 assert.equal(validatePracticeMetadata(practiceSource, practiceSchema).valid, true, 'Draft is valid, not approved');
+assert.equal(validatePracticeMetadata(practiceSource.replace('people-team', 'unknown-team'), practiceSchema).valid, true, 'A nonempty owner passes structure checks without proving that the team exists');
 assert.equal(validatePracticeMetadata(practiceSource.replace('draft', 'approved'), practiceSchema).valid, true);
 assert.match(validatePracticeMetadata(practiceSource.replace('owner: people-team\n', ''), practiceSchema).errors.join(), /owner/);
 assert.match(validatePracticeMetadata(practiceSource.replace('draft', 'ready'), practiceSchema).errors.join(), /draft, approved/);
@@ -168,4 +169,5 @@ assert.throws(() => processProcedures([...fixed, readPracticeProcedure(practiceS
 const contacts = await readFile(new URL('../../examples/onboarding-showcase/contacts.md', import.meta.url), 'utf8');
 assert.match(contacts, /status: draft/);
 console.log('Eleven lesson mounts, quiz mapping, Markdown safety, YAML parsing, JSON Schema validation, procedure processing, readiness, and source inclusion rules passed.');
+await import('./test-scenarios.mjs');
 await import('./test-architecture.mjs');

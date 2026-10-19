@@ -17,7 +17,7 @@ for (const [index, slug] of slugs.entries()) {
   const metadata = parseYaml(front[1]);
   assert.equal(metadata.id, expected[index]);
   assert.equal(metadata.chapter_number, index + 1);
-  assert.ok(!source.includes('[AGENT') && !source.includes('VISUAL:'), slug);
+  assert.ok(!/\[AGENT(?:\s|:)/.test(source) && !source.includes('VISUAL:'), slug);
   for (const visual of metadata.visuals ?? []) {
     const diagram = await readFile(path.resolve(root, 'docs', visual.source), 'utf8');
     assert.ok(source.includes(`\n${diagram.trim()}\n`), `${slug}: diagram differs from its maintained source`);

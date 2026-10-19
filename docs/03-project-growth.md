@@ -78,7 +78,7 @@ Choose one observation and ask what action it suggests. A rise in word count sho
 
 Read the figures in context. A chapter's review status tells us whether it has been approved; its word count tells us only how much text it contains.
 
-The [dashboard guide](../reference/dashboards-and-work-tracking.md) develops dashboard design and interpretation. The [measurement reference](../reference/growth-measurement.md) explains the counting rules and saved historical charts.
+> **Explore further:** Trace the dashboard figures to their source revision and counting rules in the [measurement guide](../reference/growth-measurement.md). Reading needs no setup; reproducing a measurement uses its optional local Python environment. The [dashboard guide](../reference/dashboards-and-work-tracking.md) develops design and interpretation.
 
 ## From project trends to one change
 

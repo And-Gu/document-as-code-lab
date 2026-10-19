@@ -1,6 +1,9 @@
 ---
 import MarkdownPlayground from './MarkdownPlayground.astro';
 import Quiz from './Quiz.astro';
+import ScenarioCheck from './ScenarioCheck.astro';
+import scenarioData from '../../../../examples/learning/scenario-checks.json';
+import { prepareScenarioChecks } from '../../lib/scenario-checks';
 import OnboardingLab from './OnboardingLab.astro';
 import ProcessingPlayground from './ProcessingPlayground.astro';
 import ContractExplorer from './ContractExplorer.astro';
@@ -12,8 +15,16 @@ import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { repositoryRoot } from '../../lib/repository';
 import procedureSchema from '../../../../examples/learning/procedure.schema.json';
-interface Props { chapterNumber: number; }
-const { chapterNumber } = Astro.props;
+interface Props { chapterNumber: number; chapterSource: string; }
+const { chapterNumber, chapterSource } = Astro.props;
+const scenarios = prepareScenarioChecks(scenarioData).filter(scenario => scenario.chapter === chapterNumber);
+if (scenarios.length) {
+  const source = await readFile(path.join(repositoryRoot, chapterSource), 'utf8');
+  for (const scenario of scenarios) {
+    const marker = `<!-- interactive: ${scenario.marker} -->`;
+    if (source.split(marker).length !== 2) throw new Error(`${chapterSource}: expected one ${scenario.marker} marker.`);
+  }
+}
 const key = `chapter-${String(chapterNumber).padStart(2, '0')}` as keyof typeof candidates;
 const questions = candidates[key].map((question, index) => ({
   id: `question-${index + 1}`, question: question.question,
@@ -34,6 +45,7 @@ const fixedProcedures = chapterNumber === 7 ? await Promise.all(['access', 'equi
 {chapterNumber === 9 && <div data-learning-target="contract-explorer-widget"><ContractExplorer /></div>}
 {chapterNumber === 11 && <div data-learning-target="architecture-explorer-widget"><ArchitectureExplorer /></div>}
 <div data-learning-target="chapter-quiz-widget"><Quiz id={key} questions={questions} /></div>
+{scenarios.map(scenario => <div data-learning-target={`${scenario.marker}-widget`}><ScenarioCheck scenario={scenario} /></div>)}
 <script>
   function placeLearning() {
     document.querySelectorAll<HTMLElement>('[data-learning-target]').forEach((content) => {
