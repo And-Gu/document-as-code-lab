@@ -5,6 +5,7 @@
 - Use the [project source map](reference/project-knowledge.md) to locate authoritative information and the [tutorial specification register](spec/tutorial/README.md) for design intent and dated decisions. Follow links relevant to the task; these files do not grant permissions or imply automatic context loading.
 
 - Read `CONTRIBUTING.md` before editing tutorial content. Write project documentation in English.
+- Before rewriting prose, read the editorial rules in [CONTRIBUTING.md](CONTRIBUTING.md), the [shared vocabulary](GLOSSARY.md), and the approved narrative direction in the tutorial specification. Present representative before/after passages for owner approval before a major site-wide style change; preserve chapter objectives, source identifiers, and meaningful distinctions.
 - Keep `docs/` as the chapter source of truth. Astro in `site/` reads these files; do not duplicate or move them into the site.
 - Preserve stable chapter IDs. Filename prefixes and `chapter_number` determine reading order.
 - Keep existing user changes. Commit, push, or change GitHub settings only when requested.

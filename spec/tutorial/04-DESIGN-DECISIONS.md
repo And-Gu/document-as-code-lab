@@ -16,6 +16,7 @@
 | TD-10 | Conservative implementation default | Keep existing Astro, GitHub Pages, Mermaid, YAML/Reveal.js, stable IDs and palette | Only change tech when demonstrated necessary. |
 | TD-11 | Owner review | Exact new visuals, scenario wording and whether a new project-knowledge map/ADR file is needed | Agent provides a concrete candidate; owner accepts or revises. No invented historical decisions. |
 | TD-12 | Owner review | Chapter 8 headline: **Making Information Usable by AI Agents** | Working title; keep stable filename `08-ai-native.md` and frontmatter ID `04-ai-native`. |
+| TD-13 | Agreed, 19 October 2026 | Apply the accepted v1.3 editorial style across eleven chapters | The owner accepted the [three samples](V1-3-EDITORIAL-DECISIONS.md). Lead with situations, keep explanations cohesive, reduce repetition, and preserve technical meaning. Full revised chapters remain in review. |
 
 ## Open design boundaries, not blockers
 

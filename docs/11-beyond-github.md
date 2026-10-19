@@ -17,27 +17,15 @@ visuals:
 
 # Behind the Lab: How We Built This Tutorial
 
-This tutorial demonstrates Document-as-Code by using it. The chapters are Markdown files, but the result is a website with interactive exercises, a contract explorer, charts, dashboards, and presentations.
+You have just used a website built from the information it teaches you to maintain. The chapters live in Markdown, while Astro turns them into pages and combines them with interactive components.
 
-**The central idea is not a particular editor or file type. It is an environment where maintained information can be reviewed, processed, and reused in several experiences.** Here is how we built this one.
+Follow one source through that system, then consider how the same principles could work in a different environment.
 
 ## The repository is the workspace
 
-The [source repository](https://github.com/And-Gu/document-as-code-lab) separates information from the software that presents it:
+In the [source repository](https://github.com/And-Gu/document-as-code-lab), chapter text lives in `docs/`, fictional records in `examples/`, and presentation definitions in `presentations/`. Astro pages and components live in `site/`; the [source map](../reference/project-knowledge.md) explains the remaining folders.
 
-| Location | What it contains |
-| --- | --- |
-| [`docs/`](../docs/01-introduction.md) | Chapter text and metadata, in Markdown |
-| [`reference/`](../reference/visual-sources.md) | In-depth guides beyond the short chapters |
-| [`examples/`](../examples/contract-explorer/README.md) | Fictional records and exercise sources |
-| [`assets/`](../assets/diagrams/11-lab-architecture.mmd) | Images and diagram source files |
-| [`site/`](../site/README.md) | Astro pages, layouts, styles, and interactive components |
-| [`presentations/`](../presentations/README.md) | YAML definitions of the HTML slide decks |
-| [`.github/workflows/`](../.github/workflows/deploy-pages.yml) | Automated validation, builds, reports, and deployment |
-
-**Git** records revisions. **GitHub** makes the repository accessible to collaborators, supports pull requests (PRs), and runs automated workflows. An author can propose a Markdown edit in a PR; reviewers inspect the difference and relevant checks before the change is merged. Review and merge are not necessarily formal approval of the information.
-
-Astro reads the original chapter files directly. We do not maintain one copy of each chapter in Markdown and another manually edited copy in HTML.
+Astro reads the chapter files directly rather than maintaining a second editable copy of their text. The proposal and review process from [chapter 2](02-github-workspace.md) applies to these sources and to the code that presents them.
 
 ## From source files to a public website
 
@@ -54,33 +42,17 @@ flowchart TB
 
 *The diagram shows the main publishing path, not every script or optional API request.*
 
-The technologies have different responsibilities:
+Take DEL-101, the fictional interface-package record from [chapter 9](09-images.md). Its Markdown file contains text and structured fields. During a GitHub Actions build, validation and transformation prepare the explorer data, and Astro assembles the page and browser code. GitHub Pages then serves those built files.
 
-- **Markdown** maintains readable content and structured source records.
-- **Astro** turns those sources into styled HTML pages and combines them with components.
-- **GitHub Actions** runs checks and the site build when its configured events occur.
-- **GitHub Pages** hosts the built files at [and-gu.github.io/document-as-code-lab/](https://and-gu.github.io/document-as-code-lab/).
-- **Browser JavaScript** provides interaction after a reader opens a page.
-
-This last distinction matters. GitHub Pages does not run Python scripts or an Astro server for every visitor. The build runs before publication. Yet the published site is far from a static reading experience: it can include interactive views, local calculations, filtering, and presentations. Optional browser API calls are possible where explicitly implemented and permitted.
+When a reader selects DEL-101, JavaScript in the browser shows its links and details from the built dataset. It does not run the Python tools or an Astro server for that visitor. Updating the source changes the published dataset after a new build and deployment. The record's source link remains the route back to the maintained information.
 
 ## From Markdown to interactive experiences
 
-The same site combines several forms of information:
+The same separation supports different experiences. Quizzes use maintained question data; playgrounds let readers edit browser-only practice copies. Neither changes the chapter or example sources in GitHub.
 
-| Experience | How it is built | What remains authoritative |
-| --- | --- | --- |
-| **Chapters and references** | Astro renders Markdown into HTML, navigation, and diagrams | The source Markdown files |
-| **Quizzes and playgrounds** | Reusable components are mounted into chapter pages using markers | Chapter sources, component code, and question data |
-| **Processing lab** | Browser-only simulation validates a practice copy and generates a review view | The separately maintained source examples |
-| **Contract Explorer** | Nine structured Markdown records are validated and transformed at build time; browser code provides three exploratory views | The records in `examples/contract-explorer/` |
-| **Project Control Center** | Build-time measurements and published GitHub snapshots feed a browser dashboard | Repository history and the retrieved GitHub observations |
-| **Presentations** | YAML selects messages and chapter references; Astro and Reveal.js build HTML slides and notes pages | Chapter knowledge and the maintained deck definitions |
-| **PDF proof** | A separate workflow creates a limited PDF for review | Its identified inputs; a full PDF book is not yet published |
+Presentations need an additional editorial choice. Their YAML definitions select messages, chapter references, and a teaching sequence; Astro and Reveal.js turn those definitions into slides and speaker notes. A presentation is not simply a chapter projected onto a screen, so changes to its source knowledge still need editorial review.
 
-A presentation is not just a chapter projected onto a slide. Its YAML file selects a message and a teaching sequence, so editorial review is needed when the underlying information changes. The [presentation collection](https://and-gu.github.io/document-as-code-lab/presentations/) includes multiple decks built with the same website pipeline.
-
-The Contract Explorer makes the distinction especially clear. Its interface can show relationships, delivery commitments, and possible change impacts without storing three independently maintained copies of the contracts. It reads a validated transformation of the underlying records. The user can inspect source IDs and links but cannot silently edit the repository from the browser.
+The dashboard combines measurements from committed history with retrieved GitHub observations. It labels its build-time snapshots and offers a separate opt-in live retrieval. The PDF proof uses another workflow and covers only a limited design trial, not a published book. Their output paths differ, but each needs identifiable inputs and a defined update process.
 
 ## Explore: Follow the architecture
 
@@ -88,11 +60,7 @@ Select a chapter page, Contract Explorer, presentation, dashboard, or PDF proof 
 
 <!-- interactive: architecture-explorer -->
 
-You can already inspect the same path manually:
-
-1. Open the [Chapter 9 Contract Explorer](09-images.md), select an item, and follow its source link.
-2. Open the [presentation collection](https://and-gu.github.io/document-as-code-lab/presentations/) and look at how a short teaching message refers back to a chapter.
-3. Open the [deployment workflow](../.github/workflows/deploy-pages.yml) and identify where the Astro build and GitHub Pages deployment happen.
+The paths show which work happens before publication and which happens in the browser. To inspect the actual publication step, open the [deployment workflow](../.github/workflows/deploy-pages.yml); the [presentation collection](https://and-gu.github.io/document-as-code-lab/presentations/) shows another result of that same website build.
 
 For a guided overview, open the [Behind the Lab: From Sources to Experience presentation](/document-as-code-lab/presentations/lab-architecture/) or inspect its [YAML source](../presentations/lab-architecture.yaml).
 
@@ -127,12 +95,14 @@ This lab benefits from GitHub and Astro because the sources are structured, chan
 
 The deciding question is not *Which product owns the file?* It is **Can people and authorized tools find the maintained information, understand its status, propose changes, and produce trustworthy results?**
 
-**Key point:** This lab combines sources, software, and publishing into one reviewable system. The tools can change; the principles of ownership, accessibility, processing, and traceability do not.
-
 ## Start with one useful outcome
 
-Choose one recurring information problem, an accountable owner, and a consumer who needs the result. Build a small, complete path from maintained sources through review and checks to one useful output. Agree who maintains the information, who reviews it, and who maintains the processing rules; these can be different people.
+You do not need to reproduce this entire lab to begin. Choose one recurring need: keeping instructions consistent, finding information awaiting review, or producing a report from shared records.
 
-Measure whether the result reduces update effort, catches errors, or helps the consumer make a decision. Extend the workflow when the benefit justifies the maintenance, learning, and support it requires. The [first-increment exercise](../reference/automation-quality.md#plan-a-first-increment) helps you turn that choice into a practical plan.
+Decide where the source belongs, who maintains and reviews it, and how it reaches the people who need it. Start with one useful result, then assess whether the approach saves effort or improves decisions before extending it.
+
+The tools may differ from ours. The aim remains the same: maintain the information once, make changes inspectable, and reuse it where it is needed.
+
+The optional [first-increment exercise](../reference/automation-quality.md#plan-a-first-increment) helps you plan that first flow, including responsibility for its processing rules.
 
 <!-- interactive: chapter-quiz -->

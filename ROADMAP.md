@@ -24,7 +24,7 @@ Done when an update produces verifiable current and historical metrics.
 
 Chapters 10 and 11 explain the actual workflows and lab architecture. The read-only Architecture Explorer traces five output paths, with validated source links and a no-JavaScript overview. A fourth HTML deck, `lab-architecture`, adds nine slides and notes through the existing build and Pages deployment pipeline. The chapter content remains in review.
 
-Published baseline: Astro publishes the tutorial to GitHub Pages, with metadata and Git-history panels. Production deployment, navigation, images, and Mermaid rendering have been verified. Chapter 3 introduces the standalone Project Control Center, whose growth widget uses committed history at build time. Saved charts under `assets/figures/` remain historical snapshots. The CSSV budget table with sorting and filtering is retained in the dashboard reference guide. The Project Control Center is published at `/dashboard/` with authenticated, build-generated operational snapshots on main deployment and an hourly schedule; optional live retrieval remains available. Pages deployment 38152410515 verified all four operational sources, workflow states, source revision, and generation timestamps. Workflow states describe collection time, and scheduled runs may be delayed. Chapters 2 and 3 are approved. Chapters 1, 4, and 6 have returned to review following substantive updates; the remaining 9 chapters are in review. Full-book generation and several interactive exercises remain future work.
+Published baseline: Astro publishes the tutorial to GitHub Pages, with metadata and Git-history panels. Production deployment, navigation, images, and Mermaid rendering have been verified. Chapter 3 introduces the standalone Project Control Center, whose growth widget uses committed history at build time. Saved charts under `assets/figures/` remain historical snapshots. The CSSV budget table with sorting and filtering is retained in the dashboard reference guide. The Project Control Center is published at `/dashboard/` with authenticated, build-generated operational snapshots on main deployment and an hourly schedule; optional live retrieval remains available. Pages deployment 38152410515 verified all four operational sources, workflow states, source revision, and generation timestamps. Workflow states describe collection time, and scheduled runs may be delayed. The v1.3 editorial update preserves the v1.2 functionality; all eleven revised chapters remain in review. Full-book generation and several interactive exercises remain future work.
 
 - Compare a small set of publishing tools against the tutorial's needs.
 - Publish chapters and a basic growth dashboard.
@@ -38,7 +38,7 @@ Done when readers can follow the first exercises online.
 - Compare Mermaid, SVG, raster assets, and Napkin.
 - Set up GitHub Projects for work tracking.
 
-Chapter 9 includes a Contract Explorer in the website build, driven by nine fictional Markdown records, schema validation, and a shared build-time model. Automated tests cover its three views, impact provenance, source changes, and fallback sources. Final desktop/mobile visual and keyboard checks remain outstanding after browser preview access failed.
+Chapter 9 includes a Contract Explorer in the website build, driven by nine fictional Markdown records, schema validation, and a shared build-time model. Automated tests cover its three views, impact provenance, source changes, and fallback sources. The v1.2 implementation was checked locally at desktop/mobile sizes and on the published site, including the guided impact action and keyboard navigation. The v1.3 prose revision passed local build, link, component, and desktop/mobile rendering checks; the editorial review records the evidence and remaining limits.
 
 Done when exercises use the project's own content and data.
 
@@ -65,7 +65,7 @@ Done when readers can adapt the practices without relying on GitHub.
 
 ## Open Decisions
 
-- The [v1.2 specification register](spec/tutorial/README.md) sets the agreed browser-first audience and eleven-chapter direction. The v1.2 update adds scenario checks in chapters 5/6/8, a rewritten agent-knowledge chapter and reference, benefit-led supporting links, and guided Contract Explorer entry. Publication is authorized; final chapter approval and wider learning-effectiveness evidence remain separate decisions.
+- The [v1.3 specification register](spec/tutorial/README.md) preserves the deployed v1.2 functionality and adds the accepted editorial direction. The owner accepted three representative samples; all revised chapter text remains in review. The [editorial review](spec/tutorial/EDITORIAL-REVIEW.md) records changes, regression checks, and remaining decisions. The owner separately authorized publication after the editorial pass; chapter approval remains a separate decision.
 - Evaluate scenario wording, Chapter 8's title, the lean source map, and representative desktop/mobile renderings with the tutorial owner. External learner studies are optional future evidence, not a release gate.
 - Whether the Pandoc/Typst book trial meets full-publication needs; Astro with Reveal.js is selected for HTML presentations, and existing charts use Matplotlib.
 - Microsoft account environment used for the portability exercise.

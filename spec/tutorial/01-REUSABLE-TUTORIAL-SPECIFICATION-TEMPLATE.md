@@ -1,6 +1,6 @@
 # Reusable Specification Template — Interactive Technical & Professional Tutorial
 
-> **Template v1.2 · 19 October 2026 (owner-reviewed learning design)**\
+> **Template v1.3 · 19 October 2026 (editorial direction accepted after sample review)**\
 > Purpose: describe a *learning product* before implementing chapters and website features. Copy this file into a new tutorial project and replace `[TBD]` fields. Mark each requirement **MUST**, **SHOULD**, **MAY**, or **NOT APPLICABLE**. The template is intentionally platform-neutral: Astro/GitHub is one possible implementation.
 
 ## 0. Specification identity and decisions
@@ -66,6 +66,13 @@ prerequisites: []
 key_concepts: ["[maximum 3–5]"]
 not_in_scope: ["[What belongs elsewhere]"]
 scenario: "[Common example or new example with clear handoff]"
+narrative:
+  reader_motivation: "[What real reader problem opens the chapter?]"
+  opening_example: "[Concrete situation before extended terminology]"
+  new_insight: "[What is genuinely new here, not repeated from earlier chapters?]"
+  transition_in: "[What from the previous chapter is assumed?]"
+  transition_out: "[What question remains for the next chapter?]"
+  avoid_repeating: ["[Ideas already taught elsewhere]"]
 evidence_or_source: ["[Which maintained records or verified facts]"]
 primary_visual:
   purpose: "[What becomes clearer?]"
@@ -97,6 +104,42 @@ acceptance_checks: ["[2–4 observable tests]"]
 **Editorial structure (SHOULD):** Start with a concrete question or surprise; show the core example; introduce no more than a handful of new concepts; demonstrate the result; offer one optional path deeper; end with a meaningful takeaway and a transition. A chapter does **not** need every section in the same order.
 
 **Length guidance:** Aim for roughly 500–850 words of core prose. A complex, valuable chapter may be longer; shorten *repetition*, not useful explanation. Keep implementation tutorials and lengthy source listings in references.
+
+### Editorial voice and reading-flow contract (MUST for reader-facing chapters)
+
+**Intended voice:** direct, warm, clear, intellectually respectful, and practical. Write for a curious professional who may not know Git, Astro or YAML but is capable of complex reasoning. Explain ideas, not just labels. Avoid marketing language, lectures, artificial enthusiasm, and school-style homework framing.
+
+**Narrative sequence (flexible, not mandatory headings):** reader problem or question → concrete example → the smallest necessary explanation → diagram or interaction where it clarifies → insight/consequence → natural transition. Begin with the *reader's reason to care*, not a list of chapter objectives or a recap of the previous chapter.
+
+**Paragraph/section review rules:**
+- One central idea per paragraph; favor active verbs and specific actors over abstract nouns or excessive passive voice.
+- Introduce unfamiliar terms *when* they become necessary. Define a term once; afterward use it consistently and link to the glossary rather than redefine it in every chapter.
+- Explain cause and consequence. Prefer "If the source changes, the guide can be rebuilt" to a string of nouns such as "source-based transformation enables repeatable publication".
+- Use **you** for reader actions, **we** sparingly for a shared walkthrough, and the project's actual actors when describing approvals and responsibilities. Avoid unexplained shifts in viewpoint.
+- Prefer a short paragraph to a numbered list when the content is a coherent thought. Use tables only for meaningful comparisons or structured reference—not to interrupt a story with a mini-glossary.
+- Keep constraints and qualifications *close to the claim or result they qualify*, especially approval, status, permissions, live vs snapshot and inferred impacts. Do not delete important distinctions merely to shorten text. Eliminate **duplicate** disclaimers, not their meaning.
+- Avoid excessive "in this chapter", "as we have seen", "what to remember", "this demonstrates", repeated "maintained information", and generic handoffs. Use a natural opening and closing instead of formulaic headings where possible.
+- Prefer short headings that reveal a reader question or insight over mechanical topic labels. Make scanning easy without turning every paragraph into an isolated callout.
+- Writing length is a guide, not an optimization metric. Reduce repeated explanations and weak framing before cutting useful examples. Never use an automated word-count target as a proxy for quality.
+
+**Across-chapter continuity (MUST):** Maintain a curriculum map with the example in use, previously established knowledge, the single new insight, and the next reader question for each chapter. Whenever the example changes (onboarding → agent working environment → contracts → this site's real architecture), include one or two sentences explaining *why the new example is useful*. Maintain consistency of names, status meanings and source identity.
+
+**Interaction microcopy (MUST when present):** Introduce the situation in everyday language, use one clear action verb on the control ("Check answer", "Validate metadata", "Explore relationships"), report what happened, and explain *why* it matters. Avoid "Correct!" as the entire feedback and never imply that green means approved. Hints, reset and data-persistence explanations must be easy to find without crowding the narrative.
+
+**Supporting-link wording (SHOULD):** Say what the reader will learn or be able to do, not merely "Read more". Links to technical implementation or local exercises declare prerequisites and remain optional. Link labels must remain descriptive out of context.
+
+**Accessibility of language:** Acronyms are expanded at first meaningful use, examples are understandable without color or figure position, link purposes are explicit, and captions convey the conclusion rather than restating shapes. Prefer everyday language without becoming patronizing.
+
+### Editorial acceptance review (owner-led)
+
+Review every proposed chapter change with five checks:
+1. **Opening:** Is the reader's question clear within the first ~100 words without making false claims?
+2. **Flow:** Can we follow the explanation from example to insight without a conceptual leap or a long detour?
+3. **Novelty:** What does this chapter add that earlier chapters did not?
+4. **Economy:** Can a sentence, list, table or qualification be cut or moved to a supporting page *without losing meaning*?
+5. **Finish:** Does the reader leave with one useful understanding and a natural reason to continue or go deeper?
+
+Submit a **before/after excerpt, a short explanation of editorial intent, and a map of changed references** for owner evaluation. Build/lint automation catches broken files, not awkward prose. Read-aloud and skim reviews are editorial techniques, not quantified learning evidence. Do not require participant testing or invented readability scores.
 
 ## 3. Examples, stories, and source fidelity
 
@@ -225,7 +268,7 @@ Separate **agent working instructions** from **maintained project knowledge**. D
 
 ## 8. Content quality, evidence, and safety
 
-**Editorial rules:** `[Language, voice, terminology, heading style, acronyms, sentences, preferred examples, accessibility terminology.]`
+**Editorial rules:** Follow the chapter voice and reading-flow contract above. For the target project, link `CONTRIBUTING.md`, its glossary and an adopted editorial style guide; do not leave the instructions as generic placeholders. Preserve technical precision, source status and intended meaning.
 
 **MUST:** Technical claims link to suitable current sources; examples are clearly fictional or verified; no invented current capabilities; defined terms are consistent; specific version/tool claims are checked before publication; rights and attribution of media are recorded; sensitive or proprietary examples are not uploaded to public or external AI services.
 
@@ -243,7 +286,7 @@ Separate **agent working instructions** from **maintained project knowledge**. D
 
 **Release gates:**
 
-- **Editorial:** Distinct learning outcomes, concise chapters, no unjustified repetition, clear real-versus-fictional examples, benefit-oriented reference invitations.
+- **Editorial:** Distinct learning outcomes; concrete, reader-oriented openings; coherent paragraph and chapter transitions; limited redefinition and repetition; accurate qualifications; natural ending; benefit-led reference invitations. Owner reviews representative before/after passages.
 - **Learning design:** Contextual questions test genuine misconceptions; labs connect action to consequence; help is available without forcing extra steps.
 - **Information:** Stable IDs, accurate authority/revision/status claims; no fabricated agent capabilities or approvals.
 - **Implementation:** Source validation, Astro checks/build, route/link tests, interactive tests, keyboard and mobile checks, presentation source validation, deploy verification if published.

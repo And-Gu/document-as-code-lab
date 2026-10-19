@@ -24,11 +24,25 @@ Visual metadata documents intent. Rendering, placement, and accessibility behavi
 
 ## Writing
 
-Use clear headings, concrete examples, and an exercise with an observable result. Define unfamiliar terms and link to related chapters.
+Use clear headings, concrete examples, and an appropriate way to show the result. A browser-based question, explanatory visual, or on-page lab may improve a chapter; a conventional exercise is optional. Choose the smallest learning experience that explains the important distinction. Keep core chapters usable without a local installation.
 
-Use the shared definitions in `GLOSSARY.md`. End exercises with an expected result, a focused troubleshooting note, and what readers should retain. Link to authoritative setup guides rather than duplicating installation instructions.
+Use the shared definitions in [GLOSSARY.md](GLOSSARY.md). Where an optional exercise is useful, state its prerequisites, expected result, and recovery steps. Link to authoritative setup guides rather than duplicating installation instructions.
 
 Verify product-specific instructions against official documentation when writing them. Record account or plan requirements where they affect the exercise.
+
+## Editorial Voice
+
+- Write clear, natural English for curious professionals. Assume intelligence, not familiarity with tooling.
+- Open with a useful situation or question. Introduce terms when the reader needs them, and let the example carry the explanation.
+- Keep paragraphs cohesive. Prefer specific actors and consequences to abstract noun phrases or disconnected short sentences.
+- Use shared terminology consistently. Define a concept once; revisit it only when it adds a new insight.
+- Keep source, view, validation, approval, publication, revision, and permissions distinct at the claims where those differences matter. Remove repeated caveats, not their meaning.
+- Explain changes of example with a short bridge. Onboarding, agent-ready project knowledge, fictional contracts, and the real site each serve a different question.
+- Give an interaction a reason before presenting it; explain the result through nearby prose or its feedback. Do not prescribe homework by default.
+- Offer references by reader benefit, with any local setup requirements. Avoid promotional wording and formulaic opening, takeaway, or next-chapter sentences.
+- Do not impose a word quota, uniform sentence length, or mandatory table/image/quiz count.
+
+For a major style change, present representative before/after passages and the rationale for owner review before applying it across chapters. Preserve IDs, examples, source accuracy, diagram meanings, and code blocks unless their changes are reviewed too. The [tutorial specification](spec/tutorial/02-DOCUMENT-AS-CODE-LAB-V1-SPECIFICATION.md) records the curriculum and narrative contracts.
 
 ## Source and Outputs
 

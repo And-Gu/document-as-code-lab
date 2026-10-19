@@ -7,15 +7,15 @@ learning_goal: "Read and edit common Markdown structures and explain why plain-t
 
 # Markdown: Readable Sources
 
-Markdown is a lightweight way to format plain text. A Markdown file stays readable in a text editor, while a renderer can present it with headings, lists, links, tables, and other formatting.
+Suppose you need to add a step to the access procedure. With Markdown, you can edit the words and formatting markers in a readable text file, then see how they appear on the page.
 
-We use Markdown for this tutorial because people and tools can inspect and update the source without opening a specific word processor. Document-as-Code is not tied to Markdown: the same versioning, review, and processing practices can be applied to other source formats.
+**Markdown** is a lightweight format for plain text. A renderer turns its markers into headings, lists, links, and tables. We use it here because people and tools can inspect and update the source without opening a particular word processor. Document-as-Code can use other formats too.
 
 Many of us create and revise Markdown through an interactive AI chat, describing what we want rather than typing every formatting marker ourselves.
 
 ## Source and presentation
 
-Here is an excerpt from our fictional onboarding procedure:
+The access procedure from our fictional onboarding example starts like this:
 
 ```markdown
 # Requesting System Access
@@ -33,11 +33,13 @@ The source is easy to read. A renderer displays it as a heading, a numbered list
 
 ## Try it in the Markdown Playground
 
+Add one step and compare the source with its preview. The browser practice below lets you see the effect without editing the repository.
+
 <!-- interactive: markdown-playground -->
 
 **Self-check:** Add a fourth numbered step, then add a link to an imaginary support page using `[Support](https://example.com/support)`. Change a value in the example table and check the preview. Don't worry, this playground does not grade your edits or save them into the repository.
 
-Experiment with a heading (`#`), emphasis (`**text**`), a link (`[label](url)`), and a list. Italics use `*text*`, while bold uses `**text**`. The preview helps you see what changes and what stays in the source.
+The markers below control the structure you see in the preview. Italics use `*text*`, while bold uses `**text**`:
 
 | Element | Source syntax |
 | --- | --- |
@@ -75,7 +77,7 @@ echo "Hello"
 
 The optional label after the opening backticks names the language: `bash` for shell commands, or `markdown` for Markdown source. A renderer can use it to color the syntax. The block above displays a command; it does not run it.
 
-For a separate file exercise, open the [draft access procedure](../examples/onboarding/requesting-access.md). It is not the fixed approved showcase copy. [GitHub's illustrated guide](https://docs.github.com/en/repositories/working-with-files/using-files/working-with-non-code-files#disabling-markdown-rendering) explains its source and preview controls.
+To inspect an actual file, open the [draft access procedure](../examples/onboarding/requesting-access.md), which is separate from the approved showcase copy. [GitHub's illustrated guide](https://docs.github.com/en/repositories/working-with-files/using-files/working-with-non-code-files#disabling-markdown-rendering) explains how to switch between source and preview.
 
 ## Why is this useful?
 
@@ -102,10 +104,6 @@ This project keeps chapters in Markdown and adds interactive components through 
 
 Headings and paragraphs describe how content reads. They do not, on their own, tell software which team owns a procedure, whether it is approved, or how it depends on another activity.
 
-For those questions, we introduce structured fields in [chapter 5](05-structured-content.md). A Markdown file can contain both readable instructions and structured metadata.
-
-## What to remember
-
-**Markdown makes formatted information easy to read and edit at the source.** Its real value in this tutorial is not the syntax itself, but how readable source files support collaboration, review, and processing.
+The playground shows how readable source becomes a formatted page. To find procedures by owner or review state, software needs information beyond headings and paragraphs. [Chapter 5](05-structured-content.md) adds those structured fields alongside the instructions.
 
 <!-- interactive: chapter-quiz -->

@@ -1,7 +1,7 @@
-# Document-as-Code Lab — Learning Product Specification v1.2
+# Document-as-Code Lab — Learning Product Specification v1.3
 
-> **Proposed implementation baseline · 19 October 2026 · owner-approved direction with a few reviewable design details**\
-> Derived from `01-REUSABLE-TUTORIAL-SPECIFICATION-TEMPLATE.md`. **Target:** 11 chapters (owner reports Chapter 12 removed locally; remote still contained it when checked); keep rewritten Chapter 10; Chapter 11's current “Behind the Lab” treatment may be retained, selectively edited, or simplified. This is the **intended specification**, not a claim that everything is implemented or user-tested.
+> **Editorial baseline · 19 October 2026 · v1.2 functionality retained; editorial direction accepted, revised chapters in review**\
+> Derived from `01-REUSABLE-TUTORIAL-SPECIFICATION-TEMPLATE.md`. **Target:** 11 chapters (remote repository source now confirms Chapter 12 absent); keep rewritten Chapter 10; Chapter 11's current “Behind the Lab” treatment may be retained, selectively edited, or simplified. This is the **intended specification**, not a claim that everything is implemented or user-tested.
 
 ## 1. Product promise
 
@@ -51,7 +51,7 @@ Groups are coherent reader journeys. The homepage should use these *semantic gro
 | **10. Automating Information with GitHub Actions** | Show that source changes can trigger repeatable checks, builds, and publishing | Trace PR → check versus main/schedule → build → Pages; inspect a run | Real workflow map with annotated steps; optional live Actions page | Automation and publishing guides |
 | **11. Behind the Lab: How We Built This Tutorial** | Reveal the system the reader just used and transfer the principles to other tools | Trace Markdown → Astro → JS/Reveal.js → GitHub Actions → Pages; compare with M365 | Architecture Explorer and one clear architecture diagram | Presentations authoring, workflows-across-tools, implementation references |
 
-**Editorial decision on Chapter 11:** Its current long form is not automatically rejected. Retain it if the owner judges it a satisfying overview; prune only sections that repeat prior chapters. Chapter 12's *start with one small information flow* message may become a very short optional closing or a supporting reference—not another mandatory chapter.
+**Editorial decision on Chapter 11:** Its current long form is not automatically rejected. Retain its valuable architectural overview; selectively tighten repeated inventories and transitions after owner review. Chapter 12's *start with one small information flow* message may become a very short optional closing or a supporting reference—not another mandatory chapter.
 
 ## 4. Narrative examples and data boundaries
 
@@ -126,6 +126,48 @@ Supporting reference pages remain outside chapter numbering. Each chapter link s
 
 **Visual density guidance:** Each chapter should have one purposeful visual explanation or interaction near the key learning moment, plus extra graphics only when they materially simplify a question. Do not mandate a decorative image on every page.
 
+## 6A. v1.3 Editorial and Reading-Flow Requirements
+
+**Primary intent:** Improve the reading experience without changing the learning objectives, technical meaning or approved interaction design. This is an editorial pass, not a request to expand scope or invent new content.
+
+**Voice:** clear, conversational, precise and respectful. The reader is an intelligent non-specialist; practitioners may skim but should not feel talked down to. Favor people, situations and consequences over abstractions. Use exact technical words where they carry meaning, and define them at point of need.
+
+**Chapter narrative:** Open with one concrete reader problem, then explain the necessary mechanism and use the existing examples/labs to demonstrate it. Don't open each section by summarizing the previous chapter. In a natural ending, state the insight and leave a relevant next question. Avoid repeating the same benefit in the opening, last paragraph and boxed takeaway.
+
+**Specific continuity requirements:** Use the Onboarding Lab consistently in Chapters 1–7; move from that example to the actual repository and agent-ready knowledge in Chapter 8; explicitly introduce the fictional contracts scenario in Chapter 9; close by revealing the real build/publishing architecture in Chapters 10–11. Transitions should explain why the reader is seeing a different example.
+
+**Caveats:** Keep important distinctions—metadata validity versus accuracy/approval; requirement approval versus implementation; review candidate versus confirmed impact; source versus generated view; build-time versus live; agent file access versus authority. Place each qualification next to the particular example or result where confusion could arise, and eliminate repetitive generic warnings elsewhere.
+
+**Lists, tables, callouts:** Keep only those that improve scanning or comparison. Replace long definitions tables inside core chapters with a small relevant comparison and a glossary invitation. A scenario question should flow naturally from surrounding text, not feel like an isolated exam. A reference card should offer useful depth without interrupting the main story.
+
+**Editor quality gates:**
+- Chapter starts with a specific question/situation within the opening ~100 words.
+- Every section advances the single intended chapter insight; repeated definitions are consolidated or linked.
+- New technical terms are explained at first useful appearance, not preloaded in bulk.
+- Headings and transitions create a readable progression; avoid formulaic "This chapter..." and "Next..." boilerplate when prose works better.
+- Questions, diagrams and labs are introduced and followed by a sentence explaining the consequence.
+- Source links and optional references promise a concrete benefit, and any prerequisites are explicit.
+- Meaning of the original claims is preserved; no changed technical assertions without source verification.
+- The owner reviews representative before/after passages before approving a site-wide editorial pattern.
+
+**No mandatory word quota and no mandatory exercise per chapter.** Retain concise writing but do not amputate the example, rationale or necessary qualification to reach a number.
+
+### Chapter-by-chapter editorial opportunities
+
+| Chapter | Why the flow may improve | Proposed editorial treatment |
+| --- | --- | --- |
+| 1 Introduction | Three separate trend explanations and repeated value propositions precede the first lab | Tighten the route to the onboarding story; preserve the important "why now" factors and the agreed takeaway |
+| 2 Workspace | Definitions and procedural list can feel like a Git mini-manual | Lead with a change to a procedure; explain repository / Git / GitHub in that context; retain precise distinctions |
+| 3 History | Multiple cautions about what history cannot establish interrupt progression | Cluster cautions beside the corresponding history/dashboard claim; highlight one useful reader decision |
+| 4 Markdown | Instructional tone can be more connected to visible outcomes | Let the playground demonstrate one small edit and its resulting rendered view |
+| 5 Structured content | Large "Concepts so far" table delays validation experience | Move most glossary material to `GLOSSARY.md`; keep only terms needed for the scenario question and lab |
+| 6 Traceability | Mostly abstract definitions and relationships | Make the procedure/policy change scenario carry the explanation and adjacent knowledge check |
+| 7 Processing | Pipeline details sometimes replace the reader's question | Lead with the result readers want, then show how the processor gets there |
+| 8 AI agents | Published v1.2 framing already covers agent-ready project knowledge | Review v1.2 agent-ready knowledge rewrite for plain language and a real `AGENTS.md` walkthrough, not an obvious AI comparison |
+| 9 Explore information | Dense record table and three perspectives could overwhelm new readers | Open with one contract/delivery question, guide to its answer, then invite free exploration |
+| 10 GitHub Actions | Workflow table and runner terms can feel like infrastructure documentation | Start with "What happens when this source changes?" and link detailed workflow mechanics to reference |
+| 11 Behind the Lab | Many inventory tables repeat technology described previously | Tell one end-to-end story using the architecture explorer; keep Microsoft 365 comparison and practical conclusion without an extra chapter |
+
 ## 7. Implementation architecture (the tutorial, not the universal standard)
 
 | Concern | Current project approach | Required boundary |
@@ -144,9 +186,9 @@ Supporting reference pages remain outside chapter numbering. Each chapter link s
 
 **Transferability:** Describe equivalent *capabilities*, not false one-to-one tool equivalence. OneDrive/SharePoint offer managed files and versions; Copilot/agent integrations can retrieve files and, with appropriately configured tools and permissions, modify them; review and automation may be implemented through SharePoint/Power Automate. They do not become Git pull requests by being in the cloud.
 
-## 8. v1.2 acceptance criteria
+## 8. v1.2 functional acceptance and v1.3 editorial criteria
 
-The tutorial has **11 chapters** as the desired finished state. The user reports having deleted Chapter 12 locally; remote `main` still included it when this specification was checked. Never restore a user's uncommitted deletion merely because the remote baseline differs.
+The tutorial has **11 chapters** as the desired finished state. The public repository currently lists 11 chapter sources, with Chapter 12 absent. Confirm that navigation, decks, reference links and a production build reflect the same 11-chapter structure.
 
 1. **Eleven-chapter integrity:** No obsolete Chapter 12 page, navigation, final next-link, slides or source refs; route redirects checked; all book/README references reconciled.
 2. **Chapter 8:** Explains agent-ready knowledge and the distinct roles of `AGENTS.md`, project information architecture, conventions, decisions, maintained sources, and validation; one short, useful scenario check; references updated to remove the obvious with/without-context exercise from the default path.
@@ -156,6 +198,8 @@ The tutorial has **11 chapters** as the desired finished state. The user reports
 6. **Better reference links:** At least one value-led reference entry at a natural point in each relevant chapter, with prerequisite/no-setup context when useful. References stay separate from numbered chapters.
 7. **Knowledge architecture:** `AGENTS.md` links to maintained guidance rather than duplicating it. If an architecture map/decision log does not exist, add only a lean, accurate version grounded in real repo structure and agreed decisions. Prefer existing `GLOSSARY.md`, `CONTRIBUTING.md`, tests and schemas where adequate.
 8. **Experience and reliability:** Visual review by the owner; correct browser states and source citations; no account or local tools for core path; keyboard/no-JS/mobile behavior checked; all Astro check/build, tests, slides and links pass; deployment verified only after publication.
+
+**v1.3 editorial release acceptance:** Representative before/after passages demonstrate smoother entry, reduced unnecessary repetition, consistent terminology and a stronger narrative bridge for each changed chapter; interaction meaning and source fidelity are unchanged. `CONTRIBUTING.md`, `AGENTS.md` and any editorial guide use consistent optional-exercise and style rules. Avoid overwriting v1.2 component work when it lands.
 
 **Evaluation model:** owner reviews concrete examples and implementation. External reader studies and learner-success statistics are not release gates and must not be claimed. This is an owner-approved design and technically checked learning product.
 
@@ -173,7 +217,13 @@ The tutorial has **11 chapters** as the desired finished state. The user reports
 
 **Delivery approach:** The seven items belong to **one integrated review/update**, but the agent must keep them separable in the diff, preserve existing work, and report verification by workstream. No commit or push without explicit authorization. Technical correctness is checked by CI/local build; content/design approval remains with the owner.
 
-**Design decisions:** See companion `04-DESIGN-DECISIONS.md`. Details of typography and spacing may be refined in owner review, but default to the current site palette and avoid rebranding.
+**Design decisions:** See [the decision register](04-DESIGN-DECISIONS.md) and [accepted editorial samples](V1-3-EDITORIAL-DECISIONS.md). Details of typography and spacing may be refined in owner review, but default to the current site palette and avoid rebranding.
+
+### v1.3 Editorial Quality
+
+One integrated **editorial pass** across all 11 chapters and their immediately linked reference invitations. Start from the actual repository after v1.2 is merged; do not blindly overwrite changed chapter text with an old proposed file. Group changes chapter by chapter so the owner can review each diff. Update writing guidance in `CONTRIBUTING.md` and reference it from `AGENTS.md`, rather than hiding the conventions in this specification alone. Include at least three representative before/after examples before requesting owner approval for the editing pattern. Do not launch a second framework or new full-size lab.
+
+**Prioritize:** (a) introduction/flow/terminology, (b) repetition and depth boundaries, (c) bridges between examples and chapters, (d) lab/quiz microcopy, (e) contextual reference-link language, and (f) final editorial and technical verification.
 
 ## 10. Targeted reference-pattern decisions for v1.2
 
@@ -190,6 +240,6 @@ The tutorial has **11 chapters** as the desired finished state. The user reports
 
 ## 11. Evidence reviewed and limits
 
-Source baseline inspected on 19 October 2026: [repository](https://github.com/And-Gu/document-as-code-lab), [chapters](https://github.com/And-Gu/document-as-code-lab/tree/main/docs), [Astro site](https://github.com/And-Gu/document-as-code-lab/tree/main/site), [decks](https://github.com/And-Gu/document-as-code-lab/tree/main/presentations), [workflows](https://github.com/And-Gu/document-as-code-lab/tree/main/.github/workflows). Ch 10 and Ch 11 rewrites and the Architecture Explorer are on the remote branch. The remote branch still exposed `docs/12-automation.md` even though the owner reports deleting Chapter 12 locally; interpret this as an unsynchronized baseline, **not** a request to restore that chapter.
+Source baseline inspected on 19 October 2026: [repository](https://github.com/And-Gu/document-as-code-lab), [chapters](https://github.com/And-Gu/document-as-code-lab/tree/main/docs), [Astro site](https://github.com/And-Gu/document-as-code-lab/tree/main/site), [decks](https://github.com/And-Gu/document-as-code-lab/tree/main/presentations), [workflows](https://github.com/And-Gu/document-as-code-lab/tree/main/.github/workflows). Ch 10 and Ch 11 rewrites and the Architecture Explorer are on the remote branch. The remote repository now lists 11 chapter files, with Chapter 12 absent. That package inspection preceded the verified v1.2 release. Implementation starts from clean main at `6d8ee1d`, where the agent-knowledge rewrite, three scenario checks, guided Contract Explorer, and eleven-chapter site are published. Preserve those implementations.
 
-No rendered-browser accessibility, mobile, or performance audit has yet been completed, and no wider-reader learning-effectiveness result is claimed. The implementation agent should report observed verification results from its workspace and from the actual site, when available.
+The v1.2 implementation record describes its local and hosted functional checks. This editorial revision needs its own regression evidence; neither a full accessibility/performance audit nor wider learning effectiveness is established by the sample approval. The [editorial review](EDITORIAL-REVIEW.md) records the changed reading path and actual checks.

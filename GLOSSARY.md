@@ -10,9 +10,20 @@ These definitions describe how terms are used in this tutorial.
 | Information-as-code | This tutorial's broader framing for applying versioning, review, and repeatable processing to text, models, visuals, and data |
 | Record | An identifiable item containing prose and metadata, such as a requirement |
 | Metadata | Fields describing content, such as its ID, owner, and status |
+| Structured field | A named value that software can read directly, such as `owner: onboarding-team` |
+| Frontmatter | A metadata block at the beginning of a file; this tutorial writes Markdown frontmatter between opening `---` lines |
+| YAML | A text format for structured information, used in frontmatter and separate configuration or data files |
+| Identifier | A stable reference for an information item, such as `PROC-001` |
+| Owner | The person or team responsible for maintaining an item; not necessarily its approver |
+| Review status | The recorded state of content review, such as `draft` or `approved` |
 | Authoring template | A starting structure for creating a record or document |
 | Output template | A layout for presenting selected source material |
 | Schema | Rules defining required fields, data types, and allowed values |
+| Validation | Checking information against configured rules; structural validity does not establish accuracy or approval |
+| Processing | Running software to read, check, select, calculate, or transform sources |
+| Derived view | A presentation calculated or assembled from source information, such as a review queue |
+| Information architecture | How maintained information is divided into identifiable items and connected through meaningful relationships |
+| Traceability | The ability to follow meaningful relationships between information items, revisions, reviews, and outputs |
 | Generated output | Material produced by processing sources, ready for inspection |
 | Published output | An output made available to its intended audience |
 | Repository | Files and their version history |
@@ -32,6 +43,7 @@ These definitions describe how terms are used in this tutorial.
 | Runner | The machine executing a workflow job |
 | Artifact | Output files retained from an automated run |
 | Large language model (LLM) | An AI model trained on large amounts of text to interpret and generate language; it can use supplied context for tasks such as drafting, summarizing, and analysis |
+| AI agent | A language model combined with tools for permitted operations such as reading sources, proposing edits, and running checks |
 | AI context package | Selected sources and task instructions supplied to an AI tool |
 | AI-native documentation | Information maintained for people and AI tools to use through clear context, traceable changes, and reviewable results |
 | Retrieval | Finding relevant source items for a task using identifiers, metadata, links, or search |

@@ -1,7 +1,7 @@
 ---
 id: github-workspace
 chapter_number: 2
-status: approved
+status: in-review
 learning_goal: "Distinguish a repository, Git and GitHub, and follow the path from proposed edit to accepted source."
 visuals:
   - id: git-github
@@ -26,7 +26,9 @@ visuals:
 
 # A Shared Workspace for Information
 
-When information matters to several people, they need to know where it lives, what changed, and which version to trust. In this tutorial, we use a **Git repository hosted on GitHub** as our shared workspace.
+Suppose the access procedure from chapter 1 needs a new step. The author needs somewhere to prepare the change, colleagues need to review it, and everyone needs to know which version they are reading.
+
+This tutorial uses a **Git repository hosted on GitHub** for that work. The repository keeps the source files and their history together. Git records revisions, while GitHub provides a shared place to propose and review changes.
 
 ## Repository, Git, and GitHub
 
@@ -47,7 +49,7 @@ flowchart TB
 *Git records versions; GitHub hosts the repository and adds collaboration and automation.*
 
 
-A **workspace** is broader than the repository itself. It includes the editors, people, workflows, and tools used to maintain the information. In this project, GitHub hosts the repository where the team shares and reviews changes. Authors can edit files directly on GitHub or work on a copy of the repository stored on their own computer, using an editor or AI assistant. Changes made on that computer must be sent to GitHub before others can review them there.
+Authors can edit directly on GitHub or use an editor or AI agent with a copy stored on their computer. Local changes must be sent to GitHub before colleagues can review them there. Together, the repository, editors, people, and workflows form the team's **workspace**.
 
 ## Branches, Commits, and Pull Requests
 
@@ -61,7 +63,7 @@ Changes move from an author's working version into the shared source through a f
 
 ## Follow a proposed change
 
-Suppose the access instructions used in chapter 1 need a new step. The contributor edits the source on a branch and commits the change. A pull request presents the proposed change for review. Reviewers can compare versions, discuss the wording, and check whether related outputs still work.
+For the new access step, the contributor edits the source on a branch and commits the change. A pull request presents it for review: colleagues can compare the wording with the earlier version, discuss the proposed step, and check affected outputs.
 
 After acceptance, the change can be merged into the main branch. This updates the maintained source. Any published output changes only when its build or publishing process runs successfully.
 
@@ -79,13 +81,13 @@ flowchart LR
 *Recording, reviewing, merging, and publishing are separate steps.*
 
 
-Three things are different:
+The new step can therefore be recorded before it is accepted, and accepted before it reaches readers:
 
 - **Recorded:** Git remembers a revision.
 - **Reviewed:** Someone has inspected and accepted a proposed change.
 - **Published:** Readers can access a resulting output.
 
-One does not automatically guarantee the others. A successful build shows that configured checks ran; it does not establish that the content is correct or approved.
+Checks help reviewers assess the proposal. A successful build does not decide whether the new instruction is correct.
 
 ## The Onboarding Lab in the repository
 
@@ -95,14 +97,14 @@ Our example has procedure files such as `access.md`, `equipment.md`, and `contac
 
 In the [real repository](https://github.com/And-Gu/document-as-code-lab), start with the [README](../README.md), locate the chapter and onboarding files, and look at the history of one file. Reading and exploring should not require creating an account. Modifying a repository is an optional advanced activity.
 
-As you explore, you will find more than the information itself. The repository also holds rules for checking changes and publishing results. For example, a proposed change can trigger a website build check, while an accepted change can trigger publication. GitHub Actions runs this automation; later chapters explain its workflows and runners.
+Alongside the chapter files, you will find rules for checking changes and publishing results. A proposed edit can trigger a website build check; an edit merged into `main` can trigger publication. GitHub Actions runs these operations, which we follow in [chapter 10](10-publishing.md).
 
 With suitable permissions, the team can improve these rules alongside the information. An AI agent can use both as context when helping with changes, while people remain responsible for reviewing the results and maintaining the tools.
 
 > **Explore further:** Want to inspect a proposed change? The [collaboration guide](../reference/review-and-collaboration.md) explains diffs, review scope, and approval boundaries. Its optional contribution steps are separate from the browser-first tutorial.
 
-For now, remember the essential relationship: **the repository holds maintained sources; Git records their history; GitHub provides a shared place to work with them.**
+**The repository holds the sources, Git records their history, and GitHub provides a shared place to work with them.** Once a change is recorded, that history can help us understand more than the latest wording.
 
 <!-- interactive: chapter-quiz -->
 
-Next, [chapter 3](03-project-growth.md) connects recorded history to useful reports.
+[Chapter 3](03-project-growth.md) follows a revision and the evidence it leaves behind.

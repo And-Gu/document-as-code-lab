@@ -26,21 +26,21 @@ visuals:
 
 # Document-as-Code: Information We Can Work With
 
-A document is useful when someone can read it. Information becomes more powerful when we can also update, connect, check, and reuse it. **Document-as-Code** applies practices from software development to information: maintain readable sources, record changes, review proposed updates, and automate repeatable work.
+An instruction changes, and the team needs to update a handbook, a training guide, and a website. Could they use one shared source instead of maintaining three copies?
+
+**Document-as-Code** applies practices from software development to that work: keep readable sources, record and review changes, and automate repeatable tasks. The information can then support documents, diagrams, dashboards, and AI-assisted work.
 
 This tutorial is both an introduction and a working example. Its source material is maintained as [Markdown files in the repository](https://github.com/And-Gu/document-as-code-lab/tree/main/docs). Astro builds the [reading website](https://and-gu.github.io/document-as-code-lab/) from those same files. The website adds interactive practice and dashboards; GitHub's Markdown preview remains a readable version without those controls.
 
-You may also encounter the term **Docs-as-Code**, particularly for maintaining and publishing documentation. This lab builds on that foundation and emphasizes information that can also be structured, connected, and reused in models, dashboards, and AI workflows. These are related practices, not competing definitions.
-
 ## Why now?
 
-**Software-driven development.** Products and services change through frequent software updates. Requirements, procedures, plans, and evidence need to keep pace—not be assembled into disconnected documents long after the work happened.
+Frequent software updates mean that requirements, procedures, and evidence need to keep pace with products and services. This **software-driven development** makes repeated manual updates harder to sustain.
 
-**AI-native workflows.** AI tools can draft text, inspect files, suggest changes, and run processing steps. To work reliably, they need accessible sources, sufficient context, clear instructions, and results that people can verify. AI increases what is possible; it does not remove the need for ownership and review.
+**AI-native workflows** add another reason to make information accessible. AI tools can inspect sources, propose edits, and run processing steps when they have suitable tools and permissions. Clear instructions, relevant context, and reviewable results help people assess that work.
 
-**Digital engineering.** Teams increasingly connect plans, models, interfaces, tests, and operational evidence. That becomes difficult when information is trapped inside separate presentations or documents that cannot be processed together.
+In **digital engineering**, teams connect plans, models, interfaces, tests, and operational evidence. Separate documents remain useful, but their information also needs to work across those connections.
 
-These trends do not make Document-as-Code mandatory. They make its central idea more useful: **maintain information in a form that people and tools can work with.**
+All three benefit from information that people and tools can inspect and process together.
 
 ```mermaid
 flowchart LR
@@ -54,7 +54,7 @@ flowchart LR
 
 ## From a document to maintained information
 
-Consider an onboarding process. New colleagues need instructions for requesting system access, collecting equipment, and finding the right contacts. These instructions can appear in a handbook, training guide, or website.
+Our fictional onboarding team maintains instructions for requesting system access, collecting equipment, and finding the right contacts. A handbook brings them together for a new colleague; a training guide may need only some of them.
 
 If each publication contains its own copy, one change to a procedure may require several manual updates. Copies can become inconsistent, and it may be unclear which version has been reviewed.
 
@@ -77,7 +77,7 @@ flowchart LR
 
 ## Explore the Onboarding Lab
 
-Throughout this tutorial, we use a small fictional onboarding system. It includes three procedures: system access, equipment, and contacts. Each has content and metadata such as an owner and review state. Later chapters show how changes, relationships, checks, and processing can turn these maintained sources into useful results.
+The Onboarding Lab uses those three procedures to show how source information can serve different needs. Each procedure includes its instructions and details about ownership and review, which later chapters explain as metadata.
 
 ### Choose how the information can be used
 
@@ -99,7 +99,7 @@ The lab shows how a rule changes which information qualifies for use. To see wha
 
 These are saved examples. Changing the rule in the lab does not update them.
 
-Both examples follow the same principle: **maintained information → explicit rules → useful results**. Later chapters unpack each part.
+The inclusion preview and saved outputs follow the same principle: **maintained information → explicit rules → useful results**.
 
 > **What about task management?** GitHub Issues and Projects can track proposed updates and reviews. Closing an issue does not approve a source revision; approving a procedure does not complete an employee's onboarding tasks. Here, we focus on maintained information and its lifecycle.
 
@@ -107,9 +107,9 @@ Both examples follow the same principle: **maintained information → explicit r
 
 The approach above can support checklists, reports, diagrams, simulation inputs, dashboards, and AI-assisted work. It can also help teams review not only information but the rules that process it.
 
-We will explore where information lives, how its changes are recorded, how Markdown and metadata work, and how processing produces different results. You can follow the demonstrations without installing development tools. The actual repository is available for readers who want to inspect the implementation.
+You may also encounter **Docs-as-Code**, particularly for maintaining and publishing documentation. This lab builds on that practice and extends the examples to structured records, relationships, and interactive views.
 
-Each chapter builds on the onboarding example, introducing new concepts and practical demonstrations along the way.
+You can follow the demonstrations without installing development tools. We start with onboarding information, then explore agent-ready project knowledge, a fictional contract model, and the actual system behind this website. [Chapter 2](02-github-workspace.md) begins with the shared workspace where the sources and proposed changes live.
 
 > **Takeaway:** Document-as-Code is not primarily about writing documents in a different format, tool, or editor. It is about managing information so that it can be maintained, reviewed, traced, reused, and processed by both people and tools.
 

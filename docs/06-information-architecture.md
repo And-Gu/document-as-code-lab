@@ -17,9 +17,9 @@ visuals:
 
 # Information Architecture and Traceability
 
-Information becomes harder to maintain as a project grows. A single handbook is manageable. A network of procedures, decisions, activities, and checks is not—unless we can identify each item and the relationships between them.
+The security policy changes. Which onboarding procedures should the team inspect, and which activities use those instructions? Searching for a familiar phrase may miss a connection or find an unrelated one.
 
-**Information architecture** is the way we divide and connect maintained information. **Traceability** means being able to follow meaningful relationships between those items. Neither requires a specialist modeling tool.
+Explicit identities and relationships give the team a more reliable starting point. **Information architecture** describes how we divide and connect the information; **traceability** lets us follow those connections when something changes.
 
 ## Choose useful boundaries
 
@@ -33,7 +33,7 @@ A filename helps a person locate a document. A stable identifier helps software 
 
 ## Connect information with explicit relationships
 
-A simple structured record could refer to a procedure and a prerequisite:
+An activity record can identify both the procedure it uses and the activities it depends on. For example:
 
 ```yaml
 id: ACT-003
@@ -44,7 +44,7 @@ depends_on:
   - ACT-002
 ```
 
-Here `procedure_id` identifies guidance used by the activity; `depends_on` identifies another operational activity. The two relationships mean different things and should be displayed differently.
+Here `procedure_id` identifies guidance; `depends_on` identifies prerequisite activities. Those relationships answer different questions: which instructions apply, and what needs to happen first?
 
 
 ```mermaid
@@ -55,11 +55,11 @@ flowchart LR
  ACT-002[ACT-002: Security training complete] -->|prerequisite for| S
 ```
 
-*This is a conceptual illustration of the fictional scenario, not a live system.*
+*In this fictional example, the access requirement constrains the procedure. The procedure guides system orientation, while access and security training are prerequisites.*
 
 ## What changes when a source changes?
 
-Suppose the requirement for system access is updated. We can follow relationships to identify the procedure, activities, and checks that **may need review**. A link does not prove that every linked object must change; it identifies candidates for impact assessment.
+A policy or requirement change gives us a reason to follow those links. They identify procedures and activities that **may need review**, rather than prescribing an edit to every connected item.
 
 A simple graph is enough to begin. More complex projects may need stronger types, validation rules, ownership, and a way to detect missing or circular references. Introduce that complexity when it solves a real problem.
 
@@ -75,13 +75,13 @@ Consider changing the wording of REQ-001. Its link identifies PROC-001 as a cand
 | PROC-001 | Access procedure | Check whether the instructions still agree |
 | ACT-003 | System orientation | Check whether its guidance or prerequisites need adjustment |
 
-ACT-001 means system access, ACT-002 means security training, and ACT-003 means system orientation. These fictional activity records illustrate dependencies. They are not the requirement/task/test records processed by the Python example.
+The diagram's activity records are fictional examples of dependencies, separate from the executable requirement/task/test dataset in the [record-processing guide](../reference/record-processing.md).
 
 
-**Key point:** Good information architecture makes change easier to understand. More files and links do not automatically make a better system.
+The useful result is a route from a changed source to the people and information that may be affected. More files and links help only when their boundaries and meanings support that work.
 
 > **Explore further:** How do these relationships become readable diagrams? The [visual-source guide](../reference/visual-sources.md) explains which representations preserve meaning and how to make their outputs accessible. Reading the guide needs no local setup.
 
-**Next:** [Chapter 7](07-processing.md) focuses on processing procedure text and metadata into a handbook and review queue.
+Once the records and relationships are clear, software can use them to produce useful results. [Chapter 7](07-processing.md) follows procedure text and metadata into a handbook and review queue.
 
 <!-- interactive: chapter-quiz -->

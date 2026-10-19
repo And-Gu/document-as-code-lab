@@ -8,29 +8,15 @@ visuals: []
 
 # Information You Can Explore
 
-A document answers the questions its author anticipated. Maintained, structured information can support other questions without requiring someone to write a new document for each one.
+A contract manager receives a proposed amendment. Which deliveries deserve review before the team accepts it? The answer depends on connections between agreements, projects, and deliveries, not just the wording of one document.
 
-So far, we have identified information objects and their relationships ([chapter 6](06-information-architecture.md)), then used processing to produce outputs ([chapter 7](07-processing.md)). Now we take the next step: **let people explore those relationships and choose the view they need.**
+The onboarding examples showed how to identify, connect, and process information. Here we use a different fictional setting to explore what happens when **readers choose the question and follow the relationships themselves**.
 
 ## A customer, two projects, several commitments
 
-Imagine a company delivering multiple projects to the same customer. Each project has its own deliveries and schedule, but some contracts cover more than one project. Amendments may change the terms for particular deliveries.
+Our customer has two projects. A framework agreement covers both, while a delivery order covers one. Proposed amendment AMD-001 would change terms for its interface package, DEL-101. The acceptance workshop, DEL-102, depends on that package.
 
-Our fictional example contains:
-
-| Record | What it represents | Connection |
-| --- | --- | --- |
-| CUST-01 | Northstar Logistics | Customer for both projects |
-| PRJ-101 | Depot rollout | Includes DEL-101 and DEL-102 |
-| PRJ-102 | Training services | Includes DEL-103 |
-| AGR-001 | Framework agreement | Applies to both projects |
-| AGR-002 | Project delivery order | Applies to PRJ-101 |
-| AMD-001 | Proposed amendment | Proposes changes to AGR-002 affecting DEL-101 |
-| DEL-101 | Interface package | Part of PRJ-101 |
-| DEL-102 | Acceptance workshop | Part of PRJ-101; depends on DEL-101 |
-| DEL-103 | Training package | Part of PRJ-102 |
-
-These are **fictional teaching records**, maintained as [Markdown sources in the repository](../examples/contract-explorer/README.md), not actual contracts. Their relationships are explicitly recorded; an application must not invent them by guessing from titles.
+These are **fictional teaching records**, maintained as [Markdown sources in the repository](../examples/contract-explorer/README.md), not actual contracts. Their relationships are recorded explicitly rather than guessed from titles.
 
 ## Same information, different questions
 
@@ -46,7 +32,7 @@ Switch to a delivery-focused view. DEL-102 depends on DEL-101. A list of documen
 
 **Contract manager: What should we review if the amendment is accepted?**
 
-Select AMD-001 and follow its recorded connections. DEL-101 is directly affected; PRJ-101 and dependent DEL-102 are *candidates for review*. The connections do not prove that every item needs a change, or that the proposed amendment is already effective.
+Follow AMD-001's connections to the affected delivery, its project, and dependent work. The links identify possible review work; the proposal is not yet effective.
 
 The underlying records have not changed. **Only the question and the view have changed.**
 
@@ -64,13 +50,29 @@ The explorer offers three selectable perspectives:
 
 Selecting a record reveals its **source file, status, revision, and explicit relationships**. The interface distinguishes *recorded connections* from *possible impacts inferred by following those connections*.
 
-For example, if AMD-001 is **proposed**, the view must not quietly present it as a signed amendment. Likewise, an agreement's approval state does not establish whether a delivery is complete. **Document status and delivery status are different information.**
+AMD-001 remains **proposed**, not effective. Its lifecycle status does not establish whether a delivery is complete; the explorer shows delivery execution status separately.
 
 The explorer is not a new system of record. Selection and filtering change the view, not the maintained files. Source edits appear after the site is rebuilt.
 
 **If proposed amendment AMD-001 were accepted, which deliveries deserve review?** Start with **Explore change impact** below, then inspect the directly linked delivery and follow the dependency to a further review candidate. Without JavaScript, read the Change impact list and linked records; the same recorded paths remain available.
 
 <!-- interactive: contract-explorer -->
+
+The direct links identify DEL-101. Because DEL-102 depends on it, DEL-102 is a further review candidate. Neither connection decides what the team should change. You can inspect the same chain in the sources below.
+
+## Inspect the example records
+
+| Record | What it represents | Connection |
+| --- | --- | --- |
+| CUST-01 | Northstar Logistics | Customer for both projects |
+| PRJ-101 | Depot rollout | Includes DEL-101 and DEL-102 |
+| PRJ-102 | Training services | Includes DEL-103 |
+| AGR-001 | Framework agreement | Applies to both projects |
+| AGR-002 | Project delivery order | Applies to PRJ-101 |
+| AMD-001 | Proposed amendment | Proposes changes to AGR-002 affecting DEL-101 |
+| DEL-101 | Interface package | Part of PRJ-101 |
+| DEL-102 | Acceptance workshop | Part of PRJ-101; depends on DEL-101 |
+| DEL-103 | Training package | Part of PRJ-102 |
 
 ## Why this is more than a dashboard
 
@@ -88,8 +90,6 @@ When a source changes, generated views should refresh through a defined process.
 
 > **Explore further:** Want to create reusable diagrams and views? The [visual-source guide](../reference/visual-sources.md) explains Mermaid, SVG, raster images, source provenance, and accessible alternatives. Reading needs no setup; optional rendering examples identify their tools.
 
-**Key point:** Document-as-Code becomes more powerful when information is not only published, but also **available to explore, connect, and reuse**.
-
-**Next:** [Chapter 10](10-publishing.md) shows how maintained sources become published outputs.
+A useful explorer lets you move from a question to recorded evidence without maintaining another copy of the information. Those views still need to be rebuilt when sources change. [Chapter 10](10-publishing.md) follows how this tutorial automates that work.
 
 <!-- interactive: chapter-quiz -->

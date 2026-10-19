@@ -1,11 +1,14 @@
 # Tutorial Design Baseline
 
-The v1.2 package dated 19 October 2026 defines the agreed direction for this tutorial. It is a design baseline, not proof of implementation, content approval, accessibility conformance, or learning effectiveness.
+The functional direction comes from v1.2; the current v1.3 specification adds the editorial style accepted after three sample reviews on 19 October 2026. A specification records intent, not proof of implementation, chapter approval, accessibility conformance, or learning effectiveness.
 
 - [Reusable specification template](01-REUSABLE-TUTORIAL-SPECIFICATION-TEMPLATE.md): a starting point for another tutorial.
 - [Lab specification](02-DOCUMENT-AS-CODE-LAB-V1-SPECIFICATION.md): reader outcomes, curriculum, and acceptance criteria.
 - [Audit and backlog](03-V1-SITE-AUDIT-AND-PRIORITIZED-BACKLOG.md): the seven coordinated workstreams and their original observations.
 - [Design decisions](04-DESIGN-DECISIONS.md): dated direction, conservative defaults, and details awaiting owner review.
+- [v1.3 editorial audit](V1-3-EDITORIAL-AUDIT.md): original observations, reconciled with the deployed v1.2 baseline.
+- [Accepted editorial samples](V1-3-EDITORIAL-DECISIONS.md): owner-approved examples and the boundaries of that approval.
+- [Editorial review](EDITORIAL-REVIEW.md): chapter-by-chapter changes and regression evidence.
 
 ## Baseline Reconciliation
 
@@ -18,5 +21,7 @@ The current sequence contains eleven chapters. Existing historical measurement s
 The tutorial owner reviews the resulting chapter text, scenario wording, guided explorer entry, and visual treatment. Technical checks establish working behavior, not educational effectiveness. No external learner study is a release prerequisite.
 
 See the [implementation review](IMPLEMENTATION-REVIEW.md) for changed files, local preview links, verification evidence, and remaining owner decisions.
+
+That review describes v1.2. The v1.3 pass starts from clean main at `6d8ee1d`; it preserves all existing interactions and source IDs, and returns substantively revised chapters to review.
 
 Use the [project source map](../../reference/project-knowledge.md) to locate maintained sources and checks. Keep specific writing rules in [CONTRIBUTING.md](../../CONTRIBUTING.md) and terminology in [GLOSSARY.md](../../GLOSSARY.md), rather than duplicating them here.

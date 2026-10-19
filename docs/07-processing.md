@@ -17,11 +17,11 @@ visuals:
 
 # From Sources to Results
 
-Maintained information becomes more useful when we can transform it into results for different audiences. That requires more than saving Markdown: it requires explicit rules for reading, checking, and assembling sources.
+The onboarding team needs a handbook for review, a trainer needs only the access instructions, and procedure owners need a list of drafts. All three can start from the same procedure files, but each needs different selection and presentation rules.
 
 ## One processing chain
 
-We will follow the three onboarding procedures introduced in earlier chapters. A small program reads those files and generates a handbook review copy, an access-only training excerpt, and a review-status chart. The repository contains the processing code alongside the source information.
+A small program reads Access, Equipment, and Contacts, checks their fields, then creates those outputs. The fixed showcase produces a handbook review copy, an access-only training excerpt, and a review-status chart. The browser lab below uses the same pattern to produce handbook text and a review queue. The repository holds the processing code alongside the source information.
 
 
 ```mermaid
@@ -40,7 +40,7 @@ The process contains four distinct steps:
 3. **Transform.** Select, combine, or calculate information for a purpose.
 4. **Generate outputs.** Produce readable pages, structured reports, or visualizations.
 
-The same sources can serve several audiences. A handbook combines procedure text; a training excerpt selects instructions for a particular session; a review queue uses ownership and review status to identify procedures needing attention.
+These rules determine what changes in each result. Editing an instruction changes the assembled handbook; changing its review status can change the review queue without changing the instruction itself.
 
 In these procedure files, `status` records whether the instructions are draft or approved. The processing rules use that meaning when selecting procedures for the review queue. Field names, allowed values, and the rules that interpret them need to agree; renaming a field also requires updating the schema and processing code that use it.
 
@@ -48,7 +48,7 @@ In these procedure files, `status` records whether the instructions are draft or
 
 If an instruction changes, the processor can produce an updated handbook. Readers do not necessarily receive that update automatically: publication depends on how the Document-as-Code system is configured. One setup may publish after checks and review; another may require someone to release the result. The setup determines which version readers can access and when it becomes available.
 
-Likewise, a successful build does not mean that the text is accurate or approved. It only shows that the configured tasks completed successfully. Meaning, suitability, and formal acceptance can require human judgment.
+A successful build confirms that the configured tasks completed. A reviewer still decides whether the resulting text is accurate and suitable for release.
 
 ## Explore: Run the pipeline
 
@@ -60,9 +60,11 @@ The website simulation builds on the Markdown editor from chapters 4 and 5. You 
 
 You can also try `status: unknown` to trigger a schema error, or change the identifier to `PROC-001` to trigger a duplicate-ID error across the three files. Use **Restore the original example** to reset the editor, then run the build to restore its outputs.
 
-Unlike chapter 5's single-file validation, this build processes all three procedures together. The handbook review copy includes their text, including drafts; the review queue lists only draft procedures. A text edit changes the handbook, while a status edit changes the queue. Both outputs follow explicit rules applied to the same sources. Changing the practice copy does not approve the maintained procedure or publish a handbook.
+Unlike chapter 5's single-file check, this build processes all three procedures together. It includes all their text in a handbook review copy and selects drafts for the queue. The practice copy stays in your browser; its status changes do not approve the original procedure or publish a handbook.
 
 <!-- interactive: processing-lab -->
+
+The preview follows your typing; generated results wait for checks and a successful build. That separation helps you see which action produced each result.
 
 > **Explore further:** Want to run the actual record processor? The [record-processing guide](../reference/record-processing.md) covers selected inputs, validation failures, and generated results. It is an optional local exercise requiring a checkout, Python, and the listed dependencies.
 
@@ -70,6 +72,6 @@ Unlike chapter 5's single-file validation, this build processes all three proced
 
 Processing rules are part of the maintained system. **They can be versioned, tested, reviewed, and improved alongside the information they transform.** This is what makes repeated outputs consistent—and makes the process inspectable when something goes wrong.
 
-**Next:** [Chapter 8](08-ai-native.md) explores what AI can do with these maintained sources and clear processing boundaries.
+Those same sources and rules can also guide an AI agent helping with a change. [Chapter 8](08-ai-native.md) turns from our fictional onboarding records to the actual project knowledge an agent needs.
 
 <!-- interactive: chapter-quiz -->

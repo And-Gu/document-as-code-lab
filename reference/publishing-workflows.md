@@ -8,7 +8,24 @@ A new colleague may want a page they can find quickly on their phone. A trainer 
 
 Publishing is the process of selecting, preparing, checking, and delivering information for an audience. Converting Markdown into another file format is one part of that process. The larger task is deciding what readers need and making the result work for them.
 
-This chapter uses our onboarding example to plan three publications. We also examine the tutorial's published website and HTML introduction deck. The core exercise works with the files already in the project; an export extension introduces tools to try when you are ready to generate additional formats.
+This optional guide uses our onboarding example to plan three publications. It also examines the tutorial's published website and HTML introduction deck. Reading needs no setup; local build and export activities use the tools identified below.
+
+## Read the Lab's Deployment Triggers
+
+The [deployment workflow](../.github/workflows/deploy-pages.yml) starts a site build on these events:
+
+```yaml
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  schedule:
+    - cron: '17 * * * *'
+```
+
+The build job checks out the repository, prepares Python, and invokes the Astro build action. A separate job publishes the built files to GitHub Pages. The hourly trigger refreshes dashboard snapshots; it does not edit chapter sources, and scheduled runs can be delayed.
+
+The workflow file remains authoritative if these settings change. [Chapter 10](../docs/10-publishing.md) follows the reader-facing distinction between checks, retained artifacts, and publication.
 
 ## One Source, Several Reading Experiences
 

@@ -17,9 +17,9 @@ visuals:
 
 # Automating Information with GitHub Actions
 
-In [Chapter 7](07-processing.md), we ran a program to check information and generate results. But if someone changes a source tomorrow, who will remember to run it again?
+Someone updates a chapter and sends the change for review. The website needs checking before the change is accepted, then rebuilding and publishing after it reaches the shared source. Who will remember to run each operation?
 
-**GitHub Actions turns repeatable operations into workflows triggered by events.** This repository uses it to check contributions, measure project growth, prepare a PDF proof, and publish the tutorial website.
+We now turn from fictional examples to this tutorial's actual repository. **GitHub Actions** runs configured operations when events occur, such as a pull request, a push, or a scheduled time. This is how the lab checks contributions, measures growth, prepares a PDF proof, and publishes its website.
 
 ## From running a script to running a workflow
 
@@ -33,7 +33,7 @@ A script defines *what to do*. A workflow defines *when to run it, where it runs
 | **Runner** | The machine executing a job |
 | **Artifact** | An output retained from a run, such as a report or PDF proof |
 
-These are not new kinds of documents. They are a way to run the checks and generators we already maintain, consistently and visibly.
+The workflow file connects an event to the checks and generators introduced in [chapter 7](07-processing.md). Its run record shows what executed and what happened.
 
 ## What runs in this tutorial?
 
@@ -64,7 +64,7 @@ flowchart TB
     pages --> reader["Reader opens the published website"]
 ```
 
-*This is an explanatory flow, not a claim that every merge requires a particular approval rule. Required checks and approvals depend on repository settings. Scheduled runs may be delayed.*
+*A proposed edit triggers checks; a separate workflow builds and publishes the site after merge or a scheduled refresh. Required approvals depend on repository settings, and scheduled runs may be delayed.*
 
 **Astro** builds the site. **GitHub Actions** runs that build and deploys its result. **GitHub Pages** serves the resulting HTML, CSS, JavaScript, images, and data files to readers at:
 
@@ -76,20 +76,9 @@ The deployment workflow also runs on an hourly schedule to refresh those snapsho
 
 ## Read the actual deployment definition
 
-Open [`deploy-pages.yml`](../.github/workflows/deploy-pages.yml). Its triggers include:
+The [deployment definition](../.github/workflows/deploy-pages.yml) records those triggers in YAML. Its build job checks out the repository, prepares Python, and invokes the Astro build action. A separate job publishes the resulting files to GitHub Pages.
 
-```yaml
-on:
-  push:
-    branches: [main]
-  workflow_dispatch:
-  schedule:
-    - cron: '17 * * * *'
-```
-
-The build job checks out the repository, prepares Python, and invokes the Astro build action. A separate deployment job uses `actions/deploy-pages` to publish the built site. The workflow runs on GitHub-hosted runners; visitors receive its output, not the development environment.
-
-The YAML file is maintained and versioned with the rest of the project. Changing a workflow deserves review too: a faulty build rule can affect every output it produces.
+The workflow is maintained and versioned with the sources. Changing a build rule deserves review because it can affect every output that uses it. The [publishing guide](../reference/publishing-workflows.md) explains the configuration in more detail.
 
 ## Explore: Inspect a real run
 
@@ -100,14 +89,10 @@ Open the public [Actions page](https://github.com/And-Gu/document-as-code-lab/ac
 3. Open the published site. What kinds of files and interactive experiences can a static host serve?
 4. Compare it with a **Measure project growth** run. Where do the downloadable artifacts go, and why are they not automatically part of the website?
 
-**Expected result:** You can trace a published result to a workflow run and source revision, and explain the difference between an Action, an artifact, and GitHub Pages.
-
-A failed build does not establish that a new edition is ready to publish. A successful build establishes only that configured checks passed; it does not approve the meaning of the information. Likewise, a finished job may still need inspection of the actual page.
+The run connects a source revision to its build and deployment. Inspect the resulting page as well: completing the configured jobs is evidence that the process ran, not approval of the chapter's meaning.
 
 > **Explore further:** What does a runner execute, and what remains after failure? The [automation and quality guide](../reference/automation-quality.md) follows workflow steps, permissions, retained artifacts, and stale outputs. No local setup is needed to inspect the public runs. The [publishing guide](../reference/publishing-workflows.md) covers output-specific build choices.
 
-[Chapter 11](11-beyond-github.md) brings the entire site architecture together.
-
-**Key point:** GitHub Actions makes information work repeatable. GitHub Pages distributes the finished result. Neither replaces responsibility for the sources and their meaning.
+Actions runs the work; Pages distributes the result. [Chapter 11](11-beyond-github.md) brings those responsibilities together with the sources and browser components to show how the whole lab works.
 
 <!-- interactive: chapter-quiz -->

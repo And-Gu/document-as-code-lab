@@ -17,9 +17,9 @@ visuals:
 
 # Making Information Usable by AI Agents
 
-We have organized information into identifiable sources (chapters 4–6) and used processing rules to produce results (chapter 7). The same groundwork helps AI agents work with a project. **What matters is not just supplying more text to a model, but making maintained information discoverable, interpretable and safe to change.**
+An agent updating this tutorial needs more than access to its files. It needs to know where the chapters live, which terms we use, and which decisions its changes must respect.
 
-An agent is an AI-powered tool that can use permitted operations such as reading files, editing sources and running checks. File access alone does not tell it which documents govern the project, why conventions exist, or whether it may publish a result.
+An **AI agent** combines a language model with tools for operations such as reading files, editing sources, and running checks. A chat prompt describes the task; repository access comes from the configured tools and permissions. The sources and processing rules from earlier chapters provide useful context; the actual repository adds the conventions and rationale needed to work on the project.
 
 ## Start with an entry point, not a giant prompt
 
@@ -37,7 +37,7 @@ This repository has an actual [`AGENTS.md`](../AGENTS.md) file. It tells working
 | **Authoritative content** | What current material can substantiate a claim? | Markdown sources, metadata and schemas |
 | **Checks and boundaries** | What can be verified, and who decides whether to accept it? | Tests, build rules, review and publication conventions |
 
-A decision record might explain why this site keeps chapter sources in `docs/` rather than duplicating them inside Astro. The project structure describes *what exists*; the decision explains *why*. An agent's instructions tell it **where to find and apply both**. Decision records must reflect real choices, not be invented afterward as if approved historically.
+The source map describes *what exists*. A decision record explains *why* a choice was made, such as keeping the core tutorial browser-first. Agent instructions point to both. This repository's decision register records the supplied direction on 19 October 2026, not a reconstructed history of earlier approvals.
 
 ```mermaid
 flowchart TB
@@ -56,9 +56,9 @@ flowchart TB
 
 ## Keep source authority and permissions clear
 
-A proposed requirement is not an approved requirement. A generated handbook is not its authoritative source. A passing build is not approval. These distinctions matter to an agent as much as to a human contributor.
+For a chapter update, the agent should read the current source and applicable conventions, then report the files it changed and the checks it ran. Diffs, validation results, and generated pages give reviewers evidence for assessing the result; a passing build alone does not approve its meaning.
 
-An agent still needs to select relevant current files, identify source revisions, follow permitted relationships, and report what it changed or could not verify. Confidential material must remain within its permitted environment. Nothing in `AGENTS.md` grants permissions that the surrounding tools or organization have not provided.
+Source selection matters too: a proposed requirement cannot support a claim that a feature is implemented. Confidential material must stay within its permitted environment. `AGENTS.md` guides the work but grants no permissions to read, share, or publish information.
 
 ## Explore: Where should a project rule live?
 
@@ -68,8 +68,6 @@ Where would you maintain a stable-identifier rule and the explanation of why it 
 
 > **Explore further:** The [agent context and project-knowledge guide](../reference/ai-context-and-agents.md) examines this repository's guidance, source selection, decision records, permissions and verification in greater detail. No AI account is needed to read it; its optional local examples require suitable tooling.
 
-**Key point:** A project becomes more useful to AI agents when its architecture, terminology, decisions, authoritative sources, and checks are maintained as accessible, connected information—not hidden in one person's prompt.
-
-**Next:** [Chapter 9](09-images.md) shows how people can explore the same structured information through different views.
+Organizing project knowledge helps agents find and interpret the material they need. People benefit from that organization too. [Chapter 9](09-images.md) uses a fictional customer-and-contract example to show how readers can follow relationships and ask their own questions.
 
 <!-- interactive: chapter-quiz -->
