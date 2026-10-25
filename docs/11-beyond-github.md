@@ -99,7 +99,7 @@ The deciding question is not *Which product owns the file?* It is **Can people a
 
 You do not need to reproduce this entire lab to begin. Choose one recurring need: keeping instructions consistent, finding information awaiting review, or producing a report from shared records.
 
-Decide where the source belongs, who maintains and reviews it, and how it reaches the people who need it. Start with one useful result, then assess whether the approach saves effort or improves decisions before extending it.
+Identify the sources you are allowed to use, what their fields mean, who maintains and reviews them, and how the result reaches the people who need it. A first experiment might use selected exports from existing systems, with an explicit check that their meaning is preserved. Start with one useful result, then assess whether the approach saves effort or improves decisions before extending it.
 
 The tools may differ from ours. The aim remains the same: maintain the information once, make changes inspectable, and reuse it where it is needed.
 

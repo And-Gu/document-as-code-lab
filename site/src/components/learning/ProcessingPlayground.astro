@@ -25,7 +25,7 @@ const initialResult = processProcedures([...fixedRecords, readPracticeProcedure(
   <h4>Procedures awaiting review</h4>
   <ul data-process-queue>{initialResult.queue.map((item) => <li>{item}</li>)}</ul>
   <h4>Handbook review copy</h4>
-  <div data-process-handbook class="mdp-preview" role="region" aria-label="Generated handbook review copy" tabindex="0" set:html={renderLearningMarkdown(initialResult.handbook)} />
+  <div data-process-handbook class="mdp-preview" role="region" aria-label="Generated handbook review copy" tabindex="0" set:html={renderLearningMarkdown(initialResult.handbook, true)} />
   <details><summary>Previous generated result</summary><pre data-process-previous>No build has been requested yet.</pre></details>
   <p class="learning-status">Practice outputs stay in this browser. Builds do not edit repository files, approve instructions, or publish a handbook.</p>
   <noscript><p>Enable JavaScript to edit and build. The starting sources and outputs remain readable.</p></noscript>
@@ -61,7 +61,7 @@ const initialResult = processProcedures([...fixedRecords, readPracticeProcedure(
           queue.replaceChildren(...(result.queue.length ? result.queue : ['No draft procedures.']).map((text) => {
             const item = document.createElement('li'); item.textContent = text; return item;
           }));
-          handbook.innerHTML = renderLearningMarkdown(result.handbook);
+          handbook.innerHTML = renderLearningMarkdown(result.handbook, true);
           status.dataset.state = 'valid';
           status.textContent = 'Checks passed · Both outputs now use the current source. This handbook remains a practice review copy.';
         } catch (error) {

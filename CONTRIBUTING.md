@@ -30,6 +30,8 @@ Use the shared definitions in [GLOSSARY.md](GLOSSARY.md). Where an optional exer
 
 Verify product-specific instructions against official documentation when writing them. Record account or plan requirements where they affect the exercise.
 
+Start from a recognizable information task and the reader's domain experience. Do not assume they are writers, engineers or developers. Explain a result before optional implementation detail. Information may already be structured in a business system; connecting it elsewhere requires deliberate selection, meaning, access and processing. Never present document-as-code as automatic system integration. Follow the audience and promise in the [product specification](spec/tutorial/02-DOCUMENT-AS-CODE-LAB-V1-SPECIFICATION.md).
+
 ## Editorial Voice
 
 - Write clear, natural English for curious professionals. Assume intelligence, not familiarity with tooling.

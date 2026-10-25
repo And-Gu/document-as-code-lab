@@ -21,6 +21,10 @@ An agent updating this tutorial needs more than access to its files. It needs to
 
 An **AI agent** combines a language model with tools for operations such as reading files, editing sources, and running checks. A chat prompt describes the task; repository access comes from the configured tools and permissions. The sources and processing rules from earlier chapters provide useful context; the actual repository adds the conventions and rationale needed to work on the project.
 
+An assistant can help rewrite a status report. A tool-enabled agent could also gather permitted sources, compare a forecast with a commitment, identify missing support, and prepare a source-linked draft. That requires the meaning of the fields, suitable tools, and clear limits on what the agent may change. People still decide how to resolve uncertainty and whether to accept a proposal.
+
+Here we inspect the project knowledge that supports such work. This chapter runs no AI model and gives no agent automatic access to business systems.
+
 ## Start with an entry point, not a giant prompt
 
 This repository has an actual [`AGENTS.md`](../AGENTS.md) file. It tells working agents where the maintained chapters live, which paths Astro reads, how chapter IDs are preserved, what related information may need checking, and which commands verify changes.
@@ -37,7 +41,7 @@ This repository has an actual [`AGENTS.md`](../AGENTS.md) file. It tells working
 | **Authoritative content** | What current material can substantiate a claim? | Markdown sources, metadata and schemas |
 | **Checks and boundaries** | What can be verified, and who decides whether to accept it? | Tests, build rules, review and publication conventions |
 
-The source map describes *what exists*. A decision record explains *why* a choice was made, such as keeping the core tutorial browser-first. Agent instructions point to both. This repository's decision register records the supplied direction on 19 October 2026, not a reconstructed history of earlier approvals.
+The source map describes *what exists*. A decision record explains *why* a choice was made, such as keeping the core tutorial browser-first. Agent instructions point to both. This repository's dated decision register records supplied design direction, including the audience decision on 25 October 2026; it does not reconstruct earlier approvals.
 
 ```mermaid
 flowchart TB

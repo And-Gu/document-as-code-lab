@@ -24,3 +24,14 @@
 - Chapter 11 can remain mostly unchanged; remove obsolete 'Next Ch 12' and fix factual inconsistencies.
 - A lean source/architecture guide and decision log may be added **if** they reduce repeated instructions. Inspect and reuse `AGENTS.md`, `CONTRIBUTING.md`, `GLOSSARY.md`, `README.md` and existing reference files before creating anything.
 - Scenario checks are optional per chapter, not a new mandated count. Initially implement in Ch 5/6/8; others may be proposed later.
+
+## 25 October 2026: working-methods direction
+
+| ID | Status | Decision | Rationale / boundaries |
+| --- | --- | --- | --- |
+| TD-14 | Agreed audience direction | Primary readers are information-experienced professionals using documents and specialized business systems; no writer, engineer or developer background is assumed | Respect domain expertise. Information may already be structured inside systems but hard to combine across them. Technical depth remains optional. |
+| TD-15 | Agreed reader promise | Show how new working methods can enable collaboration, automation and AI-agent assistance beyond individual documents and system boundaries | Document-as-code is the concrete demonstration, not an automatic integration layer or replacement mandate. Keep visible sources, review and responsibility. |
+| TD-16 | Authorized implementation scope | Implement package 1 in a separate draft PR; packages 2 and 3 follow after review and merge of their predecessor | Keep eleven chapters, stable IDs/routes, browser-first access and existing labs. No merge or publication approval is implied. |
+| TD-17 | Proposed; owner review pending | Final homepage/chapter wording, readable-record treatment, mobile tabs/diagram alternatives and navigation | Review representative before/after passages and rendered examples. Audience agreement does not approve every sentence or interaction. |
+
+The current product requirements remain in the [existing lab specification](02-DOCUMENT-AS-CODE-LAB-V1-SPECIFICATION.md). Earlier dated decisions above retain their original scope.

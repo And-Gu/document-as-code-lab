@@ -39,8 +39,12 @@ export function answerMatches(selected: string[], correct: string[]) {
 const markdown = new MarkdownIt({ html: false, linkify: false, typographer: false });
 // Learner content stays local, including images that would otherwise contact a remote host.
 markdown.disable('image');
-export function renderLearningMarkdown(source: string) {
-  return markdown.render(source);
+export function renderLearningMarkdown(source: string, embedded = false) {
+  const tokens = markdown.parse(source, {});
+  if (embedded) for (const token of tokens) {
+    if (token.type === 'heading_open' || token.type === 'heading_close') token.tag = `h${Math.min(6, Number(token.tag.slice(1)) + 3)}`;
+  }
+  return markdown.renderer.render(tokens, markdown.options, {});
 }
 
 export interface ProcedureSource { id: string; owner: string; status: string; body: string; }

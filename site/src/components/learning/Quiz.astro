@@ -60,6 +60,17 @@ const prepared = prepareQuestions(questions);
       });
       form.addEventListener('submit', (event) => {
         event.preventDefault();
+        const unanswered = blocks.filter(block => !block.querySelector('input:checked'));
+        if (unanswered.length) {
+          clearFeedback();
+          for (const block of unanswered) {
+            const feedback = block.querySelector<HTMLElement>('[data-feedback]')!;
+            feedback.textContent = 'Select an answer first.'; feedback.hidden = false;
+          }
+          score.textContent = 'Answer each question before checking your answers.';
+          unanswered[0].querySelector<HTMLInputElement>('input')?.focus();
+          return;
+        }
         let correctCount = 0;
         questions.forEach((question, index) => {
           const block = blocks[index];

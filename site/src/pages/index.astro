@@ -1,17 +1,13 @@
 ---
-import { ArrowRight, BookOpen, Network, ShieldCheck, Compass, FileText, PanelsTopLeft, ChartNoAxesCombined, Presentation, Bot, Workflow } from '@lucide/astro';
+import { ArrowRight, Network, ShieldCheck, FileText, PanelsTopLeft, ChartNoAxesCombined, Presentation, Bot, Workflow } from '@lucide/astro';
 import Documentation from '../layouts/Documentation.astro';
 import { getChapters, chapterTitle } from '../lib/chapters';
 import { getPresentations } from '../lib/presentations';
 import { siteUrl } from '../lib/urls';
 import '../styles/home.css';
+import { learningJourney } from '../lib/learning-journey';
 const chapters = await getChapters();
-const groups = [
-  { start: 1, end: 4, title: 'Working with sources', description: 'Understand the approach, the workspace, history, and readable source files.', icon: BookOpen, tone: 'sage' },
-  { start: 5, end: 7, title: 'Making information processable', description: 'Add metadata, meaningful relationships, validation, and repeatable processing.', icon: Network, tone: 'violet' },
-  { start: 8, end: 9, title: 'Using information in new ways', description: 'Prepare project knowledge for agents and explore connected information.', icon: Compass, tone: 'sage' },
-  { start: 10, end: 11, title: 'Making it a working environment', description: 'Automate checks and publication, inspect the lab architecture, and compare environments.', icon: Workflow, tone: 'ochre' },
-];
+const groups = learningJourney.map((group, index) => ({ ...group, icon: [FileText, Workflow, Network, Workflow][index] }));
 const packs = (await getPresentations()).filter((deck) => ['information-model', 'information-value', 'lab-architecture'].includes(deck.slug));
 const stages = [
   { label: 'Maintain', detail: 'Readable sources and clear ownership', icon: FileText },
@@ -20,20 +16,27 @@ const stages = [
   { label: 'Reuse & transform', detail: 'Shape information for its audience', icon: Network },
 ];
 ---
-<Documentation title="Document-as-Code" wide>
+<Documentation title="New ways of working with information" description="Explore how shared sources, review and processing can support collaboration, automation and AI-assisted information work. Try the examples without installing tools." wide>
   <div class="home">
     <section class="home-hero" aria-labelledby="home-title">
-      <img class="home-art" src={siteUrl('files/assets/illustrations/information-workshop.jpg')} alt="Colored-pencil illustration of two engineers reviewing shared information, with a laptop, source sheets, and a handbook." width="1536" height="1024" fetchpriority="high" />
+      <img class="home-art" src={siteUrl('files/assets/illustrations/information-workshop.jpg')} alt="Colored-pencil illustration of two colleagues reviewing shared information, with a laptop, source sheets, and a handbook." width="1536" height="1024" fetchpriority="high" />
       <div class="hero-copy">
-        <p class="home-eyebrow">The living tutorial & engineering lab</p>
-        <h1 id="home-title">Document-as-Code</h1>
-        <p class="hero-headline">From static documents to information we can work with.</p>
-        <p>Document-as-Code applies software engineering practices to the management of information. Sources are maintained in readable formats, changes are versioned and reviewed, and automated processes can validate, transform, and publish the information.</p>
+        <p class="home-eyebrow">Document-as-Code Lab</p>
+        <h1 id="home-title">New ways of working with information</h1>
+        <p class="hero-headline">Better collaboration, more automation, and new uses for AI agents.</p>
+        <p>Discover new ways of working beyond individual documents and information scattered across or locked inside business systems. Explore how that information can be connected, refined, and reused—with clear sources, review, and responsibility.</p>
         <div class="home-actions">
-          <a class="home-primary" href={siteUrl(`chapters/${chapters[0].id}/`)}>Start learning <ArrowRight size={18} aria-hidden="true" /></a>
-          <a href="#concept">Explore the concept <ArrowRight size={18} aria-hidden="true" /></a>
+          <a class="home-primary" href={siteUrl(`chapters/${chapters[0].id}/`)}>Start exploring <ArrowRight size={18} aria-hidden="true" /></a>
+          <a href={siteUrl('chapters/07-processing/#processing-lab-widget')}>See one source change several results <ArrowRight size={18} aria-hidden="true" /></a>
         </div>
+        <p class="home-caption">Try the examples in your browser. No coding, installation, or AI account required.</p>
       </div>
+    </section>
+    <section class="home-section" aria-labelledby="workplace-title">
+      <h2 id="workplace-title">A situation you may recognize</h2>
+      <p>A customer commitment is recorded in a PDF. The forecast is in a spreadsheet, and resource availability is in a planning system. Before a review meeting, someone assembles a decision brief and checks what the different sources mean.</p>
+      <p>These systems may already hold well-structured information. Connecting selected information across their boundaries still takes work. Our small examples make the sources, rules, and results visible so you can consider what could change in your own setting.</p>
+      <p class="home-caption">A workplace illustration. The lab demonstrates the method with fictional records; it does not connect to business systems.</p>
     </section>
     <section id="concept" class="home-section" aria-labelledby="concept-title">
       <p class="home-eyebrow">From sources to results</p><h2 id="concept-title">Maintain once. Use in different ways.</h2>
@@ -56,7 +59,7 @@ const stages = [
       </div>
     </section>
     <section id="learning-path" class="home-section" aria-labelledby="learning-title">
-      <p class="home-eyebrow">{chapters.length} chapters · Read in sequence or explore a topic</p><h2 id="learning-title">Choose a learning path</h2>
+      <p class="home-eyebrow">{chapters.length} chapters · Read in sequence or explore a topic</p><h2 id="learning-title">Explore the learning journey</h2>
       <div class="learning-paths">
         {groups.map(({ start, end, title, description, icon: Icon, tone }) => <article class={`learning-path path-${tone}`}>
           <div class="path-heading"><Icon size={28} aria-hidden="true" /><span>{start === end ? `Chapter ${start}` : `Chapters ${start}–${end}`}</span></div>
@@ -72,10 +75,11 @@ const stages = [
         <li><a href={siteUrl('chapters/01-introduction/#onboarding-lab-widget')}>Choose content for a handbook <ArrowRight size={18} aria-hidden="true" /></a><p>Browser-only simulation · Compare inclusion rules against fictional source review states.</p></li>
         <li><a href={siteUrl('chapters/04-markdown/#markdown-playground-widget')}>Edit Markdown and see the result <ArrowRight size={18} aria-hidden="true" /></a><p>Browser-only practice · Edit headings, lists, and a table. Changes are not saved.</p></li>
         <li><a href={siteUrl('chapters/05-structured-content/#metadata-lab-widget')}>Validate procedure metadata <ArrowRight size={18} aria-hidden="true" /></a><p>Browser-only practice · Check YAML fields against a visible schema. Passing is not approval.</p></li>
+        <li><a href={siteUrl('chapters/07-processing/#processing-lab-widget')}>Build a handbook and review queue <ArrowRight size={18} aria-hidden="true" /></a><p>Processing Lab · Edit one procedure, run checks, and compare two generated results.</p></li>
         <li><a href={siteUrl('chapters/09-images/#contract-explorer-widget')}>Explore customer projects and agreements <ArrowRight size={18} aria-hidden="true" /></a><p>Fictional records · Explore relationships, delivery commitments, and change-impact review candidates.</p></li>
         <li><a href={siteUrl('chapters/11-beyond-github/#architecture-explorer-widget')}>Trace an output to its sources <ArrowRight size={18} aria-hidden="true" /></a><p>Repository architecture · Compare the sources, processing, results, and update triggers for five outputs.</p></li>
-        <li><a href={siteUrl('materials/reference/dashboards-and-work-tracking/')}>Explore a spreadsheet-style view <ArrowRight size={18} aria-hidden="true" /></a><p>Fictional fixed dataset · Sort and filter a department budget using CSSV.</p></li>
-        <li><a href={siteUrl('dashboard/')}>Open the Project Control Center <ArrowRight size={18} aria-hidden="true" /></a><p>Growth measured at build time · Operational snapshots refreshed on deployment and hourly, with retrieval times. Optional live retrieval is separate.</p></li>
+        <li><a href={siteUrl('materials/reference/dashboards-and-work-tracking/#missing-excel-tables-and-spreadsheets')}>Explore a spreadsheet-style view <ArrowRight size={18} aria-hidden="true" /></a><p>Fictional fixed dataset · Sort and filter a department budget using CSSV.</p></li>
+        <li><a href={siteUrl('dashboard/')}>Behind the lab: Project Control Center <ArrowRight size={18} aria-hidden="true" /></a><p>Growth measured at build time · Operational snapshots refreshed on deployment and hourly, with retrieval times. Optional live retrieval is separate.</p></li>
       </ul>
       <p class="home-caption">Each chapter also includes a short practice quiz. Fictional example statuses do not constitute operational approval.</p>
     </section>

@@ -1,5 +1,7 @@
 # Tutorial Design Baseline
 
+The intended **v1.4 baseline** adopts the audience and working-methods promise agreed on 25 October 2026 in the existing product specification and decision register. Package 1 implementation, exact wording and visual treatment are in review; packages 2 and 3 remain separate future implementation work. The v1.3 history below remains evidence of the earlier editorial pass.
+
 The functional direction comes from v1.2; the current v1.3 specification adds the editorial style accepted after three sample reviews on 19 October 2026. A specification records intent, not proof of implementation, chapter approval, accessibility conformance, or learning effectiveness.
 
 - [Reusable specification template](01-REUSABLE-TUTORIAL-SPECIFICATION-TEMPLATE.md): a starting point for another tutorial.
@@ -25,3 +27,7 @@ See the [implementation review](IMPLEMENTATION-REVIEW.md) for changed files, loc
 That review describes v1.2. The v1.3 pass starts from clean main at `6d8ee1d`; it preserves all existing interactions and source IDs, and returns substantively revised chapters to review.
 
 Use the [project source map](../../reference/project-knowledge.md) to locate maintained sources and checks. Keep specific writing rules in [CONTRIBUTING.md](../../CONTRIBUTING.md) and terminology in [GLOSSARY.md](../../GLOSSARY.md), rather than duplicating them here.
+
+## Working-methods upgrade — planning packages, 25 October 2026
+
+The [three-package specification register](working-methods-upgrade/README.md) records the agreed audience and proposed audience/reader-experience, information-refinement, and verification/learning work. These specification PRs upload planning material; they do not deliver the described functionality or replace the current implementation baseline. Read the register for package locations, agent instructions and the distinction between specification adoption and sequential implementation.

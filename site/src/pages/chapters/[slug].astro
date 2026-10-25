@@ -17,11 +17,14 @@ const { chapter, previous, next } = Astro.props;
 const { Content, headings } = await render(chapter);
 ---
 
-<Documentation title={chapterTitle(chapter)} activeChapter={chapter.id}>
-  <p class="chapter-meta">Chapter {chapter.data.chapter_number} · {chapter.data.status}</p>
+<Documentation title={chapterTitle(chapter)} description={chapter.data.learning_goal} activeChapter={chapter.id}>
+  <p class="chapter-meta">Chapter {chapter.data.chapter_number}</p>
   <article>
     <h1 id={headings.find((heading) => heading.depth === 1)?.slug ?? chapter.id}>{chapterTitle(chapter)}</h1>
     <ChapterInformation chapter={chapter} />
+    {headings.filter(heading => heading.depth === 2).length >= 5 && <aside class="chapter-contents" aria-label="On this page">
+      <strong>On this page</strong><ul>{headings.filter(heading => heading.depth === 2).map(heading => <li><a href={`#${heading.slug}`}>{heading.text}</a></li>)}</ul>
+    </aside>}
     <Content />
     {chapter.data.chapter_number <= 11 && <ChapterLearning chapterNumber={chapter.data.chapter_number} chapterSource={`docs/${chapter.id}.md`} />}
   </article>

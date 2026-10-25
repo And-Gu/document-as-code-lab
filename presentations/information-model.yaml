@@ -1,6 +1,6 @@
 slug: information-model
 title: "Document-as-Code: Rethinking How We Work with Information"
-description: "For engineers and practitioners: maintained sources, metadata, relationships, review, processing, and AI context."
+description: "For people exploring information work: maintained sources, metadata, relationships, review, processing, and AI context."
 slides:
   - id: information
     type: title
