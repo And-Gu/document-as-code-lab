@@ -1,0 +1,133 @@
+{
+  "scope": "Assembled specification package after all three specification PRs are merged; not an application validation result.",
+  "baseline_commit": "9b63bdbc14c0c5352e364ba0289ec071e5566e48",
+  "source_zip_sha256": "817c86e918de00becb72e77d11f500e7cae8ae8e6e02248cb42fb0578307cac0",
+  "files": [
+    {
+      "path": "01-SHARED-DESIGN-BASELINE.md",
+      "sha256": "dbb3fd36007edd3e391d90cfddf8e7e5a57e2eb6be4f6e5b32db29f6d5c04073",
+      "bytes": 6848,
+      "specification_package": 1
+    },
+    {
+      "path": "02-PR1-AUDIENCE-AND-READER-EXPERIENCE.md",
+      "sha256": "3040123d26d19ee3921523153da96a66e282bd9d291ccd00ccb70c808abe12d2",
+      "bytes": 12396,
+      "specification_package": 1
+    },
+    {
+      "path": "03-PR2-INFORMATION-REFINEMENT.md",
+      "sha256": "e78519e9b3d223471aa39c231dc3fd89ed8129e96fecfb29592c0913957c1011",
+      "bytes": 16797,
+      "specification_package": 2
+    },
+    {
+      "path": "04-PR3-VERIFICATION-AND-LEARNING.md",
+      "sha256": "8a055db05235bda5b02e4cc4db0b3a8d63b3b99d6db57d6c25e5d31e396d9165",
+      "bytes": 11690,
+      "specification_package": 3
+    },
+    {
+      "path": "05-CHAPTER-CHANGE-MAP.md",
+      "sha256": "a96dc55fca1d558c11cfdf1101ee5caccd04fad6e1687fd1fc1a3c40bfd6855a",
+      "bytes": 6088,
+      "specification_package": 1
+    },
+    {
+      "path": "06-ACCEPTANCE-AND-TRACEABILITY.md",
+      "sha256": "74b577b15264cdca302d794b6ed18834a661551a54b2ab3b6a88ae5f98508fca",
+      "bytes": 6907,
+      "specification_package": 1
+    },
+    {
+      "path": "07-AGENT-HANDOFF.md",
+      "sha256": "68ab27d0c071a60b5b9cfac5f76b586509ef5d6fdb74708c4b4cb01cd4e990bf",
+      "bytes": 4578,
+      "specification_package": 1
+    },
+    {
+      "path": "08-REFERENCES-AND-BASELINE.md",
+      "sha256": "091490208b909dcf1ddeab455395b272d3e6a67003490ae09b517d3e11c9757c",
+      "bytes": 4339,
+      "specification_package": 1
+    },
+    {
+      "path": "09-CONTENT-SAMPLES.md",
+      "sha256": "ae2b7ef63966536cb6984a95ecc0c4e815cd62104a0f45a7c9b1c4600dd810ed",
+      "bytes": 5719,
+      "specification_package": 1
+    },
+    {
+      "path": "README.md",
+      "sha256": "7a12eb1d41c58099057e9db7c2bc66b066d4202cdf9488cf26f58fdfe692192e",
+      "bytes": 5367,
+      "specification_package": 1
+    },
+    {
+      "path": "checks/fixture-consistency-result.json",
+      "sha256": "39abe25c4fc5687f06387054417e51b4cba6da565d0671186159d8e57809ae83",
+      "bytes": 544,
+      "specification_package": 2
+    },
+    {
+      "path": "checks/validate-fixtures.py",
+      "sha256": "b4fd1d01e0bf5318bb0372e4eb60fe47609d59896aa882994eeed3ab22793d70",
+      "bytes": 2536,
+      "specification_package": 2
+    },
+    {
+      "path": "fixtures/README.md",
+      "sha256": "3667de66c042fe2fcb7992902d71eaec347728cd0685597c35bfc7c25c543f00",
+      "bytes": 1583,
+      "specification_package": 2
+    },
+    {
+      "path": "fixtures/expected-cases.json",
+      "sha256": "16e663ef89257e01c1aa1fb6fa32b2a295e0e47870e78e95d8074ff57996de14",
+      "bytes": 5020,
+      "specification_package": 2
+    },
+    {
+      "path": "fixtures/identity-map.json",
+      "sha256": "2d54b3e6bf979b0b4d7109dbe40d9f3500633df4850b41a1e2a0344e53b93065",
+      "bytes": 403,
+      "specification_package": 2
+    },
+    {
+      "path": "fixtures/scenario.json",
+      "sha256": "47bd9b5a6077aff8db90036da1c5530bcb36cb0fffadc901a24af24abcda9cd1",
+      "bytes": 1504,
+      "specification_package": 2
+    },
+    {
+      "path": "fixtures/sources/SRC-BUDGET.md",
+      "sha256": "85f52fe8e21490828ec329b4409bf986f24baddb1891c8ca239dbbc15f73c835",
+      "bytes": 606,
+      "specification_package": 2
+    },
+    {
+      "path": "fixtures/sources/SRC-CAPACITY.md",
+      "sha256": "a2493c9f2bf603372c98d88ee4a020064ac82f9eb54258cf3f51457fd53c9610",
+      "bytes": 567,
+      "specification_package": 2
+    },
+    {
+      "path": "fixtures/sources/SRC-CUSTOMER.md",
+      "sha256": "c3f517efba125719b08c4e6b83ef968f941517f8c8e651a8ad98c2047e7d57b6",
+      "bytes": 608,
+      "specification_package": 2
+    },
+    {
+      "path": "fixtures/sources/SRC-FORECAST.md",
+      "sha256": "5e8cd66fe4eba2c738fadb969cb6d505076f6f577f5659b9471f8b555c633577",
+      "bytes": 540,
+      "specification_package": 2
+    },
+    {
+      "path": "fixtures/sources/SRC-MEETING.md",
+      "sha256": "19b7669229be97dc235b4d3fa3a91331a1a746b5253e10517c997b0e6ae68749",
+      "bytes": 560,
+      "specification_package": 2
+    }
+  ]
+}
