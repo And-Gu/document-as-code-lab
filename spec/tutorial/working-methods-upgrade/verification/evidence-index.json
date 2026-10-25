@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "learning_evidence": "not_run",
+  "entries": [
+    {
+      "test_id": "local-journeys",
+      "requirement_id": "P3-01",
+      "source_revision": null,
+      "environment": null,
+      "procedure": "npm run test:e2e:cross",
+      "result": "planned",
+      "reason": "Execution pending final committed build",
+      "artifact": null,
+      "reviewer": null,
+      "limitations": []
+    },
+    {
+      "test_id": "hosted",
+      "requirement_id": "P3-02",
+      "source_revision": null,
+      "environment": null,
+      "procedure": "npm run test:hosted with explicit URL/revision/run",
+      "result": "not_verified",
+      "reason": "No authorized deployment of this package",
+      "artifact": null,
+      "reviewer": null,
+      "limitations": []
+    },
+    {
+      "test_id": "study-kit",
+      "requirement_id": "P3-03",
+      "source_revision": null,
+      "environment": null,
+      "procedure": "Review protocol and empty template against T1\u2013T7",
+      "result": "planned",
+      "reason": "Kit review pending",
+      "artifact": null,
+      "reviewer": null,
+      "limitations": []
+    },
+    {
+      "test_id": "reader-observations",
+      "requirement_id": "P3-04",
+      "source_revision": null,
+      "environment": null,
+      "procedure": "Facilitate real representative reader sessions",
+      "result": "not_run",
+      "reason": "No participants recruited or observed",
+      "artifact": null,
+      "reviewer": null,
+      "limitations": []
+    },
+    {
+      "test_id": "physical-device",
+      "requirement_id": "P3-01",
+      "source_revision": null,
+      "environment": null,
+      "procedure": "Read and operate representative journeys on physical phone",
+      "result": "not_run",
+      "reason": "No physical device session",
+      "artifact": null,
+      "reviewer": null,
+      "limitations": []
+    },
+    {
+      "test_id": "manual-accessibility",
+      "requirement_id": "P3-01",
+      "source_revision": null,
+      "environment": null,
+      "procedure": "Manual screen-reader and assistive-technology checks",
+      "result": "not_run",
+      "reason": "No manual assistive-technology session",
+      "artifact": null,
+      "reviewer": null,
+      "limitations": []
+    },
+    {
+      "test_id": "owner-approval",
+      "requirement_id": "P3-05",
+      "source_revision": null,
+      "environment": null,
+      "procedure": "Owner accepts wording and visual treatment",
+      "result": "not_run",
+      "reason": "No owner acceptance recorded",
+      "artifact": null,
+      "reviewer": null,
+      "limitations": []
+    }
+  ]
+}

@@ -5,7 +5,7 @@ import { publicSpecifications } from './public-specifications';
 export const repositoryRoot = path.resolve(process.cwd(), '..');
 
 export async function repositoryFiles() {
-  const files = ['README.md', 'LICENSE.md', 'AGENTS.md', 'GLOSSARY.md', 'CONTRIBUTING.md', 'ROADMAP.md', 'requirements.txt', 'site/README.md', 'tests/test_records.py',
+  const files = ['spec/tutorial/working-methods-upgrade/verification/evidence-index.json', 'README.md', 'LICENSE.md', 'AGENTS.md', 'GLOSSARY.md', 'CONTRIBUTING.md', 'ROADMAP.md', 'requirements.txt', 'site/README.md', 'tests/test_records.py',
     'site/src/content.config.ts', 'site/src/pages/chapters/[slug].astro',
     'site/src/lib/contract-loader.ts', 'site/src/lib/contract-controller.ts',
     'site/src/lib/presentations.ts', 'site/src/layouts/PresentationLayout.astro',

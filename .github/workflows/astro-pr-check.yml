@@ -2,7 +2,7 @@ name: Astro PR check
 
 on:
   pull_request:
-    branches: [main]
+    branches: [main, feat/audience-and-reader-experience, feat/information-refinement-lab]
 
 permissions:
   contents: read
@@ -41,5 +41,14 @@ jobs:
       - run: npm run test:learning
       - run: npm run test:content
       - run: npm run test:homepage
+      - run: npm run test:refinement
       - run: npm run test:contracts
       - run: node scripts/test-budget.mjs
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:e2e
+      - uses: actions/upload-artifact@v7
+        if: ${{ !cancelled() }}
+        with:
+          name: reader-journey-evidence
+          path: build/verification/
+          retention-days: 14

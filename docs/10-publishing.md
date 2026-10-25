@@ -96,3 +96,5 @@ The run connects a source revision to its build and deployment. Inspect the resu
 Actions runs the work; Pages distributes the result. [Chapter 11](11-beyond-github.md) brings those responsibilities together with the sources and browser components to show how the whole lab works.
 
 <!-- interactive: chapter-quiz -->
+
+The verification harness checks a published artifact against its explicit `build-information.json` source revision. A successful local build does not establish that the same revision is live. The [verification register](../spec/tutorial/working-methods-upgrade/verification/README.md) records those results separately from content approval and reader observations.
