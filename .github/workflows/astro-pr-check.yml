@@ -41,6 +41,7 @@ jobs:
       - run: npm run test:learning
       - run: npm run test:content
       - run: npm run test:homepage
+      - run: npm run test:verification
       - run: npm run test:refinement
       - run: npm run test:contracts
       - run: node scripts/test-budget.mjs

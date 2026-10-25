@@ -100,3 +100,10 @@ test('P3-01 resize, 320/768 reflow, 200% text and no-JavaScript baseline',async(
   // Playwright's text engine intentionally excludes noscript; use rendered DOM innerText for this no-JS fallback.
   const staticText = await staticPage.locator('main').innerText(); expect(staticText).toContain('SEK 26,000'); expect(staticText).toContain('5 calendar days after'); await context.close();
 });
+test('P3-01 touch-operated editor and usable narrow relationship table',async({browser,baseURL})=>{
+  const context=await browser.newContext({baseURL,hasTouch:true,viewport:{width:390,height:844}}), page=await context.newPage();
+  await go(page,'chapters/07-processing/'); const source=page.locator('[data-source]'), original=await source.inputValue();
+  await page.locator('[data-editor-tab="preview"]').tap();await expect(page.locator('[data-preview]')).toBeVisible();await expect(source).not.toBeVisible();
+  await page.locator('[data-editor-tab="source"]').tap();await expect(source).toHaveValue(original);
+  await go(page,'chapters/09-images/');await page.locator('[data-ce-record]').selectOption('DEL-101');await expect(page.locator('[data-ce-links]')).toBeVisible();await expect(page.locator('[data-ce-links]')).toContainText('PRJ-101');await reflow(page);await context.close();
+});

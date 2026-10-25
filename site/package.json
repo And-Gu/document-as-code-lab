@@ -19,7 +19,8 @@
     "test:refinement": "node scripts/test-refinement.mjs",
     "test:e2e": "playwright test --project=chromium",
     "test:e2e:cross": "playwright test",
-    "test:hosted": "playwright test --config=playwright.hosted.config.ts"
+    "test:hosted": "playwright test --config=playwright.hosted.config.ts",
+    "test:verification": "node scripts/test-build-information.mjs"
   },
   "dependencies": {
     "@astrojs/markdown-remark": "^7.3.1",
