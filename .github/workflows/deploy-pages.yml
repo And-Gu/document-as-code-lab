@@ -56,3 +56,36 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5
+
+  verify:
+    name: Verify published revision and reader routes
+    needs: deploy
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    defaults:
+      run:
+        working-directory: site
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: site/package-lock.json
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:hosted
+        env:
+          HOSTED_URL: https://and-gu.github.io/document-as-code-lab/
+          EXPECTED_REVISION: ${{ github.sha }}
+          DEPLOYMENT_RUN_ID: ${{ github.run_id }}
+      - uses: actions/upload-artifact@v7
+        if: ${{ !cancelled() }}
+        with:
+          name: hosted-reader-verification-${{ github.sha }}
+          path: build/verification/
+          retention-days: 14

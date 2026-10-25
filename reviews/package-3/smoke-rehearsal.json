@@ -1,0 +1,15 @@
+{
+  "scope": "localhost harness rehearsal only; not hosted evidence",
+  "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+  "stats": {
+    "startTime": "2026-10-25T21:13:46.178Z",
+    "duration": 25333.224,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "procedure": "test:hosted with explicit localhost URL, expected revision and local-rehearsal run identifier",
+  "expected_outcome": "pass",
+  "actual_outcome": "passed"
+}

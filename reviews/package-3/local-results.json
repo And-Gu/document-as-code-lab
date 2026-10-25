@@ -1,0 +1,862 @@
+{
+  "schema_version": 1,
+  "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+  "stats": {
+    "startTime": "2026-10-25T21:13:44.802Z",
+    "duration": 61465.61,
+    "expected": 57,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "results": [
+    {
+      "test_id": "P3-01",
+      "title": "P3-01 production identity and genuine missing-route errors",
+      "project": "chromium",
+      "environment": {},
+      "result": "passed",
+      "duration_ms": 42,
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "procedure": "site/tests/e2e/journeys.spec.ts",
+      "screenshots": []
+    },
+    {
+      "test_id": "P3-01",
+      "title": "P3-01 resize, 320/768 reflow, 200% text and no-JavaScript baseline",
+      "project": "chromium",
+      "environment": {},
+      "result": "passed",
+      "duration_ms": 4448,
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "procedure": "site/tests/e2e/journeys.spec.ts",
+      "screenshots": []
+    },
+    {
+      "test_id": "P3-01",
+      "title": "P3-01 touch-operated editor and usable narrow relationship table",
+      "project": "chromium",
+      "environment": {},
+      "result": "passed",
+      "duration_ms": 1568,
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "procedure": "site/tests/e2e/journeys.spec.ts",
+      "screenshots": []
+    },
+    {
+      "test_id": "P3-01",
+      "title": "P3-01 production identity and genuine missing-route errors",
+      "project": "firefox",
+      "environment": {},
+      "result": "passed",
+      "duration_ms": 30,
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "procedure": "site/tests/e2e/journeys.spec.ts",
+      "screenshots": []
+    },
+    {
+      "test_id": "P3-01",
+      "title": "P3-01 resize, 320/768 reflow, 200% text and no-JavaScript baseline",
+      "project": "firefox",
+      "environment": {},
+      "result": "passed",
+      "duration_ms": 5059,
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "procedure": "site/tests/e2e/journeys.spec.ts",
+      "screenshots": []
+    },
+    {
+      "test_id": "P3-01",
+      "title": "P3-01 touch-operated editor and usable narrow relationship table",
+      "project": "firefox",
+      "environment": {},
+      "result": "passed",
+      "duration_ms": 2081,
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "procedure": "site/tests/e2e/journeys.spec.ts",
+      "screenshots": []
+    },
+    {
+      "test_id": "P3-01",
+      "title": "P3-01 production identity and genuine missing-route errors",
+      "project": "webkit",
+      "environment": {},
+      "result": "passed",
+      "duration_ms": 46,
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "procedure": "site/tests/e2e/journeys.spec.ts",
+      "screenshots": []
+    },
+    {
+      "test_id": "P3-01",
+      "title": "P3-01 resize, 320/768 reflow, 200% text and no-JavaScript baseline",
+      "project": "webkit",
+      "environment": {},
+      "result": "passed",
+      "duration_ms": 4902,
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "procedure": "site/tests/e2e/journeys.spec.ts",
+      "screenshots": []
+    },
+    {
+      "test_id": "P3-01",
+      "title": "P3-01 touch-operated editor and usable narrow relationship table",
+      "project": "webkit",
+      "environment": {},
+      "result": "passed",
+      "duration_ms": 1672,
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "procedure": "site/tests/e2e/journeys.spec.ts",
+      "screenshots": []
+    },
+    {
+      "test_id": "J1",
+      "title": "J1 homepage discovers the processing demonstration",
+      "project": "chromium",
+      "environment": {
+        "browser": "156.0.8078.4",
+        "width": 390,
+        "timestamp": "2026-10-25T21:13:45.632Z"
+      },
+      "result": "passed",
+      "duration_ms": 1178,
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "procedure": "site/tests/e2e/journeys.spec.ts",
+      "screenshots": [
+        "chromium-390-J1.png"
+      ]
+    },
+    {
+      "test_id": "J2",
+      "title": "J2 processing edits, invalid build, recovery and reset",
+      "project": "chromium",
+      "environment": {
+        "browser": "156.0.8078.4",
+        "width": 390,
+        "timestamp": "2026-10-25T21:13:45.632Z"
+      },
+      "result": "passed",
+      "duration_ms": 1327,
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "procedure": "site/tests/e2e/journeys.spec.ts",
+      "screenshots": []
+    },
+    {
+      "test_id": "J3",
+      "title": "J3 Contract Explorer source identity, exact bytes and relevant return",
+      "project": "chromium",
+      "environment": {
+        "browser": "156.0.8078.4",
+        "width": 390,
+        "timestamp": "2026-10-25T21:13:46.838Z"
+      },
+      "result": "passed",
+      "duration_ms": 1135,
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "procedure": "site/tests/e2e/journeys.spec.ts",
+      "screenshots": [
+        "chromium-390-J3.png"
+      ]
+    },
+    {
+      "test_id": "J4",
+      "title": "J4 source, mapping and computed briefing with preserved return context",
+      "project": "chromium",
+      "environment": {
+        "browser": "156.0.8078.4",
+        "width": 390,
+        "timestamp": "2026-10-25T21:13:46.955Z"
+      },
+      "result": "passed",
+      "duration_ms": 1130,
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "procedure": "site/tests/e2e/journeys.spec.ts",
+      "screenshots": [
+        "chromium-390-J4.png"
+      ]
+    },
+    {
+      "test_id": "J5",
+      "title": "J5 missing budget, changed forecast, failed and stale builds",
+      "project": "chromium",
+      "environment": {
+        "browser": "156.0.8078.4",
+        "width": 390,
+        "timestamp": "2026-10-25T21:13:47.990Z"
+      },
+      "result": "passed",
+      "duration_ms": 1247,
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "procedure": "site/tests/e2e/journeys.spec.ts",
+      "screenshots": []
+    },
+    {
+      "test_id": "J6",
+      "title": "J6 illustrative agent keeps authority and makes no model/external request",
+      "project": "chromium",
+      "environment": {
+        "browser": "156.0.8078.4",
+        "width": 390,
+        "timestamp": "2026-10-25T21:13:48.106Z"
+      },
+      "result": "passed",
+      "duration_ms": 935,
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "procedure": "site/tests/e2e/journeys.spec.ts",
+      "screenshots": [
+        "chromium-390-J6.png"
+      ]
+    },
+    {
+      "test_id": "J7",
+      "title": "J7 fresh responsive navigation, diagrams and keyboard source/preview",
+      "project": "chromium",
+      "environment": {
+        "browser": "156.0.8078.4",
+        "width": 390,
+        "timestamp": "2026-10-25T21:13:49.065Z"
+      },
+      "result": "passed",
+      "duration_ms": 1026,
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "procedure": "site/tests/e2e/journeys.spec.ts",
+      "screenshots": []
+    },
+    {
+      "test_id": "J8",
+      "title": "J8 slides, notes, legacy routes and explicit dashboard API failure",
+      "project": "chromium",
+      "environment": {
+        "browser": "156.0.8078.4",
+        "width": 390,
+        "timestamp": "2026-10-25T21:13:49.248Z"
+      },
+      "result": "passed",
+      "duration_ms": 2671,
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "procedure": "site/tests/e2e/journeys.spec.ts",
+      "screenshots": []
+    },
+    {
+      "test_id": "J1",
+      "title": "J1 homepage discovers the processing demonstration",
+      "project": "firefox",
+      "environment": {
+        "browser": "157.0",
+        "width": 390,
+        "timestamp": "2026-10-25T21:14:11.030Z"
+      },
+      "result": "passed",
+      "duration_ms": 2521,
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "procedure": "site/tests/e2e/journeys.spec.ts",
+      "screenshots": []
+    },
+    {
+      "test_id": "J2",
+      "title": "J2 processing edits, invalid build, recovery and reset",
+      "project": "firefox",
+      "environment": {
+        "browser": "157.0",
+        "width": 390,
+        "timestamp": "2026-10-25T21:14:11.683Z"
+      },
+      "result": "passed",
+      "duration_ms": 2937,
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "procedure": "site/tests/e2e/journeys.spec.ts",
+      "screenshots": []
+    },
+    {
+      "test_id": "J3",
+      "title": "J3 Contract Explorer source identity, exact bytes and relevant return",
+      "project": "firefox",
+      "environment": {
+        "browser": "157.0",
+        "width": 390,
+        "timestamp": "2026-10-25T21:14:12.934Z"
+      },
+      "result": "passed",
+      "duration_ms": 1357,
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "procedure": "site/tests/e2e/journeys.spec.ts",
+      "screenshots": []
+    },
+    {
+      "test_id": "J4",
+      "title": "J4 source, mapping and computed briefing with preserved return context",
+      "project": "firefox",
+      "environment": {
+        "browser": "157.0",
+        "width": 390,
+        "timestamp": "2026-10-25T21:14:13.938Z"
+      },
+      "result": "passed",
+      "duration_ms": 1349,
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "procedure": "site/tests/e2e/journeys.spec.ts",
+      "screenshots": [
+        "firefox-390-J4.png"
+      ]
+    },
+    {
+      "test_id": "J5",
+      "title": "J5 missing budget, changed forecast, failed and stale builds",
+      "project": "firefox",
+      "environment": {
+        "browser": "157.0",
+        "width": 390,
+        "timestamp": "2026-10-25T21:14:14.206Z"
+      },
+      "result": "passed",
+      "duration_ms": 1311,
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "procedure": "site/tests/e2e/journeys.spec.ts",
+      "screenshots": []
+    },
+    {
+      "test_id": "J6",
+      "title": "J6 illustrative agent keeps authority and makes no model/external request",
+      "project": "firefox",
+      "environment": {
+        "browser": "157.0",
+        "width": 390,
+        "timestamp": "2026-10-25T21:14:15.258Z"
+      },
+      "result": "passed",
+      "duration_ms": 1037,
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "procedure": "site/tests/e2e/journeys.spec.ts",
+      "screenshots": []
+    },
+    {
+      "test_id": "J7",
+      "title": "J7 fresh responsive navigation, diagrams and keyboard source/preview",
+      "project": "firefox",
+      "environment": {
+        "browser": "157.0",
+        "width": 390,
+        "timestamp": "2026-10-25T21:14:15.511Z"
+      },
+      "result": "passed",
+      "duration_ms": 1784,
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "procedure": "site/tests/e2e/journeys.spec.ts",
+      "screenshots": []
+    },
+    {
+      "test_id": "J8",
+      "title": "J8 slides, notes, legacy routes and explicit dashboard API failure",
+      "project": "firefox",
+      "environment": {
+        "browser": "157.0",
+        "width": 390,
+        "timestamp": "2026-10-25T21:14:16.341Z"
+      },
+      "result": "passed",
+      "duration_ms": 3585,
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "procedure": "site/tests/e2e/journeys.spec.ts",
+      "screenshots": []
+    },
+    {
+      "test_id": "J1",
+      "title": "J1 homepage discovers the processing demonstration",
+      "project": "webkit",
+      "environment": {
+        "browser": "27.2",
+        "width": 390,
+        "timestamp": "2026-10-25T21:14:30.221Z"
+      },
+      "result": "passed",
+      "duration_ms": 2799,
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "procedure": "site/tests/e2e/journeys.spec.ts",
+      "screenshots": []
+    },
+    {
+      "test_id": "J2",
+      "title": "J2 processing edits, invalid build, recovery and reset",
+      "project": "webkit",
+      "environment": {
+        "browser": "27.2",
+        "width": 390,
+        "timestamp": "2026-10-25T21:14:30.221Z"
+      },
+      "result": "passed",
+      "duration_ms": 2629,
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "procedure": "site/tests/e2e/journeys.spec.ts",
+      "screenshots": []
+    },
+    {
+      "test_id": "J3",
+      "title": "J3 Contract Explorer source identity, exact bytes and relevant return",
+      "project": "webkit",
+      "environment": {
+        "browser": "27.2",
+        "width": 390,
+        "timestamp": "2026-10-25T21:14:32.520Z"
+      },
+      "result": "passed",
+      "duration_ms": 1118,
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "procedure": "site/tests/e2e/journeys.spec.ts",
+      "screenshots": []
+    },
+    {
+      "test_id": "J4",
+      "title": "J4 source, mapping and computed briefing with preserved return context",
+      "project": "webkit",
+      "environment": {
+        "browser": "27.2",
+        "width": 390,
+        "timestamp": "2026-10-25T21:14:32.673Z"
+      },
+      "result": "passed",
+      "duration_ms": 1138,
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "procedure": "site/tests/e2e/journeys.spec.ts",
+      "screenshots": [
+        "webkit-390-J4.png"
+      ]
+    },
+    {
+      "test_id": "J5",
+      "title": "J5 missing budget, changed forecast, failed and stale builds",
+      "project": "webkit",
+      "environment": {
+        "browser": "27.2",
+        "width": 390,
+        "timestamp": "2026-10-25T21:14:33.659Z"
+      },
+      "result": "passed",
+      "duration_ms": 1153,
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "procedure": "site/tests/e2e/journeys.spec.ts",
+      "screenshots": []
+    },
+    {
+      "test_id": "J6",
+      "title": "J6 illustrative agent keeps authority and makes no model/external request",
+      "project": "webkit",
+      "environment": {
+        "browser": "27.2",
+        "width": 390,
+        "timestamp": "2026-10-25T21:14:33.823Z"
+      },
+      "result": "passed",
+      "duration_ms": 965,
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "procedure": "site/tests/e2e/journeys.spec.ts",
+      "screenshots": []
+    },
+    {
+      "test_id": "J7",
+      "title": "J7 fresh responsive navigation, diagrams and keyboard source/preview",
+      "project": "webkit",
+      "environment": {
+        "browser": "27.2",
+        "width": 390,
+        "timestamp": "2026-10-25T21:14:34.793Z"
+      },
+      "result": "passed",
+      "duration_ms": 1004,
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "procedure": "site/tests/e2e/journeys.spec.ts",
+      "screenshots": []
+    },
+    {
+      "test_id": "J8",
+      "title": "J8 slides, notes, legacy routes and explicit dashboard API failure",
+      "project": "webkit",
+      "environment": {
+        "browser": "27.2",
+        "width": 390,
+        "timestamp": "2026-10-25T21:14:34.793Z"
+      },
+      "result": "passed",
+      "duration_ms": 2891,
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "procedure": "site/tests/e2e/journeys.spec.ts",
+      "screenshots": []
+    },
+    {
+      "test_id": "J1",
+      "title": "J1 homepage discovers the processing demonstration",
+      "project": "chromium",
+      "environment": {
+        "browser": "156.0.8078.4",
+        "width": 1440,
+        "timestamp": "2026-10-25T21:13:50.079Z"
+      },
+      "result": "passed",
+      "duration_ms": 987,
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "procedure": "site/tests/e2e/journeys.spec.ts",
+      "screenshots": [
+        "chromium-1440-J1.png"
+      ]
+    },
+    {
+      "test_id": "J2",
+      "title": "J2 processing edits, invalid build, recovery and reset",
+      "project": "chromium",
+      "environment": {
+        "browser": "156.0.8078.4",
+        "width": 1440,
+        "timestamp": "2026-10-25T21:13:51.177Z"
+      },
+      "result": "passed",
+      "duration_ms": 1115,
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "procedure": "site/tests/e2e/journeys.spec.ts",
+      "screenshots": []
+    },
+    {
+      "test_id": "J3",
+      "title": "J3 Contract Explorer source identity, exact bytes and relevant return",
+      "project": "chromium",
+      "environment": {
+        "browser": "156.0.8078.4",
+        "width": 1440,
+        "timestamp": "2026-10-25T21:13:51.913Z"
+      },
+      "result": "passed",
+      "duration_ms": 855,
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "procedure": "site/tests/e2e/journeys.spec.ts",
+      "screenshots": [
+        "chromium-1440-J3.png"
+      ]
+    },
+    {
+      "test_id": "J4",
+      "title": "J4 source, mapping and computed briefing with preserved return context",
+      "project": "chromium",
+      "environment": {
+        "browser": "156.0.8078.4",
+        "width": 1440,
+        "timestamp": "2026-10-25T21:13:52.199Z"
+      },
+      "result": "passed",
+      "duration_ms": 956,
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "procedure": "site/tests/e2e/journeys.spec.ts",
+      "screenshots": [
+        "chromium-1440-J4.png"
+      ]
+    },
+    {
+      "test_id": "J5",
+      "title": "J5 missing budget, changed forecast, failed and stale builds",
+      "project": "chromium",
+      "environment": {
+        "browser": "156.0.8078.4",
+        "width": 1440,
+        "timestamp": "2026-10-25T21:13:52.779Z"
+      },
+      "result": "passed",
+      "duration_ms": 975,
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "procedure": "site/tests/e2e/journeys.spec.ts",
+      "screenshots": []
+    },
+    {
+      "test_id": "J6",
+      "title": "J6 illustrative agent keeps authority and makes no model/external request",
+      "project": "chromium",
+      "environment": {
+        "browser": "156.0.8078.4",
+        "width": 1440,
+        "timestamp": "2026-10-25T21:13:53.170Z"
+      },
+      "result": "passed",
+      "duration_ms": 907,
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "procedure": "site/tests/e2e/journeys.spec.ts",
+      "screenshots": [
+        "chromium-1440-J6.png"
+      ]
+    },
+    {
+      "test_id": "J7",
+      "title": "J7 fresh responsive navigation, diagrams and keyboard source/preview",
+      "project": "chromium",
+      "environment": {
+        "browser": "156.0.8078.4",
+        "width": 1440,
+        "timestamp": "2026-10-25T21:13:53.773Z"
+      },
+      "result": "passed",
+      "duration_ms": 925,
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "procedure": "site/tests/e2e/journeys.spec.ts",
+      "screenshots": []
+    },
+    {
+      "test_id": "J8",
+      "title": "J8 slides, notes, legacy routes and explicit dashboard API failure",
+      "project": "chromium",
+      "environment": {
+        "browser": "156.0.8078.4",
+        "width": 1440,
+        "timestamp": "2026-10-25T21:13:54.099Z"
+      },
+      "result": "passed",
+      "duration_ms": 2734,
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "procedure": "site/tests/e2e/journeys.spec.ts",
+      "screenshots": []
+    },
+    {
+      "test_id": "J1",
+      "title": "J1 homepage discovers the processing demonstration",
+      "project": "firefox",
+      "environment": {
+        "browser": "157.0",
+        "width": 1440,
+        "timestamp": "2026-10-25T21:14:17.376Z"
+      },
+      "result": "passed",
+      "duration_ms": 1606,
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "procedure": "site/tests/e2e/journeys.spec.ts",
+      "screenshots": []
+    },
+    {
+      "test_id": "J2",
+      "title": "J2 processing edits, invalid build, recovery and reset",
+      "project": "firefox",
+      "environment": {
+        "browser": "157.0",
+        "width": 1440,
+        "timestamp": "2026-10-25T21:14:19.126Z"
+      },
+      "result": "passed",
+      "duration_ms": 2238,
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "procedure": "site/tests/e2e/journeys.spec.ts",
+      "screenshots": []
+    },
+    {
+      "test_id": "J3",
+      "title": "J3 Contract Explorer source identity, exact bytes and relevant return",
+      "project": "firefox",
+      "environment": {
+        "browser": "157.0",
+        "width": 1440,
+        "timestamp": "2026-10-25T21:14:20.110Z"
+      },
+      "result": "passed",
+      "duration_ms": 1621,
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "procedure": "site/tests/e2e/journeys.spec.ts",
+      "screenshots": []
+    },
+    {
+      "test_id": "J4",
+      "title": "J4 source, mapping and computed briefing with preserved return context",
+      "project": "firefox",
+      "environment": {
+        "browser": "157.0",
+        "width": 1440,
+        "timestamp": "2026-10-25T21:14:21.257Z"
+      },
+      "result": "passed",
+      "duration_ms": 1403,
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "procedure": "site/tests/e2e/journeys.spec.ts",
+      "screenshots": [
+        "firefox-1440-J4.png"
+      ]
+    },
+    {
+      "test_id": "J5",
+      "title": "J5 missing budget, changed forecast, failed and stale builds",
+      "project": "firefox",
+      "environment": {
+        "browser": "157.0",
+        "width": 1440,
+        "timestamp": "2026-10-25T21:14:21.579Z"
+      },
+      "result": "passed",
+      "duration_ms": 1385,
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "procedure": "site/tests/e2e/journeys.spec.ts",
+      "screenshots": []
+    },
+    {
+      "test_id": "J6",
+      "title": "J6 illustrative agent keeps authority and makes no model/external request",
+      "project": "firefox",
+      "environment": {
+        "browser": "157.0",
+        "width": 1440,
+        "timestamp": "2026-10-25T21:14:22.639Z"
+      },
+      "result": "passed",
+      "duration_ms": 1041,
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "procedure": "site/tests/e2e/journeys.spec.ts",
+      "screenshots": []
+    },
+    {
+      "test_id": "J7",
+      "title": "J7 fresh responsive navigation, diagrams and keyboard source/preview",
+      "project": "firefox",
+      "environment": {
+        "browser": "157.0",
+        "width": 1440,
+        "timestamp": "2026-10-25T21:14:22.926Z"
+      },
+      "result": "passed",
+      "duration_ms": 1122,
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "procedure": "site/tests/e2e/journeys.spec.ts",
+      "screenshots": []
+    },
+    {
+      "test_id": "J8",
+      "title": "J8 slides, notes, legacy routes and explicit dashboard API failure",
+      "project": "firefox",
+      "environment": {
+        "browser": "157.0",
+        "width": 1440,
+        "timestamp": "2026-10-25T21:14:23.709Z"
+      },
+      "result": "passed",
+      "duration_ms": 2859,
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "procedure": "site/tests/e2e/journeys.spec.ts",
+      "screenshots": []
+    },
+    {
+      "test_id": "J1",
+      "title": "J1 homepage discovers the processing demonstration",
+      "project": "webkit",
+      "environment": {
+        "browser": "27.2",
+        "width": 1440,
+        "timestamp": "2026-10-25T21:14:35.809Z"
+      },
+      "result": "passed",
+      "duration_ms": 1261,
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "procedure": "site/tests/e2e/journeys.spec.ts",
+      "screenshots": []
+    },
+    {
+      "test_id": "J2",
+      "title": "J2 processing edits, invalid build, recovery and reset",
+      "project": "webkit",
+      "environment": {
+        "browser": "27.2",
+        "width": 1440,
+        "timestamp": "2026-10-25T21:14:37.079Z"
+      },
+      "result": "passed",
+      "duration_ms": 1412,
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "procedure": "site/tests/e2e/journeys.spec.ts",
+      "screenshots": []
+    },
+    {
+      "test_id": "J3",
+      "title": "J3 Contract Explorer source identity, exact bytes and relevant return",
+      "project": "webkit",
+      "environment": {
+        "browser": "27.2",
+        "width": 1440,
+        "timestamp": "2026-10-25T21:14:37.728Z"
+      },
+      "result": "passed",
+      "duration_ms": 1193,
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "procedure": "site/tests/e2e/journeys.spec.ts",
+      "screenshots": []
+    },
+    {
+      "test_id": "J4",
+      "title": "J4 source, mapping and computed briefing with preserved return context",
+      "project": "webkit",
+      "environment": {
+        "browser": "27.2",
+        "width": 1440,
+        "timestamp": "2026-10-25T21:14:38.513Z"
+      },
+      "result": "passed",
+      "duration_ms": 1181,
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "procedure": "site/tests/e2e/journeys.spec.ts",
+      "screenshots": [
+        "webkit-1440-J4.png"
+      ]
+    },
+    {
+      "test_id": "J5",
+      "title": "J5 missing budget, changed forecast, failed and stale builds",
+      "project": "webkit",
+      "environment": {
+        "browser": "27.2",
+        "width": 1440,
+        "timestamp": "2026-10-25T21:14:38.903Z"
+      },
+      "result": "passed",
+      "duration_ms": 1212,
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "procedure": "site/tests/e2e/journeys.spec.ts",
+      "screenshots": []
+    },
+    {
+      "test_id": "J6",
+      "title": "J6 illustrative agent keeps authority and makes no model/external request",
+      "project": "webkit",
+      "environment": {
+        "browser": "27.2",
+        "width": 1440,
+        "timestamp": "2026-10-25T21:14:39.705Z"
+      },
+      "result": "passed",
+      "duration_ms": 1074,
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "procedure": "site/tests/e2e/journeys.spec.ts",
+      "screenshots": []
+    },
+    {
+      "test_id": "J7",
+      "title": "J7 fresh responsive navigation, diagrams and keyboard source/preview",
+      "project": "webkit",
+      "environment": {
+        "browser": "27.2",
+        "width": 1440,
+        "timestamp": "2026-10-25T21:14:40.125Z"
+      },
+      "result": "passed",
+      "duration_ms": 1007,
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "procedure": "site/tests/e2e/journeys.spec.ts",
+      "screenshots": []
+    },
+    {
+      "test_id": "J8",
+      "title": "J8 slides, notes, legacy routes and explicit dashboard API failure",
+      "project": "webkit",
+      "environment": {
+        "browser": "27.2",
+        "width": 1440,
+        "timestamp": "2026-10-25T21:14:40.777Z"
+      },
+      "result": "passed",
+      "duration_ms": 2977,
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "procedure": "site/tests/e2e/journeys.spec.ts",
+      "screenshots": []
+    }
+  ],
+  "limitations": [
+    "Local browser engines and CSS viewport/touch emulation, not physical devices.",
+    "200% text enlargement, not native browser-UI zoom.",
+    "No manual screen reader session, hosted deployment or human reader study."
+  ]
+}

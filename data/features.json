@@ -100,6 +100,16 @@
         "Package 2 provides curated sources, explicit identity mapping, source-linked deterministic results and browser-only practice inputs.",
         "Technical checks are recorded in reviews/package-2/README.md; owner acceptance and hosted verification remain pending."
       ]
+    },
+    {
+      "id": "reader-journey-verification",
+      "name": "Reproducible reader-journey verification",
+      "status": "in-progress",
+      "completion_criterion": "Local browser journeys pass on an identified revision and an authorized deployment is verified against its explicit build manifest.",
+      "evidence": [
+        "Package 3 adds pinned Playwright, production-route tests, a public build manifest, bounded hosted smoke checks and a reader-study kit.",
+        "Local evidence is recorded separately from pending hosted verification and not-run learning observations in the verification evidence index."
+      ]
     }
   ]
 }

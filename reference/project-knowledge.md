@@ -13,6 +13,7 @@ This map describes the current repository. [AGENTS.md](../AGENTS.md) is the work
 | Website and learning components | [Site guide](../site/README.md), `site/src/` | Astro check, build, and site tests |
 | Presentation definitions | [Presentation guide](../presentations/README.md) | HTML slides and notes generated during site build |
 | Automation and release | [Automation guide](automation-quality.md), `.github/workflows/` | PR checks, artifacts, Pages deployment |
+| Reader-journey and learning evidence | [Verification register](../spec/tutorial/working-methods-upgrade/verification/README.md) | Local/cross-engine and hosted procedures; real reader study remains not run |
 | History and operational evidence | [Measurement guide](growth-measurement.md), `data/features.json` | Build-time dashboard snapshots; fixed historical charts remain unchanged |
 
 The [product specification](../spec/tutorial/02-DOCUMENT-AS-CODE-LAB-V1-SPECIFICATION.md) owns the current audience and reader promise; the [dated decision register](../spec/tutorial/04-DESIGN-DECISIONS.md) records their rationale. The [working-methods register](../spec/tutorial/working-methods-upgrade/README.md) coordinates implementation packages, without replacing those authorities. Selected public planning pages are explicitly listed in `site/src/lib/public-specifications.ts`; adding a private/internal file does not authorize portal publication.
