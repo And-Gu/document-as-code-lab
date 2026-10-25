@@ -1,0 +1,14 @@
+{
+  "scope": "Specification fixture consistency only. No proposed application checks executed.",
+  "status": "passed",
+  "source_records_checked": 5,
+  "expected_cases_defined": 11,
+  "baseline_calendar_day_gap": 5,
+  "baseline_capacity_shortfall_hours": 8,
+  "baseline_budget_variance_minor_sek": 2600000,
+  "baseline_budget_variance_percentage": "14.4%",
+  "application_implementation": "not performed",
+  "browser_tests_for_proposed_changes": "not run",
+  "hosted_verification_for_proposed_changes": "not run",
+  "reader_study": "not run"
+}
