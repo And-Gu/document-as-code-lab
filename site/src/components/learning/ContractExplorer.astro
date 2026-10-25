@@ -16,9 +16,10 @@ const views = [{ id: 'relationships', title: 'Relationships', Icon: Network }, {
 ---
 <section class="contract-explorer" data-contract-explorer aria-labelledby="ce-title">
   <header class="ce-header"><h3 id="ce-title">Contract Explorer</h3><p>Fictional example · Updated at build time</p>
-    <small>Snapshot built <time datetime={data.builtAt}>{data.builtAt}</time> · {data.records.length} maintained records</small>
+    <details><summary>About this snapshot</summary><p>Built <time datetime={data.builtAt}>{data.builtAt}</time> · {data.records.length} maintained records.</p></details>
   </header>
   <script type="application/json" data-ce-data set:html={JSON.stringify(data).replaceAll('<', '\\u003c')} />
+  <p>Which deliveries deserve review if the proposed amendment is accepted? Follow the recorded links, then inspect the sources before deciding.</p>
   <p class="ce-guided-entry"><button type="button" data-ce-guide={initialChange.id} aria-controls="ce-panel-impact" disabled><GitBranch size={18} aria-hidden="true" />Explore change impact</button></p>
   <div class="ce-tabs" role="tablist" aria-label="Explorer view">
     {views.map(({id, title, Icon}) =>
@@ -56,7 +57,8 @@ const views = [{ id: 'relationships', title: 'Relationships', Icon: Network }, {
   <section class="ce-details" id="ce-details" aria-labelledby="ce-details-title">
     <h4 id="ce-details-title">Selected record</h4><div data-ce-details>
       <p><strong>{initial.id} · {initial.label}</strong></p><p>{initial.type} · {statusScope(initial)}: {initial.status}</p><p>{initial.body}</p>
-      <p>Revision: {initial.revision}<br />SHA-256: <code>{initial.digest}</code></p>
+      <p><a href={siteUrl(`materials/${initial.source.replace(/\.md$/, '')}/`)}>Read source record</a></p>
+      <details><summary>Source and revision</summary><p>Revision: {initial.revision}<br />SHA-256: <code>{initial.digest}</code></p></details>
       <a href={sourceUrl(initial.source)}>Read maintained Markdown: {initial.source}</a>
     </div>
   </section>
@@ -65,7 +67,7 @@ const views = [{ id: 'relationships', title: 'Relationships', Icon: Network }, {
       <h4>{record.id} · {record.label}</h4><p>{record.type} · {statusScope(record)}: <strong>{record.status}</strong></p>
       <p>{record.body}</p>{record.type === 'delivery' && <p>Planned date: {record.planned_date ?? 'Not recorded'}</p>}<p>Revision: {record.revision}</p><p class="ce-digest">SHA-256: {record.digest}</p>
       <ul>{record.relations.map(relation => <li>{relationLabels[relation.type]} <a href={`#ce-source-${relation.target}`}>{relation.target} · {label(relation.target)}</a></li>)}</ul>
-      <p><a href={sourceUrl(record.source)}>Read maintained Markdown: {record.source}</a></p>
+      <p><a href={siteUrl(`materials/${record.source.replace(/\.md$/, '')}/`)}>Read source record</a> · <a href={sourceUrl(record.source)}>Read maintained Markdown: {record.source}</a></p>
     </article>)}
   </details>
   <noscript><p>The records, source links, commitments, and relationship table remain readable here. Enable JavaScript to select records and switch views.</p></noscript>

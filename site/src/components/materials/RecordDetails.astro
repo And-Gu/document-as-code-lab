@@ -1,0 +1,21 @@
+---
+import type { MaterialRecord } from '../../lib/material-records';
+import { siteUrl } from '../../lib/urls';
+interface Props { record: MaterialRecord; }
+const { record } = Astro.props;
+---
+<h1>{record.title}</h1>
+<dl class="record-fields">
+  {record.fields.map(field => <div><dt>{field.label}</dt><dd>{field.value}</dd></div>)}
+</dl>
+{record.fields.some(field => field.label === 'Planned date') && <p>Recorded planning data. Delivery execution/planning state does not establish approval, a customer commitment, or completion.</p>}
+{record.relations.length > 0 && <ul aria-label="Recorded relationships">{record.relations.map(relation => <li>{relation.label} <a href={siteUrl(`materials/${relation.source.replace(/\.md$/, '')}/`)}>{relation.target} — {relation.title}</a></li>)}</ul>}
+<p><a href={siteUrl(`files/${record.source}`)}>View original source</a> · <a href={siteUrl(record.returnPath)}>Return to Contract Explorer</a></p>
+<details class="record-provenance"><summary>Source and revision</summary>
+  <p>Path: <code>{record.source}</code></p><p>Revision: <code>{record.revision}</code></p><p>SHA-256: <code>{record.digest}</code></p>
+  {record.revision !== 'Uncommitted working copy' && <a href={`https://github.com/And-Gu/document-as-code-lab/blob/${record.revision}/${record.source}`}>Source revision on GitHub</a>}
+</details>
+<style>
+  .record-fields { display: flex; flex-wrap: wrap; gap: 1rem 2rem; padding: 1rem; background: #f3f7f5; }
+  dt { font-weight: 650; } dd { margin: 0; } .record-provenance { margin: 1rem 0; }
+</style>

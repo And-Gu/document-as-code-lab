@@ -171,3 +171,9 @@ assert.match(contacts, /status: draft/);
 console.log('Eleven lesson mounts, quiz mapping, Markdown safety, YAML parsing, JSON Schema validation, procedure processing, readiness, and source inclusion rules passed.');
 await import('./test-scenarios.mjs');
 await import('./test-architecture.mjs');
+
+const template = await readFile(new URL('../../examples/learning/procedure-template.md', import.meta.url), 'utf8');
+assert.equal(validatePracticeMetadata(template, practiceSchema).valid, true);
+assert.ok(!renderLearningMarkdown('# Embedded title', true).includes('<h1>'));
+assert.match(renderLearningMarkdown('# Embedded title', true), /<h4>Embedded title<\/h4>/);
+console.log('Procedure template uses the existing schema; embedded previews retain a subordinate heading hierarchy.');

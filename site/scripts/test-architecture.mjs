@@ -7,12 +7,21 @@ import ts from 'typescript';
 const root = fileURLToPath(new URL('../../', import.meta.url));
 async function load(relative) {
   const source = await readFile(new URL(relative, import.meta.url), 'utf8');
-  const code = ts.transpileModule(source, { compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.ES2022 } }).outputText;
+  let code = ts.transpileModule(source, { compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.ES2022 } }).outputText;
+  if (relative.endsWith('/repository.ts')) {
+    const selection = await readFile(new URL('../src/lib/public-specifications.ts', import.meta.url), 'utf8');
+    const compiled = ts.transpileModule(selection, { compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.ES2022 } }).outputText;
+    code = code.replace("from './public-specifications'", `from 'data:text/javascript;base64,${Buffer.from(compiled).toString('base64')}'`);
+  }
   return import(`data:text/javascript;base64,${Buffer.from(code).toString('base64')}`);
 }
 const { architectureExamples, validateArchitectureSources } = await load('../src/lib/architecture.ts');
 const { repositoryFiles } = await load('../src/lib/repository.ts');
 const published = new Set(await repositoryFiles());
+assert.ok(published.has('spec/tutorial/working-methods-upgrade/02-PR1-AUDIENCE-AND-READER-EXPERIENCE.md'));
+assert.ok(!published.has('spec/tutorial/working-methods-upgrade/private-notes.md'));
+const { publicSpecifications } = await load('../src/lib/public-specifications.ts');
+assert.deepEqual([...published].filter(file => file.startsWith('spec/')).sort(), [...publicSpecifications].sort());
 await validateArchitectureSources(root, published);
 assert.equal(architectureExamples.length, 5);
 await assert.rejects(validateArchitectureSources(root, new Set()), /not exposed/);

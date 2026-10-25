@@ -1,5 +1,6 @@
 import { readdir } from 'node:fs/promises';
 import path from 'node:path';
+import { publicSpecifications } from './public-specifications';
 
 export const repositoryRoot = path.resolve(process.cwd(), '..');
 
@@ -9,7 +10,7 @@ export async function repositoryFiles() {
     'site/src/lib/contract-loader.ts', 'site/src/lib/contract-controller.ts',
     'site/src/lib/presentations.ts', 'site/src/layouts/PresentationLayout.astro',
     'site/scripts/growth-report.mjs', 'site/scripts/operational-snapshot.mjs',
-    'site/src/lib/dashboard/controller.ts'];
+    'site/src/lib/dashboard/controller.ts', ...publicSpecifications];
   const extensions = /\.(md|json|yaml|yml|py|mmd|png|svg|jpg|jpeg|webp|gif|txt|cssv|typ)$/i;
   async function collect(directory: string) {
     const entries = await readdir(path.join(repositoryRoot, directory), { withFileTypes: true });
@@ -22,7 +23,7 @@ export async function repositoryFiles() {
       }
     }
   }
-  for (const directory of ['docs', 'examples', 'reference', 'assets', 'data', 'scripts', 'presentations', 'publishing', 'spec', '.github']) {
+  for (const directory of ['docs', 'examples', 'reference', 'assets', 'data', 'scripts', 'presentations', 'publishing', '.github']) {
     await collect(directory);
   }
   return files;

@@ -1,6 +1,7 @@
 import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
+import { publicSpecifications } from './lib/public-specifications';
 
 const chapters = defineCollection({
   loader: glob({
@@ -19,7 +20,7 @@ const chapters = defineCollection({
 
 const materials = defineCollection({
   loader: glob({
-    pattern: ['*.md', 'site/README.md', 'presentations/*.md', 'publishing/pdf/*.md', 'examples/**/*.md', 'reference/**/*.md', 'assets/**/*.md', 'spec/tutorial/*.md'],
+    pattern: ['*.md', 'site/README.md', 'presentations/*.md', 'publishing/pdf/*.md', 'examples/**/*.md', 'reference/**/*.md', 'assets/**/*.md', ...publicSpecifications],
     base: '..',
     generateId: ({ entry }) => entry.replace(/\.md$/, ''),
   }),

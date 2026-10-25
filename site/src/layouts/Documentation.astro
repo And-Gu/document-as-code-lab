@@ -1,6 +1,8 @@
 ---
 import { getChapters, chapterTitle } from '../lib/chapters';
 import { siteUrl } from '../lib/urls';
+import { learningJourney } from '../lib/learning-journey';
+import PageMetadata from '../components/PageMetadata.astro';
 import '../styles/tutorial-examples.css';
 import '../styles/chapter-learning.css';
 
@@ -8,9 +10,11 @@ interface Props {
   title: string;
   activeChapter?: string;
   wide?: boolean;
+  description?: string;
 }
-const { title, activeChapter, wide = false } = Astro.props;
+const { title, activeChapter, wide = false, description = `${title}: supporting sources and examples from Document-as-Code Lab.` } = Astro.props;
 const chapters = await getChapters();
+const current = chapters.find(chapter => chapter.id === activeChapter);
 ---
 
 <!doctype html>
@@ -19,6 +23,7 @@ const chapters = await getChapters();
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title} | Document-as-Code Lab</title>
+    <PageMetadata title={title} description={description} />
   </head>
   <body>
     <a class="skip-link" href="#content">Skip to content</a>
@@ -26,9 +31,11 @@ const chapters = await getChapters();
     <div class:list={['documentation', { 'documentation-wide': wide }]}>
       <nav aria-label="Chapters">
         <details id="chapter-menu" open>
-          <summary>Chapters</summary>
-          <ol>
-            {chapters.map((chapter) => (
+          <summary>Chapters{current && <span class="menu-current"> · {current.data.chapter_number}. {chapterTitle(current)}</span>}</summary>
+          {learningJourney.map(group => <div class="menu-group" aria-label={group.title}>
+          <p class="menu-group-title">{group.title}</p>
+          <ol start={group.start}>
+            {chapters.filter(chapter => chapter.data.chapter_number >= group.start && chapter.data.chapter_number <= group.end).map((chapter) => (
               <li>
                 <a href={siteUrl(`chapters/${chapter.id}/`)} aria-current={activeChapter === chapter.id ? 'page' : undefined}>
                   {chapterTitle(chapter)}
@@ -36,6 +43,7 @@ const chapters = await getChapters();
               </li>
             ))}
           </ol>
+          </div>)}
           <a href={siteUrl('materials/GLOSSARY/')}>Shared vocabulary</a>
           <p><a href={siteUrl('presentations/')}>Presentations</a></p>
           <p><a href={siteUrl('dashboard/')}>Project Control Center</a></p>
@@ -45,9 +53,17 @@ const chapters = await getChapters();
     </div>
     <script>
       const menu = document.querySelector<HTMLDetailsElement>('#chapter-menu');
-      if (menu && window.matchMedia('(max-width: 760px)').matches) menu.open = false;
+      const narrow = window.matchMedia('(max-width: 1100px)');
+      const updateMenu = () => {
+        if (!menu) return;
+        if (narrow.matches && menu.contains(document.activeElement)) menu.querySelector('summary')?.focus();
+        menu.open = !narrow.matches;
+      };
+      updateMenu(); narrow.addEventListener('change', updateMenu);
       const blocks = document.querySelectorAll<HTMLElement>('pre[data-language="mermaid"] code, pre code.language-mermaid');
       if (blocks.length) {
+        const diagrams = [...document.querySelectorAll<HTMLDetailsElement>('.diagram-graphic')];
+        diagrams.forEach(diagram => { diagram.open = true; });
         const { default: mermaid } = await import('mermaid');
         mermaid.initialize({ startOnLoad: false, securityLevel: 'strict', theme: 'neutral' });
         for (const code of blocks) {
@@ -59,6 +75,7 @@ const chapters = await getChapters();
           pre.replaceWith(diagram);
         }
         await mermaid.run({ querySelector: '.mermaid' });
+        diagrams.forEach(diagram => { diagram.open = false; });
       }
     </script>
   </body>
@@ -76,6 +93,10 @@ const chapters = await getChapters();
   .documentation-wide { max-width: 100rem; }
   .documentation-wide main { max-width: none; }
   nav { padding: 1.5rem; border-right: 1px solid #ddd; font-size: 0.875rem; }
+  .menu-group-title { font-weight: 650; margin-bottom: .25rem; }
+  .menu-current { font-weight: 400; }
+  .chapter-contents { padding: .75rem 1rem; border: 1px solid #d5ddda; }
+  .chapter-contents ul { columns: 2 16rem; padding-left: 1.2rem; }
   nav summary { font-weight: 650; cursor: pointer; }
   nav ol { padding-left: 1.4rem; }
   nav li { padding: 0.3rem 0; }
@@ -92,13 +113,19 @@ const chapters = await getChapters();
   code { overflow-wrap: anywhere; }
   p, li, h1, h2, h3, a { overflow-wrap: anywhere; }
   blockquote { border-left: 3px solid #ccc; margin-left: 0; padding-left: 1rem; }
+  .readable-diagram { margin: 1.5rem 0; padding: 1rem; background: #f3f7f5; border-left: 3px solid #557362; }
+  .readable-diagram figcaption { font-weight: 650; }
+  .diagram-relationships { font-size: 1rem; padding-left: 1.25rem; }
+  .diagram-relationships li { margin: .65rem 0; }
+  .diagram-graphic { overflow: auto; }
+  .diagram-graphic .mermaid { min-width: 45rem; }
   .mermaid { overflow-x: auto; margin: 1.5rem 0; }
   .chapter-meta { color: #555; font-size: 0.875rem; }
   .chapter-navigation { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; border-top: 1px solid #ddd; padding-top: 1rem; margin-top: 2.5rem; }
   .chapter-navigation a { flex: 1 1 14rem; }
   .skip-link { position: absolute; top: -5rem; left: 1rem; background: white; padding: 0.5rem; }
   .skip-link:focus { top: 0.5rem; }
-  @media (max-width: 760px) {
+  @media (max-width: 1100px) {
     .documentation { grid-template-columns: minmax(0, 1fr); }
     nav { border-right: 0; border-bottom: 1px solid #ddd; padding: 1rem; }
     main { padding: 1rem 1rem 3rem; }

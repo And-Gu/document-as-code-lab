@@ -45,7 +45,9 @@ export function initContractExplorers() {
         const row = element('li'); row.append(item(edge.source), document.createTextNode(` ${relationLabels[edge.type]} `), item(edge.target)); links.append(row);
       }
       if (!links.childElementCount) links.append(element('li', 'No recorded links.'));
-      details.replaceChildren(title, type, status, element('p', record.body), element('h5', 'Recorded links'), links, revision, digest, source, github, note);
+      const readable = element('a', 'Read source record'); readable.href = siteUrl(`materials/${record.source.replace(/\.md$/, '')}/`);
+      const provenance = element('details'); provenance.append(element('summary', 'Source and revision'), revision, digest, source, github, note);
+      details.replaceChildren(title, type, status, element('p', record.body), readable, element('h5', 'Recorded links'), links, provenance);
       if (record.type === 'delivery') status.after(element('p', `Planned date: ${record.planned_date ?? 'Not recorded'}`));
       if (view === 'relationships') showRelationships(id);
       else summary.textContent = `Selected ${id} · ${record.label} · ${statusScope(record)}: ${record.status}`;
@@ -160,6 +162,8 @@ export function initContractExplorers() {
     root.querySelector('[data-ce-change]')!.addEventListener('change', showImpact);
     root.querySelector<HTMLElement>('[data-ce-fallback]')!.hidden = true;
     root.querySelectorAll<HTMLButtonElement | HTMLSelectElement>('button, select').forEach(control => { control.disabled = false; });
+    const requested = new URLSearchParams(window.location.search).get('record');
+    if (requested && records.has(requested)) recordSelect.value = requested;
     root.classList.add('ce-enhanced'); switchView('relationships');
   });
 }
