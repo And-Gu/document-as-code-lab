@@ -12,7 +12,7 @@ visuals:
     embedded: true
     outputs: [web, pdf, slides]
     caption: "From maintained sources through checks and transformations to generated outputs and publication."
-    alt: " S[Sources] --> C[Checks] --> T[Transformations] --> O[Generated outputs];  H[Human review] -.-> O;  O --> P[Separate publication]"
+    alt: "Sources pass through checks and transformations into generated outputs. Human review assesses those outputs; publication is a separate step."
 ---
 
 # From Sources to Results

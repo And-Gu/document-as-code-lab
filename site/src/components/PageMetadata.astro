@@ -1,0 +1,15 @@
+---
+import { siteUrl } from '../lib/urls';
+interface Props { title: string; description: string; }
+const { title, description } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const shareImage = new URL(siteUrl('files/assets/illustrations/information-workshop.jpg'), Astro.site).href;
+---
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+<meta property="og:type" content="website" />
+<meta property="og:title" content={`${title} | Document-as-Code Lab`} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={shareImage} />
+<meta property="og:image:alt" content="Illustration of colleagues reviewing shared sources and a handbook." />

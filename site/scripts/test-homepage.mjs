@@ -35,6 +35,7 @@ for (const slug of ['information-model', 'information-value', 'lab-architecture'
   const deck = parse(await read(`../dist/presentations/${slug}/index.html`));
   const notes = parse(await read(`../dist/presentations/${slug}/notes/index.html`));
   assert.equal(all(deck, node => node.tagName === 'section' && attr(node, 'aria-label')).length, slideCount);
+  assert.equal(attr(all(deck, node => attr(node, 'rel') === 'canonical')[0], 'href'), `https://and-gu.github.io/document-as-code-lab/presentations/${slug}/`);
   assert.equal(all(notes, node => node.tagName === 'section').length, slideCount);
   assert.ok(all(deck, node => attr(node, 'href') === `/document-as-code-lab/presentations/${slug}/notes/`).length);
   assert.ok(all(home, node => attr(node, 'href') === `/document-as-code-lab/presentations/${slug}/`).length);
@@ -44,3 +45,14 @@ for (const slug of ['information-model', 'information-value', 'lab-architecture'
 const original = parse(await read('../dist/presentations/document-as-code/index.html'));
 assert.equal(all(original, node => node.tagName === 'section' && attr(node, 'aria-label')).length, 8);
 console.log('Homepage groups cover all 11 chapters; two ten-slide packs, nine-slide architecture deck, notes, image, base paths, and original eight-slide deck passed.');
+
+const menu = all(home, node => attr(node, 'id') === 'chapter-menu')[0];
+const menuGroups = all(menu, node => hasClass(node, 'menu-group'));
+assert.deepEqual(menuGroups.map(group => all(group, node => node.tagName === 'a').map(node => attr(node, 'href'))), groupLinks, 'Menu and homepage share chapter groups');
+const actions = all(home, node => hasClass(node, 'home-actions'))[0];
+assert.deepEqual(all(actions, node => node.tagName === 'a').map(node => attr(node, 'href')), ['/document-as-code-lab/chapters/01-introduction/', '/document-as-code-lab/chapters/07-processing/#processing-lab-widget']);
+assert.ok((await read('../dist/chapters/07-processing/index.html')).includes('id="processing-lab-widget"'));
+const budgetAnchor = 'missing-excel-tables-and-spreadsheets';
+assert.equal(all(home, node => node.tagName === 'a' && attr(node, 'href') === `/document-as-code-lab/materials/reference/dashboards-and-work-tracking/#${budgetAnchor}`).length, 1);
+assert.ok((await read('../dist/materials/reference/dashboards-and-work-tracking/index.html')).includes(`id="${budgetAnchor}"`));
+console.log('Package 1 primary entries, shared navigation and final budget anchor passed.');

@@ -98,3 +98,33 @@ for (const base of ['/', '/document-as-code-lab/']) {
   assert.equal(siteUrl('files/examples/contract-explorer/records/AMD-001.md'), `${base}files/examples/contract-explorer/records/AMD-001.md`);
 }
 console.log('Contract sources, schema failures, relation types, coverage, impact provenance, source edits, lifecycle separation, original-source links, fallback, and both base paths passed.');
+
+const loaderUrl = `data:text/javascript;base64,${Buffer.from(loaderCode).toString('base64')}`;
+const adapterCode = compile(await readFile('src/lib/material-records.ts', 'utf8')).replace("from './contract-loader'", `from '${loaderUrl}'`).replace("from './contract-model'", `from '${modelUrl}'`);
+const { materialRecord } = await import(`data:text/javascript;base64,${Buffer.from(adapterCode).toString('base64')}`);
+assert.equal(await materialRecord(root, 'reference/automation-quality.md'), undefined, 'Ordinary material has no record schema');
+const delivery = await materialRecord(root, 'examples/contract-explorer/records/DEL-101.md');
+assert.equal(delivery.title, 'DEL-101 — Interface package');
+assert.equal(delivery.fields.find(field => field.label === 'Planned date').value, '10 November 2026');
+assert.equal(delivery.relations[0].target, 'PRJ-101');
+assert.equal(delivery.digest, data.records.find(record => record.id === 'DEL-101').digest);
+for (const record of data.records) {
+  const readable = await readFile(`dist/materials/${record.source.replace(/\.md$/, '')}/index.html`, 'utf8');
+  assert.ok(readable.includes(`${record.id} — ${record.label}`));
+  assert.equal((readable.match(/<h1[ >]/g) ?? []).length, 1);
+  assert.ok(readable.includes(record.digest));
+  assert.ok(readable.includes('View original source') && readable.includes('Source and revision'));
+  assert.ok(readable.includes(`?record=${record.id}#contract-explorer-widget`));
+  for (const relation of record.relations) assert.ok(readable.includes(`/materials/examples/contract-explorer/records/${relation.target}/`));
+}
+const changedRoot = await mkdtemp(path.join(tmpdir(), 'material-record-'));
+try {
+  await cp(path.join(root, 'examples/contract-explorer'), path.join(changedRoot, 'examples/contract-explorer'), { recursive: true });
+  const source = 'examples/contract-explorer/records/DEL-101.md';
+  await writeFile(path.join(changedRoot, source), (await readFile(path.join(changedRoot, source), 'utf8')).replace('2026-11-10', '2026-12-03'));
+  const changed = await materialRecord(changedRoot, source);
+  assert.equal(changed.fields.find(field => field.label === 'Planned date').value, '3 December 2026');
+  assert.equal(changed.revision, 'Uncommitted working copy');
+  assert.notEqual(changed.digest, delivery.digest);
+} finally { await rm(changedRoot, { recursive: true, force: true }); }
+console.log('Readable source adapters, real metadata/relations/provenance, source mutation and deterministic returns passed.');

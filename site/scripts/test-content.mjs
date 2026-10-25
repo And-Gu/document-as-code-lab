@@ -87,3 +87,46 @@ assert.equal(navLinks.length, 1, 'The final chapter has only a previous link');
 assert.equal(attribute(navLinks[0], 'href'), '/document-as-code-lab/chapters/10-publishing/');
 assert.ok(!findNodes(lastChapter, node => node.tagName === 'a').some(node => /\/chapters\/(12|13|14)-automation\//.test(attribute(node, 'href') ?? '')));
 console.log(`Stable chapter IDs, maintained Mermaid sources, and ${links} internal links/assets across ${files.length} HTML pages passed.`);
+
+const descriptions = new Set();
+for (const slug of ['', ...slugs.map(slug => `chapters/${slug}/`)]) {
+  const doc = parseHtml(await readFile(path.join(dist, slug, 'index.html'), 'utf8'));
+  const meta = name => findNodes(doc, node => node.tagName === 'meta' && (attribute(node, 'name') === name || attribute(node, 'property') === name))[0];
+  const description = attribute(meta('description'), 'content');
+  assert.ok(description && description.length > 40); descriptions.add(description);
+  const canonical = findNodes(doc, node => attribute(node, 'rel') === 'canonical')[0];
+  assert.equal(attribute(canonical, 'href'), `https://and-gu.github.io/document-as-code-lab/${slug}`);
+  assert.equal(attribute(meta('og:url'), 'content'), attribute(canonical, 'href'));
+  assert.equal(attribute(meta('og:description'), 'content'), description);
+  assert.ok(attribute(meta('og:title'), 'content'));
+  assert.equal(attribute(meta('og:image'), 'content'), 'https://and-gu.github.io/document-as-code-lab/files/assets/illustrations/information-workshop.jpg');
+  assert.ok(attribute(meta('og:image:alt'), 'content'));
+  assert.equal(findNodes(doc, node => node.tagName === 'h1').length, 1, `One page title: ${slug}`);
+  if (slug) {
+    const contents = findNodes(doc, node => attribute(node, 'aria-label') === 'On this page')[0];
+    if (contents) assert.ok(!findNodes(contents, node => node.tagName === 'a').some(node => /^#(?:metadata-validation|ce-|chapter-information|Requesting)/.test(attribute(node, 'href'))));
+    const chapterMeta = findNodes(doc, node => attribute(node, 'class') === 'chapter-meta')[0];
+    assert.ok(chapterMeta && !findNodes(chapterMeta, node => node.nodeName === '#text').map(node => node.value).join('').includes('in-review'));
+  }
+}
+assert.equal(descriptions.size, 12, 'Homepage and each chapter need their own description');
+const { diagramRelationships } = await import('../plugins/readable-diagrams.mjs');
+for (const [slug, expected] of [
+  ['06-information-architecture', [
+    'REQ-001: Access requirement constrains PROC-001: Access procedure.',
+    'PROC-001: Access procedure guides ACT-003: System orientation.',
+    'ACT-001: Access enabled prerequisite for ACT-003: System orientation.',
+    'ACT-002: Security training complete prerequisite for ACT-003: System orientation.',
+  ]],
+  ['07-processing', ['Sources leads to Checks.', 'Checks leads to Transformations.', 'Transformations leads to Generated outputs.', 'Human review reviews Generated outputs.', 'Generated outputs leads to Separate publication.']],
+]) {
+  const source = await readFile(path.join(root, `docs/${slug}.md`), 'utf8');
+  const code = source.match(/```mermaid\n([\s\S]*?)\n```/)[1];
+  assert.deepEqual(diagramRelationships(code).map(row => `${row.from} ${row.relation} ${row.to}.`), expected);
+  const html = await readFile(path.join(dist, `chapters/${slug}/index.html`), 'utf8');
+  const rendered = slug === '07-processing' ? ['From sources to checks.', 'From checks to transformations.', 'From transformations to generated outputs.', 'Human review assesses generated outputs.', 'From generated outputs to separate publication.'] : expected;
+  for (const statement of rendered) assert.ok(html.includes(statement), statement);
+}
+assert.throws(() => diagramRelationships('flowchart LR\nA[One] -- unknown --> B[Two]'), /Unsupported|Unresolved/);
+assert.ok(files.some(file => file.endsWith('materials/spec/tutorial/working-methods-upgrade/02-PR1-AUDIENCE-AND-READER-EXPERIENCE/index.html')));
+console.log('Page descriptions, canonical/social URLs, heading hierarchy, readable diagram equivalence and selected nested planning pages passed.');

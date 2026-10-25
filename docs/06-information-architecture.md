@@ -12,7 +12,7 @@ visuals:
     embedded: true
     outputs: [web, pdf, slides]
     caption: "Conceptual relationships in the fictional onboarding scenario; not a live system."
-    alt: " R[REQ-001: Access requirement] -->|constrains| P[PROC-001: Access procedure];  P -->|guides| S[ACT-003: System orientation];  A[ACT-001: Access enabled] -->|prerequisite for| S;  ACT-002[ACT-002: Security training complete] -->|prerequisite for| S"
+    alt: "The access requirement constrains the access procedure, which guides system orientation. Access enabled and security training complete are prerequisites for orientation."
 ---
 
 # Information Architecture and Traceability

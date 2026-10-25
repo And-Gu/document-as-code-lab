@@ -16,9 +16,13 @@ const previewSource = validationSchema ? readPracticeFrontmatter(initial).body :
       <button type="button" data-copy disabled title="Copy Markdown" aria-label="Copy Markdown"><Copy size={18} /></button>
     </div>
   </div>
+  <div class="mdp-tabs" data-editor-tabs hidden aria-label="Editor view">
+    <button type="button" data-editor-tab="source">Source</button>
+    <button type="button" data-editor-tab="preview">Preview</button>
+  </div>
   <div class="mdp-panels">
-    <label class="mdp-panel">Markdown source<textarea data-source rows="15" spellcheck="false" aria-label="Markdown source" aria-describedby={validationSchema ? 'metadata-validation-result' : undefined} disabled>{initial}</textarea></label>
-    <div class="mdp-panel"><span class="mdp-label">Rendered preview</span><div data-preview class="mdp-preview" role="region" aria-label="Rendered Markdown preview" tabindex="0" set:html={renderLearningMarkdown(previewSource)} /></div>
+    <div class="mdp-panel" data-editor-panel="source"><label>Markdown source<textarea data-source rows="15" spellcheck="false" aria-label="Markdown source" aria-describedby={validationSchema ? 'metadata-validation-result' : undefined} disabled>{initial}</textarea></label></div>
+    <div class="mdp-panel" data-editor-panel="preview"><span class="mdp-label">Rendered preview</span><div data-preview class="mdp-preview" role="region" aria-label="Rendered Markdown preview" tabindex="0" set:html={renderLearningMarkdown(previewSource, true)} /></div>
   </div>
   {validationSchema && <div data-schema-practice>
     <script type="application/json" data-validation-schema set:html={JSON.stringify(validationSchema).replaceAll('<', '\\u003c')} />
@@ -37,6 +41,7 @@ const previewSource = validationSchema ? readPracticeFrontmatter(initial).body :
 </section>
 <script>
   import { renderLearningMarkdown } from '../../lib/learning';
+  import { initEditorTabs } from '../../lib/editor-tabs';
   import { readPracticeFrontmatter, validatePracticeMetadata } from '../../lib/metadata-practice';
   function init() {
     document.querySelectorAll<HTMLElement>('[data-markdown-playground]').forEach((root) => {
@@ -45,6 +50,7 @@ const previewSource = validationSchema ? readPracticeFrontmatter(initial).body :
       const source = root.querySelector<HTMLTextAreaElement>('[data-source]')!;
       const preview = root.querySelector<HTMLElement>('[data-preview]')!;
       const status = root.querySelector<HTMLElement>('[data-status]')!;
+      const showSource = initEditorTabs(root);
       const initial = source.value;
       const schemaElement = root.querySelector('[data-validation-schema]');
       const schema: object | undefined = schemaElement ? JSON.parse(schemaElement.textContent!) : undefined;
@@ -61,7 +67,7 @@ const previewSource = validationSchema ? readPracticeFrontmatter(initial).body :
         errors.hidden = checked.errors.length === 0;
         source.setAttribute('aria-invalid', String(!checked.valid));
       }
-      const render = () => { preview.innerHTML = renderLearningMarkdown(schema ? readPracticeFrontmatter(source.value).body : source.value); };
+      const render = () => { preview.innerHTML = renderLearningMarkdown(schema ? readPracticeFrontmatter(source.value).body : source.value, true); };
       source.disabled = false;
       root.querySelectorAll<HTMLButtonElement>('button').forEach((button) => { button.disabled = false; });
       source.addEventListener('input', () => {
@@ -75,11 +81,11 @@ const previewSource = validationSchema ? readPracticeFrontmatter(initial).body :
       });
       root.querySelector('[data-validate]')?.addEventListener('click', () => showValidation());
       root.querySelector('[data-reset]')!.addEventListener('click', () => {
-        source.value = initial; render(); showValidation(true); source.focus(); source.setSelectionRange(0, 0); source.scrollTop = 0; preview.scrollTop = 0; status.textContent = 'Example restored.';
+        source.value = initial; render(); showValidation(true); showSource(); source.focus(); source.setSelectionRange(0, 0); source.scrollTop = 0; preview.scrollTop = 0; status.textContent = 'Example restored.';
       });
       root.querySelector('[data-copy]')!.addEventListener('click', async () => {
         try { await navigator.clipboard.writeText(source.value); status.textContent = 'Markdown copied.'; }
-        catch { source.focus(); source.select(); status.textContent = 'Clipboard unavailable. Copy the selected text manually.'; }
+        catch { showSource(); source.focus(); source.select(); status.textContent = 'Clipboard unavailable. Copy the selected text manually.'; }
       });
     });
   }

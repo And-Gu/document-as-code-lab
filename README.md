@@ -4,6 +4,12 @@ A living tutorial and visualization lab: write in Markdown, track changes, and t
 
 The project teaches document-as-code by applying it to itself. It also serves as a visualization showcase for experienced readers: repository content, metadata, relationships, and work history become inputs to charts, diagrams, and dashboards.
 
+## Audience and next baseline
+
+The intended v1.4 baseline is for professionals experienced in information work with Word, Excel, PDF and specialized business systems. It explores new ways to collaborate, automate repeated information work and use agents with traceable sources. No writing, engineering or developer background is required for the browser-first journey. Document-as-code is the concrete demonstration, not automatic integration or a requirement to replace existing tools.
+
+Package 1 adds a direct Processing Lab entry, readable contract records, shared chapter navigation, mobile source/preview controls and page sharing metadata. Its implementation and final text/design are in review; the status below records the earlier published baseline. Packages 2 and 3 remain future work. See the [package specifications](spec/tutorial/working-methods-upgrade/README.md).
+
 ## Status
 
 The v1.3 editorial update revises all 11 chapters, which remain in review. The owner accepted the representative writing samples and authorized publication; those decisions do not approve every revised chapter. The [Astro reading site is published on GitHub Pages](https://and-gu.github.io/document-as-code-lab/) and reads the original Markdown sources, including diagrams and linked examples. Every chapter has an expandable metadata and Git-history widget. Pull requests run Astro checks and a production build; pushes to `main` build and deploy the website.
@@ -120,7 +126,7 @@ The [v1.3 specification register](spec/tutorial/README.md) links the reusable te
 
 ## Next Milestone
 
-Review the chapter text and local experience with the tutorial owner, verify the remaining environment-dependent exercises, and develop the PDF, presentation, and dashboard pipelines. Keep the capability register aligned with verification evidence.
+Review package 1 wording and rendered reader journeys, then merge its implementation before beginning package 2. Continue chapter review and track later output/environment work in the roadmap. Keep the capability register aligned with verification evidence.
 
 ## Licensing
 

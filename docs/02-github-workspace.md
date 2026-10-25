@@ -30,6 +30,8 @@ Suppose the access procedure from chapter 1 needs a new step. The author needs s
 
 This tutorial uses a **Git repository hosted on GitHub** for that work. The repository keeps the source files and their history together. Git records revisions, while GitHub provides a shared place to propose and review changes.
 
+This is the lab's shared, reviewable workspace. The principle is to make sources and proposed changes inspectable; your organization can explore that principle while keeping its existing business systems.
+
 ## Repository, Git, and GitHub
 
 A **repository** is a collection of maintained files and their change history. It can hold documentation, structured data, diagrams, tests, and the instructions that process them.

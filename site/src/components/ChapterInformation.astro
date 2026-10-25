@@ -27,13 +27,14 @@ const formatDate = (date: string) => new Intl.DateTimeFormat('en-GB', {
       {history.changedLocally ? 'Local edits' : latest ? <>Updated <time datetime={latest.date}>{formatDate(latest.date)}</time></> : 'History unavailable'}
     </span>
   </summary>
+  <p class="chapter-information__note">Editorial status applies to this chapter revision; publication does not establish approval.</p>
   <div class="chapter-information__body">
     <dl class="chapter-information__metadata">
       <dt>Learning goal</dt><dd>{metadata.learning_goal ?? 'Not specified'}</dd>
       <dt>Audience</dt><dd>{metadata.audience?.replaceAll('-', ' ') ?? 'Not specified'}</dd>
       <dt>Chapter</dt><dd>{metadata.chapter_number}</dd>
       <dt>Stable ID</dt><dd><code>{metadata.id ?? chapter.id}</code></dd>
-      <dt>Source status</dt><dd><code>{metadata.status}</code></dd>
+
     </dl>
     <h2 class="chapter-information__heading">Recent changes</h2>
     {history.commits.length ? <ol class="chapter-information__commits">

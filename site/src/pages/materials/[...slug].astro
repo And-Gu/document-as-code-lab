@@ -3,6 +3,9 @@ import { getCollection, render } from 'astro:content';
 import Documentation from '../../layouts/Documentation.astro';
 import { siteUrl } from '../../lib/urls';
 import BudgetTable from '../../components/BudgetTable.astro';
+import RecordDetails from '../../components/materials/RecordDetails.astro';
+import { materialRecord } from '../../lib/material-records';
+import { repositoryRoot } from '../../lib/repository';
 import { getChapters, chapterTitle } from '../../lib/chapters';
 
 export async function getStaticPaths() {
@@ -13,8 +16,14 @@ export async function getStaticPaths() {
 }
 const { material } = Astro.props;
 const { Content, headings } = await render(material);
-const title = headings.find((heading) => heading.depth === 1)?.text ?? material.id;
+const record = await materialRecord(repositoryRoot, `${material.id}.md`);
+const title = record?.title ?? headings.find((heading) => heading.depth === 1)?.text ?? material.id;
 const relatedNumbers: Record<string, number[]> = {
+  'reference/dashboards-and-work-tracking': [3],
+  'reference/pdf-publication': [10, 11],
+  'examples/learning/procedure-template': [5],
+  'examples/onboarding-showcase/README': [1, 5, 7],
+  'examples/contract-explorer/README': [9],
   'reference/review-and-collaboration': [2],
   'reference/growth-measurement': [3],
   'reference/record-processing': [5, 7],
@@ -31,7 +40,7 @@ const relatedChapters = (await getChapters()).filter(chapter => relatedNumbers[m
 ---
 
 <Documentation title={title}>
-  <p class="chapter-meta"><a href={siteUrl(`files/${material.id}.md`)}>Source file</a></p>
+  {!record && <p class="chapter-meta"><a href={siteUrl(`files/${material.id}.md`)}>Source file</a></p>}
   {relatedChapters.length > 0 && <p class="material-return">Return to the tutorial: {relatedChapters.map((chapter, index) => <>{index > 0 && ' · '}<a href={siteUrl(`chapters/${chapter.id}/`)}>Chapter {chapter.data.chapter_number}: {chapterTitle(chapter)}</a></>)}</p>}
-  <article><Content />{material.id === 'reference/dashboards-and-work-tracking' && <BudgetTable />}</article>
+  <article>{record && <RecordDetails record={record} />}<Content />{material.id === 'reference/dashboards-and-work-tracking' && <BudgetTable />}</article>
 </Documentation>

@@ -10,6 +10,8 @@
 - Preserve stable chapter IDs. Filename prefixes and `chapter_number` determine reading order.
 - Keep existing user changes. Commit, push, or change GitHub settings only when requested.
 
+Follow the [current audience and reader promise](spec/tutorial/02-DOCUMENT-AS-CODE-LAB-V1-SPECIFICATION.md#2-audiences-and-paths) and the [25 October decision](spec/tutorial/04-DESIGN-DECISIONS.md#25-october-2026-working-methods-direction). Preserve eleven chapters, stable routes/anchors, and a browser-first core without accounts or installation. Keep technical depth optional; do not imply automatic business-system integration. Exact copy and visual treatment remain subject to owner review.
+
 ## Keep Related Information Consistent
 
 For a capability, publication, or workflow change, inspect the following files and update those affected. Do not edit every file mechanically.
