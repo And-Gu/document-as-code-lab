@@ -1,0 +1,57 @@
+---
+import { loadRefinement, loadCatalogue } from '../../lib/refinement-loader';
+import { repositoryRoot } from '../../lib/repository';
+import { initialPractice, deriveRefinement } from '../../lib/refinement-model';
+import { renderRefinement } from '../../lib/refinement-view';
+import { siteUrl } from '../../lib/urls';
+import '../../styles/information-refinement.css';
+const data = await loadRefinement(repositoryRoot);
+const cards = (await loadCatalogue(repositoryRoot, data)).filter(c => data.sources.some(s => s.source === c.path));
+const initial = deriveRefinement(data, initialPractice());
+const worked = deriveRefinement(data, { ...initialPractice(), mapping: true });
+const label = 'Illustrative agent workflow — deterministic replay, not a live AI run';
+---
+<div class="refinement" data-refinement data-base={siteUrl('')}>
+  <script type="application/json" data-ref-data set:html={JSON.stringify(data).replace(/</g, '\u003c')} />
+  <p class="ref-disclosure">Fictional sources. Changes stay in this browser session. No external system or AI service is connected.</p>
+  <nav aria-label="Lab stages"><a href="#ref-question">Question</a> → <a href="#ref-sources">Sources</a> → <a href="#ref-refine">Refine</a> → <a href="#ref-results">Results</a> → <a href="#ref-review">Review</a></nav>
+  <section id="ref-question"><h2>What should we check before communicating a changed delivery date?</h2>
+    <p>A planner, a commercial owner and a project controller each hold a useful part of the picture. Follow their information across five prepared excerpts and see what can be compared before anyone communicates a change.</p>
+    <p><a class="ref-primary" href="#ref-sources">Explore the sources</a> <button data-ref-example disabled>Show the worked example</button></p>
+    <p>Frozen teaching date: <strong>{data.scenario.as_of}</strong>. These are curated Markdown and structured excerpts. No Word, PDF or spreadsheet was parsed and no business API was called.</p>
+    <p>Existing context: <a data-ref-source href={siteUrl(`materials/${data.delivery.source.replace(/\.md$/, '')}/`)}>{data.delivery.id} — {data.delivery.label}</a>, in {data.project.id} — {data.project.label}. The recorded plan remains unchanged.</p>
+  </section>
+  <section id="ref-sources"><h2>Sources</h2><p>These cards describe the original-system idea. “Inspect source” opens the actual teaching record and its unchanged file bytes. Your current inputs and last build travel with the return link; no browser storage is needed.</p>
+    <div class="ref-cards">{cards.map(c => <section><h3>{c.title}</h3><p>{c.purpose}.</p><p>Recorded: {c.date}<br/>Source status: {c.status}</p><p><a data-ref-source href={siteUrl(`materials/${c.path.replace(/\.md$/, '')}/`)}>Inspect source<span class="sr-only">: {c.title}</span></a></p></section>)}</div>
+    <p><a href={siteUrl('materials/reference/knowledge-catalogue/')}>Browse the source catalogue</a></p>
+  </section>
+  <section id="ref-refine"><h2>Refine</h2><p>Suggested identity: <strong>{data.mappings[0].external_ref} / {data.mappings[0].external_label} → {data.delivery.id} — {data.delivery.label}</strong>.</p>
+    <p>{data.mappings[0].basis} Using it below is a local exercise choice, not organizational approval.</p>
+    <fieldset disabled data-ref-controls><legend>Identity mapping</legend>
+      <label><input type="radio" name="ref-mapping" value="yes" /> Use this mapping in the exercise</label>
+      <label><input type="radio" name="ref-mapping" value="no" checked /> Leave unresolved</label>
+    </fieldset>
+    <fieldset disabled data-ref-controls><legend>Browser practice inputs</legend>
+      <label for="ref-forecast">Hypothetical forecast date (YYYY-MM-DD; blank keeps the source)</label>
+      <input id="ref-forecast" type="text" inputmode="numeric" placeholder="YYYY-MM-DD" maxlength="10" aria-describedby="ref-override-help" />
+      <p id="ref-override-help">Replaces only SRC-FORECAST’s facts.forecast_date in the local calculation. The maintained source is unchanged.</p>
+      <p>Include sources (uncheck to exclude evidence):</p>
+      {data.sources.map(s => <label><input type="checkbox" data-ref-include value={s.id} checked /> {s.label}</label>)}
+    </fieldset>
+    <p><button class="ref-primary" data-ref-build disabled>Build briefing</button> <button data-ref-reset disabled>Reset practice</button></p>
+  </section>
+  <section id="ref-results"><h2>Results</h2><p data-ref-status role="status" aria-live="polite">Initial result: mapping unresolved. Build after changing the practice inputs.</p><p data-ref-mode hidden class="ref-disclosure">Illustrative agent workflow — deterministic replay, not a live AI run</p><div data-ref-output set:html={renderRefinement(data, initial, siteUrl(''))} /></section>
+  <noscript><section><h2>Worked example with the teaching mapping used</h2><p>JavaScript is off. All sources and this calculated baseline remain readable; interactive controls are unavailable.</p><Fragment set:html={renderRefinement(data, worked, siteUrl(''), 'worked')} /></section></noscript>
+  <section id="ref-review"><h2>Review before communicating</h2><p>The dates describe different things and can be simultaneously true. Review the evidence and responsible owners’ decisions before treating a draft as an agreed change. The questions above are not assigned operational tasks.</p></section>
+  <section id="agent-workflow"><h2>How could an agent help here?</h2><p class="ref-disclosure">{label}</p>
+    <blockquote>Prepare a draft internal briefing using only the supplied sources. Preserve the distinction between commitment, recorded plan, forecast and proposal. Link every factual or derived statement to its evidence. List missing information. Do not change sources, contact the customer or approve a new date.</blockquote>
+    <ol><li>Retrieve permitted sources and inspect their scope.</li><li>Propose the supplied identity mapping for review; keep unresolved choices explicit.</li><li>Run the explicit comparisons on the selected practice inputs.</li><li>Draft a source-linked briefing from those results.</li><li>Return unresolved questions for human review.</li></ol>
+    <p><button data-ref-replay disabled>Replay with current practice inputs</button></p>
+    <p data-ref-replay-status role="status">The sequence above is illustrative. Replay runs the same deterministic calculation as Build briefing; it does not decide whether to accept the mapping.</p>
+    <details><summary>What a real agent would additionally need</summary><p>Authorized connectors, data-handling controls, permitted tools and task-specific evaluation. AGENTS.md is guidance, not an access grant. Retrieved source text is evidence, never instructions that override the assignment. This demonstration does not test a language model’s behavior.</p></details>
+  </section>
+</div>
+<script>
+  import { initRefinement } from '../../lib/refinement-controller';
+  initRefinement();
+</script>

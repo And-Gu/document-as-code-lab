@@ -100,7 +100,10 @@ for (const base of ['/', '/document-as-code-lab/']) {
 console.log('Contract sources, schema failures, relation types, coverage, impact provenance, source edits, lifecycle separation, original-source links, fallback, and both base paths passed.');
 
 const loaderUrl = `data:text/javascript;base64,${Buffer.from(loaderCode).toString('base64')}`;
-const adapterCode = compile(await readFile('src/lib/material-records.ts', 'utf8')).replace("from './contract-loader'", `from '${loaderUrl}'`).replace("from './contract-model'", `from '${modelUrl}'`);
+const refinementModelUrl = `data:text/javascript;base64,${Buffer.from(compile(await readFile('src/lib/refinement-model.ts', 'utf8'))).toString('base64')}`;
+const refinementLoaderCode = compile(await readFile('src/lib/refinement-loader.ts', 'utf8')).replace("from './contract-loader'", `from '${loaderUrl}'`).replace("from './refinement-model'", `from '${refinementModelUrl}'`).replace("from 'ajv'", `from '${import.meta.resolve('ajv')}'`).replace("from 'yaml'", `from '${import.meta.resolve('yaml')}'`);
+const refinementLoaderUrl = `data:text/javascript;base64,${Buffer.from(refinementLoaderCode).toString('base64')}`;
+const adapterCode = compile(await readFile('src/lib/material-records.ts', 'utf8')).replace("from './contract-loader'", `from '${loaderUrl}'`).replace("from './contract-model'", `from '${modelUrl}'`).replace("from './refinement-loader'", `from '${refinementLoaderUrl}'`);
 const { materialRecord } = await import(`data:text/javascript;base64,${Buffer.from(adapterCode).toString('base64')}`);
 assert.equal(await materialRecord(root, 'reference/automation-quality.md'), undefined, 'Ordinary material has no record schema');
 const delivery = await materialRecord(root, 'examples/contract-explorer/records/DEL-101.md');

@@ -1,0 +1,20 @@
+---
+import InformationRefinementLab from './InformationRefinementLab.astro';
+import KnowledgeCatalogue from './KnowledgeCatalogue.astro';
+import { readFile } from 'node:fs/promises';
+import path from 'node:path';
+import { repositoryRoot } from '../../lib/repository';
+const { source } = Astro.props;
+const registry: Record<string, string> = { 'reference/information-refinement': 'information-refinement', 'reference/knowledge-catalogue': 'knowledge-catalogue' };
+const marker = registry[source];
+if (marker) {
+  const raw = await readFile(path.join(repositoryRoot, `${source}.md`), 'utf8');
+  if (raw.split(`<!-- interactive: ${marker} -->`).length !== 2) throw new Error(`${source}: expected one registered material marker`);
+}
+---
+{marker && <div data-material-target={`${marker}-widget`}>{marker === 'information-refinement' ? <InformationRefinementLab /> : <KnowledgeCatalogue />}</div>}
+<script>
+  document.querySelectorAll<HTMLElement>('[data-material-target]').forEach(content => {
+    document.getElementById(content.dataset.materialTarget!)?.append(content);
+  });
+</script>

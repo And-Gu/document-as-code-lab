@@ -90,6 +90,16 @@
       "name": "Workflow beyond GitHub",
       "status": "planned",
       "completion_criterion": "The OneDrive and Copilot exercise is documented and verified in a stated environment."
+    },
+    {
+      "id": "information-refinement",
+      "name": "Cross-source information refinement",
+      "status": "in-progress",
+      "completion_criterion": "The fictional cross-source lab, source catalogue and deterministic agent walkthrough pass local model/browser regression checks and the owner accepts business meaning and reader experience.",
+      "evidence": [
+        "Package 2 provides curated sources, explicit identity mapping, source-linked deterministic results and browser-only practice inputs.",
+        "Technical checks are recorded in reviews/package-2/README.md; owner acceptance and hosted verification remain pending."
+      ]
     }
   ]
 }

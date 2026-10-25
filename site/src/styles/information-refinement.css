@@ -1,0 +1,28 @@
+.refinement { --ref-ink:#163e39; --ref-line:#cbded8; margin-block:2rem; color:#203b35; }
+.refinement section { scroll-margin-top:2rem; }
+.refinement nav { display:flex; flex-wrap:wrap; gap:.5rem; padding:1rem 0; border-block:1px solid var(--ref-line); }
+.refinement h2 { margin-top:2rem; }
+.ref-disclosure { padding:1rem; border-left:4px solid #367a68; background:#ecf5ef; }
+.ref-cards,.ref-results { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr)); gap:1rem; }
+.ref-cards section,.ref-results section,.catalogue-entry { border:1px solid var(--ref-line,#cbded8); border-radius:.5rem; padding:1rem; min-width:0; }
+.ref-cards h3,.ref-results h4 { margin:0 0 .5rem; }
+.ref-results { grid-template-columns:repeat(auto-fit,minmax(min(100%,310px),1fr)); }
+.refinement fieldset { border:1px solid var(--ref-line); padding:1rem; margin:1rem 0; min-width:0; }
+.refinement label { display:block; margin-block:.65rem; }
+.refinement input[type=text] { font:inherit; padding:.6rem; max-width:100%; width:14rem; box-sizing:border-box; }
+.refinement button,.ref-primary,.catalogue select { font:inherit; padding:.6rem .8rem; min-height:44px; border:1px solid #577e71; border-radius:.3rem; background:white; color:var(--ref-ink,#163e39); cursor:pointer; margin:.25rem; display:inline-block; }
+.refinement .ref-primary { background:var(--ref-ink); color:white; }
+.refinement button:disabled { opacity:.6; cursor:default; }
+.refinement :focus-visible,.catalogue :focus-visible { outline:3px solid #b3541b; outline-offset:3px; }
+.refinement code,.refinement li,.refinement p,.catalogue-entry { overflow-wrap:anywhere; }
+.refinement details { margin-block:1rem; }
+.refinement summary { cursor:pointer; min-height:32px; font-weight:600; }
+.ref-state { text-transform:uppercase; letter-spacing:.06em; font-size:.8em; font-weight:700; }
+[data-ref-status] { padding:1rem; border:1px solid #8a6c2d; background:#fff9e8; }
+.catalogue { margin-block:2rem; }
+.catalogue-filters { display:flex; flex-wrap:wrap; gap:1rem; margin-block:1rem; }
+.catalogue-filters label { display:grid; max-width:100%; }
+.catalogue select { max-width:100%; }
+.catalogue-entry { margin-block:1rem; }
+.catalogue [hidden] { display:none; }
+.sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }

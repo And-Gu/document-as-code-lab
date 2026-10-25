@@ -74,6 +74,8 @@ The direct links identify DEL-101. Because DEL-102 depends on it, DEL-102 is a f
 | DEL-102 | Acceptance workshop | Part of PRJ-101; depends on DEL-101 |
 | DEL-103 | Training package | Part of PRJ-102 |
 
+The explorer shows relationships already recorded in this example. [Follow DEL-101 across sources](../reference/information-refinement.md) to continue with a different question: what should people check before communicating a changed date? The refinement exercise adds explicit source claims and a reviewed teaching alias, without inventing new edges in this contract graph.
+
 ## Why this is more than a dashboard
 
 A dashboard usually answers a set of predefined questions. An exploratory interface allows readers to select an object, follow a relationship, and ask the next question.

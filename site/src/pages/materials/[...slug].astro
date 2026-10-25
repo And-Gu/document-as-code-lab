@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import Documentation from '../../layouts/Documentation.astro';
 import { siteUrl } from '../../lib/urls';
+import MaterialLearning from '../../components/learning/MaterialLearning.astro';
 import BudgetTable from '../../components/BudgetTable.astro';
 import RecordDetails from '../../components/materials/RecordDetails.astro';
 import { materialRecord } from '../../lib/material-records';
@@ -42,5 +43,5 @@ const relatedChapters = (await getChapters()).filter(chapter => relatedNumbers[m
 <Documentation title={title}>
   {!record && <p class="chapter-meta"><a href={siteUrl(`files/${material.id}.md`)}>Source file</a></p>}
   {relatedChapters.length > 0 && <p class="material-return">Return to the tutorial: {relatedChapters.map((chapter, index) => <>{index > 0 && ' · '}<a href={siteUrl(`chapters/${chapter.id}/`)}>Chapter {chapter.data.chapter_number}: {chapterTitle(chapter)}</a></>)}</p>}
-  <article>{record && <RecordDetails record={record} />}<Content />{material.id === 'reference/dashboards-and-work-tracking' && <BudgetTable />}</article>
+  <article>{record && <RecordDetails record={record} />}<Content /><MaterialLearning source={material.id} />{material.id === 'reference/dashboards-and-work-tracking' && <BudgetTable />}</article>
 </Documentation>

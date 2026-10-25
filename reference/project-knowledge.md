@@ -9,6 +9,7 @@ This map describes the current repository. [AGENTS.md](../AGENTS.md) is the work
 | Tutorial intent and rationale | [Specification register](../spec/tutorial/README.md), [dated design decisions](../spec/tutorial/04-DESIGN-DECISIONS.md) | Owner review; proposed details remain open |
 | Procedure examples | [Showcase sources](../examples/onboarding-showcase/README.md) | Fixed handbook and review chart; separate browser practice copies |
 | Structured records and rules | [Requirement guide](record-processing.md), [contract records and schema](../examples/contract-explorer/README.md) | Explicitly configured processors and validation tests |
+| Cross-source refinement | [Fixture contract](../examples/information-refinement/README.md), selected sources and mapping manifest | [Refinement Lab](information-refinement.md), [catalogue](knowledge-catalogue.md), pure comparisons and source-linked briefing |
 | Website and learning components | [Site guide](../site/README.md), `site/src/` | Astro check, build, and site tests |
 | Presentation definitions | [Presentation guide](../presentations/README.md) | HTML slides and notes generated during site build |
 | Automation and release | [Automation guide](automation-quality.md), `.github/workflows/` | PR checks, artifacts, Pages deployment |

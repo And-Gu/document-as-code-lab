@@ -10,7 +10,7 @@ const { record } = Astro.props;
 </dl>
 {record.fields.some(field => field.label === 'Planned date') && <p>Recorded planning data. Delivery execution/planning state does not establish approval, a customer commitment, or completion.</p>}
 {record.relations.length > 0 && <ul aria-label="Recorded relationships">{record.relations.map(relation => <li>{relation.label} <a href={siteUrl(`materials/${relation.source.replace(/\.md$/, '')}/`)}>{relation.target} — {relation.title}</a></li>)}</ul>}
-<p><a href={siteUrl(`files/${record.source}`)}>View original source</a> · <a href={siteUrl(record.returnPath)}>Return to Contract Explorer</a></p>
+<p><a href={siteUrl(`files/${record.source}`)}>View original source</a> · <a href={siteUrl(record.returnPath)} data-record-return>{record.returnLabel ?? 'Return to Contract Explorer'}</a></p>
 <details class="record-provenance"><summary>Source and revision</summary>
   <p>Path: <code>{record.source}</code></p><p>Revision: <code>{record.revision}</code></p><p>SHA-256: <code>{record.digest}</code></p>
   {record.revision !== 'Uncommitted working copy' && <a href={`https://github.com/And-Gu/document-as-code-lab/blob/${record.revision}/${record.source}`}>Source revision on GitHub</a>}
@@ -19,3 +19,14 @@ const { record } = Astro.props;
   .record-fields { display: flex; flex-wrap: wrap; gap: 1rem 2rem; padding: 1rem; background: #f3f7f5; }
   dt { font-weight: 650; } dd { margin: 0; } .record-provenance { margin: 1rem 0; }
 </style>
+
+{record.kind === 'contract' && record.source.endsWith('/DEL-101.md') && <p><a href={siteUrl('materials/reference/information-refinement/')}>Follow this delivery across sources</a></p>}
+<p data-lab-context-return hidden><a href={siteUrl('materials/reference/information-refinement/')} data-lab-return>Return to Information Refinement Lab with your practice inputs</a></p>
+<script>
+  if (location.hash.startsWith('#practice=') && location.hash.length <= 8000) {
+    const link = document.querySelector<HTMLAnchorElement>('[data-lab-return]');
+    if (link) { link.hash = location.hash; link.parentElement!.hidden = false; }
+    const normal = document.querySelector<HTMLAnchorElement>('[data-record-return]');
+    if (normal?.textContent?.includes('Refinement')) normal.hash = location.hash;
+  }
+</script>

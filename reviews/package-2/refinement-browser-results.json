@@ -1,0 +1,54 @@
+{
+  "sourceRevision": "0b161201b0138caa976d66edecacc3934d5505d1",
+  "workingTree": "clean",
+  "browser": "155.0.8059.85",
+  "base": "http://127.0.0.1:4330/document-as-code-lab/",
+  "results": [
+    {
+      "name": "Chapter bridge and unresolved mapping preserve independent budget result",
+      "result": "passed"
+    },
+    {
+      "name": "Explicit keyboard build, stale edits, partial output and invalid build retention",
+      "result": "passed"
+    },
+    {
+      "name": "Source and original bytes, exact return restores edits and prior build",
+      "result": "passed"
+    },
+    {
+      "name": "Reset, worked example and deterministic replay use current inputs",
+      "result": "passed"
+    },
+    {
+      "name": "Catalogue filters and existing DEL-101 entry",
+      "result": "passed"
+    },
+    {
+      "name": "320px reflow and readable evidence",
+      "result": "passed"
+    },
+    {
+      "name": "390px reflow and readable evidence",
+      "result": "passed"
+    },
+    {
+      "name": "768px reflow and readable evidence",
+      "result": "passed"
+    },
+    {
+      "name": "1440px reflow and readable evidence",
+      "result": "passed"
+    },
+    {
+      "name": "200% text and no-JavaScript sources, baseline and catalogue",
+      "result": "passed"
+    }
+  ],
+  "errors": [],
+  "external": [],
+  "limitations": [
+    "Local Chromium only; not hosted, a screen reader test, physical device or reader study.",
+    "200% CSS text enlargement, not native browser UI zoom."
+  ]
+}

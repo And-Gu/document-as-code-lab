@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "scenario_id": "delivery-change-briefing",
+  "fictional": true,
+  "as_of": "2026-11-04",
+  "rule_version": "refinement-rules-1",
+  "existing_entities": [
+    {
+      "id": "DEL-101",
+      "repository_path": "examples/contract-explorer/records/DEL-101.md",
+      "role": "delivery_identity_and_recorded_plan"
+    },
+    {
+      "id": "PRJ-101",
+      "repository_path": "examples/contract-explorer/records/PRJ-101.md",
+      "role": "project_identity_and_scope"
+    }
+  ],
+  "new_source_paths": [
+    "examples/information-refinement/sources/SRC-CUSTOMER.md",
+    "examples/information-refinement/sources/SRC-FORECAST.md",
+    "examples/information-refinement/sources/SRC-CAPACITY.md",
+    "examples/information-refinement/sources/SRC-BUDGET.md",
+    "examples/information-refinement/sources/SRC-MEETING.md"
+  ],
+  "identity_map_path": "examples/information-refinement/identity-map.json",
+  "operations": [
+    "inspect_sources",
+    "inspect_identity_mapping",
+    "build_briefing",
+    "inspect_derivation",
+    "reset_practice"
+  ],
+  "external_network_required": false,
+  "live_ai": false,
+  "persistent_browser_edits": false,
+  "notes": [
+    "Existing entity files must be read from the real repository, not duplicated in this fixture package.",
+    "All new inputs are curated text/structured fixtures. No PDF/Word/Excel parsing is implemented by this package.",
+    "Initial outputs and later browser builds must use the same pure derivation functions."
+  ]
+}

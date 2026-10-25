@@ -64,6 +64,10 @@ For a chapter update, the agent should read the current source and applicable co
 
 Source selection matters too: a proposed requirement cannot support a claim that a feature is implemented. Confidential material must stay within its permitted environment. `AGENTS.md` guides the work but grants no permissions to read, share, or publish information.
 
+## A bounded information task
+
+An agent can help connect selected evidence as well as develop text. In the [Information Refinement Lab’s illustrative agent workflow](../reference/information-refinement.md#agent-workflow), the assignment is to prepare a source-linked briefing about a possible delivery-date change, preserve different date meanings and return questions for review. The replay uses deterministic rules on fictional sources; it does not run an AI model or grant access to business systems.
+
 ## Explore: Where should a project rule live?
 
 Where would you maintain a stable-identifier rule and the explanation of why it exists?

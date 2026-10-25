@@ -1,0 +1,29 @@
+---
+import { loadRefinement, loadCatalogue } from '../../lib/refinement-loader';
+import { repositoryRoot } from '../../lib/repository';
+import { siteUrl } from '../../lib/urls';
+import '../../styles/information-refinement.css';
+const entries = await loadCatalogue(repositoryRoot, await loadRefinement(repositoryRoot));
+const filters = [{ key: 'use', label: 'Question/use' }, { key: 'kind', label: 'Source kind' }, { key: 'example', label: 'Example' }] as const;
+---
+<div class="catalogue" data-ref-catalogue>
+  <div class="catalogue-filters">{filters.map(f => <div><label for={`catalogue-${f.key}`}>{f.label}</label><select id={`catalogue-${f.key}`} data-catalogue-filter={f.key} disabled><option value="">All</option>{[...new Set(entries.map(e => e[f.key]))].map(value => <option value={value}>{value}</option>)}</select></div>)}</div>
+  <p data-catalogue-count role="status">{entries.length} sources</p>
+  {entries.map(entry => <section class="catalogue-entry" data-catalogue-entry data-use={entry.use} data-kind={entry.kind} data-example={entry.example}>
+    <h2>{entry.title}</h2><p>{entry.purpose}.</p><dl><dt>Source kind and scope</dt><dd>{entry.kind} · {entry.scope}</dd><dt>Owner role</dt><dd>{entry.owner}</dd><dt>Source date</dt><dd>{entry.date}</dd><dt>Status meaning</dt><dd>{entry.status}</dd></dl><p>{entry.caveat}</p>
+    <p><a href={siteUrl(`materials/${entry.path.replace(/\.md$/, '')}/`)}>Read source</a> · <a href={siteUrl(`files/${entry.path}`)}>Original file</a></p>
+  </section>)}
+</div>
+<script>
+  document.querySelectorAll<HTMLElement>('[data-ref-catalogue]').forEach(root => {
+    const filters = [...root.querySelectorAll<HTMLSelectElement>('[data-catalogue-filter]')];
+    const entries = [...root.querySelectorAll<HTMLElement>('[data-catalogue-entry]')];
+    for (const filter of filters) {
+      filter.disabled = false;
+      filter.addEventListener('change', () => {
+        entries.forEach(entry => { entry.hidden = filters.some(f => f.value && entry.dataset[f.dataset.catalogueFilter!] !== f.value); });
+        root.querySelector('[data-catalogue-count]')!.textContent = `${entries.filter(e => !e.hidden).length} sources`;
+      });
+    }
+  });
+</script>

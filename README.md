@@ -126,7 +126,7 @@ The [v1.3 specification register](spec/tutorial/README.md) links the reusable te
 
 ## Next Milestone
 
-Review package 1 wording and rendered reader journeys, then merge its implementation before beginning package 2. Continue chapter review and track later output/environment work in the roadmap. Keep the capability register aligned with verification evidence.
+Review package 1 wording and rendered reader journeys. Package 2 is available as a dependent draft: the [Information Refinement Lab](reference/information-refinement.md), [source catalogue](reference/knowledge-catalogue.md) and deterministic agent walkthrough need business-meaning and design review before merging. Continue chapter review and track later output/environment work in the roadmap. Keep the capability register aligned with verification evidence.
 
 ## Licensing
 

@@ -64,6 +64,8 @@ Unlike chapter 5's single-file check, this build processes all three procedures 
 
 <!-- interactive: processing-lab -->
 
+The onboarding sources are already prepared for one process. In everyday work, the harder step may be connecting facts maintained in different places. The [Information Refinement Lab](../reference/information-refinement.md) follows one delivery across a customer schedule, planning extract, resources, budget and meeting note, while keeping their meanings separate.
+
 The preview follows your typing; generated results wait for checks and a successful build. That separation helps you see which action produced each result.
 
 > **Explore further:** Want to run the actual record processor? The [record-processing guide](../reference/record-processing.md) covers selected inputs, validation failures, and generated results. It is an optional local exercise requiring a checkout, Python, and the listed dependencies.

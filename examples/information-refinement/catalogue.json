@@ -1,0 +1,51 @@
+[
+  {
+    "path": "examples/information-refinement/sources/SRC-CUSTOMER.md",
+    "title": "Customer schedule",
+    "purpose": "Find the date stated in the customer schedule",
+    "use": "Dates",
+    "example": "Delivery change"
+  },
+  {
+    "path": "examples/information-refinement/sources/SRC-FORECAST.md",
+    "title": "Delivery forecast",
+    "purpose": "See the planning forecast and its external identity",
+    "use": "Dates",
+    "example": "Delivery change"
+  },
+  {
+    "path": "examples/information-refinement/sources/SRC-CAPACITY.md",
+    "title": "Resources",
+    "purpose": "Inspect the inputs behind the capacity comparison",
+    "use": "Resources",
+    "example": "Delivery change"
+  },
+  {
+    "path": "examples/information-refinement/sources/SRC-BUDGET.md",
+    "title": "Project budget",
+    "purpose": "Compare project baseline and forecast without assuming a cause",
+    "use": "Budget",
+    "example": "Delivery change"
+  },
+  {
+    "path": "examples/information-refinement/sources/SRC-MEETING.md",
+    "title": "Meeting note",
+    "purpose": "Distinguish a proposed change from approval",
+    "use": "Dates",
+    "example": "Delivery change"
+  },
+  {
+    "path": "examples/contract-explorer/records/DEL-101.md",
+    "title": "Delivery context",
+    "purpose": "Inspect the existing recorded plan and project relationship",
+    "use": "Dates",
+    "example": "Contract Explorer"
+  },
+  {
+    "path": "reference/ai-context-and-agents.md",
+    "title": "AI context and agents",
+    "purpose": "Understand the boundary of a permitted information task",
+    "use": "Agent assistance",
+    "example": "Project knowledge"
+  }
+]
