@@ -25,3 +25,7 @@ See the [implementation review](IMPLEMENTATION-REVIEW.md) for changed files, loc
 That review describes v1.2. The v1.3 pass starts from clean main at `6d8ee1d`; it preserves all existing interactions and source IDs, and returns substantively revised chapters to review.
 
 Use the [project source map](../../reference/project-knowledge.md) to locate maintained sources and checks. Keep specific writing rules in [CONTRIBUTING.md](../../CONTRIBUTING.md) and terminology in [GLOSSARY.md](../../GLOSSARY.md), rather than duplicating them here.
+
+## Working-methods upgrade — planning packages, 25 October 2026
+
+The [three-package specification register](working-methods-upgrade/README.md) records the agreed audience and proposed audience/reader-experience, information-refinement, and verification/learning work. These specification PRs upload planning material; they do not deliver the described functionality or replace the current implementation baseline. Read the register for package locations, agent instructions and the distinction between specification adoption and sequential implementation.
