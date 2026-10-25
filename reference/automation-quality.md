@@ -8,7 +8,7 @@ Throughout this tutorial, we have changed a maintained source and followed its e
 
 Automation helps with the steps that are easy to forget: checking records, rebuilding a chart, selecting current instructions, or retaining evidence of a run. It also gives the team a process it can inspect and improve rather than a sequence that exists only in someone's memory.
 
-This final chapter brings the existing scripts together, examines what the hosted workflow actually checks, and introduces a deliberate stale-output experiment. It closes with ways to develop the project as both a tutorial and a visualization showcase.
+This optional reference brings the existing scripts together, examines what the hosted workflow actually checks, and introduces a deliberate stale-output experiment. It closes with ways to develop the project as both a tutorial and a visualization showcase.
 
 ## Turn a Repeated Task into a Workflow
 
@@ -138,7 +138,7 @@ In a disposable project copy, repeat the [publishing guide's onboarding change](
 
 Next, run `python scripts/measure_growth.py --include-working-tree` after a chapter edit. Inspect the working-copy observation as described in the [measurement reference](../reference/growth-measurement.md#measure-local-edits) and distinguish it from committed history. Keep generated outputs outside `docs/` so they do not become additional chapter content in the measurement.
 
-Turning these exercises into one hosted quality workflow is a next implementation step. Add focused checks, test an intentional failure, and review the workflow before enabling it. The current growth workflow remains unchanged by this chapter.
+Turning these exercises into one hosted quality workflow is a next implementation step. Add focused checks, test an intentional failure, and review the workflow before enabling it. This reference does not change the current growth workflow.
 
 ## Choose the Next Experiment
 
@@ -146,7 +146,7 @@ The project now has a complete first draft of the tutorial, but the showcase can
 
 | Experiment | What it would teach | Evidence of success |
 | --- | --- | --- |
-| Interactive growth dashboard | Filtering and comparing history | Values match the measured revisions and controls work accessibly |
+| Extend the existing growth dashboard | Additional comparisons over measured history | New views match identified revisions and controls work accessibly |
 | Connected work overview | Joining content and task data | Every displayed item links to its source and observation time |
 | Website, book, and presentation builds | Audience-specific publishing | A source change reaches all intended outputs and each passes visual review |
 | Dependency-aware updates | Coordinating related text and visuals | Changed and unchanged outputs are accounted for, including captions |
@@ -173,6 +173,6 @@ Review the plan with the owner and consumer. Name who maintains the templates, c
 
 Compare update effort, defects found, or report preparation time before extending the workflow. Commit and file counts alone do not demonstrate value. Temporary notes and one-off work may not need this structure; keep authoritative information in existing controlled systems where they fit the task better.
 
-Return to the information item you chose in chapter 1. You can now describe its owner, source, metadata, review process, useful views, AI context, and publication needs. Choose one repeated step to improve and one check that would make the result more trustworthy.
+Choose a recurring information task from your own work. You can now describe its owner, source, metadata, review process, useful views, AI context, and publication needs. Choose one repeated step to improve and one check that would make the result more trustworthy.
 
 Document-as-code is not a requirement to replace every familiar application. It is a way to make information and the processes around it easier to inspect, reuse, and develop. Start with a manageable improvement, learn from the people using it, and let the tools grow with the work.

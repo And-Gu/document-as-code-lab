@@ -27,3 +27,21 @@ Existing presentations: inspect audience claims and source links. Make only chan
 ## Editorial review examples
 
 Request owner review of a homepage, Chapter 1 bridge and Chapter 8 passage before broad changes. The intended register is intelligent, concrete and calm. Avoid “unlock the power,” claims that all PDFs are unusable, or blanket promises that agents remove the need for judgment. Do not repeat the same disclaimer in every paragraph; place the relevant boundary beside the particular claim.
+
+## Package 1 implementation review — 25 October 2026
+
+| Chapter | Disposition | Change or reason for retaining text |
+| --- | --- | --- |
+| 1 | Changed; in review | Workplace why-now, small-example bridge and synchronized teaching diagram. Onboarding opening/lab retained. |
+| 2 | Changed; in review | One paragraph identifies GitHub as this lab's implementation, with existing systems retained. |
+| 3 | Checked unchanged | History, snapshot provenance and activity-versus-quality distinctions already fit the intent. |
+| 4 | Prose checked unchanged; shared UI changed | Formats are already presented as choices; mobile editor tabs and subordinate preview headings improve use. |
+| 5 | Changed; in review | Procedure template first, existing schema reused, meaningful cross-system fields explained; requirement depth retained. |
+| 6 | Prose checked unchanged; visual changed | Human-readable alternative metadata and source-derived relationship list; no graph platform added. |
+| 7 | Prose checked unchanged; shared UI changed | Existing processing rules retained; homepage discovery, editor tabs and source-derived diagram alternative. |
+| 8 | Changed; in review | Concise text-assistance versus information-task distinction; project knowledge/authority guidance retained. |
+| 9 | Prose checked unchanged; explorer UI changed | Existing scenario bridge and three questions retained; readable sources, deterministic return and provenance disclosure added. |
+| 10 | Checked unchanged | Already opens with repeatable checking/rebuilding and identifies actual Actions behavior. |
+| 11 | Changed; in review | Small closing addition about permitted sources, field meaning and selected exports; architecture retained. |
+
+All eleven chapter metadata statuses remain `in-review`; no new approval is recorded. The information-model presentation's description drops the engineer-specific audience; slide messages, routes and notes remain. Other presentations were checked and left unchanged. Package 2 bridges, fixtures, catalogue and agent replay are deferred to its implementation. Broader stylistic revision is deferred to owner review of representative text and visual treatment.

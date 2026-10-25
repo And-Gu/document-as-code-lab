@@ -106,7 +106,7 @@ A manager is reviewing a fictional department's annual budget. All amounts are i
 | Software | 50,000 | 48,000 | -2,000 |
 | Team events | 20,000 | 20,000 | 0 |
 
-The [Astro version of this section](https://and-gu.github.io/document-as-code-lab/chapters/10-dashboards/#missing-excel-tables-and-spreadsheets) replaces this saved table with a styled, interactive view when JavaScript is available. It reads the actual [department-budget.cssv file](../examples/dashboards/department-budget.cssv), not a separate set of website values. The table above remains readable in GitHub and when JavaScript is unavailable.
+The [Astro version of this section](https://and-gu.github.io/document-as-code-lab/materials/reference/dashboards-and-work-tracking/#missing-excel-tables-and-spreadsheets) replaces this saved table with a styled, interactive view when JavaScript is available. It reads the actual [department-budget.cssv file](../examples/dashboards/department-budget.cssv), not a separate set of website values. The table above remains readable in GitHub and when JavaScript is unavailable.
 
 Choose **Over budget** to isolate Equipment and Travel. Together they exceed their allocations by 21,000 SEK. Across all five categories, lower spending elsewhere reduces the net overspend to 11,000 SEK. The view's totals always describe the rows currently shown.
 

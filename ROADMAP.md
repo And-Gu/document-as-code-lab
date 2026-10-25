@@ -1,71 +1,31 @@
 # Roadmap
 
-## 1. Establish the Tutorial
+Reconciled on 25 October 2026. Published baseline evidence and proposed work are separate; a completed build does not approve chapter text or demonstrate learning.
 
-- Agree on audience and expected prior knowledge.
-- Draft chapters 1 and 2 to introduce the approach and the GitHub workspace.
-- Keep history and traceability in chapter 3, with the actual dashboard linked. Detailed dashboard and measurement material lives in the reference guides.
-- Define chapter status, chapter counting, word counting, and capability milestones.
-- Keep this README aligned with implemented behavior.
-
-Done when the introduction and growth exercise can be followed by a reader.
-
-## 2. Measure the Project
-
-- Implement historical metrics from Git revisions.
-- Record source commit, measurement version, and chapter status.
-- Generate initial charts from the same dataset.
-- Run measurements on changes to main.
-- Avoid automated output commits triggering repeated builds.
-
-Done when an update produces verifiable current and historical metrics.
-
-## 3. Publish the First Website
-
-Chapters 10 and 11 explain the actual workflows and lab architecture. The read-only Architecture Explorer traces five output paths, with validated source links and a no-JavaScript overview. A fourth HTML deck, `lab-architecture`, adds nine slides and notes through the existing build and Pages deployment pipeline. The chapter content remains in review.
+## Established baseline
 
 Published baseline: Astro publishes the tutorial to GitHub Pages, with metadata and Git-history panels. Production deployment, navigation, images, and Mermaid rendering have been verified. Chapter 3 introduces the standalone Project Control Center, whose growth widget uses committed history at build time. Saved charts under `assets/figures/` remain historical snapshots. The CSSV budget table with sorting and filtering is retained in the dashboard reference guide. The Project Control Center is published at `/dashboard/` with authenticated, build-generated operational snapshots on main deployment and an hourly schedule; optional live retrieval remains available. Pages deployment 38152410515 verified all four operational sources, workflow states, source revision, and generation timestamps. Workflow states describe collection time, and scheduled runs may be delayed. The v1.3 editorial update preserves the v1.2 functionality; all eleven revised chapters remain in review. Full-book generation and several interactive exercises remain future work.
 
-- Compare a small set of publishing tools against the tutorial's needs.
-- Publish chapters and a basic growth dashboard.
-- Check links, navigation, accessibility, and diagram rendering.
-
-Done when readers can follow the first exercises online.
-
-## 4. Expand the Learning Material
-
-- Draft Markdown, AI context, visual assets, collaboration, and dashboard chapters.
-- Compare Mermaid, SVG, raster assets, and Napkin.
-- Set up GitHub Projects for work tracking.
-
-Chapter 9 includes a Contract Explorer in the website build, driven by nine fictional Markdown records, schema validation, and a shared build-time model. Automated tests cover its three views, impact provenance, source changes, and fallback sources. The v1.2 implementation was checked locally at desktop/mobile sizes and on the published site, including the guided impact action and keyboard navigation. The v1.3 prose revision passed local build, link, component, and desktop/mobile rendering checks; the editorial review records the evidence and remaining limits.
-
-Done when exercises use the project's own content and data.
-
-## 5. Add Book and Presentations
-
 The first HTML introduction deck uses YAML, reusable Astro components, and Reveal.js in the existing site build. Local production checks cover its eight slides, source links, navigation, overview, fullscreen, and desktop/phone layouts. Two additional ten-slide packs cover the information model and its value, with chapter references and separate speaker-note pages. The nine-slide architecture deck explains the lab's implementation. The homepage groups all 11 chapters into four learning paths. All four decks are included in the site build and Pages deployment. The hands-on workshop deck and book remain to be developed; these decks do not meet the presentation capability's introduction-and-workshop completion criterion.
 
-- Build a PDF book with readable print layout.
-- Expand the verified Pandoc/Typst three-excerpt proof and automated Mermaid rendering to full-book navigation, pagination, and accessibility checks. See `publishing/pdf/README.md` and the proposed chapter outline in `reference/pdf-publication.md`.
-- Build an introduction deck and a workshop deck.
-- Document how edits in Word or PowerPoint return to the source.
-- Verify shared diagrams in each output.
 
-Done when all outputs can be regenerated from documented inputs.
+The tutorial has eleven chapters, browser-only labs and quizzes, the nine-record Contract Explorer, the Architecture Explorer, four HTML slide decks and a published dashboard. Historical measurements identify their source revisions. The PDF workflow verifies a limited three-page design proof; it is not a full book. See the existing [editorial review](spec/tutorial/EDITORIAL-REVIEW.md) and [PDF trial evidence](publishing/pdf/README.md) for their original scope and limitations.
 
-## 6. Explore Beyond GitHub
+## Next work
 
-- Develop a lightweight OneDrive and Copilot exercise.
-- Verify capabilities in the chosen Microsoft environment.
-- Document source ownership, review, context selection, and version history.
-- Compare manual and automated workflows.
+1. Review **package 1: audience and reader experience** against P1-01–P1-06. The agreed audience and promise are in the existing [v1.4 product specification](spec/tutorial/02-DOCUMENT-AS-CODE-LAB-V1-SPECIFICATION.md); exact wording, source views, navigation and mobile design remain in owner review. Local evidence must identify the tested revision. Hosted verification follows authorized publication.
+2. After package 1 implementation is reviewed and merged, implement package 2's information-refinement lab, source catalogue and illustrative agent workflow. These capabilities are specified, not delivered by package 1.
+3. After package 2 implementation is merged, implement package 3's cross-page verification and learning-evidence plan. Existing and changed functionality must be tested in every package; package 3 does not defer earlier tests. Actual reader evidence remains not run until collected.
+4. Review chapter revisions individually. Keep all substantively revised chapters in review until explicitly accepted.
 
-Done when readers can adapt the practices without relying on GitHub.
+See the [package register](spec/tutorial/working-methods-upgrade/README.md). Merging a specification is not completing its implementation.
 
-## Open Decisions
+## Later possibilities and decisions
 
-- The [v1.3 specification register](spec/tutorial/README.md) preserves the deployed v1.2 functionality and adds the accepted editorial direction. The owner accepted three representative samples; all revised chapter text remains in review. The [editorial review](spec/tutorial/EDITORIAL-REVIEW.md) records changes, regression checks, and remaining decisions. The owner separately authorized publication after the editorial pass; chapter approval remains a separate decision.
-- Evaluate scenario wording, Chapter 8's title, the lean source map, and representative desktop/mobile renderings with the tutorial owner. External learner studies are optional future evidence, not a release gate.
-- Whether the Pandoc/Typst book trial meets full-publication needs; Astro with Reveal.js is selected for HTML presentations, and existing charts use Matplotlib.
-- Microsoft account environment used for the portability exercise.
+- Expand the Pandoc/Typst proof into a PDF book with navigation, pagination, cross-references and accessibility verification; inspect every output page.
+- Create the remaining hands-on workshop deck. Existing HTML decks do not satisfy the introduction-and-workshop capability criterion.
+- Document how output-specific Word/PowerPoint edits return to maintained sources.
+- Verify a bounded workflow in the selected Microsoft environment, including organizational permissions and licensing. The current comparison is illustrative.
+- Consider dependency-aware updates and additional work-tracking views when a concrete reader need warrants them.
+
+Astro/Reveal.js are already selected for the website and HTML decks, and Matplotlib for historical charts. Full-book suitability and the Microsoft test environment remain decisions to resolve. Record capability completion in `data/features.json` only against verified criteria. Owner approval, deployment, physical-device/accessibility checks and learning evidence remain distinct.

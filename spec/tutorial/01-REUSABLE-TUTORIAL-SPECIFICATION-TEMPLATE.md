@@ -35,8 +35,10 @@ Define no more than 3–5 overall learning outcomes. Prefer verbs such as *ident
 
 | Profile | Starting knowledge / constraints | Desired job-to-be-done | Suggested path | Needed accommodation |
 | --- | --- | --- | --- | --- |
-| [Non-technical professional] | [TBD] | [TBD] | [TBD] | [TBD] |
-| [Practicing engineer] | [TBD] | [TBD] | [TBD] | [TBD] |
+| [Primary reader] | [TBD] | [TBD] | [TBD] | [TBD] |
+| [Optional depth reader] | [TBD] | [TBD] | [TBD] | [TBD] |
+
+Record the reader's actual work environment and existing domain knowledge. Which tools and information do they already use? Which writing, technical or organizational prerequisites must not be assumed? What new opportunity should they recognize, and what observable task could demonstrate that insight? Name how outcome evidence will be collected, distinguishing owner review, technical checks and actual reader observations.
 
 State prerequisites explicitly. **MUST:** Core learning works in a browser without a local installation or external account. **MAY:** Offer a clearly labeled advanced local track.
 

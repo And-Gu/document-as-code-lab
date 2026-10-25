@@ -1,13 +1,13 @@
-# Document-as-Code Lab — Learning Product Specification v1.3
+# Document-as-Code Lab — Learning Product Specification v1.4
 
-> **Editorial baseline · 19 October 2026 · v1.2 functionality retained; editorial direction accepted, revised chapters in review**\
+> **Intended baseline v1.4 · 25 October 2026 · audience direction agreed; package 1 implementation and final wording/design in review**\
 > Derived from `01-REUSABLE-TUTORIAL-SPECIFICATION-TEMPLATE.md`. **Target:** 11 chapters (remote repository source now confirms Chapter 12 absent); keep rewritten Chapter 10; Chapter 11's current “Behind the Lab” treatment may be retained, selectively edited, or simplified. This is the **intended specification**, not a claim that everything is implemented or user-tested.
 
 ## 1. Product promise
 
-**Reader promise:** Learn how to move from isolated documents to *maintained, processable information* that can be reviewed, connected, transformed, explored, and used by people, software, and AI agents.
+**Reader promise:** Discover how new ways of working can enable better collaboration, more automation, and new uses for AI agents—beyond individual documents and information scattered across or locked inside business systems.
 
-**Primary outcome:** A reader can describe a credible Document-as-Code workflow and recognize how source information differs from views, approval decisions, tasks, and publication. They can inspect a working example in a browser and know where to go for a real implementation.
+**Primary outcomes:** Recognize a possible working-method experiment; explain its source → processing → result chain and the information, responsibility and access it needs; trace a claim to evidence; distinguish a plan, commitment, forecast, proposal and outcome; explain what people, configured rules and a tool-enabled agent each contribute. These are intended reader outcomes, not measured learning results.
 
 **Secondary outcome:** A practitioner can inspect the tutorial's own GitHub/Astro implementation and adapt its patterns, or recognize analogous approaches using existing document environments such as Microsoft 365.
 
@@ -19,8 +19,10 @@
 
 | Reader | Starting position | Core path | Optional next step |
 | --- | --- | --- | --- |
-| General professional / manager | Uses documents, reports, collaboration tools; limited Git familiarity | Read all conceptual chapters; try browser labs | Explore examples, presentations, Microsoft 365 alternative |
-| Practicing engineer / builder | Familiar with code/repositories; wants architecture, checks, reuse, AI | Skim foundations; focus on Ch 5–11 | Inspect scripts, source records, workflows, reference guides |
+| Information-experienced professional (primary) | Uses Word, Excel, PDF and specialized business systems; understands their domain but need not be a writer, engineer or developer | Explore the examples and eleven-chapter journey | Identify a bounded experiment in their own work |
+| Reader seeking implementation depth (optional) | Wants to inspect or adapt the mechanisms | Follow the same conceptual journey | Inspect sources, scripts, workflows and implementation references |
+
+Information can be richly structured inside product, requirements, modeling, quotation, planning or budget systems while remaining difficult to combine across their boundaries. The intended reader often connects, interprets and summarizes it manually, with AI mainly helping develop text. This is a starting situation, not a claim about every organization. Document-as-code is our inspectable demonstration; it neither integrates business systems automatically nor requires replacing familiar tools.
 
 **Browser-first requirement:** All chapter learning outcomes must be achievable without cloning a repository, using an AI account, or installing Node/Python. Optional implementation tasks may require tools but are outside the core path. State whether a UI example is browser-only, build-time, or actually live.
 
@@ -61,6 +63,8 @@ Groups are coherent reader journeys. The homepage should use these *semantic gro
 | **Requirement records** | Deeper reference and AI context (5, 7–8 reference) | `examples/structured-content/records/` | Approved requirement ≠ implemented and tested capability |
 | **Contract Explorer** | Broader business scenario (9) | `examples/contract-explorer/records/` | Proposed amendment ≠ effective contract; graph traversal ≠ verified impact |
 | **This GitHub/Astro repository** | Real-world meta-example (3, 10–11) | Git history, workflows, site code, YAML decks | Published/build-time snapshot ≠ true live feed; successful build ≠ content approval |
+
+**v1.4 scenario boundary:** Keep onboarding as the small example in Chapters 1–7. Use brief workplace bridges to show why the method matters beyond this example. Package 1 improves existing experiences only; the cross-source refinement lab and agent walkthrough belong to package 2. They are not present merely because their specifications exist.
 
 **Scenario transitions:** At the start of Chapter 9 say why we leave onboarding for a customer/project/contract example. At Chapter 10 say why we now examine the *actual tutorial repository*. Explicitly label fictional teaching datasets versus real repository status. Do not require readers to remember every example ID from earlier chapters.
 
@@ -243,3 +247,9 @@ One integrated **editorial pass** across all 11 chapters and their immediately l
 Source baseline inspected on 19 October 2026: [repository](https://github.com/And-Gu/document-as-code-lab), [chapters](https://github.com/And-Gu/document-as-code-lab/tree/main/docs), [Astro site](https://github.com/And-Gu/document-as-code-lab/tree/main/site), [decks](https://github.com/And-Gu/document-as-code-lab/tree/main/presentations), [workflows](https://github.com/And-Gu/document-as-code-lab/tree/main/.github/workflows). Ch 10 and Ch 11 rewrites and the Architecture Explorer are on the remote branch. The remote repository now lists 11 chapter files, with Chapter 12 absent. That package inspection preceded the verified v1.2 release. Implementation starts from clean main at `6d8ee1d`, where the agent-knowledge rewrite, three scenario checks, guided Contract Explorer, and eleven-chapter site are published. Preserve those implementations.
 
 The v1.2 implementation record describes its local and hosted functional checks. This editorial revision needs its own regression evidence; neither a full accessibility/performance audit nor wider learning effectiveness is established by the sample approval. The [editorial review](EDITORIAL-REVIEW.md) records the changed reading path and actual checks.
+
+## 12. v1.4 adoption and implementation evidence
+
+The [25 October decision](04-DESIGN-DECISIONS.md#25-october-2026-working-methods-direction) establishes audience and promise. The [working-methods package register](working-methods-upgrade/README.md) sequences three separately reviewable implementation increments. Specification adoption is distinct from implementation, content approval, publication and learning evidence.
+
+Package 1 covers P1-01 through P1-06 and acceptance A01–A08, A15 and A20. The existing architecture and eleven chapters remain. Final text and visual treatment require owner review; no broader style approval is inferred from the audience decision. Packages 2 and 3 remain future work until the preceding implementation is reviewed and merged.

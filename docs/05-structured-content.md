@@ -68,15 +68,17 @@ A status view can identify **Contacts** as the item needing review. Unlike an in
 
 ## Agree on meaning, not just field names
 
+A planning system may already contain rich structure. Reusing its information elsewhere still requires knowing what each field means: a planned date and a customer commitment answer different questions.
+
 Structure works only when fields mean the same thing across files. Does `approved` mean a procedure has passed content review? Who may change it? Is an owner a person or a team? What happens if a field is missing?
 
 Once the team agrees on these meanings, it can turn some of them into rules that software checks. This is called **validation**. For example, a check can flag a missing `id`, a duplicated identifier, or a `status` value outside the agreed list. These checks help keep the records consistent; people still need to judge whether the procedure itself is sensible and safe.
 
-A [template](../examples/structured-content/templates/requirement.md) helps an author create a consistent record. A [schema](../examples/structured-content/schema.yaml) defines what a program should check: for example, whether an identifier is present and whether the status uses an allowed value.
+A [procedure template](../examples/learning/procedure-template.md) helps an author create a consistent record. The [existing procedure schema](../examples/learning/procedure.schema.json) defines what a program should check: for example, whether an identifier is present and whether the status uses an allowed value.
 
 The schema is a set of rules, not a running check. A validator must apply those rules to the intended files. In the lab below, **Validate metadata** runs that check on the procedure in the editor.
 
-Different records can need different rules. The linked requirement template and schema belong to the REQ-014 example; the onboarding editor uses its own procedure schema.
+Different records can need different rules. The optional [requirement template](../examples/structured-content/templates/requirement.md) and [requirement schema](../examples/structured-content/schema.yaml) belong to the deeper REQ-014 example. The procedure template and this editor use the same existing procedure schema.
 
 <!-- interactive: scenario-check-metadata -->
 
