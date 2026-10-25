@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "source_revision": "9ac44630269e220a8ea6f6607f7d81b971901bcd",
+  "deployment_run": "https://github.com/And-Gu/document-as-code-lab/actions/runs/40238084101",
+  "public_url": "https://and-gu.github.io/document-as-code-lab/",
+  "result": "passed",
+  "stats": {
+    "startTime": "2026-10-25T22:02:28.104Z",
+    "duration": 20200.141,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "observations": [
+    {
+      "name": "deployment-identity",
+      "data": {
+        "expected": "9ac44630269e220a8ea6f6607f7d81b971901bcd",
+        "run": "40238084101",
+        "observed": {
+          "schema_version": 1,
+          "source_commit": "9ac44630269e220a8ea6f6607f7d81b971901bcd",
+          "built_at": "2026-10-25T22:00:30.194Z"
+        },
+        "url": "https://and-gu.github.io/document-as-code-lab/",
+        "checked_at": "2026-10-25T22:02:29.066Z",
+        "browser": "156.0.8078.4"
+      }
+    },
+    {
+      "name": "observed-pages",
+      "data": {
+        "urls": [
+          "https://and-gu.github.io/document-as-code-lab/",
+          "https://and-gu.github.io/document-as-code-lab/chapters/01-introduction/",
+          "https://and-gu.github.io/document-as-code-lab/chapters/07-processing/",
+          "https://and-gu.github.io/document-as-code-lab/chapters/08-ai-native/",
+          "https://and-gu.github.io/document-as-code-lab/materials/examples/contract-explorer/records/DEL-101/",
+          "https://and-gu.github.io/document-as-code-lab/materials/reference/information-refinement/",
+          "https://and-gu.github.io/document-as-code-lab/materials/reference/knowledge-catalogue/",
+          "https://and-gu.github.io/document-as-code-lab/presentations/",
+          "https://and-gu.github.io/document-as-code-lab/presentations/information-model/notes/",
+          "https://and-gu.github.io/document-as-code-lab/chapters/07-processing/",
+          "https://and-gu.github.io/document-as-code-lab/dashboard/",
+          "https://and-gu.github.io/document-as-code-lab/",
+          "https://and-gu.github.io/document-as-code-lab/chapters/01-introduction/",
+          "https://and-gu.github.io/document-as-code-lab/chapters/07-processing/",
+          "https://and-gu.github.io/document-as-code-lab/chapters/08-ai-native/",
+          "https://and-gu.github.io/document-as-code-lab/materials/examples/contract-explorer/records/DEL-101/",
+          "https://and-gu.github.io/document-as-code-lab/materials/reference/information-refinement/",
+          "https://and-gu.github.io/document-as-code-lab/materials/reference/knowledge-catalogue/",
+          "https://and-gu.github.io/document-as-code-lab/presentations/",
+          "https://and-gu.github.io/document-as-code-lab/presentations/information-model/notes/",
+          "https://and-gu.github.io/document-as-code-lab/chapters/07-processing/",
+          "https://and-gu.github.io/document-as-code-lab/dashboard/"
+        ],
+        "viewports": [
+          390,
+          1440
+        ],
+        "naturalErrors": [],
+        "missingAssets": [],
+        "dashboardFailure": "controlled 503; explicit error retained",
+        "checked_at": "2026-10-25T22:02:48.213Z"
+      }
+    }
+  ],
+  "limitations": [
+    "Chromium at 390 and 1440 CSS pixels; not physical devices or manual assistive technology.",
+    "No human reader study performed."
+  ]
+}

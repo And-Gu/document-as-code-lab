@@ -89,7 +89,7 @@ Chapter 9 uses the `contract-explorer` marker and `ContractExplorer.astro`, regi
 
 Each source link serves the original maintained Markdown bytes through the existing `/files/` mechanism, not the transformed snapshot. Details also provide the GitHub repository path, source commit when available, SHA-256 digest, and an explicit uncommitted label for new or edited sources. New GitHub paths become available only after publication. The snapshot is embedded during the Astro build; no API, backend, browser persistence, or AI service is used. Run `npm run build` then `npm run test:contracts` to verify transformations, validation failures, source-edit effects, source byte identity, static fallback, and URL prefixes.
 
-## Package 1 reader experience (in review)
+## Package 1 reader experience
 
 Homepage and chapter navigation use `src/lib/learning-journey.ts`. The existing Processing Lab is a primary entry. On chapters with at least five second-level source headings, contents links are generated from those headings; component/demo headings are excluded. Editorial status appears in the chapter-information summary.
 
@@ -101,7 +101,7 @@ Shared-layout descriptions, canonical and Open Graph metadata use the configured
 
 Focused browser verification for package 1 is `node scripts/test-reader-experience.mjs` against an already built preview. It requires an installed Playwright package and Chromium/Chrome; it is not a runtime dependency. Set `PLAYWRIGHT_MODULE` to the package's ESM entry when supplied by a separate tool environment, `CHROME_PATH` when using a system Chrome executable, and `READER_TEST_URL` to the actual preview URL printed by Astro (including `/document-as-code-lab/`). Screenshots/results default to ignored `build/package-1-browser/`; `READER_EVIDENCE_DIR` can select another local evidence directory. `READER_TEST_MATCH` is an optional diagnostic name filter; leave it unset for the complete package-1 run. This focused script does not implement package 3's planned cross-engine, CI or hosted-study harness.
 
-## Package 2 information refinement (in review)
+## Package 2 information refinement
 
 The registered `information-refinement` and `knowledge-catalogue` material markers mount through `MaterialLearning.astro`. The source bundle lives in `examples/information-refinement/`; `refinement-loader.ts` validates YAML/JSON with the existing dependencies and reuses contract identities. The browser-safe `refinement-model.ts` derives all outputs, `refinement-view.ts` escapes source values and renders provenance, and `refinement-controller.ts` handles local practice state, explicit builds and deterministic replay. Readable source adapters keep exact raw bytes available. No business/API/AI service or persistence is added.
 
@@ -118,3 +118,5 @@ From a clean, committed checkout, run `npm run check`, `npm run build`, the exis
 After an authorized deployment, check out the expected commit and run `HOSTED_URL=https://and-gu.github.io/document-as-code-lab/ EXPECTED_REVISION=<full-commit> DEPLOYMENT_RUN_ID=<actual-run-id> npm run test:hosted`. This read-only command does not publish anything. It checks the explicit build manifest with at most three attempts, compares raw bytes to the checked-out source, visits routes at 390/1440px, checks metadata/assets/console, and exercises a controlled dashboard API failure. A localhost URL is supported only for harness rehearsal and must never be reported as hosted evidence. The deployment workflow runs this bounded smoke step after successful deployment and uploads evidence; it adds no schedule or permissions beyond read-only contents access in the verification job.
 
 The PR workflow retains its existing checks and adds refinement/model and Chromium journey verification. It also accepts the two dependent implementation target branches while their drafts are stacked. Full history, Python setup and least-privilege permissions are preserved. [The evidence and study kit](../spec/tutorial/working-methods-upgrade/verification/README.md) distinguishes engineering results from actual reader observations, owner acceptance and manual accessibility work.
+
+Packages 1–3 were merged and published on 25 October 2026. Deployment run [40238084101](https://github.com/And-Gu/document-as-code-lab/actions/runs/40238084101) and a separate hosted smoke check verified `9ac44630269e220a8ea6f6607f7d81b971901bcd`. Subsequent documentation-only releases generate and verify their own manifest; this is a dated evidence record, not an assertion about every future deployment.

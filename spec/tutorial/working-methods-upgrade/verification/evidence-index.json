@@ -34,14 +34,16 @@
     {
       "test_id": "hosted",
       "requirement_id": "P3-02",
-      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
-      "environment": null,
-      "procedure": "npm run test:hosted with explicit URL/revision/run",
-      "result": "not_verified",
-      "reason": "No authorized deployment of this package",
-      "artifact": null,
-      "reviewer": null,
-      "limitations": []
+      "source_revision": "9ac44630269e220a8ea6f6607f7d81b971901bcd",
+      "environment": "GitHub Pages; Chromium; 390/1440 CSS px",
+      "procedure": "test:hosted with public URL, expected source commit and deployment run 40238084101",
+      "result": "passed",
+      "reason": "Actual public build manifest matched before and after smoke checks; Pages workflow and separate local invocation passed.",
+      "artifact": "https://github.com/And-Gu/document-as-code-lab/blob/main/reviews/release-2026-10-25/hosted-results.json",
+      "reviewer": "Automated hosted assertions; published homepage/lab inspected by Codex",
+      "limitations": [
+        "Not a physical-device, manual assistive-technology or human learning study."
+      ]
     },
     {
       "test_id": "study-kit",
@@ -94,14 +96,16 @@
     {
       "test_id": "owner-approval",
       "requirement_id": "P3-05",
-      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
-      "environment": null,
+      "source_revision": "9ac44630269e220a8ea6f6607f7d81b971901bcd",
+      "environment": "Owner instruction in task conversation",
       "procedure": "Owner accepts wording and visual treatment",
-      "result": "not_run",
-      "reason": "No owner acceptance recorded",
-      "artifact": null,
-      "reviewer": null,
-      "limitations": []
+      "result": "passed",
+      "reason": "Owner explicitly authorized acceptance/merge/push/deploy/publication of the proposals in chat on 25 October 2026.",
+      "artifact": "https://github.com/And-Gu/document-as-code-lab/pull/23",
+      "reviewer": "Repository owner",
+      "limitations": [
+        "Release authorization covers these proposals, not blanket approval of every pre-existing chapter or fictional source."
+      ]
     },
     {
       "test_id": "smoke-rehearsal",

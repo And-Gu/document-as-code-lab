@@ -4,11 +4,11 @@ A living tutorial and visualization lab: write in Markdown, track changes, and t
 
 The project teaches document-as-code by applying it to itself. It also serves as a visualization showcase for experienced readers: repository content, metadata, relationships, and work history become inputs to charts, diagrams, and dashboards.
 
-## Audience and next baseline
+## Audience
 
-The intended v1.4 baseline is for professionals experienced in information work with Word, Excel, PDF and specialized business systems. It explores new ways to collaborate, automate repeated information work and use agents with traceable sources. No writing, engineering or developer background is required for the browser-first journey. Document-as-code is the concrete demonstration, not automatic integration or a requirement to replace existing tools.
+The v1.4 baseline is for professionals experienced in information work with Word, Excel, PDF and specialized business systems. It explores new ways to collaborate, automate repeated information work and use agents with traceable sources. No writing, engineering or developer background is required for the browser-first journey. Document-as-code is the concrete demonstration, not automatic integration or a requirement to replace existing tools.
 
-Package 1 adds a direct Processing Lab entry, readable contract records, shared chapter navigation, mobile source/preview controls and page sharing metadata. Its implementation and final text/design are in review; the status below records the earlier published baseline. Packages 2 and 3 remain future work. See the [package specifications](spec/tutorial/working-methods-upgrade/README.md).
+The three working-methods packages were merged and published on 25 October 2026 after owner authorization. They add clearer reader journeys and source views, the [Information Refinement Lab](reference/information-refinement.md), a [source catalogue](reference/knowledge-catalogue.md), deterministic agent replay, production browser checks and a [reader-study kit](spec/tutorial/working-methods-upgrade/verification/README.md). Public build identity and representative routes were verified against revision `9ac4463`. Human learning observations, physical-device and manual assistive-technology checks remain not run. See the [package register](spec/tutorial/working-methods-upgrade/README.md).
 
 ## Status
 
@@ -126,7 +126,7 @@ The [v1.3 specification register](spec/tutorial/README.md) links the reusable te
 
 ## Next Milestone
 
-Review package 1 wording and rendered reader journeys. Package 2 is available as a dependent draft: the [Information Refinement Lab](reference/information-refinement.md), [source catalogue](reference/knowledge-catalogue.md) and deterministic agent walkthrough need business-meaning and design review before merging. Package 3 adds the [verification harness and reader-study kit](spec/tutorial/working-methods-upgrade/verification/README.md) as a dependent draft; study and hosted results remain separate from local checks. Continue chapter review and track later output/environment work in the roadmap. Keep the capability register aligned with verification evidence.
+Use the prepared reader-study kit to collect real observations when participants are available, continue individual chapter review, and address findings with traceable corrections. Packages 1–3 are implemented and published; later output/environment work remains in the roadmap.
 
 ## Licensing
 
