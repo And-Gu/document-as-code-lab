@@ -51,11 +51,11 @@ for (const width of [390,1440]) test.describe(`${width}px`, () => {
   });
   test('J5 missing budget, changed forecast, failed and stale builds', async ({ page }) => {
     await go(page,lab); await page.getByRole('button',{name:'Show the worked example'}).click();
-    const result = page.locator('[data-ref-output]'), prior = await result.innerText();
+    const result = page.locator('[data-ref-output]'), prior = (await result.textContent())!;
     await page.locator('#ref-forecast').fill('2026-11-11'); await page.locator('[data-ref-include][value="SRC-BUDGET"]').uncheck();
     await expect(page.locator('[data-ref-status]')).toContainText('previous inputs'); await expect(result).toHaveText(prior);
     await page.getByRole('button',{name:'Build briefing',exact:true}).click(); await expect(result).toContainText('1 calendar day before'); await expect(result).toContainText('Project cost comparison unavailable'); await expect(result).not.toContainText('26,000');
-    const partial = await result.innerText(); await page.locator('#ref-forecast').fill('2026-11-31'); await page.getByRole('button',{name:'Build briefing',exact:true}).click(); await expect(result).toHaveText(partial); await expect(page.locator('[data-ref-status]')).toContainText('Build failed');
+    const partial = (await result.textContent())!; await page.locator('#ref-forecast').fill('2026-11-31'); await page.getByRole('button',{name:'Build briefing',exact:true}).click(); await expect(result).toHaveText(partial); await expect(page.locator('[data-ref-status]')).toContainText('Build failed');
     await page.getByRole('button',{name:'Reset practice'}).click(); await expect(page.getByLabel('Leave unresolved')).toBeChecked();
   });
   test('J6 illustrative agent keeps authority and makes no model/external request', async ({ page,baseURL }) => {
@@ -97,5 +97,6 @@ test('P3-01 resize, 320/768 reflow, 200% text and no-JavaScript baseline',async(
   await page.addStyleTag({content:'html{font-size:200% !important}'}); await reflow(page);
   const context=await browser.newContext({javaScriptEnabled:false,viewport:{width:390,height:844}}), staticPage=await context.newPage();
   await staticPage.goto(new URL(lab,baseURL).href);
-  await expect(staticPage.locator('main')).toContainText('SEK 26,000'); await expect(staticPage.locator('main')).toContainText('5 calendar days after'); await context.close();
+  // Playwright's text engine intentionally excludes noscript; use rendered DOM innerText for this no-JS fallback.
+  const staticText = await staticPage.locator('main').innerText(); expect(staticText).toContain('SEK 26,000'); expect(staticText).toContain('5 calendar days after'); await context.close();
 });

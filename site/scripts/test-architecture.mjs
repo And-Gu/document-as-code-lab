@@ -21,7 +21,7 @@ const published = new Set(await repositoryFiles());
 assert.ok(published.has('spec/tutorial/working-methods-upgrade/02-PR1-AUDIENCE-AND-READER-EXPERIENCE.md'));
 assert.ok(!published.has('spec/tutorial/working-methods-upgrade/private-notes.md'));
 const { publicSpecifications } = await load('../src/lib/public-specifications.ts');
-assert.deepEqual([...published].filter(file => file.startsWith('spec/')).sort(), [...publicSpecifications].sort());
+assert.deepEqual([...published].filter(file => file.startsWith('spec/')).sort(), [...publicSpecifications, 'spec/tutorial/working-methods-upgrade/verification/evidence-index.json'].sort());
 await validateArchitectureSources(root, published);
 assert.equal(architectureExamples.length, 5);
 await assert.rejects(validateArchitectureSources(root, new Set()), /not exposed/);
