@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "mappings": [
+    {
+      "source_id": "SRC-FORECAST",
+      "external_ref": "IP-A",
+      "external_label": "Interface Pack A",
+      "canonical_id": "DEL-101",
+      "basis": "Explicit mapping supplied by the fictional scenario author, not inferred from string similarity.",
+      "ui_initial_state": "suggested",
+      "use_requires_browser_confirmation": true
+    }
+  ]
+}
