@@ -1,6 +1,6 @@
 # Tutorial Design Baseline
 
-The intended **v1.4 baseline** adopts the audience and working-methods promise agreed on 25 October 2026 in the existing product specification and decision register. Package 1 implementation, exact wording and visual treatment are in review; packages 2 and 3 remain separate future implementation work. The v1.3 history below remains evidence of the earlier editorial pass.
+The intended **v1.4 baseline** adopts the audience and working-methods promise agreed on 25 October 2026 in the existing product specification and decision register. Package 1 implementation, exact wording and visual treatment are in review; package 2 is implemented in a dependent draft following technical review of package 1, while package 3 remains future work. Business meaning and design still need owner review. The v1.3 history below remains evidence of the earlier editorial pass.
 
 The functional direction comes from v1.2; the current v1.3 specification adds the editorial style accepted after three sample reviews on 19 October 2026. A specification records intent, not proof of implementation, chapter approval, accessibility conformance, or learning effectiveness.
 

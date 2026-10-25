@@ -89,6 +89,8 @@ For example, a team could keep working documents in a managed **SharePoint docum
 
 For product details, see Microsoft's documentation for [Copilot in OneDrive](https://support.microsoft.com/en-us/onedrive/get-started-with-copilot-in-onedrive), [agent knowledge sources](https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/knowledge-sources), and the [OneDrive for Business connector](https://learn.microsoft.com/en-us/connectors/onedriveforbusiness/). The tutorial's Microsoft workflow is an illustration, not a validated deployment in an organization.
 
+The [Information Refinement Lab](../reference/information-refinement.md) demonstrates a portable method: select sources, identify their subjects, preserve meaning, calculate explicitly and review a traceable draft. Its curated excerpts, frozen scenario date and browser-only replay are specific to this static tutorial. Live integration would additionally require authorized access, maintained mappings, operational ownership and evaluation in the chosen environment.
+
 ## Choose the environment for the information
 
 This lab benefits from GitHub and Astro because the sources are structured, changes are inspectable, and we want custom visualizations and repeatable builds. A Microsoft 365-first team might choose different tools because Word, Excel, shared libraries, and Copilot are already part of everyday work.

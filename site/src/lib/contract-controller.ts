@@ -48,6 +48,7 @@ export function initContractExplorers() {
       const readable = element('a', 'Read source record'); readable.href = siteUrl(`materials/${record.source.replace(/\.md$/, '')}/`);
       const provenance = element('details'); provenance.append(element('summary', 'Source and revision'), revision, digest, source, github, note);
       details.replaceChildren(title, type, status, element('p', record.body), readable, element('h5', 'Recorded links'), links, provenance);
+      if (record.id === 'DEL-101') { const follow = element('a', 'Follow this delivery across sources'); follow.href = siteUrl('materials/reference/information-refinement/'); const paragraph = element('p'); paragraph.append(follow); readable.after(paragraph); }
       if (record.type === 'delivery') status.after(element('p', `Planned date: ${record.planned_date ?? 'Not recorded'}`));
       if (view === 'relationships') showRelationships(id);
       else summary.textContent = `Selected ${id} · ${record.label} · ${statusScope(record)}: ${record.status}`;

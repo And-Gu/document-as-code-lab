@@ -14,7 +14,7 @@ The tutorial has eleven chapters, browser-only labs and quizzes, the nine-record
 ## Next work
 
 1. Review **package 1: audience and reader experience** against P1-01–P1-06. The agreed audience and promise are in the existing [v1.4 product specification](spec/tutorial/02-DOCUMENT-AS-CODE-LAB-V1-SPECIFICATION.md); exact wording, source views, navigation and mobile design remain in owner review. Local evidence must identify the tested revision. Hosted verification follows authorized publication.
-2. After package 1 implementation is reviewed and merged, implement package 2's information-refinement lab, source catalogue and illustrative agent workflow. These capabilities are specified, not delivered by package 1.
+2. Review package 2's information-refinement lab, source catalogue and illustrative agent workflow in its dependent draft. At the owner's request it was prepared after technical review of package 1, before merge; neither package is thereby approved or published. Merge dependencies in order after review.
 3. After package 2 implementation is merged, implement package 3's cross-page verification and learning-evidence plan. Existing and changed functionality must be tested in every package; package 3 does not defer earlier tests. Actual reader evidence remains not run until collected.
 4. Review chapter revisions individually. Keep all substantively revised chapters in review until explicitly accepted.
 

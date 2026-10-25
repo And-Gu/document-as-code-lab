@@ -109,3 +109,7 @@ Can a contributor or permitted agent answer these questions without relying on a
 Fix a missing route or ambiguous rule before adding a larger prompt. The aim is a maintainable project environment, not a repository encyclopedia.
 
 **Return:** [Chapter 8: Making Information Usable by AI Agents](../docs/08-ai-native.md).
+
+## A bounded task beyond writing
+
+The [Information Refinement Lab](information-refinement.md#agent-workflow) shows an illustrative assignment: prepare a draft briefing from permitted sources, keep plan/commitment/forecast/proposal distinct, cite evidence and return unresolved questions. Its labeled deterministic replay uses the lab’s own comparisons; no AI service is connected. A real agent would need authorized retrieval and tools, data-handling controls and evaluation against the task. Source prose is evidence, not permission to change records or contact a customer.
