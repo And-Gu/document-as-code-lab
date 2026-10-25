@@ -5,19 +5,36 @@
     {
       "test_id": "local-journeys",
       "requirement_id": "P3-01",
-      "source_revision": null,
-      "environment": null,
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "environment": {
+        "node": "22.23.3",
+        "playwright": "1.64.1",
+        "engines": [
+          "chromium: 156.0.8078.4",
+          "firefox: 157.0",
+          "webkit: 27.2"
+        ],
+        "viewports": [
+          320,
+          390,
+          768,
+          1440
+        ]
+      },
       "procedure": "npm run test:e2e:cross",
-      "result": "planned",
-      "reason": "Execution pending final committed build",
-      "artifact": null,
-      "reviewer": null,
-      "limitations": []
+      "result": "passed",
+      "reason": "57/57 tests; 19 each in Chromium, Firefox and WebKit; zero skipped/flaky",
+      "artifact": "https://github.com/And-Gu/document-as-code-lab/blob/test/reader-journey-and-learning-evidence/reviews/package-3/local-results.json",
+      "reviewer": "Codex: assertions and selected rendered screenshots",
+      "limitations": [
+        "Local emulation, not physical devices or full WCAG conformance.",
+        "Text enlargement is CSS-based."
+      ]
     },
     {
       "test_id": "hosted",
       "requirement_id": "P3-02",
-      "source_revision": null,
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
       "environment": null,
       "procedure": "npm run test:hosted with explicit URL/revision/run",
       "result": "not_verified",
@@ -29,19 +46,19 @@
     {
       "test_id": "study-kit",
       "requirement_id": "P3-03",
-      "source_revision": null,
-      "environment": null,
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "environment": "Source review",
       "procedure": "Review protocol and empty template against T1\u2013T7",
-      "result": "planned",
-      "reason": "Kit review pending",
-      "artifact": null,
-      "reviewer": null,
+      "result": "passed",
+      "reason": "Protocol reviewed for neutral T1\u2013T7 tasks, audience, privacy, facilitation, outcomes/denominators, interpretation and unfilled template. No participant results are claimed.",
+      "artifact": "reader-study-protocol.md",
+      "reviewer": "Codex; not independent human acceptance",
       "limitations": []
     },
     {
       "test_id": "reader-observations",
       "requirement_id": "P3-04",
-      "source_revision": null,
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
       "environment": null,
       "procedure": "Facilitate real representative reader sessions",
       "result": "not_run",
@@ -53,7 +70,7 @@
     {
       "test_id": "physical-device",
       "requirement_id": "P3-01",
-      "source_revision": null,
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
       "environment": null,
       "procedure": "Read and operate representative journeys on physical phone",
       "result": "not_run",
@@ -65,7 +82,7 @@
     {
       "test_id": "manual-accessibility",
       "requirement_id": "P3-01",
-      "source_revision": null,
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
       "environment": null,
       "procedure": "Manual screen-reader and assistive-technology checks",
       "result": "not_run",
@@ -77,7 +94,7 @@
     {
       "test_id": "owner-approval",
       "requirement_id": "P3-05",
-      "source_revision": null,
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
       "environment": null,
       "procedure": "Owner accepts wording and visual treatment",
       "result": "not_run",
@@ -85,6 +102,160 @@
       "artifact": null,
       "reviewer": null,
       "limitations": []
+    },
+    {
+      "test_id": "smoke-rehearsal",
+      "requirement_id": "P3-02",
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "environment": "Localhost Chromium rehearsal",
+      "procedure": "npm run test:hosted with explicit local URL/revision/run",
+      "result": "passed",
+      "reason": "Read-only smoke procedure passed against localhost at 390/1440px; no public deployment checked.",
+      "artifact": "https://github.com/And-Gu/document-as-code-lab/blob/test/reader-journey-and-learning-evidence/reviews/package-3/smoke-rehearsal.json",
+      "reviewer": "Codex",
+      "limitations": [
+        "Not hosted verification."
+      ]
+    },
+    {
+      "test_id": "mismatch-guard",
+      "requirement_id": "P3-02",
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "environment": "Localhost Chromium rehearsal",
+      "procedure": "npm run test:hosted with explicit local URL/revision/run",
+      "result": "passed",
+      "reason": "Deliberately incorrect manifest revision was rejected; original local manifest restored.",
+      "artifact": "https://github.com/And-Gu/document-as-code-lab/blob/test/reader-journey-and-learning-evidence/reviews/package-3/mismatch-guard.json",
+      "reviewer": "Codex",
+      "limitations": [
+        "Not hosted verification."
+      ]
+    },
+    {
+      "test_id": "interpretation-and-corrections",
+      "requirement_id": "P3-04",
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "environment": "Protocol and harness review",
+      "procedure": "Inspect semantic-error rubric; link any correction to a failing test or real observation",
+      "result": "passed",
+      "reason": "Rubric and blank correction log prepared. Initial assertion errors were corrected (hidden disclosure/noscript semantics and explicit JSON selection); no reader observation or UI correction is invented.",
+      "artifact": "https://github.com/And-Gu/document-as-code-lab/blob/test/reader-journey-and-learning-evidence/reviews/package-3/README.md",
+      "reviewer": "Codex",
+      "limitations": [
+        "No human comprehension evidence."
+      ]
+    },
+    {
+      "test_id": "J1",
+      "requirement_id": "P3-01",
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "environment": "Chromium 156.0.8078.4, Firefox 157.0, WebKit 27.2; 390 and 1440 CSS px",
+      "procedure": "J1 homepage discovers the processing demonstration",
+      "result": "passed",
+      "reason": "All six engine/viewport observations passed",
+      "artifact": "https://github.com/And-Gu/document-as-code-lab/blob/test/reader-journey-and-learning-evidence/reviews/package-3/local-results.json",
+      "reviewer": "Automated assertions; selected screenshots reviewed by Codex",
+      "limitations": [
+        "Local emulation, not human learning or physical-device evidence."
+      ]
+    },
+    {
+      "test_id": "J2",
+      "requirement_id": "P3-01",
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "environment": "Chromium 156.0.8078.4, Firefox 157.0, WebKit 27.2; 390 and 1440 CSS px",
+      "procedure": "J2 processing edits, invalid build, recovery and reset",
+      "result": "passed",
+      "reason": "All six engine/viewport observations passed",
+      "artifact": "https://github.com/And-Gu/document-as-code-lab/blob/test/reader-journey-and-learning-evidence/reviews/package-3/local-results.json",
+      "reviewer": "Automated assertions; selected screenshots reviewed by Codex",
+      "limitations": [
+        "Local emulation, not human learning or physical-device evidence."
+      ]
+    },
+    {
+      "test_id": "J3",
+      "requirement_id": "P3-01",
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "environment": "Chromium 156.0.8078.4, Firefox 157.0, WebKit 27.2; 390 and 1440 CSS px",
+      "procedure": "J3 Contract Explorer source identity, exact bytes and relevant return",
+      "result": "passed",
+      "reason": "All six engine/viewport observations passed",
+      "artifact": "https://github.com/And-Gu/document-as-code-lab/blob/test/reader-journey-and-learning-evidence/reviews/package-3/local-results.json",
+      "reviewer": "Automated assertions; selected screenshots reviewed by Codex",
+      "limitations": [
+        "Local emulation, not human learning or physical-device evidence."
+      ]
+    },
+    {
+      "test_id": "J4",
+      "requirement_id": "P3-01",
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "environment": "Chromium 156.0.8078.4, Firefox 157.0, WebKit 27.2; 390 and 1440 CSS px",
+      "procedure": "J4 source, mapping and computed briefing with preserved return context",
+      "result": "passed",
+      "reason": "All six engine/viewport observations passed",
+      "artifact": "https://github.com/And-Gu/document-as-code-lab/blob/test/reader-journey-and-learning-evidence/reviews/package-3/local-results.json",
+      "reviewer": "Automated assertions; selected screenshots reviewed by Codex",
+      "limitations": [
+        "Local emulation, not human learning or physical-device evidence."
+      ]
+    },
+    {
+      "test_id": "J5",
+      "requirement_id": "P3-01",
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "environment": "Chromium 156.0.8078.4, Firefox 157.0, WebKit 27.2; 390 and 1440 CSS px",
+      "procedure": "J5 missing budget, changed forecast, failed and stale builds",
+      "result": "passed",
+      "reason": "All six engine/viewport observations passed",
+      "artifact": "https://github.com/And-Gu/document-as-code-lab/blob/test/reader-journey-and-learning-evidence/reviews/package-3/local-results.json",
+      "reviewer": "Automated assertions; selected screenshots reviewed by Codex",
+      "limitations": [
+        "Local emulation, not human learning or physical-device evidence."
+      ]
+    },
+    {
+      "test_id": "J6",
+      "requirement_id": "P3-01",
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "environment": "Chromium 156.0.8078.4, Firefox 157.0, WebKit 27.2; 390 and 1440 CSS px",
+      "procedure": "J6 illustrative agent keeps authority and makes no model/external request",
+      "result": "passed",
+      "reason": "All six engine/viewport observations passed",
+      "artifact": "https://github.com/And-Gu/document-as-code-lab/blob/test/reader-journey-and-learning-evidence/reviews/package-3/local-results.json",
+      "reviewer": "Automated assertions; selected screenshots reviewed by Codex",
+      "limitations": [
+        "Local emulation, not human learning or physical-device evidence."
+      ]
+    },
+    {
+      "test_id": "J7",
+      "requirement_id": "P3-01",
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "environment": "Chromium 156.0.8078.4, Firefox 157.0, WebKit 27.2; 390 and 1440 CSS px",
+      "procedure": "J7 fresh responsive navigation, diagrams and keyboard source/preview",
+      "result": "passed",
+      "reason": "All six engine/viewport observations passed",
+      "artifact": "https://github.com/And-Gu/document-as-code-lab/blob/test/reader-journey-and-learning-evidence/reviews/package-3/local-results.json",
+      "reviewer": "Automated assertions; selected screenshots reviewed by Codex",
+      "limitations": [
+        "Local emulation, not human learning or physical-device evidence."
+      ]
+    },
+    {
+      "test_id": "J8",
+      "requirement_id": "P3-01",
+      "source_revision": "cc226ec61b0d3a61b25e7f2fc577a33b58d46288",
+      "environment": "Chromium 156.0.8078.4, Firefox 157.0, WebKit 27.2; 390 and 1440 CSS px",
+      "procedure": "J8 slides, notes, legacy routes and explicit dashboard API failure",
+      "result": "passed",
+      "reason": "All six engine/viewport observations passed",
+      "artifact": "https://github.com/And-Gu/document-as-code-lab/blob/test/reader-journey-and-learning-evidence/reviews/package-3/local-results.json",
+      "reviewer": "Automated assertions; selected screenshots reviewed by Codex",
+      "limitations": [
+        "Local emulation, not human learning or physical-device evidence."
+      ]
     }
   ]
 }

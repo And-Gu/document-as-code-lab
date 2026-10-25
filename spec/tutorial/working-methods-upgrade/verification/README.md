@@ -24,3 +24,7 @@ Public `build-information.json` contains only schema version, source commit and 
 Use `planned`, `passed`, `failed`, `not_run`, `not_verified` or `not_applicable`, with a reason. Keep local results, hosted verification, physical/manual checks, actual reader observations and owner approval in separate rows. Never mark a study complete merely because this kit exists. The first qualitative round is approximately 4–6 people; no statistical effectiveness or time-savings claim follows from that plan.
 
 Package 3 is prepared on package 2's feature branch while earlier drafts remain open, at the owner's request to continue. Merge/rebase the dependent changes in review order. The specification at PR #20 remains separate. Rollback removes the harness, workflow additions, build-information hook and study-kit links; it does not change maintained source facts or the eleven-chapter sequence.
+
+## Recorded local result, 25 October 2026
+
+Implementation `cc226ec61b0d3a61b25e7f2fc577a33b58d46288`: 57 browser checks passed (19 each in Chromium, Firefox and WebKit), plus build/type/content/model regressions and 17 Python tests. The hosted-check procedure passed a localhost rehearsal and rejected a deliberately incorrect local manifest; neither run is a public deployment check. See the [review report and rendered evidence](https://github.com/And-Gu/document-as-code-lab/blob/test/reader-journey-and-learning-evidence/reviews/package-3/README.md) for commands, exact environments and limitations. The study kit is prepared; learning evidence remains not run.
