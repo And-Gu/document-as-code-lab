@@ -7,11 +7,11 @@ export function initEditorTabs(root: HTMLElement) {
   const id = `editor-${++nextEditor}`;
   let active = 'source';
   tabs.forEach((tab, index) => { tab.id = `${id}-tab-${index}`; panels[index].id = `${id}-panel-${index}`; });
-  function render() {
+  function render(preserveFocus = false) {
     const mobile = narrow.matches;
     // Keep focus in a visible place across responsive changes.
     const focusedPanel = panels.find(panel => panel.contains(document.activeElement));
-    if (mobile && focusedPanel) active = focusedPanel.dataset.editorPanel!;
+    if (preserveFocus && mobile && focusedPanel) active = focusedPanel.dataset.editorPanel!;
     if (!mobile && bar.contains(document.activeElement)) panels.find(panel => panel.dataset.editorPanel === active)?.querySelector<HTMLElement>('textarea, [tabindex]')?.focus();
     bar.hidden = !mobile;
     if (mobile) bar.setAttribute('role', 'tablist'); else bar.removeAttribute('role');
@@ -36,6 +36,6 @@ export function initEditorTabs(root: HTMLElement) {
       if (next !== undefined) { event.preventDefault(); tabs[next].focus(); select(next); }
     });
   });
-  render(); narrow.addEventListener('change', render);
+  render(); narrow.addEventListener('change', () => render(true));
   return () => { active = 'source'; render(); };
 }

@@ -99,3 +99,11 @@ The browser checks found and drove fixes for a focus handler that interfered wit
 ## Owner review
 
 Review the [before/after passages](editorial-samples.md), homepage/diagram/editor/source-record screenshots, all eleven chapter dispositions and the publication allowlist. Decide whether the wording and treatment serve the agreed audience. The implementation and technical results support that decision; they do not make it on the owner's behalf.
+
+## Follow-up technical review, 25 October 2026
+
+Review of the tab state machine found that explicit Preview activation could be overridden when DOM focus remained in the source textarea (including browser-dependent pointer focus behavior). Reproduced in Chromium by focusing the source and activating the button without transferring focus: Preview remained hidden. Focus-based selection now applies only to responsive breakpoint changes. The browser regression exercises this activation in all three editors and still checks keyboard selection, reset and resize behavior.
+
+The review also inspected the record adapter, publication allowlist, material routing, chapter integration and provenance boundaries. No additional actionable finding was identified in that scope. This is a technical review, not owner acceptance of wording/design, a hosted check or an independent human review. Package 2 is being prepared as a dependent draft at the owner's request; package 1 is not merged.
+
+Validation of the fix: Astro check (77 files, zero diagnostics), production build, learning/content/budget checks passed. Full browser rerun results are recorded separately in the follow-up evidence. The original evidence above remains tied to its recorded revision.

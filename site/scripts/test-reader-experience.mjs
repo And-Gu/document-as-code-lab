@@ -27,6 +27,10 @@ try {
     const initial = await source.inputValue();
     await source.fill(initial + '\n\nA new practice sentence.');
     await source.evaluate(node => { node.focus(); node.setSelectionRange(9, 15); });
+    // Activation need not move DOM focus first (for example Safari pointer activation).
+    await tabs.getByRole('tab', { name: 'Preview', exact: true }).evaluate(button => button.click());
+    assert.ok(await page.locator('[data-preview]').isVisible());
+    await tabs.getByRole('tab', { name: 'Source', exact: true }).click();
     await tabs.getByRole('tab', { name: 'Source', exact: true }).focus();
     await page.keyboard.press('ArrowRight');
     assert.equal(await tabs.getByRole('tab', { name: 'Preview', exact: true }).getAttribute('aria-selected'), 'true');
