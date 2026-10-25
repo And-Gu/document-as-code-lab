@@ -2,7 +2,7 @@
 
 Package 3 supplies a reproducible engineering check and a reader-study kit. They answer different questions: an identified build can pass an engineering procedure; learning can only be investigated through real representative people attempting tasks. Neither establishes owner approval automatically.
 
-**Learning evidence: not run. Hosted verification of this package: not verified; no deployment has been authorized or performed. Physical-device and manual assistive-technology checks: not run.** Local browser emulation is not a physical-device test or full WCAG assessment.
+**Learning evidence: not run. Hosted verification: passed for `9ac44630269e220a8ea6f6607f7d81b971901bcd`, deployment 40238084101 on 25 October 2026. Physical-device and manual assistive-technology checks: not run.** Local browser emulation is not a physical-device test or full WCAG assessment.
 
 - [Reader-study protocol](reader-study-protocol.md): recruitment, privacy, neutral tasks, facilitation and interpretation.
 - [Unfilled findings template](reader-findings-template.md): private session worksheet and privacy-safe aggregate reporting structure.
@@ -23,8 +23,12 @@ Public `build-information.json` contains only schema version, source commit and 
 
 Use `planned`, `passed`, `failed`, `not_run`, `not_verified` or `not_applicable`, with a reason. Keep local results, hosted verification, physical/manual checks, actual reader observations and owner approval in separate rows. Never mark a study complete merely because this kit exists. The first qualitative round is approximately 4–6 people; no statistical effectiveness or time-savings claim follows from that plan.
 
-Package 3 is prepared on package 2's feature branch while earlier drafts remain open, at the owner's request to continue. Merge/rebase the dependent changes in review order. The specification at PR #20 remains separate. Rollback removes the harness, workflow additions, build-information hook and study-kit links; it does not change maintained source facts or the eleven-chapter sequence.
+Package 3 was prepared as a dependent draft at the owner's request. All three specification and implementation PRs are now merged after explicit owner authorization. Rollback removes the harness, workflow additions, build-information hook and study-kit links; it does not change maintained source facts or the eleven-chapter sequence.
 
 ## Recorded local result, 25 October 2026
 
 Implementation `cc226ec61b0d3a61b25e7f2fc577a33b58d46288`: 57 browser checks passed (19 each in Chromium, Firefox and WebKit), plus build/type/content/model regressions and 17 Python tests. The hosted-check procedure passed a localhost rehearsal and rejected a deliberately incorrect local manifest; neither run is a public deployment check. See the [review report and rendered evidence](https://github.com/And-Gu/document-as-code-lab/blob/test/reader-journey-and-learning-evidence/reviews/package-3/README.md) for commands, exact environments and limitations. The study kit is prepared; learning evidence remains not run.
+
+## Recorded public verification, 25 October 2026
+
+[Deployment 40238084101](https://github.com/And-Gu/document-as-code-lab/actions/runs/40238084101) successfully built, published and verified `9ac44630269e220a8ea6f6607f7d81b971901bcd`. A separate invocation of `test:hosted` from the local environment passed against the actual public URL, checking the same manifest before/after page, raw-byte, canonical/social, console/asset and controlled dashboard-error checks at 390/1440px. The published homepage and lab were also visually inspected. [Dated release evidence](https://github.com/And-Gu/document-as-code-lab/blob/main/reviews/release-2026-10-25/README.md) retains observations and screenshots. Later builds have their own commit/time; this record is not silently refreshed.

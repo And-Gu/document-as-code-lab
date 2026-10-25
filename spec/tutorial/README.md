@@ -1,8 +1,8 @@
 # Tutorial Design Baseline
 
-The intended **v1.4 baseline** adopts the audience and working-methods promise agreed on 25 October 2026 in the existing product specification and decision register. Package 1 implementation, exact wording and visual treatment are in review; package 2 is implemented in a dependent draft following technical review of package 1, while package 3 supplies a dependent verification harness and study kit in review. Real reader observations remain not run. Business meaning and design still need owner review. The v1.3 history below remains evidence of the earlier editorial pass.
+The **v1.4 baseline** adopts the audience and working-methods promise agreed on 25 October 2026. The owner subsequently authorized acceptance, merge and publication of the three proposals; specification PRs #18–20 and implementation PRs #21–23 are merged. Their published build was verified at `9ac4463`; see the [evidence register](working-methods-upgrade/verification/README.md). Real reader observations and manual accessibility checks remain not run. This release authorization does not blanket-approve every pre-existing chapter draft. The v1.3 history below retains its earlier scope.
 
-The functional direction comes from v1.2; the current v1.3 specification adds the editorial style accepted after three sample reviews on 19 October 2026. A specification records intent, not proof of implementation, chapter approval, accessibility conformance, or learning effectiveness.
+The functional direction comes from v1.2; the v1.3 specification added the editorial style accepted after three sample reviews on 19 October 2026. A specification records intent, not proof of implementation, chapter approval, accessibility conformance, or learning effectiveness.
 
 - [Reusable specification template](01-REUSABLE-TUTORIAL-SPECIFICATION-TEMPLATE.md): a starting point for another tutorial.
 - [Lab specification](02-DOCUMENT-AS-CODE-LAB-V1-SPECIFICATION.md): reader outcomes, curriculum, and acceptance criteria.

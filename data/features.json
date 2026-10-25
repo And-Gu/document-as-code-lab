@@ -94,21 +94,23 @@
     {
       "id": "information-refinement",
       "name": "Cross-source information refinement",
-      "status": "in-progress",
+      "status": "complete",
       "completion_criterion": "The fictional cross-source lab, source catalogue and deterministic agent walkthrough pass local model/browser regression checks and the owner accepts business meaning and reader experience.",
       "evidence": [
         "Package 2 provides curated sources, explicit identity mapping, source-linked deterministic results and browser-only practice inputs.",
-        "Technical checks are recorded in reviews/package-2/README.md; owner acceptance and hosted verification remain pending."
+        "Technical checks are recorded in reviews/package-2/README.md; release authorization and dated hosted evidence are recorded in the release report.",
+        "Owner authorized the proposals for merge and publication on 25 October 2026. Deployment 40238084101 and a separate hosted check verified source 9ac44630269e220a8ea6f6607f7d81b971901bcd; dated evidence is in reviews/release-2026-10-25/. Human reader-study and manual accessibility evidence remain not run."
       ]
     },
     {
       "id": "reader-journey-verification",
       "name": "Reproducible reader-journey verification",
-      "status": "in-progress",
+      "status": "complete",
       "completion_criterion": "Local browser journeys pass on an identified revision and an authorized deployment is verified against its explicit build manifest.",
       "evidence": [
         "Package 3 adds pinned Playwright, production-route tests, a public build manifest, bounded hosted smoke checks and a reader-study kit.",
-        "Local evidence is recorded separately from pending hosted verification and not-run learning observations in the verification evidence index."
+        "Local evidence is recorded separately from dated hosted verification and not-run learning observations in the verification evidence index.",
+        "Owner authorized the proposals for merge and publication on 25 October 2026. Deployment 40238084101 and a separate hosted check verified source 9ac44630269e220a8ea6f6607f7d81b971901bcd; dated evidence is in reviews/release-2026-10-25/. Human reader-study and manual accessibility evidence remain not run."
       ]
     }
   ]

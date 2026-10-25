@@ -13,10 +13,11 @@ The tutorial has eleven chapters, browser-only labs and quizzes, the nine-record
 
 ## Next work
 
-1. Review **package 1: audience and reader experience** against P1-01–P1-06. The agreed audience and promise are in the existing [v1.4 product specification](spec/tutorial/02-DOCUMENT-AS-CODE-LAB-V1-SPECIFICATION.md); exact wording, source views, navigation and mobile design remain in owner review. Local evidence must identify the tested revision. Hosted verification follows authorized publication.
-2. Review package 2's information-refinement lab, source catalogue and illustrative agent workflow in its dependent draft. At the owner's request it was prepared after technical review of package 1, before merge; neither package is thereby approved or published. Merge dependencies in order after review.
-3. Review package 3's dependent cross-page verification harness and reader-study kit. Hosted verification follows an authorized deployment; human reader observations and manual accessibility checks remain pending. Existing and changed functionality must be tested in every package; package 3 does not defer earlier tests. Actual reader evidence remains not run until collected.
-4. Review chapter revisions individually. Keep all substantively revised chapters in review until explicitly accepted.
+1. Collect real reader observations using the completed study kit when suitable participants are available. Learning evidence remains **not run**; the kit and engineering checks do not prove effectiveness.
+2. Perform physical-device and manual assistive-technology checks; local browser emulation and automated checks remain separately identified.
+3. Review individual chapter revisions and address actual reader findings. Merge/publication authorization does not blanket-approve all pre-existing chapter drafts.
+
+Packages 1–3 and their specifications were merged on 25 October 2026. The reader journey, refinement lab, source catalogue, deterministic replay and verification harness are published. [Deployment 40238084101](https://github.com/And-Gu/document-as-code-lab/actions/runs/40238084101) and a separate public smoke check verified source revision `9ac44630269e220a8ea6f6607f7d81b971901bcd`. Historical measurements and the earlier publication evidence above retain their original scope.
 
 See the [package register](spec/tutorial/working-methods-upgrade/README.md). Merging a specification is not completing its implementation.
 

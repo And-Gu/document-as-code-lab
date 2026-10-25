@@ -3,9 +3,13 @@
 Prepared and uploaded: 25 October 2026. Repository: `And-Gu/document-as-code-lab`.
 Inspected baseline: `9b63bdbc14c0c5352e364ba0289ec071e5566e48`.
 
-## Delivery status and scope
+## Current delivery status
 
-These are implementation specifications, not implemented features. The owner requested three GitHub pull requests containing the agreed planning package. The specification PRs add documentation and fictional teaching fixtures only; they do not implement or publish the website changes, approve chapter revisions, or establish learning effectiveness.
+Specification PRs #18–20 and implementation PRs #21–23 were merged with owner authorization on 25 October 2026. Packages 1–3 are implemented and published; [public verification](verification/README.md) identifies the deployed source revision and remaining evidence. The original planning scope and sequence below are retained as historical context.
+
+## Original specification scope
+
+These documents were prepared as implementation specifications; implementation and publication were delivered separately in PRs #21–23. The owner requested three GitHub pull requests containing the agreed planning package. The specification PRs add documentation and fictional teaching fixtures only; they do not implement or publish the website changes, approve chapter revisions, or establish learning effectiveness.
 
 The three specification branches independently target `main` and add different files. Review and merge the specification packages in order 1, 2, 3. All three packages can be adopted before implementation starts. The subsequent **implementation** PRs must run sequentially: implement package 1 first; implement package 2 from current main after implementation 1 is merged; implement package 3 after implementation 2 is merged. Merging a specification is not completing its implementation.
 
@@ -20,11 +24,11 @@ The numbered PR labels in the source documents identify work packages, not GitHu
 ## Read in this order
 
 1. [Shared design baseline](01-SHARED-DESIGN-BASELINE.md).
-2. [Package 1](02-PR1-AUDIENCE-AND-READER-EXPERIENCE.md), [package 2 on its specification branch](https://github.com/And-Gu/document-as-code-lab/blob/spec/working-methods-02-refinement/spec/tutorial/working-methods-upgrade/03-PR2-INFORMATION-REFINEMENT.md), [package 3 on its specification branch](https://github.com/And-Gu/document-as-code-lab/blob/spec/working-methods-03-verification/spec/tutorial/working-methods-upgrade/04-PR3-VERIFICATION-AND-LEARNING.md).
+2. [Package 1](02-PR1-AUDIENCE-AND-READER-EXPERIENCE.md), [package 2 on main](https://github.com/And-Gu/document-as-code-lab/blob/main/spec/tutorial/working-methods-upgrade/03-PR2-INFORMATION-REFINEMENT.md), [package 3 on main](https://github.com/And-Gu/document-as-code-lab/blob/main/spec/tutorial/working-methods-upgrade/04-PR3-VERIFICATION-AND-LEARNING.md).
 3. [Chapter changes](05-CHAPTER-CHANGE-MAP.md), [acceptance and traceability](06-ACCEPTANCE-AND-TRACEABILITY.md), [agent handoff](07-AGENT-HANDOFF.md).
-4. [References and baseline](08-REFERENCES-AND-BASELINE.md), [draft copy](09-CONTENT-SAMPLES.md), [fixture documentation on package 2's branch](https://github.com/And-Gu/document-as-code-lab/blob/spec/working-methods-02-refinement/spec/tutorial/working-methods-upgrade/fixtures/README.md).
+4. [References and baseline](08-REFERENCES-AND-BASELINE.md), [draft copy](09-CONTENT-SAMPLES.md), [fixture documentation on main](https://github.com/And-Gu/document-as-code-lab/blob/main/spec/tutorial/working-methods-upgrade/fixtures/README.md).
 
-Cross-package links use the specification branches while the PRs are open. After all three specification PRs are merged, use the same filenames in this directory on `main`; reconcile these links before deleting the specification branches.
+Cross-package links now identify the merged files on `main`. Specification fixtures retain their planning role; the runtime source bundle lives under `examples/information-refinement/`.
 
 ## Agent starting point
 
