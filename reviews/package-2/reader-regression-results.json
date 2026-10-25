@@ -1,0 +1,70 @@
+{
+  "sourceRevision": "0b161201b0138caa976d66edecacc3934d5505d1",
+  "workingTree": "clean",
+  "browser": "155.0.8059.85",
+  "base": "http://127.0.0.1:4330/document-as-code-lab/",
+  "results": [
+    {
+      "name": "Homepage → Processing Lab, no account/setup step",
+      "result": "passed"
+    },
+    {
+      "name": "04-markdown: mobile tabs, keyboard, selection, validation/build and reset",
+      "result": "passed"
+    },
+    {
+      "name": "05-structured-content: mobile tabs, keyboard, selection, validation/build and reset",
+      "result": "passed"
+    },
+    {
+      "name": "07-processing: mobile tabs, keyboard, selection, validation/build and reset",
+      "result": "passed"
+    },
+    {
+      "name": "Blank/partial quiz prompts completion, focuses missing answer, then scores",
+      "result": "passed"
+    },
+    {
+      "name": "Explorer → DEL-101 readable source → original bytes → deterministic return",
+      "result": "passed"
+    },
+    {
+      "name": "320px: page reflow, current menu, diagrams and representative pages",
+      "result": "passed"
+    },
+    {
+      "name": "390px: page reflow, current menu, diagrams and representative pages",
+      "result": "passed"
+    },
+    {
+      "name": "768px: page reflow, current menu, diagrams and representative pages",
+      "result": "passed"
+    },
+    {
+      "name": "1440px: page reflow, current menu, diagrams and representative pages",
+      "result": "passed"
+    },
+    {
+      "name": "Desktop → mobile resize preserves source/result and keeps focus visible",
+      "result": "passed"
+    },
+    {
+      "name": "200% text enlargement: ordinary content reflows",
+      "result": "passed"
+    },
+    {
+      "name": "No-JavaScript: both editor panels, sources, diagram meaning and all explorer views",
+      "result": "passed"
+    },
+    {
+      "name": "Slides, notes, legacy routes and dashboard snapshot/failure labels",
+      "result": "passed"
+    }
+  ],
+  "errors": [],
+  "nonGetRequests": [],
+  "limitations": [
+    "Local Chromium emulation; no physical device, screen reader, hosted deployment or reader study.",
+    "200% text enlargement and viewport reflow; native browser-UI zoom not automated."
+  ]
+}

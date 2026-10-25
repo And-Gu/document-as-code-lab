@@ -22,4 +22,20 @@ The original onboarding processor, nine contract records and graph edges, histor
 
 ## Validation
 
-Validation commands, exact tested revision and selected rendered evidence will be recorded after the final production checks. Local preview evidence does not establish a hosted deployment. Browser checks use Chromium, CSS viewports and text enlargement; physical devices, screen readers, native browser UI zoom and Firefox/WebKit are outside this run. The existing Mermaid bundle-size advisory remains.
+Tested clean implementation revision: `0b161201b0138caa976d66edecacc3934d5505d1`. Node 22.23.3, Python 3.9.6 and local Chrome 155.0.8059.85. The later evidence-only commit does not change runtime code, source fixtures, publication selection or chapter text; history-derived measurements can naturally gain a revision.
+
+From `site/`:
+
+- `ASTRO_TELEMETRY_DISABLED=1 npm run check`: 86 files, zero errors/warnings/hints.
+- `PYTHON=<existing repository venv>/bin/python ASTRO_TELEMETRY_DISABLED=1 npm run build`: 92 pages plus 19 legacy redirects.
+- `npm run test:refinement`, `test:learning`, `test:scenarios`, `test:content`, `test:homepage`, `test:contracts`, `test:dashboard`: passed. Content check covered 2,224 internal links/assets across 111 HTML pages. Dashboard used the same Python environment.
+- `node scripts/test-budget.mjs`: passed.
+- From repository root: `<existing repository venv>/bin/python -m unittest discover -s tests`: 17 tests passed.
+- `node scripts/test-refinement-browser.mjs`: 10 checks passed, including keyboard build, stale/failed/partial/reset states, source navigation with exact state restoration, original bytes, replay, catalogue, 320/390/768/1440px, 200% text and JavaScript-off results. No uncaught errors or external/write requests.
+- `node scripts/test-reader-experience.mjs`: all 14 existing reader-experience checks passed against the package-2 build, including the reviewed package-1 tab regression, labs, Contract Explorer, diagrams, slides, legacy routes and dashboard.
+- `git diff --check`: passed. Original checkout’s three user-edited files remain outside this worktree and unchanged by this task.
+
+Browser commands used `PLAYWRIGHT_MODULE` pointing to the installed runtime’s Playwright ESM entry, `CHROME_PATH` pointing to system Chrome and `REFINEMENT_TEST_URL` / `READER_TEST_URL` = `http://127.0.0.1:4330/document-as-code-lab/`. Exact browser results are in [refinement results](refinement-browser-results.json) and [existing reader regressions](reader-regression-results.json).
+
+Rendered screenshots were inspected: [mobile entry](initial-390.png), [invalid edit and retained result warning](partial-failed-390.png), [readable source](source-390.png), [agent replay](replay-390.png), [catalogue](catalogue-390.png), [desktop evidence disclosure](worked-1440.png), [200% text](text-200.png).
+ Local preview evidence does not establish a hosted deployment. Browser checks use Chromium, CSS viewports and text enlargement; physical devices, screen readers, native browser UI zoom and Firefox/WebKit are outside this run. The existing Mermaid bundle-size advisory remains.
