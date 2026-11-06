@@ -25,7 +25,9 @@ if (scenarios.length) {
     if (source.split(marker).length !== 2) throw new Error(`${chapterSource}: expected one ${scenario.marker} marker.`);
   }
 }
-const key = `chapter-${String(chapterNumber).padStart(2, '0')}` as keyof typeof candidates;
+// Preserve published quizzes when older chapters move; the added enrichment lesson uses a new key.
+const originalQuizNumber = chapterNumber === 10 ? 12 : chapterNumber > 10 ? chapterNumber - 1 : chapterNumber;
+const key = `chapter-${String(originalQuizNumber).padStart(2, '0')}` as keyof typeof candidates;
 const questions = candidates[key].map((question, index) => ({
   id: `question-${index + 1}`, question: question.question,
   type: question.type === 'true_false' ? 'true-false' as const : 'single' as const,
@@ -43,7 +45,7 @@ const fixedProcedures = chapterNumber === 7 ? await Promise.all(['access', 'equi
 {chapterNumber === 5 && <div data-learning-target="metadata-lab-widget"><MarkdownPlayground title="Onboarding Lab: validate metadata" initial={metadataExample} validationSchema={procedureSchema} /></div>}
 {chapterNumber === 7 && <div data-learning-target="processing-lab-widget"><ProcessingPlayground initial={metadataExample} fixedRecords={fixedProcedures} schema={procedureSchema} /></div>}
 {chapterNumber === 9 && <div data-learning-target="contract-explorer-widget"><ContractExplorer /></div>}
-{chapterNumber === 11 && <div data-learning-target="architecture-explorer-widget"><ArchitectureExplorer /></div>}
+{chapterNumber === 12 && <div data-learning-target="architecture-explorer-widget"><ArchitectureExplorer /></div>}
 <div data-learning-target="chapter-quiz-widget"><Quiz id={key} questions={questions} /></div>
 {scenarios.map(scenario => <div data-learning-target={`${scenario.marker}-widget`}><ScenarioCheck scenario={scenario} /></div>)}
 <script>
