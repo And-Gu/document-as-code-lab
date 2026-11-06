@@ -119,3 +119,5 @@ Find a dataset you already use: service tickets, a register of decisions, projec
 The important change is one of mindset: data are not only inputs for a report. **They are assets we can question, improve, explain, combine, visualize, and preserve for further learning.**
 
 The next chapter looks at automation. Once a transformation or quality check is understood and trusted, we can consider running it repeatably when the relevant source changes.
+
+<!-- interactive: chapter-quiz -->
