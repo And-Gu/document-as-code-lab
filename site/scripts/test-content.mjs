@@ -7,9 +7,9 @@ import { parse as parseYaml } from 'yaml';
 
 const root = fileURLToPath(new URL('../../', import.meta.url));
 const dist = path.join(root, 'site/dist');
-const expected = ["01-introduction","github-workspace","02-project-growth","03-markdown","03a-structured-content","information-architecture","processing-information","04-ai-native","05-images","08-publishing","09-beyond-github"];
-const slugs = ["01-introduction","02-github-workspace","03-project-growth","04-markdown","05-structured-content","06-information-architecture","07-processing","08-ai-native","09-images","10-publishing","11-beyond-github"];
-assert.equal((await readdir(path.join(root, 'docs'))).filter(name => name.endsWith('.md')).length, 11);
+const expected = ["01-introduction","github-workspace","02-project-growth","03-markdown","03a-structured-content","information-architecture","processing-information","04-ai-native","05-images","data-enrichment","08-publishing","09-beyond-github"];
+const slugs = ["01-introduction","02-github-workspace","03-project-growth","04-markdown","05-structured-content","06-information-architecture","07-processing","08-ai-native","09-images","10-data-enrichment","10-publishing","11-beyond-github"];
+assert.equal((await readdir(path.join(root, 'docs'))).filter(name => name.endsWith('.md')).length, 12);
 for (const [index, slug] of slugs.entries()) {
   const source = await readFile(path.join(root, `docs/${slug}.md`), 'utf8');
   const front = source.match(/^---\n([\s\S]*?)\n---\n/);
@@ -20,7 +20,7 @@ for (const [index, slug] of slugs.entries()) {
   assert.ok(!/\[AGENT(?:\s|:)/.test(source) && !source.includes('VISUAL:'), slug);
   for (const visual of metadata.visuals ?? []) {
     const diagram = await readFile(path.resolve(root, 'docs', visual.source), 'utf8');
-    assert.ok(source.includes(`\n${diagram.trim()}\n`), `${slug}: diagram differs from its maintained source`);
+    if (visual.embedded) assert.ok(source.includes(`\n${diagram.trim()}\n`), `${slug}: diagram differs from its maintained source`);
   }
 }
 const files = [];
@@ -109,7 +109,7 @@ for (const slug of ['', ...slugs.map(slug => `chapters/${slug}/`)]) {
     assert.ok(chapterMeta && !findNodes(chapterMeta, node => node.nodeName === '#text').map(node => node.value).join('').includes('in-review'));
   }
 }
-assert.equal(descriptions.size, 12, 'Homepage and each chapter need their own description');
+assert.equal(descriptions.size, 13, 'Homepage and each chapter need their own description');
 const { diagramRelationships } = await import('../plugins/readable-diagrams.mjs');
 for (const [slug, expected] of [
   ['06-information-architecture', [

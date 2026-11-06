@@ -16,13 +16,17 @@ test('P3-02 expected deployment artifact, routes, metadata, sources and assets',
   await info.attach('deployment-identity',{body:JSON.stringify({expected:process.env.EXPECTED_REVISION,run:process.env.DEPLOYMENT_RUN_ID,observed:manifest??null,url:baseURL,checked_at:new Date().toISOString(),browser:page.context().browser()?.version()}),contentType:'application/json'});
   expect(manifest?.source_commit,'Revision mismatch/pending: a 200 response is not deployment evidence').toBe(process.env.EXPECTED_REVISION);
   expect(manifest.schema_version).toBe(1); expect(Object.keys(manifest).sort()).toEqual(['built_at','schema_version','source_commit']);expect(Number.isFinite(Date.parse(manifest.built_at))).toBe(true);
-  const routes=['','chapters/01-introduction/','chapters/07-processing/','chapters/08-ai-native/','materials/examples/contract-explorer/records/DEL-101/','materials/reference/information-refinement/','materials/reference/knowledge-catalogue/','presentations/','presentations/information-model/notes/','chapters/06-processing/','dashboard/'];
+  const routes=['','chapters/01-introduction/','chapters/07-processing/','chapters/08-ai-native/','chapters/10-data-enrichment/','chapters/10-publishing/','chapters/11-beyond-github/','materials/examples/contract-explorer/records/DEL-101/','materials/reference/information-refinement/','materials/reference/knowledge-catalogue/','presentations/','presentations/information-model/notes/','chapters/06-processing/','dashboard/'];
   for(const viewport of [{width:390,height:844},{width:1440,height:900}]){
     await page.setViewportSize(viewport);
     for(const route of routes){
       const response=await page.goto(new URL(route,baseURL).href);expect(response?.status()).toBe(200);await page.waitForLoadState('networkidle');observed.push(page.url());
       if(route==='chapters/06-processing/')await expect(page).toHaveURL(/chapters\/07-processing\/$/);
       await expect(page.locator('h1')).toHaveCount(1);
+      if(route.startsWith('chapters/')) {
+        const glance=page.getByRole('region',{name:/Chapter \d+ · At a Glance/});
+        await expect(glance.getByRole('listitem')).toHaveCount(6);
+      }
       const canonical=await page.locator('link[rel="canonical"]').getAttribute('href');
       expect(canonical).toBe(`https://and-gu.github.io${new URL(page.url()).pathname}`);
       await expect(page.locator('meta[property="og:url"]')).toHaveAttribute('content',canonical!);
@@ -32,6 +36,9 @@ test('P3-02 expected deployment artifact, routes, metadata, sources and assets',
   }
   const raw=await request.get('files/examples/contract-explorer/records/DEL-101.md');expect(raw.status()).toBe(200);expect(await raw.body()).toEqual(await readFile('../examples/contract-explorer/records/DEL-101.md'));
   const source=await request.get('files/examples/information-refinement/sources/SRC-FORECAST.md');expect(await source.body()).toEqual(await readFile('../examples/information-refinement/sources/SRC-FORECAST.md'));
+  for(const file of ['examples/data-enrichment/cases.json','assets/data-enrichment/analysis.json','assets/data-enrichment/resolution-duration.svg']) {
+    const response=await request.get(`files/${file}`);expect(response.status()).toBe(200);expect(await response.body()).toEqual(await readFile(`../${file}`));
+  }
   expect(errors).toEqual([]);expect(missing).toEqual([]);
   // Controlled failure is isolated from natural console/asset checks, and never depends on live GitHub uptime.
   await page.route('https://api.github.com/**',route=>route.fulfill({status:503,contentType:'application/json',body:'{"message":"Controlled smoke-test failure"}'}));

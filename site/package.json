@@ -14,6 +14,7 @@
     "test:scenarios": "node scripts/test-scenarios.mjs",
     "test:content": "node scripts/test-content.mjs",
     "test:homepage": "node scripts/test-homepage.mjs",
+    "test:glance": "node scripts/test-glance.mjs",
     "test:contracts": "node scripts/test-contracts.mjs",
     "test:dashboard": "node scripts/growth-report.mjs && node scripts/test-dashboard.mjs",
     "test:refinement": "node scripts/test-refinement.mjs",

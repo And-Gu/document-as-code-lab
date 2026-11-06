@@ -1,6 +1,6 @@
 # Proposed Chapter: From Markdown to a Designed PDF
 
-Status: optional publication reference linked from the publishing guide, not a numbered tutorial chapter. Chapters 10 and 11 distinguish the proof artifacts from a published book. The publishing proof remains under review.
+Status: optional publication reference linked from the publishing guide, not a numbered tutorial chapter. Chapters 11 and 12 distinguish the proof artifacts from a published book. The publishing proof remains under review.
 
 ## Purpose
 

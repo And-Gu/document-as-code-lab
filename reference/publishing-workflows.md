@@ -25,7 +25,7 @@ on:
 
 The build job checks out the repository, prepares Python, and invokes the Astro build action. A separate job publishes the built files to GitHub Pages. The hourly trigger refreshes dashboard snapshots; it does not edit chapter sources, and scheduled runs can be delayed.
 
-The workflow file remains authoritative if these settings change. [Chapter 10](../docs/10-publishing.md) follows the reader-facing distinction between checks, retained artifacts, and publication.
+The workflow file remains authoritative if these settings change. [Chapter 11](../docs/10-publishing.md) follows the reader-facing distinction between checks, retained artifacts, and publication.
 
 ## One Source, Several Reading Experiences
 
@@ -248,4 +248,4 @@ The PDF command requires a PDF engine configured for Pandoc; see its [PDF guidan
 
 Open each successful output and compare it with the brief. Check page breaks in the PDF, text fit in the slides, and headings and links in the HTML. Confirm that the source clarification is present wherever it belongs. Record converter versions and checks, including any failed or untested format. A successful conversion is the starting point for this review.
 
-[Chapter 11, Behind the Lab](../docs/11-beyond-github.md), traces this tutorial's implementation and compares it with a Microsoft 365 alternative. The [portable workflow guide](workflows-across-tools.md) develops that alternative in more detail.
+[Chapter 12, Behind the Lab](../docs/11-beyond-github.md), traces this tutorial's implementation and compares it with a Microsoft 365 alternative. The [portable workflow guide](workflows-across-tools.md) develops that alternative in more detail.

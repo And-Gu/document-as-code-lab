@@ -99,7 +99,7 @@ Our example has procedure files such as `access.md`, `equipment.md`, and `contac
 
 In the [real repository](https://github.com/And-Gu/document-as-code-lab), start with the [README](../README.md), locate the chapter and onboarding files, and look at the history of one file. Reading and exploring should not require creating an account. Modifying a repository is an optional advanced activity.
 
-Alongside the chapter files, you will find rules for checking changes and publishing results. A proposed edit can trigger a website build check; an edit merged into `main` can trigger publication. GitHub Actions runs these operations, which we follow in [chapter 10](10-publishing.md).
+Alongside the chapter files, you will find rules for checking changes and publishing results. A proposed edit can trigger a website build check; an edit merged into `main` can trigger publication. GitHub Actions runs these operations, which we follow in [chapter 11](10-publishing.md).
 
 With suitable permissions, the team can improve these rules alongside the information. An AI agent can use both as context when helping with changes, while people remain responsible for reviewing the results and maintaining the tools.
 

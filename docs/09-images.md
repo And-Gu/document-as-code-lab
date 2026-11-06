@@ -92,6 +92,6 @@ When a source changes, generated views should refresh through a defined process.
 
 > **Explore further:** Want to create reusable diagrams and views? The [visual-source guide](../reference/visual-sources.md) explains Mermaid, SVG, raster images, source provenance, and accessible alternatives. Reading needs no setup; optional rendering examples identify their tools.
 
-A useful explorer lets you move from a question to recorded evidence without maintaining another copy of the information. Those views still need to be rebuilt when sources change. [Chapter 10](10-publishing.md) follows how this tutorial automates that work.
+A useful explorer lets you move from a question to recorded evidence without maintaining another copy of the information. But how else can we improve the underlying data rather than only its presentation? [Chapter 10](10-data-enrichment.md) examines data quality, annotation, enrichment, visualization and reuse.
 
 <!-- interactive: chapter-quiz -->

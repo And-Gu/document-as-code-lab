@@ -1,0 +1,62 @@
+---
+import { BookOpen, Search, Sparkles, ChartNoAxesCombined, ClipboardCheck, Archive,
+  Files, Eye, GitBranch, Repeat2, FolderOpen, Users, GitPullRequest, GitCompare,
+  GitMerge, RotateCcwClock, MessageSquare, ShieldCheck, FileText, Heading, Table2,
+  Link, Tag, FingerprintPattern, ListChecks, Funnel, Scale, Box, Network, Workflow,
+  FileOutput, Send, Map, KeyRound, CircleQuestionMark, Database, Calculator, Zap,
+  Package, Monitor, Component, Globe } from '@lucide/astro';
+import { chapterGlances } from '../lib/chapter-glances';
+
+interface Props { slug: string; chapterNumber: number }
+const { slug, chapterNumber } = Astro.props;
+const glance = chapterGlances[slug];
+const icons: Record<string, typeof BookOpen> = {
+  Sources: Files, Views: Eye, Change: GitBranch, Review: ClipboardCheck, Reuse: Repeat2,
+  Value: Sparkles, Workspace: FolderOpen, Roles: Users, Propose: GitPullRequest,
+  Compare: GitCompare, Integrate: GitMerge, History: RotateCcwClock, Revisions: RotateCcwClock,
+  Differences: GitCompare, Context: MessageSquare, Evidence: Search,
+  Trends: ChartNoAxesCombined, Limits: ShieldCheck, Readable: FileText,
+  Structure: Heading, Tables: Table2, Links: Link, Preview: Eye, Metadata: Tag,
+  Identity: FingerprintPattern, Definitions: BookOpen, Checks: ListChecks,
+  Selection: Funnel, Judgment: Scale, Objects: Box, Relationships: Network,
+  Dependencies: Workflow, Impact: Search, Inputs: Files, Validation: ListChecks,
+  Processing: Calculator, Outputs: FileOutput, Publication: Send, 'Source map': Map,
+  Instructions: BookOpen, Language: MessageSquare, Decisions: ClipboardCheck,
+  Access: KeyRound, Questions: CircleQuestionMark, Quality: ShieldCheck, Annotate: Tag,
+  Enrich: Database, Visualize: ChartNoAxesCombined, Preserve: Archive, Events: Zap,
+  Artifacts: Package, Delivery: Send, Monitoring: Monitor, Components: Component,
+  Website: Globe, Experiences: Eye, Automation: Workflow, Portability: Repeat2,
+};
+if (!glance || glance.tiles.length !== 6) throw new Error('Missing or invalid Chapter at a Glance: ' + slug);
+for (const tile of glance.tiles) if (!icons[tile.title]) throw new Error('Missing semantic icon: ' + tile.title);
+---
+<section class="chapter-glance" aria-labelledby="chapter-glance-title">
+  <div class="chapter-glance__header">
+    <h2 id="chapter-glance-title" class="chapter-glance__eyebrow">Chapter {String(chapterNumber).padStart(2, '0')} · At a Glance</h2>
+    <p class="chapter-glance__idea">{glance.message}</p>
+  </div>
+  <ul class="chapter-glance__tiles">
+    {glance.tiles.map((tile) => {
+      const Icon = icons[tile.title];
+      return <li class="chapter-glance__tile">
+        <Icon size={22} stroke-width={1.8} aria-hidden="true" />
+        <strong>{tile.title}</strong>
+        <span>{tile.detail}</span>
+      </li>;
+    })}
+  </ul>
+</section>
+<style>
+  .chapter-glance { margin: 1.4rem 0 2rem; padding: clamp(1rem, 2.8vw, 1.5rem); border: 1px solid #d9ddd7; border-width: 1px 0; background: #fbfcfa; color: #273a30; }
+  .chapter-glance__header { margin-bottom: 1rem; }
+  .chapter-glance__eyebrow { display: block; margin: 0; font-size: .85rem; font-weight: 750; letter-spacing: 0; color: #3a6852; }
+  .chapter-glance__idea { font-size: 1.04rem; line-height: 1.5; margin: .55rem 0 .25rem; max-width: 68ch; font-weight: 550; }
+  .chapter-glance__tiles { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: .65rem; }
+  .chapter-glance__tile { display: flex; flex-direction: column; align-items: flex-start; gap: .28rem; min-width: 0; background: #f0f4f1; padding: .85rem; border-radius: 4px; overflow-wrap: anywhere; }
+  .chapter-glance__tile svg { color: #466a57; flex-shrink: 0; }
+  .chapter-glance__tile strong { font-size: .91rem; }
+  .chapter-glance__tile span { font-size: .79rem; line-height: 1.4; color: #4b5b51; overflow-wrap: anywhere; }
+  @media (max-width: 720px) { .chapter-glance__tiles { grid-template-columns: repeat(2,minmax(0,1fr)); } }
+  @media (max-width: 380px) { .chapter-glance__tiles { grid-template-columns: 1fr; } }
+  @media print { .chapter-glance { break-inside: avoid; } }
+</style>
