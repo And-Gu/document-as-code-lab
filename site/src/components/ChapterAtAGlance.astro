@@ -1,0 +1,40 @@
+---
+import { BookOpen, Search, Sparkles, ChartNoAxesCombined, ClipboardCheck, Archive } from '@lucide/astro';
+import { chapterGlances } from '../lib/chapter-glances';
+
+interface Props { slug: string; chapterNumber: number }
+const { slug, chapterNumber } = Astro.props;
+const glance = chapterGlances[slug];
+const icons = [BookOpen, Search, Sparkles, ChartNoAxesCombined, ClipboardCheck, Archive];
+if (!glance || glance.tiles.length !== 6) throw new Error('Missing or invalid Chapter at a Glance: ' + slug);
+---
+<section class="chapter-glance" aria-label="Chapter at a Glance">
+  <div class="chapter-glance__header">
+    <span class="chapter-glance__eyebrow">Chapter {String(chapterNumber).padStart(2, '0')} · At a Glance</span>
+    <p class="chapter-glance__idea">{glance.message}</p>
+  </div>
+  <ul class="chapter-glance__tiles">
+    {glance.tiles.map((tile, index) => {
+      const Icon = icons[index];
+      return <li class="chapter-glance__tile">
+        <Icon size={22} strokeWidth={1.8} aria-hidden="true" />
+        <strong>{tile.title}</strong>
+        <span>{tile.detail}</span>
+      </li>;
+    })}
+  </ul>
+</section>
+<style>
+  .chapter-glance { margin: 1.4rem 0 2rem; padding: clamp(1rem, 2.8vw, 1.5rem); border-radius: 1rem; border: 1px solid #d9ddd7; background: #fbfcfa; color: #273a30; }
+  .chapter-glance__header { margin-bottom: 1rem; }
+  .chapter-glance__eyebrow { display: block; font-size: .74rem; font-weight: 750; letter-spacing: .075em; text-transform: uppercase; color: #3a6852; }
+  .chapter-glance__idea { font-size: 1.04rem; line-height: 1.5; margin: .55rem 0 .25rem; max-width: 68ch; font-weight: 550; }
+  .chapter-glance__tiles { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: .65rem; }
+  .chapter-glance__tile { display: flex; flex-direction: column; align-items: flex-start; gap: .28rem; min-width: 0; background: #f0f4f1; padding: .85rem; border-radius: .65rem; }
+  .chapter-glance__tile svg { color: #466a57; flex-shrink: 0; }
+  .chapter-glance__tile strong { font-size: .91rem; }
+  .chapter-glance__tile span { font-size: .79rem; line-height: 1.4; color: #4b5b51; overflow-wrap: anywhere; }
+  @media (max-width: 720px) { .chapter-glance__tiles { grid-template-columns: repeat(2,minmax(0,1fr)); } }
+  @media (max-width: 380px) { .chapter-glance__tiles { grid-template-columns: 1fr; } }
+  @media print { .chapter-glance { break-inside: avoid; } }
+</style>
