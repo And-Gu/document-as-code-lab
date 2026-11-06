@@ -1,7 +1,7 @@
-# Document-as-Code Lab — Learning Product Specification v1.4
+# Document-as-Code Lab — Learning Product Specification v1.5 (proposed data-enrichment extension)
 
 > **Intended baseline v1.4 · 25 October 2026 · audience direction agreed; package 1 implementation and final wording/design in review**\
-> Derived from `01-REUSABLE-TUTORIAL-SPECIFICATION-TEMPLATE.md`. **Target:** 11 chapters (remote repository source now confirms Chapter 12 absent); keep rewritten Chapter 10; Chapter 11's current “Behind the Lab” treatment may be retained, selectively edited, or simplified. This is the **intended specification**, not a claim that everything is implemented or user-tested.
+> Derived from `01-REUSABLE-TUTORIAL-SPECIFICATION-TEMPLATE.md`. **Target:** 12 chapters (remote repository source now confirms Chapter 12 absent); keep rewritten Chapter 10; Chapter 11's current “Behind the Lab” treatment may be retained, selectively edited, or simplified. This is the **intended specification**, not a claim that everything is implemented or user-tested.
 
 ## 1. Product promise
 
@@ -19,14 +19,14 @@
 
 | Reader | Starting position | Core path | Optional next step |
 | --- | --- | --- | --- |
-| Information-experienced professional (primary) | Uses Word, Excel, PDF and specialized business systems; understands their domain but need not be a writer, engineer or developer | Explore the examples and eleven-chapter journey | Identify a bounded experiment in their own work |
+| Information-experienced professional (primary) | Uses Word, Excel, PDF and specialized business systems; understands their domain but need not be a writer, engineer or developer | Explore the examples and twelve-chapter journey | Identify a bounded experiment in their own work |
 | Reader seeking implementation depth (optional) | Wants to inspect or adapt the mechanisms | Follow the same conceptual journey | Inspect sources, scripts, workflows and implementation references |
 
 Information can be richly structured inside product, requirements, modeling, quotation, planning or budget systems while remaining difficult to combine across their boundaries. The intended reader often connects, interprets and summarizes it manually, with AI mainly helping develop text. This is a starting situation, not a claim about every organization. Document-as-code is our inspectable demonstration; it neither integrates business systems automatically nor requires replacing familiar tools.
 
 **Browser-first requirement:** All chapter learning outcomes must be achievable without cloning a repository, using an AI account, or installing Node/Python. Optional implementation tasks may require tools but are outside the core path. State whether a UI example is browser-only, build-time, or actually live.
 
-## 3. Curriculum structure — intended 11 chapters
+## 3. Curriculum structure — intended 12 chapters
 
 Groups are coherent reader journeys. The homepage should use these *semantic group definitions* rather than outdated hard-coded ranges.
 
@@ -34,8 +34,8 @@ Groups are coherent reader journeys. The homepage should use these *semantic gro
 | --- | --- | --- |
 | **G1 — Work with maintained sources** | 1–4 | From document thinking to shared, versioned, readable sources |
 | **G2 — Make information processable** | 5–7 | From readable text to metadata, relationships, rules, and generated results |
-| **G3 — Use information in new ways** | 8–9 | From information sources to AI context and interactive exploration |
-| **G4 — Make it a working environment** | 10–11 | From local processing to automation, publication, system architecture, and transferability |
+| **G3 — Use and enrich information** | 8–10 | From information exploration to quality, annotation, enrichment, visualization and reusable data |
+| **G4 — Make it a working environment** | 11–12 | From local processing to automation, publication, system architecture, and transferability |
 
 ### Chapter-by-chapter specification
 
@@ -50,8 +50,8 @@ Groups are coherent reader journeys. The homepage should use these *semantic gro
 | **7. From Sources to Results** | Demonstrate transformations and distinct outputs from common sources | Predict what changes in a handbook or review queue after a source edit | Processing Lab; side-by-side sources and outputs | Record-processing, automation details |
 | **8. Making Information Usable by AI Agents** | Show how maintainable project knowledge supports agent work | Distinguish `AGENTS.md` instructions, information architecture, terminology, decisions, authoritative sources and checks | Real `AGENTS.md` excerpt + one contextual scenario check about where rules/rationale belong; no contrived AI quality comparison | Reworked AI Context and Agents reference |
 | **9. Information You Can Explore** | Move from predetermined reports to questions over interconnected maintained data | Navigate agreement, project, and delivery relations and distinguish recorded from inferred impacts | Contract Explorer with three views | Visual-source guide and dashboard examples |
-| **10. Automating Information with GitHub Actions** | Show that source changes can trigger repeatable checks, builds, and publishing | Trace PR → check versus main/schedule → build → Pages; inspect a run | Real workflow map with annotated steps; optional live Actions page | Automation and publishing guides |
-| **11. Behind the Lab: How We Built This Tutorial** | Reveal the system the reader just used and transfer the principles to other tools | Trace Markdown → Astro → JS/Reveal.js → GitHub Actions → Pages; compare with M365 | Architecture Explorer and one clear architecture diagram | Presentations authoring, workflows-across-tools, implementation references |
+| **10. From Data to Knowledge** | Improve and extend the value of data itself | Judge data quality; annotate, enrich, visualize, review, preserve and reuse data | Illustrative service-case analysis and data-asset examples | Data enrichment source and future lab |\n| **11. Automating Information with GitHub Actions** | Show that source changes can trigger repeatable checks, builds, and publishing | Trace PR → check versus main/schedule → build → Pages; inspect a run | Real workflow map with annotated steps; optional live Actions page | Automation and publishing guides |
+| **12. Behind the Lab: How We Built This Tutorial** | Reveal the system the reader just used and transfer the principles to other tools | Trace Markdown → Astro → JS/Reveal.js → GitHub Actions → Pages; compare with M365 | Architecture Explorer and one clear architecture diagram | Presentations authoring, workflows-across-tools, implementation references |
 
 **Editorial decision on Chapter 11:** Its current long form is not automatically rejected. Retain its valuable architectural overview; selectively tighten repeated inventories and transitions after owner review. Chapter 12's *start with one small information flow* message may become a very short optional closing or a supporting reference—not another mandatory chapter.
 
@@ -253,3 +253,4 @@ The v1.2 implementation record describes its local and hosted functional checks.
 The [25 October decision](04-DESIGN-DECISIONS.md#25-october-2026-working-methods-direction) establishes audience and promise. The [working-methods package register](working-methods-upgrade/README.md) sequences three separately reviewable implementation increments. Specification adoption is distinct from implementation, content approval, publication and learning evidence.
 
 Package 1 covers P1-01 through P1-06 and acceptance A01–A08, A15 and A20. The existing architecture and eleven chapters remain. Final text and visual treatment require owner review; no broader style approval is inferred from the audience decision. Packages 2 and 3 remain future work until the preceding implementation is reviewed and merged.
+\n\n## Proposed November 2026 curriculum amendment — Data Enrichment and Chapter at a Glance\n\nThis addition introduces a distinct data-centered chapter rather than a new document-output or metadata chapter. Its six core practices are quality, annotation, enrichment, visualization, critical review, and preservation/reuse. They are complementary and iterative rather than an obligatory process. The example uses fictional service cases and distinguishes raw records, curated observations, and derived values. Do not claim that a browser-based transformation laboratory exists until implemented and verified.\n\nEvery chapter includes a reusable six-tile *Chapter at a Glance* introduction; its six tiles are conceptual anchors, not completion gates. The reader-facing text is maintained in site/src/lib/chapter-glances.ts.\n\nTo preserve existing chapter URLs, 10-publishing and 11-beyond-github retain their published filenames/IDs while their display order becomes 11 and 12. This is an explicit compatibility exception until a versioned migration strategy is approved. Existing quiz identities and interaction markers remain stable.\n\n**Status:** Proposed change for owner review; not an approval or proof of deployment.\n
