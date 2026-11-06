@@ -17,7 +17,7 @@ if (!glance || glance.tiles.length !== 6) throw new Error('Missing or invalid Ch
     {glance.tiles.map((tile, index) => {
       const Icon = icons[index];
       return <li class="chapter-glance__tile">
-        <Icon size={22} strokeWidth={1.8} aria-hidden="true" />
+        <Icon size={22} stroke-width={1.8} aria-hidden="true" />
         <strong>{tile.title}</strong>
         <span>{tile.detail}</span>
       </li>;
