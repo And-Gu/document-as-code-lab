@@ -1,5 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFile, readdir } from 'node:fs/promises';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { parse, serialize } from 'parse5';
 import { parse as yaml } from 'yaml';
 
@@ -12,10 +14,12 @@ const slugs = (await readdir(new URL('../../docs/', import.meta.url))).filter(na
 assert.equal(slugs.length, 12);
 const numbers = [];
 const icons = new Map();
+const chapterNumbers = new Map();
 for (const file of slugs) {
   const source = await read(`../../docs/${file}`);
   const metadata = yaml(source.match(/^---\n([\s\S]*?)\n---/)[1]);
   numbers.push(metadata.chapter_number);
+  chapterNumbers.set(file, metadata.chapter_number);
   const page = parse(await read(`../dist/chapters/${file.slice(0,-3)}/index.html`));
   const glances = all(page, node => hasClass(node, 'chapter-glance'));
   assert.equal(glances.length, 1, file);
@@ -60,4 +64,16 @@ assert.match(spec, /^\| \*\*11\. Automating/m);
 const readme = await read('../../README.md');
 assert.match(readme, /^10\. \[From Data to Knowledge\]/m);
 assert.match(readme, /^12\. \[Behind the Lab/m);
+for (const directory of ['docs', 'reference']) {
+  for (const file of (await readdir(new URL(`../../${directory}/`, import.meta.url))).filter(file => file.endsWith('.md'))) {
+    const source = await read(`../../${directory}/${file}`);
+    for (const match of source.matchAll(/\[[Cc]hapter (\d+)[^\]]*\]\(([^)]+)\)/g)) {
+      if (/^https?:/.test(match[2])) continue;
+      const target = path.resolve(fileURLToPath(new URL(`../../${directory}/`, import.meta.url)), match[2].split('#')[0]);
+      if (path.dirname(target) === fileURLToPath(new URL('../../docs', import.meta.url))) {
+        assert.equal(Number(match[1]), chapterNumbers.get(path.basename(target)), `${directory}/${file}: stale chapter number in ${match[0]}`);
+      }
+    }
+  }
+}
 console.log('Twelve accessible six-tile summaries, semantic icons, reading order, source-backed case table and curriculum formatting passed.');
