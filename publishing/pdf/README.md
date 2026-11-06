@@ -6,11 +6,12 @@ This is a small proof, not the full book pipeline. It reads selected excerpts fr
 
 From the repository root, using the existing Python environment:
 
-First create `.venv` and install the root `requirements.txt` as described in the repository README. The PDF tools are optional and separate from Astro; Node 22.12 or newer is recommended for the shared workspace. Run the following shell commands on macOS/Linux (Windows requires equivalent environment-variable syntax).
+First create `.venv` and install the root `requirements.txt` as described in the repository README. The PDF tools are optional and separate from Astro; the pinned Mermaid CLI requires Node 22.13 or newer. Run the following shell commands on macOS/Linux (Windows requires equivalent environment-variable syntax).
 
 ```sh
 .venv/bin/python -m pip install --target build/pdf-tools -r publishing/pdf/requirements.txt
 npm ci --prefix publishing/pdf --ignore-scripts
+npm audit --prefix publishing/pdf
 ```
 
 Mermaid CLI needs a compatible Chrome/Chromium executable. Set `PUPPETEER_EXECUTABLE_PATH` to an existing compatible browser, or install Puppeteer's headless shell locally:
@@ -45,7 +46,7 @@ This option accepts a prepared asset and records that fact and its hash in the m
 
 The `PDF design proof` workflow in `.github/workflows/pdf-proof.yml` runs on pull requests to `main` and can be started manually from GitHub's Actions tab once the workflow is on the default branch. It is separate from Astro and does not deploy to Pages, commit generated files, or publish an approved edition. There is no push-to-main trigger yet.
 
-The Ubuntu 22.04 runner installs the locked Mermaid CLI dependencies and Puppeteer's matching Chrome browser with its sandbox enabled. It installs the pinned Pandoc/Typst Python packages and Poppler inspection tools, runs the focused tests, then calls `scripts/build_pdf_proof.py` without `--prepared-svg`.
+The Ubuntu 22.04 runner installs the locked Mermaid CLI dependencies, runs `npm audit` (any reported severity fails), and installs Puppeteer's matching Chrome browser with its sandbox enabled. It installs the pinned Pandoc/Typst Python packages and Poppler inspection tools, runs the focused tests, then calls `scripts/build_pdf_proof.py` without `--prepared-svg`. The audit checks known npm advisories at execution time; it does not certify the browser, Python environment, or complete publication system.
 
 `scripts/verify_pdf_proof.py` requires Mermaid CLI provenance, matching source and SVG hashes, native SVG labels and shapes, three PDF pages, expected searchable metadata and budget values, and no raster images. It records font information for review. These are checks for this particular proof, not a general publication validator.
 

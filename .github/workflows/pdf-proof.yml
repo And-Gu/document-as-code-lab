@@ -39,6 +39,7 @@ jobs:
         run: |
           python -m pip install -r publishing/pdf/requirements.txt
           npm ci --prefix publishing/pdf --ignore-scripts
+          npm audit --prefix publishing/pdf
           sudo apt-get update
           sudo apt-get install -y poppler-utils fonts-liberation
       - name: Install Puppeteer's compatible browser
