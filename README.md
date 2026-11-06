@@ -12,7 +12,7 @@ The three working-methods packages were merged and published on 25 October 2026 
 
 ## Status
 
-The v1.3 editorial update revises all 11 chapters, which remain in review. The owner accepted the representative writing samples and authorized publication; those decisions do not approve every revised chapter. The [Astro reading site is published on GitHub Pages](https://and-gu.github.io/document-as-code-lab/) and reads the original Markdown sources, including diagrams and linked examples. Every chapter has an expandable metadata and Git-history widget. Pull requests run Astro checks and a production build; pushes to `main` build and deploy the website.
+The prior v1.3 editorial update revised the original 11 chapters, which remain in review. The owner accepted the representative writing samples and authorized publication; those decisions do not approve every revised chapter. The [Astro reading site is published on GitHub Pages](https://and-gu.github.io/document-as-code-lab/) and reads the original Markdown sources, including diagrams and linked examples. Every chapter has an expandable metadata and Git-history widget. Pull requests run Astro checks and a production build; pushes to `main` build and deploy the website.
 
 A runnable onboarding showcase, historical growth reporting, structured-record processing, and record-to-Mermaid generation are also available. Growth reports are generated as GitHub Actions artifacts. Chapter 3 connects source history to traceability and links to the standalone dashboard. Saved growth charts remain fixed historical examples, while the dashboard adds an interactive report measured from committed history during each site build. The [Project Control Center is published on GitHub Pages](https://and-gu.github.io/document-as-code-lab/dashboard/), linked from the chapter menu. It reads published operational snapshots by default, generated on main deployments and hourly, with optional live retrieval and separately labelled growth measurements. Hosted snapshot retrieval, timestamps, issues, pull requests, commits, and all four workflows have been verified. Workflow states describe collection time rather than current live status. The full PDF book, a hands-on workshop deck, and verification of Microsoft-environment exercises remain future work. Chapter approval does not extend to other chapter drafts or fictional example procedures.
 
@@ -42,7 +42,7 @@ Run the Python suite from the repository root with `.venv/bin/python -m unittest
 
 Chapter 1 follows three [procedure source files](examples/onboarding-showcase/README.md) into an assembled [handbook review copy](assets/onboarding-showcase/handbook.md), a [training excerpt](assets/onboarding-showcase/training-excerpt.md), and a [review-status chart](assets/onboarding-showcase/review-status.png). The [generation script](scripts/build_onboarding_showcase.py) builds these views from the same sources.
 
-These are fixed, fictional teaching examples, not operationally approved instructions or a finished publishing system. The handbook includes draft material, the training excerpt is not a slide deck, and the chart is not an interactive dashboard. Chapter 1 adds a browser-only comparison of source review states and handbook inclusion rules; it does not generate a handbook. Chapter 4 adds Markdown practice; chapter 5 adds schema validation in the editor. Chapter 7 extends that editor with cross-file checks and a build that generates a handbook review copy and a review queue. None of these simulations change the fixed source files or approve publications. All 11 chapters have short website-only quizzes. Detailed dashboard, visual, AI, publishing, and automation exercises remain in linked reference guides.
+These are fixed, fictional teaching examples, not operationally approved instructions or a finished publishing system. The handbook includes draft material, the training excerpt is not a slide deck, and the chart is not an interactive dashboard. Chapter 1 adds a browser-only comparison of source review states and handbook inclusion rules; it does not generate a handbook. Chapter 4 adds Markdown practice; chapter 5 adds schema validation in the editor. Chapter 7 extends that editor with cross-file checks and a build that generates a handbook review copy and a review queue. None of these simulations change the fixed source files or approve publications. The proposed 12-chapter revision retains website-only quizzes for each chapter. Detailed dashboard, visual, AI, publishing, and automation exercises remain in linked reference guides.
 
 Chapter 9's [Contract Explorer](https://and-gu.github.io/document-as-code-lab/chapters/09-images/#contract-explorer-widget) uses nine fictional Markdown records for relationship navigation, delivery filtering, and change-impact review candidates. Source validation and transformation run during the Astro build; the widget does not query external services or edit the records. See the [source dataset](examples/contract-explorer/README.md).
 
@@ -60,7 +60,7 @@ Chapter 9's [Contract Explorer](https://and-gu.github.io/document-as-code-lab/ch
 
 Start with the [shared vocabulary](GLOSSARY.md) whenever a term is unfamiliar. Local exercises link to official Git setup and cloning guides; the tutorial focuses on using the resulting workspace.
 
-Filename prefixes and `chapter_number` metadata give the current reading order. Stable `id` values may contain older numbers; they identify the same content across reorganizations, not its current position.
+The `chapter_number` metadata determines the current reading order. Existing source filenames and published URL slugs may retain older numbers for backward compatibility. Stable `id` values may contain older numbers; they identify the same content across reorganizations, not its current position.
 
 1. [Document-as-Code: Information We Can Work With](docs/01-introduction.md)
 2. [A Shared Workspace for Information](docs/02-github-workspace.md)
@@ -76,7 +76,7 @@ Filename prefixes and `chapter_number` metadata give the current reading order. 
 
 ## Outputs
 
-Chapters 10 and 11 explain the repository's workflows and architecture. Chapter 11 includes a read-only [Architecture Explorer](https://and-gu.github.io/document-as-code-lab/chapters/11-beyond-github/#architecture-explorer-widget) and a nine-slide [architecture presentation](https://and-gu.github.io/document-as-code-lab/presentations/lab-architecture/) with speaker notes. Both are included in the website build and Pages deployment; the chapter content remains in review.
+Chapters 11 and 12 explain the repository's workflows and architecture. Chapter 12 includes a read-only [Architecture Explorer](https://and-gu.github.io/document-as-code-lab/chapters/11-beyond-github/#architecture-explorer-widget) and a nine-slide [architecture presentation](https://and-gu.github.io/document-as-code-lab/presentations/lab-architecture/) with speaker notes. Both are included in the website build and Pages deployment; the chapter content remains in review.
 
 | Output | Purpose |
 | --- | --- |
