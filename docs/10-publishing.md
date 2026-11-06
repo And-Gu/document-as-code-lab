@@ -93,7 +93,7 @@ The run connects a source revision to its build and deployment. Inspect the resu
 
 > **Explore further:** What does a runner execute, and what remains after failure? The [automation and quality guide](../reference/automation-quality.md) follows workflow steps, permissions, retained artifacts, and stale outputs. No local setup is needed to inspect the public runs. The [publishing guide](../reference/publishing-workflows.md) covers output-specific build choices.
 
-Actions runs the work; Pages distributes the result. [Chapter 11](11-beyond-github.md) brings those responsibilities together with the sources and browser components to show how the whole lab works.
+Actions runs the work; Pages distributes the result. [Chapter 12](11-beyond-github.md) brings those responsibilities together with the sources and browser components to show how the whole lab works.
 
 <!-- interactive: chapter-quiz -->
 
