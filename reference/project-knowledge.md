@@ -4,7 +4,7 @@ This map describes the current repository. [AGENTS.md](../AGENTS.md) is the work
 
 | Subject | Maintained home | Derived result or check |
 | --- | --- | --- |
-| Chapter text and stable IDs | `docs/`; [chapter conventions](../CONTRIBUTING.md#chapter-conventions) | Astro reads these files directly; filename and chapter number determine order |
+| Chapter text and stable IDs | `docs/`; [chapter conventions](../CONTRIBUTING.md#chapter-conventions) | Astro reads these files directly; chapter number determines order, published filenames determine routes |
 | Terminology and writing | [Glossary](../GLOSSARY.md), [contribution guide](../CONTRIBUTING.md) | Editorial review |
 | Tutorial intent and rationale | [Specification register](../spec/tutorial/README.md), [dated design decisions](../spec/tutorial/04-DESIGN-DECISIONS.md) | Owner review; proposed details remain open |
 | Procedure examples | [Showcase sources](../examples/onboarding-showcase/README.md) | Fixed handbook and review chart; separate browser practice copies |
@@ -22,7 +22,7 @@ The [product specification](../spec/tutorial/02-DOCUMENT-AS-CODE-LAB-V1-SPECIFIC
 
 Chapter IDs survive reordering; their current convention lives in [CONTRIBUTING.md](../CONTRIBUTING.md#chapter-conventions). Record schemas define permitted fields and relationship types for their own datasets, not for every file in the repository. A generated report, browser practice edit, or decision proposal does not replace its maintained source.
 
-The decision register records the owner-supplied design direction on 19 October 2026 and the audience decision on 25 October 2026. It is not a reconstructed history of earlier architecture approvals. The current architecture can also be inspected in [Chapter 11](../docs/11-beyond-github.md).
+The decision register records the owner-supplied design direction on 19 October 2026 and the audience decision on 25 October 2026. It is not a reconstructed history of earlier architecture approvals. The current architecture can also be inspected in [Chapter 12](../docs/11-beyond-github.md).
 
 ## Route a Maintenance Task
 

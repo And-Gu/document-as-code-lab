@@ -35,12 +35,15 @@ jobs:
         with:
           python-version: '3.11'
       - run: python -m pip install -r ../requirements.txt
+      - run: python -m unittest discover -s tests
+        working-directory: .
       - run: npm run test:dashboard
       - run: npm run check
       - run: npm run build
       - run: npm run test:learning
       - run: npm run test:content
       - run: npm run test:homepage
+      - run: npm run test:glance
       - run: npm run test:verification
       - run: npm run test:refinement
       - run: npm run test:contracts

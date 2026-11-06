@@ -4,12 +4,20 @@ chapter_number: 10
 status: draft
 audience: general-professional
 learning_goal: "Improve, annotate, enrich, visualize, review, preserve, and reuse data while distinguishing calculated results from supported conclusions."
-visuals: []
+visuals:
+  - id: service-case-duration
+    status: source-ready
+    kind: chart
+    preferred_source: python
+    source: ../scripts/analyze_service_cases.py
+    outputs: [web, pdf]
+    caption: "Three usable durations from five fictional cases; median six calendar days."
+    alt: "C-101: 3 days; C-102: 7 days; C-105: 6 days. C-103 has no closure date; C-104 has reversed dates."
 ---
 
 # From Data to Knowledge
 
-A service manager notices that resolving customer cases seems to take longer. The organization has years of tickets, yet the monthly report only counts how many were closed. Can that existing data tell a more useful story—and can someone else check the answer six months later?
+A service manager wants to understand how long customer cases take to resolve. The existing report only counts closures. What can a small extract tell us about resolution time, what does it leave unknown, and could someone else check the answer six months later?
 
 The opportunity is not simply to generate a prettier report. We can **improve the underlying data, add meaning, calculate new information, test interpretations, and save the results in a form others can reuse**. These activities are often called *data enrichment* or *data curation*. This chapter approaches them as everyday information work, not as a specialist data-engineering pipeline.
 
@@ -40,7 +48,7 @@ Consider a fictional extract of support cases:
 | C-104 | B | 7 Apr | 5 Apr | Access issue |
 | C-105 | A | 9 Apr | 15 Apr | Equipment |
 
-All dates in this example are illustrative and belong to the same fictional year. Case C-104 appears to close before it opened. C-103 has no closed date. The three labels *Login*, *log-in*, and *Access* may or may not describe the same problem; a person needs to agree on their meaning before merging categories.
+All dates in this example are illustrative and belong to 2026. The [maintained dataset](../examples/data-enrichment/cases.json) preserves these original values. Case C-104 appears to close before it opened. C-103 has no closed date. The three labels *Login*, *log-in*, and *Access* may or may not describe the same problem; a person needs to agree on their meaning before merging categories.
 
 If we simply average durations across these rows, we risk an attractive but misleading number. First record what is missing or suspect. **Do not invent a closing date or silently delete a surprising record**. A reliable dataset can include explicit unknowns and unresolved problems.
 
@@ -56,7 +64,7 @@ Annotations are useful far beyond tables. A photograph can carry a marked defect
 
 ## Enrich by combining and deriving
 
-We can add a maintained reference table mapping validated ticket categories to service families. That may make apparently unrelated reports comparable. We can also calculate **resolution duration = closed date − opened date** for cases with valid timestamps, using a specified calendar and time zone.
+We could add a maintained reference table mapping validated ticket categories to service families. That would help compare reports, but this extract has no accepted mapping, so we keep its original labels. We can calculate **resolution duration = closed date − opened date** for cases with usable dates. Here we subtract calendar dates, not working hours; these date-only records need no time-zone conversion.
 
 Derived numbers are new data, but they are not automatically new knowledge. A median duration may describe typical completed cases. It cannot, by itself, tell us why cases remain open. Before comparing teams, we might need case complexity, staffing, service type, and changes in process.
 
@@ -74,21 +82,27 @@ A new column without a documented origin is easy to misunderstand. Prefer keepin
 
 ## Visualize to investigate, not only to present
 
-A line chart of monthly median resolution time could show an increase. But compare that chart with a distribution of individual durations and an account of open cases. Perhaps a few exceptional cases skew the average, or perhaps the proportion of difficult cases changed.
+For our five cases, the usable durations are **3, 7, and 6 calendar days**, with a **median of 6 days**. That describes three cases, not the entire extract. Keep the other two visible:
 
-Different views answer different questions:
+| Case | Calculated duration | Treatment |
+| --- | --- | --- |
+| C-101 | 3 days | Include |
+| C-102 | 7 days | Include |
+| C-103 | Unknown | No closure date; do not invent one |
+| C-104 | -2 days | Exclude from the summary; investigate reversed dates |
+| C-105 | 6 days | Include |
 
-- **Time series:** When did the trend change?
-- **Distribution:** What is typical, and how much variation exists?
-- **Group comparison:** Do categories or teams behave differently?
-- **Scatter plot:** Are two recorded variables associated?
-- **Annotation overlay:** Did an event coincide with the observed change?
+![Durations of three fictional cases: C-101 is 3 days, C-102 is 7 days, and C-105 is 6 days. A dashed line marks the median of 6 days. Two cases have unusable closure dates.](../assets/data-enrichment/resolution-duration.svg)
+
+The plot shows the spread behind the median. Its zero-based axis and individual case labels make the comparison inspectable. A chart of monthly trends would need observations across several months; these five April cases do not supply that evidence.
 
 Choose scales, units, denominators, and exclusions carefully. Visualizations can reveal problems in the dataset as readily as they reveal plausible patterns. Correlation alone does not establish causation.
 
 ## Review conclusions and alternatives
 
-Suppose Team A’s cases take longer in June. The observation is not the same as the conclusion *"Team A became less effective."* The group may have handled different case types, changed a logging rule, or resolved an unusual backlog. A useful review asks what the data actually show, what assumptions went into the comparison, and what contrary explanations remain.
+Our supported observation is narrow: the three usable durations have a median of six days, and all three belong to Team A. Neither Team B case provides a usable duration. We therefore cannot compare team performance, establish a monthly trend, or conclude that either team became less effective. The next investigation would check the two missing or suspect dates and obtain a broader, comparable sample.
+
+The [saved report](../assets/data-enrichment/analysis.json) retains all five IDs, inclusion decisions, quality annotations, the median, and the source fingerprint. The [example guide](../examples/data-enrichment/README.md) explains how to reproduce it and the plot. This lets a reviewer check the result rather than rely on the prose alone.
 
 Make the review inspectable. Separate **recorded facts**, **derived calculations**, **proposed interpretations**, and **accepted decisions**. A successful data-quality check is not approval of a business conclusion.
 

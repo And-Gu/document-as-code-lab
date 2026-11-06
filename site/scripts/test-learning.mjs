@@ -168,7 +168,7 @@ assert.throws(() => processProcedures([...fixed, readPracticeProcedure(practiceS
 assert.throws(() => processProcedures([...fixed, readPracticeProcedure(practiceSource.split('\n\n')[0], practiceSchema)]), /procedure text is required/);
 const contacts = await readFile(new URL('../../examples/onboarding-showcase/contacts.md', import.meta.url), 'utf8');
 assert.match(contacts, /status: draft/);
-console.log('Eleven lesson mounts, quiz mapping, Markdown safety, YAML parsing, JSON Schema validation, procedure processing, readiness, and source inclusion rules passed.');
+console.log('Twelve lesson mounts, quiz mapping, Markdown safety, YAML parsing, JSON Schema validation, procedure processing, readiness, and source inclusion rules passed.');
 await import('./test-scenarios.mjs');
 await import('./test-architecture.mjs');
 

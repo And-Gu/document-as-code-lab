@@ -1,0 +1,10 @@
+{
+  "description": "Fictional support cases; all dates are illustrative, date-only values in 2026.",
+  "cases": [
+    {"id": "C-101", "team": "A", "opened": "2026-04-01", "closed": "2026-04-04", "label": "Login"},
+    {"id": "C-102", "team": "A", "opened": "2026-04-02", "closed": "2026-04-09", "label": "log-in"},
+    {"id": "C-103", "team": "B", "opened": "2026-04-03", "closed": null, "label": "Access"},
+    {"id": "C-104", "team": "B", "opened": "2026-04-07", "closed": "2026-04-05", "label": "Access issue"},
+    {"id": "C-105", "team": "A", "opened": "2026-04-09", "closed": "2026-04-15", "label": "Equipment"}
+  ]
+}

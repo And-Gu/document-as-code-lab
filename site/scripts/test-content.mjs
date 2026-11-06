@@ -20,7 +20,7 @@ for (const [index, slug] of slugs.entries()) {
   assert.ok(!/\[AGENT(?:\s|:)/.test(source) && !source.includes('VISUAL:'), slug);
   for (const visual of metadata.visuals ?? []) {
     const diagram = await readFile(path.resolve(root, 'docs', visual.source), 'utf8');
-    assert.ok(source.includes(`\n${diagram.trim()}\n`), `${slug}: diagram differs from its maintained source`);
+    if (visual.embedded) assert.ok(source.includes(`\n${diagram.trim()}\n`), `${slug}: diagram differs from its maintained source`);
   }
 }
 const files = [];

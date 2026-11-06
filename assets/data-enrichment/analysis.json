@@ -1,0 +1,44 @@
+{
+  "method": "calendar-date-duration-v1",
+  "source_count": 5,
+  "included_count": 3,
+  "median_days": 6,
+  "cases": [
+    {
+      "id": "C-101",
+      "team": "A",
+      "duration_days": 3,
+      "included": true,
+      "annotation": "Included in duration calculation"
+    },
+    {
+      "id": "C-102",
+      "team": "A",
+      "duration_days": 7,
+      "included": true,
+      "annotation": "Included in duration calculation"
+    },
+    {
+      "id": "C-103",
+      "team": "B",
+      "duration_days": null,
+      "included": false,
+      "annotation": "Closure date missing; duration unknown"
+    },
+    {
+      "id": "C-104",
+      "team": "B",
+      "duration_days": -2,
+      "included": false,
+      "annotation": "Closure predates opening; verify source before calculating"
+    },
+    {
+      "id": "C-105",
+      "team": "A",
+      "duration_days": 6,
+      "included": true,
+      "annotation": "Included in duration calculation"
+    }
+  ],
+  "source_sha256": "fa6ab7f15bc917f4333f1035d74a98c5229fe386d352ccba6cf32b9f1e77aa6a"
+}

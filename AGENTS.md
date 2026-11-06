@@ -11,7 +11,7 @@
 - Keep existing user changes. Commit, push, or change GitHub settings only when requested.
 - For the data-enrichment insertion, existing published chapter source slugs (10-publishing and 11-beyond-github) are intentionally preserved for URL compatibility while their reader-facing chapter_number values advance to 11 and 12. This is a documented exception to the filename-prefix convention; never silently break those published routes.
 
-Follow the [current audience and reader promise](spec/tutorial/02-DOCUMENT-AS-CODE-LAB-V1-SPECIFICATION.md#2-audiences-and-paths) and the [25 October decision](spec/tutorial/04-DESIGN-DECISIONS.md#25-october-2026-working-methods-direction). Preserve eleven chapters, stable routes/anchors, and a browser-first core without accounts or installation. Keep technical depth optional; do not imply automatic business-system integration. Exact copy and visual treatment remain subject to owner review.
+Follow the [current audience and reader promise](spec/tutorial/02-DOCUMENT-AS-CODE-LAB-V1-SPECIFICATION.md#2-audiences-and-paths) and the [25 October decision](spec/tutorial/04-DESIGN-DECISIONS.md#25-october-2026-working-methods-direction). Preserve the twelve-chapter reading order, stable routes/anchors, and a browser-first core without accounts or installation. Keep technical depth optional; do not imply automatic business-system integration. Exact copy and visual treatment remain subject to owner review.
 
 ## Keep Related Information Consistent
 
