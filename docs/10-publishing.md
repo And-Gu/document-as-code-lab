@@ -1,6 +1,6 @@
 ---
 id: 08-publishing
-chapter_number: 10
+chapter_number: 11
 status: in-review
 learning_goal: "Explain how GitHub Actions uses repository events to check, build, and publish information; distinguish a workflow artifact from a GitHub Pages deployment."
 visuals:
