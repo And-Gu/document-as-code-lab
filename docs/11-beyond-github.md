@@ -1,6 +1,6 @@
 ---
 id: 09-beyond-github
-chapter_number: 11
+chapter_number: 12
 status: in-review
 learning_goal: "Trace the real source-to-publication architecture of this tutorial and compare its information-management principles with a Microsoft 365 alternative."
 visuals:
