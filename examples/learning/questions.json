@@ -295,5 +295,31 @@
       "correctIndex": 0,
       "feedback": "Knowledge grounding is different from file editing. Office tools or configured actions and flows need appropriate permissions; OneDrive and SharePoint are not Git."
     }
+  ],
+  "chapter-12": [
+    {
+      "type": "single_select",
+      "question": "What is lost when a team saves only a chart rather than its underlying dataset and calculation method?",
+      "options": [
+        "The choice of chart colors",
+        "The ability to verify, reproduce and extend the analysis",
+        "The original chart title",
+        "The possibility of making a PDF"
+      ],
+      "correctIndex": 1,
+      "feedback": "Keep source, curated values and reproducible derivations so another person can challenge and reuse the result."
+    },
+    {
+      "type": "single_select",
+      "question": "What does a longer average resolution time prove about a team?",
+      "options": [
+        "The team is less effective",
+        "Its staff need more training",
+        "Only that this metric changed under its stated definition; causes need further investigation",
+        "The service process must be replaced"
+      ],
+      "correctIndex": 2,
+      "feedback": "An observed difference is not a causal explanation. Check data quality, case mix, definitions and alternative hypotheses."
+    }
   ]
 }
