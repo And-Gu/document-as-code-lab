@@ -35,7 +35,7 @@ test('At a Glance: accessible names, no-JS reading, text enlargement and keyboar
   await page.keyboard.press('Enter');
   await expect(page.locator('.chapter-information')).toHaveAttribute('open','');
   await expect(page.locator('.chapter-information > summary')).toBeFocused();
-  await page.addStyleTag({content:'html{font-size:200% !important}'});
+  await page.evaluate(() => document.documentElement.style.setProperty('font-size','200%','important'));
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true);
   await expect(page.getByRole('img', {name:/Durations of three fictional cases/})).toBeVisible();
   await expect(page.locator('main')).toContainText('cannot compare team performance');
