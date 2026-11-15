@@ -32,13 +32,13 @@ export async function fingerprintPaths(root, relativePaths) {
       throw new Error(`Source fingerprint does not follow symlinks: ${relative}`);
     }
     if (info.isDirectory()) {
-      digest.update(`directory\\0${relative}\\0`);
+      digest.update(JSON.stringify(['directory', relative]));
       const entries = (await readdir(absolute)).sort();
       for (const name of entries) await visit(path.posix.join(relative, name));
     } else if (info.isFile()) {
-      digest.update(`file\\0${relative}\\0`);
-      digest.update(await readFile(absolute));
-      digest.update('\\0');
+      const bytes = await readFile(absolute);
+      digest.update(JSON.stringify(['file', relative, bytes.length]));
+      digest.update(bytes);
     } else {
       throw new Error(`Unsupported source fingerprint entry: ${relative}`);
     }
