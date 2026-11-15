@@ -1,0 +1,28 @@
+# Temporary one-shot lockfile regeneration workflow; remove after generating lockfile.
+name: Prepare patched Astro lockfile
+on:
+  push:
+    branches: [fix/astro-security-nov2026]
+    paths: [.github/workflows/prepare-astro-lock.yml]
+permissions:
+  contents: write
+jobs:
+  regenerate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+      - name: Regenerate lockfile using npm
+        working-directory: site
+        run: npm install astro@7.4.11 --save-exact --package-lock-only --ignore-scripts --no-audit --no-fund
+      - name: Commit regenerated dependencies
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add site/package.json site/package-lock.json
+          if ! git diff --cached --quiet; then
+            git commit -m "fix: update Astro to patched 7.4.11"
+            git push origin HEAD:fix/astro-security-nov2026
+          fi
