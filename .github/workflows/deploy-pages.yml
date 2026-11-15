@@ -39,18 +39,46 @@ jobs:
         with:
           python-version: '3.11'
       - run: python -m pip install -r requirements.txt
-      - name: Install, build, and upload the site
-        uses: withastro/action@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: site/package-lock.json
+      - name: Install locked dependencies
+        working-directory: site
+        run: npm ci
+      - name: Restore incremental page cache
+        uses: actions/cache@v4
+        with:
+          path: site/node_modules/.astro
+          key: astro-cache-${{ runner.os }}-${{ github.sha }}
+          restore-keys: astro-cache-${{ runner.os }}-
+      - name: Require an unchanged source checkout
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            git status --short
+            echo "The dependency install must not change the source checkout."
+            exit 1
+          fi
+      - name: Build the site
+        working-directory: site
         env:
           GITHUB_TOKEN: ${{ github.token }}
+        run: npm run build -- --timings
+      - name: Verify artifact revision before publishing
+        working-directory: site
+        run: |
+          node --input-type=module <<'JS'
+          import assert from 'node:assert/strict';
+          import { readFile } from 'node:fs/promises';
+          const manifest = JSON.parse(await readFile('dist/build-information.json', 'utf8'));
+          assert.equal(manifest.source_commit, process.env.GITHUB_SHA);
+          JS
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v5
         with:
-          path: site
-          node-version: '24'
-          # The action restores and saves site/node_modules/.astro between builds.
-          # Astro reuses only routes with unchanged per-page cacheKey values.
-          cache: true
-          cache-dir: node_modules/.astro
-          build-cmd: npm run build -- --timings
+          path: site/dist
+          include-hidden-files: true
 
   deploy:
     needs: build
