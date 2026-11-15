@@ -27,6 +27,7 @@ See the [package register](spec/tutorial/working-methods-upgrade/README.md). Mer
 
 - Expand the Pandoc/Typst proof into a PDF book with navigation, pagination, cross-references and accessibility verification; inspect every output page.
 - Create the remaining hands-on workshop deck. Existing HTML decks do not satisfy the introduction-and-workshop capability criterion.
+- Review the proposed [Chapter 13](docs/13-explorable-presentations.md) and evaluate one source-linked HTML presentation with guided, explore and read modes before extending the current four-slide-type schema. Keep implementation and publication separate from editorial acceptance.
 - Document how output-specific Word/PowerPoint edits return to maintained sources.
 - Verify a bounded workflow in the selected Microsoft environment, including organizational permissions and licensing. The current comparison is illustrative.
 - Consider dependency-aware updates and additional work-tracking views when a concrete reader need warrants them.
