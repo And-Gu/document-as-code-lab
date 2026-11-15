@@ -11,6 +11,7 @@
   background: var(--widget-background);
   color: var(--widget-text);
   font-size: 0.875rem;
+  overflow-wrap: anywhere;
 }
 .chapter-information[data-status='draft'] { --status-color: #946200; }
 .chapter-information[data-status='in-review'] { --status-color: #1968ac; }

@@ -55,6 +55,13 @@
 .reveal .diagram-outputs ul { display: flex; justify-content: center; gap: 40px; padding: 0; list-style: none; margin-top: 12px; }
 .reveal .diagram-outputs li { font-size: 25px; padding: 0; margin: 0; }
 .reveal .diagram-caption { color: var(--presentation-muted); font-size: 20px; margin-top: 30px; }
+/* Reserve space for longer line wraps in the platform's system font. */
+@media (min-width: 601px) {
+  .slide-diagram .slide-message { font-size: 30px; margin-bottom: 24px; }
+  .slide-diagram .workflow-diagram { margin-top: 28px; }
+  .slide-diagram .diagram-outputs { margin-top: 20px; }
+  .slide-diagram .diagram-caption { margin-top: 20px; }
+}
 .slide-sources { flex-wrap: wrap; position: absolute; bottom: 25px; left: 50px; right: 50px; display: flex; gap: 14px; border-top: 1px solid var(--presentation-rule); padding-top: 14px; font-size: 18px; color: var(--presentation-muted); }
 .reveal .progress { color: var(--presentation-green); height: 4px; }
 .reveal .controls { color: var(--presentation-green); }
