@@ -50,7 +50,7 @@ When a reader selects DEL-101, JavaScript in the browser shows its links and det
 
 The same separation supports different experiences. Quizzes use maintained question data; playgrounds let readers edit browser-only practice copies. Neither changes the chapter or example sources in GitHub.
 
-Presentations need an additional editorial choice. Their YAML definitions select messages, chapter references, and a teaching sequence; Astro and Reveal.js turn those definitions into slides and speaker notes. A presentation is not simply a chapter projected onto a screen, so changes to its source knowledge still need editorial review. [Chapter 13](13-explorable-presentations.md) examines how the same architecture might support guided stories, interactive maps and other explorable presentation formats.
+Presentations need an additional editorial choice. Their YAML definitions select messages, chapter references, and a teaching sequence; Astro and Reveal.js turn those definitions into slides and speaker notes. A presentation is not simply a chapter projected onto a screen, so changes to its source knowledge still need editorial review. [the bonus chapter](13-explorable-presentations.md) examines how the same architecture might support guided stories, interactive maps and other explorable presentation formats.
 
 The dashboard combines measurements from committed history with retrieved GitHub observations. It labels its build-time snapshots and offers a separate opt-in live retrieval. The PDF proof uses another workflow and covers only a limited design trial, not a published book. Their output paths differ, but each needs identifiable inputs and a defined update process.
 
