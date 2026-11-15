@@ -10,6 +10,8 @@ Chapter statuses are `outline`, `draft`, `in-review`, `approved`, and the earlie
 
 `chapter_number` determines reading order. Filename prefixes normally match it, but `10-publishing.md` and `11-beyond-github.md` retain their published slugs after the data chapter insertion; they are now chapters 11 and 12. The `id` is a permanent content key, not a chapter number: older IDs retain prefixes from earlier outlines. For example, `04-markdown.md` has `chapter_number: 4` and `id: 03-markdown`. Do not renumber that ID to fix its apparent mismatch; historical reports use it to recognize the same content. For new chapters, prefer descriptive IDs without a reading-order prefix.
 
+Optional bonus content may use a stable numbered source filename for routing compatibility, but should set `bonus: true` in front matter and appear separately from the core learning path. The current bonus source is `docs/13-explorable-presentations.md` and its URL is stable. The page heading and At a Glance should label it as bonus reading; the original twelve chapters remain the core curriculum.
+
 Chapters can store their identifier, `chapter_number`, status, audience, and learning goal in YAML front matter. Preserve existing IDs and published routes when renumbering; IDs identify content independently of its position. Keep planning notes out of the reader-facing prose as a chapter develops.
 
 ## Visual Specifications
