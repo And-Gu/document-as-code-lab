@@ -49,7 +49,7 @@ jobs:
       - run: npm run test:scheduled-publish
       - run: npm run test:incremental
       - run: npm run check
-      - run: npm run build
+      - run: npm run build -- --timings
       - run: npm run test:learning
       - run: npm run test:content
       - run: npm run test:homepage
