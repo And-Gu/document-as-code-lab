@@ -2,12 +2,21 @@ import type { APIRoute } from 'astro';
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { repositoryFiles, repositoryRoot } from '../../lib/repository';
+import { fingerprintPaths } from '../../lib/incremental-build.mjs';
 
 export async function getStaticPaths() {
-  return (await repositoryFiles()).map((file) => ({
-    params: { path: file },
-    props: { file },
-  }));
+  const files = await repositoryFiles();
+  const routes = [];
+  // Bound file reads avoid opening every source and image simultaneously.
+  for (let index = 0; index < files.length; index += 16) {
+    const batch = await Promise.all(files.slice(index, index + 16).map(async (file) => ({
+      params: { path: file },
+      cacheKey: await fingerprintPaths(repositoryRoot, [file]),
+      props: { file },
+    })));
+    routes.push(...batch);
+  }
+  return routes;
 }
 
 export const GET: APIRoute = async ({ props }) => {
