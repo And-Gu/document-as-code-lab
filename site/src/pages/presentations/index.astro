@@ -6,6 +6,7 @@ const presentations = await getPresentations();
 ---
 <Documentation title="Presentations">
   <h1>Presentations</h1>
+  <p>These are the Lab's existing HTML decks. For other forms of communication—including scrollytelling, interactive maps, dashboards and explorable explanations—see the <a href={siteUrl('chapters/13-explorable-presentations/')}>bonus chapter: Beyond Slides</a>, with a practical tool directory and exercises.</p>
   {presentations.map((presentation) => <article>
     <h2><a href={siteUrl(`presentations/${presentation.slug}/`)}>{presentation.title}</a></h2>
     <p>{presentation.description}</p>

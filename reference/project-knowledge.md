@@ -12,7 +12,7 @@ This map describes the current repository. [AGENTS.md](../AGENTS.md) is the work
 | Cross-source refinement | [Fixture contract](../examples/information-refinement/README.md), selected sources and mapping manifest | [Refinement Lab](information-refinement.md), [catalogue](knowledge-catalogue.md), pure comparisons and source-linked briefing |
 | Website and learning components | [Site guide](../site/README.md), `site/src/` | Astro check, build, and site tests |
 | Course concept map | [Concepts and named relationships](../data/course-concepts.json), shared vocabulary and chapter sources | 3D/2D knowledge map, text directory and chapter reading links |
-| Presentation definitions | [Presentation guide](../presentations/README.md) | HTML slides and notes generated during site build |
+| Presentation definitions and formats | [Presentation guide](../presentations/README.md) and [bonus chapter](../docs/13-explorable-presentations.md) | Working HTML decks and notes; proposed explorable formats are not implemented |
 | Automation and release | [Automation guide](automation-quality.md), `.github/workflows/` | PR checks, artifacts, Pages deployment |
 | Reader-journey and learning evidence | [Verification register](../spec/tutorial/working-methods-upgrade/verification/README.md) | Local/cross-engine and hosted procedures; real reader study remains not run |
 | History and operational evidence | [Measurement guide](growth-measurement.md), `data/features.json` | Build-time dashboard snapshots; fixed historical charts remain unchanged |

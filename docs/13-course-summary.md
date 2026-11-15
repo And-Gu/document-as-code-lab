@@ -1,7 +1,7 @@
 ---
 id: course-summary
 chapter_number: 13
-status: draft
+status: approved
 learning_goal: "Connect the four parts of the course and recognize where the same practices can help in everyday information work."
 ---
 

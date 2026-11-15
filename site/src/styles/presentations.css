@@ -122,3 +122,58 @@
 .reveal:not(.ready) h1 { font-size: clamp(36px, 6vw, 76px); }
 .reveal:not(.ready) h2 { font-size: clamp(28px, 4vw, 48px); }
 .reveal:not(.ready) .title-slide { padding-top: 20px; }
+
+/* Keep relationship labels above the connectors and make the diagram explorable. */
+.with-relationships .content-body { grid-template-columns: .75fr 1.25fr; gap: 32px; }
+.relationship-graphic svg { display: block; width: 100%; height: 330px; overflow: visible; }
+.relationship-node { cursor: pointer; outline: none; }
+.relationship-node, .relationship-edge { transition: opacity 140ms ease; }
+.relationship-node rect, .relationship-edge path { transition: stroke 140ms ease, fill 140ms ease; }
+.relationship-node:hover rect, .relationship-node:focus-visible rect { stroke: var(--presentation-green); stroke-width: 6px; }
+.relationship-node:focus-visible rect { stroke-dasharray: 10 5; }
+.reveal .relationship-explanation { min-height: 84px; margin-top: 12px; font-size: 21px; line-height: 1.35; color: var(--presentation-green); }
+.relationship-graphic[data-active]:not([data-active=""]) .relationship-edge { opacity: .25; }
+.relationship-graphic[data-active="handbook"] .relationship-edge[data-from="handbook"],
+.relationship-graphic[data-active="handbook"] .relationship-edge[data-to="handbook"] { opacity: 1; }
+.relationship-graphic[data-active="handbook"] .relationship-edge[data-from="handbook"] path,
+.relationship-graphic[data-active="handbook"] .relationship-edge[data-to="handbook"] path { stroke: var(--presentation-green); stroke-width: 5px; }
+.relationship-graphic[data-active="handbook"] [data-node="handbook"] rect,
+.relationship-graphic[data-active="handbook"] [data-node="access"] rect,
+.relationship-graphic[data-active="handbook"] [data-node="equipment"] rect { fill: #e5f2e9; stroke: var(--presentation-green); }
+.relationship-graphic[data-active="handbook"] [data-node="handbook"] rect { fill: #cde8d7; stroke-width: 6px; }
+.relationship-graphic[data-active="handbook"] [data-node="policy"] { opacity: .45; }
+.relationship-graphic[data-active="access"] .relationship-edge[data-from="access"],
+.relationship-graphic[data-active="access"] .relationship-edge[data-to="access"] { opacity: 1; }
+.relationship-graphic[data-active="access"] .relationship-edge[data-from="access"] path,
+.relationship-graphic[data-active="access"] .relationship-edge[data-to="access"] path { stroke: var(--presentation-green); stroke-width: 5px; }
+.relationship-graphic[data-active="access"] [data-node="handbook"] rect,
+.relationship-graphic[data-active="access"] [data-node="access"] rect,
+.relationship-graphic[data-active="access"] [data-node="policy"] rect { fill: #e5f2e9; stroke: var(--presentation-green); }
+.relationship-graphic[data-active="access"] [data-node="access"] rect { fill: #cde8d7; stroke-width: 6px; }
+.relationship-graphic[data-active="access"] [data-node="equipment"] { opacity: .45; }
+.relationship-graphic[data-active="equipment"] .relationship-edge[data-from="equipment"],
+.relationship-graphic[data-active="equipment"] .relationship-edge[data-to="equipment"] { opacity: 1; }
+.relationship-graphic[data-active="equipment"] .relationship-edge[data-from="equipment"] path,
+.relationship-graphic[data-active="equipment"] .relationship-edge[data-to="equipment"] path { stroke: var(--presentation-green); stroke-width: 5px; }
+.relationship-graphic[data-active="equipment"] [data-node="handbook"] rect,
+.relationship-graphic[data-active="equipment"] [data-node="equipment"] rect,
+.relationship-graphic[data-active="equipment"] [data-node="policy"] rect { fill: #e5f2e9; stroke: var(--presentation-green); }
+.relationship-graphic[data-active="equipment"] [data-node="equipment"] rect { fill: #cde8d7; stroke-width: 6px; }
+.relationship-graphic[data-active="equipment"] [data-node="access"] { opacity: .45; }
+.relationship-graphic[data-active="policy"] .relationship-edge[data-from="policy"],
+.relationship-graphic[data-active="policy"] .relationship-edge[data-to="policy"] { opacity: 1; }
+.relationship-graphic[data-active="policy"] .relationship-edge[data-from="policy"] path,
+.relationship-graphic[data-active="policy"] .relationship-edge[data-to="policy"] path { stroke: var(--presentation-green); stroke-width: 5px; }
+.relationship-graphic[data-active="policy"] [data-node="policy"] rect,
+.relationship-graphic[data-active="policy"] [data-node="access"] rect,
+.relationship-graphic[data-active="policy"] [data-node="equipment"] rect { fill: #e5f2e9; stroke: var(--presentation-green); }
+.relationship-graphic[data-active="policy"] [data-node="policy"] rect { fill: #cde8d7; stroke-width: 6px; }
+.relationship-graphic[data-active="policy"] [data-node="handbook"] { opacity: .45; }
+@media (max-width: 600px) {
+  .with-relationships .content-body { grid-template-columns: minmax(0, 1fr); }
+  .relationship-graphic svg { height: auto; }
+  .reveal .relationship-explanation { font-size: 28px; min-height: 114px; margin-top: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .relationship-node, .relationship-edge, .relationship-node rect, .relationship-edge path { transition: none; }
+}

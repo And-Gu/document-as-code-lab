@@ -6,7 +6,7 @@ import { siteUrl } from '../../lib/urls';
 import SlideBody from './SlideBody';
 
 const keyboardCondition = (event: KeyboardEvent) => event.key === 'Escape' || !(event.target instanceof Element
-  && event.target.closest('button, a, input, select, textarea, [contenteditable="true"]'));
+  && event.target.closest('button, [role="button"], a, input, select, textarea, [contenteditable="true"]'));
 
 export default function PresentationDeck({ presentation, records }: { presentation: Presentation; records: DemoRecord[] }) {
   const [deck, setDeck] = useState<RevealApi | null>(null);

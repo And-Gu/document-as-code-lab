@@ -1,7 +1,7 @@
 ---
 id: 01-introduction
 chapter_number: 1
-status: in-review
+status: approved
 learning_goal: "Recognize new ways to collaborate, automate information work, and support agents while distinguishing maintained sources, review and reuse."
 visuals:
   - id: why-now

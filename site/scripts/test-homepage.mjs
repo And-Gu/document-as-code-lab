@@ -16,6 +16,15 @@ assert.equal(all(home, node => node.tagName === 'h1').length, 1);
 const groupLinks = groups.map(group => all(group, node => node.tagName === 'a').map(node => attr(node, 'href')));
 assert.deepEqual(groupLinks.map(links => links.length), [4, 3, 3, 2]);
 assert.equal(new Set(groupLinks.flat()).size, 12);
+const bonusLink = '/document-as-code-lab/chapters/13-explorable-presentations/';
+const bonus = all(home, node => attr(node, 'id') === 'bonus-chapter')[0];
+assert.ok(bonus, 'Homepage needs a distinct bonus feature');
+assert.ok(all(bonus, node => node.tagName === 'a' && attr(node, 'href') === bonusLink).length >= 1);
+assert.ok(!groupLinks.flat().includes(bonusLink), 'Bonus must remain outside the core journey');
+const presentationsIndex = parse(await read('../dist/presentations/index.html'));
+assert.ok(all(presentationsIndex, node => node.tagName === 'a' && attr(node, 'href') === bonusLink).length >= 1,
+  'Presentation catalog must link to the bonus chapter');
+
 assert.ok(!groupLinks.flat().some(link => /\/(12|13|14)-automation\//.test(link)));
 assert.ok(!groupLinks.flat().some(link => link.includes('10-git-review')));
 assert.ok(!groupLinks.flat().some(link => link.includes('quality-checks')));
@@ -48,7 +57,7 @@ console.log('Homepage groups cover the 12 lesson chapters; two ten-slide packs, 
 
 const menu = all(home, node => attr(node, 'id') === 'chapter-menu')[0];
 const menuGroups = all(menu, node => hasClass(node, 'menu-group'));
-assert.deepEqual(menuGroups.map(group => all(group, node => node.tagName === 'a').map(node => attr(node, 'href'))), groupLinks, 'Menu and homepage share chapter groups');
+assert.deepEqual(menuGroups.slice(0, 4).map(group => all(group, node => node.tagName === 'a').map(node => attr(node, 'href'))), groupLinks, 'Menu and homepage share chapter groups');
 const recapUrl = '/document-as-code-lab/chapters/13-course-summary/';
 const learningPath = all(home, node => attr(node, 'id') === 'learning-path')[0];
 assert.equal(all(learningPath, node => attr(node, 'href') === recapUrl).length, 1);
@@ -60,3 +69,5 @@ const budgetAnchor = 'missing-excel-tables-and-spreadsheets';
 assert.equal(all(home, node => node.tagName === 'a' && attr(node, 'href') === `/document-as-code-lab/materials/reference/dashboards-and-work-tracking/#${budgetAnchor}`).length, 1);
 assert.ok((await read('../dist/materials/reference/dashboards-and-work-tracking/index.html')).includes(`id="${budgetAnchor}"`));
 console.log('Package 1 primary entries, shared navigation and final budget anchor passed.');
+
+assert.ok(menuGroups[4] && all(menuGroups[4], node => node.tagName === "a" && attr(node, "href") === bonusLink).length === 1, "Bonus sidebar link");

@@ -1,7 +1,7 @@
 ---
 id: 08-publishing
 chapter_number: 11
-status: in-review
+status: approved
 learning_goal: "Explain how GitHub Actions uses repository events to check, build, and publish information; distinguish a workflow artifact from a GitHub Pages deployment."
 visuals:
   - id: actions-to-pages
@@ -59,7 +59,7 @@ Three tools have distinct jobs in this path:
 
 A **build** prepares the website files. A **deployment** makes those files available on the host. This is the distinction from Chapter 7 in practice: passing the pull-request check prepares a website for inspection; the later deployment updates the public site.
 
-Pages serves the prepared HTML, styles, images, data and JavaScript. When a reader answers a quiz or turns the knowledge graph, JavaScript runs in their browser. The whole website does not need to be rebuilt for each click.
+Pages serves the prepared HTML, styles, images, data and JavaScript. When a reader answers a quiz or turns the knowledge graph, JavaScript runs in their browser. The whole website does not need to be rebuilt for each click. During publication, Astro can also reuse unchanged pages through incremental builds. Each deployment still publishes a complete website. The [site build guide](../site/README.md#build-and-publication-performance) explains the cache and its checks.
 
 ## Explore: Inspect a real run
 

@@ -11,6 +11,7 @@ const chapters = defineCollection({
   }),
   schema: z.object({
     chapter_number: z.number().int().positive(),
+    bonus: z.boolean().optional().default(false),
     status: z.string().default('unknown'),
     id: z.string().optional(),
     audience: z.string().optional(),

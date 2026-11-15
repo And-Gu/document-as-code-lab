@@ -1,7 +1,7 @@
 ---
 id: 07-dashboards
 chapter_number: reference
-status: in-review
+status: approved
 ---
 
 

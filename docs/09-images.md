@@ -1,7 +1,7 @@
 ---
 id: 05-images
 chapter_number: 9
-status: in-review
+status: approved
 learning_goal: "Use a knowledge graph to find an explanation, understand how its records and relationships support exploration, and see how an AI agent can follow the same sources."
 visuals: []
 ---

@@ -34,11 +34,19 @@ Four slide types are available:
 | Type | Fields beyond the shared fields |
 | --- | --- |
 | `title` | `subtitle`, optional `context` |
-| `content` | `message`, up to four `bullets`, optional `image` with `path`, `alt`, and optional `caption`; optional `demo: source-selection` |
+| `content` | `message`, up to four `bullets`, optional `image` with `path`, `alt`, optional `caption`, and optional `interactive: relationships`; optional `demo: source-selection` |
 | `comparison` | `left` and `right`, each with a `title` and up to four `items` |
 | `diagram` | `message`, two to five `steps` with `label` and `detail`, optional `outputs` and `caption` |
 
-Image paths are repository-relative under `assets/`. Plain text is escaped by React, not interpreted as HTML. The `source-selection` demonstration reads `examples/onboarding-showcase/{access,equipment,contacts}.md` during the build; its buttons affect the browser preview only. Put it on a content slide with no bullets or image to leave enough room for the table. The schema in `site/src/lib/presentations.ts` rejects unknown fields, missing chapters, duplicate deck slugs, duplicate slide IDs, and missing image files during builds. Keep text short and inspect the rendered result: schema validation does not establish that text fits or that a message is correct.
+Image paths are repository-relative under `assets/`. The maintained `assets/diagrams/information-relationships.svg` supports `interactive: relationships`: React highlights each box and its direct connections on hover or keyboard focus, and tapping a box keeps its explanation visible. Relationship labels sit above horizontal connectors; the SVG remains readable without JavaScript. Plain text is escaped by React, not interpreted as HTML. The `source-selection` demonstration reads `examples/onboarding-showcase/{access,equipment,contacts}.md` during the build; its buttons affect the browser preview only. Put it on a content slide with no bullets or image to leave enough room for the table. The schema in `site/src/lib/presentations.ts` rejects unknown fields, missing chapters, duplicate deck slugs, duplicate slide IDs, and missing image files during builds. Keep text short and inspect the rendered result: schema validation does not establish that text fits or that a message is correct.
+
+## Beyond the current slide types (proposed)
+
+[Bonus chapter: Beyond Slides — Presentations as Explorable Knowledge](../docs/13-explorable-presentations.md) develops the educational and editorial principles for guided stories, mind maps, data dashboards, connected maps and explorable explanations.
+
+The current implementation continues to support the four validated slide types above. The bonus chapter adds an extended tool directory, examples and authoring methods rather than replacing working decks. The source-selection demo and relationship diagram are implemented React components, and the information-model deck uses scroll view. Additional interactive components or linked presentation/exploration modes **are not enabled by adding YAML alone**. Such additions need explicit schema extension, input/provenance contracts, rendering and behavior tests, static fallbacks, accessibility checks, and presenter navigation that remains reliable when a detail view opens.
+
+Prefer extending the existing Astro build incrementally. Do not fork the chapter knowledge into deck-specific source files, and do not mark a visual capability complete until its behavior has been implemented and verified.
 
 ## Render and Verify
 

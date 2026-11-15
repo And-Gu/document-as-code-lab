@@ -3,22 +3,43 @@ import { render } from 'astro:content';
 import Documentation from '../../layouts/Documentation.astro';
 import { getChapters, chapterTitle } from '../../lib/chapters';
 import { siteUrl } from '../../lib/urls';
+import { repositoryRoot } from '../../lib/repository';
+import { chapterHistory } from '../../lib/chapter-history';
+import { buildCacheKey, fingerprintPaths } from '../../lib/incremental-build.mjs';
 import ChapterInformation from '../../components/ChapterInformation.astro';
 import ChapterLearning from '../../components/learning/ChapterLearning.astro';
 
 export async function getStaticPaths() {
   const chapters = await getChapters();
-  return chapters.map((chapter, index) => ({
-    params: { slug: chapter.id },
-    props: { chapter, previous: chapters[index - 1], next: chapters[index + 1] },
-  }));
+  const core = chapters.filter((chapter) => !chapter.data.bonus);
+  // The layout renders the whole chapter menu, not just this chapter.
+  const navigationKey = buildCacheKey('chapter-menu', chapters.map((chapter) => [
+    chapter.id, chapter.data.chapter_number, chapter.data.bonus, chapterTitle(chapter),
+  ]));
+  // Learning components read example files directly, outside Vite's dependency graph.
+  const examplesKey = await fingerprintPaths(repositoryRoot, ['examples']);
+  return chapters.map((chapter) => {
+    const index = core.findIndex((item) => item.id === chapter.id);
+    return {
+      params: { slug: chapter.id },
+      // Include the chapter's three visible Git-history entries in the data key.
+      // The global HEAD SHA is intentionally excluded so unrelated commits can reuse pages.
+      cacheKey: buildCacheKey('chapter', chapter.digest, navigationKey, examplesKey,
+        chapterHistory(`docs/${chapter.id}.md`).commits.map(({ sha }) => sha)),
+      props: {
+        chapter,
+        previous: index > 0 ? core[index - 1] : undefined,
+        next: index >= 0 && index < core.length - 1 ? core[index + 1] : undefined,
+      },
+    };
+  });
 }
 const { chapter, previous, next } = Astro.props;
 const { Content, headings } = await render(chapter);
 ---
 
 <Documentation title={chapterTitle(chapter)} description={chapter.data.learning_goal} activeChapter={chapter.id} wide={chapter.data.chapter_number === 9}>
-  <p class="chapter-meta">Chapter {chapter.data.chapter_number}</p>
+  <p class="chapter-meta">{chapter.data.bonus ? "Bonus chapter · Optional deep dive" : `Chapter ${chapter.data.chapter_number}`}</p>
   <article class:list={{ 'chapter-with-map': chapter.data.chapter_number === 9 }}>
     <h1 id={headings.find((heading) => heading.depth === 1)?.slug ?? chapter.id}>{chapterTitle(chapter)}</h1>
     <ChapterInformation chapter={chapter} />
@@ -26,9 +47,10 @@ const { Content, headings } = await render(chapter);
       <strong>On this page</strong><ul>{headings.filter(heading => heading.depth === 2).map(heading => <li><a href={`#${heading.slug}`}>{heading.text}</a></li>)}</ul>
     </aside>}
     <Content />
-    {chapter.data.chapter_number <= 12 && <ChapterLearning chapterNumber={chapter.data.chapter_number} chapterSource={`docs/${chapter.id}.md`} />}
+    {!chapter.data.bonus && chapter.data.chapter_number <= 12 && <ChapterLearning chapterNumber={chapter.data.chapter_number} chapterSource={`docs/${chapter.id}.md`} />}
   </article>
   <div class="chapter-navigation" aria-label="Chapter navigation">
+    {chapter.data.bonus && <a href={siteUrl()}>Back to the 12-chapter learning journey</a>}
     {previous && <a href={siteUrl(`chapters/${previous.id}/`)}>Previous: {chapterTitle(previous)}</a>}
     {next && <a href={siteUrl(`chapters/${next.id}/`)}>Next: {chapterTitle(next)}</a>}
   </div>

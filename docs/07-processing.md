@@ -1,7 +1,7 @@
 ---
 id: processing-information
 chapter_number: 7
-status: in-review
+status: approved
 learning_goal: "Explain how sources and processing rules produce checked outputs without conflating generation, review, and publication."
 visuals:
   - id: processing-chain

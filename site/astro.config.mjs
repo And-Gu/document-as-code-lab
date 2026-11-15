@@ -12,6 +12,7 @@ const base = '/document-as-code-lab';
 
 export default defineConfig({
   integrations: [react()],
+  experimental: { incrementalBuild: true },
   site: 'https://and-gu.github.io',
   base,
   redirects: {

@@ -16,6 +16,8 @@ concurrency:
 
 jobs:
   build:
+    outputs:
+      started_at: ${{ steps.start.outputs.started_at }}
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     permissions:
@@ -26,6 +28,9 @@ jobs:
     env:
       ASTRO_TELEMETRY_DISABLED: '1'
     steps:
+      - name: Record build start for snapshot freshness verification
+        id: start
+        run: echo "started_at=$(date -u +%Y-%m-%dT%H:%M:%SZ)" >> "$GITHUB_OUTPUT"
       - uses: actions/checkout@v6
         with:
           fetch-depth: 0
@@ -40,7 +45,12 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           path: site
-          node-version: '22'
+          node-version: '24'
+          # The action restores and saves site/node_modules/.astro between builds.
+          # Astro reuses only routes with unchanged per-page cacheKey values.
+          cache: true
+          cache-dir: node_modules/.astro
+          build-cmd: npm run build -- --timings
 
   deploy:
     needs: build
@@ -60,6 +70,7 @@ jobs:
   verify:
     name: Verify published revision and reader routes
     needs: deploy
+    if: github.event_name != 'schedule'
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -73,7 +84,7 @@ jobs:
           persist-credentials: false
       - uses: actions/setup-node@v6
         with:
-          node-version: '22'
+          node-version: '24'
           cache: npm
           cache-dependency-path: site/package-lock.json
       - run: npm ci
@@ -89,3 +100,28 @@ jobs:
           name: hosted-reader-verification-${{ github.sha }}
           path: build/verification/
           retention-days: 14
+
+  verify-scheduled:
+    name: Verify scheduled dashboard publication
+    needs: [build, deploy]
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    defaults:
+      run:
+        working-directory: site
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+      - name: Check published revision, dashboard and fresh snapshot
+        run: node scripts/verify-scheduled-publication.mjs
+        env:
+          EXPECTED_REVISION: ${{ github.sha }}
+          BUILD_STARTED_AT: ${{ needs.build.outputs.started_at }}
+          DEPLOYMENT_RUN_ID: ${{ github.run_id }}

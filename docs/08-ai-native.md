@@ -1,7 +1,7 @@
 ---
 id: 04-ai-native
 chapter_number: 8
-status: in-review
+status: approved
 learning_goal: "Explain how agent instructions, project information architecture, terminology, decisions, maintained sources, and checks make information usable by AI agents."
 visuals:
   - id: ai-context

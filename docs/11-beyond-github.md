@@ -1,7 +1,7 @@
 ---
 id: 09-beyond-github
 chapter_number: 12
-status: in-review
+status: approved
 learning_goal: "Trace the real source-to-publication architecture of this tutorial and compare its information-management principles with a Microsoft 365 alternative."
 visuals:
   - id: lab-architecture
@@ -73,7 +73,7 @@ This separation also explains the processing lab in [Chapter 7](07-processing.md
 
 Now choose **Presentation** in the architecture explorer. Its source is a YAML outline containing slide messages, speaker notes and chapter references. The website builds a slide deck from that outline. The author chooses a sequence for an audience, while the references connect the presentation to the fuller explanations.
 
-You can see that result in [Behind the Lab: From Sources to Experience](/document-as-code-lab/presentations/lab-architecture/) and compare it with the [presentation source](../presentations/lab-architecture.yaml). When a chapter changes, those references help the author find slides that may need an update.
+You can see that result in [Behind the Lab: From Sources to Experience](/document-as-code-lab/presentations/lab-architecture/) and compare it with the [presentation source](../presentations/lab-architecture.yaml). When a chapter changes, those references help the author find slides that may need an update. The [bonus chapter](13-explorable-presentations.md) explores how presentations can combine a guided story with interactive exploration.
 
 The remaining explorer tabs show other output paths. **Project Control Center** uses measurements and GitHub observations collected for publication; **PDF design proof** produces a sample document retained with a workflow run. Comparing their sources and update triggers tells us how each result stays current.
 

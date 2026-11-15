@@ -1,7 +1,7 @@
 ---
 id: github-workspace
 chapter_number: 2
-status: in-review
+status: approved
 learning_goal: "Distinguish a repository, Git and GitHub, and follow the path from proposed edit to accepted source."
 visuals:
   - id: git-github

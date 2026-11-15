@@ -1,7 +1,7 @@
 ---
 id: 03a-structured-content
 chapter_number: 5
-status: in-review
+status: approved
 learning_goal: "Distinguish procedure text from metadata and explain how stable fields enable checking, filtering and relationships."
 visuals:
   - id: metadata-flow

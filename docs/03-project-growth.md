@@ -1,7 +1,7 @@
 ---
 id: 02-project-growth
 chapter_number: 3
-status: in-review
+status: approved
 learning_goal: "Explain how version history supports comparisons, accountability, and analysis without confusing activity metrics with quality."
 visuals:
   - id: history

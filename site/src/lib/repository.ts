@@ -12,7 +12,7 @@ export async function repositoryFiles() {
     'site/src/components/learning/KnowledgeMap.astro',
     'site/src/lib/presentations.ts', 'site/src/layouts/PresentationLayout.astro',
     'site/src/components/slides/PresentationDeck.tsx', 'site/src/components/slides/SlideBody.tsx',
-    'site/src/components/slides/SourceSelection.tsx',
+    'site/src/components/slides/SourceSelection.tsx', 'site/src/components/slides/RelationshipDiagram.tsx',
     'site/scripts/growth-report.mjs', 'site/scripts/operational-snapshot.mjs',
     'site/src/lib/dashboard/controller.ts', ...publicSpecifications];
   const extensions = /\.(md|json|yaml|yml|py|mmd|png|svg|jpg|jpeg|webp|gif|txt|cssv|typ)$/i;

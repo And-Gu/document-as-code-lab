@@ -110,3 +110,67 @@ test('source links, notes and all slide content remain readable without JavaScri
   }
   await context.close();
 });
+
+test('relationship boxes explain and highlight direct connections on hover and keyboard focus', async ({ page }) => {
+  const errors: string[] = [];
+  page.on('pageerror', error => errors.push(error.message));
+  for (const view of ['slide', 'scroll']) {
+    await page.goto(`presentations/information-model/?view=${view}#/relationships`);
+    await expect(page.locator('.reveal.ready')).toBeVisible();
+    const slide = page.locator('section#relationships');
+    const graph = slide.locator('.relationship-graphic');
+    await expect(graph).toBeInViewport();
+    const nodes = [
+      { id: 'handbook', name: 'Handbook', text: 'The handbook includes Access' },
+      { id: 'access', name: 'Access, PROC-001', text: 'Access (PROC-001) is included' },
+      { id: 'equipment', name: 'Equipment, PROC-002', text: 'Equipment (PROC-002) is included' },
+      { id: 'policy', name: 'Security policy, POL-001', text: 'A policy change identifies both for review.' },
+    ];
+    for (const node of nodes) {
+      await graph.getByRole('button', { name: node.name, exact: true }).hover();
+      await expect(graph).toHaveAttribute('data-active', node.id);
+      await expect(slide.getByRole('status')).toContainText(node.text);
+      await expect.poll(() => graph.locator('.relationship-edge').evaluateAll((edges, active) =>
+        edges.every(edge => Number(getComputedStyle(edge).opacity) ===
+          (edge.getAttribute('data-from') === active || edge.getAttribute('data-to') === active ? 1 : .25)), node.id)).toBe(true);
+    }
+    await slide.getByRole('heading').hover();
+    await expect(graph).toHaveAttribute('data-active', '');
+    const access = graph.getByRole('button', { name: 'Access, PROC-001', exact: true });
+    await access.focus();
+    await expect(graph).toHaveAttribute('data-active', 'access');
+    await page.keyboard.press('Tab');
+    await expect(graph.getByRole('button', { name: 'Equipment, PROC-002', exact: true })).toBeFocused();
+    await expect(graph).toHaveAttribute('data-active', 'equipment');
+    await page.keyboard.press('Enter');
+    await page.keyboard.press('Space');
+    await expect(graph).toHaveAttribute('data-active', 'equipment');
+    await expect(slide).toBeInViewport();
+    // Text labels must sit above their horizontal connector with a clear gap.
+    const labelClearance = await graph.locator('.relationship-edge').evaluateAll(edges => edges.map(edge => {
+      const text = edge.querySelector('text')!.getBBox();
+      const path = edge.querySelector('path')!.getAttribute('d')!;
+      const horizontalY = Number(path.match(/(?:M\d+ |V)(\d+)H/)![1]);
+      return horizontalY - (text.y + text.height);
+    }));
+    expect(Math.min(...labelClearance)).toBeGreaterThan(12);
+  }
+  expect(errors).toEqual([]);
+});
+
+test('relationship boxes respond to taps on a narrow touchscreen', async ({ browser }) => {
+  const context = await browser.newContext({ viewport: { width: 390, height: 844 }, hasTouch: true });
+  const page = await context.newPage();
+  await page.goto(`http://127.0.0.1:${process.env.E2E_PORT || 4340}/document-as-code-lab/presentations/information-model/#/relationships`);
+  await expect(page.locator('.reveal.ready')).toBeVisible();
+  const slide = page.locator('section#relationships');
+  const graph = slide.locator('.relationship-graphic');
+  await graph.getByRole('button', { name: 'Security policy, POL-001', exact: true }).tap();
+  await expect(slide.getByRole('status')).toContainText('A policy change identifies both for review.');
+  await expect(graph).toHaveAttribute('data-active', 'policy');
+  await graph.getByRole('button', { name: 'Handbook', exact: true }).tap();
+  await expect(slide.getByRole('status')).toContainText('The handbook includes Access');
+  await expect(graph).toHaveAttribute('data-active', 'handbook');
+  await expect(slide).toBeInViewport();
+  await context.close();
+});

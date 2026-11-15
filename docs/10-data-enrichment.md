@@ -1,7 +1,7 @@
 ---
 id: data-enrichment
 chapter_number: 10
-status: draft
+status: approved
 audience: general-professional
 learning_goal: "Use a small dataset to explain quality checks, annotations, enrichment, visualization, review, and reuse."
 visuals:
@@ -140,7 +140,7 @@ We have used six practices in the service-case example: **quality checks** found
 
 We started with dates and ended with an explained finding. Keeping that connection visible is what makes the result useful beyond one meeting.
 
-> **Take the finding into a presentation.** How could the manager guide the team through the chart, then open the supporting records when someone asks a question? The optional bonus chapter, [Beyond Slides: Presentations as Explorable Knowledge](https://and-gu.github.io/document-as-code-lab/chapters/13-explorable-presentations/), explores how to combine a guided story, opportunities to explore and a reference people can return to afterward.
+> **Take the finding into a presentation.** How could the manager guide the team through the chart, then open the supporting records when someone asks a question? The optional bonus chapter, [Beyond Slides: Presentations as Explorable Knowledge](13-explorable-presentations.md), explores how to combine a guided story, opportunities to explore and a reference people can return to afterward.
 
 In [Chapter 11](10-publishing.md), we look at automation: running established checks and processing rules when their sources change.
 

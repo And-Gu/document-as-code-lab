@@ -1,0 +1,564 @@
+{
+  "status": "approved",
+  "date": "2026-11-15",
+  "reviewer": "Anders Gustafsson",
+  "scope": "Editorial approval of chapters and supporting course material. Example record statuses and capability verification are separate.",
+  "files": [
+    {
+      "path": "AGENTS.md",
+      "sha256": "f46d03f6be71e33e8bdeb29cee5fa89cb1f893e42176e7007b448909a10a0a8d"
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "sha256": "b9bc14b9a23e208104059082761488664cd4a794e6bbb745131a6971651127d7"
+    },
+    {
+      "path": "GLOSSARY.md",
+      "sha256": "05105e75a761f6279f241422f8f71c15d265289f7b268e6320eee77d89b0df36"
+    },
+    {
+      "path": "LICENSE.md",
+      "sha256": "ac5cd662e401398bc9a317770070abaa2e907d0652bb4dda2f06c31040fab20b"
+    },
+    {
+      "path": "README.md",
+      "sha256": "03df1ec8ae113d7dfc13e4ff5715bbfe4296e199d9b151dec0b92364f6ec0df3"
+    },
+    {
+      "path": "ROADMAP.md",
+      "sha256": "c451995b941ba385d89f9258b9dc0c5338b9f4942f50ef01e0ce7b1dcdda0f52"
+    },
+    {
+      "path": "assets/data-enrichment/analysis.json",
+      "sha256": "f9c62751bb9c6a49422583b87d9c759d7b6891cb0a8fa931796ad389e0c656fc"
+    },
+    {
+      "path": "assets/data-enrichment/resolution-duration.svg",
+      "sha256": "bec18a90bec99462814e53ef42edc5f9a93c59946ec460942203308e0c0c8b93"
+    },
+    {
+      "path": "assets/diagrams/01-source-to-outcomes.mmd",
+      "sha256": "2cc4ddd34f6dee55475d2276706154814412dc80e85c0508a6d5b628c51e38dc"
+    },
+    {
+      "path": "assets/diagrams/01-why-now.mmd",
+      "sha256": "8fc01d32db63a299a19d426506f204002be12f41d5e83bfa5b567e3e070e780a"
+    },
+    {
+      "path": "assets/diagrams/02-change-path.mmd",
+      "sha256": "76f74e573d51aacca650e46c9aec2e73df10a44a0c34a943495f2e8dfb3bcdae"
+    },
+    {
+      "path": "assets/diagrams/02-git-github.mmd",
+      "sha256": "1899c008952b66269d5bef0e58f0a68492413a69a709c6038ceec632fd1cab4a"
+    },
+    {
+      "path": "assets/diagrams/03-history.mmd",
+      "sha256": "362d7d34847047566edf3c5ede7435a341aadd283583b9730c2794b2a878b06d"
+    },
+    {
+      "path": "assets/diagrams/05-metadata-flow.mmd",
+      "sha256": "e7200f456253d49f4578328361ba88e03af9c50d43955b2340946979efdf420d"
+    },
+    {
+      "path": "assets/diagrams/06-information-relationships.mmd",
+      "sha256": "6756cd9c8920b10412f1dbe21931855074c37489d5dc0f2467caaa2a0793228c"
+    },
+    {
+      "path": "assets/diagrams/06-processing.mmd",
+      "sha256": "b1ae562b0f00f742040ae2f42aecc4afd77ab770fbeabbab7d8d2c2e284742c5"
+    },
+    {
+      "path": "assets/diagrams/07-processing-chain.mmd",
+      "sha256": "874bba27daca05659159eac27d43d0f7ab73c2435012bc70e3a46435a9e8ec69"
+    },
+    {
+      "path": "assets/diagrams/08-ai-context.mmd",
+      "sha256": "251f8dda2d34df35285807d9ba73e44373fa53a7f0f3119f721b3feaaade3ec7"
+    },
+    {
+      "path": "assets/diagrams/09-one-source-views.mmd",
+      "sha256": "3a95d83a8acda1019a6db6569b1674ae9660682693e20e08daedca67e27815a9"
+    },
+    {
+      "path": "assets/diagrams/10-actions-to-pages.mmd",
+      "sha256": "8ab534321e52d682ed2416f8e4bcda97ace5fe323b7c6b89d8b3b5fe5e8461a6"
+    },
+    {
+      "path": "assets/diagrams/10-review-flow.mmd",
+      "sha256": "7dc1ee0b0ea6dc65131c9b56770482e9e8c98eb928b62ec515ce179273d35497"
+    },
+    {
+      "path": "assets/diagrams/11-lab-architecture.mmd",
+      "sha256": "80c3a2c9708d94df451599bb51fdedbf4cd08b7b9cd437671d609acfa86517f9"
+    },
+    {
+      "path": "assets/diagrams/11-validation-layers.mmd",
+      "sha256": "44da31ba923d7799fd0f7c9eb04477c5912ddb2848d1ccf72d4aa2477b4d000d"
+    },
+    {
+      "path": "assets/diagrams/12-publication-timeline.mmd",
+      "sha256": "5f30a7d598dfe2f67a0af6dbb2ce0587c9ce7066a956ac0b2ab6218af863c555"
+    },
+    {
+      "path": "assets/diagrams/13-integration-boundaries.mmd",
+      "sha256": "f91ce70e0dd95c11e1b5c77c1f781c736137f1d89a1dea275112aae208936937"
+    },
+    {
+      "path": "assets/diagrams/14-adoption-loop.mmd",
+      "sha256": "a2866fc023426305540ac747d141dbe132afa8cfa257dd295da66d8c87821ff2"
+    },
+    {
+      "path": "assets/diagrams/change-review-release.mmd",
+      "sha256": "7298080e424a7dbc1e973bedd0c9442c6c94a7b089768868d55cb6d8bf0f2f7c"
+    },
+    {
+      "path": "assets/diagrams/connected-workflow.mmd",
+      "sha256": "e35f9c8073ef60ea2f70fdca14d78533bdf2a559d6e50618b18711b8e3ad8fe8"
+    },
+    {
+      "path": "assets/diagrams/context-to-reviewed-output.mmd",
+      "sha256": "c1b374a563b9696e3b0102416af288bc0e8aa086e3f18a6654b90cee7d54b1f2"
+    },
+    {
+      "path": "assets/diagrams/dashboard-sources.mmd",
+      "sha256": "3bdfe479dd1b500aa5c870b7a32261d52a97eb15907c44dc0d67a4616de9d3be"
+    },
+    {
+      "path": "assets/diagrams/git-and-github.mmd",
+      "sha256": "cd0a6dad9d4dda5afda0dfef767904eec90650bfb422dab966711b779f60deb1"
+    },
+    {
+      "path": "assets/diagrams/information-relationships.svg",
+      "sha256": "fe27e5490b39f4618eebf0b2e72c68ce5c60622c6b16a85566d0d89301160d3e"
+    },
+    {
+      "path": "assets/diagrams/markdown-source-and-views.mmd",
+      "sha256": "abf97d12cba3bd3cc43fcc8167d50d5435bb9a59a3844d93186d12a62d961c00"
+    },
+    {
+      "path": "assets/diagrams/onboarding-assembly.mmd",
+      "sha256": "a33518f63dcca428badb4fac1920a3f682dac6d180164d816f17afa0739afef1"
+    },
+    {
+      "path": "assets/diagrams/onboarding-record-relationships.mmd",
+      "sha256": "6bdec3379e3a691ceae7fc44f8bfc96e1c0e3442aaee27725e98c6f16c99f2ec"
+    },
+    {
+      "path": "assets/diagrams/recorded-relationships.mmd",
+      "sha256": "f49a645864f593afd57e64e7696f3358fc4b51d10b47c7c1921f4fcf4d0c06f9"
+    },
+    {
+      "path": "assets/diagrams/records-to-views.mmd",
+      "sha256": "9c8e51005b66be111840d36d0f4065f47c6ab458b1d2520a4cdd23fd01e4cb55"
+    },
+    {
+      "path": "assets/diagrams/source-to-publications.mmd",
+      "sha256": "531a1c27b5ea0eb3d30db4ef0c15f00274c8520b764116e57e032c502ce7cc6f"
+    },
+    {
+      "path": "assets/diagrams/source-to-reading-views.mmd",
+      "sha256": "4601a48d08e1939df3848366bf1cc598476989a3dd47772c48e945b30d2425ff"
+    },
+    {
+      "path": "assets/diagrams/workspace-to-automation.mmd",
+      "sha256": "4deb4850e652be5915abb237aadfb603011ac271078feb71bfb01cfb15f587d6"
+    },
+    {
+      "path": "assets/figures/growth-baseline.json",
+      "sha256": "38a67fedf87b6f3ee0ac51cf22c3659fdf9114792e498a703d1ce315f973b74c"
+    },
+    {
+      "path": "assets/figures/growth-baseline.png",
+      "sha256": "baa520a5577c6f5eb69ea55f319b9ca9bc7eb4142871257f0bcdaec9c8bec89e"
+    },
+    {
+      "path": "assets/figures/growth-complete-draft/chapter-sizes.png",
+      "sha256": "7861e23fd06aca8aba16afda0ceb6ca0be613bedcc96fe9d9d99bd49090fea42"
+    },
+    {
+      "path": "assets/figures/growth-complete-draft/growth.png",
+      "sha256": "3ebd11516c91f10ed4b4c3136139bc11ded624d42bdfac9976a371b1d456d9ec"
+    },
+    {
+      "path": "assets/figures/growth-complete-draft/history.json",
+      "sha256": "a166d231bbca68e631c3261746a6ec1956e7446b5a3a41741377b8207764de34"
+    },
+    {
+      "path": "assets/figures/growth-first-update/chapter-sizes.png",
+      "sha256": "168e623e9a379d745c2016dc8a7ffad3fa61612e3424b7acad8f35cdd8b74d02"
+    },
+    {
+      "path": "assets/figures/growth-first-update/growth.png",
+      "sha256": "96f6335f9dece6ad3a6ad0578b7d1ec4721a97ac8482488f891f4fc811a2e7c2"
+    },
+    {
+      "path": "assets/figures/growth-first-update/history.json",
+      "sha256": "3854bd4e6fb585e67f3b4128f9ee8a229d9a18e0d31f9480746a4b681636f403"
+    },
+    {
+      "path": "assets/illustrations/README.md",
+      "sha256": "c25e257fc487ccab5ce861196e9ad2d49f0eb173b877a1a3395cd331cc35ca56"
+    },
+    {
+      "path": "assets/illustrations/information-workshop.jpg",
+      "sha256": "9453fa72b1d8794ea1777dcb330585593eafe61c0c9e6e18e6a7dacfcd2016cc"
+    },
+    {
+      "path": "assets/onboarding-showcase/data.json",
+      "sha256": "f4eaccc91a10df8ca7a2ee594feae2267fab015e6a621db607770a128468f791"
+    },
+    {
+      "path": "assets/onboarding-showcase/handbook.md",
+      "sha256": "e6eefc9d925398f65449c5dea3361939ae985f4f747713e1ee5c8dcab9441bc9"
+    },
+    {
+      "path": "assets/onboarding-showcase/review-status.png",
+      "sha256": "135feeca99980a3811591a2b2a74914f5780f35c1c945481a16f05071fef96a1"
+    },
+    {
+      "path": "assets/onboarding-showcase/training-excerpt.md",
+      "sha256": "3fbac10090f2699deb4fb2f3d73fe7eca90ecff15119b5f8281649fb05a7ca73"
+    },
+    {
+      "path": "data/course-concepts.json",
+      "sha256": "ceed2072ebee129929295d8fec743c8b0f5627de84273e6c3fb04013c3e360e1"
+    },
+    {
+      "path": "docs/01-introduction.md",
+      "sha256": "2d77cc05ac60193333bd632d17b5bea1203465a1b107ec3be3fde28bc81d20de"
+    },
+    {
+      "path": "docs/02-github-workspace.md",
+      "sha256": "bef7ba3dc60aba31de41aa72656efc8584ad3d408ab4e43dcd5c5644017fb435"
+    },
+    {
+      "path": "docs/03-project-growth.md",
+      "sha256": "fed2b3a10f736b0eefa4f1deed960d365f3a5c3335ff1dfa38ed32c83d736e51"
+    },
+    {
+      "path": "docs/04-markdown.md",
+      "sha256": "a1007a6a6112fcf47a31b0cbe577ca88794a61be8902c7e907450f1f3b79c8b3"
+    },
+    {
+      "path": "docs/05-structured-content.md",
+      "sha256": "584261626ea7be93adf303ce823512992fe7dfe95a43da6adf179df643e5ca63"
+    },
+    {
+      "path": "docs/06-information-architecture.md",
+      "sha256": "3fb440b66ea5752ed42692f83a41243e583e820e030a6e5464a780571c6c3a30"
+    },
+    {
+      "path": "docs/07-processing.md",
+      "sha256": "2e910c888b525cb4f8dea76bd39a5217189853da03dfacb3e128bd8d3852c26c"
+    },
+    {
+      "path": "docs/08-ai-native.md",
+      "sha256": "b23780610e7e4361925eaaea1241efebbe3ebff45cd3fd73d6e5a84017f24441"
+    },
+    {
+      "path": "docs/09-images.md",
+      "sha256": "e0ad5684138cf11878ff41c37086f2eeafca2dc4986e117a64dd8c92ace7709a"
+    },
+    {
+      "path": "docs/10-data-enrichment.md",
+      "sha256": "c3d7334ae83909d48e2777a67f2423f03249308830faf17e7dc873849c0fd443"
+    },
+    {
+      "path": "docs/10-publishing.md",
+      "sha256": "c44db0411387a3eb319ce14dc4d6fb3677c0275c26a00e68002b97dc8fc1bc50"
+    },
+    {
+      "path": "docs/11-beyond-github.md",
+      "sha256": "5e2d8264370e71fc7b53a8850c8f46311a00c86eeef51faea85b2c7edc4b0041"
+    },
+    {
+      "path": "docs/13-course-summary.md",
+      "sha256": "90d21759ce22ed2f62feea67a7108de3d96c0279ca5ebfcbc2e1c577d8e628d5"
+    },
+    {
+      "path": "docs/13-explorable-presentations.md",
+      "sha256": "7517f76620842ebd4d0fb81c65430dac24731a88ad846331aad6c07a6699fa63"
+    },
+    {
+      "path": "examples/contract-explorer/README.md",
+      "sha256": "35a1b0b3c7ab64d032f5ac6854bb11b18a6cc630bc9959638e100683ad14db84"
+    },
+    {
+      "path": "examples/contract-explorer/records/AGR-001.md",
+      "sha256": "5865b408ede4c0f0cf6df2b4a097f9a5cc1b2959ea12b7ced25c053e869fc289"
+    },
+    {
+      "path": "examples/contract-explorer/records/AGR-002.md",
+      "sha256": "1777f3eea08352b3f98915340d46c7629e2aeaea7b4a40859ef8d137f58d2b18"
+    },
+    {
+      "path": "examples/contract-explorer/records/AMD-001.md",
+      "sha256": "9b36563c8ff95dd7da0daf04f33a885cc42b25503afb30a77e80669af34de8f5"
+    },
+    {
+      "path": "examples/contract-explorer/records/CUST-01.md",
+      "sha256": "9b0877c9e46e51fdd5ba40707202ea752fca4afd4a5224c3f8e5a7de247f7865"
+    },
+    {
+      "path": "examples/contract-explorer/records/DEL-101.md",
+      "sha256": "1e16d9574939ea20488fcab0cb12fc31080327c09dacbab8da2858b7f83f43bd"
+    },
+    {
+      "path": "examples/contract-explorer/records/DEL-102.md",
+      "sha256": "52d6c0e3f2fbcd2e139a0ae6e797f009e4777af2282a7999cb614b12eb996145"
+    },
+    {
+      "path": "examples/contract-explorer/records/DEL-103.md",
+      "sha256": "ea27f6b0b10092c379e8ed1750826a5e1451657fc53bc8e650328c736bb56a6f"
+    },
+    {
+      "path": "examples/contract-explorer/records/PRJ-101.md",
+      "sha256": "06c81f9d1ecd5ae16f8c226211773045b07d6100bda9756443508b057e560073"
+    },
+    {
+      "path": "examples/contract-explorer/records/PRJ-102.md",
+      "sha256": "bdfe153d39c590de986d25bdaddcd4a8563c2648c78d6e3e4b192deb05ece585"
+    },
+    {
+      "path": "examples/contract-explorer/schema.json",
+      "sha256": "213aafc1b9429c087f07d58ce6d33dea78a1841f72f022cbc33c216861852076"
+    },
+    {
+      "path": "examples/dashboards/department-budget.cssv",
+      "sha256": "9bc223ec766ed386a88efbb51af2693df56eaf61984e30833961e2449b4f824e"
+    },
+    {
+      "path": "examples/data-enrichment/README.md",
+      "sha256": "349216a4cbf3ddb06d005db3812acd0497de6994c73d5f0fed3c96c87e08e1ba"
+    },
+    {
+      "path": "examples/data-enrichment/cases.json",
+      "sha256": "fa6ab7f15bc917f4333f1035d74a98c5229fe386d352ccba6cf32b9f1e77aa6a"
+    },
+    {
+      "path": "examples/information-refinement/README.md",
+      "sha256": "c1baa32d43c34c65d48e41012882eded5f991562206c18a79bd5c2c10eb2ff2e"
+    },
+    {
+      "path": "examples/information-refinement/catalogue.json",
+      "sha256": "0dc4f11cd8a770930ea006dcd88f16730655d2e2301310415c3c2a05117e7a0d"
+    },
+    {
+      "path": "examples/information-refinement/identity-map.json",
+      "sha256": "2d54b3e6bf979b0b4d7109dbe40d9f3500633df4850b41a1e2a0344e53b93065"
+    },
+    {
+      "path": "examples/information-refinement/scenario.json",
+      "sha256": "0d6fd3c6adc6d710c7047ac4bc0df7eb8485171efe1c3169bff53e972c43bdbe"
+    },
+    {
+      "path": "examples/information-refinement/schema.json",
+      "sha256": "ef21ecdac572c7d9752e44f933a9b86b90b6dc6cf70af4a55b7b14dac5a17625"
+    },
+    {
+      "path": "examples/information-refinement/sources/SRC-BUDGET.md",
+      "sha256": "85f52fe8e21490828ec329b4409bf986f24baddb1891c8ca239dbbc15f73c835"
+    },
+    {
+      "path": "examples/information-refinement/sources/SRC-CAPACITY.md",
+      "sha256": "a2493c9f2bf603372c98d88ee4a020064ac82f9eb54258cf3f51457fd53c9610"
+    },
+    {
+      "path": "examples/information-refinement/sources/SRC-CUSTOMER.md",
+      "sha256": "c3f517efba125719b08c4e6b83ef968f941517f8c8e651a8ad98c2047e7d57b6"
+    },
+    {
+      "path": "examples/information-refinement/sources/SRC-FORECAST.md",
+      "sha256": "5e8cd66fe4eba2c738fadb969cb6d505076f6f577f5659b9471f8b555c633577"
+    },
+    {
+      "path": "examples/information-refinement/sources/SRC-MEETING.md",
+      "sha256": "19b7669229be97dc235b4d3fa3a91331a1a746b5253e10517c997b0e6ae68749"
+    },
+    {
+      "path": "examples/learning/procedure-template.md",
+      "sha256": "efff93ca608ea6701655715ec268376a00b99ac445d4e66c2959e36692cc96d2"
+    },
+    {
+      "path": "examples/learning/procedure.schema.json",
+      "sha256": "cb4402c559592b109f3ac1a87d91582424e9a2f30ddf062f1d766afb3ca68ce7"
+    },
+    {
+      "path": "examples/learning/questions.json",
+      "sha256": "1a05c19e946312fcb9a3277cce7d869eeba974997cdb689f4102057ba711f63a"
+    },
+    {
+      "path": "examples/learning/scenario-checks.json",
+      "sha256": "e5d5df1e883e5181bd9dcae48ba333236e105c8468b8ac9304648dbd88cbb2ac"
+    },
+    {
+      "path": "examples/learning/scenario-checks.schema.json",
+      "sha256": "4ae2d52223b135bbc61842312c5d10b1c5136553514fc19623446ebbeffb7979"
+    },
+    {
+      "path": "examples/onboarding-showcase/README.md",
+      "sha256": "a2157b3423d5a4073e0a03402d9461d1b6a83ef649ced30e5994a1a0baa2c8c4"
+    },
+    {
+      "path": "examples/onboarding-showcase/access.md",
+      "sha256": "f60373a4d68cf5212d8e5d0809d2a20b26aa775b89d7ae349ed8370baa5ee443"
+    },
+    {
+      "path": "examples/onboarding-showcase/contacts.md",
+      "sha256": "ae0d204b72dadefb1b1766308159a3bdd872b661c1741c4383b417363978069a"
+    },
+    {
+      "path": "examples/onboarding-showcase/equipment.md",
+      "sha256": "0038eb9262661512afa5fbe44aa94e0f17cffa2da57a8bf5a157f7aa04397c0e"
+    },
+    {
+      "path": "examples/onboarding/requesting-access.md",
+      "sha256": "ae617c8e010de55419658de9375fd81f129d0e62e50f7b8bb1423b06a0fa5fac"
+    },
+    {
+      "path": "examples/publishing/publication-brief.md",
+      "sha256": "a08a0571166f6263397eea17acbb8eac9aa8ce954e20a4597944ee2aa122180b"
+    },
+    {
+      "path": "examples/review/templates/change-review.md",
+      "sha256": "0c3fc2f895483ae4403ccc4ae07985092a2795ca8a588c32ecbbf4b4998819e2"
+    },
+    {
+      "path": "examples/structured-content/records/REQ-014.md",
+      "sha256": "23174d58d0f092185b247c74cfcbffb3599d841fca35da78493043c1a5f351cd"
+    },
+    {
+      "path": "examples/structured-content/records/REQ-015.md",
+      "sha256": "aba3a6d4468f66bbdabf384aa0434694c8d7a3d7b2f2b5b9a8e289e290c92d30"
+    },
+    {
+      "path": "examples/structured-content/records/TASK-003.md",
+      "sha256": "b4a6049e8466fdbc98624eee66a105e8b208eff44545458bbed46c7a4b9b4dc5"
+    },
+    {
+      "path": "examples/structured-content/records/TEST-008.md",
+      "sha256": "5f45234d733ec83a15f2aef7b51baef4b21c8c8de7a225d60c7a326592aa1d7e"
+    },
+    {
+      "path": "examples/structured-content/schema.yaml",
+      "sha256": "9a6cce8eb0d72ac4da1395cf0d728a365dc39939c2b989dcc8742f4a641bf9b2"
+    },
+    {
+      "path": "examples/structured-content/templates/requirement.md",
+      "sha256": "f1230620ec159067b45a4040d39b8a56072ab3a800e6159e0e35790a15e0203a"
+    },
+    {
+      "path": "presentations/README.md",
+      "sha256": "d04905e0c6890bd9b215da30fb8efedc21f64b4ad148dce5f51ddb6a6c13087b"
+    },
+    {
+      "path": "presentations/document-as-code-intro.yaml",
+      "sha256": "5b98cd72078edf806ca04d15caa39bb8d0aa7b7437184daf2ce6c232865f0a88"
+    },
+    {
+      "path": "presentations/information-model.yaml",
+      "sha256": "2b6f342f18e40b00e6c9a2c9611728cfa25932bf12736f942fd55f597481bc31"
+    },
+    {
+      "path": "presentations/information-value.yaml",
+      "sha256": "6f1a23d36b317b4872e742f5d1ec2d1a4e1b6cd0528b092c290b2940458a9fed"
+    },
+    {
+      "path": "presentations/lab-architecture.yaml",
+      "sha256": "28d51709769e9a35558acb6a65a0374db536ff95f2f0ebbfc2406448eec96657"
+    },
+    {
+      "path": "publishing/pdf/README.md",
+      "sha256": "1348e0b9069ad884b469687836a2129e378550ae62cd2523d81a7828facb6e30"
+    },
+    {
+      "path": "publishing/pdf/mermaid.json",
+      "sha256": "558ca887d80079353e557dde0db70e80bcceaf7cbc0e7b4a87e036cd7a651403"
+    },
+    {
+      "path": "publishing/pdf/package-lock.json",
+      "sha256": "9c9f6f9ffeccabdca34e2a7c6721e951c0d12761896e0419daf2a3eb56899302"
+    },
+    {
+      "path": "publishing/pdf/package.json",
+      "sha256": "c1ab7b89da1fa99c59ebd4ea41af4b708bb71e4054136e2bd34e4f2fbecfa1d6"
+    },
+    {
+      "path": "publishing/pdf/requirements.txt",
+      "sha256": "e542ac6849530ee87181740ea5d842bde458ba6f5fc59ffa2701a11be31ba2e3"
+    },
+    {
+      "path": "publishing/pdf/template.typ",
+      "sha256": "bca625ea43ac30cfb53b72994a7e559d42bb86a3bbd57755576673c74b8c019a"
+    },
+    {
+      "path": "publishing/pdf/test_proof.py",
+      "sha256": "f6ee7348b08e251b9b5f9de8aa78c02be34b6e94d7f1e445a21f59aab6ee763e"
+    },
+    {
+      "path": "reference/ai-context-and-agents.md",
+      "sha256": "fb0965ed3a7a18f5d24308a4f9a89fc2d513850c0cd5c5d73f033e29ed6ff16d"
+    },
+    {
+      "path": "reference/automation-quality.md",
+      "sha256": "a576820b180c882158d679d169ad446d6aeb95ba247f4fa0bd1e026c94128d14"
+    },
+    {
+      "path": "reference/dashboards-and-work-tracking.md",
+      "sha256": "02d0c5b70e7e15a5a752d18a0806369bfd1ae09c6ece4d5929b9638cf7eba775"
+    },
+    {
+      "path": "reference/editorial-approval.md",
+      "sha256": "3930557936ef26560c4dd9d91b3071633435af946b23aa1a6159c23ed00dc6a8"
+    },
+    {
+      "path": "reference/growth-measurement.md",
+      "sha256": "a2283e928b0c0754ef12d3a181af7f9348dcd3bb651510048c17e192d7d40684"
+    },
+    {
+      "path": "reference/information-refinement.md",
+      "sha256": "d482e208293df67f00ecc17084aedeaa5fb863afa3ff74ac8b32d7576eda1961"
+    },
+    {
+      "path": "reference/knowledge-catalogue.md",
+      "sha256": "f30393a41b9e6545f4aa5d6a9c59722e37738a4ee347e8057198a2c0ce980a91"
+    },
+    {
+      "path": "reference/knowledge-map-licenses.txt",
+      "sha256": "244b42b6373b64d527a228dfcf70414a739a17b1edff27b8b7abed7a9964abc3"
+    },
+    {
+      "path": "reference/pdf-publication.md",
+      "sha256": "501a32d1a292f524bc9200d9813f24846d3ece61f3a9ec0bb1e283def72967d2"
+    },
+    {
+      "path": "reference/project-knowledge.md",
+      "sha256": "4f0832c81212d80d40af731e93931eda11defb0a1d8e25b927a1d784f1393c58"
+    },
+    {
+      "path": "reference/publishing-workflows.md",
+      "sha256": "04b83ebefecf344b035b028f08ebc9051ef553c21eca5ae095fc369c40be7736"
+    },
+    {
+      "path": "reference/record-processing.md",
+      "sha256": "3b68ae53d4db748118c662b02ad505bc6045727590e71aa0cd2c1b971c39b872"
+    },
+    {
+      "path": "reference/review-and-collaboration.md",
+      "sha256": "bf2e7a101563092c6d8ea2bbf4f3a3bbe4c35f4a8618e871ba04c6f044a55d0b"
+    },
+    {
+      "path": "reference/visual-sources.md",
+      "sha256": "bce8fb509ad2f8296ad58dfe8cabe47e7cfb3b4c4f3e2d83369dc98b13064f94"
+    },
+    {
+      "path": "reference/workflows-across-tools.md",
+      "sha256": "9e7b029067357f9c09a37cdf065dd6ae725ef34a94864fc12cc3aac536555dfc"
+    },
+    {
+      "path": "site/README.md",
+      "sha256": "94dadf68dac410bfa13443befc1d8cb59958e63edb47a78980aafba1790afdc9"
+    }
+  ]
+}

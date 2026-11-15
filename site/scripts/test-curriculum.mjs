@@ -6,13 +6,13 @@ import { parse as yaml } from 'yaml';
 
 const read = path => readFile(new URL(path, import.meta.url), 'utf8');
 const slugs = (await readdir(new URL('../../docs/', import.meta.url))).filter(name => name.endsWith('.md'));
-assert.equal(slugs.length, 13);
+assert.equal(slugs.length, 14);
 const numbers = [];
 const chapterNumbers = new Map();
 for (const file of slugs) {
   const source = await read(`../../docs/${file}`);
   const metadata = yaml(source.match(/^---\n([\s\S]*?)\n---/)[1]);
-  numbers.push(metadata.chapter_number);
+  if (!metadata.bonus) numbers.push(metadata.chapter_number);
   chapterNumbers.set(file, metadata.chapter_number);
 }
 assert.deepEqual(numbers.sort((a,b) => a-b), Array.from({length:13},(_,index)=>index+1));
