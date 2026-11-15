@@ -39,6 +39,7 @@ jobs:
       - run: python -m unittest discover -s tests
         working-directory: .
       - run: npm run test:dashboard
+      - run: npm run test:scheduled-publish
       - run: npm run check
       - run: npm run build
       - run: npm run test:learning
