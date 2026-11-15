@@ -54,7 +54,7 @@ npm run test:homepage
 node scripts/test-budget.mjs
 ```
 
-Astro requires Node 22.12 or newer. This project includes Node 22 as a local development dependency, so npm scripts use a compatible runtime even when the system Node version is older. No global Node installation is changed.
+The site is built and verified using Node.js 24 in CI. The patched Astro release requires Node.js 22.23.4 or newer, and a supported Node runtime must be installed on the developer's machine; it is no longer installed as an npm development dependency. Use Node.js 24 to match the reproducible CI environment.
 
 Pull requests against `main` run `.github/workflows/astro-pr-check.yml`, which installs dependencies with `npm ci`, runs `npm audit` across production and development dependencies, checks types, and builds and tests the site. Any reported vulnerability fails the audit step; no severity is suppressed. Audit results reflect the advisory database at the time of the check, not a guarantee of complete security. Pushes to `main` run `.github/workflows/deploy-pages.yml`, which builds and publishes to [GitHub Pages](https://and-gu.github.io/document-as-code-lab/). Required review and build checks must be configured separately in GitHub's branch rules.
 
