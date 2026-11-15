@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { mkdtemp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
+import { parse } from 'yaml';
 import { buildCacheKey, fingerprintPaths } from '../src/lib/incremental-build.mjs';
 
 const root = await mkdtemp(path.join(tmpdir(), 'astro-incremental-'));
@@ -44,6 +45,14 @@ for (const route of [
   assert.match(await file(route), /cacheKey:/, `${route} must opt in to incremental page output`);
 }
 const deploy = await file('../../.github/workflows/deploy-pages.yml');
-assert.ok(deploy.includes('withastro/action@v6'), 'The Pages publisher must retain Astro build-cache support');
-assert.ok(deploy.includes('cache: true'), 'The Pages cache must be explicitly enabled');
+const steps = parse(deploy).jobs.build.steps;
+const install = steps.findIndex(step => step.run === 'npm ci');
+const cache = steps.findIndex(step => step.with?.path === 'site/node_modules/.astro');
+const clean = steps.findIndex(step => step.run?.includes('git status --porcelain'));
+const build = steps.findIndex(step => step.run === 'npm run build -- --timings');
+const upload = steps.findIndex(step => step.uses?.startsWith('actions/upload-pages-artifact@'));
+assert.ok(install >= 0 && install < cache, 'Install locked dependencies before restoring the Astro cache');
+assert.ok(cache < clean && clean < build && build < upload, 'Require a clean checkout before building and uploading');
+assert.equal(steps[cache].with['restore-keys'], 'astro-cache-${{ runner.os }}-');
+assert.equal(steps[upload].with.path, 'site/dist', 'Publish the complete built site');
 console.log('Incremental cache key invalidation, opt-in routes and Pages cache configuration passed.');
