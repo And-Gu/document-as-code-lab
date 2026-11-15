@@ -50,6 +50,7 @@ jobs:
           # Astro reuses only routes with unchanged per-page cacheKey values.
           cache: true
           cache-dir: node_modules/.astro
+          build-cmd: npm run build -- --timings
 
   deploy:
     needs: build
