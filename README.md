@@ -74,9 +74,9 @@ The `chapter_number` metadata determines the current reading order. Existing sou
 10. [From Data to Knowledge](docs/10-data-enrichment.md)
 11. [Automating Information with GitHub Actions](docs/10-publishing.md)
 12. [Behind the Lab: How We Built This Tutorial](docs/11-beyond-github.md)
-13. [Beyond Slides: Presentations as Explorable Knowledge](docs/13-explorable-presentations.md) (draft)
+**Bonus chapter (optional):** [Beyond Slides: Presentations as Explorable Knowledge](docs/13-explorable-presentations.md). This long-form guide explores interactive presentation design, a practical technology directory, case studies, videos and exercises outside the numbered twelve-chapter core.
 
-The proposed Chapter 13 builds on the working Reveal.js decks and explains how source-linked presentations could evolve into guided, exploratory and self-paced experiences. Its more advanced interactive presentation modes are design options, not existing implemented features.
+The bonus chapter builds on the working Reveal.js decks and explains how source-linked presentations could evolve into guided, exploratory and self-paced experiences. Its more advanced interactive presentation modes are design options, not existing implemented features.
 
 ## Outputs
 
@@ -136,4 +136,4 @@ Use the prepared reader-study kit to collect real observations when participants
 
 Original software is licensed under MIT; original educational content is licensed under CC BY 4.0. See [LICENSE.md](LICENSE.md) for scope, attribution, and third-party exceptions.
 
-The 12-chapter editorial structure keeps practical detail in [reference guides](reference/record-processing.md). Chapter 10 follows five fictional service cases through quality checks, annotations, duration calculation and a reproducible plot. Each chapter has a six-part At a Glance summary on the website. The [dashboard guide](reference/dashboards-and-work-tracking.md) retains work tracking and the interactive budget table. Chapter 6 covers information architecture; processing is chapter 7. Earlier published chapter URLs remain available.
+The 12-chapter core editorial structure, plus an optional bonus chapter, keeps practical detail in [reference guides](reference/record-processing.md). Chapter 10 follows five fictional service cases through quality checks, annotations, duration calculation and a reproducible plot. Each chapter has a six-part At a Glance summary on the website. The [dashboard guide](reference/dashboards-and-work-tracking.md) retains work tracking and the interactive budget table. Chapter 6 covers information architecture; processing is chapter 7. Earlier published chapter URLs remain available.
