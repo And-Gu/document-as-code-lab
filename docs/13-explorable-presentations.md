@@ -1,7 +1,8 @@
 ---
 id: explorable-presentations
 chapter_number: 13
-status: draft
+bonus: true
+status: in-review
 audience: general-professional
 learning_goal: "Design presentations as source-linked, reusable experiences and choose between guided stories, interactive maps, dashboards and explanations for a particular audience."
 visuals: []
@@ -14,6 +15,9 @@ A project leader is preparing a review. The team has written a detailed report, 
 What if the presentation were not a second copy of the information? What if it were a **guided way into maintained knowledge**, with the option to explore when a new question arises?
 
 This chapter asks how we can use a browser, reusable visual components, and document-as-code practices to make presentations more useful than a sequence of static slides. You do not need to be a developer to follow the approach or try the examples.
+
+> **Bonus chapter — optional deep dive.** The main learning journey consists of twelve chapters. This additional resource is for anyone designing a briefing, workshop, course or interactive knowledge experience. It goes further into available tools, practical authoring choices, references and evaluation methods. You can follow the principles whether you work in GitHub and Astro, Office, or another information environment.
+
 
 ## A presentation is a view, not a source of truth
 
@@ -126,23 +130,116 @@ A practical future architecture is:
 
 This is a design proposal, not a claim that all modes are already implemented.
 
-## A practical tool palette
+## The presentation-as-code toolbox
 
-Choose tools by the communication need and the architecture already in use. Introducing a second development stack should be justified by a tangible benefit.
+Technology should serve the audience's question. The following directory distinguishes tools that help you **guide a talk**, **explore concepts**, **investigate data**, or **produce animated material**. These are options to evaluate, not a shopping list or a requirement to rebuild the current website.
 
-| Need | Tool to investigate | Reason to consider it |
+### Presentation engines and narratives
+
+| Tool | Typical output | When it helps | Fit with this Lab |
+| --- | --- | --- | --- |
+| [Astro](https://astro.build/) with [MDX](https://docs.astro.build/en/guides/integrations-guide/mdx/) and selective React | Narrative website with interactive islands | Source-linked reading, storytelling and embedded demos | **Preferred base**; Astro is already used |
+| [Reveal.js](https://revealjs.com/) | Presenter-controlled HTML slides | Timed talks with keyboard navigation, overview and notes | **Already implemented**, with four validated YAML slide types |
+| [Slidev](https://sli.dev/) | Markdown + Vue component slides | Developer-oriented demos, code walkthroughs and rapid editing | Good alternative; would introduce Vue |
+| [Marp](https://marp.app/) | Markdown slides, HTML, PDF or PPTX | Fast, portable slide production with VS Code | Good alternative when interaction is limited |
+| [Spectacle](https://formidable.com/open-source/spectacle/) | React-based presentation deck | Presentations that are mostly composed of custom React scenes | More control; adds a second deck application |
+| [GSAP ScrollTrigger](https://gsap.com/docs/v3/Plugins/ScrollTrigger/) | Scroll-triggered narrative animation | Reveal, continuity, movement and causal sequence | Add only when movement improves comprehension |
+
+For a management briefing with strict time, begin with the working Reveal.js system. For a reader who should scroll through a changing diagram and revisit details later, an Astro article with reusable components may be a better home.
+
+### Mind maps, whiteboards and connected ideas
+
+| Tool | What it does | Choose it for | Important limitation |
+| --- | --- | --- | --- |
+| [Markmap](https://markmap.js.org/docs/introduction) | Turns Markdown headings and lists into foldable, zoomable branches | A navigable agenda, idea hierarchy or subject overview | A hierarchy is not a typed knowledge graph |
+| [Mermaid](https://mermaid.js.org/) | Generates diagrams from editable text | Structured processes, decisions, sequences and simple state diagrams | Complex drill-down needs extra code |
+| [React Flow](https://reactflow.dev/examples) | Interactive node-and-edge canvases | Source-linked relationships and selectable architecture objects | Relationships must be modeled, not guessed |
+| [tldraw](https://tldraw.dev/) | Infinite canvas and whiteboard components | Group exploration, workshops and annotated system sketches | Persistence, ownership and collaboration need design |
+| [Excalidraw](https://excalidraw.com/) | Hand-drawn-style collaborative diagrams | Fast workshop sketches or expressive illustrations | An exported sketch is not itself maintained semantic data |
+| [D3](https://d3js.org/) | Low-level data-driven visualization library | Custom interactive layouts beyond common chart patterns | Higher code and testing cost |
+
+Use Markmap when navigation follows headings. Use React Flow when selecting an object must reveal its ID, typed links, source record and state. The second needs a controlled information model, not just a more attractive layout.
+
+### Data visualization, dashboards and simulations
+
+| Tool | Best application | Decision consideration |
 | --- | --- | --- |
-| Source-linked pages with selective interactivity | [Astro](https://astro.build/) with React and, when useful, MDX | Retains the Lab's existing static build and reusable browser components |
-| Presenter navigation, notes and full-screen display | [Reveal.js](https://revealjs.com/) | Already used by this Lab; the newer [React bindings](https://revealjs.com/react/) are an optional future path |
-| Mind maps from Markdown | [Markmap](https://markmap.js.org/docs/introduction) | Converts headings and lists into a foldable, zoomable map |
-| Editable or inspectable relationship views | [React Flow](https://reactflow.dev/examples) | Suitable for controlled node-and-edge experiences |
-| Data-rich reports and coordinated visualizations | [Observable Framework](https://observablehq.github.io/framework/what-is-framework) | Strong reference for data applications; a separate framework, not an Astro dependency |
-| Scroll-linked narrative movement | [GSAP ScrollTrigger](https://gsap.com/docs/v3/Plugins/ScrollTrigger/) | Useful when the timing of an explanation has a clear purpose |
-| Reusing React explanations as video | [Remotion](https://www.remotion.dev/) | A potential route from reusable scenes to rendered video |
+| [Observable Plot](https://observablehq.github.io/plot/) | Concise, source-driven charts and comparisons | Strong candidate when a small chart plus a data table answers the question |
+| [Observable Framework](https://observablehq.github.io/framework/) | Reports and analytical dashboards | Excellent separate publishing environment; not required for an Astro site |
+| [Vega-Lite](https://vega.github.io/vega-lite/docs/) | Declarative, reviewable interactive chart specifications | Versioned JSON is useful for reproducible views |
+| [Apache ECharts](https://echarts.apache.org/en/index.html) | Dashboards with established chart families and controls | Feature-rich but not a substitute for clear units and data provenance |
+| [Three.js](https://threejs.org/) / [React Three Fiber](https://r3f.docs.pmnd.rs/) | Interactive spatial models and 3D scenes | Use only if depth, orientation or geometry contributes to understanding |
 
-[Slidev](https://sli.dev/) is another strong Markdown-first slide option, but its Vue-oriented component model is less aligned with the Lab's existing React/Astro choices. It is an alternative, not a recommended migration.
+A dashboard can reveal trends and outliers, but only if its audience knows which data are current, what filters apply and what conclusions are legitimate. A three-dimensional simulation should state the model assumptions; visual realism is not evidence that the model is correct. The companion [Executable Engineering Lab](https://and-gu.github.io/executable-engineering-lab/) develops those technical contracts.
 
-Separate **how to communicate** from **how to build a physically meaningful technical visualization**. The latter needs model contracts, numerical assumptions, validation and testing; see the companion engineering tutorial for that deeper subject.
+### Animation, video and verification
+
+| Tool | Role | When it earns its complexity |
+| --- | --- | --- |
+| [Remotion](https://www.remotion.dev/) | Programmatically render video with React | Reusing a visual explanation as recorded training or social content |
+| [Manim](https://www.manim.community/) | Python-defined mathematical animation | A carefully authored explanation of transformations and mathematics |
+| [Playwright](https://playwright.dev/) | Browser and interaction tests | Verify projector-scale navigation, reset, source links and responsive views |
+| [Pandoc](https://pandoc.org/) | Convert and assemble document formats | Provide conventional handouts or compatible exports |
+| Browser print/PDF | Static, portable fallback | Useful when a visitor has no browser interaction or network access |
+
+Video is a complementary output, not an interactive replacement. A short recording can capture the guided explanation; the underlying data and source links should remain discoverable in the web version.
+
+### My recommended starting set
+
+For this repository, explore **Astro + Reveal.js + Markmap + React Flow + Observable Plot** in that order. Keep existing validated components and dependencies where possible. Introduce GSAP for a real teaching animation or Three.js for a genuine spatial question, never as default decoration.
+
+The key decision rule is: *What new question can someone answer with this interaction that a clear static page would leave unanswered?*
+
+## Worked example: one knowledge source, three experiences
+
+Consider the proposed contract amendment in [Chapter 9](09-images.md). The audience should understand why DEL-101 needs review and why DEL-102 is an additional *review candidate*, not an automatically confirmed impact.
+
+| Mode | Opening | Meaningful interaction | End result |
+| --- | --- | --- | --- |
+| **Present** | One statement about the proposal and its current status | Reveal the direct and indirect relationships in a controlled sequence | Short decision-oriented talk |
+| **Explore** | A relationship map showing affected projects and deliveries | Select AMD-001, trace typed links, filter and reset | A source-linked view for audience questions |
+| **Read** | Narrative with supporting data and references | Follow stable links to detailed records and definitions | A durable reference or handout |
+
+The same maintained records can supply all three modes, but the *narrative choice* and *delivery behavior* differ. It is not enough to embed a dashboard in a slide and call it a presentation.
+
+## A practical authoring and agent workflow
+
+Begin with a small **scene contract**. For example:
+
+| Contract field | Illustrative scene definition |
+| --- | --- |
+| Claim | "AMD-001 directly references DEL-101" |
+| Source | The maintained proposed-amendment record and typed link |
+| Visual | Highlight the precise recorded relationship |
+| Reveal order | Proposal → direct delivery → dependent review candidate |
+| Interaction | Open the selected record, navigate and return |
+| Fallback | A text description and tabular link list |
+| Review | Verify status, IDs and relationship meanings |
+
+This is an **illustrative authoring brief**, not an accepted YAML type in the current slide schema. The real [presentation guide](../presentations/README.md) lists the available types and fields. A future React/interactive scene type would require a schema, renderer, tests and static fallback.
+
+Use the following sequence for either an individual author or an AI-assisted team:
+
+1. **Define the audience and decision.** Why are people here, and what should change in their understanding?
+2. **Identify maintained sources.** Choose evidence, claims, definitions and source revisions; flag unresolved uncertainty.
+3. **Storyboard the argument.** Outline an opening, three to five meaningful turns, a conclusion and a link to explore further.
+4. **Select the simplest visual per scene.** Choose a static diagram unless a specific interaction adds understanding.
+5. **Keep knowledge and presentation separate.** Scene definitions select meaning, pacing and view; they do not rewrite engineering calculations or source records.
+6. **Test the real presentation route.** Keyboard, contrast, projector distance, network loss, reduced motion and browser resize.
+7. **Publish with provenance.** Provide sources, speaker notes and any snapshot dates or assumptions.
+8. **Observe understanding.** Ask someone to explain the point back to you; revise weak scenes before adding animation.
+
+An agent can help propose scenes, generate a layout, draft narration and run visual regression tests. It must also report unsupported claims, invalid links and invented connections. A working animation is not proof of a correct explanation.
+
+## Try three formats with the existing Lab
+
+**Experiment A — Guided story.** Open the [information model deck](https://and-gu.github.io/document-as-code-lab/presentations/information-model/). Pick a slide that currently lists facts. Rewrite it as a single claim with an appropriate reveal order; note what supporting material should be accessible only on request.
+
+**Experiment B — Explorable map.** Open the [Contract Explorer](https://and-gu.github.io/document-as-code-lab/chapters/09-images/#contract-explorer-widget). Begin with a proposed amendment and trace one recorded connection and one possible review candidate. Write a presenter script that can open either record without losing the overarching question.
+
+**Experiment C — Data story.** Open the [Project Control Center](https://and-gu.github.io/document-as-code-lab/dashboard/). Explain one graph to someone unfamiliar with the project. Which filter would improve the story? Where must you clarify snapshot age, measurement method or limits?
+
+Compare the formats for **clarity, effort, shareability and the ability to answer an unexpected audience question**, not for the number of animations.
 
 ## Keep the presentation connected to its evidence
 
