@@ -7,6 +7,8 @@ import { siteUrl } from '../lib/urls';
 import '../styles/home.css';
 import { learningJourney } from '../lib/learning-journey';
 const chapters = await getChapters();
+const coreChapters = chapters.filter((chapter) => !chapter.data.bonus);
+const bonusChapter = chapters.find((chapter) => chapter.data.bonus);
 const groups = learningJourney.map((group, index) => ({ ...group, icon: [FileText, Workflow, Network, Workflow][index] }));
 const packs = (await getPresentations()).filter((deck) => ['information-model', 'information-value', 'lab-architecture'].includes(deck.slug));
 const stages = [
@@ -59,15 +61,22 @@ const stages = [
       </div>
     </section>
     <section id="learning-path" class="home-section" aria-labelledby="learning-title">
-      <p class="home-eyebrow">{chapters.length} chapters · Read in sequence or explore a topic</p><h2 id="learning-title">Explore the learning journey</h2>
+      <p class="home-eyebrow">{coreChapters.length} core chapters · Plus one optional bonus chapter</p><h2 id="learning-title">Explore the learning journey</h2>
       <div class="learning-paths">
         {groups.map(({ start, end, title, description, icon: Icon, tone }) => <article class={`learning-path path-${tone}`}>
           <div class="path-heading"><Icon size={28} aria-hidden="true" /><span>{start === end ? `Chapter ${start}` : `Chapters ${start}–${end}`}</span></div>
           <h3>{title}</h3><p>{description}</p>
-          <ol start={start}>{chapters.filter((chapter) => chapter.data.chapter_number >= start && chapter.data.chapter_number <= end).map((chapter) => <li><a href={siteUrl(`chapters/${chapter.id}/`)} title={chapter.data.learning_goal}>{chapterTitle(chapter)}</a></li>)}</ol>
+          <ol start={start} >{coreChapters.filter((chapter) => chapter.data.chapter_number >= start && chapter.data.chapter_number <= end).map((chapter) => <li><a href={siteUrl(`chapters/${chapter.id}/`)} title={chapter.data.learning_goal}>{chapterTitle(chapter)}</a></li>)}</ol>
         </article>)}
       </div>
     </section>
+    {bonusChapter && <section id="bonus-chapter" class="home-section bonus-feature" aria-labelledby="bonus-title">
+      <p class="home-eyebrow">Bonus chapter · Optional deep dive</p>
+      <h2 id="bonus-title"><a href={siteUrl(`chapters/${bonusChapter.id}/`)}>{chapterTitle(bonusChapter)}</a></h2>
+      <p>Why stop at flat slides? Learn how source-linked HTML presentations, scrollytelling, interactive mind maps, dashboards and explorable explanations can transform how we communicate information.</p>
+      <p>Includes a practical directory of tools, real examples, videos, source-to-presentation methods and exercises. The original twelve chapters remain the core learning journey.</p>
+      <a class="bonus-feature-link" href={siteUrl(`chapters/${bonusChapter.id}/`)}>Explore the bonus chapter <ArrowRight size={18} aria-hidden="true" /></a>
+    </section>}
     <section id="working-lab" class="home-section" aria-labelledby="lab-title">
       <h2 id="lab-title">Explore the working lab</h2>
       <p>The tutorial uses this repository as a working example. Try a focused exercise or inspect the project's recorded activity.</p>
@@ -81,10 +90,12 @@ const stages = [
         <li><a href={siteUrl('materials/reference/dashboards-and-work-tracking/#missing-excel-tables-and-spreadsheets')}>Explore a spreadsheet-style view <ArrowRight size={18} aria-hidden="true" /></a><p>Fictional fixed dataset · Sort and filter a department budget using CSSV.</p></li>
         <li><a href={siteUrl('dashboard/')}>Behind the lab: Project Control Center <ArrowRight size={18} aria-hidden="true" /></a><p>Growth measured at build time · Operational snapshots refreshed on deployment and hourly, with retrieval times. Optional live retrieval is separate.</p></li>
       </ul>
-      <p class="home-caption">Each chapter also includes a short practice quiz. Fictional example statuses do not constitute operational approval.</p>
+      <p class="home-caption">Each core chapter also includes a short practice quiz. Fictional example statuses do not constitute operational approval.</p>
     </section>
     <section id="presentations" class="home-section" aria-labelledby="present-title">
       <h2 id="present-title">Present and share</h2><p>Explore how the approach works, when its benefits justify the change, and how this lab puts it into practice.</p>
+      {bonusChapter && <p>Want to design something beyond a slideshow? See the <a href={siteUrl(`chapters/${bonusChapter.id}/`)}>bonus chapter on explorable presentations</a> and its directory of tools.</p>}
+
       <div class="presentation-packs">
         {packs.map((pack) => <article><Presentation size={25} aria-hidden="true" /><h3><a href={siteUrl(`presentations/${pack.slug}/`)}>{pack.title}</a></h3><p>{pack.description}</p><p class="home-caption">{pack.slides.length} slides · <a href={siteUrl(`presentations/${pack.slug}/notes/`)}>Speaker notes</a></p></article>)}
       </div>
