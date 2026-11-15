@@ -26,6 +26,7 @@ export async function initConceptMap() {
   let graph: ForceGraph3DInstance | undefined;
   let nodes: MapNode[] = [];
   let disposed = false;
+  let fitPending = false;
   const duration = () => reducedMotion.matches ? 0 : 550;
   const endpoint = (node: LinkObject['source']) => typeof node === 'object' ? String(node.id) : String(node);
   const linked = (link: Connection) => link.source === selected || link.target === selected;
@@ -62,15 +63,16 @@ export async function initConceptMap() {
     panel.dataset.selected = selected;
     if (graph) status.textContent = `${concept.label} · ${data.links.filter(linked).length} connections highlighted`;
   }
+  function styleLabel(id: string, sprite: SpriteText, near: Set<string>) {
+    const node = byId.get(id)!;
+    sprite.color = id === selected ? '#173e2b' : colors[node.group - 1];
+    sprite.backgroundColor = id === selected ? '#dce9d9' : '#f7f9f6';
+    sprite.borderColor = id === selected ? '#526c4c' : '#f7f9f6';
+    sprite.fontWeight = near.has(id) ? '650' : '450';
+  }
   function styleSelection() {
     const near = neighbours();
-    for (const [id, sprite] of labels) {
-      const node = byId.get(id)!;
-      sprite.color = id === selected ? '#173e2b' : colors[node.group - 1];
-      sprite.backgroundColor = id === selected ? '#dce9d9' : '#f7f9f6';
-      sprite.borderColor = id === selected ? '#526c4c' : '#f7f9f6';
-      sprite.fontWeight = id === selected || near.has(id) ? '650' : '450';
-    }
+    for (const [id, sprite] of labels) styleLabel(id, sprite, near);
     graph?.linkColor(link => endpoint(link.source) === selected || endpoint(link.target) === selected ? '#55775d' : '#cad5cb');
     graph?.linkWidth(link => endpoint(link.source) === selected || endpoint(link.target) === selected ? .55 : .12);
     graph?.linkDirectionalArrowLength(link => endpoint(link.source) === selected || endpoint(link.target) === selected ? 2.6 : 0);
@@ -109,9 +111,9 @@ export async function initConceptMap() {
     if (!graph) return;
     nodes = positions();
     const ids = new Set(nodes.map(node => node.id));
+    fitPending = true;
     graph.graphData({ nodes, links: data.links.filter(link => ids.has(link.source) && ids.has(link.target)).map(link => ({ ...link })) });
     styleSelection();
-    requestAnimationFrame(fit);
   }
   describeSelection();
   document.querySelector('.knowledge-page')?.addEventListener('click', event => {
@@ -157,7 +159,6 @@ export async function initConceptMap() {
     filter.value = ''; search.value = ''; results.hidden = true; selected = 'metadata';
     describeSelection(); populateGraph();
     graph?.cameraPosition({ x: 0, y: 0, z: 650 }, { x: 0, y: 0, z: 0 }, 0);
-    fit();
   });
   root.querySelectorAll<HTMLButtonElement>('[data-map-mode]').forEach(button => button.addEventListener('click', () => {
     dimensions = button.dataset.mapMode === '2' ? 2 : 3;
@@ -192,11 +193,11 @@ export async function initConceptMap() {
         const concept = node as MapNode;
         const sprite = new SpriteText(concept.label, 10.5, colors[concept.group - 1]);
         sprite.fontFace = 'system-ui, -apple-system, sans-serif';
-        sprite.fontSize = 64; sprite.fontWeight = '450';
+        sprite.fontSize = 64;
         sprite.padding = [2.5, 1.5]; sprite.borderRadius = 3;
         sprite.borderWidth = .4;
-        sprite.backgroundColor = '#f7f9f6';
-        sprite.borderColor = '#f7f9f6';
+        // Graph objects are created asynchronously, after populateGraph returns.
+        styleLabel(concept.id, sprite, neighbours());
         labels.set(concept.id, sprite);
         return sprite;
       })
@@ -207,7 +208,13 @@ export async function initConceptMap() {
         return label;
       })
       .linkOpacity(.65)
-      .onEngineStop(() => { styleSelection(); fit(); })
+      .onEngineStop(() => {
+        // Styling setters restart the graph engine: calling them here creates a
+        // feedback loop. Fit once after replacing data, never on selection/idle.
+        if (!fitPending) return;
+        fitPending = false;
+        fit();
+      })
       .onNodeClick(node => { select(String(node.id)); })
       .onLinkClick(link => { select(endpoint(link.source)); });
     graph.cameraPosition({ x: 0, y: 0, z: 650 });
