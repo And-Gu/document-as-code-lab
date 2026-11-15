@@ -8,12 +8,31 @@ import RecordDetails from '../../components/materials/RecordDetails.astro';
 import { materialRecord } from '../../lib/material-records';
 import { repositoryRoot } from '../../lib/repository';
 import { getChapters, chapterTitle } from '../../lib/chapters';
+import { buildCacheKey, fingerprintPaths } from '../../lib/incremental-build.mjs';
 
 export async function getStaticPaths() {
-  return (await getCollection('materials')).map((material) => ({
-    params: { slug: material.id },
-    props: { material },
-  }));
+  const [materials, chapters] = await Promise.all([getCollection('materials'), getChapters()]);
+  const navigationKey = buildCacheKey('chapter-menu', chapters.map((chapter) => [
+    chapter.id, chapter.data.chapter_number, chapter.data.bonus, chapterTitle(chapter),
+  ]));
+  // Selected interactive materials embed data read directly from example fixtures.
+  // Include those dependencies so changes cannot be hidden by a warm build cache.
+  const [recordsKey, budgetKey] = await Promise.all([
+    fingerprintPaths(repositoryRoot, ['examples/contract-explorer', 'examples/information-refinement']),
+    fingerprintPaths(repositoryRoot, ['examples/dashboards/department-budget.cssv']),
+  ]);
+  return materials.map((material) => {
+    const records = material.id.startsWith('examples/contract-explorer/records/')
+      || material.id.startsWith('examples/information-refinement/sources/')
+      || ['reference/information-refinement', 'reference/knowledge-catalogue'].includes(material.id);
+    const budget = material.id === 'reference/dashboards-and-work-tracking';
+    return {
+      params: { slug: material.id },
+      cacheKey: buildCacheKey('material', material.digest, navigationKey,
+        records ? recordsKey : null, budget ? budgetKey : null),
+      props: { material },
+    };
+  });
 }
 const { material } = Astro.props;
 const { Content, headings } = await render(material);
