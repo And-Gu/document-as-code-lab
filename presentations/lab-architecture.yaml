@@ -6,7 +6,7 @@ slides:
     type: title
     title: The tutorial is built the way it teaches
     subtitle: Maintained sources become a website, interactive applications, and presentations
-    context: "Document-as-Code Lab | Behind the architecture"
+    context: "Document-as-Code Lab: behind the architecture"
     sources: [docs/01-introduction.md, docs/11-beyond-github.md]
     notes: "The website is not a manually maintained HTML copy of the chapters. It is an output built from the same repository that readers are learning about. Explain the architecture with concrete examples, not a tour of product logos."
 
@@ -24,7 +24,7 @@ slides:
 
   - id: github-collaboration
     type: comparison
-    title: Git records changes; GitHub supports collaboration
+    title: Git history and GitHub collaboration
     left:
       title: Maintained information
       items:
@@ -69,18 +69,18 @@ slides:
   - id: presentations
     type: content
     title: Presentations reuse knowledge without copying a chapter
-    message: YAML defines the teaching sequence; Astro and Reveal.js render the slides
+    message: YAML defines the teaching sequence. React components render it through reveal.js.
     bullets:
       - "Short messages reference the maintained chapters"
-      - "Reusable slide components establish a consistent format"
-      - "HTML decks and speaker-note pages share the site build"
+      - "The official React Deck and Slide components manage the presentation"
+      - "One deck opens in scroll view for independent reading"
       - "Presentation wording still needs editorial review after source changes"
-    sources: [docs/09-images.md, docs/11-beyond-github.md]
-    notes: "Open the presentation collection in the browser. Discuss why an effective slide is a curated interpretation rather than an entire paragraph carried unchanged into another format."
+    sources: [docs/10-publishing.md, docs/11-beyond-github.md]
+    notes: "Astro renders the initial HTML and hydrates the official @revealjs/react wrapper. The concept deck uses reveal.js scroll view and a React source-selection demonstration. State changes affect the preview only. HTML decks and static notes still share the site build. Open the presentation collection in the browser. Discuss why an effective slide is a curated interpretation rather than an entire paragraph carried unchanged into another format."
 
   - id: automate-and-publish
     type: diagram
-    title: GitHub Actions runs the pipeline; Pages serves the result
+    title: Build and publication
     message: A successful build and a published website are distinct results
     steps:
       - { label: PR, detail: "Check proposed changes without publishing" }
@@ -112,7 +112,7 @@ slides:
 
   - id: closing
     type: content
-    title: Build an environment around useful information
+    title: An environment for maintained information
     message: Choose maintained sources, make changes inspectable, and deliver more than one view
     bullets:
       - "Identify ownership and the authoritative source"

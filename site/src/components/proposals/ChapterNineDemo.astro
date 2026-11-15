@@ -1,0 +1,100 @@
+---
+import { moveTasks, type Proposal, type Scenario } from '../../lib/chapter-nine-proposals';
+interface Props { proposal: Proposal; scenario: Scenario; }
+const { proposal, scenario } = Astro.props;
+const source = scenario.sources[0];
+const audiences = [...new Set(scenario.documents.map(document => document.audience).filter(audience => audience !== 'Everyone'))];
+const sourceById = (id: string) => scenario.sources.find(record => record.id === id)!;
+---
+<section class={`proposal-demo method-${proposal.method}`} data-proposal-demo data-method={proposal.method} aria-label={`${proposal.methodName} demonstration`}>
+  <script type="application/json" data-proposal-data set:html={JSON.stringify({ scenario, tasks: moveTasks }).replaceAll('<', '\\u003c')} />
+  <p class="demo-instruction">{proposal.instruction}</p>
+  {proposal.method === 'cards' && <fieldset class="demo-toolbar">
+    <legend>Who needs the material?</legend>
+    {['All audiences', ...audiences].map((audience, index) => <button type="button" data-audience={index === 0 ? '' : audience} aria-pressed={index === 0 ? 'true' : 'false'}>{audience}</button>)}
+  </fieldset>}
+  {['map', 'comparison'].includes(proposal.method) && <fieldset class="demo-toolbar">
+    <legend>Choose a maintained source</legend>
+    {scenario.sources.map((record, index) => <button type="button" data-choose-source={record.id} aria-pressed={index === 0 ? 'true' : 'false'}>{record.title}</button>)}
+  </fieldset>}
+  {proposal.method === 'cards' && <>
+    <p class="demo-status" role="status" data-demo-status>{scenario.documents.length} materials for all audiences</p>
+    <div class="document-cards">
+      {scenario.documents.map(document => <article class="document-card" data-document={document.id} data-audience-value={document.audience}>
+        <p class="card-audience">{document.audience}</p><h3>{document.title}</h3><p>{document.purpose}</p>
+        <dl>{document.fields.map(field => <div><dt>{field.label}</dt><dd>{sourceById(field.source).value}</dd></div>)}</dl>
+        <p class="card-owner">Maintained by {document.owner}</p>
+        <div class="source-links">{document.fields.map(field => <button type="button" class="text-button" data-inspect-source={field.source}>{sourceById(field.source).title}</button>)}</div>
+      </article>)}
+    </div>
+  </>}
+  {proposal.method === 'map' && <>
+    <p class="demo-status" role="status" data-demo-status>{scenario.documents.filter(document => document.fields.some(field => field.source === source.id)).length} materials use {source.title.toLowerCase()}</p>
+    <div class="dependency-map">
+      <div class="map-source"><span>Shared source</span><h3 data-map-title>{source.title}</h3><p data-map-value>{source.value}</p><p class="map-relationship">Used in the connected materials →</p></div>
+      <div class="map-documents">
+        {scenario.documents.map(document => {
+          const connected = document.fields.some(field => field.source === source.id);
+          return <article class:list={['map-document', { connected }]} data-map-document={document.id}>
+            <p class="map-state" data-map-state>{connected ? 'Uses this source' : 'Uses other sources'}</p>
+            <h3>{document.title}</h3><p data-map-field>{connected ? source.value : document.fields.map(field => sourceById(field.source).value).join(' · ')}</p>
+            <p class="card-owner">Maintained by {document.owner}</p>
+            <button type="button" class="text-button" data-inspect-document={document.id}>Inspect its source links</button>
+          </article>;
+        })}
+      </div>
+    </div>
+  </>}
+  {proposal.method === 'comparison' && <>
+    <div class="change-control">
+      <div><h3 data-change-title>{source.title}</h3><p><span data-old-value>{source.value}</span> <span aria-hidden="true">→</span> <strong data-new-value>{source.proposed}</strong></p></div>
+      <button type="button" class="primary-button" data-preview-change aria-pressed="false">Preview {source.proposed}</button>
+    </div>
+    <p class="demo-status" role="status" data-demo-status>Current values are shown. Preview the change to compare its effects.</p>
+    <div class="document-comparisons">
+      {scenario.documents.map(document => <article class="document-comparison" data-comparison-document={document.id}>
+        <div class="comparison-heading"><h3>{document.title}</h3><span data-comparison-status>Current source values</span></div>
+        <div class="comparison-columns">
+          <div><h4>Current</h4><dl>{document.fields.map(field => <div><dt>{field.label}</dt><dd>{sourceById(field.source).value}</dd></div>)}</dl></div>
+          <div class="proposed-copy"><h4>Proposed preview</h4><dl>{document.fields.map(field => <div><dt>{field.label}</dt><dd data-proposed-field={field.source}>{sourceById(field.source).value}</dd></div>)}</dl></div>
+        </div>
+        <button type="button" class="text-button" data-inspect-document={document.id}>Inspect its source links</button>
+      </article>)}
+    </div>
+  </>}
+  {proposal.method === 'timeline' && <>
+    <div class="change-control"><div><h3>Move date</h3><p>15 June <span aria-hidden="true">→</span> <strong>17 June</strong></p></div><button type="button" class="primary-button" data-preview-change aria-pressed="false">Preview 17 June</button></div>
+    <p class="demo-status" role="status" data-demo-status>The current plan uses 15 June as the move date.</p>
+    <div class="timeline-legend"><span><i class="original-dot"></i>Current date</span><span><i class="proposed-dot"></i>Proposed date</span></div>
+    <div class="timeline-scroll" tabindex="0" role="region" aria-label="Move timeline, 12 to 20 June">
+      <div class="move-timeline">
+        <div class="timeline-axis"><span>June</span><div>{Array.from({length:9},(_,index)=><span>{index+12}</span>)}</div></div>
+        {moveTasks.map(task => {
+          const currentDay = task.fixedDay ?? 15 + task.offset!;
+          return <div class="timeline-row">
+            <button type="button" class="timeline-task" data-inspect-task={task.id}><strong>{task.title}</strong><span>{task.rule}</span></button>
+            <div class="timeline-track" data-timeline-task={task.id}>
+              <span class="timeline-mark current-mark" style={`--day:${currentDay-12}`}><span>{currentDay} June</span></span>
+              <span class="timeline-mark proposed-mark" style={`--day:${currentDay-12}`} hidden><span>{currentDay} June</span></span>
+            </div>
+          </div>;
+        })}
+      </div>
+    </div>
+  </>}
+  <aside class="record-inspector" aria-label="Selected source or relationship" tabindex="-1" data-inspector>
+    <p class="inspector-label">Inspect the information</p><h3 data-inspector-title>{proposal.method === 'timeline' ? 'Move date and task rules' : source.title}</h3>
+    <p data-inspector-description>{proposal.method === 'timeline' ? 'The move is planned for 15 June. Three tasks use a day offset from that date. The lease start has its own fixed date.' : source.meaning}</p>
+    <ul data-inspector-links><li>{source.title} · {source.value}</li></ul>
+  </aside>
+  <details class="prototype-records"><summary>Inspect all maintained records</summary>
+    <h3>Shared values</h3><dl>{scenario.sources.map(record=><div><dt>{record.title} <code>{record.id}</code></dt><dd>{record.value} · {record.meaning}</dd></div>)}</dl>
+    <h3>Document relationships</h3><ul>{scenario.documents.map(document=><li><strong>{document.title}</strong> uses {document.fields.map(field=>sourceById(field.source).title.toLowerCase()).join(', ')}. Maintained by {document.owner}.</li>)}</ul>
+    {scenario.id === 'office' && <><h3>Scheduling rules</h3><ul>{moveTasks.map(task=><li><strong>{task.title}</strong> · {task.rule}. {task.review}</li>)}</ul></>}
+  </details>
+  <noscript><p>The current records and visual remain readable. Enable JavaScript to try the selections and proposed changes.</p></noscript>
+</section>
+<script>
+  import { initChapterNineProposals } from '../../lib/chapter-nine-proposal-controller';
+  initChapterNineProposals();
+</script>

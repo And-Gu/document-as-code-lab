@@ -2,96 +2,115 @@
 id: 05-images
 chapter_number: 9
 status: in-review
-learning_goal: "Explain how one maintained information model can answer different questions through interactive views, while preserving source identity and meaning."
+learning_goal: "Use a knowledge graph to find an explanation, understand how its records and relationships support exploration, and see how an AI agent can follow the same sources."
 visuals: []
 ---
 
 # Information You Can Explore
 
-A contract manager receives a proposed amendment. Which deliveries deserve review before the team accepts it? The answer depends on connections between agreements, projects, and deliveries, not just the wording of one document.
+A colleague asks you how the onboarding lab decides which procedures belong in the review queue. You explored that queue in [Chapter 7](07-processing.md), where it listed draft procedures awaiting review. How can you bring together what you have learned to explain how it works?
 
-The onboarding examples showed how to identify, connect, and process information. Here we use a different fictional setting to explore what happens when **readers choose the question and follow the relationships themselves**.
+The graph below gives you an overview of the concepts introduced throughout the course and shows how they connect. This is a **knowledge graph**: a map of ideas linked by named relationships. Select a concept to see its description, related ideas and links to the chapters that explain it.
 
-## A customer, two projects, several commitments
+<span id="explore-one-source-three-views"></span>
+<span id="explore-how-does-metadata-help-us-reuse-information"></span>
 
-Our customer has two projects. A framework agreement covers both, while a delivery order covers one. Proposed amendment AMD-001 would change terms for its interface package, DEL-101. The acceptance workshop, DEL-102, depends on that package.
+## Explore: From a review status to a review queue
 
-These are **fictional teaching records**, maintained as [Markdown sources in the repository](../examples/contract-explorer/README.md), not actual contracts. Their relationships are recorded explicitly rather than guessed from titles.
+Use the graph to see how the ideas you have learned fit together. To answer your colleague’s question, start in the details panel on the right of the graph. On smaller screens, the panel appears below it.
 
-## Same information, different questions
+1. **Metadata** is already selected. Review status is one example of metadata: it describes whether a procedure is a draft or approved.
+2. In the panel’s **How it connects** list, select **Processing** from **Processing uses Metadata**. The panel now shows information about processing.
+3. Open the Chapter 7 link under **Read more**. That chapter shows how the processor reads each procedure’s status and selects drafts for the review queue.
 
-Consider three questions from three different people.
+You can also select labels in the graph or use **Find a concept** to search for a term.
 
-**Account manager: Which projects share an agreement?**
+<!-- interactive: knowledge-map -->
 
-Show the customer, its projects, and the agreements linked to each one. The shared framework agreement becomes visible without opening every contract.
+## Follow a question through the graph
 
-**Delivery manager: What depends on the interface package?**
+The **Processing** panel also shows what processing can produce. Select **Derived view** from the connection **Processing produces Derived view**. A derived view presents information selected, combined or calculated from maintained sources. In the onboarding lab, the review queue is a derived view: it lists the draft procedures selected by the processor.
 
-Switch to a delivery-focused view. DEL-102 depends on DEL-101. A list of documents would be less useful than seeing that relationship directly.
+<figure class="example-flow">
+  <figcaption>How a review status helps produce the queue</figcaption>
+  <ol role="list">
+    <li><strong>Metadata</strong><span>The procedure’s status field records whether it is a draft or approved.</span></li>
+    <li><strong>Processing</strong><span>The processor reads that field and selects procedures marked as drafts.</span></li>
+    <li><strong>Derived view</strong><span>The review queue lists those procedures so their owners can see what needs review.</span></li>
+  </ol>
+</figure>
 
-**Contract manager: What should we review if the amendment is accepted?**
+We can now answer the colleague:
 
-Follow AMD-001's connections to the affected delivery, its project, and dependent work. The links identify possible review work; the proposal is not yet effective.
+> The status field gives the processor a way to select drafts. The review queue presents the selected procedures together. When a procedure’s status changes, the next build uses the new value to decide whether to include it.
 
-The underlying records have not changed. **Only the question and the view have changed.**
+The graph helped us locate and connect the ideas; the linked chapter supplied the worked example. That is what exploration adds: a way to start with a question and find the information needed to answer it.
 
-## Explore: One source, three views
+<span id="from-metadata-to-a-useful-view"></span>
 
-The website's Contract Explorer reads the same nine records for all three views. It is a fictional example, updated when the site is built. In GitHub's Markdown preview, use the record table and linked sources to follow the same relationships.
+## What makes the map work?
 
-The explorer offers three selectable perspectives:
+The map begins with a small record for each concept. Consider **Metadata**:
 
-| View | Reader can do | What it reveals |
+| Part of the record | What it contains | What it lets us do |
 | --- | --- | --- |
-| **Relationships** | Select a customer, project, agreement, or delivery | Connected records, with labeled links |
-| **Commitments** | Filter deliveries by project or agreement | Delivery names, planned dates if recorded, and associated terms |
-| **Change impact** | Select an agreement or proposed amendment | Direct links and possible downstream review candidates |
+| Identifier | `metadata` | Refer to this concept consistently |
+| Label and description | “Metadata” and an explanation of the term | Find and understand the idea |
+| Course section | Make information processable | Group and filter related course topics |
+| Reading reference | Chapter 5’s explanation of metadata | Open the relevant passage |
 
-Selecting a record reveals its **source file, status, revision, and explicit relationships**. The interface distinguishes *recorded connections* from *possible impacts inferred by following those connections*.
+These are the **structured fields** introduced in [Chapter 5](05-structured-content.md). The website uses them to label the graph, populate the information panel and build reading links.
 
-AMD-001 remains **proposed**, not effective. Its lifecycle status does not establish whether a delivery is complete; the explorer shows delivery execution status separately.
+A connection has its own recorded meaning. **Processing uses Metadata** joins two concept IDs with the relationship “uses”. This applies the **named relationships** from [Chapter 6](06-information-architecture.md). The line tells us how the concepts relate; their positions help us arrange and explore the map.
 
-The explorer is not a new system of record. Selection and filtering change the view, not the maintained files. Source edits appear after the site is rebuilt.
+Finally, the **processing** introduced in Chapter 7 prepares the view. During the site build, the website checks the concept IDs and references, then uses the records to create the graph and the written concept list. The same maintained information supports both.
 
-**If proposed amendment AMD-001 were accepted, which deliveries deserve review?** Start with **Explore change impact** below, then inspect the directly linked delivery and follow the dependency to a further review candidate. Without JavaScript, read the Change impact list and linked records; the same recorded paths remain available.
+<span id="keep-the-connection-to-the-sources"></span>
 
-<!-- interactive: contract-explorer -->
+You can inspect the [concept records and relationships](../data/course-concepts.json) in the repository. The authors maintain these connections alongside the chapters. If an explanation moves or a term changes, the records and chapter edits can be reviewed together before the next build updates the map.
 
-The direct links identify DEL-101. Because DEL-102 depends on it, DEL-102 is a further review candidate. Neither connection decides what the team should change. You can inspect the same chain in the sources below.
+<span id="same-information-different-questions"></span>
 
-## Inspect the example records
+## Choose where to look
 
-| Record | What it represents | Connection |
-| --- | --- | --- |
-| CUST-01 | Northstar Logistics | Customer for both projects |
-| PRJ-101 | Depot rollout | Includes DEL-101 and DEL-102 |
-| PRJ-102 | Training services | Includes DEL-103 |
-| AGR-001 | Framework agreement | Applies to both projects |
-| AGR-002 | Project delivery order | Applies to PRJ-101 |
-| AMD-001 | Proposed amendment | Proposes changes to AGR-002 affecting DEL-101 |
-| DEL-101 | Interface package | Part of PRJ-101 |
-| DEL-102 | Acceptance workshop | Part of PRJ-101; depends on DEL-101 |
-| DEL-103 | Training package | Part of PRJ-102 |
+Suppose the colleague now asks what helps an AI agent find the right source. Search for **AI agent**, follow its connection to **Retrieval**, and then select **Metadata**. Retrieval means finding relevant information for a task. Fields such as a topic or review status can help select useful sources; the sources’ text provides the detail.
 
-The explorer shows relationships already recorded in this example. [Follow DEL-101 across sources](../reference/information-refinement.md) to continue with a different question: what should people check before communicating a changed date? The refinement exercise adds explicit source claims and a reviewed teaching alias, without inventing new edges in this contract graph.
+The controls help you concentrate on the part of the course you need:
 
-## Why this is more than a dashboard
+- **Course section** narrows the map to one group of topics. Choose **Make information processable** to concentrate on fields, relationships and processing, or **All four sections** to follow connections across the course.
+- **Focus on these connections** brings the selected concept and its neighbours closer, making that part of the map easier to read.
+- **2D** gives you a flat view; **3D** lets you turn the map. **Reset view** returns to the starting view with Metadata selected.
 
-A dashboard usually answers a set of predefined questions. An exploratory interface allows readers to select an object, follow a relationship, and ask the next question.
+<span id="why-this-is-more-than-a-dashboard"></span>
 
-That is where structured information becomes especially useful. A record has an identity; its relationships have meanings; its status belongs to a defined process. Those details let people navigate the information rather than only read a published snapshot.
+These choices change how you look at the information. The concept records stay the same. The graph itself is another **derived view**, just as the review queue is. The concept list below the graph offers the same connections and reading links as text.
 
-The same approach can support a knowledge graph, portfolio overview, dependency view, or AI-assisted query interface. Each is an application of maintained information—not a reason to maintain separate copies of it.
+<span id="ask-an-ai-agent-to-prepare-the-review"></span>
 
-## Keep the connection to the sources
+## Let an AI agent follow the same sources
 
-An attractive visualization can still mislead. A line between two objects must mean something specific. A date needs a source. A missing link means *no recorded link*, not proof that the objects are unrelated.
+In [Chapter 8](08-ai-native.md#give-the-agent-context-it-can-use), we gave an agent context it could use. The graph adds a guide to that context: named ideas, connections between them and references to the explanations.
 
-When a source changes, generated views should refresh through a defined process. Users should be able to inspect which source and revision produced the view. If a proposed change may affect other items, treat them as review candidates, not automatically approved updates.
+An agent with access to the concept records and linked chapters can investigate the colleague’s original question too. A request could be:
 
-> **Explore further:** Want to create reusable diagrams and views? The [visual-source guide](../reference/visual-sources.md) explains Mermaid, SVG, raster images, source provenance, and accessible alternatives. Reading needs no setup; optional rendering examples identify their tools.
+> Explain how the onboarding lab uses a procedure’s review status to build the review queue. Follow the course graph to the relevant chapters, use the example in Chapter 7 and link to the passages that support the answer.
 
-A useful explorer lets you move from a question to recorded evidence without maintaining another copy of the information. But how else can we improve the underlying data rather than only its presentation? [Chapter 10](10-data-enrichment.md) examines data quality, annotation, enrichment, visualization and reuse.
+The agent can follow **Metadata → Processing → Derived view**, read the relevant sections and prepare an explanation with source links. A reader can then inspect the same passages and check whether the explanation fits the example.
+
+The benefit also extends to maintenance. If the team changes how the queue selects procedures, an agent can use the references to find related explanations and propose edits together. The recorded connections give it useful starting points, while the source text explains what each connection means.
+
+## Use the same idea in your work
+
+A support team could connect products, recurring problems, troubleshooting procedures and training material. A colleague investigating a login problem could find the relevant product, follow a link to its troubleshooting procedure and open the instructions. An agent with access to those sources could follow the same route to prepare a response.
+
+The information model makes that possible: identifiable records, fields with agreed meanings and useful relationships. A graph makes those connections visible. Search, a filtered list or an agent’s explanation can provide other ways into the same information.
+
+<span id="a-customer-two-projects-several-commitments"></span>
+<span id="inspect-the-example-records"></span>
+<span id="contract-explorer-widget"></span>
+
+For another application, the [Contract Explorer](/document-as-code-lab/labs/contract-explorer/) lets you follow links between agreements, orders, projects and deliveries. The [visual-source guide](../reference/visual-sources.md) explores other ways to show connected information.
+
+Finding a source is the beginning of an investigation. We may also need to check its values, explain a gap or calculate something new. [Chapter 10](10-data-enrichment.md) follows a service manager through that work, turning case records into a finding that can be checked and reused.
 
 <!-- interactive: chapter-quiz -->

@@ -1,0 +1,657 @@
+{
+  "nodes": [
+    {
+      "id": "source",
+      "label": "Maintained source",
+      "group": 1,
+      "description": "The editable information that people keep up to date and use to produce other material.",
+      "reading": [
+        {
+          "chapter": "01-introduction",
+          "anchor": "from-a-document-to-maintained-information"
+        }
+      ]
+    },
+    {
+      "id": "markdown",
+      "label": "Markdown",
+      "group": 1,
+      "description": "Readable text with simple markings for headings, lists, links and other structure.",
+      "reading": [
+        {
+          "chapter": "04-markdown",
+          "anchor": "source-and-presentation"
+        }
+      ]
+    },
+    {
+      "id": "repository",
+      "label": "Repository",
+      "group": 1,
+      "description": "A shared collection of files and their version history.",
+      "reading": [
+        {
+          "chapter": "02-github-workspace",
+          "anchor": "repository-git-and-github"
+        }
+      ]
+    },
+    {
+      "id": "git",
+      "label": "Git",
+      "group": 1,
+      "description": "The tool that records revisions and lets people compare and combine changes to files.",
+      "reading": [
+        {
+          "chapter": "02-github-workspace",
+          "anchor": "repository-git-and-github"
+        }
+      ]
+    },
+    {
+      "id": "github",
+      "label": "GitHub",
+      "group": 1,
+      "description": "A place to host a repository, discuss proposed changes and run automated workflows.",
+      "reading": [
+        {
+          "chapter": "02-github-workspace",
+          "anchor": "repository-git-and-github"
+        }
+      ]
+    },
+    {
+      "id": "commit",
+      "label": "Commit",
+      "group": 1,
+      "description": "A recorded revision of tracked files, with a message explaining the change.",
+      "reading": [
+        {
+          "chapter": "03-project-growth",
+          "anchor": "what-does-git-remember"
+        }
+      ]
+    },
+    {
+      "id": "branch",
+      "label": "Branch",
+      "group": 1,
+      "description": "A separate line of development where a change can be prepared.",
+      "reading": [
+        {
+          "chapter": "02-github-workspace",
+          "anchor": "branches-commits-and-pull-requests"
+        }
+      ]
+    },
+    {
+      "id": "pull-request",
+      "label": "Pull request",
+      "group": 1,
+      "description": "A proposal to review and merge changes from a branch.",
+      "reading": [
+        {
+          "chapter": "02-github-workspace",
+          "anchor": "follow-a-proposed-change"
+        }
+      ]
+    },
+    {
+      "id": "review",
+      "label": "Review",
+      "group": 1,
+      "description": "People inspect a proposed change, discuss it and record whether the specified revision is acceptable.",
+      "reading": [
+        {
+          "chapter": "03-project-growth",
+          "anchor": "who-changed-reviewed-and-approved-the-information"
+        }
+      ]
+    },
+    {
+      "id": "record",
+      "label": "Record",
+      "group": 2,
+      "description": "An identifiable item containing text and metadata, such as a procedure or requirement.",
+      "reading": [
+        {
+          "chapter": "06-information-architecture",
+          "anchor": "choose-useful-boundaries"
+        }
+      ]
+    },
+    {
+      "id": "identifier",
+      "label": "Identifier",
+      "group": 2,
+      "description": "A stable reference that lets people and tools find the same information item over time.",
+      "reading": [
+        {
+          "chapter": "06-information-architecture",
+          "anchor": "give-important-items-stable-identities"
+        }
+      ]
+    },
+    {
+      "id": "metadata",
+      "label": "Metadata",
+      "group": 2,
+      "description": "Fields describing content, such as its identifier, owner and review status.",
+      "reading": [
+        {
+          "chapter": "05-structured-content",
+          "anchor": "metadata-information-about-information"
+        }
+      ]
+    },
+    {
+      "id": "schema",
+      "label": "Schema",
+      "group": 2,
+      "description": "Rules that define required fields, their data types and allowed values.",
+      "reading": [
+        {
+          "chapter": "05-structured-content",
+          "anchor": "try-schema-validation"
+        }
+      ]
+    },
+    {
+      "id": "validation",
+      "label": "Validation",
+      "group": 2,
+      "description": "Checking whether information follows configured rules, such as having all required fields.",
+      "reading": [
+        {
+          "chapter": "05-structured-content",
+          "anchor": "try-schema-validation"
+        }
+      ]
+    },
+    {
+      "id": "relationship",
+      "label": "Relationship",
+      "group": 2,
+      "description": "A named connection between identified items, such as a delivery that depends on another delivery.",
+      "reading": [
+        {
+          "chapter": "06-information-architecture",
+          "anchor": "connect-information-with-explicit-relationships"
+        }
+      ]
+    },
+    {
+      "id": "processing",
+      "label": "Processing",
+      "group": 2,
+      "description": "Software reads, checks, selects, calculates or transforms maintained information into useful results.",
+      "reading": [
+        {
+          "chapter": "07-processing",
+          "anchor": "one-processing-chain"
+        }
+      ]
+    },
+    {
+      "id": "traceability",
+      "label": "Traceability",
+      "group": 2,
+      "description": "The ability to follow connections between information, revisions, reviews and the outputs they produced.",
+      "reading": [
+        {
+          "chapter": "06-information-architecture",
+          "anchor": "what-changes-when-a-source-changes"
+        }
+      ]
+    },
+    {
+      "id": "derived-view",
+      "label": "Derived view",
+      "group": 3,
+      "description": "A presentation assembled or calculated from source information, such as a list of items awaiting review.",
+      "reading": [
+        {
+          "chapter": "09-images",
+          "anchor": "follow-a-question-through-the-graph"
+        }
+      ]
+    },
+    {
+      "id": "visualization",
+      "label": "Visualization",
+      "group": 3,
+      "description": "A visual arrangement that helps readers investigate patterns and relationships in information.",
+      "reading": [
+        {
+          "chapter": "10-data-enrichment",
+          "anchor": "visualize-to-investigate-not-only-to-present"
+        }
+      ]
+    },
+    {
+      "id": "ai-agent",
+      "label": "AI agent",
+      "group": 3,
+      "description": "A language model combined with tools for tasks such as finding sources, proposing edits and running checks.",
+      "reading": [
+        {
+          "chapter": "08-ai-native",
+          "anchor": "give-the-agent-context-it-can-use"
+        }
+      ]
+    },
+    {
+      "id": "context",
+      "label": "Context",
+      "group": 3,
+      "description": "Relevant sources, definitions and instructions that help an agent understand the task and the project.",
+      "reading": [
+        {
+          "chapter": "08-ai-native",
+          "anchor": "give-the-agent-context-it-can-use"
+        }
+      ]
+    },
+    {
+      "id": "retrieval",
+      "label": "Retrieval",
+      "group": 3,
+      "description": "Finding relevant information for a task using identifiers, metadata, relationships or search.",
+      "reading": [
+        {
+          "chapter": "08-ai-native",
+          "anchor": "what-knowledge-should-a-project-maintain"
+        }
+      ]
+    },
+    {
+      "id": "data-quality",
+      "label": "Data quality",
+      "group": 3,
+      "description": "How suitable information is for its intended use, including completeness, consistency and meaning.",
+      "reading": [
+        {
+          "chapter": "10-data-enrichment",
+          "anchor": "start-by-questioning-quality"
+        }
+      ]
+    },
+    {
+      "id": "annotation",
+      "label": "Annotation",
+      "group": 3,
+      "description": "An explanation attached to information that records an observation, uncertainty or interpretation.",
+      "reading": [
+        {
+          "chapter": "10-data-enrichment",
+          "anchor": "annotate-what-needs-explaining"
+        }
+      ]
+    },
+    {
+      "id": "enrichment",
+      "label": "Enrichment",
+      "group": 3,
+      "description": "Adding useful information by combining sources or deriving new values with visible rules.",
+      "reading": [
+        {
+          "chapter": "10-data-enrichment",
+          "anchor": "enrich-by-combining-and-deriving"
+        }
+      ]
+    },
+    {
+      "id": "workflow",
+      "label": "Workflow",
+      "group": 4,
+      "description": "A configured automated process with triggers, jobs and steps.",
+      "reading": [
+        {
+          "chapter": "10-publishing",
+          "anchor": "from-running-a-script-to-running-a-workflow"
+        }
+      ]
+    },
+    {
+      "id": "trigger",
+      "label": "Trigger",
+      "group": 4,
+      "description": "An event or schedule that starts a workflow, such as a proposed change or a push to the main branch.",
+      "reading": [
+        {
+          "chapter": "10-publishing",
+          "anchor": "what-runs-in-this-tutorial"
+        }
+      ]
+    },
+    {
+      "id": "build",
+      "label": "Build",
+      "group": 4,
+      "description": "A run of configured steps that checks sources and produces outputs, such as this website.",
+      "reading": [
+        {
+          "chapter": "10-publishing",
+          "anchor": "from-a-change-to-github-pages"
+        }
+      ]
+    },
+    {
+      "id": "artifact",
+      "label": "Artifact",
+      "group": 4,
+      "description": "Output files retained from an automated run so they can be inspected or used in a later step.",
+      "reading": [
+        {
+          "chapter": "10-publishing",
+          "anchor": "from-running-a-script-to-running-a-workflow"
+        }
+      ]
+    },
+    {
+      "id": "publication",
+      "label": "Publication",
+      "group": 4,
+      "description": "Making a generated output available to its intended readers.",
+      "reading": [
+        {
+          "chapter": "07-processing",
+          "anchor": "processing-is-not-publication"
+        }
+      ]
+    },
+    {
+      "id": "astro",
+      "label": "Astro",
+      "group": 4,
+      "description": "The website builder that turns this tutorial’s Markdown sources into pages and adds interactive components.",
+      "reading": [
+        {
+          "chapter": "11-beyond-github",
+          "anchor": "from-source-files-to-a-public-website"
+        }
+      ]
+    },
+    {
+      "id": "github-actions",
+      "label": "GitHub Actions",
+      "group": 4,
+      "description": "The service that runs this repository’s configured checks, builds and publishing workflows.",
+      "reading": [
+        {
+          "chapter": "10-publishing",
+          "anchor": "what-runs-in-this-tutorial"
+        }
+      ]
+    },
+    {
+      "id": "github-pages",
+      "label": "GitHub Pages",
+      "group": 4,
+      "description": "The hosting service that makes the built tutorial website available to readers.",
+      "reading": [
+        {
+          "chapter": "11-beyond-github",
+          "anchor": "from-source-files-to-a-public-website"
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "source": "source",
+      "target": "markdown",
+      "label": "can be written in"
+    },
+    {
+      "source": "source",
+      "target": "repository",
+      "label": "is maintained in"
+    },
+    {
+      "source": "repository",
+      "target": "git",
+      "label": "has revisions recorded by"
+    },
+    {
+      "source": "repository",
+      "target": "github",
+      "label": "can be hosted on"
+    },
+    {
+      "source": "git",
+      "target": "commit",
+      "label": "records"
+    },
+    {
+      "source": "branch",
+      "target": "commit",
+      "label": "contains"
+    },
+    {
+      "source": "branch",
+      "target": "pull-request",
+      "label": "can be proposed through"
+    },
+    {
+      "source": "github",
+      "target": "pull-request",
+      "label": "hosts"
+    },
+    {
+      "source": "pull-request",
+      "target": "review",
+      "label": "supports"
+    },
+    {
+      "source": "review",
+      "target": "commit",
+      "label": "assesses a specific"
+    },
+    {
+      "source": "commit",
+      "target": "traceability",
+      "label": "supports"
+    },
+    {
+      "source": "record",
+      "target": "source",
+      "label": "is a kind of"
+    },
+    {
+      "source": "record",
+      "target": "identifier",
+      "label": "has a stable"
+    },
+    {
+      "source": "record",
+      "target": "metadata",
+      "label": "carries"
+    },
+    {
+      "source": "schema",
+      "target": "metadata",
+      "label": "defines rules for"
+    },
+    {
+      "source": "validation",
+      "target": "schema",
+      "label": "checks against"
+    },
+    {
+      "source": "processing",
+      "target": "validation",
+      "label": "can include"
+    },
+    {
+      "source": "relationship",
+      "target": "identifier",
+      "label": "uses"
+    },
+    {
+      "source": "relationship",
+      "target": "record",
+      "label": "connects"
+    },
+    {
+      "source": "traceability",
+      "target": "relationship",
+      "label": "follows"
+    },
+    {
+      "source": "processing",
+      "target": "source",
+      "label": "reads"
+    },
+    {
+      "source": "processing",
+      "target": "derived-view",
+      "label": "produces"
+    },
+    {
+      "source": "processing",
+      "target": "metadata",
+      "label": "uses"
+    },
+    {
+      "source": "processing",
+      "target": "relationship",
+      "label": "uses"
+    },
+    {
+      "source": "derived-view",
+      "target": "source",
+      "label": "draws on"
+    },
+    {
+      "source": "visualization",
+      "target": "relationship",
+      "label": "can reveal"
+    },
+    {
+      "source": "derived-view",
+      "target": "visualization",
+      "label": "can be presented as"
+    },
+    {
+      "source": "ai-agent",
+      "target": "context",
+      "label": "uses"
+    },
+    {
+      "source": "context",
+      "target": "source",
+      "label": "includes selected"
+    },
+    {
+      "source": "context",
+      "target": "schema",
+      "label": "can include"
+    },
+    {
+      "source": "retrieval",
+      "target": "metadata",
+      "label": "can find relevant sources using"
+    },
+    {
+      "source": "retrieval",
+      "target": "relationship",
+      "label": "can follow"
+    },
+    {
+      "source": "ai-agent",
+      "target": "retrieval",
+      "label": "can perform"
+    },
+    {
+      "source": "ai-agent",
+      "target": "review",
+      "label": "can prepare changes for"
+    },
+    {
+      "source": "data-quality",
+      "target": "validation",
+      "label": "is partly checked through"
+    },
+    {
+      "source": "annotation",
+      "target": "source",
+      "label": "adds explanation to"
+    },
+    {
+      "source": "enrichment",
+      "target": "source",
+      "label": "combines"
+    },
+    {
+      "source": "enrichment",
+      "target": "processing",
+      "label": "uses"
+    },
+    {
+      "source": "enrichment",
+      "target": "annotation",
+      "label": "can preserve"
+    },
+    {
+      "source": "data-quality",
+      "target": "enrichment",
+      "label": "informs"
+    },
+    {
+      "source": "trigger",
+      "target": "workflow",
+      "label": "starts"
+    },
+    {
+      "source": "github-actions",
+      "target": "workflow",
+      "label": "runs"
+    },
+    {
+      "source": "workflow",
+      "target": "build",
+      "label": "can run"
+    },
+    {
+      "source": "build",
+      "target": "processing",
+      "label": "runs"
+    },
+    {
+      "source": "build",
+      "target": "artifact",
+      "label": "can retain"
+    },
+    {
+      "source": "astro",
+      "target": "build",
+      "label": "produces a website during"
+    },
+    {
+      "source": "astro",
+      "target": "markdown",
+      "label": "renders"
+    },
+    {
+      "source": "workflow",
+      "target": "publication",
+      "label": "can automate"
+    },
+    {
+      "source": "publication",
+      "target": "artifact",
+      "label": "can release"
+    },
+    {
+      "source": "github-pages",
+      "target": "publication",
+      "label": "hosts the website after"
+    },
+    {
+      "source": "github-actions",
+      "target": "github-pages",
+      "label": "can deploy to"
+    }
+  ]
+}

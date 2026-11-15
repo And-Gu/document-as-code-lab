@@ -5,8 +5,9 @@ import { getChapters, chapterTitle } from '../lib/chapters';
 import { getPresentations } from '../lib/presentations';
 import { siteUrl } from '../lib/urls';
 import '../styles/home.css';
-import { learningJourney } from '../lib/learning-journey';
+import { courseSummaryId, learningJourney } from '../lib/learning-journey';
 const chapters = await getChapters();
+const courseSummary = chapters.find(chapter => chapter.id === courseSummaryId);
 const groups = learningJourney.map((group, index) => ({ ...group, icon: [FileText, Workflow, Network, Workflow][index] }));
 const packs = (await getPresentations()).filter((deck) => ['information-model', 'information-value', 'lab-architecture'].includes(deck.slug));
 const stages = [
@@ -36,7 +37,6 @@ const stages = [
       <h2 id="workplace-title">A situation you may recognize</h2>
       <p>A customer commitment is recorded in a PDF. The forecast is in a spreadsheet, and resource availability is in a planning system. Before a review meeting, someone assembles a decision brief and checks what the different sources mean.</p>
       <p>These systems may already hold well-structured information. Connecting selected information across their boundaries still takes work. Our small examples make the sources, rules, and results visible so you can consider what could change in your own setting.</p>
-      <p class="home-caption">A workplace illustration. The lab demonstrates the method with fictional records; it does not connect to business systems.</p>
     </section>
     <section id="concept" class="home-section" aria-labelledby="concept-title">
       <p class="home-eyebrow">From sources to results</p><h2 id="concept-title">Maintain once. Use in different ways.</h2>
@@ -67,21 +67,24 @@ const stages = [
           <ol start={start}>{chapters.filter((chapter) => chapter.data.chapter_number >= start && chapter.data.chapter_number <= end).map((chapter) => <li><a href={siteUrl(`chapters/${chapter.id}/`)} title={chapter.data.learning_goal}>{chapterTitle(chapter)}</a></li>)}</ol>
         </article>)}
       </div>
+      {courseSummary && <p><a href={siteUrl(`chapters/${courseSummary.id}/`)}>{courseSummary.data.chapter_number}. {chapterTitle(courseSummary)}</a> · A summary of the four parts of the course</p>}
+      <p><a href={siteUrl('knowledge-map/')}>Explore the knowledge map</a> · See how the key concepts connect and find where to read more.</p>
     </section>
     <section id="working-lab" class="home-section" aria-labelledby="lab-title">
       <h2 id="lab-title">Explore the working lab</h2>
       <p>The tutorial uses this repository as a working example. Try a focused exercise or inspect the project's recorded activity.</p>
       <ul class="lab-directory">
-        <li><a href={siteUrl('chapters/01-introduction/#onboarding-lab-widget')}>Choose content for a handbook <ArrowRight size={18} aria-hidden="true" /></a><p>Browser-only simulation · Compare inclusion rules against fictional source review states.</p></li>
-        <li><a href={siteUrl('chapters/04-markdown/#markdown-playground-widget')}>Edit Markdown and see the result <ArrowRight size={18} aria-hidden="true" /></a><p>Browser-only practice · Edit headings, lists, and a table. Changes are not saved.</p></li>
-        <li><a href={siteUrl('chapters/05-structured-content/#metadata-lab-widget')}>Validate procedure metadata <ArrowRight size={18} aria-hidden="true" /></a><p>Browser-only practice · Check YAML fields against a visible schema. Passing is not approval.</p></li>
+        <li><a href={siteUrl('chapters/01-introduction/#onboarding-lab-widget')}>Choose content for a handbook <ArrowRight size={18} aria-hidden="true" /></a><p>Try it in your browser: see which procedures qualify for the handbook when you include drafts for review.</p></li>
+        <li><a href={siteUrl('chapters/04-markdown/#markdown-playground-widget')}>Edit Markdown and see the result <ArrowRight size={18} aria-hidden="true" /></a><p>Edit headings, lists, and a table, and see the preview update as you type.</p></li>
+        <li><a href={siteUrl('chapters/05-structured-content/#metadata-lab-widget')}>Validate procedure metadata <ArrowRight size={18} aria-hidden="true" /></a><p>Edit YAML fields and check them against the schema.</p></li>
         <li><a href={siteUrl('chapters/07-processing/#processing-lab-widget')}>Build a handbook and review queue <ArrowRight size={18} aria-hidden="true" /></a><p>Processing Lab · Edit one procedure, run checks, and compare two generated results.</p></li>
-        <li><a href={siteUrl('chapters/09-images/#contract-explorer-widget')}>Explore customer projects and agreements <ArrowRight size={18} aria-hidden="true" /></a><p>Fictional records · Explore relationships, delivery commitments, and change-impact review candidates.</p></li>
+        <li><a href={siteUrl('chapters/09-images/#knowledge-map-widget')}>Explore the course knowledge graph <ArrowRight size={18} aria-hidden="true" /></a><p>Follow connections between concepts and find the chapters that explain them.</p></li>
+        <li><a href={siteUrl('labs/contract-explorer/#contract-explorer-widget')}>Explore customer projects and agreements <ArrowRight size={18} aria-hidden="true" /></a><p>See how projects and agreements connect, what is due, and what might need review when a record changes.</p></li>
         <li><a href={siteUrl('chapters/11-beyond-github/#architecture-explorer-widget')}>Trace an output to its sources <ArrowRight size={18} aria-hidden="true" /></a><p>Repository architecture · Compare the sources, processing, results, and update triggers for five outputs.</p></li>
-        <li><a href={siteUrl('materials/reference/dashboards-and-work-tracking/#missing-excel-tables-and-spreadsheets')}>Explore a spreadsheet-style view <ArrowRight size={18} aria-hidden="true" /></a><p>Fictional fixed dataset · Sort and filter a department budget using CSSV.</p></li>
+        <li><a href={siteUrl('materials/reference/dashboards-and-work-tracking/#missing-excel-tables-and-spreadsheets')}>Explore a spreadsheet-style view <ArrowRight size={18} aria-hidden="true" /></a><p>Sort and filter a department budget.</p></li>
         <li><a href={siteUrl('dashboard/')}>Behind the lab: Project Control Center <ArrowRight size={18} aria-hidden="true" /></a><p>Growth measured at build time · Operational snapshots refreshed on deployment and hourly, with retrieval times. Optional live retrieval is separate.</p></li>
       </ul>
-      <p class="home-caption">Each chapter also includes a short practice quiz. Fictional example statuses do not constitute operational approval.</p>
+      <p class="home-caption">Chapters 1–12 each include a short practice quiz.</p>
     </section>
     <section id="presentations" class="home-section" aria-labelledby="present-title">
       <h2 id="present-title">Present and share</h2><p>Explore how the approach works, when its benefits justify the change, and how this lab puts it into practice.</p>

@@ -8,7 +8,11 @@ export async function repositoryFiles() {
   const files = ['spec/tutorial/working-methods-upgrade/verification/evidence-index.json', 'README.md', 'LICENSE.md', 'AGENTS.md', 'GLOSSARY.md', 'CONTRIBUTING.md', 'ROADMAP.md', 'requirements.txt', 'site/README.md', 'tests/test_records.py',
     'site/src/content.config.ts', 'site/src/pages/chapters/[slug].astro',
     'site/src/lib/contract-loader.ts', 'site/src/lib/contract-controller.ts',
+    'site/src/lib/concept-map.ts', 'site/src/lib/concept-map-controller.ts',
+    'site/src/components/learning/KnowledgeMap.astro',
     'site/src/lib/presentations.ts', 'site/src/layouts/PresentationLayout.astro',
+    'site/src/components/slides/PresentationDeck.tsx', 'site/src/components/slides/SlideBody.tsx',
+    'site/src/components/slides/SourceSelection.tsx',
     'site/scripts/growth-report.mjs', 'site/scripts/operational-snapshot.mjs',
     'site/src/lib/dashboard/controller.ts', ...publicSpecifications];
   const extensions = /\.(md|json|yaml|yml|py|mmd|png|svg|jpg|jpeg|webp|gif|txt|cssv|typ)$/i;

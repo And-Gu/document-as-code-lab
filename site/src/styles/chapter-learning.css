@@ -29,3 +29,41 @@
   .scenario-check { padding-inline-start: .75rem; }
   .scenario-check label { padding-inline: .25rem; }
 }
+
+.example-flow { margin: 1rem 0; }
+.example-flow figcaption { font-weight: 650; margin-bottom: .5rem; }
+.example-flow ol {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.example-flow ol { gap: 1.75rem; margin: 0; }
+.example-flow li {
+  position: relative;
+  min-width: 0;
+  padding: .65rem .75rem;
+  background: #f3f7f5;
+  border: 1px solid #d5ddda;
+  border-radius: 4px;
+  font-size: .875rem;
+}
+.example-flow span { display: block; margin-top: .2rem; }
+.example-flow li + li::before {
+  content: '→' / '';
+  position: absolute;
+  top: 50%;
+  left: -1.45rem;
+  transform: translateY(-50%);
+  color: #17684c;
+  font-weight: 700;
+}
+@media (max-width: 600px) {
+  .example-flow ol { grid-template-columns: minmax(0, 1fr); }
+  .example-flow li + li::before {
+    content: '↓' / '';
+    top: -1.65rem;
+    left: .75rem;
+    transform: none;
+  }
+}

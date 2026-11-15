@@ -227,25 +227,25 @@
   "chapter-09": [
     {
       "type": "single_select",
-      "question": "What changes when you switch from a customer-focused view to a delivery-focused view of the same maintained records?",
+      "question": "What gives the connection between Processing and Metadata its meaning in the knowledge graph?",
       "options": [
-        "The records must be copied into a new source for each view",
-        "The selected information and its presentation change; the underlying records remain the same",
-        "The delivery relationships can be guessed from the record titles"
+        "The distance between the labels in the 3D view",
+        "The recorded relationship: Processing uses Metadata",
+        "Their labels having the same colour"
       ],
       "correctIndex": 1,
-      "feedback": "Different questions select and present the same maintained information in different ways. Record identities and explicit relationships remain the source for each view."
+      "feedback": "The relationship records how the concepts connect. Positions and colours help you navigate the view; the named relationship carries the meaning."
     },
     {
       "type": "single_select",
-      "question": "AMD-001 is proposed and linked to DEL-101. DEL-102 depends on DEL-101. What does following these connections establish?",
+      "question": "How can an AI agent use the graph to explain how the onboarding lab builds its review queue?",
       "options": [
-        "The amendment is effective and both deliveries must change",
-        "DEL-101 is directly linked, and DEL-102 is a candidate for review if the amendment is accepted",
-        "No review is useful until someone changes the delivery records"
+        "Treat each line as a complete explanation",
+        "Follow the relationships and reading references, then use the chapter text to explain the example with sources",
+        "Infer every relationship from the position of the labels"
       ],
       "correctIndex": 1,
-      "feedback": "The recorded links support impact assessment. They do not make a proposed amendment effective or prove that every connected item needs an edit."
+      "feedback": "The Metadata → Processing → Derived view route helps find the explanation. Chapter 7 shows how the status field is used to select drafts for the queue."
     }
   ],
   "chapter-10": [
@@ -275,25 +275,25 @@
   "chapter-11": [
     {
       "type": "single_select",
-      "question": "How can this GitHub Pages site provide an interactive Contract Explorer without running an Astro server for each reader?",
+      "question": "You select Metadata in the knowledge graph. How does its description appear?",
       "options": [
-        "Astro prepares the data and pages at build time; JavaScript in the reader's browser handles navigation",
+        "Astro prepares the data at build time; JavaScript in the browser displays the selected concept",
         "GitHub Pages runs the Python record processor on every click",
         "The browser rewrites the maintained Markdown records"
       ],
       "correctIndex": 0,
-      "feedback": "Pages serves built files. Browser JavaScript provides interaction over the validated snapshot without changing the source records."
+      "feedback": "The build prepares the concept records. Browser code uses those records to respond when you select a label; an edited source description reaches readers after a new build and deployment."
     },
     {
       "type": "single_select",
-      "question": "A Copilot agent can answer questions using permitted SharePoint documents. What does that establish about editing those documents?",
+      "question": "A team maintains procedures in Word and SharePoint. Which practice from this tutorial can it apply?",
       "options": [
-        "Reading access alone does not establish editing ability; editing needs suitable tools and permissions",
-        "The agent can automatically edit every document it can read",
-        "The library now provides Git-style pull requests"
+        "Agree on the maintained source, preserve its history and define how changes reach readers",
+        "Keep a separate editable copy for every use of each procedure",
+        "Assume that storing a file in a library completes its review"
       ],
       "correctIndex": 0,
-      "feedback": "Knowledge grounding is different from file editing. Office tools or configured actions and flows need appropriate permissions; OneDrive and SharePoint are not Git."
+      "feedback": "The tools can differ while the team still maintains a shared source, inspects changes and defines a path to the reader."
     }
   ],
   "chapter-12": [
@@ -307,19 +307,19 @@
         "The possibility of making a PDF"
       ],
       "correctIndex": 1,
-      "feedback": "Keep source, curated values and reproducible derivations so another person can challenge and reuse the result."
+      "feedback": "Keep the original records, calculation rules and notes so a colleague can check the result and update it when more information arrives."
     },
     {
       "type": "single_select",
-      "question": "What does a longer average resolution time prove about a team?",
+      "question": "What can we conclude from the three usable durations in this example?",
       "options": [
-        "The team is less effective",
-        "Its staff need more training",
-        "Only that this metric changed under its stated definition; causes need further investigation",
-        "The service process must be replaced"
+        "Team A resolves cases faster than Team B",
+        "Every case took six days to resolve",
+        "These three cases have a median duration of six calendar days",
+        "The two cases left out of the summary are still open"
       ],
       "correctIndex": 2,
-      "feedback": "An observed difference is not a causal explanation. Check data quality, case mix, definitions and alternative hypotheses."
+      "feedback": "The middle value of 3, 6 and 7 is 6. All three usable durations belong to Team A; missing or reversed dates leave the other two durations unresolved."
     }
   ]
 }

@@ -1,4 +1,5 @@
 import { defineConfig } from 'astro/config';
+import react from '@astrojs/react';
 import { unified } from '@astrojs/markdown-remark';
 import repositoryLinks from './plugins/repository-links.mjs';
 import chapterTitle from './plugins/chapter-title.mjs';
@@ -10,6 +11,7 @@ import readableDiagrams from './plugins/readable-diagrams.mjs';
 const base = '/document-as-code-lab';
 
 export default defineConfig({
+  integrations: [react()],
   site: 'https://and-gu.github.io',
   base,
   redirects: {

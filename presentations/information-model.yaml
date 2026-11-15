@@ -1,14 +1,15 @@
 slug: information-model
 title: "Document-as-Code: Rethinking How We Work with Information"
 description: "For people exploring information work: maintained sources, metadata, relationships, review, processing, and AI context."
+view: scroll
 slides:
   - id: information
     type: title
     title: Information we can work with
     subtitle: One maintained source can support more than one publication
-    context: "Document-as-Code | Concept and mechanics"
+    context: "Document-as-Code: concept and mechanics"
     sources: [docs/01-introduction.md]
-    notes: "Ask the audience where the same instruction appears in their work. A handbook, training guide, and website may each contain a copy. This session explores a different arrangement: maintain the information deliberately, then select and present it for each audience. It is not a requirement to use GitHub or Markdown."
+    notes: "This deck opens in scroll view for independent reading. Use Slide view in the toolbar for a live session. Ask the audience where the same instruction appears in their work. A handbook, training guide, and website may each contain a copy. This session explores a different arrangement: maintain the information deliberately, then select and present it for each audience. It is not a requirement to use GitHub or Markdown."
   - id: documents
     type: comparison
     title: A document is one useful view
@@ -22,7 +23,7 @@ slides:
     notes: "Do not portray word processors as incapable of automation or structured content. The distinction is how a team organizes its maintained sources and outputs. Self-contained documents remain valuable delivery formats. The question is where updates are made and how repeated information stays consistent."
   - id: sources-and-outputs
     type: diagram
-    title: Separate the source from its presentation
+    title: Sources and derived views
     message: Reuse needs explicit selection and processing rules
     steps:
       - { label: Maintain, detail: "Procedure text and review metadata" }
@@ -41,7 +42,7 @@ slides:
     notes: "Open the chapter 4 playground after the session if useful. A file does not become reusable merely because it is Markdown. Structured records and specialized engineering models may be better represented in other formats. Prefer an accessible source that preserves the information."
   - id: history-and-review
     type: comparison
-    title: Recording is not the same as approving
+    title: Revision history and review evidence
     left:
       title: Recorded history
       items: ["What changed and when", "Author and revision reference", "A diff between versions"]
@@ -52,24 +53,25 @@ slides:
     notes: "Keep this conceptual; it is not a Git walkthrough. A commit records a revision, not approval of every item. A review decision applies to a particular revision. If an AI agent changes several files, examine the relevant diffs and their consistency together."
   - id: metadata
     type: content
-    title: Give software explicit fields
-    message: Procedure metadata answers questions that prose leaves implicit
-    bullets: ["id: PROC-003 identifies the item", "owner: people-team identifies its maintainer", "status: draft records its review state"]
-    sources: [docs/05-structured-content.md]
-    notes: "These field names are project conventions, not requirements of Markdown or GitHub. Frontmatter is the opening metadata block; YAML is one way to write its fields. The chapter 5 practice schema accepts draft as a valid value. Passing that check does not approve the content. Ownership does not automatically grant approval authority."
+    title: Metadata changes the output
+    message: A review status can determine which procedures a view includes
+    demo: source-selection
+    sources: [docs/05-structured-content.md, docs/07-processing.md]
+    notes: "Compare Approved only with Include drafts. The preview reads the three maintained fictional onboarding sources at build time. The first rule omits the draft contact procedure; the second includes it in a review copy. Neither rule approves a publication. These field names are project conventions, not requirements of Markdown or GitHub. Frontmatter is the opening metadata block; YAML is one way to write its fields. The chapter 5 practice schema accepts draft as a valid value. Passing that check does not approve the content. Ownership does not automatically grant approval authority."
   - id: relationships
     type: content
-    title: Link information that must stay consistent
+    title: Relationships and change impact
     message: A policy change can identify related procedures for review
     image:
       path: assets/diagrams/information-relationships.svg
+      interactive: relationships
       alt: "A security policy is referenced by access and equipment procedures, which are included in a handbook."
       caption: "Illustrative source relationships, not task dependencies."
     sources: [docs/06-information-architecture.md]
     notes: "The diagram is illustrative, not an export of implemented records. A relationship identifies where to investigate; it does not prove that every linked item must change. Stable identifiers and clear relationship meanings are what make these references useful."
   - id: processing
     type: diagram
-    title: Make processing rules inspectable
+    title: Inspectable processing rules
     message: Checks and transformations are maintained work too
     steps:
       - { label: Read, detail: "Load selected source files" }
@@ -81,7 +83,7 @@ slides:
     notes: "Distinguish a valid record, accurate instructions, and an approved publication. Automation can detect a missing owner or an unsupported status, but it cannot establish every semantic claim. A build may succeed while the selected sources are still drafts."
   - id: ai-context
     type: comparison
-    title: Give AI relevant evidence, not just a prompt
+    title: Evidence and instructions for AI
     left:
       title: A request alone
       items: ["Draft a training guide", "Unclear source revision", "Unclear limits on proposed changes"]
@@ -92,7 +94,7 @@ slides:
     notes: "Agents can inspect related files and instructions, but access alone does not ensure appropriate context. Select relevant versions, separate proposals from accepted requirements, and keep restricted information within its access boundaries. People remain responsible for checking results."
   - id: first-use
     type: content
-    title: Try one complete information flow
+    title: A first information flow
     message: Choose a source, a consumer, and one useful output
     bullets: ["Name the owner and review responsibility", "Try the source and metadata labs", "Inspect the result and improve the rules"]
     sources: [docs/01-introduction.md, docs/05-structured-content.md, docs/11-beyond-github.md]

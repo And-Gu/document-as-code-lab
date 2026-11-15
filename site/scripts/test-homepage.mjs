@@ -44,11 +44,15 @@ for (const slug of ['information-model', 'information-value', 'lab-architecture'
 }
 const original = parse(await read('../dist/presentations/document-as-code/index.html'));
 assert.equal(all(original, node => node.tagName === 'section' && attr(node, 'aria-label')).length, 8);
-console.log('Homepage groups cover all 12 chapters; two ten-slide packs, nine-slide architecture deck, notes, image, base paths, and original eight-slide deck passed.');
+console.log('Homepage groups cover the 12 lesson chapters; two ten-slide packs, nine-slide architecture deck, notes, image, base paths, and original eight-slide deck passed.');
 
 const menu = all(home, node => attr(node, 'id') === 'chapter-menu')[0];
 const menuGroups = all(menu, node => hasClass(node, 'menu-group'));
 assert.deepEqual(menuGroups.map(group => all(group, node => node.tagName === 'a').map(node => attr(node, 'href'))), groupLinks, 'Menu and homepage share chapter groups');
+const recapUrl = '/document-as-code-lab/chapters/13-course-summary/';
+const learningPath = all(home, node => attr(node, 'id') === 'learning-path')[0];
+assert.equal(all(learningPath, node => attr(node, 'href') === recapUrl).length, 1);
+assert.equal(all(menu, node => attr(node, 'href') === recapUrl).length, 1);
 const actions = all(home, node => hasClass(node, 'home-actions'))[0];
 assert.deepEqual(all(actions, node => node.tagName === 'a').map(node => attr(node, 'href')), ['/document-as-code-lab/chapters/01-introduction/', '/document-as-code-lab/chapters/07-processing/#processing-lab-widget']);
 assert.ok((await read('../dist/chapters/07-processing/index.html')).includes('id="processing-lab-widget"'));

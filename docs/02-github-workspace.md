@@ -28,7 +28,7 @@ visuals:
 
 Suppose the access procedure from chapter 1 needs a new step. The author needs somewhere to prepare the change, colleagues need to review it, and everyone needs to know which version they are reading.
 
-This tutorial uses a **Git repository hosted on GitHub** for that work. The repository keeps the source files and their history together. Git records revisions, while GitHub provides a shared place to propose and review changes.
+This tutorial uses a **[Git](https://git-scm.com/) repository hosted on [GitHub](https://docs.github.com/en/get-started/start-your-journey/what-is-github)** for that work. The repository keeps the source files and their history together. Git records revisions, while GitHub provides a shared place to propose and review changes.
 
 This is the lab's shared, reviewable workspace. The principle is to make sources and proposed changes inspectable; your organization can explore that principle while keeping its existing business systems.
 
@@ -93,11 +93,13 @@ Checks help reviewers assess the proposal. A successful build does not decide wh
 
 ## The Onboarding Lab in the repository
 
-Our example has procedure files such as `access.md`, `equipment.md`, and `contacts.md`. See the [maintained procedure files](../examples/onboarding-showcase/README.md). Those files are sources, not separate copies of every handbook or presentation that uses them. As the lab grows, related configuration, data, tests, and processing code can live alongside them.
+In the [Onboarding Lab](../examples/onboarding-showcase/README.md), each procedure has a file in the repository. The team maintains the access instructions in `access.md`, and the lab uses that file to build both the handbook review copy and the training excerpt. That makes `access.md` a source file. When an access instruction changes, the team edits it there once. The next build uses the updated wording in both outputs.
 
-## Explore without installing anything
+<span id="explore-without-installing-anything"></span>
 
-In the [real repository](https://github.com/And-Gu/document-as-code-lab), start with the [README](../README.md), locate the chapter and onboarding files, and look at the history of one file. Reading and exploring should not require creating an account. Modifying a repository is an optional advanced activity.
+## Explore GitHub without installing anything
+
+Go to the [tutorial repository on GitHub](https://github.com/And-Gu/document-as-code-lab) and start by reading the [`README.md` file](https://github.com/And-Gu/document-as-code-lab/blob/main/README.md) for an overview. Then open `examples/onboarding-showcase/access.md` in the repository and select **History** to see the changes recorded for that file. You can do this in your browser without a GitHub account.
 
 Alongside the chapter files, you will find rules for checking changes and publishing results. A proposed edit can trigger a website build check; an edit merged into `main` can trigger publication. GitHub Actions runs these operations, which we follow in [chapter 11](10-publishing.md).
 

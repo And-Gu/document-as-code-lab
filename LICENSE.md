@@ -59,6 +59,8 @@ Generating a website, PDF, presentation, chart, or selected excerpt does not cha
 
 ## Third-Party Material
 
+The knowledge map uses 3d-force-graph, three-spritetext and Three.js under the MIT License. Their supplied notices are retained in [knowledge-map-licenses.txt](reference/knowledge-map-licenses.txt).
+
 Dependencies, third-party assets, quoted material, and externally supplied examples retain their own licenses and notices. This file does not grant rights that the project's authors do not hold. Links to external resources do not license those resources under this project's terms.
 
 Third-party material must be identified with its source and applicable license or permission. Review ownership and permissions before public distribution; this file is not evidence that such a review has been completed.

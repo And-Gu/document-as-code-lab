@@ -4,6 +4,7 @@
 
 - Use the [project source map](reference/project-knowledge.md) to locate authoritative information and the [tutorial specification register](spec/tutorial/README.md) for design intent and dated decisions. Follow links relevant to the task; these files do not grant permissions or imply automatic context loading.
 
+- Treat the lab as a self-contained tutorial. Use fictional data for exercises about business processes and keep those exercises separate from live business systems and operational approvals. Describe what readers can try or learn; explain the example’s scope only where it affects a reader’s action or interpretation. The Project Control Center reports on this repository’s actual activity.
 - Read `CONTRIBUTING.md` before editing tutorial content. Write project documentation in English.
 - Before rewriting prose, read the editorial rules in [CONTRIBUTING.md](CONTRIBUTING.md), the [shared vocabulary](GLOSSARY.md), and the approved narrative direction in the tutorial specification. Present representative before/after passages for owner approval before a major site-wide style change; preserve chapter objectives, source identifiers, and meaningful distinctions.
 - Keep `docs/` as the chapter source of truth. Astro in `site/` reads these files; do not duplicate or move them into the site.
@@ -11,7 +12,7 @@
 - Keep existing user changes. Commit, push, or change GitHub settings only when requested.
 - For the data-enrichment insertion, existing published chapter source slugs (10-publishing and 11-beyond-github) are intentionally preserved for URL compatibility while their reader-facing chapter_number values advance to 11 and 12. This is a documented exception to the filename-prefix convention; never silently break those published routes.
 
-Follow the [current audience and reader promise](spec/tutorial/02-DOCUMENT-AS-CODE-LAB-V1-SPECIFICATION.md#2-audiences-and-paths) and the [25 October decision](spec/tutorial/04-DESIGN-DECISIONS.md#25-october-2026-working-methods-direction). Preserve the twelve-chapter reading order, stable routes/anchors, and a browser-first core without accounts or installation. Keep technical depth optional; do not imply automatic business-system integration. Exact copy and visual treatment remain subject to owner review.
+Follow the [current audience and reader promise](spec/tutorial/02-DOCUMENT-AS-CODE-LAB-V1-SPECIFICATION.md#2-audiences-and-paths) and the [25 October decision](spec/tutorial/04-DESIGN-DECISIONS.md#25-october-2026-working-methods-direction). Preserve the twelve lesson chapters in reading order, followed by the standalone course summary. Preserve stable routes/anchors and a browser-first core without accounts or installation. Keep technical depth optional; do not imply automatic business-system integration. Exact copy and visual treatment remain subject to owner review.
 
 ## Keep Related Information Consistent
 

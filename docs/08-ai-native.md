@@ -17,13 +17,19 @@ visuals:
 
 # Making Information Usable by AI Agents
 
-An agent updating this tutorial needs more than access to its files. It needs to know where the chapters live, which terms we use, and which decisions its changes must respect.
+An agent updating this tutorial needs more than access to the files relevant to the update. It needs to know where the chapters live, which terms we use, and which decisions its changes must respect.
 
 An **AI agent** combines a language model with tools for operations such as reading files, editing sources, and running checks. A chat prompt describes the task; repository access comes from the configured tools and permissions. The sources and processing rules from earlier chapters provide useful context; the actual repository adds the conventions and rationale needed to work on the project.
 
 An assistant can help rewrite a status report. A tool-enabled agent could also gather permitted sources, compare a forecast with a commitment, identify missing support, and prepare a source-linked draft. That requires the meaning of the fields, suitable tools, and clear limits on what the agent may change. People still decide how to resolve uncertainty and whether to accept a proposal.
 
-Here we inspect the project knowledge that supports such work. This chapter runs no AI model and gives no agent automatic access to business systems.
+## Give the agent context it can use
+
+**Context helps an agent make the right change.** A request to rename an exercise tells the agent what to do. The current chapter, the shared glossary, and the decisions behind the exercise tell it where the name belongs and whether related references need updating. When those sources live together in a Git repository, an agent with access can search the files and read the parts relevant to the task.
+
+**Keep important instructions and facts in searchable text.** An agent can find an exact term in Markdown, quote the source, and compare the wording across files. A model that can read images may also understand a screenshot, but the words in the screenshot have to be extracted or interpreted before the agent can use them. Keep images where they show something useful, such as a screen layout or a relationship. If a diagram carries an important rule, write the rule down alongside it.
+
+**Review related edits together.** An agent can update the exercise name in a chapter, a guide, and a navigation label in the same working copy. Git shows what changed across those files and can record the edits together in one commit. A pull request gives reviewers a place to check whether the new name is consistent and whether the links and site build still work.
 
 ## Start with an entry point, not a giant prompt
 
@@ -76,6 +82,6 @@ Where would you maintain a stable-identifier rule and the explanation of why it 
 
 > **Explore further:** The [agent context and project-knowledge guide](../reference/ai-context-and-agents.md) examines this repository's guidance, source selection, decision records, permissions and verification in greater detail. No AI account is needed to read it; its optional local examples require suitable tooling.
 
-Organizing project knowledge helps agents find and interpret the material they need. People benefit from that organization too. [Chapter 9](09-images.md) uses a fictional customer-and-contract example to show how readers can follow relationships and ask their own questions.
+Organizing project knowledge helps agents find and interpret the material they need. People benefit from that organization too. [Chapter 9](09-images.md) uses the course’s own knowledge graph to connect concepts with related ideas and the chapters that explain them. An agent can follow the same references to find source material and prepare an explanation.
 
 <!-- interactive: chapter-quiz -->

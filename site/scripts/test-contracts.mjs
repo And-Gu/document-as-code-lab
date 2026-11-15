@@ -63,7 +63,7 @@ try {
   await writeFile(target, source.replace('status: planned', 'status: impossible'));
   await assert.rejects(loadContractExplorer(temporary), /DEL-103/);
 } finally { await rm(temporary, { recursive: true, force: true }); }
-const html = await readFile('dist/chapters/09-images/index.html', 'utf8');
+const html = await readFile('dist/labs/contract-explorer/index.html', 'utf8');
 const controllerSource = await readFile('src/lib/contract-controller.ts', 'utf8');
 assert.doesNotMatch(controllerSource, /\bfetch\s*\(|XMLHttpRequest|localStorage|sessionStorage/, 'Explorer has no external retrieval or persistence');
 assert.equal((html.match(/data-contract-explorer/g) ?? []).length, 1);
@@ -71,7 +71,6 @@ assert.ok(html.includes('id="contract-explorer-widget"'));
 assert.match(html, /data-ce-guide="AMD-001"/);
 assert.ok(html.includes('If proposed amendment AMD-001 were accepted'));
 assert.ok(controllerSource.includes("switchView('impact')"));
-assert.ok(html.includes('Fictional example'));
 assert.ok(html.includes('<noscript>'));
 assert.ok(html.includes('Table alternative to the graph'));
 assert.ok(!html.includes('Proposed interactive lab'));
@@ -83,6 +82,8 @@ const nodes = [];
 function walk(node) { nodes.push(node); for (const child of node.childNodes ?? []) walk(child); }
 walk(parse(html));
 const hasAttr = (node, name) => node.attrs?.some(attribute => attribute.name === name);
+const defaultTab = nodes.find(node => node.attrs?.some(attribute => attribute.name === 'data-ce-view' && attribute.value === 'commitments'));
+assert.ok(defaultTab.attrs.some(attribute => attribute.name === 'aria-selected' && attribute.value === 'true'));
 const fallback = nodes.find(node => hasAttr(node, 'data-ce-fallback'));
 assert.ok(fallback && !hasAttr(fallback, 'hidden'), 'Without JavaScript the source-record fallback is visible');
 for (const record of snapshot.records) assert.ok(nodes.some(node => node.attrs?.some(attribute => attribute.name === 'id' && attribute.value === `ce-source-${record.id}`)));

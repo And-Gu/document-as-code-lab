@@ -47,7 +47,7 @@ const adapters = [{
         const target = data.records.find(item => item.id === relation.target)!;
         return { label: sentenceCase(relationLabels[relation.type]), target: target.id, title: target.label, source: target.source };
       }),
-      returnPath: `chapters/09-images/?record=${encodeURIComponent(record.id)}#contract-explorer-widget`,
+      returnPath: `labs/contract-explorer/?record=${encodeURIComponent(record.id)}#contract-explorer-widget`,
     };
   },
 }];

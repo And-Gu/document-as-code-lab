@@ -1,0 +1,77 @@
+---
+import { concepts, connections } from '../../lib/concept-map';
+import { getChapters, chapterTitle } from '../../lib/chapters';
+import { learningJourney } from '../../lib/learning-journey';
+import { siteUrl } from '../../lib/urls';
+import '../../styles/concept-map.css';
+
+const chapters = await getChapters();
+const nodes = concepts.map(node => ({
+  ...node,
+  reading: node.reading.map(reading => {
+    const chapter = chapters.find(chapter => chapter.id === reading.chapter);
+    if (!chapter) throw new Error(`Missing reading destination: ${reading.chapter}`);
+    return { ...reading, title: `Chapter ${chapter.data.chapter_number} · ${chapterTitle(chapter)}`, href: siteUrl(`chapters/${reading.chapter}/#${reading.anchor}`) };
+  }),
+}));
+const groups = learningJourney.map((group, index) => ({ id: index + 1, title: group.title }));
+const initial = nodes.find(node => node.id === 'metadata')!;
+const byId = (id: string) => nodes.find(node => node.id === id)!;
+---
+<div class="knowledge-page">
+    <section class="knowledge-map" data-knowledge-map aria-label="Course knowledge map">
+      <script type="application/json" data-map-data set:html={JSON.stringify({ nodes, links: connections, groups }).replaceAll('<', '\\u003c')} />
+      <div class="knowledge-toolbar">
+        <div class="concept-search">
+          <label for="concept-search">Find a concept</label>
+          <input id="concept-search" type="search" placeholder="Try metadata, review or AI…" autocomplete="off" aria-controls="concept-results" />
+          <ul id="concept-results" class="concept-results" aria-label="Matching concepts" hidden></ul>
+        </div>
+        <div class="concept-filter"><label for="concept-group">Course section</label><select id="concept-group"><option value="">All four sections</option>{groups.map(group => <option value={group.id}>{group.title}</option>)}</select></div>
+        <div class="map-view-controls" role="group" aria-label="Map view">
+          <button type="button" data-map-mode="3" aria-pressed="true" disabled>3D</button>
+          <button type="button" data-map-mode="2" aria-pressed="false" disabled>2D</button>
+          <button type="button" data-map-reset disabled>Reset view</button>
+        </div>
+      </div>
+      <div class="knowledge-workspace">
+        <div class="map-stage">
+          <div class="map-key" aria-label="Course section colours">{groups.map(group => <span><i class={`concept-tone-${group.id}`}></i>{group.title}</span>)}</div>
+          <div class="map-canvas" data-map-canvas aria-label="Interactive 3D concept map. Use search or the concept list for keyboard navigation.">
+            <p class="map-loading" data-map-loading>Preparing the concept map…</p>
+          </div>
+          <p class="map-gesture" data-map-gesture>Drag to turn · Scroll to zoom · Select a label to explore</p>
+          <p class="map-status" data-map-status role="status" aria-live="polite">{nodes.length} concepts · {connections.length} connections</p>
+        </div>
+        <aside class="concept-detail" data-concept-detail aria-label="Selected concept" tabindex="-1">
+          <p class="map-eyebrow" data-concept-group>{groups[initial.group - 1].title}</p>
+          <h2 data-concept-title>{initial.label}</h2>
+          <p data-concept-description>{initial.description}</p>
+          <h3>How it connects</h3>
+          <ul class="concept-connections" data-concept-connections>{connections.filter(link => link.source === initial.id || link.target === initial.id).map(link => <li>{byId(link.source).label} {link.label} {byId(link.target).label}</li>)}</ul>
+          <h3>Read more</h3>
+          <ul class="concept-reading" data-concept-reading>{initial.reading.map(reading => <li><a href={reading.href}>{reading.title}</a></li>)}</ul>
+          <button class="map-focus" type="button" data-map-focus disabled>Focus on these connections</button>
+        </aside>
+      </div>
+    </section>
+    <div class="map-starts"><span>Start exploring</span><button type="button" data-select-concept="source">Maintained source</button><button type="button" data-select-concept="ai-agent">AI agent</button><button type="button" data-select-concept="publication">Publication</button></div>
+    <details class="concept-directory" id="concept-directory">
+      <summary>Browse all {nodes.length} concepts and their reading links</summary>
+      <div class="concept-directory-grid">
+        {groups.map(group => <section><h2>{group.title}</h2>{nodes.filter(node => node.group === group.id).map(node => <section id={`concept-${node.id}`}>
+          <h3>{node.label}</h3><p>{node.description}</p>
+          <ul>{connections.filter(link => link.source === node.id || link.target === node.id).map(link => <li>{link.source === node.id ? node.label : <a href={`#concept-${link.source}`}>{byId(link.source).label}</a>} {link.label} {link.target === node.id ? node.label : <a href={`#concept-${link.target}`}>{byId(link.target).label}</a>}</li>)}</ul>
+          {node.reading.map(reading => <p><a href={reading.href}>{reading.title}</a></p>)}
+          <button type="button" data-select-concept={node.id}>Show on map</button>
+        </section>)}</section>)}
+      </div>
+    </details>
+    <noscript><p>Open the concept list above to follow the connections and chapter links.</p><style is:global>.knowledge-toolbar,.map-stage,.map-focus,.map-starts,.concept-directory button{display:none!important}.knowledge-workspace{display:block}</style></noscript>
+    <p class="map-source-note">This map draws on the course’s <a href={siteUrl('materials/GLOSSARY/')}>shared vocabulary</a>. Its concepts, named connections and reading links are <a href={siteUrl('files/data/course-concepts.json')}>maintained together in the repository</a>.</p>
+
+</div>
+<script>
+  import { initConceptMap } from '../../lib/concept-map-controller';
+  initConceptMap();
+</script>

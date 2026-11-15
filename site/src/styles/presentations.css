@@ -4,6 +4,8 @@
   --presentation-muted: #59635e;
   --presentation-rule: #d7ded9;
   --presentation-red: #a54255;
+  --r-overlay-element-bg-color: 23, 104, 76;
+  --r-overlay-element-fg-color: 255, 255, 255;
 }
 .presentation-page { margin: 0; background: #fff; color: var(--presentation-ink); font-family: system-ui, sans-serif; }
 .presentation-page * { box-sizing: border-box; letter-spacing: 0; }
@@ -11,17 +13,17 @@
 .presentation-toolbar a { display: inline-flex; align-items: center; gap: 8px; color: var(--presentation-green); font-size: 14px; text-decoration: none; }
 .presentation-toolbar > div { display: flex; gap: 8px; }
 .presentation-toolbar .notes-link { display: grid; place-items: center; width: 36px; height: 36px; border: 1px solid var(--presentation-rule); border-radius: 4px; }
-.presentation-toolbar button { width: 36px; height: 36px; display: grid; place-items: center; border: 1px solid var(--presentation-rule); border-radius: 4px; background: #fff; color: var(--presentation-ink); cursor: pointer; }
+.presentation-toolbar button { min-height: 36px; padding: 0 10px; font: inherit; font-size: 14px; display: grid; place-items: center; border: 1px solid var(--presentation-rule); border-radius: 4px; background: #fff; color: var(--presentation-ink); cursor: pointer; }
 .presentation-toolbar button:disabled { opacity: 0.4; cursor: default; }
 .presentation-toolbar button:hover:not(:disabled) { background: #edf5f0; }
 .presentation-page a:focus-visible, .presentation-page button:focus-visible { outline: 3px solid var(--presentation-green); outline-offset: 3px; }
 .presentation-page .reveal { position: absolute; top: 48px; width: 100%; height: calc(100dvh - 48px); font-size: 28px; }
 .reveal .slides { text-align: left; }
-.reveal .slides > section { height: 720px; padding: 48px 50px 76px; }
+.reveal section.course-slide { height: 720px; padding: 48px 50px 76px; }
 .reveal h1, .reveal h2, .reveal h3, .reveal p, .reveal ul, .reveal ol, .reveal figure { margin: 0; }
 .reveal h1, .reveal h2, .reveal h3 { color: var(--presentation-ink); font-weight: 650; line-height: 1.15; overflow-wrap: anywhere; }
 .reveal h1 { font-size: 88px; }
-.reveal h2 { font-size: 50px; max-width: 1120px; margin-bottom: 40px; }
+.reveal h2 { font-size: 50px; max-width: 1120px; margin-bottom: 24px; }
 .reveal h3 { font-size: 29px; }
 .reveal p, .reveal li { line-height: 1.45; }
 .reveal .slide-message { font-size: 34px; max-width: 1060px; margin-bottom: 40px; }
@@ -31,7 +33,7 @@
 .reveal a { color: var(--presentation-green); text-underline-offset: 4px; }
 .title-slide { padding-top: 105px; }
 .reveal .slide-context { color: var(--presentation-muted); font-size: 24px; margin-bottom: 35px; }
-.reveal .slide-subtitle { color: var(--presentation-green); font-size: 44px; margin-top: 36px; max-width: 940px; }
+.reveal .slide-subtitle { color: var(--presentation-green); font-size: 44px; margin-top: 22px; max-width: 940px; }
 .content-body { display: grid; gap: 42px; }
 .with-image .content-body { grid-template-columns: 1.15fr 1fr; align-items: start; }
 .with-image .slide-message { font-size: 28px; margin-bottom: 28px; }
@@ -41,26 +43,26 @@
 .comparison-columns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 60px; }
 .comparison-column { border-top: 5px solid var(--presentation-red); padding-top: 28px; }
 .comparison-column + .comparison-column { border-color: var(--presentation-green); }
-.reveal .comparison-column h3 { margin-bottom: 34px; }
+.reveal .comparison-column h3 { margin-bottom: 20px; }
 .reveal .comparison-column li { margin-bottom: 30px; }
 .reveal .workflow-diagram { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 32px; padding: 0; list-style: none; margin-top: 46px; }
 .workflow-diagram li { position: relative; border-top: 3px solid var(--presentation-green); padding-top: 18px; }
 .step-number { display: block; color: var(--presentation-green); font-size: 20px; margin-bottom: 14px; }
-.reveal .workflow-diagram h3 { font-size: 27px; margin-bottom: 14px; }
+.reveal .workflow-diagram h3 { font-size: 27px; margin-bottom: 8px; }
 .reveal .workflow-diagram p { font-size: 23px; }
 .step-arrow { position: absolute; right: -28px; top: 46px; color: var(--presentation-muted); }
 .diagram-outputs { margin-top: 26px; color: var(--presentation-green); text-align: center; }
 .reveal .diagram-outputs ul { display: flex; justify-content: center; gap: 40px; padding: 0; list-style: none; margin-top: 12px; }
 .reveal .diagram-outputs li { font-size: 25px; padding: 0; margin: 0; }
 .reveal .diagram-caption { color: var(--presentation-muted); font-size: 20px; margin-top: 30px; }
-.slide-sources { position: absolute; bottom: 25px; left: 50px; right: 50px; display: flex; gap: 14px; border-top: 1px solid var(--presentation-rule); padding-top: 14px; font-size: 18px; color: var(--presentation-muted); }
+.slide-sources { flex-wrap: wrap; position: absolute; bottom: 25px; left: 50px; right: 50px; display: flex; gap: 14px; border-top: 1px solid var(--presentation-rule); padding-top: 14px; font-size: 18px; color: var(--presentation-muted); }
 .reveal .progress { color: var(--presentation-green); height: 4px; }
 .reveal .controls { color: var(--presentation-green); }
 .reveal .slide-number { font-family: inherit; background: #fff; color: var(--presentation-muted); font-size: 14px; right: 18px; bottom: 10px; }
 .presentation-fallback { position: fixed; bottom: 20px; padding: 16px; background: #fff; z-index: 40; }
 @media (prefers-reduced-motion: reduce) { .reveal .slides section { transition: none !important; } }
 @media (max-width: 600px) {
-  .reveal .slides > section { height: 1400px; padding: 45px 40px 90px; }
+  .reveal section.course-slide { height: 1400px; padding: 45px 40px 90px; }
   .reveal h1 { font-size: 76px; }
   .reveal h2 { font-size: 50px; }
   .reveal .slide-message, .with-image .slide-message { font-size: 34px; margin-bottom: 32px; }
@@ -69,12 +71,12 @@
   .reveal figure img { height: 300px; }
   .reveal figcaption { font-size: 24px; }
   .comparison-columns { grid-template-columns: minmax(0, 1fr); gap: 35px; }
-  .reveal .comparison-column h3 { margin-bottom: 24px; font-size: 34px; }
+  .reveal .comparison-column h3 { margin-bottom: 14px; font-size: 34px; }
   .reveal .comparison-column li { margin-bottom: 20px; }
   .reveal .workflow-diagram { grid-auto-flow: row; gap: 18px; margin-top: 24px; }
   .workflow-diagram li { padding: 14px 0 8px 54px; }
   .step-number { position: absolute; left: 0; top: 16px; font-size: 24px; }
-  .reveal .workflow-diagram h3 { font-size: 34px; margin-bottom: 8px; }
+  .reveal .workflow-diagram h3 { font-size: 34px; margin-bottom: 5px; }
   .reveal .workflow-diagram p { font-size: 28px; }
   .step-arrow { display: none; }
   .reveal .diagram-outputs ul { flex-direction: column; gap: 12px; }
@@ -82,3 +84,41 @@
   .reveal .diagram-caption { font-size: 24px; }
   .slide-sources { left: 40px; right: 40px; font-size: 24px; }
 }
+
+/* Scroll view wraps sections in scroll pages; style the slide rather than its parent. */
+.reveal .scrollbar { color: var(--presentation-green); }
+.with-demo .slide-message { margin-bottom: 16px; font-size: 30px; }
+.source-selection { font-size: 23px; }
+.reveal .demo-instruction { color: var(--presentation-muted); margin-bottom: 12px; }
+.demo-controls { display: flex; gap: 12px; margin-bottom: 18px; }
+.demo-controls button { font: inherit; color: var(--presentation-green); background: white; border: 2px solid currentColor; border-radius: 4px; padding: 9px 18px; cursor: pointer; }
+.demo-controls button[aria-pressed="true"] { color: white; background: var(--presentation-green); border-color: var(--presentation-green); }
+.demo-controls button:disabled { cursor: default; }
+.source-selection table { width: 100%; border-collapse: collapse; text-align: left; }
+.source-selection caption { text-align: left; font-size: 20px; color: var(--presentation-muted); padding-bottom: 8px; }
+.source-selection th, .source-selection td { padding: 9px 14px 9px 0; border-bottom: 1px solid var(--presentation-rule); }
+.source-selection thead th { font-size: 20px; color: var(--presentation-muted); }
+.source-selection tbody th { font-weight: 500; }
+.source-selection small { display: block; color: var(--presentation-muted); font-size: 17px; margin-top: 4px; }
+.reveal .demo-result { margin-top: 18px; font-weight: 600; color: var(--presentation-green); }
+.reveal .demo-scope { margin-top: 8px; font-size: 20px; color: var(--presentation-muted); }
+@media (max-width: 600px) {
+  .presentation-toolbar { padding: 5px 8px; height: 88px; align-items: start; flex-direction: column; justify-content: center; gap: 5px; }
+  .presentation-toolbar > div { align-items: center; gap: 6px; }
+  .presentation-toolbar button { min-height: 32px; font-size: 12px; padding: 0 8px; }
+  .presentation-page .reveal { top: 88px; height: calc(100dvh - 88px); }
+  .source-selection { font-size: 28px; }
+  .source-selection small, .source-selection caption, .source-selection thead th, .reveal .demo-scope { font-size: 23px; }
+  .source-selection th, .source-selection td { padding-top: 18px; padding-bottom: 18px; }
+  .demo-controls { flex-wrap: wrap; margin: 24px 0; }
+  .demo-controls button { padding: 16px 22px; }
+  .reveal .demo-result { margin-top: 28px; }
+}
+/* Static HTML is a readable fallback if JavaScript is unavailable or fails to load. */
+.presentation-page .reveal:not(.ready) { position: relative; top: 0; height: auto; margin-top: 100px; font-size: 20px; overflow: visible; }
+.reveal:not(.ready) .slides { position: static; width: auto; height: auto; margin: auto; max-width: 1080px; transform: none; }
+.reveal:not(.ready) section.course-slide { display: block; position: relative; opacity: 1; visibility: visible; height: auto; min-height: 540px; padding: 40px 24px; transform: none; pointer-events: auto; }
+.reveal:not(.ready) .slide-sources { position: static; margin-top: 32px; }
+.reveal:not(.ready) h1 { font-size: clamp(36px, 6vw, 76px); }
+.reveal:not(.ready) h2 { font-size: clamp(28px, 4vw, 48px); }
+.reveal:not(.ready) .title-slide { padding-top: 20px; }

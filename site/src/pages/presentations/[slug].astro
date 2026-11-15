@@ -1,10 +1,7 @@
 ---
-import { getPresentations } from '../../lib/presentations';
+import { getPresentations, getPresentationDemo } from '../../lib/presentations';
 import PresentationLayout from '../../layouts/PresentationLayout.astro';
-import TitleSlide from '../../components/slides/TitleSlide.astro';
-import ContentSlide from '../../components/slides/ContentSlide.astro';
-import ComparisonSlide from '../../components/slides/ComparisonSlide.astro';
-import DiagramSlide from '../../components/slides/DiagramSlide.astro';
+import PresentationDeck from '../../components/slides/PresentationDeck';
 import { siteUrl } from '../../lib/urls';
 
 export async function getStaticPaths() {
@@ -13,16 +10,10 @@ export async function getStaticPaths() {
   }));
 }
 const { presentation } = Astro.props;
+const records = presentation.slides.some((slide) => slide.type === 'content' && slide.demo)
+  ? await getPresentationDemo() : [];
 ---
-<PresentationLayout title={presentation.title} description={presentation.description} notesUrl={presentation.slides.some((slide) => slide.notes) ? siteUrl(`presentations/${presentation.slug}/notes/`) : undefined}>
-  {presentation.slides.map((slide) => <section id={slide.id} class={`slide-${slide.type}`} aria-label={slide.title}>
-    {slide.type === 'title' && <TitleSlide slide={slide} />}
-    {slide.type === 'content' && <ContentSlide slide={slide} />}
-    {slide.type === 'comparison' && <ComparisonSlide slide={slide} />}
-    {slide.type === 'diagram' && <DiagramSlide slide={slide} />}
-    <footer class="slide-sources">
-      <span>Source</span>
-      {slide.references.map((source) => <a href={source.url} title={source.title}>Chapter {source.number}</a>)}
-    </footer>
-  </section>)}
+<PresentationLayout title={presentation.title} description={presentation.description}>
+  <PresentationDeck presentation={presentation} records={records} client:load />
+  <noscript><p class="presentation-fallback">Reading view. <a href={siteUrl(`presentations/${presentation.slug}/notes/`)}>Read the speaker notes</a>.</p></noscript>
 </PresentationLayout>
