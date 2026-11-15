@@ -53,14 +53,15 @@ for (const slug of ['information-model', 'information-value', 'lab-architecture'
 }
 const original = parse(await read('../dist/presentations/document-as-code/index.html'));
 assert.equal(all(original, node => node.tagName === 'section' && attr(node, 'aria-label')).length, 8);
-console.log('Homepage groups cover all 12 core chapters and one separate bonus; two ten-slide packs, nine-slide architecture deck, notes, image, base paths, and original eight-slide deck passed.');
+console.log('Homepage groups cover the 12 lesson chapters; two ten-slide packs, nine-slide architecture deck, notes, image, base paths, and original eight-slide deck passed.');
 
 const menu = all(home, node => attr(node, 'id') === 'chapter-menu')[0];
 const menuGroups = all(menu, node => hasClass(node, 'menu-group'));
-assert.deepEqual(menuGroups.slice(0, 4).map(group => all(group, node => node.tagName === 'a').map(node => attr(node, 'href'))), groupLinks, 'Menu and homepage share core chapter groups');
-const bonusMenu = menuGroups[4];
-assert.ok(bonusMenu && all(bonusMenu, node => node.tagName === 'a' && attr(node, 'href') === bonusLink).length === 1, 'Bonus sidebar link');
-
+assert.deepEqual(menuGroups.slice(0, 4).map(group => all(group, node => node.tagName === 'a').map(node => attr(node, 'href'))), groupLinks, 'Menu and homepage share chapter groups');
+const recapUrl = '/document-as-code-lab/chapters/13-course-summary/';
+const learningPath = all(home, node => attr(node, 'id') === 'learning-path')[0];
+assert.equal(all(learningPath, node => attr(node, 'href') === recapUrl).length, 1);
+assert.equal(all(menu, node => attr(node, 'href') === recapUrl).length, 1);
 const actions = all(home, node => hasClass(node, 'home-actions'))[0];
 assert.deepEqual(all(actions, node => node.tagName === 'a').map(node => attr(node, 'href')), ['/document-as-code-lab/chapters/01-introduction/', '/document-as-code-lab/chapters/07-processing/#processing-lab-widget']);
 assert.ok((await read('../dist/chapters/07-processing/index.html')).includes('id="processing-lab-widget"'));
@@ -68,3 +69,5 @@ const budgetAnchor = 'missing-excel-tables-and-spreadsheets';
 assert.equal(all(home, node => node.tagName === 'a' && attr(node, 'href') === `/document-as-code-lab/materials/reference/dashboards-and-work-tracking/#${budgetAnchor}`).length, 1);
 assert.ok((await read('../dist/materials/reference/dashboards-and-work-tracking/index.html')).includes(`id="${budgetAnchor}"`));
 console.log('Package 1 primary entries, shared navigation and final budget anchor passed.');
+
+assert.ok(menuGroups[4] && all(menuGroups[4], node => node.tagName === "a" && attr(node, "href") === bonusLink).length === 1, "Bonus sidebar link");

@@ -1,0 +1,43 @@
+---
+import Documentation from '../../../layouts/Documentation.astro';
+import ChapterNineDemo from '../../../components/proposals/ChapterNineDemo.astro';
+import { proposals, scenarios } from '../../../lib/chapter-nine-proposals';
+import { siteUrl } from '../../../lib/urls';
+import '../../../styles/chapter-nine-proposals.css';
+export function getStaticPaths() {
+  return proposals.map(proposal => ({params:{number:String(proposal.number)},props:{proposal}}));
+}
+const { proposal } = Astro.props;
+const scenario = scenarios[proposal.example];
+const previous = proposals.find(item => item.number === proposal.number - 1);
+const next = proposals.find(item => item.number === proposal.number + 1);
+---
+<Documentation title={`Chapter 9 proposal ${proposal.number} — ${proposal.title}`} description={proposal.lesson} wide>
+  <article class="proposal-review">
+    <div class="proposal-nav" role="navigation" aria-label="Chapter 9 proposals">
+      <a href={siteUrl('proposals/chapter-9/')}>All proposals</a>
+      {proposals.map(item=><a href={siteUrl(`proposals/chapter-9/${item.number}/`)} aria-current={item.number===proposal.number?'page':undefined}>Proposal {item.number}</a>)}
+    </div>
+    <p class="proposal-eyebrow">Proposal {proposal.number} of 6 · {proposal.methodName}</p>
+    <h1>{proposal.title}</h1>
+    <p class="proposal-intro">{scenario.intro}</p>
+    <p class="proposal-question"><strong>{scenario.question}</strong></p>
+    <ChapterNineDemo proposal={proposal} scenario={scenario}/>
+    <h2>What this introduces</h2>
+    <p>{proposal.lesson}</p>
+    <p>The shared values are the structured fields from chapter 5. The recorded links are the relationships from chapter 6. Processing from chapter 7 uses those fields and links to produce this view. <a href={siteUrl('chapters/05-structured-content/')}>Structured fields</a> · <a href={siteUrl('chapters/06-information-architecture/')}>Relationships</a> · <a href={siteUrl('chapters/07-processing/')}>Processing</a></p>
+    <h2>How an AI agent could help</h2>
+    <p>An agent with access to these records and their definitions could prepare a review using a request like this.</p>
+    <blockquote><p>{scenario.aiRequest}</p></blockquote>
+    <details class="supporting-reference"><summary>Example briefing from these records</summary><p>{scenario.aiBrief}</p></details>
+    <section class="proposal-assessment" aria-labelledby="assessment-title">
+      <h2 id="assessment-title">Assessment of this iteration</h2>
+      <p class="proposal-eyebrow">{proposal.change}</p>
+      <p>{proposal.strength}</p><p>{proposal.limitation}</p>
+    </section>
+    <div class="chapter-navigation" aria-label="Proposal navigation">
+      {previous && <a href={siteUrl(`proposals/chapter-9/${previous.number}/`)}>Previous · Proposal {previous.number}</a>}
+      {next ? <a href={siteUrl(`proposals/chapter-9/${next.number}/`)}>Next · Proposal {next.number}</a> : <a href={siteUrl('proposals/chapter-9/#evaluation')}>Compare all six and read the recommendation</a>}
+    </div>
+  </article>
+</Documentation>

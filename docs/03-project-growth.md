@@ -1,7 +1,7 @@
 ---
 id: 02-project-growth
 chapter_number: 3
-status: in-review
+status: approved
 learning_goal: "Explain how version history supports comparisons, accountability, and analysis without confusing activity metrics with quality."
 visuals:
   - id: history
@@ -11,13 +11,13 @@ visuals:
     source: ../assets/diagrams/03-history.mmd
     embedded: true
     outputs: [web, pdf, slides]
-    caption: "Fictional revisions A to D show how a report remains tied to the revision used to build it."
+    caption: "Revisions A to D show how a report remains tied to the revision used to build it."
     alt: " A[Revision A] --> B[Revision B];  B --> C[Revision C];  C --> D[Revision D];  C -.-> X[Report built from C];  D -.-> Y[New report requires new processing]"
 ---
 
 # History Is Useful Information
 
-Suppose the access procedure gains an extra verification step. Who introduced it, what did reviewers accept, and which version reached the training guide? A change history helps the team answer those questions without relying on memory.
+Suppose the access procedure from our previous example gains an extra verification step. Who introduced it, what did reviewers accept, and which version reached the training guide? A change history helps the team answer those questions without relying on memory.
 
 ## What does Git remember?
 
@@ -35,12 +35,17 @@ flowchart LR
  D -.-> Y[New report requires new processing]
 ```
 
-*Fictional revisions A to D show how a report remains tied to the revision used to build it.*
+*Revisions A to D show how a report remains tied to the revision used to build it.*
 
 
 ## Who changed, reviewed, and approved the information?
 
 History also connects changes to people. Git records author and committer information for each commit. GitHub pull-request reviews record the reviewer's account and decision against a particular revision. This helps a team find who proposed a change, who reviewed it, and where questions were resolved.
+
+<aside class="supporting-reference" aria-label="Pull request (PR)">
+  <p><strong>Pull request (PR)</strong></p>
+  <p>A pull request is a proposal to merge changes on GitHub. It shows what would change and gives reviewers a place to discuss the proposal and record their decisions.</p>
+</aside>
 
 For approval, the important question is not just **who**, but **who approved which revision**. Keep the decision with the review or change record. A later edit is not automatically covered by an earlier approval. These records support accountability and follow-up, not a ranking of contributors by activity.
 

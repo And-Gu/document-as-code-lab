@@ -1,7 +1,7 @@
 ---
 id: information-architecture
 chapter_number: 6
-status: in-review
+status: approved
 learning_goal: "Organize information into clear objects and relationships; assess likely impacts of a change."
 visuals:
   - id: information-relationships

@@ -2,7 +2,7 @@
 id: explorable-presentations
 chapter_number: 13
 bonus: true
-status: in-review
+status: approved
 audience: general-professional
 learning_goal: "Design presentations as source-linked, reusable experiences and choose between guided stories, interactive maps, dashboards and explanations for a particular audience."
 visuals: []

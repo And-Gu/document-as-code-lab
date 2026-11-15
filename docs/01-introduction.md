@@ -1,7 +1,7 @@
 ---
 id: 01-introduction
 chapter_number: 1
-status: in-review
+status: approved
 learning_goal: "Recognize new ways to collaborate, automate information work, and support agents while distinguishing maintained sources, review and reuse."
 visuals:
   - id: why-now
@@ -31,6 +31,8 @@ An instruction changes, and the team needs to update a handbook, a training guid
 **Document-as-Code** applies practices from software development to that work: keep readable sources, record and review changes, and automate repeatable tasks. The information can then support documents, diagrams, dashboards, and AI-assisted work.
 
 This tutorial is both an introduction and a working example. Its source material is maintained as [Markdown files in the repository](https://github.com/And-Gu/document-as-code-lab/tree/main/docs). Astro builds the [reading website](https://and-gu.github.io/document-as-code-lab/) from those same files. The website adds interactive practice and dashboards; GitHub's Markdown preview remains a readable version without those controls.
+
+You’ll learn how teams use [GitHub in Chapter 2](02-github-workspace.md) and how [Astro builds this site in Chapter 12](11-beyond-github.md).
 
 ## Why now?
 
@@ -73,7 +75,7 @@ flowchart LR
 
 *One set of maintained procedures can support different outputs, including an overview of the information's review state.*
 
-**Reuse of text and information is designed, not automatic.** Saving text in Markdown or GitHub does not eliminate duplication. Someone must decide what information is shared, which source states are acceptable, and how each output uses them.
+Start with one shared source and decide what each output needs. For example, the handbook might use all approved procedures, while a training guide might use just the approved access instructions.
 
 ## Explore the Onboarding Lab
 
@@ -107,7 +109,7 @@ The inclusion preview and saved outputs follow the same principle: **maintained 
 
 The approach above can support checklists, reports, diagrams, simulation inputs, dashboards, and AI-assisted work. It can also help teams review not only information but the rules that process it.
 
-You may also encounter **Docs-as-Code**, particularly for maintaining and publishing documentation. This lab builds on that practice and extends the examples to structured records, relationships, and interactive views.
+In technical documentation, these same practices are often called **docs as code**. In this tutorial, we also use them to work with information such as project records and the links between them.
 
 You can follow the demonstrations without installing development tools. We start with onboarding information, then explore agent-ready project knowledge, a fictional contract model, and the actual system behind this website. [Chapter 2](02-github-workspace.md) begins with the shared workspace where the sources and proposed changes live.
 

@@ -1,6 +1,6 @@
 .architecture-explorer { margin: 1.5rem 0; border: 1px solid #bbc9c5; border-radius: 6px; padding: 1rem; background: #fafcfb; min-width: 0; }
-.architecture-explorer h3 { margin: 0 0 1rem; font-size: 1.15rem; }
-.architecture-explorer h4 { margin: 1rem 0; font-size: 1.05rem; }
+.architecture-explorer h3 { margin: 0 0 .5rem; font-size: 1.15rem; }
+.architecture-explorer h4 { margin: 1rem 0 .5rem; font-size: 1.05rem; }
 .architecture-explorer h5 { margin: 0; font-size: .9rem; }
 .architecture-tabs { display: flex; flex-wrap: wrap; gap: .35rem; padding-bottom: .75rem; border-bottom: 1px solid #d1dad7; }
 .architecture-explorer [hidden] { display: none !important; }

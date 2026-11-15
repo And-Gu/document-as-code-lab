@@ -1,7 +1,7 @@
 ---
 id: 08-publishing
 chapter_number: 11
-status: in-review
+status: approved
 learning_goal: "Explain how GitHub Actions uses repository events to check, build, and publish information; distinguish a workflow artifact from a GitHub Pages deployment."
 visuals:
   - id: actions-to-pages
@@ -11,46 +11,29 @@ visuals:
     source: ../assets/diagrams/10-actions-to-pages.mmd
     embedded: true
     outputs: [web, pdf, slides]
-    caption: "Pull-request checks and published website deployments serve different purposes; only an authorized, successful deployment changes the site."
+    caption: "A proposed edit is checked before review. After merge, the deployment workflow builds the website and publishes the updated files."
     alt: "A pull request triggers checks and review. After a change reaches main, or an hourly refresh starts, the deployment workflow builds the Astro site and deploys its static files to GitHub Pages."
 ---
 
 # Automating Information with GitHub Actions
 
-Someone updates a chapter and sends the change for review. The website needs checking before the change is accepted, then rebuilding and publishing after it reaches the shared source. Who will remember to run each operation?
+Suppose we improve the explanation of resolution time in Chapter 10. We edit the Markdown, ask a colleague to review it and want the new wording to reach readers. Along the way, the website needs to be checked, rebuilt and published. How can those repeatable tasks happen whenever a change is ready?
 
-We now turn from fictional examples to this tutorial's actual repository. **GitHub Actions** runs configured operations when events occur, such as a pull request, a push, or a scheduled time. This is how the lab checks contributions, measures growth, prepares a PDF proof, and publishes its website.
+In [Chapter 7](07-processing.md), we ran checks and generated results with a button. In [Chapter 10](10-data-enrichment.md), we kept a calculation so it could be run again. **GitHub Actions** lets us connect repeatable work like this to an event, such as proposing a change or merging it. This chapter follows how the tutorial’s own repository uses it to publish a chapter edit.
 
-## From running a script to running a workflow
+<span id="from-running-a-script-to-running-a-workflow"></span>
 
-A script defines *what to do*. A workflow defines *when to run it, where it runs, and what happens to the result*.
+## Start with a proposed change
 
-| Term | Meaning |
-| --- | --- |
-| **Event** | A pull request, push, manual request, or schedule that starts a run |
-| **Workflow** | A versioned YAML file in `.github/workflows/` |
-| **Job** | Steps that run together, usually on one runner |
-| **Runner** | The machine executing a job |
-| **Artifact** | An output retained from a run, such as a report or PDF proof |
+The author submits the revised paragraph in a **pull request**, the proposal for review introduced in [Chapter 2](02-github-workspace.md). That event starts the repository’s **Astro PR check**.
 
-The workflow file connects an event to the checks and generators introduced in [chapter 7](07-processing.md). Its run record shows what executed and what happened.
+The check follows a **workflow**: a set of instructions saved in the repository. It builds the proposed website and runs checks on the result, including links and learning components. If the edit contains a broken chapter link, the check can point it out while the change is still being reviewed.
 
-## What runs in this tutorial?
-
-The [repository](https://github.com/And-Gu/document-as-code-lab) contains four workflows with different purposes:
-
-| Workflow | Trigger | Result |
-| --- | --- | --- |
-| [Astro PR check](../.github/workflows/astro-pr-check.yml) | Pull request targeting `main` | Website, content, learning-component, and dashboard checks; no publication |
-| [Deploy Astro to GitHub Pages](../.github/workflows/deploy-pages.yml) | Push to `main`, manual dispatch, or hourly schedule | Builds and publishes the website, including refreshed build-time data |
-| [Measure project growth](../.github/workflows/growth.yml) | Push to `main` or manual dispatch | Tests, measured history, and downloadable report artifacts |
-| [PDF design proof](../.github/workflows/pdf-proof.yml) | Pull request or manual dispatch | A limited PDF and page images for inspection, not a finished book |
-
-Each has its own purpose and permission boundary. **A passing pull-request check does not publish a website; a downloaded artifact is not a public website.**
+The reviewer can then consider the wording alongside the check results. The automated work helps answer “Does the site still work?” The reviewer answers “Does this explanation help the reader?”
 
 ## From a change to GitHub Pages
 
-Follow a typical update to this tutorial:
+Once the change is accepted and merged into the main branch, another workflow builds and publishes the website. Follow the edit through that sequence:
 
 ```mermaid
 flowchart TB
@@ -64,39 +47,68 @@ flowchart TB
     pages --> reader["Reader opens the published website"]
 ```
 
-*A proposed edit triggers checks; a separate workflow builds and publishes the site after merge or a scheduled refresh. Required approvals depend on repository settings, and scheduled runs may be delayed.*
+*The proposed edit is checked before review. After merge, the deployment workflow builds the website and publishes the updated files.*
 
-**Astro** builds the site. **GitHub Actions** runs that build and deploys its result. **GitHub Pages** serves the resulting HTML, CSS, JavaScript, images, and data files to readers at:
+Three tools have distinct jobs in this path:
 
-[and-gu.github.io/document-as-code-lab/](https://and-gu.github.io/document-as-code-lab/)
+| Tool | What it does for our chapter edit |
+| --- | --- |
+| **Astro** | Reads the Markdown and builds the chapter page, its layout and navigation |
+| **GitHub Actions** | Runs the configured checks, build and deployment |
+| **GitHub Pages** | Hosts the built files so readers can open the updated page |
 
-GitHub Pages is static hosting. It does not run Astro or the project's Python scripts for each visitor. Those operations run before publication; JavaScript in the reader's browser makes quizzes, the Contract Explorer, presentations, and other controls interactive. The dashboard also has an optional, explicitly requested live GitHub API retrieval; most of its data is a published snapshot.
+A **build** prepares the website files. A **deployment** makes those files available on the host. This is the distinction from Chapter 7 in practice: passing the pull-request check prepares a website for inspection; the later deployment updates the public site.
 
-The deployment workflow also runs on an hourly schedule to refresh those snapshots. A site may therefore receive an updated dataset without any chapter text being edited.
-
-The site uses Astro's **incremental static build** feature to avoid rendering unchanged content pages again. It uses source-based cache keys and dependency checks, not an unchanged commit SHA alone. Each run still generates fresh dashboard data, creates a complete website artifact, and deploys that artifact to GitHub Pages. A cache miss or deliberate clean build simply renders everything. See the [site build guide](../site/README.md) for the dependency rules and validation checks.
-
-## Read the actual deployment definition
-
-The [deployment definition](../.github/workflows/deploy-pages.yml) records those triggers in YAML. Its build job checks out the repository, prepares Python, and invokes the Astro build action. A separate job publishes the resulting files to GitHub Pages.
-
-The workflow is maintained and versioned with the sources. Changing a build rule deserves review because it can affect every output that uses it. The [publishing guide](../reference/publishing-workflows.md) explains the configuration in more detail.
+Pages serves the prepared HTML, styles, images, data and JavaScript. When a reader answers a quiz or turns the knowledge graph, JavaScript runs in their browser. The whole website does not need to be rebuilt for each click. During publication, Astro can also reuse unchanged pages through incremental builds. Each deployment still publishes a complete website. The [site build guide](../site/README.md#build-and-publication-performance) explains the cache and its checks.
 
 ## Explore: Inspect a real run
 
-Open the public [Actions page](https://github.com/And-Gu/document-as-code-lab/actions) and inspect a recent **Deploy Astro to GitHub Pages** run.
+Open the public [Actions page](https://github.com/And-Gu/document-as-code-lab/actions), choose **Deploy Astro to GitHub Pages** and open a completed run. A run is one execution of the workflow.
 
-1. Find its trigger, source commit, and build/deploy jobs.
-2. Check whether the build succeeded and whether the deployment job ran.
-3. Open the published site. What kinds of files and interactive experiences can a static host serve?
-4. Compare it with a **Measure project growth** run. Where do the downloadable artifacts go, and why are they not automatically part of the website?
+You can view the run summary, source commit and job outcomes without signing in. Reading the [detailed job logs](https://docs.github.com/en/actions/how-tos/monitor-workflows/use-workflow-run-logs) requires a GitHub login; that part of the exercise is optional.
 
-The run connects a source revision to its build and deployment. Inspect the resulting page as well: completing the configured jobs is evidence that the process ran, not approval of the chapter's meaning.
+1. **Find what started it.** Look for the event and the source commit. The commit identifies the revision used for this run.
+2. **Follow the jobs.** The build job prepares the site; the deploy job publishes it. A further verification job checks the published revision and reader routes.
+3. **Optional: inspect the logs.** If you are signed in to GitHub, open a job to read its step-by-step logs. If a step failed, its log helps locate the problem.
+4. **Open the [published website](https://and-gu.github.io/document-as-code-lab/).** Compare the relevant page with the change recorded in the source revision.
 
-> **Explore further:** What does a runner execute, and what remains after failure? The [automation and quality guide](../reference/automation-quality.md) follows workflow steps, permissions, retained artifacts, and stale outputs. No local setup is needed to inspect the public runs. The [publishing guide](../reference/publishing-workflows.md) covers output-specific build choices.
+A **job** groups steps that run on a **runner**, the machine carrying out the work. These names are useful when reading a run: they let you move from the overall result to the operation that produced it.
 
-Actions runs the work; Pages distributes the result. [Chapter 12](11-beyond-github.md) brings those responsibilities together with the sources and browser components to show how the whole lab works.
+For our paragraph edit, the chain to inspect is **source revision → build → deployment → published page**. A failure during the build prevents that run from reaching deployment. A failure in the later verification job means the published result needs investigation.
+
+## Read the actual deployment definition
+
+The [deployment workflow](../.github/workflows/deploy-pages.yml) is written in YAML, the structured text format introduced in [Chapter 5](05-structured-content.md). Its opening section lists the events that start it. The jobs below describe the build, deployment and verification.
+
+In this repository, a push to the main branch starts publication. A maintainer can also start it manually, and an hourly schedule refreshes the website’s repository-activity snapshots. That scheduled refresh explains why the Project Control Center can change even when no chapter text has been edited.
+
+The workflow lives beside the chapter sources and has its own revision history. A team can review a change to a publishing rule in the same way it reviews a change to a paragraph.
+
+<span id="what-runs-in-this-tutorial"></span>
+
+## Decide where each result belongs
+
+Some automated work produces a file for inspection. The project-growth workflow, for example, saves a report as an **artifact**: a file retained with the run and available to download while it is kept.
+
+That report has a different destination from our chapter page. To become part of the public website, an output must be included in the website build and deployment.
+
+| Work in this repository | When it starts | Where the result goes |
+| --- | --- | --- |
+| [Astro PR check](../.github/workflows/astro-pr-check.yml) | A pull request | Check results attached to the proposal |
+| [Website deployment](../.github/workflows/deploy-pages.yml) | A push to main, a manual request or the hourly schedule | The published GitHub Pages site |
+| [Project-growth measurement](../.github/workflows/growth.yml) | A push to main or a manual request | Reports retained with the run |
+| [PDF design proof](../.github/workflows/pdf-proof.yml) | A pull request or a manual request | A sample PDF and page images for inspection |
+
+## Use the same idea in your work
+
+Return to the service report from Chapter 10. A team could arrange for the agreed date checks and duration calculation to run whenever it receives a new set of case records. The workflow would save the results and identify records needing attention; the manager would use those results to prepare the meeting.
+
+Start by identifying the repeated task, the event that should start it and the destination for its result. Once those are clear, automation can repeat an established method and keep a record of each run.
+
+An agent with access to the workflow and run logs can also help explain a failure or prepare a proposed fix. Keeping the instructions with the sources gives it the context introduced in [Chapter 8](08-ai-native.md).
+
+> **Explore further:** The [automation and quality guide](../reference/automation-quality.md) explains workflow steps and retained results. The [publishing guide](../reference/publishing-workflows.md) covers this repository’s output paths, and [GitHub’s introduction to Actions](https://docs.github.com/en/actions/get-started/understand-github-actions) explains the platform’s terms.
+
+Our chapter edit now has a path from proposal to publication. [Chapter 12](11-beyond-github.md) looks inside that path: which files hold the information, how the website combines them and how the same approach can work in another environment.
 
 <!-- interactive: chapter-quiz -->
-
-The verification harness checks a published artifact against its explicit `build-information.json` source revision. A successful local build does not establish that the same revision is live. The [verification register](../spec/tutorial/working-methods-upgrade/verification/README.md) records those results separately from content approval and reader observations.

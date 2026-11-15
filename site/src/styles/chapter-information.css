@@ -4,13 +4,14 @@
   --widget-border: #d6dedb;
   --widget-text: #222;
   --widget-muted: #52605a;
-  margin: 1.25rem 0 1.75rem;
+  margin: .5rem 0 1.75rem;
   border: 1px solid var(--widget-border);
   border-left: 4px solid var(--status-color);
   border-radius: 4px;
   background: var(--widget-background);
   color: var(--widget-text);
   font-size: 0.875rem;
+  overflow-wrap: anywhere;
 }
 .chapter-information[data-status='draft'] { --status-color: #946200; }
 .chapter-information[data-status='in-review'] { --status-color: #1968ac; }

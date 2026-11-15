@@ -1,7 +1,9 @@
 # Document-as-Code Lab — Learning Product Specification v1.5
 
 > **6 November 2026 · v1.5 data-enrichment extension to the 25 October audience baseline**\
-> Derived from `01-REUSABLE-TUTORIAL-SPECIFICATION-TEMPLATE.md`. **Target:** 12 chapters. Insert *From Data to Knowledge* at chapter 10; automation and lab architecture become chapters 11 and 12 without changing their published source slugs. This is the **intended specification**, not a claim that everything is implemented or user-tested.
+> Derived from `01-REUSABLE-TUTORIAL-SPECIFICATION-TEMPLATE.md`. **Target:** 12 lesson chapters and a closing summary. Insert *From Data to Knowledge* at chapter 10; automation and lab architecture become chapters 11 and 12 without changing their published source slugs. This is the **intended specification**, not a claim that everything is implemented or user-tested.
+
+**15 November 2026 · Chapter 9 direction:** The owner selected the course knowledge graph as Chapter 9's primary example. It brings the graph near the opening, connects its fields and named relationships to Chapters 5–7, and explains how an agent can follow the same sources using the context introduced in Chapter 8. The Contract Explorer remains a supplementary lab. This decision supersedes the Contract Explorer-specific Chapter 9 requirements in the earlier implementation packages below; it does not change the chapter's stable ID or route.
 
 ## 1. Product promise
 
@@ -19,14 +21,14 @@
 
 | Reader | Starting position | Core path | Optional next step |
 | --- | --- | --- | --- |
-| Information-experienced professional (primary) | Uses Word, Excel, PDF and specialized business systems; understands their domain but need not be a writer, engineer or developer | Explore the examples and twelve-chapter journey | Identify a bounded experiment in their own work |
+| Information-experienced professional (primary) | Uses Word, Excel, PDF and specialized business systems; understands their domain but need not be a writer, engineer or developer | Explore the examples and four-part course and closing summary | Identify a bounded experiment in their own work |
 | Reader seeking implementation depth (optional) | Wants to inspect or adapt the mechanisms | Follow the same conceptual journey | Inspect sources, scripts, workflows and implementation references |
 
 Information can be richly structured inside product, requirements, modeling, quotation, planning or budget systems while remaining difficult to combine across their boundaries. The intended reader often connects, interprets and summarizes it manually, with AI mainly helping develop text. This is a starting situation, not a claim about every organization. Document-as-code is our inspectable demonstration; it neither integrates business systems automatically nor requires replacing familiar tools.
 
 **Browser-first requirement:** All chapter learning outcomes must be achievable without cloning a repository, using an AI account, or installing Node/Python. Optional implementation tasks may require tools but are outside the core path. State whether a UI example is browser-only, build-time, or actually live.
 
-## 3. Curriculum structure — intended 12 chapters
+## 3. Curriculum structure
 
 Groups are coherent reader journeys. The homepage should use these *semantic group definitions* rather than outdated hard-coded ranges.
 
@@ -49,12 +51,13 @@ Groups are coherent reader journeys. The homepage should use these *semantic gro
 | **6. Information Architecture and Traceability** | Show object boundaries, identities, and meaningful relationships | Trace candidate impacts without assuming every linked item must change | Select/highlight relationships or a clearly annotated case | Record-processing and visual-source references |
 | **7. From Sources to Results** | Demonstrate transformations and distinct outputs from common sources | Predict what changes in a handbook or review queue after a source edit | Processing Lab; side-by-side sources and outputs | Record-processing, automation details |
 | **8. Making Information Usable by AI Agents** | Show how maintainable project knowledge supports agent work | Distinguish `AGENTS.md` instructions, information architecture, terminology, decisions, authoritative sources and checks | Real `AGENTS.md` excerpt + one contextual scenario check about where rules/rationale belong; no contrived AI quality comparison | Reworked AI Context and Agents reference |
-| **9. Information You Can Explore** | Move from predetermined reports to questions over interconnected maintained data | Navigate agreement, project, and delivery relations and distinguish recorded from inferred impacts | Contract Explorer with three views | Visual-source guide and dashboard examples |
+| **9. Information You Can Explore** | Move from predetermined reports to questions over interconnected maintained data | Follow named concept relationships, find supporting chapters, and explain how metadata, processing and AI context enable the experience | Course knowledge graph with 3D text labels, readable list, chapter references and a worked agent request | Maintained graph dataset, supplementary Contract Explorer and visual-source guide |
 | **10. From Data to Knowledge** | Improve and extend the value of data itself | Judge data quality; annotate, enrich, visualize, review, preserve and reuse data | Five fictional service cases, quality annotations, reproducible duration report and plot | Service-case sources and reproduction guide |
 | **11. Automating Information with GitHub Actions** | Show that source changes can trigger repeatable checks, builds, and publishing | Trace PR → check versus main/schedule → build → Pages; inspect a run | Real workflow map with annotated steps; optional live Actions page | Automation and publishing guides |
 | **12. Behind the Lab: How We Built This Tutorial** | Reveal the system the reader just used and transfer the principles to other tools | Trace Markdown → Astro → JS/Reveal.js → GitHub Actions → Pages; compare with M365 | Architecture Explorer and one clear architecture diagram | Presentations authoring, workflows-across-tools, implementation references |
+| **13. Bringing It Together** | Revisit what the four parts introduced and connect it to everyday information work | Recognize how maintained sources, structure, reuse, and publication fit together | A short visual walkthrough for each part, using the course examples | Links back to the relevant chapters |
 
-**Lab architecture chapter:** Retain the useful architectural overview in the final chapter (now chapter 12). The earlier adoption chapter remains retired; its *start with one small information flow* message belongs in the closing or a supporting reference, not another mandatory chapter.
+**Lab architecture chapter:** Chapter 12 retains the lab architecture and guidance on starting with one useful information flow. Chapter 13 serves as the course recap.
 
 ## 4. Narrative examples and data boundaries
 
@@ -62,18 +65,19 @@ Groups are coherent reader journeys. The homepage should use these *semantic gro
 | --- | --- | --- | --- |
 | **Onboarding procedures** | Opening, metadata, processing (1, 4–7) | `examples/onboarding-showcase/` and related examples | Draft/approved procedure state is not execution or publication |
 | **Requirement records** | Deeper reference and AI context (5, 7–8 reference) | `examples/structured-content/records/` | Approved requirement ≠ implemented and tested capability |
-| **Contract Explorer** | Broader business scenario (9) | `examples/contract-explorer/records/` | Proposed amendment ≠ effective contract; graph traversal ≠ verified impact |
+| **Course knowledge graph** | Familiar course concepts (9) | `data/course-concepts.json` and `docs/` | Named relationships carry meaning; screen positions only arrange the view |
+| **Contract Explorer** | Supplementary business example | `examples/contract-explorer/records/` | Proposed amendment ≠ effective contract; graph traversal ≠ verified impact |
 | **This GitHub/Astro repository** | Real-world meta-example (3, 10–11) | Git history, workflows, site code, YAML decks | Published/build-time snapshot ≠ true live feed; successful build ≠ content approval |
 
 **v1.4 scenario boundary:** Keep onboarding as the small example in Chapters 1–7. Use brief workplace bridges to show why the method matters beyond this example. Package 1 improves existing experiences only; the cross-source refinement lab and agent walkthrough belong to package 2. They are not present merely because their specifications exist.
 
-**Scenario transitions:** At the start of Chapter 9 say why we leave onboarding for a customer/project/contract example. At Chapter 10 say why we now examine the *actual tutorial repository*. Explicitly label fictional teaching datasets versus real repository status. Do not require readers to remember every example ID from earlier chapters.
+**Scenario transitions:** At the start of Chapter 9 connect the generated onboarding outputs to a graph over the course’s own concepts. Chapter 10 moves from using maintained information to adding useful information: follow the service manager’s question through case records, quality notes, calculated durations, a chart and a reusable finding. Introduce the six practices through that investigation. Distinguish teaching datasets from real repository status where it affects interpretation. Do not require readers to remember every example ID from earlier chapters.
 
 ## 5. Engagement policy
 
 **Default chapter experience:** concise narrative + one concrete example + one meaningful visual or comparison + optional short quiz. **Labs are selected for pedagogical value, not imposed on every chapter.**
 
-**Existing core labs to preserve:** Chapter 1 selection, Chapter 4 Markdown editor, Chapter 5 metadata validation, Chapter 7 processing, Chapter 9 Contract Explorer, Chapter 11 Architecture Explorer. The website already has quizzes in every chapter. Retain these unless an explicit owner decision or verified defect justifies changing them. There is no requirement to add more labs to reach an arbitrary count.
+**Existing core labs to preserve:** Chapter 1 selection, Chapter 4 Markdown editor, Chapter 5 metadata validation, Chapter 7 processing, Chapter 9 knowledge graph, Chapter 12 Architecture Explorer. The Contract Explorer remains a supplementary lab. The website already has quizzes in every chapter. Retain these unless an explicit owner decision or verified defect justifies changing them. There is no requirement to add more labs to reach an arbitrary count.
 
 **Quiz requirements:** Usually 1–3 questions, each probing a common misconception or decision. Provide feedback explaining *why*. Avoid trivia and automatic uniform quizzes where an in-context check would work better.
 
@@ -95,7 +99,7 @@ Groups are coherent reader journeys. The homepage should use these *semantic gro
 
 The current lab already has an editor and explicit validation. The owner will review an integrated in-context scenario check and its explanatory feedback; technical verification covers behavior, not generalized learning claims. Avoid re-implementing the parser or changing schema rules just to fit a visual pattern.
 
-**Second guided-design target:** Chapter 9 Contract Explorer. Borrow an *orient → select → trace → interpret → inspect source* flow from Observable and visual-storytelling sites. Make the first business question obvious (“Which delivery might be affected?”), but preserve advanced views. A graph or zoom interaction must have a readable list/table alternative.
+**Second guided-design target:** Chapter 9 knowledge graph. Use an *orient → select → trace → interpret → read source* flow. Start with Metadata and its connection to Processing; connect the interaction to what Chapters 5–8 introduced. A graph or zoom interaction must have a readable list/table alternative.
 
 **Scenario checks:** Reuse a small in-content component where a substantive judgment or misconception exists (initial targets Chapters 5, 6 and 8; additional uses only when justified). Answer feedback explains *why*. No scores, streaks, persistence, or obligatory completion. Retain end-of-chapter quizzes if nonduplicative, but do not force quiz counts. Optional hint/retry is encouraged.
 
@@ -139,7 +143,7 @@ Supporting reference pages remain outside chapter numbering. Each chapter link s
 
 **Chapter narrative:** Open with one concrete reader problem, then explain the necessary mechanism and use the existing examples/labs to demonstrate it. Don't open each section by summarizing the previous chapter. In a natural ending, state the insight and leave a relevant next question. Avoid repeating the same benefit in the opening, last paragraph and boxed takeaway.
 
-**Specific continuity requirements:** Use the Onboarding Lab consistently in Chapters 1–7; move from that example to the actual repository and agent-ready knowledge in Chapter 8; explicitly introduce the fictional contracts scenario in Chapter 9; close by revealing the real build/publishing architecture in Chapters 10–11. Transitions should explain why the reader is seeing a different example.
+**Specific continuity requirements:** Use the Onboarding Lab consistently in Chapters 1–7; move from that example to the actual repository and agent-ready knowledge in Chapter 8; use the course knowledge graph to explore the mechanisms introduced so far in Chapter 9; close by revealing the real build/publishing architecture in Chapters 10–11. Transitions should explain why the reader is seeing a different example.
 
 **Caveats:** Keep important distinctions—metadata validity versus accuracy/approval; requirement approval versus implementation; review candidate versus confirmed impact; source versus generated view; build-time versus live; agent file access versus authority. Place each qualification next to the particular example or result where confusion could arise, and eliminate repetitive generic warnings elsewhere.
 
@@ -260,7 +264,7 @@ Package 1 covers P1-01 through P1-06 and acceptance A01–A08, A15 and A20. The 
 
 This addition introduces a distinct data-centered chapter rather than a new document-output or metadata chapter. Its six core practices are quality, annotation, enrichment, visualization, critical review, and preservation/reuse. They are complementary and iterative rather than an obligatory process. The example uses fictional service cases and distinguishes raw records, curated observations, and derived values. Do not claim that a browser-based transformation laboratory exists until implemented and verified.
 
-Every chapter includes a reusable six-tile *Chapter at a Glance* introduction; its six tiles are conceptual anchors, not completion gates. The reader-facing text is maintained in `site/src/lib/chapter-glances.ts`. Icons follow each tile's meaning rather than its position. The summary is a semantic heading and list, readable without JavaScript; static explanatory tiles are not keyboard controls.
+The 6 November release introduced six-tile *At a Glance* summaries. The 14 November editorial decision removes them so readers reach the chapter text sooner.
 
 To preserve existing chapter URLs, 10-publishing and 11-beyond-github retain their published filenames/IDs while their display order becomes 11 and 12. This is an explicit compatibility exception until a versioned migration strategy is approved. Existing quiz identities and interaction markers remain stable.
 

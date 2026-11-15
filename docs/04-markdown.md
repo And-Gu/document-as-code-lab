@@ -1,7 +1,7 @@
 ---
 id: 03-markdown
 chapter_number: 4
-status: in-review
+status: approved
 learning_goal: "Read and edit common Markdown structures and explain why plain-text sources are useful."
 ---
 

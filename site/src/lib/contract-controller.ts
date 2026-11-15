@@ -13,7 +13,7 @@ export function initContractExplorers() {
     const get = (id: string) => records.get(id)!;
     const recordSelect = root.querySelector<HTMLSelectElement>('[data-ce-record]')!;
     const summary = root.querySelector('[data-ce-summary]')!;
-    let view = 'relationships';
+    let view = 'commitments';
     const tabs = [...root.querySelectorAll<HTMLButtonElement>('[data-ce-view]')];
     const panels = [...root.querySelectorAll<HTMLElement>('[data-ce-panel]')];
     function item(id: string) {
@@ -27,6 +27,7 @@ export function initContractExplorers() {
     }
     function select(id: string) {
       const record = get(id); recordSelect.value = id;
+      root.querySelector<HTMLElement>('#ce-details')!.hidden = false;
       const details = root.querySelector('[data-ce-details]')!;
       const title = element('p'); title.append(element('strong', `${id} · ${record.label}`));
       const type = element('p', `Record type: ${record.type}`);
@@ -47,11 +48,13 @@ export function initContractExplorers() {
       if (!links.childElementCount) links.append(element('li', 'No recorded links.'));
       const readable = element('a', 'Read source record'); readable.href = siteUrl(`materials/${record.source.replace(/\.md$/, '')}/`);
       const provenance = element('details'); provenance.append(element('summary', 'Source and revision'), revision, digest, source, github, note);
-      details.replaceChildren(title, type, status, element('p', record.body), readable, element('h5', 'Recorded links'), links, provenance);
+      details.replaceChildren(title, type, status);
+      if (record.type !== 'customer') details.append(element('p', record.body));
+      details.append(readable, element('h5', 'Recorded links'), links, provenance);
       if (record.id === 'DEL-101') { const follow = element('a', 'Follow this delivery across sources'); follow.href = siteUrl('materials/reference/information-refinement/'); const paragraph = element('p'); paragraph.append(follow); readable.after(paragraph); }
       if (record.type === 'delivery') status.after(element('p', `Planned date: ${record.planned_date ?? 'Not recorded'}`));
       if (view === 'relationships') showRelationships(id);
-      else summary.textContent = `Selected ${id} · ${record.label} · ${statusScope(record)}: ${record.status}`;
+      else if (view === 'impact') summary.textContent = `Selected ${id} · ${record.label} · ${statusScope(record)}: ${record.status}`;
     }
     function showRelationships(id: string) {
       const edges = immediateEdges(data, id), body = root.querySelector('[data-ce-links]')!;
@@ -94,6 +97,7 @@ export function initContractExplorers() {
       }
     }
     function showCommitments() {
+      root.querySelector<HTMLElement>('#ce-details')!.hidden = true;
       const project = root.querySelector<HTMLSelectElement>('[data-ce-project]')!.value;
       const agreement = root.querySelector<HTMLSelectElement>('[data-ce-agreement]')!.value;
       const rows = deliveryCommitments(data, project, agreement);
@@ -109,15 +113,17 @@ export function initContractExplorers() {
         tr.append(delivery, element('td', row.delivery.planned_date ?? 'Not recorded'), element('td', row.delivery.status === 'not-recorded' ? 'Not recorded' : row.delivery.status), terms); body.append(tr);
       }
       root.querySelector<HTMLElement>('[data-ce-empty]')!.hidden = rows.length !== 0;
-      summary.textContent = `${rows.length} deliveries · Agreement coverage follows recorded project links`;
+      const deliveryCount = `${rows.length} ${rows.length === 1 ? 'delivery' : 'deliveries'}`;
+      const projectLabel = project ? get(project).label : 'All projects';
+      const agreementLabel = agreement ? get(agreement).label : 'All agreements and orders';
+      summary.textContent = `${deliveryCount} · ${projectLabel} · ${agreementLabel}`;
     }
     function showImpact() {
       const id = root.querySelector<HTMLSelectElement>('[data-ce-change]')!.value, record = get(id);
       const impact = changeImpact(data, id);
-      const message = record.type === 'amendment'
-        ? record.status === 'proposed' ? `${id} is proposed, not effective. These links do not apply its terms.`
-          : `${id} lifecycle status: ${record.status}. This does not establish delivery completion.`
-        : `${id} lifecycle status: ${record.status}. Review candidates are not confirmed changes.`;
+      const message = record.status === 'proposed'
+        ? `${record.label} (${id}) is proposed. Review the linked work before deciding whether to accept it.`
+        : `${record.label} (${id}) · ${statusScope(record)}: ${record.status}. Follow the links to identify work that may need review.`;
       root.querySelector('[data-ce-impact-status]')!.textContent = message;
       const direct = root.querySelector('[data-ce-direct]')!; direct.replaceChildren();
       for (const edge of impact.direct) { const row = element('li'); row.append(element('strong', 'Recorded: '), item(edge.source), document.createTextNode(` ${relationLabels[edge.type]} `), item(edge.target)); direct.append(row); }
@@ -126,16 +132,17 @@ export function initContractExplorers() {
       for (const candidate of impact.candidates) {
         const row = element('li'); row.className = 'ce-candidate'; row.append(element('strong', 'Review candidate: '), item(candidate.id));
         const trail = element('ul');
-        for (const edge of candidate.path) trail.append(element('li', `${edge.source} ${relationLabels[edge.type]} ${edge.target} (recorded)`));
-        row.append(element('p', 'Derived by following these recorded links, not a new asserted relationship:'), trail); candidates.append(row);
+        for (const edge of candidate.path) trail.append(element('li', `${get(edge.source).label} (${edge.source}) ${relationLabels[edge.type]} ${get(edge.target).label} (${edge.target})`));
+        row.append(element('p', 'Reason for review'), trail); candidates.append(row);
       }
       if (!impact.candidates.length) candidates.append(element('li', 'No further candidates found in the recorded relationships.'));
-      select(id); summary.textContent = `${impact.direct.length} direct links · ${impact.candidates.length} traversal-derived review candidates`;
+      select(id); summary.textContent = `${impact.direct.length} direct links · ${impact.candidates.length} related items to review`;
     }
     function switchView(next: string) {
       view = next;
       tabs.forEach(tab => { const active = tab.dataset.ceView === view; tab.setAttribute('aria-selected', String(active)); tab.tabIndex = active ? 0 : -1; });
       panels.forEach(panel => { panel.hidden = panel.dataset.cePanel !== view; });
+      root.querySelector<HTMLElement>('.ce-guided-entry')!.hidden = view === 'impact';
       if (view === 'relationships') select(recordSelect.value);
       if (view === 'commitments') showCommitments();
       if (view === 'impact') {
@@ -165,6 +172,6 @@ export function initContractExplorers() {
     root.querySelectorAll<HTMLButtonElement | HTMLSelectElement>('button, select').forEach(control => { control.disabled = false; });
     const requested = new URLSearchParams(window.location.search).get('record');
     if (requested && records.has(requested)) recordSelect.value = requested;
-    root.classList.add('ce-enhanced'); switchView('relationships');
+    root.classList.add('ce-enhanced'); switchView(requested && records.has(requested) ? 'relationships' : 'commitments');
   });
 }

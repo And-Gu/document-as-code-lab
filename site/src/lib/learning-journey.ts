@@ -1,3 +1,5 @@
+export const courseSummaryId = '13-course-summary';
+
 // One maintained grouping for homepage and chapter navigation.
 export const learningJourney = [
   { start: 1, end: 4, title: 'Work with maintained sources', description: 'See how shared sources, review and history help people work together.', tone: 'sage' },

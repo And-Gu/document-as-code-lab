@@ -5,13 +5,14 @@ slides:
   - id: introduction
     type: title
     title: Document-as-Code
-    subtitle: Maintain the knowledge. Shape the view.
+    subtitle: Shared information for different readers
     context: An introduction based on the living tutorial
     sources: [docs/01-introduction.md]
+    notes: "Use the fictional onboarding example to introduce the distinction between maintained information and a publication. No account or local installation is needed to explore the tutorial."
 
   - id: reuse
     type: content
-    title: One source. Several useful views.
+    title: One source, several views
     message: Maintain information around the people responsible for it. Present it around the reader's needs.
     bullets:
       - Instructions become a handbook or a training excerpt.
@@ -22,10 +23,11 @@ slides:
       alt: The fictional onboarding dataset contains two approved procedures and one draft.
       caption: Chapter 1's fictional onboarding example. Not tutorial approval data.
     sources: [docs/01-introduction.md]
+    notes: "The chart describes the fixed fictional showcase: two approved procedures and one draft. It does not describe the tutorial review state. A publication still needs a review appropriate to its audience and selected content."
 
   - id: workspace
     type: comparison
-    title: Bring the process into the workspace.
+    title: Sources and processing rules
     left:
       title: Application-led work
       items:
@@ -39,10 +41,11 @@ slides:
         - Teams can develop their tools within agreed boundaries.
         - Checks and publishing are versioned alongside content.
     sources: [docs/02-github-workspace.md]
+    notes: "These are possible ways to organize the work, not inherent limits of office applications. Existing systems can remain authoritative. A repository provides a place to version selected sources and their processing rules."
 
   - id: proposed-change
     type: diagram
-    title: A proposal becomes shared information.
+    title: A proposed change and its review
     message: Keep the current version available while the team prepares and reviews a change.
     steps:
       - label: Branch
@@ -57,21 +60,23 @@ slides:
         detail: Update the shared source.
     caption: Required review and checks depend on repository rules.
     sources: [docs/02-github-workspace.md]
+    notes: "A commit records a local revision. A push shares it with the remote repository before the pull request can be reviewed there. The arrows summarize the proposed-change workflow, not a mandatory approval policy."
 
   - id: review
     type: content
-    title: Recording is not approving.
+    title: Revision records and approval decisions
     message: A review decision needs a scope, an identified version, and a responsible reviewer.
     bullets:
       - A commit records what the files contained.
       - Accepting a change updates the shared source.
       - Approving a publication covers a particular deliverable.
     sources: [docs/02-github-workspace.md]
+    notes: "Distinguish recording a revision, accepting a source change, and approving a particular publication. An automated check only establishes the properties it actually checks."
 
   - id: publishing
     type: diagram
-    title: Adapt the view. Keep the facts connected.
-    message: A presentation is not a handbook divided into slides.
+    title: Publications for different audiences
+    message: Choose the content and sequence that help each audience.
     steps:
       - label: Shared sources
         detail: Markdown, metadata, and visuals.
@@ -82,23 +87,26 @@ slides:
     outputs: [Website, PDF handbook, Training presentation]
     caption: These are publication choices, not three automatically implemented export pipelines.
     sources: [docs/10-publishing.md]
+    notes: "The site and HTML presentations are implemented outputs. The PDF workflow is a limited design proof. A training presentation requires editorial selection and review when the underlying sources change."
 
   - id: automation
     type: content
-    title: Make repeatable work repeatable.
+    title: Repeatable builds and publication
     message: Astro builds the reading experience. GitHub Actions runs the process. GitHub Pages hosts the result.
     bullets:
       - A pull request checks that the website builds.
       - Updates to main trigger the publishing workflow.
       - A successful build does not establish content approval.
     sources: [docs/02-github-workspace.md, docs/10-publishing.md]
+    notes: "The build runs before publication. GitHub Pages serves the generated files, and browser JavaScript enables interactions. Check the deployed result as well as the build log."
 
   - id: start-small
     type: content
-    title: Start with one information item.
+    title: A first maintained item
     message: Choose something you maintain today. Give it an owner, a review process, and two useful views.
     bullets:
       - Keep the maintained facts in one source.
       - Use AI to help develop and check the connections.
       - Improve the process as the team's needs change.
     sources: [docs/01-introduction.md]
+    notes: "Choose a recurring information task and compare two useful views. Agree who maintains the source and who reviews the outputs. Chapter 1 offers a browser example to inspect before adopting any tool."

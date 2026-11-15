@@ -5,7 +5,8 @@ import { processProcedures, renderLearningMarkdown, type ProcedureSource } from 
 import { readPracticeProcedure } from '../../lib/metadata-practice';
 interface Props { initial: string; fixedRecords: ProcedureSource[]; schema: object; }
 const { initial, fixedRecords, schema } = Astro.props;
-const initialResult = processProcedures([...fixedRecords, readPracticeProcedure(initial, schema)]);
+const initialContacts = readPracticeProcedure(initial, schema);
+const initialResult = processProcedures([...fixedRecords, initialContacts]);
 ---
 <section data-processing-playground aria-label="Onboarding Lab: process procedure sources">
   <p>Starting sources: Access and Equipment are approved; Contacts is a draft. Edit only Contacts below. Its preview follows your edits immediately; the two generated outputs keep their last successful result until you build again.</p>
@@ -25,7 +26,18 @@ const initialResult = processProcedures([...fixedRecords, readPracticeProcedure(
   <h4>Procedures awaiting review</h4>
   <ul data-process-queue>{initialResult.queue.map((item) => <li>{item}</li>)}</ul>
   <h4>Handbook review copy</h4>
-  <div data-process-handbook class="mdp-preview" role="region" aria-label="Generated handbook review copy" tabindex="0" set:html={renderLearningMarkdown(initialResult.handbook, true)} />
+  <ol class="handbook-map" aria-label="Handbook section order">
+    <li><strong>1. Access</strong><span>Fixed</span></li>
+    <li><strong>2. Equipment</strong><span>Fixed</span></li>
+    <li class="handbook-map-editable"><a href="#handbook-contacts"><strong>3. Contacts</strong></a><span>Your edits appear here after a successful build.</span></li>
+  </ol>
+  <div data-process-handbook class="mdp-preview" role="region" aria-label="Generated handbook review copy" tabindex="0">
+    {fixedRecords.map((record) => <div set:html={renderLearningMarkdown(record.body, true)} />)}
+    <section id="handbook-contacts" tabindex="-1" aria-label="Contacts section of the handbook">
+      <p class="handbook-section-label"><strong>3. Contacts</strong></p>
+      <div data-process-contacts set:html={renderLearningMarkdown(initialContacts.body, true)} />
+    </section>
+  </div>
   <details><summary>Previous generated result</summary><pre data-process-previous>No build has been requested yet.</pre></details>
   <p class="learning-status">Practice outputs stay in this browser. Builds do not edit repository files, approve instructions, or publish a handbook.</p>
   <noscript><p>Enable JavaScript to edit and build. The starting sources and outputs remain readable.</p></noscript>
@@ -42,7 +54,7 @@ const initialResult = processProcedures([...fixedRecords, readPracticeProcedure(
       const fixed = JSON.parse(root.querySelector('[data-fixed-procedures]')!.textContent!) as ProcedureSource[];
       const status = root.querySelector<HTMLElement>('[data-process-status]')!;
       const queue = root.querySelector('[data-process-queue]')!;
-      const handbook = root.querySelector('[data-process-handbook]')!;
+      const contactsOutput = root.querySelector('[data-process-contacts]')!;
       const previous = root.querySelector('[data-process-previous]')!;
       let result = processProcedures([...fixed, readPracticeProcedure(source.value, schema)]);
       function markEdited() {
@@ -55,13 +67,15 @@ const initialResult = processProcedures([...fixedRecords, readPracticeProcedure(
       build.disabled = false;
       build.addEventListener('click', () => {
         try {
-          const next = processProcedures([...fixed, readPracticeProcedure(source.value, schema)]);
+          const contacts = readPracticeProcedure(source.value, schema);
+          const next = processProcedures([...fixed, contacts]);
+          const contactsHtml = renderLearningMarkdown(contacts.body, true);
           previous.textContent = `Previous review queue: ${result.queue.join(', ') || 'No draft procedures.'}\n\n${result.handbook}`;
           result = next;
           queue.replaceChildren(...(result.queue.length ? result.queue : ['No draft procedures.']).map((text) => {
             const item = document.createElement('li'); item.textContent = text; return item;
           }));
-          handbook.innerHTML = renderLearningMarkdown(result.handbook, true);
+          contactsOutput.innerHTML = contactsHtml;
           status.dataset.state = 'valid';
           status.textContent = 'Checks passed · Both outputs now use the current source. This handbook remains a practice review copy.';
         } catch (error) {

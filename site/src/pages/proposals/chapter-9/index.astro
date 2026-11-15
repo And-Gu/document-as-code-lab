@@ -1,0 +1,37 @@
+---
+import Documentation from '../../../layouts/Documentation.astro';
+import { proposals, scenarios } from '../../../lib/chapter-nine-proposals';
+import { siteUrl } from '../../../lib/urls';
+import '../../../styles/chapter-nine-proposals.css';
+---
+<Documentation title="Six proposals for Chapter 9" description="Try six alternative examples and visualizations for teaching how maintained information can be explored, connected and reused." wide>
+  <article class="proposal-review">
+    <p class="proposal-eyebrow">Chapter 9 design review</p>
+    <h1>Six ways to explore connected information</h1>
+    <p class="proposal-intro">Each prototype starts with an everyday task and puts an interactive example near the top. The sequence alternates between changing the visualization and changing the example. Try them in order to compare what each change adds.</p>
+    <p><a href={siteUrl('proposals/chapter-9/1/')}>Start with proposal 1</a> · <a href="#evaluation">Go to the comparison and recommendation</a></p>
+    <div class="proposal-grid">
+      {proposals.map(proposal=><section class="proposal-card" aria-labelledby={`proposal-${proposal.number}`}>
+        <p class="proposal-eyebrow">Proposal {proposal.number} · {scenarios[proposal.example].title}</p>
+        <h2 id={`proposal-${proposal.number}`}>{proposal.methodName}</h2>
+        <p>{scenarios[proposal.example].question}</p>
+        <p class="proposal-change">{proposal.change}</p>
+        <a href={siteUrl(`proposals/chapter-9/${proposal.number}/`)}>Try proposal {proposal.number} →</a>
+      </section>)}
+    </div>
+    <section id="evaluation" class="proposal-evaluation" aria-labelledby="evaluation-title">
+      <h2 id="evaluation-title">Comparison of the six proposals</h2>
+      <p>I assessed how quickly a reader can understand the situation, what the interaction reveals, how clearly it teaches relationships between maintained information, and how it builds on the earlier chapters. These are editorial judgments about the prototypes.</p>
+      <table><thead><tr><th>Proposal</th><th>What works</th><th>What weakens it</th><th>Fit for Chapter 9</th></tr></thead>
+      <tbody>{proposals.map(proposal=><tr><td><a href={siteUrl(`proposals/chapter-9/${proposal.number}/`)}>{proposal.number}. {proposal.title}</a></td><td>{proposal.strength}</td><td>{proposal.limitation}</td><td>{proposal.verdict}</td></tr>)}</tbody></table>
+      <div class="recommendation">
+        <h3>Recommended starting point · Proposal 2</h3>
+        <p>The training-day dependency map introduces the chapter’s idea with one familiar change. Selecting a room immediately reveals the two materials that use it and the people responsible for them. Selecting the topic produces a different set of connections, so the reader experiences why the structure matters.</p>
+        <p>Its AI follow-up is equally concrete. The agent can trace the same links, identify the owners and draft the changes for review. The reader has already seen the evidence the agent would use.</p>
+        <p><a href={siteUrl('proposals/chapter-9/2/')}>Open proposal 2</a></p>
+        <p>Proposal 6 is the strongest optional extension. Its timeline makes the effect of a date change particularly clear, once readers understand the links and the rules behind that view.</p>
+      </div>
+      <p>Proposal 3 would suit a product or sales audience. Proposals 4 and 5 are useful demonstrations of coordinated updates, but cover much of the source-to-output lesson already introduced in Chapter 7.</p>
+    </section>
+  </article>
+</Documentation>

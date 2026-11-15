@@ -64,7 +64,7 @@ try {
     await page.getByLabel('Question/use').selectOption(''); assert.equal(await page.locator('[data-catalogue-entry]:visible').count(), 1);
     await page.getByLabel('Source kind').selectOption('Delivery record'); assert.equal(await page.locator('[data-catalogue-entry]:visible').count(), 1);
     await page.getByLabel('Example', { exact: true }).selectOption(''); await page.getByLabel('Source kind').selectOption(''); await shot('catalogue-390');
-    await go('chapters/09-images/'); await page.locator('[data-ce-record]').selectOption('DEL-101'); await page.getByRole('link', { name: 'Follow this delivery across sources', exact: true }).click(); await page.waitForLoadState('networkidle'); assert.ok(await page.locator('[data-refinement]').isVisible());
+    await go('labs/contract-explorer/'); await page.getByRole('tab', { name: 'Relationships', exact: true }).click(); await page.locator('[data-ce-record]').selectOption('DEL-101'); await page.getByRole('link', { name: 'Follow this delivery across sources', exact: true }).click(); await page.waitForLoadState('networkidle'); assert.ok(await page.locator('[data-refinement]').isVisible());
   });
   for (const width of [320, 390, 768, 1440]) await test(`${width}px reflow and readable evidence`, async () => {
     await page.setViewportSize({ width, height: 900 });

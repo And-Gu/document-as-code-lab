@@ -1,7 +1,7 @@
 ---
 id: processing-information
 chapter_number: 7
-status: in-review
+status: approved
 learning_goal: "Explain how sources and processing rules produce checked outputs without conflating generation, review, and publication."
 visuals:
   - id: processing-chain
@@ -52,10 +52,21 @@ A successful build confirms that the configured tasks completed. A reviewer stil
 
 ## Explore: Run the pipeline
 
-The website simulation builds on the Markdown editor from chapters 4 and 5. You can edit the Contacts procedure's text and metadata; Access and Equipment remain fixed. The rendered preview updates as you type, while the generated handbook text and review queue wait for a successful build.
+The website simulation below lets you edit **Contacts only**. The preview shows your edit as you type. Run the build to see the edit in section 3 of the handbook review copy.
+
+<figure class="example-flow">
+  <figcaption>How a Contacts edit moves through the lab</figcaption>
+  <ol>
+    <li><strong>Edit Contacts</strong><span>Its preview updates as you type.</span></li>
+    <li><strong>Run checks and build</strong><span>The lab checks Contacts and uses it alongside the two fixed procedures.</span></li>
+    <li><strong>See the results</strong><span>The handbook uses the edited text in its last section. The queue uses the draft status.</span></li>
+  </ol>
+</figure>
+
+If the checks fail, both outputs keep the last successful result.
 
 1. Delete the `owner` line from the Contacts metadata, then select **Run checks and build**. Schema validation fails, so no new output is generated. The last successful result remains visible.
-2. Restore `owner: people-team`, edit a sentence in the procedure text, and run again. Find your revision in the **Handbook review copy**. Contacts remains in the review queue because its status is `draft`.
+2. Restore `owner: people-team`, edit a sentence in the procedure text, and run again. Under **Handbook review copy**, select **3. Contacts** to find your edited sentence. Contacts remains in the review queue because its status is `draft`.
 3. Change `status: draft` to `status: approved` and run again. Contacts disappears from the review queue because the selection rule includes only drafts.
 
 You can also try `status: unknown` to trigger a schema error, or change the identifier to `PROC-001` to trigger a duplicate-ID error across the three files. Use **Restore the original example** to reset the editor, then run the build to restore its outputs.

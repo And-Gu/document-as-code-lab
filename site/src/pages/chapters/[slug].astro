@@ -7,7 +7,6 @@ import { repositoryRoot } from '../../lib/repository';
 import { chapterHistory } from '../../lib/chapter-history';
 import { buildCacheKey, fingerprintPaths } from '../../lib/incremental-build.mjs';
 import ChapterInformation from '../../components/ChapterInformation.astro';
-import ChapterAtAGlance from '../../components/ChapterAtAGlance.astro';
 import ChapterLearning from '../../components/learning/ChapterLearning.astro';
 
 export async function getStaticPaths() {
@@ -39,13 +38,12 @@ const { chapter, previous, next } = Astro.props;
 const { Content, headings } = await render(chapter);
 ---
 
-<Documentation title={chapterTitle(chapter)} description={chapter.data.learning_goal} activeChapter={chapter.id}>
+<Documentation title={chapterTitle(chapter)} description={chapter.data.learning_goal} activeChapter={chapter.id} wide={chapter.data.chapter_number === 9}>
   <p class="chapter-meta">{chapter.data.bonus ? "Bonus chapter · Optional deep dive" : `Chapter ${chapter.data.chapter_number}`}</p>
-  <article>
+  <article class:list={{ 'chapter-with-map': chapter.data.chapter_number === 9 }}>
     <h1 id={headings.find((heading) => heading.depth === 1)?.slug ?? chapter.id}>{chapterTitle(chapter)}</h1>
-    <ChapterAtAGlance slug={chapter.id} chapterNumber={chapter.data.chapter_number} bonus={chapter.data.bonus} />
     <ChapterInformation chapter={chapter} />
-    {headings.filter(heading => heading.depth === 2).length >= 5 && <aside class="chapter-contents" aria-label="On this page">
+    {chapter.data.chapter_number !== 9 && headings.filter(heading => heading.depth === 2).length >= 5 && <aside class="chapter-contents" aria-label="On this page">
       <strong>On this page</strong><ul>{headings.filter(heading => heading.depth === 2).map(heading => <li><a href={`#${heading.slug}`}>{heading.text}</a></li>)}</ul>
     </aside>}
     <Content />
@@ -57,3 +55,8 @@ const { Content, headings } = await render(chapter);
     {next && <a href={siteUrl(`chapters/${next.id}/`)}>Next: {chapterTitle(next)}</a>}
   </div>
 </Documentation>
+
+<style is:global>
+  .chapter-with-map > :not(#knowledge-map-widget):not([data-learning-target="knowledge-map-widget"]) { max-width: 52rem; }
+  .chapter-with-map > #knowledge-map-widget { margin: 1.25rem 0 2rem; }
+</style>

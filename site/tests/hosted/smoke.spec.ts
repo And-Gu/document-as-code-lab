@@ -23,10 +23,7 @@ test('P3-02 expected deployment artifact, routes, metadata, sources and assets',
       const response=await page.goto(new URL(route,baseURL).href);expect(response?.status()).toBe(200);await page.waitForLoadState('networkidle');observed.push(page.url());
       if(route==='chapters/06-processing/')await expect(page).toHaveURL(/chapters\/07-processing\/$/);
       await expect(page.locator('h1')).toHaveCount(1);
-      if(route.startsWith('chapters/')) {
-        const glance=page.getByRole('region',{name:/Chapter \d+ · At a Glance/});
-        await expect(glance.getByRole('listitem')).toHaveCount(6);
-      }
+      if(route.startsWith('chapters/')) await expect(page.locator('.chapter-information')).toHaveCount(1);
       const canonical=await page.locator('link[rel="canonical"]').getAttribute('href');
       expect(canonical).toBe(`https://and-gu.github.io${new URL(page.url()).pathname}`);
       await expect(page.locator('meta[property="og:url"]')).toHaveAttribute('content',canonical!);

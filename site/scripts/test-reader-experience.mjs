@@ -73,7 +73,7 @@ try {
     await quiz.getByRole('button', { name: 'Try again' }).click(); assert.equal(await quiz.locator('input:checked').count(), 0);
   });
   await test('Explorer → DEL-101 readable source → original bytes → deterministic return', async () => {
-    await go('chapters/09-images/'); await page.locator('[data-ce-record]').selectOption('DEL-101');
+    await go('labs/contract-explorer/'); await page.getByRole('tab', { name: 'Relationships', exact: true }).click(); await page.locator('[data-ce-record]').selectOption('DEL-101');
     await page.locator('[data-ce-details]').getByRole('link', { name: 'Read source record', exact: true }).click();
     assert.equal(await page.locator('h1').innerText(), 'DEL-101 — Interface package');
     const content = await page.locator('main').innerText();
@@ -85,9 +85,9 @@ try {
     await page.waitForLoadState('networkidle'); assert.equal(await page.locator('[data-ce-record]').inputValue(), 'DEL-101');
     await page.locator('[data-ce-guide]').click(); assert.equal(await page.locator('[data-ce-view="impact"]').getAttribute('aria-selected'), 'true');
     assert.match(await page.locator('[data-ce-candidates]').innerText(), /DEL-102/);
-    await go('chapters/09-images/?record=https://example.com'); assert.equal(await page.locator('[data-ce-record]').inputValue(), 'CUST-01');
+    await go('labs/contract-explorer/?record=https://example.com'); assert.equal(await page.locator('[data-ce-record]').inputValue(), 'CUST-01');
   });
-  const routes = ['', 'chapters/01-introduction/', 'chapters/05-structured-content/', 'chapters/06-information-architecture/', 'chapters/07-processing/', 'chapters/08-ai-native/', 'chapters/09-images/', 'chapters/11-beyond-github/', 'materials/examples/contract-explorer/records/DEL-101/', 'materials/reference/automation-quality/'];
+  const routes = ['', 'chapters/01-introduction/', 'chapters/05-structured-content/', 'chapters/06-information-architecture/', 'chapters/07-processing/', 'chapters/08-ai-native/', 'labs/contract-explorer/', 'chapters/11-beyond-github/', 'materials/examples/contract-explorer/records/DEL-101/', 'materials/reference/automation-quality/'];
   for (const width of [320, 390, 768, 1440]) await test(`${width}px: page reflow, current menu, diagrams and representative pages`, async () => {
     await page.setViewportSize({ width, height: 900 });
     for (const route of routes) {
@@ -142,7 +142,7 @@ try {
     assert.ok(await staticPage.locator('[data-source]').isVisible()); assert.ok(await staticPage.locator('[data-preview]').isVisible());
     assert.equal(await staticPage.locator('[data-editor-tabs]').isVisible(), false);
     assert.ok(await staticPage.locator('.diagram-relationships').isVisible());
-    await staticPage.goto(new URL('chapters/09-images/', base).href);
+    await staticPage.goto(new URL('labs/contract-explorer/', base).href);
     for (const panel of await staticPage.locator('[data-ce-panel]').all()) assert.ok(await panel.isVisible());
     assert.ok(await staticPage.locator('[data-ce-fallback]').isVisible());
     await nojs.close();

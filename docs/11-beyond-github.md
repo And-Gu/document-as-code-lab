@@ -1,7 +1,7 @@
 ---
 id: 09-beyond-github
 chapter_number: 12
-status: in-review
+status: approved
 learning_goal: "Trace the real source-to-publication architecture of this tutorial and compare its information-management principles with a Microsoft 365 alternative."
 visuals:
   - id: lab-architecture
@@ -17,17 +17,36 @@ visuals:
 
 # Behind the Lab: How We Built This Tutorial
 
-You have just used a website built from the information it teaches you to maintain. The chapters live in Markdown, while Astro turns them into pages and combines them with interactive components.
+A colleague wants to improve a paragraph in this tutorial and asks, “Where should I make the change, and how will it reach the website?” We can answer by tracing the page back to its source.
 
-Follow one source through that system, then consider how the same principles could work in a different environment.
+[Chapter 11](10-publishing.md) followed an edit through checking and publication. Here, we look inside the website that those operations build. The chapters, quizzes, knowledge graph and presentations draw on maintained files in the same repository.
 
-## The repository is the workspace
+<span id="the-repository-is-the-workspace"></span>
 
-In the [source repository](https://github.com/And-Gu/document-as-code-lab), chapter text lives in `docs/`, fictional records in `examples/`, and presentation definitions in `presentations/`. Astro pages and components live in `site/`; the [source map](../reference/project-knowledge.md) explains the remaining folders.
+## Find the source of a chapter page
 
-Astro reads the chapter files directly rather than maintaining a second editable copy of their text. The proposal and review process from [chapter 2](02-github-workspace.md) applies to these sources and to the code that presents them.
+The chapter text lives in a Markdown file in the repository’s `docs/` folder. **Astro**, the tool that builds this website, reads that file and combines it with the page layout, chapter navigation and any interactive components.
+
+To improve the paragraph, we edit the Markdown source. The next website build uses that wording. This is the maintained-source idea from [Chapter 1](01-introduction.md), applied to the tutorial itself.
+
+## Explore: Follow the architecture
+
+Start with **Chapter page** in the explorer below. It traces the automation chapter you have just read.
+
+1. Under **Maintained source**, open the Markdown file and find a paragraph you recognise.
+2. Follow **Transformation / runtime** to see how Astro reads the text and prepares the page.
+3. Under **Delivered result**, open the chapter page. It presents the same text with navigation and learning controls.
+4. Read **Update trigger** to see what causes the website to be rebuilt.
+
+<!-- interactive: architecture-explorer -->
+
+The three columns connect the author’s file to the reader’s experience. If the wording needs work, change the source. If every chapter needs a different layout, change the shared layout code. In each case, the build combines the current sources into a new result.
+
+The [project source map](../reference/project-knowledge.md) shows where the other kinds of information live: example records, concept definitions, questions, presentation outlines and the code that processes them.
 
 ## From source files to a public website
+
+A chapter is one path through the larger system. Other maintained sources enter the same website build:
 
 ```mermaid
 flowchart TB
@@ -40,71 +59,59 @@ flowchart TB
     pages --> experiences["Chapter pages, interactive labs, dashboards and slide decks"]
 ```
 
-*The diagram shows the main publishing path, not every script or optional API request.*
+*Astro combines the maintained information with the code that presents it. GitHub Actions runs the build, and GitHub Pages hosts the result.*
 
-Take DEL-101, the fictional interface-package record from [chapter 9](09-images.md). Its Markdown file contains text and structured fields. During a GitHub Actions build, validation and transformation prepare the explorer data, and Astro assembles the page and browser code. GitHub Pages then serves those built files.
-
-When a reader selects DEL-101, JavaScript in the browser shows its links and details from the built dataset. It does not run the Python tools or an Astro server for that visitor. Updating the source changes the published dataset after a new build and deployment. The record's source link remains the route back to the maintained information.
+The sources and the processing code are kept in the [same repository](https://github.com/And-Gu/document-as-code-lab). A change that affects several files can be proposed and reviewed together using the process from [Chapter 2](02-github-workspace.md). Their shared history helps explain which combination produced an earlier result.
 
 ## From Markdown to interactive experiences
 
-The same separation supports different experiences. Quizzes use maintained question data; playgrounds let readers edit browser-only practice copies. Neither changes the chapter or example sources in GitHub.
+Choose **Knowledge graph** in the architecture explorer to trace the map from [Chapter 9](09-images.md). Its [source records](../data/course-concepts.json) contain the concepts, descriptions, named relationships and chapter links. During the build, checks validate those records and the website prepares them for the graph.
 
-Presentations need an additional editorial choice. Their YAML definitions select messages, chapter references, and a teaching sequence; Astro and Reveal.js turn those definitions into slides and speaker notes. A presentation is not simply a chapter projected onto a screen, so changes to its source knowledge still need editorial review. [the bonus chapter](13-explorable-presentations.md) examines how the same architecture might support guided stories, interactive maps and other explorable presentation formats.
+When you select **Metadata**, the browser displays its description and connections from that prepared data. The 3D library draws the labels and lines. You can explore the information immediately; a change to a concept’s maintained description reaches readers through a new build and deployment.
 
-The dashboard combines measurements from committed history with retrieved GitHub observations. It labels its build-time snapshots and offers a separate opt-in live retrieval. The PDF proof uses another workflow and covers only a limited design trial, not a published book. Their output paths differ, but each needs identifiable inputs and a defined update process.
+This separation also explains the processing lab in [Chapter 7](07-processing.md). The browser receives the example procedures and code for the exercise. It can then process your practice edits and display the results while you work on the page.
 
-## Explore: Follow the architecture
+Now choose **Presentation** in the architecture explorer. Its source is a YAML outline containing slide messages, speaker notes and chapter references. The website builds a slide deck from that outline. The author chooses a sequence for an audience, while the references connect the presentation to the fuller explanations.
 
-Select a chapter page, Contract Explorer, presentation, dashboard, or PDF proof to follow its maintained sources through processing to its result. Each path includes its update trigger and links to the actual source files. The overview table remains readable without JavaScript.
+You can see that result in [Behind the Lab: From Sources to Experience](/document-as-code-lab/presentations/lab-architecture/) and compare it with the [presentation source](../presentations/lab-architecture.yaml). When a chapter changes, those references help the author find slides that may need an update. The [bonus chapter](13-explorable-presentations.md) explores how presentations can combine a guided story with interactive exploration.
 
-<!-- interactive: architecture-explorer -->
+The remaining explorer tabs show other output paths. **Project Control Center** uses measurements and GitHub observations collected for publication; **PDF design proof** produces a sample document retained with a workflow run. Comparing their sources and update triggers tells us how each result stays current.
 
-The paths show which work happens before publication and which happens in the browser. To inspect the actual publication step, open the [deployment workflow](../.github/workflows/deploy-pages.yml); the [presentation collection](https://and-gu.github.io/document-as-code-lab/presentations/) shows another result of that same website build.
-
-For a guided overview, open the [Behind the Lab: From Sources to Experience presentation](/document-as-code-lab/presentations/lab-architecture/) or inspect its [YAML source](../presentations/lab-architecture.yaml).
-
-> **Explore further:** Want to reuse the site or slide pattern? The [Astro site guide](../site/README.md) explains source routing and components; the [presentation guide](../presentations/README.md) explains YAML decks and speaker notes. Reading needs no setup; local builds require the tools listed in each guide.
+> **Explore further:** The [Astro site guide](../site/README.md) explains how sources become pages. The [presentation guide](../presentations/README.md) explains slide outlines and speaker notes.
 
 ## What would this look like with Microsoft 365?
 
-GitHub is our implementation choice, not a prerequisite for working with maintained, reusable information. A team could use familiar Microsoft 365 tools and still apply many of the same principles.
+Suppose the colleague’s task is to update a staff procedure in a team that already works in Word and SharePoint. The same questions still apply: where is the maintained procedure, who reviews the change and how do readers find the current version?
 
-For example, a team could keep working documents in a managed **SharePoint document library**, or in a shared **OneDrive** location where that arrangement suits the team. Word and Excel provide authoring; file history and library controls support collaboration and review. **Microsoft 365 Copilot** can help people locate, summarize, and compare content they are allowed to access. Configured Copilot agents can use permitted OneDrive and SharePoint files as knowledge sources.
+One possible arrangement is to keep the Word document in a shared SharePoint library. The author updates that document, and colleagues use its version history to inspect earlier wording. The team can configure content approval to control when a revision becomes available to readers. Microsoft describes these controls in its [guide to library versioning](https://support.microsoft.com/en-us/sharepoint/lists/documents-and-library/how-versioning-works-in-lists-and-libraries).
 
-**Reading information is different from changing it.** A Copilot or agent that can answer questions from a document does not automatically have a tool or permission to edit that document. Changes may happen through Office editing, or through suitably configured agent actions, connectors, and flows. Permissions, licensing, and the organization's rules determine what is available.
-
-| Need | This tutorial | A possible Microsoft 365 arrangement |
+| Question | This tutorial | A possible Microsoft 365 arrangement |
 | --- | --- | --- |
-| Maintained sources | Markdown and structured records in GitHub | Word, Excel, and other files in SharePoint/OneDrive |
-| Shared history and change review | Git commits, diffs, and PRs | File version history, co-authoring, library review and approval |
-| AI access | An agent reads permitted repository files | Copilot or configured agents read permitted files |
-| Agent-assisted change | Agent proposes file edits for review | Office editing or authorized file-update tools and flows |
-| Automated processing | Python/JavaScript and GitHub Actions | Power Automate, connectors, scripts, or another processing service |
-| Reader experience | Astro on GitHub Pages | SharePoint pages, Office outputs, or a separately developed application |
+| Where is the maintained text? | Markdown in the repository | A Word document in a SharePoint library |
+| How do colleagues inspect a change? | Git history and a GitHub pull request | Document version history and a configured review process |
+| How does the result reach readers? | An Astro build deployed to GitHub Pages | A shared document or SharePoint page |
+| What can an agent use as context? | Relevant repository files and project guidance | Permitted documents configured as knowledge sources |
 
-**OneDrive is a file-sharing and storage environment, not a Git repository.** Neither OneDrive nor SharePoint automatically supplies Git-style pull requests or reproducible source builds. The alternatives can support similar *goals*, but the mechanics and capabilities differ. For team-controlled information, a SharePoint library often provides clearer ownership and governance than a personal OneDrive folder.
+A configured Copilot agent can use SharePoint and OneDrive content that the user is allowed to access. For the procedure, it could help find related guidance or prepare an answer using that context. Microsoft’s [agent knowledge-source guide](https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/knowledge-sources) explains the available sources and access requirements. Editing documents also requires appropriate editing tools and permissions.
 
-> **Explore further:** Use a Microsoft environment for a similar information flow: the [portable workflow guide](../reference/workflows-across-tools.md) compares file history, review, Copilot, and automation. Optional hands-on work depends on organizational permissions and licensing.
-
-For product details, see Microsoft's documentation for [Copilot in OneDrive](https://support.microsoft.com/en-us/onedrive/get-started-with-copilot-in-onedrive), [agent knowledge sources](https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/knowledge-sources), and the [OneDrive for Business connector](https://learn.microsoft.com/en-us/connectors/onedriveforbusiness/). The tutorial's Microsoft workflow is an illustration, not a validated deployment in an organization.
-
-The [Information Refinement Lab](../reference/information-refinement.md) demonstrates a portable method: select sources, identify their subjects, preserve meaning, calculate explicitly and review a traceable draft. Its curated excerpts, frozen scenario date and browser-only replay are specific to this static tutorial. Live integration would additionally require authorized access, maintained mappings, operational ownership and evaluation in the chosen environment.
+The concrete setup differs from this lab, but the purpose is familiar: keep a source people can find, preserve its history and make the reviewed information useful to readers. The [portable workflow guide](../reference/workflows-across-tools.md) explores the comparison in more detail.
 
 ## Choose the environment for the information
 
-This lab benefits from GitHub and Astro because the sources are structured, changes are inspectable, and we want custom visualizations and repeatable builds. A Microsoft 365-first team might choose different tools because Word, Excel, shared libraries, and Copilot are already part of everyday work.
+This tutorial uses GitHub and Astro because we maintain text and structured records together, review changes across files and build custom interactive views. A team working mainly with Office documents may begin with its existing shared library.
 
-The deciding question is not *Which product owns the file?* It is **Can people and authorized tools find the maintained information, understand its status, propose changes, and produce trustworthy results?**
+For either setting, trace one piece of information from the place it is maintained to the person who uses it. That reveals the connections the team already has and the repeated work it could improve.
+
+An agent benefits from that same map. Given the source locations, field definitions and processing rules, it can help locate the right material, identify related edits and prepare a change for review.
 
 ## Start with one useful outcome
 
-You do not need to reproduce this entire lab to begin. Choose one recurring need: keeping instructions consistent, finding information awaiting review, or producing a report from shared records.
+Choose a recurring need in your work, such as keeping a staff guide and training material consistent. Find the instruction they share and identify where it should be maintained.
 
-Identify the sources you are allowed to use, what their fields mean, who maintains and reviews them, and how the result reaches the people who need it. A first experiment might use selected exports from existing systems, with an explicit check that their meaning is preserved. Start with one useful result, then assess whether the approach saves effort or improves decisions before extending it.
+Then sketch its path: **maintained instruction → review and processing → the two reading experiences**. Name the person responsible for the source and the event that should update each result. This is enough to begin discussing a small, useful experiment.
 
-The tools may differ from ours. The aim remains the same: maintain the information once, make changes inspectable, and reuse it where it is needed.
+The optional [first-increment exercise](../reference/automation-quality.md#plan-a-first-increment) helps you describe that flow. The [Information Refinement Lab](../reference/information-refinement.md) offers another example of turning selected sources into an explained draft.
 
-The optional [first-increment exercise](../reference/automation-quality.md#plan-a-first-increment) helps you plan that first flow, including responsibility for its processing rules.
+We have now followed the information through the whole lab, from an editable source to something a reader can use. [Bringing It Together](13-course-summary.md) returns to the four parts of the course and connects what each one added.
 
 <!-- interactive: chapter-quiz -->

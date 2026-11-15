@@ -1,0 +1,16 @@
+---
+import Documentation from '../../layouts/Documentation.astro';
+import ContractExplorer from '../../components/learning/ContractExplorer.astro';
+import { siteUrl } from '../../lib/urls';
+---
+<Documentation title="Explore customer projects and agreements" description="Follow agreements, orders and deliveries to investigate commitments and a proposed amendment." wide>
+  <article>
+    <p class="chapter-meta">Further example · Connected information</p>
+    <h1>Explore customer projects and agreements</h1>
+    <p>Northstar Logistics has a depot rollout and a staff training project. A framework agreement sets shared terms; a delivery order specifies the depot work. Start with <strong>Commitments</strong> to see what is due, then filter by project or agreement.</p>
+    <p><strong>If proposed amendment AMD-001 were accepted, which deliveries should the team review?</strong></p>
+    <div id="contract-explorer-widget"><ContractExplorer /></div>
+    <p>The proposed amendment adds a written test summary for the interface package. Use <strong>Explore change impact</strong> to find the linked delivery and the customer workshop that depends on it. These connections help the team identify what to review before accepting the amendment.</p>
+    <p><a href={siteUrl('chapters/09-images/')}>Return to Chapter 9: Information You Can Explore</a></p>
+  </article>
+</Documentation>

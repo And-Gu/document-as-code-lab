@@ -51,7 +51,7 @@ assert.ok(!chapter.includes('Proposed site component'));
 assert.ok(chapter.includes('https://github.com/And-Gu/document-as-code-lab/blob/main/.github/workflows/deploy-pages.yml'));
 assert.ok(chapter.includes('https://github.com/And-Gu/document-as-code-lab/blob/main/.github/workflows/pdf-proof.yml'));
 assert.ok(!chapter.includes('/files/.github/'));
-assert.ok(chapter.includes('Copilot agent can answer questions'));
+assert.ok(chapter.includes('https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/knowledge-sources'), 'The Microsoft 365 comparison links to its maintained product guidance');
 
 // Exercise the small controller without a browser or a second DOM dependency.
 const { initArchitectureExplorers } = await load('../src/lib/architecture-controller.ts');
