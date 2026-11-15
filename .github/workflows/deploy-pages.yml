@@ -65,6 +65,15 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: npm run build -- --timings
+      - name: Verify artifact revision before publishing
+        working-directory: site
+        run: |
+          node --input-type=module <<'JS'
+          import assert from 'node:assert/strict';
+          import { readFile } from 'node:fs/promises';
+          const manifest = JSON.parse(await readFile('dist/build-information.json', 'utf8'));
+          assert.equal(manifest.source_commit, process.env.GITHUB_SHA);
+          JS
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v5
         with:
