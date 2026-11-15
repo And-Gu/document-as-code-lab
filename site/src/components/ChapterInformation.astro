@@ -32,7 +32,7 @@ const formatDate = (date: string) => new Intl.DateTimeFormat('en-GB', {
     <dl class="chapter-information__metadata">
       <dt>Learning goal</dt><dd>{metadata.learning_goal ?? 'Not specified'}</dd>
       <dt>Audience</dt><dd>{metadata.audience?.replaceAll('-', ' ') ?? 'Not specified'}</dd>
-      <dt>Chapter</dt><dd>{metadata.chapter_number}</dd>
+      <dt>Reading path</dt><dd>{metadata.bonus ? 'Bonus chapter' : `Chapter ${metadata.chapter_number}`}</dd>
       <dt>Stable ID</dt><dd><code>{metadata.id ?? chapter.id}</code></dd>
 
     </dl>
