@@ -74,6 +74,9 @@ The `chapter_number` metadata determines the current reading order. Existing sou
 10. [From Data to Knowledge](docs/10-data-enrichment.md)
 11. [Automating Information with GitHub Actions](docs/10-publishing.md)
 12. [Behind the Lab: How We Built This Tutorial](docs/11-beyond-github.md)
+13. [Beyond Slides: Presentations as Explorable Knowledge](docs/13-explorable-presentations.md) (draft)
+
+The proposed Chapter 13 builds on the working Reveal.js decks and explains how source-linked presentations could evolve into guided, exploratory and self-paced experiences. Its more advanced interactive presentation modes are design options, not existing implemented features.
 
 ## Outputs
 
