@@ -40,6 +40,14 @@ Four slide types are available:
 
 Image paths are repository-relative under `assets/`. Plain text is escaped by Astro, not interpreted as HTML. The schema in `site/src/lib/presentations.ts` rejects unknown fields, missing chapters, duplicate deck slugs, duplicate slide IDs, and missing image files during builds. Keep text short and inspect the rendered result: schema validation does not establish that text fits or that a message is correct.
 
+## Beyond the current slide types (proposed)
+
+[Bonus chapter: Beyond Slides — Presentations as Explorable Knowledge](../docs/13-explorable-presentations.md) develops the educational and editorial principles for guided stories, mind maps, data dashboards, connected maps and explorable explanations.
+
+The current implementation continues to support the four validated slide types above. The bonus chapter adds an extended tool directory, examples and authoring methods rather than replacing working decks. A reusable React component, interactive graph, scroll narrative, or linked presentation/exploration mode **is not enabled by adding YAML alone**. Such components would need explicit schema extension, input/provenance contracts, rendering and behavior tests, static fallbacks, accessibility checks, and presenter navigation that remains reliable when a detail view opens.
+
+Prefer extending the existing Astro build incrementally. Do not fork the chapter knowledge into deck-specific source files, and do not mark a visual capability complete until its behavior has been implemented and verified.
+
 ## Render and Verify
 
 Use the existing site commands from `site/`: `npm run dev`, `npm run check`, and `npm run build`. The existing Python setup and full-history requirements still apply. `npm run preview` serves the production build. All decks use the same Astro build and GitHub Pages deployment as the documentation.

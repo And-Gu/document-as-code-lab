@@ -15,6 +15,7 @@ interface Props {
 const { title, activeChapter, wide = false, description = `${title}: supporting sources and examples from Document-as-Code Lab.` } = Astro.props;
 const chapters = await getChapters();
 const current = chapters.find(chapter => chapter.id === activeChapter);
+const bonusChapter = chapters.find(chapter => chapter.data.bonus);
 ---
 
 <!doctype html>
@@ -31,7 +32,7 @@ const current = chapters.find(chapter => chapter.id === activeChapter);
     <div class:list={['documentation', { 'documentation-wide': wide }]}>
       <nav aria-label="Chapters">
         <details id="chapter-menu" open>
-          <summary>Chapters{current && <span class="menu-current"> · {current.data.chapter_number}. {chapterTitle(current)}</span>}</summary>
+          <summary>Chapters{current && <span class="menu-current"> · {current.data.bonus ? 'Bonus' : current.data.chapter_number + '.'} {chapterTitle(current)}</span>}</summary>
           {learningJourney.map(group => <div class="menu-group" aria-label={group.title}>
           <p class="menu-group-title">{group.title}</p>
           <ol start={group.start}>
@@ -44,6 +45,10 @@ const current = chapters.find(chapter => chapter.id === activeChapter);
             ))}
           </ol>
           </div>)}
+          {bonusChapter && <div class="menu-group" aria-label="Bonus reading">
+            <p class="menu-group-title">Bonus reading</p>
+            <p><a href={siteUrl(`chapters/${bonusChapter.id}/`)} aria-current={activeChapter === bonusChapter.id ? 'page' : undefined}>{chapterTitle(bonusChapter)}</a></p>
+          </div>}
           <a href={siteUrl('materials/GLOSSARY/')}>Shared vocabulary</a>
           <p><a href={siteUrl('presentations/')}>Presentations</a></p>
           <p><a href={siteUrl('dashboard/')}>Project Control Center</a></p>

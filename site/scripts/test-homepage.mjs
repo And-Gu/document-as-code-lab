@@ -16,6 +16,15 @@ assert.equal(all(home, node => node.tagName === 'h1').length, 1);
 const groupLinks = groups.map(group => all(group, node => node.tagName === 'a').map(node => attr(node, 'href')));
 assert.deepEqual(groupLinks.map(links => links.length), [4, 3, 3, 2]);
 assert.equal(new Set(groupLinks.flat()).size, 12);
+const bonusLink = '/document-as-code-lab/chapters/13-explorable-presentations/';
+const bonus = all(home, node => attr(node, 'id') === 'bonus-chapter')[0];
+assert.ok(bonus, 'Homepage needs a distinct bonus feature');
+assert.ok(all(bonus, node => node.tagName === 'a' && attr(node, 'href') === bonusLink).length >= 1);
+assert.ok(!groupLinks.flat().includes(bonusLink), 'Bonus must remain outside the core journey');
+const presentationsIndex = parse(await read('../dist/presentations/index.html'));
+assert.ok(all(presentationsIndex, node => node.tagName === 'a' && attr(node, 'href') === bonusLink).length >= 1,
+  'Presentation catalog must link to the bonus chapter');
+
 assert.ok(!groupLinks.flat().some(link => /\/(12|13|14)-automation\//.test(link)));
 assert.ok(!groupLinks.flat().some(link => link.includes('10-git-review')));
 assert.ok(!groupLinks.flat().some(link => link.includes('quality-checks')));
@@ -44,11 +53,14 @@ for (const slug of ['information-model', 'information-value', 'lab-architecture'
 }
 const original = parse(await read('../dist/presentations/document-as-code/index.html'));
 assert.equal(all(original, node => node.tagName === 'section' && attr(node, 'aria-label')).length, 8);
-console.log('Homepage groups cover all 12 chapters; two ten-slide packs, nine-slide architecture deck, notes, image, base paths, and original eight-slide deck passed.');
+console.log('Homepage groups cover all 12 core chapters and one separate bonus; two ten-slide packs, nine-slide architecture deck, notes, image, base paths, and original eight-slide deck passed.');
 
 const menu = all(home, node => attr(node, 'id') === 'chapter-menu')[0];
 const menuGroups = all(menu, node => hasClass(node, 'menu-group'));
-assert.deepEqual(menuGroups.map(group => all(group, node => node.tagName === 'a').map(node => attr(node, 'href'))), groupLinks, 'Menu and homepage share chapter groups');
+assert.deepEqual(menuGroups.slice(0, 4).map(group => all(group, node => node.tagName === 'a').map(node => attr(node, 'href'))), groupLinks, 'Menu and homepage share core chapter groups');
+const bonusMenu = menuGroups[4];
+assert.ok(bonusMenu && all(bonusMenu, node => node.tagName === 'a' && attr(node, 'href') === bonusLink).length === 1, 'Bonus sidebar link');
+
 const actions = all(home, node => hasClass(node, 'home-actions'))[0];
 assert.deepEqual(all(actions, node => node.tagName === 'a').map(node => attr(node, 'href')), ['/document-as-code-lab/chapters/01-introduction/', '/document-as-code-lab/chapters/07-processing/#processing-lab-widget']);
 assert.ok((await read('../dist/chapters/07-processing/index.html')).includes('id="processing-lab-widget"'));

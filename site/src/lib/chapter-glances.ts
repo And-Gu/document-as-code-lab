@@ -349,5 +349,17 @@ export const chapterGlances: Record<string, ChapterGlance> = {
         "detail": "Apply principles elsewhere"
       }
     ]
+  },
+  "13-explorable-presentations": {
+    "message": "A presentation becomes more useful when a clear story leads people into trusted information they can explore and revisit.",
+    "tiles": [
+      { "title": "Sources", "detail": "Maintained information" },
+      { "title": "Questions", "detail": "A purposeful narrative" },
+      { "title": "Views", "detail": "Choose a fitting format" },
+      { "title": "Components", "detail": "Reuse visual explanations" },
+      { "title": "Experiences", "detail": "Present, explore and read" },
+      { "title": "Reuse", "detail": "Carry context forward" }
+    ]
   }
+
 };

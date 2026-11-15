@@ -7,8 +7,8 @@ import { BookOpen, Search, Sparkles, ChartNoAxesCombined, ClipboardCheck, Archiv
   Package, Monitor, Component, Globe } from '@lucide/astro';
 import { chapterGlances } from '../lib/chapter-glances';
 
-interface Props { slug: string; chapterNumber: number }
-const { slug, chapterNumber } = Astro.props;
+interface Props { slug: string; chapterNumber: number; bonus?: boolean }
+const { slug, chapterNumber, bonus = false } = Astro.props;
 const glance = chapterGlances[slug];
 const icons: Record<string, typeof BookOpen> = {
   Sources: Files, Views: Eye, Change: GitBranch, Review: ClipboardCheck, Reuse: Repeat2,
@@ -32,7 +32,7 @@ for (const tile of glance.tiles) if (!icons[tile.title]) throw new Error('Missin
 ---
 <section class="chapter-glance" aria-labelledby="chapter-glance-title">
   <div class="chapter-glance__header">
-    <h2 id="chapter-glance-title" class="chapter-glance__eyebrow">Chapter {String(chapterNumber).padStart(2, '0')} · At a Glance</h2>
+    <h2 id="chapter-glance-title" class="chapter-glance__eyebrow">{bonus ? 'Bonus chapter' : `Chapter ${String(chapterNumber).padStart(2, '0')}`} · At a Glance</h2>
     <p class="chapter-glance__idea">{glance.message}</p>
   </div>
   <ul class="chapter-glance__tiles">

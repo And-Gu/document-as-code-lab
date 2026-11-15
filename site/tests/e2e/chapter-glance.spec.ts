@@ -4,11 +4,12 @@ import { readdir } from 'node:fs/promises';
 const slugs = (await readdir('../docs')).filter(file => file.endsWith('.md')).map(file => file.slice(0,-3));
 
 for (const width of [320, 390, 1440]) {
-  test(`At a Glance: all twelve chapters reflow at ${width}px`, async ({ page }, info) => {
+  test(`At a Glance: twelve core chapters and bonus reflow at ${width}px`, async ({ page }, info) => {
     await page.setViewportSize({ width, height: 900 });
     for (const slug of slugs) {
       expect((await page.goto(`chapters/${slug}/`))?.status()).toBe(200);
-      const glance = page.getByRole('region', { name: /Chapter \d+ · At a Glance/ });
+      const glanceName = slug === '13-explorable-presentations' ? /Bonus chapter · At a Glance/ : /Chapter \d+ · At a Glance/;
+      const glance = page.getByRole('region', { name: glanceName });
       await expect(glance).toBeVisible();
       await expect(glance.getByRole('listitem')).toHaveCount(6);
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true);
