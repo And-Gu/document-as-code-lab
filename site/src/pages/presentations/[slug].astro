@@ -6,10 +6,13 @@ import ContentSlide from '../../components/slides/ContentSlide.astro';
 import ComparisonSlide from '../../components/slides/ComparisonSlide.astro';
 import DiagramSlide from '../../components/slides/DiagramSlide.astro';
 import { siteUrl } from '../../lib/urls';
+import { buildCacheKey } from '../../lib/incremental-build.mjs';
 
 export async function getStaticPaths() {
   return (await getPresentations()).map((presentation) => ({
-    params: { slug: presentation.slug }, props: { presentation },
+    params: { slug: presentation.slug },
+    cacheKey: buildCacheKey('presentation', presentation),
+    props: { presentation },
   }));
 }
 const { presentation } = Astro.props;

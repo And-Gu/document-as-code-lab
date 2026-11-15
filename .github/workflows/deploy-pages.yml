@@ -46,6 +46,11 @@ jobs:
         with:
           path: site
           node-version: '24'
+          # The action restores and saves site/node_modules/.astro between builds.
+          # Astro reuses only routes with unchanged per-page cacheKey values.
+          cache: true
+          cache-dir: node_modules/.astro
+          build-cmd: npm run build -- --timings
 
   deploy:
     needs: build

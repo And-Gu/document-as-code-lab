@@ -23,7 +23,7 @@ on:
     - cron: '17 * * * *'
 ```
 
-The build job checks out the repository, prepares Python, and invokes the Astro build action. A separate job publishes the built files to GitHub Pages. The hourly trigger refreshes dashboard snapshots; it does not edit chapter sources, and scheduled runs can be delayed.
+The build job checks out the repository, prepares Python, and invokes the Astro build action. A separate job publishes the built files to GitHub Pages. The hourly trigger refreshes dashboard snapshots; it does not edit chapter sources, and scheduled runs can be delayed. The action also preserves Astro's incremental page cache so unchanged content routes can skip re-rendering, while fresh generated JSON and a full static site artifact are still published on every run. Cache invalidation and the forced-build escape hatch are documented in the [site guide](../site/README.md).
 
 The workflow file remains authoritative if these settings change. [Chapter 11](../docs/10-publishing.md) follows the reader-facing distinction between checks, retained artifacts, and publication.
 

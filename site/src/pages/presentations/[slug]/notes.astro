@@ -2,8 +2,9 @@
 import Documentation from '../../../layouts/Documentation.astro';
 import { getPresentations } from '../../../lib/presentations';
 import { siteUrl } from '../../../lib/urls';
+import { buildCacheKey } from '../../../lib/incremental-build.mjs';
 export async function getStaticPaths() {
-  return (await getPresentations()).filter((deck) => deck.slides.some((slide) => slide.notes)).map((presentation) => ({ params: { slug: presentation.slug }, props: { presentation } }));
+  return (await getPresentations()).filter((deck) => deck.slides.some((slide) => slide.notes)).map((presentation) => ({ params: { slug: presentation.slug }, cacheKey: buildCacheKey('notes', presentation), props: { presentation } }));
 }
 const { presentation } = Astro.props;
 ---

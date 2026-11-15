@@ -31,6 +31,13 @@ jobs:
           cache: npm
           cache-dependency-path: site/package-lock.json
       - run: npm ci
+      - name: Restore incremental page cache for this PR
+        uses: actions/cache@v6
+        with:
+          path: site/node_modules/.astro
+          key: astro-pr-${{ runner.os }}-${{ github.event.pull_request.number }}-${{ hashFiles('site/package-lock.json', 'site/astro.config.mjs') }}-${{ github.sha }}
+          restore-keys: |
+            astro-pr-${{ runner.os }}-${{ github.event.pull_request.number }}-${{ hashFiles('site/package-lock.json', 'site/astro.config.mjs') }}-
       - run: npm audit
       - uses: actions/setup-python@v6
         with:
@@ -40,8 +47,9 @@ jobs:
         working-directory: .
       - run: npm run test:dashboard
       - run: npm run test:scheduled-publish
+      - run: npm run test:incremental
       - run: npm run check
-      - run: npm run build
+      - run: npm run build -- --timings
       - run: npm run test:learning
       - run: npm run test:content
       - run: npm run test:homepage

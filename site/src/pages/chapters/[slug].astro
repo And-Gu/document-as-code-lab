@@ -3,6 +3,9 @@ import { render } from 'astro:content';
 import Documentation from '../../layouts/Documentation.astro';
 import { getChapters, chapterTitle } from '../../lib/chapters';
 import { siteUrl } from '../../lib/urls';
+import { repositoryRoot } from '../../lib/repository';
+import { chapterHistory } from '../../lib/chapter-history';
+import { buildCacheKey, fingerprintPaths } from '../../lib/incremental-build.mjs';
 import ChapterInformation from '../../components/ChapterInformation.astro';
 import ChapterAtAGlance from '../../components/ChapterAtAGlance.astro';
 import ChapterLearning from '../../components/learning/ChapterLearning.astro';
@@ -10,10 +13,20 @@ import ChapterLearning from '../../components/learning/ChapterLearning.astro';
 export async function getStaticPaths() {
   const chapters = await getChapters();
   const core = chapters.filter((chapter) => !chapter.data.bonus);
+  // The layout renders the whole chapter menu, not just this chapter.
+  const navigationKey = buildCacheKey('chapter-menu', chapters.map((chapter) => [
+    chapter.id, chapter.data.chapter_number, chapter.data.bonus, chapterTitle(chapter),
+  ]));
+  // Learning components read example files directly, outside Vite's dependency graph.
+  const examplesKey = await fingerprintPaths(repositoryRoot, ['examples']);
   return chapters.map((chapter) => {
     const index = core.findIndex((item) => item.id === chapter.id);
     return {
       params: { slug: chapter.id },
+      // Include the chapter's three visible Git-history entries in the data key.
+      // The global HEAD SHA is intentionally excluded so unrelated commits can reuse pages.
+      cacheKey: buildCacheKey('chapter', chapter.digest, navigationKey, examplesKey,
+        chapterHistory(`docs/${chapter.id}.md`).commits.map(({ sha }) => sha)),
       props: {
         chapter,
         previous: index > 0 ? core[index - 1] : undefined,
