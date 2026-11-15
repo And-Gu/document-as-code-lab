@@ -21,6 +21,9 @@ const bonus = all(home, node => attr(node, 'id') === 'bonus-chapter')[0];
 assert.ok(bonus, 'Homepage needs a distinct bonus feature');
 assert.ok(all(bonus, node => node.tagName === 'a' && attr(node, 'href') === bonusLink).length >= 1);
 assert.ok(!groupLinks.flat().includes(bonusLink), 'Bonus must remain outside the core journey');
+const presentationsIndex = parse(await read('../dist/presentations/index.html'));
+assert.ok(all(presentationsIndex, node => node.tagName === 'a' && attr(node, 'href') === bonusLink).length >= 1,
+  'Presentation catalog must link to the bonus chapter');
 
 assert.ok(!groupLinks.flat().some(link => /\/(12|13|14)-automation\//.test(link)));
 assert.ok(!groupLinks.flat().some(link => link.includes('10-git-review')));
