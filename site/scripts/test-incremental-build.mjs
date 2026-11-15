@@ -33,7 +33,7 @@ try {
 
 const file = name => readFile(new URL(name, import.meta.url), 'utf8');
 const config = await file('../astro.config.mjs');
-assert.match(config, /incrementalBuild:\\s*true/);
+assert.ok(config.includes('experimental: { incrementalBuild: true }'));
 for (const route of [
   '../src/pages/chapters/[slug].astro',
   '../src/pages/materials/[...slug].astro',
@@ -44,6 +44,6 @@ for (const route of [
   assert.match(await file(route), /cacheKey:/, `${route} must opt in to incremental page output`);
 }
 const deploy = await file('../../.github/workflows/deploy-pages.yml');
-assert.match(deploy, /withastro\\/action@v6/, 'The Pages publisher must retain Astro build-cache support');
-assert.match(deploy, /cache:\\s*true/, 'The Pages cache must be explicitly enabled');
+assert.ok(deploy.includes('withastro/action@v6'), 'The Pages publisher must retain Astro build-cache support');
+assert.ok(deploy.includes('cache: true'), 'The Pages cache must be explicitly enabled');
 console.log('Incremental cache key invalidation, opt-in routes and Pages cache configuration passed.');
