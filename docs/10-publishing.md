@@ -74,6 +74,8 @@ GitHub Pages is static hosting. It does not run Astro or the project's Python sc
 
 The deployment workflow also runs on an hourly schedule to refresh those snapshots. A site may therefore receive an updated dataset without any chapter text being edited.
 
+The site uses Astro's **incremental static build** feature to avoid rendering unchanged content pages again. It uses source-based cache keys and dependency checks, not an unchanged commit SHA alone. Each run still generates fresh dashboard data, creates a complete website artifact, and deploys that artifact to GitHub Pages. A cache miss or deliberate clean build simply renders everything. See the [site build guide](../site/README.md) for the dependency rules and validation checks.
+
 ## Read the actual deployment definition
 
 The [deployment definition](../.github/workflows/deploy-pages.yml) records those triggers in YAML. Its build job checks out the repository, prepares Python, and invokes the Astro build action. A separate job publishes the resulting files to GitHub Pages.
