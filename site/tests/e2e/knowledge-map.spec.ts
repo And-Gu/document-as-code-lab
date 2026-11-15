@@ -1,5 +1,74 @@
 import { test, expect } from '@playwright/test';
 
+for (const route of ['knowledge-map/', 'chapters/09-images/']) test(`The graph settles after loading and interaction on ${route}`, async ({ page }) => {
+  // Sprite labels use a 2D canvas texture. Repainting unchanged labels while idle
+  // exposes update loops even when the camera happens to look steady.
+  await page.addInitScript(() => {
+    const original = CanvasRenderingContext2D.prototype.fillText;
+    const counts = { metadata: 0 };
+    Object.assign(window, { mapLabelDraws: counts });
+    CanvasRenderingContext2D.prototype.fillText = function (...args: Parameters<typeof original>) {
+      if (args[0] === 'Metadata') counts.metadata++;
+      return original.apply(this, args);
+    };
+  });
+  let navigations = 0;
+  page.on('framenavigated', frame => { if (frame === page.mainFrame()) navigations++; });
+  await page.goto(route);
+  await expect(page.locator('[data-knowledge-map]')).toHaveAttribute('data-ready', 'true');
+  const draws = () => page.evaluate(() => (window as unknown as { mapLabelDraws: { metadata: number } }).mapLabelDraws.metadata);
+  const expectSettled = async () => {
+    // Let the initial camera transition and label creation finish, then observe
+    // a further idle interval rather than testing only the first rendered frame.
+    await page.waitForTimeout(1000);
+    const before = await draws();
+    expect(before).toBeGreaterThan(0);
+    await page.waitForTimeout(1200);
+    expect(await draws()).toBe(before);
+  };
+  await expectSettled();
+  await page.locator('[data-concept-connections]').getByRole('button', { name: 'Processing', exact: true }).click();
+  await expectSettled();
+  await page.getByLabel('Course section', { exact: true }).selectOption('2');
+  await page.getByRole('button', { name: '2D', exact: true }).click();
+  await expectSettled();
+  await page.getByRole('button', { name: 'Reset view' }).click();
+  await page.getByRole('button', { name: '3D', exact: true }).click();
+  await expectSettled();
+  expect(navigations).toBe(1);
+});
+
+test('The reader keeps their camera position when selecting a concept', async ({ page }, testInfo) => {
+  // Disable damping/transitions so the pixel comparison measures camera resets,
+  // rather than the intentional easing after a drag.
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto('chapters/09-images/');
+  await expect(page.locator('[data-knowledge-map]')).toHaveAttribute('data-ready', 'true');
+  const canvas = page.locator('[data-map-canvas] canvas');
+  await canvas.scrollIntoViewIfNeeded();
+  await page.waitForTimeout(500);
+  const openingView = await canvas.screenshot();
+  const bounds = (await canvas.boundingBox())!;
+  await page.mouse.move(bounds.x + bounds.width / 2, bounds.y + bounds.height / 2);
+  await page.mouse.down();
+  await page.mouse.move(bounds.x + bounds.width / 2 + 100, bounds.y + bounds.height / 2 + 40, { steps: 10 });
+  await page.mouse.up();
+  await page.mouse.move(0, 0);
+  const readerView = await canvas.screenshot();
+  expect(readerView.equals(openingView)).toBe(false);
+  // Reselect the same concept: labels stay identical, exposing camera movement.
+  const search = page.getByRole('searchbox', { name: 'Find a concept' });
+  await search.fill('Metadata');
+  await page.locator('#concept-results').getByRole('button', { name: 'Metadata', exact: true }).click();
+  await expect(page.locator('[data-concept-title]')).toHaveText('Metadata');
+  await page.mouse.move(0, 0);
+  await page.waitForTimeout(1200);
+  const selectedView = await canvas.screenshot();
+  await testInfo.attach('reader-view', { body: readerView, contentType: 'image/png' });
+  await testInfo.attach('selected-view', { body: selectedView, contentType: 'image/png' });
+  expect(selectedView.equals(readerView)).toBe(true);
+});
+
 for (const route of ['knowledge-map/', 'chapters/09-images/']) test(`Find a concept, follow a relationship and read the relevant chapter from ${route}`, async ({ page }) => {
   const errors: string[] = [];
   page.on('pageerror', error => errors.push(error.message));
