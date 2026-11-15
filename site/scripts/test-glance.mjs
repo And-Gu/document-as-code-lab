@@ -11,7 +11,7 @@ const all = (node, predicate) => [...(predicate(node) ? [node] : []), ...(node.c
 const hasClass = (node, value) => attr(node, 'class')?.split(' ').includes(value);
 const text = node => all(node, item => item.nodeName === '#text').map(item => item.value).join(' ').replace(/\s+/g, ' ').trim();
 const slugs = (await readdir(new URL('../../docs/', import.meta.url))).filter(name => name.endsWith('.md'));
-assert.equal(slugs.length, 12);
+assert.equal(slugs.length, 13);
 const numbers = [];
 const icons = new Map();
 const chapterNumbers = new Map();
@@ -26,7 +26,8 @@ for (const file of slugs) {
   const glance = glances[0];
   const title = all(glance, node => node.tagName === 'h2')[0];
   assert.equal(attr(glance, 'aria-labelledby'), attr(title, 'id'));
-  assert.match(text(title), new RegExp(`Chapter ${String(metadata.chapter_number).padStart(2,'0')} . At a Glance`));
+  if (metadata.bonus) assert.match(text(title), /Bonus chapter . At a Glance/);
+  else assert.match(text(title), new RegExp(`Chapter ${String(metadata.chapter_number).padStart(2,'0')} . At a Glance`));
   const tiles = all(glance, node => hasClass(node, 'chapter-glance__tile'));
   assert.equal(tiles.length, 6, file);
   assert.equal(all(glance, node => node.tagName === 'ul').length, 1);
@@ -46,7 +47,8 @@ for (const file of slugs) {
     else icons.set(label, shape);
   }
 }
-assert.deepEqual(numbers.sort((a,b) => a-b), Array.from({length:12},(_,index)=>index+1));
+assert.deepEqual(numbers.sort((a,b) => a-b), Array.from({length:13},(_,index)=>index+1));
+assert.equal(chapterNumbers.get('13-explorable-presentations.md'), 13);
 const chapter = await read('../../docs/10-data-enrichment.md');
 const cases = JSON.parse(await read('../../examples/data-enrichment/cases.json')).cases;
 for (const item of cases) {
@@ -76,4 +78,4 @@ for (const directory of ['docs', 'reference']) {
     }
   }
 }
-console.log('Twelve accessible six-tile summaries, semantic icons, reading order, source-backed case table and curriculum formatting passed.');
+console.log('Twelve core and one bonus accessible six-tile summaries, semantic icons, reading order, source-backed case table and curriculum formatting passed.');
