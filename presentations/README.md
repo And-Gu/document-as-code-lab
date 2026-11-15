@@ -42,9 +42,9 @@ Image paths are repository-relative under `assets/`. Plain text is escaped by As
 
 ## Beyond the current slide types (proposed)
 
-[Chapter 13: Beyond Slides — Presentations as Explorable Knowledge](../docs/13-explorable-presentations.md) develops the educational and editorial principles for guided stories, mind maps, data dashboards, connected maps and explorable explanations.
+[Bonus chapter: Beyond Slides — Presentations as Explorable Knowledge](../docs/13-explorable-presentations.md) develops the educational and editorial principles for guided stories, mind maps, data dashboards, connected maps and explorable explanations.
 
-The current implementation continues to support the four validated slide types above. A reusable React component, interactive graph, scroll narrative, or linked presentation/exploration mode **is not enabled by adding YAML alone**. Such components would need explicit schema extension, input/provenance contracts, rendering and behavior tests, static fallbacks, accessibility checks, and presenter navigation that remains reliable when a detail view opens.
+The current implementation continues to support the four validated slide types above. The bonus chapter adds an extended tool directory, examples and authoring methods rather than replacing working decks. A reusable React component, interactive graph, scroll narrative, or linked presentation/exploration mode **is not enabled by adding YAML alone**. Such components would need explicit schema extension, input/provenance contracts, rendering and behavior tests, static fallbacks, accessibility checks, and presenter navigation that remains reliable when a detail view opens.
 
 Prefer extending the existing Astro build incrementally. Do not fork the chapter knowledge into deck-specific source files, and do not mark a visual capability complete until its behavior has been implemented and verified.
 
