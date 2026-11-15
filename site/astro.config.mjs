@@ -10,6 +10,7 @@ import readableDiagrams from './plugins/readable-diagrams.mjs';
 const base = '/document-as-code-lab';
 
 export default defineConfig({
+  experimental: { incrementalBuild: true },
   site: 'https://and-gu.github.io',
   base,
   redirects: {
