@@ -4,6 +4,8 @@ A living tutorial and visualization lab: write in Markdown, track changes, and t
 
 The project teaches document-as-code by applying it to itself. It also serves as a visualization showcase for experienced readers: repository content, metadata, relationships, and work history become inputs to charts, diagrams, and dashboards.
 
+Created by **Anders Gustafsson** · [Connect on LinkedIn](https://www.linkedin.com/in/anders-gustafsson-359438/).
+
 ## Audience
 
 The v1.4 baseline is for professionals experienced in information work with Word, Excel, PDF and specialized business systems. It explores new ways to collaborate, automate repeated information work and use agents with traceable sources. No writing, engineering or developer background is required for the browser-first journey. Document-as-code is the concrete demonstration, not automatic integration or a requirement to replace existing tools.
