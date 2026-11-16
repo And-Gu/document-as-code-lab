@@ -27,12 +27,13 @@ python3 -m venv .venv
 .venv/bin/python -m pip install -r requirements.txt
 cd site
 npm ci
+npm run preflight
 npm run dev
 ```
 
 Open the local URL printed by Astro, using the `/document-as-code-lab/` base path. Changes to the original chapter files update the site; no duplicate chapter copies are maintained. See the [site README](site/README.md) for checks, build commands, and the GitHub Pages deployment flow.
 
-Use Node.js 24 (used in CI; Astro requires at least Node 22.23.4) and a full Git checkout. The site generates growth data with Python before starting or building. The separate [PDF design trial](publishing/pdf/README.md) has optional dependencies and does not run as part of the website build. A dedicated manual/pull-request workflow builds its three-page proof with Mermaid CLI and saves review artifacts. Automated rendering and all three pages were verified in GitHub Actions; this is not the full book or a published PDF edition.
+Select the Node version in `.node-version` and npm 11, and use a full Git checkout. `npm run preflight` reports setup problems together before development or builds; the site generates growth data with Python. See the [shared environment and CI impact policy](site/README.md#shared-environment-preflight) for setup, isolated test evidence and affected checks. The separate [PDF design trial](publishing/pdf/README.md) has optional dependencies and does not run as part of the website build. Its workflow renders the three-page proof when a PR affects its inputs or when requested manually. Automated rendering and all three pages were verified in GitHub Actions; this is not the full book or a published PDF edition.
 
 ## Quality Checks
 

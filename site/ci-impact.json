@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "policy": "First matching rule per changed path; union across paths. Unknown inputs or unavailable Git history require full browser and PDF checks. Static checks and production builds always run.",
+  "rules": [
+    {
+      "name": "delivery tooling and shared dependencies",
+      "files": [".node-version", "site/package.json", "site/package-lock.json", "site/ci-impact.json", "requirements.txt"],
+      "prefixes": [".github/", "site/scripts/", "scripts/", "publishing/"],
+      "browser": "all", "pdf": true
+    },
+    {
+      "name": "presentation sources and dedicated rendering",
+      "files": ["site/src/lib/presentations.ts", "site/src/layouts/PresentationLayout.astro", "site/src/styles/presentations.css", "site/tests/e2e/presentations.spec.ts"],
+      "prefixes": ["presentations/", "site/src/components/slides/", "site/src/pages/presentations/"],
+      "browser": "presentations", "pdf": false
+    },
+    {
+      "name": "maintained content and assets (includes PDF source families)",
+      "files": [],
+      "prefixes": ["docs/", "reference/", "examples/", "assets/"],
+      "browser": "all", "pdf": true
+    },
+    {
+      "name": "website, datasets and supporting material",
+      "files": ["README.md", "AGENTS.md", "CONTRIBUTING.md", "GLOSSARY.md", "LICENSE.md", "ROADMAP.md"],
+      "prefixes": ["site/src/", "site/public/", "site/tests/", "data/", "spec/"],
+      "browser": "all", "pdf": false
+    }
+  ]
+}

@@ -63,6 +63,7 @@ The growth widget also needs Python and the repository's measurement dependencie
 ```bash
 cd site
 npm ci
+npm run preflight
 npm run dev
 ```
 
@@ -78,7 +79,42 @@ npm run test:homepage
 node scripts/test-budget.mjs
 ```
 
-The site is built and verified using Node.js 24 in CI. The patched Astro release requires Node.js 22.23.4 or newer, and a supported Node runtime must be installed on the developer's machine; it is no longer installed as an npm development dependency. Use Node.js 24 to match the reproducible CI environment.
+Select the Node version in the root `.node-version` before running npm commands; the website workflows read the same file with `actions/setup-node`. The project uses Node 24.22.2 and npm 11. Later Node 24 patches/minors are accepted locally. Update the version file, package engines and lockfile metadata together when upgrading the baseline. The separate PDF toolchain remains on Node 22.
+
+### Shared environment preflight
+
+`npm run preflight` checks the Git checkout, Node/npm versions, manifest and lockfile agreement, installed direct dependencies, Python packages and writable output parents. It lists all detected setup problems and their remedies without installing, generating reports or building. `predev`, `precheck` and `prebuild` call the same check. Python selection is shared with the growth hook: `PYTHON`, then the root `.venv/bin/python`, then `python3`. Relative interpreter paths resolve from the repository root; an absolute `PYTHON` path is useful for isolated checkouts. Python 3.9+ is supported locally; CI uses 3.11.
+
+The standalone command `node site/scripts/preflight.mjs` runs from the root; an absolute script path works from any directory. Browser runners use the `browser` or `hosted` profile to check their dependencies and selected engines. Local browser tests also require a completed production build. These checks do not certify browser system libraries, content approval or deployment status.
+
+### CI impact map
+
+`site/ci-impact.json` is the maintained selection policy for both PR workflows. The first matching rule classifies each path; results are combined across the entire change. Presentation sources and dedicated rendering select `presentations.spec.ts` plus `journeys.spec.ts`. Shared website code selects every Chromium test. Changes in chapter, reference, example or asset folders also select the PDF proof, conservatively covering its source families. Tooling, shared dependencies, unknown paths, missing history or an empty diff select all browser tests and the PDF proof. Manual PDF requests always render.
+
+Inspect a committed proposal from `site/` with `npm run ci:impact -- --base origin/main`; add `--working-tree` to include unstaged, staged and untracked changes. Git compares the merge base to HEAD and includes both old and new paths for renamed files. Use `--full` for a deliberate full gate. `npm run test:tooling` checks failure handling, isolation, impact selection and workflow wiring.
+
+Both PR workflows still start, retain their existing check names and write a selection explanation to the Actions summary. Audit, Python, type, static/content, incremental-build and production-build checks in the Astro job remain required. Only browser scope and PDF rendering are conditional. An unaffected PDF run records why no artifact was generated; it does not claim to have rendered one. Pages publication and hosted verification remain unchanged in scope. This follows [GitHub's guidance on path-filtered required checks](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax#onpull_requestpull_request_targetpathspaths-ignore): skipping an entire required workflow can leave its check pending.
+
+When adding a consumer outside a dedicated component's current scope, broaden the map in the same change. Markdown is a build input, not automatically exempt documentation. Keep source edits, consumer changes, map rules and their documentation in one change set; approval digests still require the existing editorial process.
+
+### Next change cycle
+
+1. Check the checkout and existing edits before changing shared files. Use Node from `.node-version` and npm 11, then run `npm --prefix site run preflight` from the repository root. If a version manager is unavailable, `npm exec --yes --package=node@24.22.2 --package=npm@11.19.1 -- npm --prefix site run preflight` selects the declared runtime without a machine-specific PATH; substitute the desired npm command after `--`. The first use may download those pinned tools.
+2. Make the coherent source, consumer and documentation change. Inspect impact with `npm --prefix site run ci:impact -- --base origin/main --working-tree`. Keep one builder per checkout.
+3. Build when site inputs changed, then run the affected scenario first. For the graph: `npm --prefix site run test:e2e -- knowledge-map.spec.ts --grep "settles|camera position"`. A test-only correction can reuse the completed build; a source change needs a new build. Assert the intended selection before measuring behavior. Graph failures retain the selected state, runtime errors and trace; settling checks also record draw counts for each named stage.
+4. Run the required broader checks from AGENTS.md and the applicable suites. A targeted pass does not replace them. A working-tree build deliberately has no committed revision; after committing, rebuild and run the revision check and selected browser checks against that committed artifact before pushing.
+5. After an authorized publication, run the existing hosted smoke check and reuse the affected scenarios using the command below. Compare local and hosted results only for the stated source/build and target revisions.
+6. Record delivery-workflow experiments in the [cross-session log (#37)](https://github.com/And-Gu/document-as-code-lab/issues/37), with PR/revision, evidence locations, timings and avoidable reruns. Read that issue at the next retrospective and evaluate the experiment after three comparable cycles. Keep the current experiment table and dated observations there; these instructions own the commands.
+
+From `site/`, reuse the same graph selection on the published site:
+
+```bash
+HOSTED_URL=https://and-gu.github.io/document-as-code-lab/ \
+EXPECTED_REVISION=<full-published-commit> DEPLOYMENT_RUN_ID=<actual-run-id> \
+npm run test:hosted -- --scenarios knowledge-map.spec.ts --grep "settles|camera position"
+```
+
+Replace the angle-bracket values with the verified commit and run ID. Check out that revision first. `--scenarios` requires an explicit test file and uses the existing tests under `tests/e2e/`; it does not copy their code into a hosted suite. Chromium and the default local viewport are used unless the test sets its own. A global guard checks the deployed manifest before and after the selected tests, including when `--grep` narrows the selection. Identity evidence is retained as `deployment-before.json` and `deployment-after.json`. A mismatch fails the run. The normal `npm run test:hosted` smoke check retains its route, source-byte and mobile/desktop checks.
 
 Pull requests against `main` run `.github/workflows/astro-pr-check.yml`, which installs dependencies with `npm ci`, runs `npm audit` across production and development dependencies, checks types, and builds and tests the site. Any reported vulnerability fails the audit step; no severity is suppressed. Audit results reflect the advisory database at the time of the check, not a guarantee of complete security. Pushes to `main` run `.github/workflows/deploy-pages.yml`, which builds and publishes to [GitHub Pages](https://and-gu.github.io/document-as-code-lab/). Required review and build checks must be configured separately in GitHub's branch rules.
 
@@ -138,7 +174,11 @@ Source navigation carries a bounded fictional practice fragment to a fixed lab r
 
 Install locked development dependencies with `npm ci`, then install test engines with `npx playwright install chromium firefox webkit` (Linux CI uses `npx playwright install --with-deps chromium`). Playwright is pinned as a development dependency, never included in the runtime bundle. See the [Playwright web-server documentation](https://playwright.dev/docs/test-webserver) and [CI guide](https://playwright.dev/docs/ci-intro) for the underlying runner.
 
-From a clean, committed checkout, run `npm run check`, `npm run build`, the existing unit/content checks, then `npm run test:verification` for build-identity guards and `npm run test:e2e` for Chromium or `npm run test:e2e:cross` for all three engines. Set `PYTHON` to the repository venv interpreter where needed by build hooks. The runner owns a loopback static server on port 4340 (`E2E_PORT` overrides it); it refuses to reuse an unrelated process. The server serves only `dist/` under `/document-as-code-lab/`, returns real 404s and accepts GET/HEAD only. It is a test utility, not a production server.
+From a clean, committed checkout, run `npm run check`, `npm run build`, the existing unit/content checks, then `npm run test:verification` for build-identity guards and `npm run test:e2e` for Chromium or `npm run test:e2e:cross` for all three engines. Set `PYTHON` to the repository venv interpreter where needed by build hooks. Use these npm runners instead of invoking `playwright test` directly; arguments pass through, for example `npm run test:e2e -- presentations.spec.ts`. Each local run chooses an available loopback port (`E2E_PORT` overrides it), owns its server and refuses to reuse an unrelated process. A port acquired by another process before startup causes a visible failure, never server reuse.
+
+Each invocation creates an exclusive `build/verification/runs/<timestamp-uuid>/` directory. `TEST_RUN_ID` can supply a descriptive name, but an existing ID is rejected. The runner copies the completed `dist/` into a private snapshot and checks its file hashes before testing; a build changing during capture fails the run. Later builds cannot alter the captured test input. The server serves that snapshot under `/document-as-code-lab/`, returns real 404s and accepts GET/HEAD only. The snapshot is removed when the run finishes; `run.json` retains its SHA-256 fingerprint, port, arguments, timing and outcome alongside `results.json`, `artifacts/` and the local HTML `report/`. Hosted runs use the same output isolation without copying a local site. `--list` records test discovery, never a passed verification.
+
+Do not run two builders in one checkout: `dist/`, generated public data and Astro's cache still have one writer. Use a separate checkout when builds must overlap. Reports are not automatically deleted or reused; remove only completed run directories when their evidence is no longer needed. These are test utilities, not a production server or a shared build cache.
 
 `prebuild` generates `public/build-information.json` from Git and UTC time, with exactly `schema_version`, `source_commit`, `built_at`. Dirty working copies use a null commit and cannot pass revision verification. This file is generated/ignored. Reports, traces and screenshots are under ignored `build/verification/`; keep failures visible (no automatic retries). Missing browser engines are failures to run, not passed checks. Install them or record an explicit environment limitation.
 

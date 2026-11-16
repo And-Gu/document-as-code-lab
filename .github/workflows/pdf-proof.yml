@@ -24,18 +24,27 @@ jobs:
     steps:
       - uses: actions/checkout@v6
         with:
+          fetch-depth: 0
           persist-credentials: false
       - uses: actions/setup-node@v6
         with:
           node-version: '22'
           cache: npm
           cache-dependency-path: publishing/pdf/package-lock.json
+      - name: Classify change impact
+        id: impact
+        run: node site/scripts/ci-impact.mjs --ci
+      - name: Record unaffected PDF proof
+        if: steps.impact.outputs.pdf != 'true'
+        run: echo "No mapped PDF input changed; rendering is not needed for this PR. See the impact summary."
       - uses: actions/setup-python@v6
+        if: steps.impact.outputs.pdf == 'true'
         with:
           python-version: '3.11'
           cache: pip
           cache-dependency-path: publishing/pdf/requirements.txt
       - name: Install PDF tools
+        if: steps.impact.outputs.pdf == 'true'
         run: |
           python -m pip install -r publishing/pdf/requirements.txt
           npm ci --prefix publishing/pdf --ignore-scripts
@@ -43,19 +52,25 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y poppler-utils fonts-liberation
       - name: Install Puppeteer's compatible browser
+        if: steps.impact.outputs.pdf == 'true'
         working-directory: publishing/pdf
         run: |
           ./node_modules/.bin/puppeteer browsers install chrome
           node --input-type=module -e 'import puppeteer from "puppeteer"; console.log(`PUPPETEER_EXECUTABLE_PATH=${await puppeteer.executablePath()}`)' >> "$GITHUB_ENV"
       - name: Test source processing
+        if: steps.impact.outputs.pdf == 'true'
         run: python -m unittest discover -s publishing/pdf -p 'test_*.py'
       - name: Render Mermaid and build PDF
+        if: steps.impact.outputs.pdf == 'true'
         run: python scripts/build_pdf_proof.py
       - name: Verify generated SVG and PDF
+        if: steps.impact.outputs.pdf == 'true'
         run: python scripts/verify_pdf_proof.py
       - name: Render pages for human review
+        if: steps.impact.outputs.pdf == 'true'
         run: pdftoppm -scale-to 1600 -png build/pdf-proof/document-as-code-proof.pdf build/pdf-proof/page
       - name: Upload review artifacts
+        if: steps.impact.outputs.pdf == 'true'
         uses: actions/upload-artifact@v7
         with:
           name: pdf-design-proof-${{ github.sha }}

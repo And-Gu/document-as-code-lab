@@ -2,7 +2,7 @@ import { createServer } from 'node:http';
 import { readFile, realpath, stat } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-const root = await realpath(fileURLToPath(new URL('../dist/', import.meta.url)));
+const root = await realpath(process.env.TEST_SITE_ROOT || fileURLToPath(new URL('../dist/', import.meta.url)));
 const base = '/document-as-code-lab/';
 const types = { '.html':'text/html; charset=utf-8', '.js':'text/javascript', '.css':'text/css', '.json':'application/json', '.svg':'image/svg+xml', '.png':'image/png', '.jpg':'image/jpeg', '.webp':'image/webp', '.woff':'font/woff', '.woff2':'font/woff2', '.pdf':'application/pdf', '.md':'text/plain; charset=utf-8' };
 const server = createServer(async (req, res) => {
