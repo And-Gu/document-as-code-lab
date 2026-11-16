@@ -3,6 +3,7 @@ import { getChapters, chapterTitle } from '../lib/chapters';
 import { siteUrl } from '../lib/urls';
 import { courseSummaryId, learningJourney } from '../lib/learning-journey';
 import PageMetadata from '../components/PageMetadata.astro';
+import SocialLinks from '../components/SocialLinks.astro';
 import '../styles/tutorial-examples.css';
 import '../styles/chapter-learning.css';
 
@@ -29,7 +30,10 @@ const bonusChapter = chapters.find(chapter => chapter.data.bonus);
   </head>
   <body>
     <a class="skip-link" href="#content">Skip to content</a>
-    <header><a href={siteUrl()}>Document-as-Code Lab</a></header>
+    <header class="site-header">
+      <a class="site-title" href={siteUrl()}>Document-as-Code Lab</a>
+      <SocialLinks />
+    </header>
     <div class:list={['documentation', { 'documentation-wide': wide }]}>
       <nav aria-label="Chapters">
         <details id="chapter-menu" open>
@@ -104,8 +108,8 @@ const bonusChapter = chapters.find(chapter => chapter.data.bonus);
   a { color: #17684c; text-underline-offset: 0.15em; }
   a:hover { color: #111; }
   a:focus-visible, summary:focus-visible { outline: 2px solid #17684c; outline-offset: 4px; }
-  header { padding: 1rem 1.5rem; border-bottom: 1px solid #ddd; }
-  header a { font-weight: 650; text-decoration: none; }
+  header { padding: .65rem 1.5rem; border-bottom: 1px solid #ddd; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .5rem 1rem; }
+  header .site-title { font-weight: 650; text-decoration: none; }
   .documentation { display: grid; grid-template-columns: 17rem minmax(0, 1fr); max-width: 86rem; margin: auto; }
   .documentation-wide { max-width: 100rem; }
   .documentation-wide main { max-width: none; }
