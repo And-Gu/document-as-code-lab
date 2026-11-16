@@ -40,6 +40,11 @@ Distinguish chapter draft status, approval, capability completion, and successfu
 
 ## Verification and Publication
 
+- Use the maintained workflow in [site/README.md](site/README.md#next-change-cycle). Select the runtime in `.node-version`, run the shared preflight, then the affected tests before the required broad gates. After a test-only correction, rerun that scenario first; an unchanged failure needs diagnosis rather than another full run.
+- For browser checks, use the npm runners. They allocate a port, snapshot the completed build and preserve each run's evidence separately. Builders still need exclusive ownership of `dist/` and generated data. Assert the selected UI state before measuring behavior and inspect the trace/state attachments on failure.
+- The [delivery-loop log (#37)](https://github.com/And-Gu/document-as-code-lab/issues/37) is the cross-session experiment register. Read its current experiments and later observations when applying `retroperspective` or reviewing the delivery workflow. During authorized follow-up, append the change/PR, revisions, evidence, timings (unknown where unavailable), rework and result; update current experiment status without deleting history. Technical verification does not establish a measured speed improvement. Evaluate after three comparable cycles. Keep build/cache details in #30 and link them; do not create a second session log.
+- Reuse selected local browser scenarios against the explicit hosted URL with `test:hosted -- --scenarios`. The revision guard must run before and after them. Keep the existing hosted smoke check; neither a local pass nor a successful HTTP response verifies a deployment.
+
 - From `site/`, run `npm run check` and `npm run build`. Use `ASTRO_TELEMETRY_DISABLED=1` when sandboxed execution requires it.
 - Run `.venv/bin/python -m unittest discover -s tests` from the root when changing measurement or processing behavior.
 - Run `node scripts/test-budget.mjs` from `site/` when validating the website. For the optional PDF proof, follow `publishing/pdf/README.md`, run its focused tests, and inspect rendered pages. Record whether Mermaid CLI or a prepared SVG was used; do not claim the full PDF pipeline is verified from the prepared-SVG path alone.

@@ -14,6 +14,7 @@ This map describes the current repository. [AGENTS.md](../AGENTS.md) is the work
 | Course concept map | [Concepts and named relationships](../data/course-concepts.json), shared vocabulary and chapter sources | 3D/2D knowledge map, text directory and chapter reading links |
 | Presentation definitions and formats | [Presentation guide](../presentations/README.md) and [bonus chapter](../docs/13-explorable-presentations.md) | Working HTML decks and notes; proposed explorable formats are not implemented |
 | Automation and release | [Automation guide](automation-quality.md), `.github/workflows/` | PR checks, artifacts, Pages deployment |
+| Delivery-workflow experiments | [Cross-session retrospective log (#37)](https://github.com/And-Gu/document-as-code-lab/issues/37); commands in the [site guide](../site/README.md#next-change-cycle) | Dated evidence and evaluation after three comparable cycles; build/cache measurements remain in #30 |
 | Reader-journey and learning evidence | [Verification register](../spec/tutorial/working-methods-upgrade/verification/README.md) | Local/cross-engine and hosted procedures; real reader study remains not run |
 | History and operational evidence | [Measurement guide](growth-measurement.md), `data/features.json` | Build-time dashboard snapshots; fixed historical charts remain unchanged |
 

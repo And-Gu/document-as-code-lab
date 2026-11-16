@@ -97,7 +97,7 @@ That report has a different destination from our chapter page. To become part of
 | [Astro PR check](../.github/workflows/astro-pr-check.yml) | A pull request | Check results attached to the proposal |
 | [Website deployment](../.github/workflows/deploy-pages.yml) | A push to main, a manual request or the hourly schedule | The published GitHub Pages site |
 | [Project-growth measurement](../.github/workflows/growth.yml) | A push to main or a manual request | Reports retained with the run |
-| [PDF design proof](../.github/workflows/pdf-proof.yml) | A pull request or a manual request | A sample PDF and page images for inspection |
+| [PDF design proof](../.github/workflows/pdf-proof.yml) | Each pull request checks whether PDF inputs are affected; a manual request always renders | A sample PDF and page images when rendering is needed |
 
 ## Use the same idea in your work
 

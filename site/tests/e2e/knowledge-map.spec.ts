@@ -1,6 +1,28 @@
-import { test, expect } from '@playwright/test';
+import { test as base, expect } from '@playwright/test';
 
-for (const route of ['knowledge-map/', 'chapters/09-images/']) test(`The graph settles after loading and interaction on ${route}`, async ({ page }) => {
+const test = base.extend<{ graphDiagnostics: void }>({
+  graphDiagnostics: [async ({ page }, use, info) => {
+    const errors: string[] = [];
+    page.on('pageerror', error => errors.push(error.message));
+    try {
+      await use();
+      expect(errors, 'Graph page must have no uncaught runtime errors').toEqual([]);
+    } finally {
+      if (info.status !== info.expectedStatus || errors.length) {
+        await info.attach('graph-state', { contentType: 'application/json', body: JSON.stringify({
+          url: page.url(), browser: page.context().browser()?.version(), errors,
+          state: await page.locator('[data-knowledge-map]').evaluateAll(maps => maps.map(map => ({
+            ready: map.getAttribute('data-ready'), dimensions: map.getAttribute('data-dimensions'),
+            selected: map.querySelector('[data-concept-title]')?.textContent,
+            status: map.querySelector('[data-map-status]')?.textContent,
+          }))).catch(() => []),
+        }) });
+      }
+    }
+  }, { auto: true }],
+});
+
+for (const route of ['knowledge-map/', 'chapters/09-images/']) test(`The graph settles after loading and interaction on ${route}`, async ({ page }, info) => {
   // Sprite labels use a 2D canvas texture. Repainting unchanged labels while idle
   // exposes update loops even when the camera happens to look steady.
   await page.addInitScript(() => {
@@ -17,24 +39,31 @@ for (const route of ['knowledge-map/', 'chapters/09-images/']) test(`The graph s
   await page.goto(route);
   await expect(page.locator('[data-knowledge-map]')).toHaveAttribute('data-ready', 'true');
   const draws = () => page.evaluate(() => (window as unknown as { mapLabelDraws: { metadata: number } }).mapLabelDraws.metadata);
-  const expectSettled = async () => {
+  const expectSettled = async (stage: string) => test.step(stage, async () => {
     // Let the initial camera transition and label creation finish, then observe
     // a further idle interval rather than testing only the first rendered frame.
     await page.waitForTimeout(1000);
     const before = await draws();
     expect(before).toBeGreaterThan(0);
     await page.waitForTimeout(1200);
-    expect(await draws()).toBe(before);
-  };
-  await expectSettled();
+    const after = await draws();
+    await info.attach(stage, { body: JSON.stringify({ before, after, navigations }), contentType: 'application/json' });
+    expect(after, 'Unchanged labels must stop repainting while idle').toBe(before);
+  });
+  await expect(page.locator('[data-concept-title]')).toHaveText('Metadata');
+  await expectSettled('initial-load');
   await page.locator('[data-concept-connections]').getByRole('button', { name: 'Processing', exact: true }).click();
-  await expectSettled();
+  await expect(page.locator('[data-concept-title]')).toHaveText('Processing');
+  await expectSettled('selected-processing');
   await page.getByLabel('Course section', { exact: true }).selectOption('2');
   await page.getByRole('button', { name: '2D', exact: true }).click();
-  await expectSettled();
+  await expect(page.locator('[data-knowledge-map]')).toHaveAttribute('data-dimensions', '2');
+  await expectSettled('filtered-2D');
   await page.getByRole('button', { name: 'Reset view' }).click();
   await page.getByRole('button', { name: '3D', exact: true }).click();
-  await expectSettled();
+  await expect(page.locator('[data-concept-title]')).toHaveText('Metadata');
+  await expect(page.locator('[data-knowledge-map]')).toHaveAttribute('data-dimensions', '3');
+  await expectSettled('reset-3D');
   expect(navigations).toBe(1);
 });
 
