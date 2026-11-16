@@ -3,10 +3,12 @@ import { spawnSync } from 'node:child_process';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { repositoryRoot, pythonCommand } from './environment.mjs';
+import { requireReleaseIdentity } from './release-identity.mjs';
+import { checkBuildOwner } from './delivery-record.mjs';
 
 // Read-only and dependency-free, so setup failures are reported before a build.
-export async function preflight({ root = repositoryRoot, profile = 'build', browsers = ['chromium'], env = process.env } = {}) {
-  if (!['build', 'browser', 'hosted'].includes(profile)) throw new Error(`Unknown preflight profile: ${profile}`);
+export async function preflight({ root = repositoryRoot, profile = 'build', browsers = ['chromium'], env = process.env, expectedRevision } = {}) {
+  if (!['build', 'browser', 'release', 'hosted'].includes(profile)) throw new Error(`Unknown preflight profile: ${profile}`);
   const checks = [];
   const check = async (name, remedy, inspect) => {
     try { checks.push({ name, ok: true, detail: String(await inspect()) }); }
@@ -18,6 +20,8 @@ export async function preflight({ root = repositoryRoot, profile = 'build', brow
     if (result.error || result.status !== 0) throw new Error(result.error?.message || result.stderr.trim() || `${executable} exited ${result.status}`);
     return result.stdout.trim();
   };
+  if (profile === 'build') await check('delivery owner', 'Read delivery report and use DELIVERY_ACTOR for the recorded owner; arrange an explicit handoff when needed.', () => checkBuildOwner(root, env));
+  if (profile === 'release') await check('release identity', 'Commit when authorized, build the clean intended revision, then rerun. For targeted working-tree checks use --preview with a test file.', () => requireReleaseIdentity({ root, expected: expectedRevision }).source_commit);
   await check('repository', 'Run this script from a complete Git checkout; fetch missing history with git fetch --unshallow if needed.', () => {
     const actual = command('git', ['rev-parse', '--show-toplevel']);
     if (realpathSync(actual) !== realpathSync(root)) throw new Error(`Expected repository at ${root}`);
@@ -68,7 +72,7 @@ export async function preflight({ root = repositoryRoot, profile = 'build', brow
     }
     return 'output parents are writable';
   });
-  if (profile === 'browser') await check('production build', 'From site/: npm run build. Start tests after the build finishes.', () => {
+  if (profile === 'browser' || profile === 'release') await check('production build', 'From site/: npm run build. Start tests after the build finishes.', () => {
     const manifest = readJSON('site/dist/build-information.json');
     if (manifest.schema_version !== 1 || !Number.isFinite(Date.parse(manifest.built_at))) throw new Error('Invalid build-information.json');
     accessSync(path.join(root, 'site/dist/index.html'), constants.R_OK);
@@ -91,6 +95,6 @@ export function printChecks(checks) {
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
-  try { process.exitCode = printChecks(await preflight({ profile: process.argv[2] || 'build' })) ? 0 : 1; }
+  try { process.exitCode = printChecks(await preflight({ profile: process.argv[2] || 'build', expectedRevision: process.env.EXPECTED_REVISION })) ? 0 : 1; }
   catch (error) { console.error(error.message); process.exitCode = 1; }
 }
