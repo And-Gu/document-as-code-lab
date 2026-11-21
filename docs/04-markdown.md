@@ -104,6 +104,8 @@ This project keeps chapters in Markdown and adds interactive components through 
 
 Headings and paragraphs describe how content reads. They do not, on their own, tell software which team owns a procedure, whether it is approved, or how it depends on another activity.
 
-The playground shows how readable source becomes a formatted page. To find procedures by owner or review state, software needs information beyond headings and paragraphs. [Chapter 5](05-structured-content.md) adds those structured fields alongside the instructions.
+The playground shows how readable source becomes a formatted page. To find procedures by owner or review state, software needs information beyond headings and paragraphs.
 
 <!-- interactive: chapter-quiz -->
+
+[Chapter 5](05-structured-content.md) adds those structured fields alongside the instructions.

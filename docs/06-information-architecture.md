@@ -82,6 +82,6 @@ The useful result is a route from a changed source to the people and information
 
 > **Explore further:** How do these relationships become readable diagrams? The [visual-source guide](../reference/visual-sources.md) explains which representations preserve meaning and how to make their outputs accessible. Reading the guide needs no local setup.
 
-Once the records and relationships are clear, software can use them to produce useful results. [Chapter 7](07-processing.md) follows procedure text and metadata into a handbook and review queue.
-
 <!-- interactive: chapter-quiz -->
+
+Once the records and relationships are clear, software can use them to produce useful results. [Chapter 7](07-processing.md) follows procedure text and metadata into a handbook and review queue.

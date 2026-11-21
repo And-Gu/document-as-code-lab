@@ -88,8 +88,10 @@ function findNodes(node, predicate) {
 const attribute = (node, name) => node.attrs?.find(attr => attr.name === name)?.value;
 const navigation = findNodes(lastChapter, node => attribute(node, 'aria-label') === 'Chapter navigation')[0];
 const navLinks = findNodes(navigation, node => node.tagName === 'a');
-assert.equal(navLinks.length, 1, 'The final chapter has only a previous link');
-assert.equal(attribute(navLinks[0], 'href'), '/document-as-code-lab/chapters/11-beyond-github/');
+assert.deepEqual(navLinks.map(node => attribute(node, 'href')), [
+  '/document-as-code-lab/chapters/11-beyond-github/',
+  '/document-as-code-lab/',
+], 'The final chapter links to the previous lesson and the course overview');
 const architectureChapter = parseHtml(await readFile(path.join(dist, 'chapters/11-beyond-github/index.html'), 'utf8'));
 const architectureNavigation = findNodes(architectureChapter, node => attribute(node, 'aria-label') === 'Chapter navigation')[0];
 assert.ok(findNodes(architectureNavigation, node => attribute(node, 'href') === '/document-as-code-lab/chapters/13-course-summary/').length);

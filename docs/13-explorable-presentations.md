@@ -269,9 +269,9 @@ An online interactive dashboard may require a connection. Offline presentation s
 
 ## Try it: Reframe one of the existing decks
 
-Open the [Lab's presentation collection](https://and-gu.github.io/document-as-code-lab/presentations/) and choose an existing deck. You can also read its [YAML authoring guide](../presentations/README.md) without installing anything.
+Open the [information model deck](/document-as-code-lab/presentations/information-model/) or choose another deck from the [Lab’s presentation collection](/document-as-code-lab/presentations/). You can also read the [YAML authoring guide](../presentations/README.md) in your browser.
 
-Pick one scene and answer:
+Pick one scene. Sketch its main claim, the evidence viewers need to see, and what you would reveal when they ask a question. Use these prompts:
 
 1. What is its essential claim? Could someone summarize it in one sentence?
 2. What should be shown immediately, and what could be revealed only after a question?

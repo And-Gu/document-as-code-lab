@@ -142,6 +142,6 @@ We started with dates and ended with an explained finding. Keeping that connecti
 
 > **Take the finding into a presentation.** How could the manager guide the team through the chart, then open the supporting records when someone asks a question? The optional bonus chapter, [Beyond Slides: Presentations as Explorable Knowledge](13-explorable-presentations.md), explores how to combine a guided story, opportunities to explore and a reference people can return to afterward.
 
-In [Chapter 11](10-publishing.md), we look at automation: running established checks and processing rules when their sources change.
-
 <!-- interactive: chapter-quiz -->
+
+In [Chapter 11](10-publishing.md), we look at automation: running established checks and processing rules when their sources change.
