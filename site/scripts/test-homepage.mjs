@@ -17,9 +17,12 @@ const groupLinks = groups.map(group => all(group, node => node.tagName === 'a').
 assert.deepEqual(groupLinks.map(links => links.length), [4, 3, 3, 2]);
 assert.equal(new Set(groupLinks.flat()).size, 12);
 const bonusLink = '/document-as-code-lab/chapters/13-explorable-presentations/';
+const captureBonusLink = '/document-as-code-lab/chapters/14-capturing-information/';
 const bonus = all(home, node => attr(node, 'id') === 'bonus-chapter')[0];
 assert.ok(bonus, 'Homepage needs a distinct bonus feature');
 assert.ok(all(bonus, node => node.tagName === 'a' && attr(node, 'href') === bonusLink).length >= 1);
+assert.ok(all(bonus, node => node.tagName === 'a' && attr(node, 'href') === captureBonusLink).length >= 1);
+assert.ok(!groupLinks.flat().includes(captureBonusLink), 'Capture bonus must remain outside core journey');
 assert.ok(!groupLinks.flat().includes(bonusLink), 'Bonus must remain outside the core journey');
 const presentationsIndex = parse(await read('../dist/presentations/index.html'));
 assert.ok(all(presentationsIndex, node => node.tagName === 'a' && attr(node, 'href') === bonusLink).length >= 1,
@@ -70,4 +73,5 @@ assert.equal(all(home, node => node.tagName === 'a' && attr(node, 'href') === `/
 assert.ok((await read('../dist/materials/reference/dashboards-and-work-tracking/index.html')).includes(`id="${budgetAnchor}"`));
 console.log('Package 1 primary entries, shared navigation and final budget anchor passed.');
 
-assert.ok(menuGroups[4] && all(menuGroups[4], node => node.tagName === "a" && attr(node, "href") === bonusLink).length === 1, "Bonus sidebar link");
+assert.ok(menuGroups[4] && all(menuGroups[4], node => node.tagName === "a" && attr(node, "href") === bonusLink).length === 1, "Presentation bonus sidebar link");
+assert.ok(menuGroups[4] && all(menuGroups[4], node => node.tagName === "a" && attr(node, "href") === captureBonusLink).length === 1, "Capture bonus sidebar link");
