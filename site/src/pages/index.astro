@@ -9,7 +9,8 @@ import { courseSummaryId, learningJourney } from '../lib/learning-journey';
 const chapters = await getChapters();
 const courseSummary = chapters.find(chapter => chapter.id === courseSummaryId);
 const coreChapters = chapters.filter((chapter) => !chapter.data.bonus && chapter.id !== courseSummaryId);
-const bonusChapter = chapters.find((chapter) => chapter.data.bonus);
+const bonusChapters = chapters.filter((chapter) => chapter.data.bonus);
+const presentationsBonus = bonusChapters.find((chapter) => chapter.id === '13-explorable-presentations');
 const groups = learningJourney.map((group, index) => ({ ...group, icon: [FileText, Workflow, Network, Workflow][index] }));
 const packs = (await getPresentations()).filter((deck) => ['information-model', 'information-value', 'lab-architecture'].includes(deck.slug));
 const stages = [
@@ -61,7 +62,7 @@ const stages = [
       </div>
     </section>
     <section id="learning-path" class="home-section" aria-labelledby="learning-title">
-      <p class="home-eyebrow">{coreChapters.length} lessons · Course summary · Optional bonus chapter</p><h2 id="learning-title">Explore the learning journey</h2>
+      <p class="home-eyebrow">{coreChapters.length} lessons · Course summary · {bonusChapters.length} optional bonus chapters</p><h2 id="learning-title">Explore the learning journey</h2>
       <div class="learning-paths">
         {groups.map(({ start, end, title, description, icon: Icon, tone }) => <article class={`learning-path path-${tone}`}>
           <div class="path-heading"><Icon size={28} aria-hidden="true" /><span>{start === end ? `Chapter ${start}` : `Chapters ${start}–${end}`}</span></div>
@@ -72,12 +73,19 @@ const stages = [
       {courseSummary && <p><a href={siteUrl(`chapters/${courseSummary.id}/`)}>{courseSummary.data.chapter_number}. {chapterTitle(courseSummary)}</a> · A summary of the four parts of the course</p>}
       <p><a href={siteUrl('knowledge-map/')}>Explore the knowledge map</a> · See how the key concepts connect and find where to read more.</p>
     </section>
-    {bonusChapter && <section id="bonus-chapter" class="home-section bonus-feature" aria-labelledby="bonus-title">
-      <p class="home-eyebrow">Bonus chapter · Optional deep dive</p>
-      <h2 id="bonus-title"><a href={siteUrl(`chapters/${bonusChapter.id}/`)}>{chapterTitle(bonusChapter)}</a></h2>
-      <p>Why stop at flat slides? Learn how source-linked HTML presentations, scrollytelling, interactive mind maps, dashboards and explorable explanations can transform how we communicate information.</p>
-      <p>Includes a practical directory of tools, real examples, videos, source-to-presentation methods and exercises. The original twelve chapters remain the core learning journey.</p>
-      <a class="bonus-feature-link" href={siteUrl(`chapters/${bonusChapter.id}/`)}>Explore the bonus chapter <ArrowRight size={18} aria-hidden="true" /></a>
+    {bonusChapters.length > 0 && <section id="bonus-chapter" class="home-section bonus-feature" aria-labelledby="bonus-title">
+      <p class="home-eyebrow">Bonus reading · Optional deep dives</p>
+      <h2 id="bonus-title">Go further with your information</h2>
+      <p>Explore how to capture ideas before they become reviewed sources, or how to communicate maintained knowledge through more interactive experiences. These bonus chapters sit outside the twelve-lesson learning journey.</p>
+      <div class="bonus-items">
+        {bonusChapters.map((chapter) => <article>
+          <h3><a href={siteUrl(`chapters/${chapter.id}/`)}>{chapterTitle(chapter)}</a></h3>
+          <p>{chapter.id === '14-capturing-information'
+            ? 'Write in VS Code, sketch in Excalidraw, or speak and transcribe. Follow the material from raw capture to reviewed, reusable sources.'
+            : 'Design source-linked HTML presentations, scrollytelling, mind maps, dashboards and explorable explanations.'}</p>
+          <a class="bonus-feature-link" href={siteUrl(`chapters/${chapter.id}/`)}>Explore this chapter <ArrowRight size={18} aria-hidden="true" /></a>
+        </article>)}
+      </div>
     </section>}
     <section id="working-lab" class="home-section" aria-labelledby="lab-title">
       <h2 id="lab-title">Explore the working lab</h2>
@@ -97,7 +105,7 @@ const stages = [
     </section>
     <section id="presentations" class="home-section" aria-labelledby="present-title">
       <h2 id="present-title">Present and share</h2><p>Explore how the approach works, when its benefits justify the change, and how this lab puts it into practice.</p>
-      {bonusChapter && <p>Want to design something beyond a slideshow? See the <a href={siteUrl(`chapters/${bonusChapter.id}/`)}>bonus chapter on explorable presentations</a> and its directory of tools.</p>}
+      {presentationsBonus && <p>Want to design something beyond a slideshow? See the <a href={siteUrl(`chapters/${presentationsBonus.id}/`)}>bonus chapter on explorable presentations</a> and its directory of tools.</p>}
 
       <div class="presentation-packs">
         {packs.map((pack) => <article><Presentation size={25} aria-hidden="true" /><h3><a href={siteUrl(`presentations/${pack.slug}/`)}>{pack.title}</a></h3><p>{pack.description}</p><p class="home-caption">{pack.slides.length} slides · <a href={siteUrl(`presentations/${pack.slug}/notes/`)}>Speaker notes</a></p></article>)}
