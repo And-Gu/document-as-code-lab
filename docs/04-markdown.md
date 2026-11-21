@@ -106,6 +106,8 @@ Headings and paragraphs describe how content reads. They do not, on their own, t
 
 The playground shows how readable source becomes a formatted page. To find procedures by owner or review state, software needs information beyond headings and paragraphs.
 
+If your information begins as rough notes, a whiteboard sketch, or a spoken discussion, the optional bonus chapter [From Thoughts to Sources: Write, Sketch, Speak](14-capturing-information.md) explores how to preserve those inputs and turn them into reviewed source material.
+
 <!-- interactive: chapter-quiz -->
 
 [Chapter 5](05-structured-content.md) adds those structured fields alongside the instructions.

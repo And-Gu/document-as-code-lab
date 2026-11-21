@@ -17,7 +17,7 @@ const { title, activeChapter, wide = false, description = `${title}: supporting 
 const chapters = await getChapters();
 const courseSummary = chapters.find(chapter => chapter.id === courseSummaryId);
 const current = chapters.find(chapter => chapter.id === activeChapter);
-const bonusChapter = chapters.find(chapter => chapter.data.bonus);
+const bonusChapters = chapters.filter(chapter => chapter.data.bonus);
 ---
 
 <!doctype html>
@@ -54,9 +54,11 @@ const bonusChapter = chapters.find(chapter => chapter.data.bonus);
             <li><a href={siteUrl(`chapters/${courseSummary.id}/`)} aria-current={activeChapter === courseSummary.id ? 'page' : undefined}>{chapterTitle(courseSummary)}</a></li>
           </ol>}
           <p><a href={siteUrl('knowledge-map/')}>Knowledge map</a></p>
-          {bonusChapter && <div class="menu-group" aria-label="Bonus reading">
+          {bonusChapters.length > 0 && <div class="menu-group" aria-label="Bonus reading">
             <p class="menu-group-title">Bonus reading</p>
-            <p><a href={siteUrl(`chapters/${bonusChapter.id}/`)} aria-current={activeChapter === bonusChapter.id ? 'page' : undefined}>{chapterTitle(bonusChapter)}</a></p>
+            <ul>{bonusChapters.map(chapter => <li>
+              <a href={siteUrl(`chapters/${chapter.id}/`)} aria-current={activeChapter === chapter.id ? 'page' : undefined}>{chapterTitle(chapter)}</a>
+            </li>)}</ul>
           </div>}
           <a href={siteUrl('materials/GLOSSARY/')}>Shared vocabulary</a>
           <p><a href={siteUrl('presentations/')}>Presentations</a></p>

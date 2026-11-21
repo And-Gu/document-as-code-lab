@@ -81,9 +81,12 @@ The `chapter_number` metadata determines the current reading order. Existing sou
 12. [Behind the Lab: How We Built This Tutorial](docs/11-beyond-github.md)
 13. [Bringing It Together](docs/13-course-summary.md)
 
-**Bonus chapter (optional):** [Beyond Slides: Presentations as Explorable Knowledge](docs/13-explorable-presentations.md). This long-form guide explores interactive presentation design, a practical technology directory, case studies, videos and exercises outside the numbered twelve-chapter core.
+**Bonus chapters (optional):**
 
-The bonus chapter builds on the working Reveal.js decks and explains how source-linked presentations could evolve into guided, exploratory and self-paced experiences. Its more advanced interactive presentation modes are design options, not existing implemented features.
+- [Beyond Slides: Presentations as Explorable Knowledge](docs/13-explorable-presentations.md) — an approved long-form guide to interactive presentations, source-linked narratives, technology options, videos and exercises.
+- [From Thoughts to Sources: Write, Sketch, Speak](docs/14-capturing-information.md) — a new draft on capturing information through VS Code, Excalidraw, dictation and transcriptions before it becomes reviewed source material.
+
+The presentations bonus builds on working Reveal.js decks; more advanced presentation modes are design options, not existing implemented features. The capture chapter is available for editorial review and does not change the twelve-lesson core curriculum.
 
 ## Outputs
 

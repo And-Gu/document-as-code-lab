@@ -9,7 +9,7 @@ const root = fileURLToPath(new URL('../../', import.meta.url));
 const dist = path.join(root, 'site/dist');
 const expected = ["01-introduction","github-workspace","02-project-growth","03-markdown","03a-structured-content","information-architecture","processing-information","04-ai-native","05-images","data-enrichment","08-publishing","09-beyond-github","course-summary"];
 const slugs = ["01-introduction","02-github-workspace","03-project-growth","04-markdown","05-structured-content","06-information-architecture","07-processing","08-ai-native","09-images","10-data-enrichment","10-publishing","11-beyond-github","13-course-summary"];
-assert.equal((await readdir(path.join(root, 'docs'))).filter(name => name.endsWith('.md')).length, slugs.length + 1);
+assert.equal((await readdir(path.join(root, 'docs'))).filter(name => name.endsWith('.md')).length, slugs.length + 2);
 for (const [index, slug] of slugs.entries()) {
   const source = await readFile(path.join(root, `docs/${slug}.md`), 'utf8');
   const front = source.match(/^---\n([\s\S]*?)\n---\n/);
@@ -28,6 +28,11 @@ const bonusMetadata = parseYaml(bonusSource.match(/^---\n([\s\S]*?)\n---\n/)[1])
 assert.equal(bonusMetadata.bonus, true);
 assert.equal(bonusMetadata.chapter_number, 13);
 assert.ok(bonusSource.includes('## The presentation-as-code toolbox'));
+const captureSource = await readFile(path.join(root, 'docs/14-capturing-information.md'), 'utf8');
+const captureMetadata = parseYaml(captureSource.match(/^---\n([\s\S]*?)\n---\n/)[1]);
+assert.equal(captureMetadata.bonus, true);
+assert.equal(captureMetadata.status, 'draft');
+assert.ok(captureSource.includes('## Three ways to capture one idea'));
 const files = [];
 async function collect(directory) {
   for (const entry of await readdir(directory, { withFileTypes: true })) {
@@ -105,7 +110,7 @@ assert.deepEqual(findNodes(bonusNavigation, node => node.tagName === 'a').map(no
 console.log(`Stable chapter IDs, maintained Mermaid sources, and ${links} internal links/assets across ${files.length} HTML pages passed.`);
 
 const descriptions = new Set();
-for (const slug of ['', ...slugs.map(slug => `chapters/${slug}/`), 'chapters/13-explorable-presentations/']) {
+for (const slug of ['', ...slugs.map(slug => `chapters/${slug}/`), 'chapters/13-explorable-presentations/', 'chapters/14-capturing-information/']) {
   const doc = parseHtml(await readFile(path.join(dist, slug, 'index.html'), 'utf8'));
   const meta = name => findNodes(doc, node => node.tagName === 'meta' && (attribute(node, 'name') === name || attribute(node, 'property') === name))[0];
   const description = attribute(meta('description'), 'content');
@@ -125,7 +130,7 @@ for (const slug of ['', ...slugs.map(slug => `chapters/${slug}/`), 'chapters/13-
     assert.ok(chapterMeta && !findNodes(chapterMeta, node => node.nodeName === '#text').map(node => node.value).join('').includes('in-review'));
   }
 }
-assert.equal(descriptions.size, slugs.length + 2, 'Homepage and each chapter need their own description');
+assert.equal(descriptions.size, slugs.length + 3, 'Homepage and each chapter need their own description');
 const { diagramRelationships } = await import('../plugins/readable-diagrams.mjs');
 for (const [slug, expected] of [
   ['06-information-architecture', [

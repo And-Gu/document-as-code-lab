@@ -6,7 +6,7 @@ import { parse as yaml } from 'yaml';
 
 const read = path => readFile(new URL(path, import.meta.url), 'utf8');
 const slugs = (await readdir(new URL('../../docs/', import.meta.url))).filter(name => name.endsWith('.md'));
-assert.equal(slugs.length, 14);
+assert.equal(slugs.length, 15);
 const numbers = [];
 const chapterNumbers = new Map();
 for (const file of slugs) {
