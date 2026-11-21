@@ -75,5 +75,8 @@
 
 /* An optional deep dive, visually separate from the twelve-chapter curriculum. */
 .bonus-feature { padding: clamp(1.25rem, 2.5vw, 2rem); border: 1px solid #b9c9bc; border-left: 4px solid var(--home-sage); border-radius: 6px; background: #f8fbf8; }
-.bonus-feature h2 a { color: #284c38; text-underline-offset: .18em; }
+.bonus-items { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr)); gap: 1.25rem; margin-top: 1.5rem; }
+.bonus-items article { border-top: 2px solid #b9c9bc; padding-top: .75rem; }
+.bonus-items h3 a { color: #284c38; text-underline-offset: .18em; }
+.bonus-items p { font-size: .94rem; }
 .bonus-feature-link { display: inline-flex; align-items: center; gap: .45rem; min-height: 44px; font-weight: 650; }
