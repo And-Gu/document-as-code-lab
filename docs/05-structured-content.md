@@ -104,6 +104,6 @@ Edits stay in your browser. The check applies only to this file's metadata; it d
 
 The lab shows why fields need both a shared meaning and configured checks. A draft can be valid metadata without being approved content.
 
-Metadata can also identify another information item, such as a policy referenced by a procedure. [Chapter 6](06-information-architecture.md) follows those relationships to see what may need review when a source changes.
-
 <!-- interactive: chapter-quiz -->
+
+Metadata can also identify another information item, such as a policy referenced by a procedure. [Chapter 6](06-information-architecture.md) follows those relationships to see what may need review when a source changes.

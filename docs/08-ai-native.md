@@ -82,6 +82,8 @@ Where would you maintain a stable-identifier rule and the explanation of why it 
 
 > **Explore further:** The [agent context and project-knowledge guide](../reference/ai-context-and-agents.md) examines this repository's guidance, source selection, decision records, permissions and verification in greater detail. No AI account is needed to read it; its optional local examples require suitable tooling.
 
-Organizing project knowledge helps agents find and interpret the material they need. People benefit from that organization too. [Chapter 9](09-images.md) uses the course’s own knowledge graph to connect concepts with related ideas and the chapters that explain them. An agent can follow the same references to find source material and prepare an explanation.
+Organizing project knowledge helps agents find and interpret the material they need. People benefit from that organization too. An agent can follow references to locate sources and support an explanation.
 
 <!-- interactive: chapter-quiz -->
+
+[Chapter 9](09-images.md) uses the course’s own knowledge graph to connect concepts with related ideas and the chapters that explain them.

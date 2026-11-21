@@ -36,6 +36,8 @@ export async function getStaticPaths() {
 }
 const { chapter, previous, next } = Astro.props;
 const { Content, headings } = await render(chapter);
+const sectionHeadings = headings.filter((heading) => heading.depth === 2);
+const hasQuiz = !chapter.data.bonus && chapter.data.chapter_number <= 12;
 ---
 
 <Documentation title={chapterTitle(chapter)} description={chapter.data.learning_goal} activeChapter={chapter.id} wide={chapter.data.chapter_number === 9}>
@@ -43,16 +45,21 @@ const { Content, headings } = await render(chapter);
   <article class:list={{ 'chapter-with-map': chapter.data.chapter_number === 9 }}>
     <h1 id={headings.find((heading) => heading.depth === 1)?.slug ?? chapter.id}>{chapterTitle(chapter)}</h1>
     <ChapterInformation chapter={chapter} />
-    {chapter.data.chapter_number !== 9 && headings.filter(heading => heading.depth === 2).length >= 5 && <aside class="chapter-contents" aria-label="On this page">
-      <strong>On this page</strong><ul>{headings.filter(heading => heading.depth === 2).map(heading => <li><a href={`#${heading.slug}`}>{heading.text}</a></li>)}</ul>
+    {chapter.data.chapter_number !== 9 && sectionHeadings.length >= 5 && <aside class="chapter-contents" aria-label="On this page">
+      <strong>On this page</strong>
+      <ul>
+        {sectionHeadings.map((heading) => <li><a href={`#${heading.slug}`}>{heading.text}</a></li>)}
+        {hasQuiz && <li><a href="#chapter-quiz-widget">Check your understanding</a></li>}
+      </ul>
     </aside>}
     <Content />
-    {!chapter.data.bonus && chapter.data.chapter_number <= 12 && <ChapterLearning chapterNumber={chapter.data.chapter_number} chapterSource={`docs/${chapter.id}.md`} />}
+    {hasQuiz && <ChapterLearning chapterNumber={chapter.data.chapter_number} chapterSource={`docs/${chapter.id}.md`} />}
   </article>
   <div class="chapter-navigation" aria-label="Chapter navigation">
     {chapter.data.bonus && <a href={siteUrl()}>Back to the 12-chapter learning journey</a>}
     {previous && <a href={siteUrl(`chapters/${previous.id}/`)}>Previous: {chapterTitle(previous)}</a>}
     {next && <a href={siteUrl(`chapters/${next.id}/`)}>Next: {chapterTitle(next)}</a>}
+    {!next && !chapter.data.bonus && <a href={siteUrl()}>Back to the course overview</a>}
   </div>
 </Documentation>
 

@@ -111,8 +111,10 @@ The approach above can support checklists, reports, diagrams, simulation inputs,
 
 In technical documentation, these same practices are often called **docs as code**. In this tutorial, we also use them to work with information such as project records and the links between them.
 
-You can follow the demonstrations without installing development tools. We start with onboarding information, then explore agent-ready project knowledge, a fictional contract model, and the actual system behind this website. [Chapter 2](02-github-workspace.md) begins with the shared workspace where the sources and proposed changes live.
+You can follow the demonstrations without installing development tools. We start with onboarding information, then explore agent-ready project knowledge, a fictional contract model, and the actual system behind this website.
 
 > **Takeaway:** Document-as-Code is not primarily about writing documents in a different format, tool, or editor. It is about managing information so that it can be maintained, reviewed, traced, reused, and processed by both people and tools.
 
 <!-- interactive: chapter-quiz -->
+
+[Chapter 2](02-github-workspace.md) begins with the shared workspace where the sources and proposed changes live.

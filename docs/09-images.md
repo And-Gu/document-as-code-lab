@@ -111,6 +111,8 @@ The information model makes that possible: identifiable records, fields with agr
 
 For another application, the [Contract Explorer](/document-as-code-lab/labs/contract-explorer/) lets you follow links between agreements, orders, projects and deliveries. The [visual-source guide](../reference/visual-sources.md) explores other ways to show connected information.
 
-Finding a source is the beginning of an investigation. We may also need to check its values, explain a gap or calculate something new. [Chapter 10](10-data-enrichment.md) follows a service manager through that work, turning case records into a finding that can be checked and reused.
+Finding a source is the beginning of an investigation. We may also need to check its values, explain a gap or calculate something new.
 
 <!-- interactive: chapter-quiz -->
+
+[Chapter 10](10-data-enrichment.md) follows a service manager through that work, turning case records into a finding that can be checked and reused.

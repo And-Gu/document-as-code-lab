@@ -99,6 +99,6 @@ The diff shows what reviewers need to assess. Recording the source revision used
 
 The useful connection is between a change, its review, and the result readers received. History preserves the evidence for that connection; people use it to investigate and make decisions.
 
-The next question is what those editable sources look like. [Chapter 4](04-markdown.md) opens a Markdown file and compares it with its rendered view.
-
 <!-- interactive: chapter-quiz -->
+
+The next question is what those editable sources look like. [Chapter 4](04-markdown.md) opens a Markdown file and compares it with its rendered view.

@@ -85,6 +85,8 @@ The preview follows your typing; generated results wait for checks and a success
 
 Processing rules are part of the maintained system. **They can be versioned, tested, reviewed, and improved alongside the information they transform.** This is what makes repeated outputs consistent—and makes the process inspectable when something goes wrong.
 
-Those same sources and rules can also guide an AI agent helping with a change. [Chapter 8](08-ai-native.md) turns from our fictional onboarding records to the actual project knowledge an agent needs.
+Those same sources and rules can also guide an AI agent helping with a change.
 
 <!-- interactive: chapter-quiz -->
+
+[Chapter 8](08-ai-native.md) turns from our fictional onboarding records to the actual project knowledge an agent needs.

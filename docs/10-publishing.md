@@ -109,6 +109,8 @@ An agent with access to the workflow and run logs can also help explain a failur
 
 > **Explore further:** The [automation and quality guide](../reference/automation-quality.md) explains workflow steps and retained results. The [publishing guide](../reference/publishing-workflows.md) covers this repository’s output paths, and [GitHub’s introduction to Actions](https://docs.github.com/en/actions/get-started/understand-github-actions) explains the platform’s terms.
 
-Our chapter edit now has a path from proposal to publication. [Chapter 12](11-beyond-github.md) looks inside that path: which files hold the information, how the website combines them and how the same approach can work in another environment.
+Our chapter edit now has a path from proposal to publication.
 
 <!-- interactive: chapter-quiz -->
+
+[Chapter 12](11-beyond-github.md) looks inside that path: which files hold the information, how the website combines them and how the same approach can work in another environment.

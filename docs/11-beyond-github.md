@@ -112,6 +112,8 @@ Then sketch its path: **maintained instruction → review and processing → the
 
 The optional [first-increment exercise](../reference/automation-quality.md#plan-a-first-increment) helps you describe that flow. The [Information Refinement Lab](../reference/information-refinement.md) offers another example of turning selected sources into an explained draft.
 
-We have now followed the information through the whole lab, from an editable source to something a reader can use. [Bringing It Together](13-course-summary.md) returns to the four parts of the course and connects what each one added.
+We have now followed the information through the whole lab, from an editable source to something a reader can use.
 
 <!-- interactive: chapter-quiz -->
+
+[Bringing It Together](13-course-summary.md) returns to the four parts of the course and connects what each one added.

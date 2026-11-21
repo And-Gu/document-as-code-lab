@@ -6,7 +6,7 @@ const { id, title = 'Check your understanding', questions } = Astro.props;
 const prepared = prepareQuestions(questions);
 ---
 <section class="learning-tool learning-quiz" data-learning-quiz aria-labelledby={`${id}-title`}>
-  <h3 id={`${id}-title`}>{title}</h3>
+  <h2 id={`${id}-title`}>{title}</h2>
   <script type="application/json" data-questions set:html={JSON.stringify(prepared).replaceAll('<', '\\u003c')} />
   <form>
     {prepared.map((question, index) => (
@@ -18,14 +18,18 @@ const prepared = prepareQuestions(questions);
           ))}
         </fieldset>
         {question.hint && <details class="lq-hint"><summary>Show hint</summary><p>{question.hint}</p></details>}
-        <p class="lq-feedback" data-feedback role="status" hidden />
+        <p id={`${id}-feedback-${index + 1}`} class="lq-feedback" data-feedback role="status" tabindex="-1" hidden />
+        <button type="button" aria-controls={`${id}-score`} data-quiz-return hidden>Back to quiz score</button>
       </div>
     ))}
     <div class="learning-actions">
       <button type="submit" disabled><Check size={18} />Check answers</button>
       <button type="reset" disabled><RotateCcw size={18} />Try again</button>
     </div>
-    <p class="lq-score" data-score role="status" />
+    <div class="lq-results">
+      <p id={`${id}-score`} class="lq-score" data-score role="status" tabindex="-1" />
+      <button type="button" data-quiz-review hidden>Review first incorrect answer</button>
+    </div>
   </form>
   <noscript><p>Enable JavaScript to answer the questions and receive feedback.</p></noscript>
 </section>
@@ -37,6 +41,7 @@ const prepared = prepareQuestions(questions);
       root.dataset.ready = 'true';
       const form = root.querySelector<HTMLFormElement>('form')!;
       const score = root.querySelector<HTMLElement>('[data-score]')!;
+      const review = root.querySelector<HTMLButtonElement>('[data-quiz-review]')!;
       let questions: ReturnType<typeof prepareQuestions>;
       try {
         const input = JSON.parse(root.querySelector('[data-questions]')!.textContent!) as QuizQuestion[];
@@ -45,8 +50,23 @@ const prepared = prepareQuestions(questions);
       } catch { score.textContent = 'The quiz could not load.'; return; }
       const blocks = [...root.querySelectorAll<HTMLElement>('.lq-question')];
       root.querySelectorAll<HTMLFieldSetElement | HTMLButtonElement>('fieldset, button').forEach((control) => { control.disabled = false; });
+      let feedbackToReview: HTMLElement | undefined;
+      function focusResult(target: HTMLElement, block: ScrollLogicalPosition = 'nearest') {
+        target.focus({ preventScroll: true });
+        target.scrollIntoView({ block });
+      }
+      review.addEventListener('click', () => {
+        if (feedbackToReview) focusResult(feedbackToReview);
+      });
+      const returnButtons = blocks.map((block) => block.querySelector<HTMLButtonElement>('[data-quiz-return]')!);
+      returnButtons.forEach((button) => button.addEventListener('click', () => focusResult(score, 'center')));
+
       function clearFeedback() {
         score.textContent = '';
+        review.hidden = true;
+        feedbackToReview = undefined;
+        review.removeAttribute('aria-controls');
+        returnButtons.forEach((button) => { button.hidden = true; });
         blocks.forEach((block) => {
           const feedback = block.querySelector<HTMLElement>('[data-feedback]')!;
           feedback.hidden = true; feedback.textContent = ''; delete feedback.dataset.result;
@@ -60,9 +80,9 @@ const prepared = prepareQuestions(questions);
       });
       form.addEventListener('submit', (event) => {
         event.preventDefault();
+        clearFeedback();
         const unanswered = blocks.filter(block => !block.querySelector('input:checked'));
         if (unanswered.length) {
-          clearFeedback();
           for (const block of unanswered) {
             const feedback = block.querySelector<HTMLElement>('[data-feedback]')!;
             feedback.textContent = 'Select an answer first.'; feedback.hidden = false;
@@ -79,10 +99,17 @@ const prepared = prepareQuestions(questions);
           if (correct) correctCount++;
           const feedback = block.querySelector<HTMLElement>('[data-feedback]')!;
           feedback.dataset.result = correct ? 'correct' : 'incorrect';
-          feedback.textContent = selected.length ? `${correct ? 'Correct.' : 'Not quite.'} ${question.explanation}` : 'Select an answer first.';
+          feedback.textContent = `${correct ? 'Correct.' : 'Not quite.'} ${question.explanation}`;
           feedback.hidden = false;
+          if (!correct && review.hidden) {
+            feedbackToReview = feedback;
+            review.setAttribute('aria-controls', feedback.id);
+            review.hidden = false;
+            returnButtons[index].hidden = false;
+          }
         });
         score.textContent = `${correctCount} of ${questions.length} correct.`;
+        focusResult(score, 'center');
       });
     });
   }
